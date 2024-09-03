@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.2)  3 SEP 2024 19:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.2)  3 SEP 2024 19:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -216,13 +216,14 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (c:/texlive/2024/texmf-dist/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2024/02/26 v1.38 Asymptote style file for LaTeX
- (./mat327.pre)
+
+No file mat327.pre.
 \ASYbox=\box56
 \ASYdimen=\dimen151
 \c@asy=\count291
 \AsyStream=\write3
 \AsyPreStream=\write4
- (c:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
+(c:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 ) (c:/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
@@ -806,8 +807,7 @@ Package: todonotes 2024/01/05 v1.1.7 Todonotes source and documentation.
 Package: todonotes 2024/01/05
  (c:/texlive/2024/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
- (c:/texlive/2024/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-(c:/texlive/2024/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+ (c:/texlive/2024/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/texlive/2024/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks56
 \XKV@tempa@toks=\toks57
 )
@@ -851,7 +851,8 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \l_MT_below_shortintertext_sep=\dimen280
 \xmathstrut@box=\box79
 \xmathstrut@dim=\dimen281
-) (c:/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
+)
+(c:/texlive/2024/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
 \MT@toks=\toks58
 \MT@tempbox=\box80
@@ -1066,7 +1067,8 @@ Package: spath3 2024/05/31 v2.8 Functions for manipulating PGF soft paths
 \l__cal_tmph_dim=\dimen321
 \l__cal_taper_width_dim=\dimen322
 \l__cal_line_width_dim=\dimen323
-) (./mat327.aux)
+)
+No file mat327.aux.
 \openout1 = `mat327.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -1096,7 +1098,7 @@ Package scrbase Info: activating english \listfigurename on input line 15.
 Package scrbase Info: activating english \listtablename on input line 15.
 Package scrbase Info: activating english \refname on input line 15.
 Package scrbase Info: activating english \indexname on input line 15.
- (c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count372
 \scratchdimen=\dimen324
@@ -1116,7 +1118,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring ON on input line 15.
- (./mat327.out) (./mat327.out)
 \@outlinefile=\write6
 \openout6 = `mat327.out'.
 
@@ -1178,7 +1179,8 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 19.
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 Package tocbasic Info: character protrusion at toc deactivated on input line 20.
- (./mat327.toc)
+
+No file mat327.toc.
 \tf@toc=\write7
 \openout7 = `mat327.toc'.
 
@@ -1205,22 +1207,29 @@ LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10> not available
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2020/03/25>
  ***********
-Package rerunfilecheck Info: File `mat327.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+Package rerunfilecheck Warning: File `mat327.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `mat327.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 43488 strings out of 473579
- 897757 string characters out of 5732258
+ 43474 strings out of 473579
+ 897552 string characters out of 5732258
  1936960 words of memory out of 5000000
- 65570 multiletter control sequences out of 15000+600000
+ 65566 multiletter control sequences out of 15000+600000
  574212 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,20n,128p,10945b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb>
-Output written on mat327.pdf (2 pages, 149591 bytes).
+Output written on mat327.pdf (2 pages, 149465 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 73 compressed objects within 1 object stream
+ 107 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  6 named destinations out of 1000 (max. 500000)
  36885 words of extra memory for PDF output out of 42996 (max. 10000000)
 
