@@ -1,1 +1,25 @@
-tmp
+\documentclass[11pt]{scrartcl}
+
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package}
+\WarningFilter{xcolor}{Package option} % `usenames' is obsolete and ignored. yea ik idgaf
+
+\usepackage[sexy]{{style_files/evan}}
+\usepackage{{style_files/NMC}}
+\usepackage{standalone}
+\usepackage{import}
+
+% extra stuff
+\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} % tikz is a finicky annoying thing
+
+\begin{document}
+\title{MAT257 Lecture Notes}
+\date{'24 Fall \& '25 Winter Semester} % add date
+\maketitle
+
+\tableofcontents
+\newpage
+
+\input{MAT257 Notes/Day 1.tex} %\newpage
+
+\end{document}
