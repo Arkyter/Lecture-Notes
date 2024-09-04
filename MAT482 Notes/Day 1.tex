@@ -1,0 +1,28 @@
+\section{Day 1: Introduction to Class (Sep. 3, 2024)}
+Class administration notes;
+\begin{itemize}
+    \item Prof. Ila (she prefers to be called Ila) will be in Montreal once in a while.
+    \item Masks should be worn if attending lectures in person.
+    \item All reference material for the class can be found on \href{https://math.toronto.edu/~ila/math482h1f2024.html}{here}, or in the UofT library.
+    \item This class will be held in a more experimental teaching style; specifically with the Tuesday discussions.
+    \item Prof. Ila prefers to be contacted on Zulip instead of mail.
+\end{itemize}
+
+\noindent To start, this class is on arithmetic statistics, whcih studies ``arithmetic objects." Examples of such objects interesting from a number theory perspective include
+\begin{itemize}
+    \item Fields, specifically finite extensions of $\QQ$ (number fields),
+    \item Binary quadratic forms, i.e. $f(x, y) = ax^2 + bxy + cy^2$,
+    \item Varieties over $\ZZ$, i.e. zero sets of polynomials with integer coefficients,
+    \item Ideal class groups,
+    \item Primes.
+\end{itemize}
+
+\noindent Composition laws can be described as equipping a set with group operations; for example, let us consider the $\SL_2(\ZZ)$-equivalence classes of binary quadratic forms; given $\gamma \in \SL_2(\ZZ)$, we have $\gamma f(x, y) = f((x, y) \gamma)$.
+
+\begin{exercise}
+    If $\gamma \in \SL_2(\ZZ)$, prove that $\mathrm{disc} (f(x, y)) = \mathrm{disc} (\gamma \cdot f(x, y))$. Specifically, the discriminant of $\mathrm{disc}(ax^2 + bxy + cy^2) = b^2 - 4ac$.
+\end{exercise}
+
+\begin{exercise}
+    Any polynomial $\Delta$ in $a, b, c$ satisfying $\Delta(f(x, y)) = \Delta(\gamma \cdot f(x, y))$ is a multiple of the discriminant, or is constant.
+\end{exercise}
