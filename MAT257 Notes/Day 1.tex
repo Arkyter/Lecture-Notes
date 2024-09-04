@@ -1,2 +1,42 @@
-\section{Day 1: content (Sep. 4, 2024)}
-to do later
+\section{Day 1: Course Administrative Details and Equivalent Norms (Sep. 4, 2024)}
+Course administrative details!
+\begin{itemize}
+    \item The prerequisites to this class are calculus and linear algebra; specifically, this class is about calculus on manifolds.
+    \item The main three theorems this class will cover are the inclusive function theorem, change of variable in integral, and Stokes' theorem (generalization of FTC).
+    \item The main techniques we will study this class are manifolds, theory of integration, and differential forms.
+\end{itemize}
+To give an example of how linear algebra can be used in defining differentiability, we start by recalling that for a function $f : \RR \to \RR$ to be differentiable in $1$ variable, we need
+\[ \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} =: c = f'(a) \]
+to exist for any $a \in \RR$. Specifically, this may be rewritten as
+\[ \lim_{h \to 0} \frac{f(a + h) - (f(a) + ch)}{h} = 0, \]
+where we have $f(a) + f'(a)h$ as the best local linear approximation of $f(a + h)$ at $h = 0$, and $h \mapsto ch$ is a linear transformation $\RR \to \RR$. For the higher dimensional analogue of the above, let us take $f : \RR^n \to \RR^m$, and have
+\begin{align*}
+    a &= (a_1, \dots, a_n), \\
+    x &= (x_1, \dots, x_n), \\
+    h &= (h_1, \dots, h_n).
+\end{align*}
+If we let $y = f(x)$, then $y \in \RR^m$, and we can write it as a column vector with components $y_1, \dots, y_m$;
+\[ f(x) = \begin{pmatrix} y_1 \\ \vdots \\ y_m \end{pmatrix} = \begin{pmatrix} f_1(x_1, \dots, x_n) \\ \vdots \\ f_n(x_1, \dots, x_n) \end{pmatrix}. \]
+In this way, each $y_i$ for $1 \leq i \leq n$ can be viewed as a function in $n$ variables. We say $f$ is differentiable at $a \in \RR^n$ if there exists a linear transformation $\lambda : \RR^n \to \RR^m$ such that\footnote{i think we need a norm in the numerator for the limit below; bierstone didn't do it in class though, so... idk. also lambda is jacobian?}
+\[ \lim_{h \to 0} \frac{\abs{f(a + h) - (f(a) + \lambda h)}}{\abs{h}} = 0 \]
+In this way, we have that $f(a) + \lambda h$ is the best linear approximation of $f(a + h)$ at $h = 0$. Notice that compared to the $\RR \to \RR$ differentiability condition, we impose a norm on $f(a + h) - (f(a) + \lambda h)$ and $h$, since we cannot divide by $\RR^n, \RR^m$ vectors.
+
+\newpage
+\noindent This also brings the topic of what sort of norms we could be looking at; for example, we have\footnote{these are (in order) euclidean, maximum, and taxicab norms; or $\ell^2, \ell^\infty, \ell^1$}
+\begin{align*}
+    \abs{x} &= \sqrt{x_1^2 + \dots + x_n^2}, \\
+    \norm{x} &= \max \{\abs{x_1}, \dots, \abs{x_n}\}, \\
+    \triplenorm{x} &= \abs{x_1} + \dots + \abs{x_n}.
+\end{align*}
+We say that two norms $p, q$ are equivalent to each other if we may find a constant $C$ where $p(x) \leq Cq(x)$ (and vice versa). In fact, the norms $\abs{x}, \norm{x}, \triplenorm{x}$ are all equivalent to each other; here is a visual proof,
+\begin{center} \begin{tikzpicture}[scale=0.75]
+    \draw[->] (-5, 0) -- (5, 0);
+    \node at (5.6, -0.3) {$\RR^{n-1}$};
+    \draw[->] (0, -5) -- (0, 5);
+    \node at (0.3, 4.6) {$\RR$};
+    \draw[amber] (0, 0) circle (3.0);
+    \draw[crimson] (3, 0) -- (0, 3) -- (-3, 0) -- (0, -3) -- (3, 0);
+    \draw (3, 3) -- (3, -3) -- (-3, -3) -- (-3, 3) -- (3, 3);
+    \node at (3.3, -0.3) {$r$};
+\end{tikzpicture} \end{center}
+where each figure is the level sets of their respective norms. In particular, $\abs{x} \leq \sqrt{n} \norm{x}$, and $\triplenorm{x} \leq \sqrt{n} \abs{x}$. To prove the latter analytically, we may write the norm as an inner product, $\triplenorm{x} = \left< x, u(x) \right> < \abs{x} \abs{u(x)} \leq \sqrt{n}r$, where $u_i$ is the sign of each component of $x$.\footnote{i kinda get where this proof is going, but at the same time i dont really know how he defined $u$ in the first place, so yeah. alternate proof would be to give Cauchy-Schwarz}
