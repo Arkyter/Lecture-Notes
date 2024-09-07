@@ -1,0 +1,63 @@
+\section{Day 2: Review of MAT247, Metric Spaces (Sep. 6, 2024)}
+Course administrative details!
+\begin{itemize}
+    \item Fall Office Hours will be held on Mondays from 10:30 to 11:30AM (likely in Bahen 6114).
+\end{itemize}
+We start with a review on functions and continuity. Given $\RR^n$ with elements $x = (x_1, \dots, x_n)$ and $y = (y_1, \dots, y_n)$, we define the following addition and scalar multiplication,
+\begin{align*}
+    x + y &= (x_1 + y_1, \dots, x_n + y_n), \\
+    \lambda x &= (\lambda x_1, \dots, \lambda x_n), \lambda \in \RR.
+\end{align*}
+We may also equip it with the Euclidean inner product and norm,
+\begin{align*}
+    \left< x, y \right> &= x_1y_1 + \dots + x_ny_n, \\
+    \abs{x} &= (x_1^2 + \dots + x_n^2)^{\frac{1}{2}} = \sqrt{\left<x, x\right>},
+\end{align*}
+of which it has the properties
+\begin{enumerate}[label=(\alph*)]
+    \item Non-negativity; $\abs{x} \geq 0$, and is equal to $0$ if and only if $x = 0$.
+    \item Absolute Homogeneity; $\abs{\lambda x} = \abs{\lambda} \abs{x}$ for any scalar $\lambda \in \RR$.
+    \item Triangle Inequality; $\abs{x + y} \leq \abs{x} + \abs{y}$ for any vectors $x, y \in \RR^n$.
+\end{enumerate}
+We may check that the properties above hold for the Euclidean norm;
+\begin{enumerate}[label=(\alph*)]
+    \item Trivial, since the square of each component is non-negative.
+    \item Not discussed in class, but we may directly expand the norm to get the equality,
+    \[ \abs{\lambda x} = \left( \sum_{i=1}^n (\lambda x_i)^2 \right)^{\frac{1}{2}} = \left( \lambda^2 \sum_{i=1}^n x_i^2 \right)^{\frac{1}{2}} = \abs{\lambda} \abs{x}. \]
+    \item Start by observing that from inner product properties, we have $\abs{\left<x, y\right>} \leq \abs{x} \abs{y}$, with equality if and only if $x, y$ are linearly dependent. If $x, y$ are LI, observe $\lambda y - x \neq 0$ for all scalars $\lambda \in \RR$, and we may write
+    \begin{align*}
+        0 < \abs{\lambda y - x}^2 &= \left<\lambda y - x, \lambda y - x\right> \\
+        &= \lambda^2 \left<y, y\right> - 2\lambda \left<x, y\right> + \left<x, x\right> \\
+        &= \abs{y}^2 \lambda^2 - 2 \left<x, y\right> \lambda + \abs{x}^2.
+    \end{align*}
+    Reading the above as a polynomial in $\lambda$, we observe that it must not have any real roots, and so the discriminant is necessarily negative, i.e. $4 \left<x, y\right>^2 - 4\abs{x}^2\abs{y}^2 < 0$, which implies $\abs{\left<x, y\right>} < \abs{x} \abs{y}$. Returning to the triangle inequality, let us start by squaring both sides to obtain
+    \[ \abs{x + y}^2 = \left<x, x\right> + 2\left<x, y\right> + \left<y, y\right> \leq \abs{x}^2 + 2\abs{x}\abs{y} + \abs{y}^2. \]
+    This leaves us with $2 \left<x, y\right> \leq 2\abs{x}\abs{y}$, which, from the above, we find equality if $x, y$ are linearly dependent, and ``$<$'' if LI.
+\end{enumerate}
+
+\newpage
+\noindent Consider the linear transformation, $T : \RR^n \to \RR^m$, equipped with standard bases $\{e_1, \dots, e_n\}$ of $\RR^n$, and $\{f_1, \dots, f_m\}$ of $\RR^m$; let the matrix representation of $T$ be given by the below matrix $A$,
+\[ y = T(x) \implies \begin{pmatrix} y_1 \\ \vdots \\ y_m \end{pmatrix} = \underbrace{\begin{pmatrix} a_{11} & \dots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{m1} & \dots & a_{mn} \end{pmatrix}}_{A} \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}. \]
+In terms of basis vectors, we may visualize $T$ by
+\[ T(e_i) = \sum_{j=1}^m a_{ji} f_j. \]
+Now, suppose $S : \RR^m \to \RR^\ell$ be a linear transformation, with corresponding matrix representation $B \in M_{\ell \times m}(\RR)$. Then the composition $S \circ T : \RR^n \to \RR^\ell$ has matrix $B \cdot A \in M_{\ell \times n}(\RR)$.
+\medskip\newline
+\noindent Here is an example from class; if $T : \RR^n \to \RR^m$ is a linear map, then $\abs{Tx} \leq M \abs{x}$ for some $M > 0$. To see this, let us start by writing
+\[ Tx = T \left( \sum_{i=1}^n x_ie_i \right) = \sum_{i=1}^n x_i T(e_i). \]
+This gives us
+\begin{align*}
+    \abs{Tx} \leq \sum_{i=1}^n \abs{x_i T(e_i)} &= \sum_{i=1}^n \abs{x_i} \abs{T(e_i)} \\
+    &= \left(\sum_{i=1}^n a_{ji}^2 \right)^{\frac{1}{2}} \\
+    &\leq \left( \sum_{i=1}^m \sum_{j=1}^n a_{ij}^2 \right)^\frac{1}{2} =: \abs{A}.
+\end{align*} 
+Then we have
+\[ \abs{Tx} \leq \left(\sum_{i=1}^n \abs{x_i}\right) \abs{A} \leq \sqrt{n} \abs{A} \abs{x}. \]
+We simply pick $M \geq \sqrt{n} \abs{A}$ and we are done. \qed
+
+\subsection{Topology of $\RR^n$}
+Let us equip $\RR^n$ with the Euclidean norm; this is an example of a metric space (i.e., a set equipped with a distance function $d(x, y)$). The function $d : X \times X \to \RR$ has the following properties,
+\begin{enumerate}[label=(\alph*)]
+    \item Symmetry, $d(x, y) = d(y, x)$.
+    \item Non-negativity, $d(x, y) \geq 0$, with $d(x, y) = 0$ if $x = y$.
+    \item Triangle inequality, $d(x, y) \leq d(x, z) + d(z, y)$.
+\end{enumerate}
