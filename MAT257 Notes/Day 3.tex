@@ -1,0 +1,41 @@
+\section{Day 3: Topology in \texorpdfstring{$\RR^n$}{Rn} (Sep. 9, 2024)}
+What are some $n$-dimensional analogues of closed intervals $[a, b] \in \RR$? We have
+\begin{itemize}
+    \item The closed rectangle $[a_1, b_1] \times \dots \times [a_n, b_n] \subset \RR^n$,
+    \item The closed ball $\{x \in \RR^n \mid \abs{x - a} \leq r\}$.
+\end{itemize}
+For $n$-dimensional analogues of open intervals, we have open rectangles and balls, i.e.
+\begin{itemize}
+    \item $(a_1, b_1) \times \dots \times (a_n, b_n)$,
+    \item $\{x \in \RR^n \mid \abs{x - a} < r\}$.
+\end{itemize}
+We say a subset $U \subseteq \RR^n$ is open (two definitions) if:
+\begin{itemize}
+    \item For any $a \in U$, we may pick $\eps > 0$ such that the ball $B(a, \eps) \subseteq U$.
+    \item For any $a \in U$, there exists an open rectangle $R$ such that $a \in R \subseteq U$.
+\end{itemize}
+We say a subset $C \subseteq \RR^n$ is closed if $\RR^n \setminus C$ is open. Here are some examples of closed sets,
+\begin{itemize}
+    \item $\emptyset, \RR^n$;
+    \item Closed rectangles and balls as per earlier;
+    \item Finite sets.
+\end{itemize}
+Let us take the closed subset $A \subseteq \RR^n$, and have $A$ contain all rationals in $(0, 1)$. We claim that $[0, 1] \subseteq A$. To see this, consider $x \in \RR^n \setminus A$. Since $A$ is closed, $\RR^n \setminus A$ is open, which means there exists $\eps > 0$ such that $B(x, \eps) \subseteq A$. By density of $\QQ$ in $\RR$, we may always find a rational in $B(x, \eps)$, meaning $B(x, \eps) \cap A = \emptyset$, and $x \not\in [0, 1]$. \qed
+\medskip\newline
+A few remarks;
+\begin{itemize}
+    \item Any union of open sets is open.
+    \item The finite union of closed sets is closed.
+    \item Arbitrary unions of closed sets are not necessarily closed; observe
+    \[ \bigcup_{n \in \NN} \left[\frac{1}{n}-1, 1-\frac{1}{n}\right] = (-1, 1). \]
+\end{itemize}
+Now, consider $A \subseteq \RR^n$, and $x \in \RR^n$; there are $3$ possibilities:
+\begin{enumerate}
+    \item There exists an open ball $B$ such that $x \in B \subset A$ (i.e. the interior of $A$, $\mathrm{int} \, A$).
+    \item There exists an open ball $B$ such that $x \in B \subset \RR \setminus A$ (i.e. the exterior of $A$, $\mathrm{ext} \, A$).
+    \item For all open balls $B$ such that $x \in B$, there exists $y_1 \in A$ and $y_2 \in \RR^n \setminus A$ such that $y_1, y_2 \in B$ (i.e. the boundary of $A$, $\mathrm{bdry} \, A$).
+\end{enumerate}
+For example, we may consider $A \subset \RR^n$ to be the rationals in $(0, 1)$; then the interior of $A$ is $\emptyset$, the exterior of $A$ is $\RR^n \setminus [0, 1]$, and the boundary of $A$ is $[0, 1]$.
+\medskip\newline
+Let $A \subset \RR^n$; given the function $f : A \to \RR^m$ then we define the graph of $f$,
+\[ \mathrm{graph} \, f = \{(x, f(x)) \mid x \in A\} \subseteq A \times \RR^m. \]
