@@ -1,5 +1,11 @@
 \section{Day 3: Homeomorphisms and Bases (Sep. 10, 2024)}
-Course administrative details first;
+Outfit of the day (by popular request)
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.1]{MAT327 Notes/Dror Shirts/dror day 3 shirt.jpg}
+\end{figure}
+
+\noindent Course administrative details first;
 \begin{itemize}
     \item The reading for this week is on sections $12$ to $14$ (this week will cover these contents), and $15$ to $16$ as prereading.
 \end{itemize}
@@ -24,7 +30,6 @@ is continuous if and only if $\ST_1$ is finer than $\ST_2$. To see this, let $U$
 \end{definition}
 \noindent Note that continuous bijective maps $h$ need not have continuous inverses; for example, let us have $\mathrm{id} : X_\mathrm{disc} \to X_\mathrm{triv}$. $\mathrm{id}$ is continuous as per our above example, while its inverse is not. Another example is to consider $[0, 2\pi) \to S^1$ (unit circle), where $x \mapsto (\cos 2x\pi, \sin 2x\pi)$; we see that the inverse is discontinuous at $0$ and $2\pi$ radians, even if the map is continuous and bijective (also observe that $[0, 1)$ is not compact while $S^1$ is).
 
-\newpage
 \noindent An example of a homeomorphism is as follows (as per tutorial); let us consider\footnote{dror was using $\sim$ for homeomorphism symbol today. if he keeps using that i'll adjust my notes, but for now i'll use $\cong$ cuz afaik its used more...?}
 \[ (-1, 1)_\mathrm{std} \cong \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)_\mathrm{std} \cong \RR_\mathrm{std}, \]
 where we may map the first to the second by $x \mapsto \frac{\pi}{2}x$, and the second to third by $x \mapsto \tan x$. Since the composition of continuous maps is continuous, we also see $(-1, 1)_\mathrm{std}$ is homeomorphic to $\RR_\mathrm{std}$ (any open interval is homophobic to $\RR$ for that matter).
@@ -36,7 +41,9 @@ where we may map the first to the second by $x \mapsto \frac{\pi}{2}x$, and the 
     \item For all $x \in X$, there exists some $B \in \SB$ such that $x \in B$. We call $B$ a \textit{basic set}.
     \item For all $B_1, B_2 \in \SB$ and $x \in B_1 \cap B_2$, there exists a third basic set $B_3$ such that $x \in B_3 \subset B_1 \cap B_2$.
 \end{enumerate}
-In particular, the first condition is equivalent to $\bigcup_{B \in \SB} B = X$ (i.e., the basis forms a covering of $X$), and the second condition is equivalent to the basic sets contained in $B_1 \cap B_2$ forming a cover of $B_1 \cap B_2$, i.e.
+
+\newpage
+\noindent In particular, the first condition is equivalent to $\bigcup_{B \in \SB} B = X$ (i.e., the basis forms a covering of $X$), and the second condition is equivalent to the basic sets contained in $B_1 \cap B_2$ forming a cover of $B_1 \cap B_2$, i.e.
 \[ B_1 \cap B_2 = \bigcup_{\substack{B \in \SB \\ B \subset B_1 \cap B_2}} B. \]
 Here are some examples;
 \begin{enumerate}[label=(\alph*)]
