@@ -25,8 +25,8 @@ where $\pi_i$ is the mapping $(x_1, \dots, x_m) \mapsto x_i$.
 \noindent On the topic of limits, recall from MAT157 that $\lim_{x \to a} f(x) = b$ means that for every $\eps > 0$, there exists $\delta > 0$ such that if $x$ is in a $\delta$-ball of $a$, then $f(x)$ is in an $\eps$-ball of $b$. We may extend this idea to define continuity; we say $f$ is continuous at $a$ if
 \[ \lim_{x \to a} f(x) = f(a), \]
 and that $f$ is a continuous function if it is continuous for all $a \in A$. If we want to define continuity in its topological notion, though, we have that $f : \RR^n \to \RR^m$ is continuous if and only if $f^{-1}(U)$ is open in $\RR^n$ for all $U \subset \RR^m$.
-\begin{simplethm}
-    We say $f : (A \subset \RR^n) \to \RR^m$ is continuous if and only if, for all $U \subset \RR^m$, $f^{-1}(U) = A \cap V$ for some open set $V \subset \RR^n$.
+\begin{simplethm}[Spivak 1.8]
+    We say $f : (A \subset \RR^n) \to \RR^m$ is continuous if and only if, for all $U \subset \RR^m$, $f^{-1}(U) = A \cap V$ for some open set $V \subset \RR^n$.\footnote{do note that this proof is different from lecture, since i either mis-transcribed or bierstone made a mistake concerning balls for all $a \in A$ sending to $b$. }
 \end{simplethm}
 \begin{itemize}
     \item[$(\Rightarrow)$] Consider any open set $U \subset \RR^m$. If $a \in f^{-1}(U)$, we have $b := f(a) \in U$. Since $U$ is open, there exists some $\eps > 0$ such that $B(a, \eps) \subset U$; using the fact that $f$ is continuous at $a$, we may construct a $\delta$-ball $B(a, \delta(a))$ about $a$ such that
