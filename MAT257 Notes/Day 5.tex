@@ -1,0 +1,60 @@
+\section{Day 5: Composition of Continuous Functions; Uniform Continuity, Distance Metric, Compactness (Sep. 13, 2024)}
+We start with a few examples:
+\begin{itemize}
+    \item Is $f(x, y) = \frac{x^2 - y^2}{x^2 + y^2}$ continuous? The answer is no, since the limit on $(x, y) \to 0$ on $\ell_x$ (read: $X$-axis) is equal to $-1$, while the limit on $\ell_y$ is equal to $1$. This means there are two conflicting limits approaching $(x, y) \to 0$, meaning that $f$ is not continuous at $0$.
+    \item Is $f(x, y) = e^{-\frac{\abs{x - y}}{x^2 - 2xy + y^2}}$ continuous? Observe that
+    \[ e^{-\frac{\abs{x - y}}{x^2 - 2xy + y^2}} = e^{-\frac{1}{\abs{x - y}}}; \]
+    since $\abs{x - y}$ and $e^{-\frac{1}{x}}$ are continuous, we see that the composition is continuous as well, and so $f(x, y)$ is continuous.
+\end{itemize}
+While the composition of continuous functions property has been proved in 327, we provide a 257 variant of the proof;
+\begin{simplethm}[Composition of Continuous Functions is Continuous]
+    Let $f : (A \subset \RR^n) \to \RR^m$ and $g : (B \subset \RR^m) \to \RR^p$ be continuous, with $f(A) \subset B$. Then we have that $g \circ f$ is continuous.
+\end{simplethm}
+\noindent Let $U$ be open in $\RR^p$; then $g^{-1}(U) = B \cap V$ where $V$ is open in $\RR^m$ (as per our definition of continuity). Furthermore, we also have $(g \circ f)^{-1} (U) = f^{-1}(B \cap V) = f^{-1}(B) \cap f^{-1}(V)$; let $f^{-1}(V) = A \cap W$ for some open $W \subset \RR^n$, then we have
+\[ f^{-1}(B) \cap f^{-1}(V) = \underbrace{f^{-1}(B) \cap A}_{f^{-1}(B) \supset A} \cap W = A \cap W, \]
+which is as desired. \qed
+\medskip\newline
+\noindent We now provide examples of continuity.
+\begin{enumerate}
+    \item Let us have a linear function $T : \RR^n \to \RR^m$ such that $T$ is uniformly continuous. Then
+    \[ \abs{T(x) - T(y)} = \abs{T(x - y)} \leq C\abs{x - y} \]
+    for some scalar $C$. In particular, when constructing an $\eps-\delta$ proof for continuity here, for any $\eps > 0$ we may pick $\delta < \frac{\eps}{C}$.
+
+    \item Let $f = (f_1, \dots, f_m) : \RR^n \to \RR^m$; we say that $f$ is continuous if and only if each of $f_i$ for $1 \leq i \leq m$ are continuous as well.
+    \begin{itemize}
+        \item[$(\Rightarrow)$] By contrapositive; if any $f_i$ is discontinuous at any point $a$, then $f$ is discontinuous at $a$ as well.
+        \item[$(\Leftarrow)$] If every $f_i$ is continuous, there exists $\delta_i$ for each $f_i$ such that $\abs{f_i(x) - f_i(a)} < \frac{\eps}{\sqrt{n}}$ whenever $\abs{x - a} < \delta_i$. Then we may set $\delta = \min\{\delta_1, \dots, \delta_m\}$ to see
+        \[ \abs{f(x) - f(a)}^2 = \sum_{i=1}^m \abs{f_i(x) - f_i(a)} < n \left(\frac{\eps}{\sqrt{n}}\right)^2 = \eps^2, \]
+        yielding $\abs{f(x) - f(a)} < \eps$ whenever $\abs{x - a} < \delta$. \qed
+    \end{itemize}
+    In terms topological definitions though, we may write
+    \begin{itemize}
+        \item[$(\Rightarrow)$] If $f$ is continuous, then we may use the composition of continuous functions to see that the projections $f_i = \pi_i \circ f$ are indeed continuous.
+        \item[$(\Leftarrow)$] Take any open subset $U \subset \RR^m$. Then let $R$ be an open rectrangle in $U$, and let us consider the union of all possible rectangles,
+        \[ f^{-1}(U) = \bigcup_{R \in U} f^{-1}(R). \]
+        Since each rectangle is defined as the cartesian product of open intervals on each respective $f_i$, we see that $f^{-1}(R)$ is given by
+        \[ f^{-1}(R) = \bigcap_{i=1}^m f_i^{-1}(R_i), \]
+        where $R_i$ are the said respective open intervals. Since each $f_i$ is continuous and the intersection of open sets is open, we see $f^{-1}(R)$ is open for all $R$, and so $f^{-1}(U)$ is open as well. \qed
+    \end{itemize}
+
+    \item Let $X \subset \RR^n$, and define the metric $d(x, X) = \inf_{a \in X} \abs{x - a}$, i.e. the smallest distance from $x$ to some point $a \in X$. We want to show that $f(x) = d(x, X)$ is uniformly continuous on $\RR^n$.
+    \medskip\newline
+    To start, let us consider $\abs{f(x) - f(y)} = \abs{d(x, X) - d(y, X)} \leq \abs{x - y}$; we wish to prove the inequality. To do this, start by taking $d(x, X) - \abs{x - y}$, and consider
+    \begin{align*}
+        d(x, X) - \abs{x - y} &\leq d(x, X) + \underbrace{\abs{y - a} - \abs{x - a}}_{\text{Triangle Ineq.}} \\
+        &\leq \abs{y - a} \tag{$d(x, X) - \abs{x - a} \leq 0$} \\
+        &\leq d(y, X).
+    \end{align*}
+    In this way, we get $\abs{x - a} \leq \abs{x - y} + \abs{y - a}$, which yields $d(x, X) - d(y, X) \leq \abs{x - y}$. \qed
+\end{enumerate}
+\bigskip\hrule\bigskip
+\noindent We also briefly touched on compactness at the end of the class. We call a subset $X \subset \RR^n$ \textit{compact} if every open covering $\SO$ of $X$ has a finite subcovering (i.e., a subset of $\SO$ that covers $X$). Here are some examples,
+\begin{itemize}
+    \item $\RR$ (equipped with the standard topology) is not compact. If we let $\SO$ be an open covering given by 
+    \[ \SO = \{ (a, a+1) \mid a \in \RR \}, \]
+    we have that $\SO$ covers $\RR$, but there does not exist a finite subcovering. Thus, $\RR$ cannot be compact.
+    \item The open interval $(0, 1)$ (once again, equipped with the standard topology) is not compact. This time, let
+    \[ \SO = \left\{ \left( \frac{1}{n}, 1 - \frac{1}{n} \right) \mid n \in \NN \right\}. \]
+    Clearly, $\SO$ covers $X$, but it does not admit a finite subcovering.
+    \item Any topology on a finite set $X$ is compact. In particular, any covering is necessarily finite, since there are finitely many elements in $\SP(X)$; this means any subcovering, even if it is the same as the covering, is finite as well.
+\end{itemize}
