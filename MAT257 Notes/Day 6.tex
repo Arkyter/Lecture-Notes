@@ -1,0 +1,33 @@
+\section{Day 6: Compactness (Sep. 16, 2024)}
+We start by giving some properties on compactness on $\RR^n$.
+\begin{simplethm}[Compactness $\iff$ Closed and Bounded]
+    A subset $X \subset \RR^n$ is compact if and only if it is also closed and bounded.
+\end{simplethm}
+\noindent We prove both directions now.
+\begin{itemize}
+    \item[$(\Rightarrow)$] Suppose $X \subset \RR^n$ is compact. Then consider an open cover of $X$ by open balls of radius $1$; then we may find a finite subcover (by definition of compactness). Since there are a finite number of open balls of radius $1$ covering $X$, all points are finitely close to each other.
+    \medskip\newline
+    \noindent We now show that $X$ is closed, i.e. $\RR^n \setminus X$ is open. Take any $a \in \RR^n \setminus x$. We wish to find $\delta > 0$ such that $B(a, \delta) \subset \RR^n \setminus X$; then we may consider the closed balls of radius $\frac{1}{k}$ given by $\overline{B}(a, \frac{1}{k})$ for $k = 1, 2, \dots$, and denote
+    \[ U_k = \RR^n \setminus \overline{B}\left(a, \frac{1}{k}\right). \]
+    Clearly, $\bigcup_k U_k = \RR^n \setminus \{a\}$, and so $U_k$ forms an open covering of $X$, and so there exists a finite subcover of it. Thus, $X \subset U_k$ for some $k$, where $B(a, \frac{1}{k}) \subset \RR^n \setminus X$. We conclude that $X$ is closed.
+    \item[$(\Leftarrow)$] Will be done next lecture (?)
+\end{itemize}
+\begin{simplethm}[Continuous Image of Compact is Compact]
+    Let $X \subset \RR^n$ be compact, and consider a continuous function $f : X \to \RR^n$. Then $f(x)$ is compact.
+\end{simplethm}
+\noindent To start, let $\SO = \{U\}$ (read: multiple open sets $U$) be an open cover of $f(X)$. For every $U \in \SO$, consider by continuity we have
+\[ f^{-1}(U) = X \cap V_U, \]
+where $V_U$ is some open set in $\RR^n$. Then $\{V_U\}_{U \in \SO}$ is an open covering of $X$. Since $X$ is compact, we may write
+\[ X \subset V_{U_1} \cup \dots \cup V_{U_k} \]
+for some open sets $U_1, \dots, U_k$ in the covering $\SO$. Therefore, $f(X) \subset U_1 \cup \dots \cup U_k$, which is indeed a finite covering. \qed
+\begin{simplethm}[Extreme Value Theorem]
+    A continuous function $f : X \to \RR$ on a compact $X \subset \RR^n$ takes on a minimum and maximum value.
+\end{simplethm}
+\noindent Since $f(X)$ is compact, we know it is closed and bounded; let $M = \sup\{f(x) \mid x \in X\} < \infty$. If $M \not\in f(X)$, then there is an open interval around $M$ outside $f(X)$ (since the complement of $f(X)$ is open), contradicting that $M$ is the supremum; thus, $f$ attains $M$ at some point, and we may consider $-f(X)$ to obtain the infimum / minimum. \qed
+
+\newpage 
+\begin{simplethm}[$\eps$-neighborhood Theorem (Thm 4.6, Spivak)]
+    If we have a compact $X$ in an open set $U \subset \RR^n$, then there is $\eps > 0$ such that the $\eps$-neighborhood of $X$ in $\RR^n$ lies in $U$; specifically, the $\eps$-neighborhood of $X$ can be defined as 
+    \[ \{y \in \RR^n \mid d(y, X) < \eps\} = \bigcup_{x \in X} B(x, \eps). \tag{\textit{Left as exercise}} \]
+\end{simplethm}
+\noindent To prove this, let $f(x) = d(x, \RR^n \setminus U)$ be continuous (continuity has been proven previously I think). Then $f(x) > 0$ for all $x \in X$, because we may always pick a ball centered at $x$ in $U$. Since $X$ is compact, $f$ has a minimum value at $\eps > 0$; this means the $\eps$-neighborhood of $X$ lies in $U$. \qed

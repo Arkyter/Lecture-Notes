@@ -9,7 +9,7 @@ If the above is true for only pairs of events $A_i, A_j$, then we say that they 
 \[ P(\omega) := \prod_{i=1}^n P_i(\omega_i). \]
 For example, let $A = A_1 \times \dots \times A_n$, and $A_i \in \Omega_i$. then
 \[ P(A) := \sum_{\omega \in A} P(\omega) = \sum_{\substack{\omega_i \in A_i \\ i = 1, \dots, n}} \prod_{i=1}^n P_i(\omega_i) = \prod_{i=1}^n \sum_{\omega_i \in A_i} P_i(\omega_i) = \prod_{i=1}^n P_i(A_i). \]
-Let us have random variables $X_i : \Omega_i \to \RR$ where $1 \leq i \leq n$. Then $X_i^(\omega) = f_i(\omega_i)$ are independent if $P(X_1 \in A_1, \dots, X_n \in A_n) = \prod_{i=1}^n P(X_i \in A_i)$. In other words, $X_i^{-1}(A_i)$ are independent.\footnote{note on board: for any $A_1, \dots, A_n$ borel sets, intervals are enough, like $(-\infty, x_i]$. confusion?} We may continue simplifying the expression as follows,
+Let us have random variables $X_i : \Omega_i \to \RR$ where $1 \leq i \leq n$. Then $X_i^{(\omega)} = f_i(\omega_i)$ are independent if $P(X_1 \in A_1, \dots, X_n \in A_n) = \prod_{i=1}^n P(X_i \in A_i)$. In other words, $X_i^{-1}(A_i)$ are independent.\footnote{note on board: for any $A_1, \dots, A_n$ borel sets, intervals are enough, like $(-\infty, x_i]$. confusion?} We may continue simplifying the expression as follows,
 \[ \prod_{i=1}^n P(X_i \in A_i) = \prod_{i=1}^n P_i(f_i(\omega_i) = x_i) = \prod_{i=1}^n P(X_i = x_i). \]
 Now, suppose $X, Y$ are independent and $f, g$ are functions. Then we claim that $f(X), g(Y)$ are independent. To check this, let us write
 \begin{align*}
