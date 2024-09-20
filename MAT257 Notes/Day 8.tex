@@ -1,0 +1,30 @@
+\section{Day 8: Finishing Heine-Borel; Differentiation (Sep. 20, 2024)}
+\begin{simplethm}[Finishing Heine-Borel; Closed and Bounded implies Compact]
+    We now extend our proof that $X \subset \RR^n$ is compact if it is closed and bounded to $n > 1$.
+\end{simplethm}
+\noindent As a preliminary case, start by considering the rectangle $R = [a_1, b_1] \times \dots \times [a_n, b_n] = Q \times [a_n, b_n]$. Let $Q$ be a closed set in $\RR^{n-1}$; continuing on our inductive proof from last time, we have that $Q$ is compact. For any $t \in [a_n, b_n]$, consider $Q_t = \{(y, t) \mid y \in Q\}$ (where we may let $y$ be the rest of the $n-1$ components in $Q$).
+\medskip\newline
+\noindent Now, consider $\SO$ to be an open cover of $R$. Then
+\[ Q_t \subset U_1 \cup \dots \cup U_k =: U \]
+where $U_1, \dots, U_k \in \SO$, then by the $\eps$-neighborhood theorem, there is $\eps > 0$ such that $Q_t \times (t - \eps, t + \eps) \subset U$. Let us consider the set $\{(t - \eps_t, t + \eps_t) \mid t \in [a_n, b_n]\}$. This is an open cover of the closed interval $[a_n, b_n]$; by compactness of $[a_n, b_n]$, there is a finite subcover by the open intervals $(t - \eps_t, t + \eps_t)$. This means $Q \times (t - \eps_t, t + \eps_t)$ for finitely many $t \in [a_n, b_n]$ covers $R$, and we are done.
+\medskip\newline
+\noindent Returning to Heine-Borel, now, consider any $X \subset \RR^n$. Since $X$ is bounded, we may enclose $X \subset R$ where $R$ is a closed rectangle construction as per above. Then let $\SO$ be an open cover of $R$. Since $\RR^n \setminus X$ is open, we have that $\SO \cup \{\RR^n \setminus X\}$ is an open cover of $R$, meaning that as per above, $R \subset U_1 \cup \dots \cup U_k \cup (\RR^n \setminus X)$ where $U_i \in \SO$. Since $R \supset X$, we conclude that $U_1, \dots, U_k$ is a finite subcover of $\SO$ for $X$. \qed
+\medskip\newline
+\noindent We now cover differentiation. Suppose $f : (U \subset \RR^n) \to \RR^m$ with $U$ being open. We say that $f$ is differentiable at $a$ if there is a linear transformation $\lambda : \RR^n \to \RR^m$ such that
+\[ \lim_{h \to 0} \frac{f(a + h) - f(a) - \lambda h}{\abs{h}} = 0. \]
+Specifically, $f(a + h) - f(a) - \lambda(h) = o(\abs{h})$; i.e., it is equal to a function $\varphi(h)$ where $\lim_{h \to 0} \frac{y(h)}{\abs{h}} = 0$.
+\begin{simplelemma}[Differentiability implies Continuity]
+    If $f $ is differentiable at $a$, then $f$ is continuous at $a$.
+\end{simplelemma}
+\noindent To see this, take $h \to 0$ in $f(a + h) - f(a) - \lambda(h) = o(\abs{h})$.
+\begin{simplelemma}
+    If $f$ is differentiable at $a$, then there is a unique affine function $h \mapsto c - \lambda(h)$ such that
+    \[ \lim_{h \to 0} \frac{f(a + h) - f(a) - \lambda(h)}{\abs{h}} = 0. \] 
+\end{simplelemma}
+\noindent Let $c = f(a)$ by continuity. So we have to show that if $\lambda, \mu : \RR^n \to \RR^m$, with both satisfying the above limit, then we have $\lambda = \mu$. Observe that if we write
+\[ \lim_{x \to 0} \frac{\lambda(x) - \mu(x)}{\abs{x}} = 0, \]
+then we may take $x = ty$ and take $t \to 0$ to get
+\[ \lim_{t \to 0} \frac{\lambda(t_y) - \mu(t_y)}{\abs{t_y}} = 0, \]
+so $\frac{\lambda(y) - \mu(y)}{\abs{y}} = 0$. This means $\lambda = \mu$. \qed
+\medskip\newline
+\noindent With this, we say that $\lambda$ is the derivative of $f$ at $a$. We then may write $Df(a)$ or $f'(a)$ or $\partial_a f$. If $f$ is differentiable at every point of $U$, then we say it is differentiable on the open set $U$.
