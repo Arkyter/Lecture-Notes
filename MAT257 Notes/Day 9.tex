@@ -1,0 +1,29 @@
+\section{Day 9: Partial Differentiation, Jacobians (Sep. 23, 2024)}
+Let us have a function\footnote{wanted to clarify this isn't correct notation, it just looks correct to me so i do it} $f : (U \subset \RR^n) \to \RR^m$. Then the matrix $D_f(a)$ or $f'(a)$ w.r.t. the standard bases of $\RR^n, \RR^m$ is called the Jacobian matrix of $f$ at $a$.
+\medskip\newline
+\noindent We now give some examples.
+\begin{enumerate}[label=(\alph*)]
+    \item For an example, consider $g : \RR \to \RR$ differentiable at all $a \in \RR$. Let $f(x, y) = g(x)$, where $(x, y) \in \RR^2$. Then $f$ is differentiable at $(a, b)$, for any $b \in \RR$ and $D_f(a, b) : (h, k) \mapsto g'(a) h$. Writing the derivative out, we have
+    \[ \frac{f(a+h, b+k) - f(a, b) - g'(a) h}{\abs{(h, k)}} \to 0 \]
+    as $(h, k) \to 0$, meaning the above is equal to
+    \[ \frac{g(a + h) - g(a) - g'(a)h}{\abs{h}} \cdot \frac{\abs{h}}{\abs{(h, k)}} = 0. \]
+    Thus, the Jacobian is $D_f(a, b) = (g'(a), 0)$.
+    \item Let $f(x, y) = \sqrt{\abs{xy}}$. Is it differentiable at $0$? To check this, we want to either find or disprove the existence of $\lambda, \mu$ such that
+    \[ \frac{\sqrt{\abs{hk}} - 0 - (\lambda h + \mu k)}{\abs{(h, k)}} \to 0 \]
+    as $(h, k) \to 0$. Now, suppose $h = k$. Then we have
+    \[ \frac{\abs{h} - (\lambda + \mu)h}{\sqrt{2} \abs{h}} = \frac{1}{\sqrt{2}} - \frac{\lambda + \mu}{\sqrt{2}} \cdot \frac{h}{\abs{h}}. \]
+    If $\lambda + \mu = 0$, then $\frac{1}{\sqrt{2}} \not\to 0$. If $\lambda + \mu \neq 0$, then the limit approaches $2$ instead as $h \to 0$. Thus, we conclude that $f$ is not differentiable at $0$.
+\end{enumerate}
+
+\noindent Let the directional derivative of $f$ at $a$ along a vector $v$ be given by
+\[ D_v f(a)= \lim_{t \to 0} \frac{f(a + tv) - f(a)}{t}. \]
+Then we define the $i$th partial derivative of $f$ at $a$, for $i = 1, \dots, n$, to be
+\[ \frac{\partial f}{\partial x_i}(a) = D_{e_i} f(a) = \lim_{h \to 0} \frac{f(a_1, \dots, a_i + h, \dots, a_n) - f(a_1, \dots, a_n)}{h}. \]
+\begin{simplelemma}[Differentiability at Point implies Directional Derivatives Exist]
+    If $f$ is differentiable at $a$, then all directional derivatives (i.e., for all $v$) at $a$ exist, and $D_v f(a) = D f(a) v$.
+\end{simplelemma}
+\noindent To start, we know that
+\[ \frac{f(a + tv) - f(a) - D_f(a)(tv)}{\abs{tv}} \to 0 \]
+as $t \to 0$. If $t \to 0^+$, then $\abs{tv} = t\abs{v}$ and we may multiply the LHS by $\abs{v}$ to get
+\[ \frac{f(a + tv) - f(a)}{t} - Df(a)(v) \xrightarrow[t \to 0^+]{} 0 \]
+In the other way, if $t \to 0^-$, then $\abs{tv} = -t\abs{v}$; multiply the LHS by $-\abs{v}$, and we get the same thing. \qed
