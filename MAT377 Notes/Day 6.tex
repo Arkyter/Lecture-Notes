@@ -1,0 +1,61 @@
+\section{Day 6: (Sep. 23, 2024)}
+Let us throw $n$ balls into $n$ boxes. Then consider $N$ to be the number of empty boxes, and we have
+\[ P(N = k) = \frac{1}{n^n} \binom{n}{k} \sum_{\ell = 0}^k (-1)^\ell \binom{k}{\ell} (k - \ell)^n, \]
+with accompanying expectation
+\[ E[N] = \sum_{k = 0}^n P(N = k). \]
+However, we may simply the expression as follows; let $N$ instead be written as a sum of indicators, i.e.
+\[ N = \sum_{i=1}^N 1(\text{the } i\text{th box is empty}), \]
+yielding
+\[ E[N] = \sum_{i=1}^N P(\text{the } i\text{th box is empty}) = nP(\text{the } i\text{th box is empty}) = n \frac{(n-1)^n}{n^n}. \]
+Next example; the longest increasing subsequence of a random permutation. Let $S_n$ be the set of bijections $\sigma : \{1, \dots, n\} \to \{1, \dots, n\}$. Then $\abs{S_n} = n!$ where each $\sigma$ has probability $\frac{1}{n!}$, and we define an increasing subsequence to be given by $\sigma(i_1) < \sigma(i_2) < \dots < \sigma(i_k)$ for $i_1 < i_2 < \dots < i_k$. Let $L_n(k)$ be the longest increasing subsequence of $\sigma$. Then $L_n$ is a random variable; it remains to ask how big $L_n$ is (Ulam's Problem). It is proven (though not in this class) that
+\[ \frac{L_n}{\sqrt{n}} \to 2 \]
+as $n \to \infty$, i.e. the expectation $E[L_n] \sim 2\sqrt{n}$ \footnote{for more, see \href{https://www.ams.org/journals/jams/1999-12-04/S0894-0347-99-00307-0/S0894-0347-99-00307-0.pdf}{here} :3}.
+\medskip\newline
+\noindent We prove a looser bound for now; let $N_k$ be the number of increasing subsequences of length $k$. Then
+\[ N_k = \sum_{i_1 < \dots < i_k} 1(\sigma(i_1) < \dots < \sigma(i_k)), \]
+and we may write
+\begin{align*}
+    E[N_k] &= \sum_{i_1 < \dots < i_k} P(\sigma(i_1) < \dots < \sigma(i_k)) \\
+    &= \binom{n}{k} \frac{1}{k!} = \frac{n!}{(n-k)! (k)!^2}.
+\end{align*}
+We now present Chebyshev's inequality,
+\[ P(X \geq x) \leq \frac{E[X 1(X \geq x)]}{x}, \]
+where $x > 0$. Using $X 1(X \geq x) \geq x 1(X \geq x)$, we have $E[X 1(X \geq x)] \geq x P(X \geq x)$. Returning to earlier, we obtain $P(N_k > 0) \leq E[N_k] = \frac{n!}{(n-k)!(k!)^2}$.
+
+\newpage
+\begin{simplethm}[Stirling's Formula]
+    $n! \sim \sqrt{2 \pi} n^{n + \frac{1}{2}} e^{-n}$.
+\end{simplethm}
+\noindent To prove this, start by considering the Gamma function $\Gamma(z) = \int_0^\infty t^{z-1}e^t \, dt$, which gives $\Gamma(n) = (n-1)!$. Let us consider the following;
+\begin{align*}
+    \Gamma(n + 1) &= \int_0^\infty t^n e^{-t} \, dt \\
+    &= \int_0^\infty e^{n \log t - t} \, dt \tag{Substitute $t = nx$} \\
+    &= n e^{n \log n} \underbrace{\int_0^\infty e^{n(\log x - x)} \, dx}_{\text{of the form } \int e^{n f(x)} \, dx} \\
+    &\approx \int e^{n f(x^\ast) + \frac{f''(x^\ast)}{2} (x - x^\ast)^2} \, dx \\
+    &= e^{-n} \int e^{-\frac{n}{2} (x-1)^2} \, dx \tag{Substitute $x = 1 + \frac{y}{\sqrt{n}}$} \\
+    &= \frac{e^{-n}}{\sqrt{n}} \int_{-\infty}^\infty e^{-\frac{y^2}{2}} \, dy \\
+    &= \frac{e^{-n}}{\sqrt{n}} \sqrt{\int_{-\infty}^\infty \int_{-\infty}^\infty e^{-\frac{1}{2}(x^2 + y^2)} \, dx \, dy} \\
+    &= \frac{e^{-n}}{\sqrt{n}} \sqrt{\int_0^\infty \int_0^{2\pi} e^{-\frac{r^2}{2}} r \, d\theta \, dr } \\
+    &= \frac{e^{-n}}{\sqrt{n}} \sqrt{2\pi \int_0^\infty re^{-\frac{r^2}{2}} \, dr} \\
+    &= \frac{e^{-n}}{\sqrt{n}} \sqrt{2\pi}.
+\end{align*}
+\textit{(I don't know where the hell this went. Oh well.)}
+\medskip\newline
+\noindent We may now insert Stirling's formula into Ulam's problem to obtain
+\[ P_n(N_k > 0) \leq \frac{n!}{(n-k)!(k!)^2} \approx c \frac{n^{n + \frac{1}{2}} e^{-n}}{k^{2k+1} e^{-2k} (n-k)^{n-k+\frac{1}{2}} e^-(n-\frac{1}{2})}, \]
+which cancels nicely. Using $k! \geq k^k e^{-k}$, we get $P(N_k > 0) \leq (\frac{e\sqrt{n}}{k})^{2k}$. We may make the bound nicer by writing
+\[ \left(\frac{e \sqrt{n}}{k}\right)^{2k} \leq \left(\frac{e}{3}\right)^{6\sqrt{n}} \tag{$k = 3\sqrt{n}$}, \]
+and using $(\frac{e}{3})^6 \leq e^{-\frac{1}{2}}$ yields that it is less than $e^{-\frac{n}{2}}$. Thus, we have that $P(L > \cbrt{n}) \leq \sum_{m=3\sqrt{n}}^\infty e^{-\frac{\sqrt{m}}{2}}$.
+
+\newpage
+\noindent We now cover Erd\"os-Renyi random graphs. Let us have a graph on vertices $V = \{v_1, \dots, v_n\}$, and edges $E = \{e_{ij}\} \subset V \times V$. We have that $e_{ij}$ is in $E$ with probability $p$, and not there with probability $1 - p$, considered independently over all undirected pairs $(i, j)$.
+\medskip\newline
+\noindent Define a clique to be a complete subgraph of any graph $G(n, p)$, and let us have $\omega(G)$ to be the clique number, i.e. the size of the largest clique of $G$. This is approximately $C_p \log n$, where $C_p$ is some constant. Let us have $N_k$ as the number of cliques of size $k$. To calculate the expectation, let us have
+\[ N_k = \sum_{\substack{V' \subset V}{\abs{V'} = k}} 1_{\text{all } e_{ij} { for all } i, j \in V' \text{ exists}}. \]
+Then we have
+\[ E[N_k] = \binom{n}{k} p^{\binom{k}{2}} =: f(k). \]
+Observe that we have
+\[ \frac{f(k+1)}{f(k)} = \frac{\binom{n}{k+1} p^{\binom{k+1}{k}}}{\binom{n}{k} p^{\binom{k}{2}}} = \frac{n-k}{k+1} p^k. \]
+Observing that $f(1) = n$ and $f(n) = p^{\frac{n(n-1)}{2}} << 1$, we see that $f$ is unimodal. In particular, there is a unique point $k_0$ such that $f(k_0) \geq 1 > f(k_0 + 1)$. Thus,
+\[ \left(\frac{n}{k} - 1\right)^k p^{\frac{k(k-1)}{2}} \leq f(k) \leq n^k p^{\frac{k(k-1)}{2}}. \]
+In particular, the right hand side is less than $1$ if $np^{\frac{k-1}{2}} < 1$, and this evaluates out to $k > C_p \log n$. The left hand side is greater than $1$ when $k \leq \frac{\log(\frac{n}{k} - 1)}{\abs{\log p}} + 1$.
