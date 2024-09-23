@@ -1,0 +1,25 @@
+\section{Day 7: Uniform Continuity, Hard Direction of Heine-Borel (Sep. 18, 2024)}
+\begin{simplethm}[Cont. Function on Compact Set is Uniformly Cont.]
+    A continuous function $f : (X \subset \RR^n) \to \RR^n$, where $X$ is compact, is uniformly continuous. \footnote{In general, this works on any $f : X \to Y$ if $X$ is a compact metric space. for here, we let them both be subsets of $\RR^n$}
+\end{simplethm}
+\noindent Recall that uniform continuity means that for all $\eps > 0$, there exists some one-size-fits-all $\delta > 0$ such that $\abs{f(x) - f(y)} < \eps$ whenever $\abs{x - y} < \delta$ for any $x, y \in X$.
+\medskip\newline
+\noindent Let us have $X \times X \subset \RR^n \times \RR^n$. To start, the diagonal $\Delta = \{(x, x) \mid x \in X\}$ is compact, because $\Delta$ is the image of $X$ under the map $x \mapsto (x, x)$, which is a continuous function. Thus, we have that $g : X \times X \to \RR$ where $g(x, y) = \abs{f(x) - f(y)}$ is continuous, as per the composition of continuous functions.
+\medskip\newline
+Given $\eps > 0$, consider $g^{-1}((-\eps, \eps)) = (X \times X) \cup U$ where $U$ is an open set in $\RR^n \times \RR^n$; clearly, $\Delta \subset U$, since $\Delta$ is compact and $U$ is open. By the $\eps$-neighborhood theorem, there exists $\delta > 0$ such that the $\delta$-neighborhood of $\Delta$ is in $U$. Then consider $x, y$ such that $\abs{x - y} < \delta$, and observe we have
+\[ \abs{(x, x) - (x, y)} \leq \abs{x - y} + \abs{y - y} < \delta \]
+by the triangle inequality. This means $(x, y)$ is in a $\delta$-neighborhood of $\Delta$, and so is in $U$. By construction, we see that $(x, y) \in g^{-1}((-\eps, \eps))$, and we conclude $g((x, y)) = \abs{f(x) - f(y)} < \eps$. \qed
+
+\begin{simplethm}[Closed Interval is Compact]
+    A closed interval $X = [a, b] \subset \RR$ is compact.
+\end{simplethm}
+\noindent Consider an open cover $\SO$ of $[a, b]$, and let $A$ be the set of all $x \in [a, b]$ such that $[a, x]$ can be covered by finitely many sets in $\SO$. Then we want to show that $a, b \in A$, and that $A$ is bounded above by $b$.
+\medskip\newline
+\noindent Let $\alpha = \sup A$; we start by showing that $\alpha \in A$. First, observe that $\alpha \in [a, b]$, meaning $\alpha \in U$ for some $U \in \SO$. Since $U$ is open, we may find a $\delta$-ball around $\alpha$ in $U$, i.e. $(\alpha - \delta, \alpha + \delta) \subset U$. Since $\alpha$ is the supremum, there must exist some $x$ in the interval to the left of $\alpha$ such that $[a, x]$ is covered by $U_1, \dots, U_k \in \SO$. This means $[a, \alpha]$ is covered by $U \cup \bigcup_{i=1}^k U_i$.
+\medskip\newline
+\noindent Now, we show that $\alpha = b$. In the opposite direction to the above, suppose we pick $x' \in (\alpha, \alpha + \delta) \cap [a, b]$ (i.e., to the right of $\alpha$). Since we know $(a - \delta, a + \delta)$ is covered by $U$ and $[a, x]$ is covered by finitely many sets in $\SO$, $[a, x']$ is covered by $U \cup \bigcup_{i=1}^k U_i$ as well, which would contradict that $\alpha$ is the supremum of $A$. The only situation in which there is no contradiction is if $\alpha = b$, since $x'$ would be at most $b$ in this case. \qed
+
+\begin{simplelemma}[Closed Rectangles in $\RR^n$ are Compact]
+    Closed rectangles $R = [a_1, b_1] \times \dots \times [a_n, b_n] \subset \RR^n$ are compact.
+\end{simplelemma}
+\noindent We may prove this by inducting on $n$. As per earlier, we have that a closed interval on $R$ is compact. See Day 8 for the complete proof; class was interrupted by a fire alarm :c
