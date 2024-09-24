@@ -18,4 +18,3 @@ Audit list (notes may be kept, but sparsely):
 
 Errata list (?):
 - Empty for now!
-
