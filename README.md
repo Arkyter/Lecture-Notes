@@ -9,9 +9,9 @@ This also means I will revise / change some details from class if I think it hel
 
 Current list of classes:
 - MAT257 (Analysis II)
-- MAT327 (Intro to Topology)
-- MAT377 (Probability Theory)
-- MAT482 (Composition Laws, Rings of Low Rank, and Related Counting Problems; tl;dr, arithmetic statistics stuff)
+- MAT327 (Intro to Topology); textbook link [here](https://people.math.ethz.ch/~dkosanovic/24-FS/Munkres-Topology.pdf)
+- MAT377 (Probability Theory); class follows the [textbook](https://drive.google.com/file/d/1Rpkr-NCEyqygvypR65RznaZkb36KHB29/view?pli=1) closely, so I won't record notes for some days. Each class goes over about 1 subsection in the book.
+- MAT482 (Composition Laws, Rings of Low Rank, and Related Counting Problems; tl;dr, arithmetic statistics stuff); class has notes taken by professor, so I won't be keeping notes for this as often.
 
 Audit list (notes may be kept, but sparsely):
 - MAT1304 (Extremal Combinatorics)
