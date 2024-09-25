@@ -1,0 +1,47 @@
+\section{Day 10: Differentiation (Sep. 25, 2024)}
+Today we will go over differentiation. We start with a few examples;
+\begin{enumerate}[label=(\alph*)]
+    \item Let $f(x, y) = \sin(x \cos y)$. Then
+    \[ \frac{\partial f}{\partial y} = \cos(x \sin y) x \cos y. \]
+    Note that in the partial derivative above, we hold $x$ as a constant.
+    \item Let $f(x, y) = x^{x^{x^{x^y}}} = e^{(log x) \cdot x^{x^{x^y}}}$. Then
+    \[ D_2(1, y) = x^{x^{x^{x^y}}}; \hspace{0.2in} \log x \frac{\partial}{\partial y} \left(x^{x^{x^{y}}}\right) = 0. \]
+\end{enumerate}
+
+\noindent We now discuss higher order derivatives; consider $f : (U \subset \RR^n) \to \RR^n$. Suppose $D_i f : U \to \RR$ exists for all $i$, and we consider that $D_j(D_i f)$ may also be written as
+\[ D_{ij} f(x), \hspace{0.2in} f_{x_i x_j}(x), \hspace{0.2in} \frac{\partial^2 f}{\partial x_j \partial x_i} (x). \]
+However, we must note that order of differentiation is important; observe the example below (with corresponding \href{https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives#Requirement_of_continuity}{link}),
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{2}
+    \item Let $\displaystyle f(x, y) = \begin{cases} xy \frac{x^2 - y^2}{x^2 + y^2} & (x, y) \neq (0, 0) \\ 0 & (x, y) = (0, 0) \end{cases}$.
+    \medskip\newline
+    Then we have $D_2 f(x, 0) = x$, $D_2 f(0, y) = -y$ by symmetry, and $D_{12} f(0, 0) = -1$ since $D_{21} f(0, 0) = 1$.
+\end{enumerate}
+
+\noindent Note that second order mixed partial derivatives at $a$ are equal if they are both defined, and they are continuous on an open set containing $a$. For clarity, we introduce multi-index notation, given as below,
+\[ \frac{\partial^{\abs{\alpha}} f}{\partial x^\alpha} = \frac{\partial^{a_1 + \dots + a_n} f}{\partial x_1^{\alpha_1} \dots \partial x_n^{a_n}}, \]
+i.e. $\alpha = (\alpha_1, \dots, \alpha_n)$ and $\abs{\alpha} = \alpha_1 + \dots + \alpha_n$. A relevant point worth bringing up is \href{https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives#Schwarz's_theorem}{Schwarz's theorem}, which discusses when the orders of partials commute (note that this was not covered in class).
+\begin{simplethm}[Chain Rule]
+    Let $f : (U \subset \RR^n) \to \RR^m$, and $g : (V \subset \RR^m) \to \RR^n$ (where $f(U) \subset V$). If $f$ is differentiable at $a \in U$, and $g$ is differentiable at $f(a)$, then $g \circ f : U \to \RR^n$ is differentiable at $a$, and $D(g \circ f)(a) = D_g(f(n)) \circ Df(a)$, i.e. $(g \circ f)'(a) = g' (f(a)) \cdot f'(a)$ (note that this denotes matrix multiplication).
+\end{simplethm}
+\noindent To start, we're given that $f(x) - f(a) - f'(a)(x - a) = \varphi(x)$ from $\lim_{x \to a} \frac{\varphi(x)}{\abs{x - a}} = 0$, and $g(y) - g(b) - g'(b)(y - a) = \psi(y)$ from $\lim_{y \to b} \frac{\psi(y)}{\abs{y - b}} = 0$. We want to show that
+\[ \frac{(g \circ f)(x) - g(b) - g'(b) f'(a) (x - a)}{\abs{x - a}} \xrightarrow[x \to a]{} 0. \]
+To start, we reduce the numerator as folows,
+\begin{align*}
+    & (g \circ f)(x) - g(b) - g'(b) f'(a) (x - a) \\
+    &= \underbrace{(g \circ f)(x) - g(b) - g'(b)(f(x) - f(a)}_{\psi(f(x))} - \varphi(x)) \\
+    &= \psi(f(x)) + g'(b) \varphi(x).
+\end{align*}
+
+\newpage
+\noindent Then observe that the latter half of the reduced expression yields,
+\[ \lim_{x \to a} \frac{g'(b) \varphi(x)}{\abs{x - a}} = g'(b) \lim_{x \to a} \frac{\varphi(x)}{\abs{x - a}} = 0. \]
+We now claim that the former half satisfies
+\[ \lim_{x \to a} \frac{\psi(f(x))}{\abs{x - a}} = 0. \]
+For all $\eps > 0$, we have $\abs{\psi(f(x))} < \eps \abs{f(x) - b}$ if $\abs{f(x) - b} < \delta'$ for some $\delta' = \delta'(\eps)$, which happens when $\abs{x - a} < \delta$ for some $\delta = \delta(\delta')$ by continuity. Therefore, if $\abs{x - a} < \delta$, then
+\begin{align*}
+    \abs{\psi(f(x))} &< \eps \abs{f(x) - b} \\
+    &= \eps \abs{f'(a)(x - a) + \varphi(x)} \\
+    &\leq \eps M \abs{x - a} + \eps \abs{\varphi(x)},
+\end{align*}
+and so $\frac{\abs{\psi(f(x))}}{\abs{x - a}} \leq \eps M + 0$ as $x \to a$, which means we may conclude the fraction goes to $0$ as $x \to 0$ as desired. \qed
