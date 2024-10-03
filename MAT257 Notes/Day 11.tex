@@ -1,1 +1,55 @@
-\section{Day 11: Computations of Derivatives (Sep. 30, 2024)}
+\section{Day 11: Computations of Derivatives (Sep. 27, 2024)}
+We start with a few useful facts: for the following examples, we let $f : (U \subset \RR^n) \to \RR^m$.
+\begin{enumerate}[label=(\alph*)]
+    \item If $f$ is a constant function $f = b$, then $D f(a) = 0$.
+    \[ \lim_{h \to 0} \frac{f(a + h) - f(a) - 0}{\abs{h}} = \lim_{h \to 0} \frac{b - b}{\abs{h}} = 0. \]
+    \item If $f$ is a linear transformation, then $D f(a) = f$. 
+    \[ \lim_{h \to 0} \frac{f(a + h) - f(a) - f(h)}{\abs{h}} = \lim_{h \to 0} \frac{f(a + h) - f(a + h)}{\abs{h}} = 0. \]
+    \item If $f = (f_1, \dots, f_m)$, $f$ is differentiable at $a$ if and only if each $f_i$ is differentiable at $a$, and $D f(a) = (D f_1(a), \dots, D f_m(a))$. We call $D f(a)$ to be the Jacobian (read: $m \times n$ matrix) where the $i$th row is given by $D f_i(a)$. \footnote{check this... i'm not so sure..? nvm \href{https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant}{jacobian wikipedia link}}
+    \begin{itemize}
+        \item[$(\Rightarrow)$] Observe that if $f$ is differentiable at $a$, then $f_i = \pi_i \circ f$, where $\pi_i$ is the projection from $\RR^m \to \RR$, which is differentiable by the chain rule.
+        \item[$(\leftarrow)$] Now suppose each $f_i$ is differentiable at $a$; write $\lambda = (Df_1(a), \dots, Df_m(a))$, and consider
+        \begin{align*}
+            & \lim_{h \to 0} \frac{f(a + h) - f(a) - \lambda(h)}{\abs{h}} \tag{Expand component-wise} \\
+            &= \lim_{h \to 0} \frac{\left(f_1(a + h) - f_1(a) - Df_1(a), \dots, f_m(a + h) - f_m(a) - Df_m(a)\right)}{\abs{h}} = 0
+        \end{align*}
+        \[  \]
+        by the triangle inequality. \qed
+    \end{itemize}
+    \item Suppose $S : \RR^2 \to \RR$, and $S(x, y) = x + y$. Then we may observe that $S$ is linear, meaning $D_S(a, b) = S$ by (b).
+    \item Suppose $P : \RR^2 \to \RR$, and $P(x, y) = xy$. Then\footnote{yes i used binom i'm a lazy fuck}
+    \[ D_P(a, b)(x, y) = bx + ay = \begin{pmatrix} b & a \end{pmatrix} \binom{x}{y}. \]
+    Then we may write (using $\abs{hk} \leq \sqrt{h^2 + k^2}$)
+    \[ \lim_{(h, k) \to 0} \frac{\abs{P(a + h, b + k) - P(a, b) - (bh + ak)}}{\abs{(h, k)}} = \lim_{(h, k) \to 0} \frac{\abs{hk}}{\sqrt{h^2 + k^2}} \leq \sqrt{h^2 + k^2}. \]
+\end{enumerate}
+
+\newpage
+\begin{simplethm}[Addition, Product, Quotient Rule]
+    If $f, g : (U \subset \RR^n) \to \RR^m$ are differentiable at $a \in U$, then
+    \begin{enumerate}[label=(\alph*)]
+        \item $D(f + g)(a) = Df(a) + Dg(a)$.
+        \item If $m = 1$, then $D(fg)(a) = g(a) Df(a) + f(a) Dg(a)$.
+        \item If $m = 1$ and $g(x) \neq 0$, then $D\left(\frac{1}{g}\right)(a) = -\frac{1}{g(a)^2} Dg(a)$.
+    \end{enumerate}
+\end{simplethm}
+\noindent
+The proofs simply follows from our previous examples.
+\begin{enumerate}[label=(\alph*)]
+    \item $f + g = S \circ (f + g)$;
+    \item $fg = P \circ (f, g)$;
+    \item $\frac{1}{g} = \frac{1}{y} \circ g$.
+\end{enumerate}
+
+\begin{simplethm}[Jacobian Construction]
+    If $f : (U \subset \RR^n) \to \RR^m$ is differentiable at $a$, then $\frac{\partial f_i}{\partial x_j} (a)$ exists for all $1 \leq i \leq n$ and $1 \leq j \leq m$. Then $Df(a)$ is given by the matrix (which we will call the \textit{Jacobian}),
+    \[ \begin{pmatrix} \frac{\partial f_1}{\partial x_1} (a) & \dots & \frac{\partial f_1}{\partial x_n} (a) \\ \vdots & \ddots & \vdots \\ \frac{\partial f_m}{\partial x_1} (a) & \dots & \frac{\partial f_m}{\partial x_n} (a) \end{pmatrix} = \begin{pmatrix} \frac{\partial f_i}{\partial x_j} (a) \end{pmatrix}. \]
+\end{simplethm}
+\noindent To prove this, observe that when $m = 1$, $f : U \to \RR$, and $\frac{\partial f}{\partial x_j}(a) = (f \circ h)'(a_j)$, where $h(x) = (a_1, \dots, a_{j-1}, x, a_{j+1}, \dots)$. Then
+\[ \frac{\partial f}{\partial x_j}(a) = (f \circ h)(a_j) = f'(a)\begin{pmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{pmatrix} j, \]
+and so $\frac{\partial f}{\partial x_j}(a)$ is the $j$th component of $Df(a)$.
+\medskip\newline
+\noindent For general choices of $m$, $f = (f_1, \dots, f_m)$; since each $f_i$ is differentiable at $a$, and $f'(a) = (f_1'(a), \dots, f_m'(a))$, we have that $f_i'(a)$ is the $i$th row of the matrix $f'(a)$. \qed
+\medskip\newline
+\noindent For example, let $f(x, y) = g(x + y)$. Then $D f(c, d)(x, y) = D_g(c + d)(x + y)$, of which the LHS may be expanded as
+\[ (D_g \circ s)(c, d) \circ \underbrace{D_s(c, d)}_{S} (x, y) = D_g(c + d) \circ s(x, y) = D_g(c + d)(x + y) \]
+for more clarity.
