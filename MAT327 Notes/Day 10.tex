@@ -80,6 +80,6 @@ Take $\delta = \eps - d(x, y)$, and now $x \in B_\delta(x) \subset B_\eps(y) \su
 \end{tikzcd}\]
 If $d_1 + d_2 \leq 1$, then $d_3 \leq 1$ and now $\overline{d_i} = d_i$. If $d_1 + d_2 > 1$, then $\overline{d_1} + \overline{d_2} \geq 1 \geq \overline{d_3}$. Now, let $\SB = \{B_r(x)\}$ be replaced with the set $\{B_r(x) \mid r < \frac{1}{7}\}$ or some arbitrary constant less than $1$ (for now, we pick $\frac{1}{7}$). Then $d, \overline{d}$ induce the same topology because their small balls are the same. \qed
 \medskip\newline
-\noindent We now claim that if $(X_n, d_n)$ are metric spaces, then defining $d((x_n), (y_n)) = \sup_n d_n(x_n, y_n)$ is a metric on $X = \prod X_n$ called ``the uniform metric on $X$''. It defines neither the box nor the cylinder topology.
+\noindent We now claim that if $(X_n, d_n)$ are metric spaces, then defining $d((x_n), (y_n)) = \sup_n \overline{d_n}(x_n, y_n)$ is a metric on $X = \prod X_n$ called ``the uniform metric on $X$''. It defines neither the box nor the cylinder topology.
 \medskip\newline
 \noindent We will continue the proof next lecture.
