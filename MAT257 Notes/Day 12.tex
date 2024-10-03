@@ -1,0 +1,43 @@
+\section{Day 12: Computations of Derivatives II (Sep. 30, 2024)}
+We start with a few examples.
+\begin{enumerate}[label=(\alph*)]
+    \item Let $f(x, y) = g(x + y)$ be differentiable. Then
+    \[ D_f(c, d)(x, y) = D_g(c + d)(x + y). \]
+    \item Let $f(x, y) = g(xy) = (g \circ p)(x, y)$ be differentiable.
+    \[ D_f(c, d)(x, y) = D_g \circ p(c, d) \circ D_p(c, d)(x, y) = D_g(cd)(dx + cy). \]
+    \item Let $f(x, y) = \int_a^{x+y} g$ with $g$ continuous. Then $D_f(c, d)(x, y) = g(c + d)(x + y)$.
+    \item Let $f(x, y) = \int_a^{xy} g$ with $g$ continuous. Then $D_f (c, d)(x, y) = g(cd)(dx + cy)$.
+    \item Let $F(x) = f(g_1(x), \dots, g_m(x))$. Let $g_1, \dots, g_m : \RR^n \to \RR$ be differentiable at $a$. Then $f : \RR^m \to \RR$ is differentiable at $(g_1(a), \dots, g_m(a))$.
+    \[ \frac{\partial F}{\partial x_i}(a) = \sum_{j=1}^m \frac{\partial f}{\partial y_j} (g_1(a), \dots, g_m(a)) \frac{\partial g_i}{\partial x_i}(a) \]
+    Using $F = f \circ g$, where $g = (g_1, \dots, g_m)$ and $F'(a) = Df(g(a)) \cdot D_g(a)$, we get that
+    \[ \left(\frac{\partial F}{\partial x_1}(a), \dots, \frac{\partial F}{\partial x_n}(a)\right) = \left(\frac{\partial f_1}{\partial y_1}(g(a)), \dots, \frac{\partial f_m}{\partial y_m}(g(a))\right) \begin{pmatrix} \frac{\partial g_1}{\partial x_1}(a) & \dots & \frac{\partial g_1}{\partial x_n}(a) \\ \vdots & \ddots & \vdots \\ \frac{\partial g_m}{\partial x_1}(a) & \dots & \frac{\partial g_m}{\partial x_n} (a) \end{pmatrix}. \]
+    With $y = g(x)$ and $z = f(y)$, we get that
+    \[ \frac{\partial z}{\partial x_i} = \sum_{j=1}^m \frac{\partial z}{\partial y_i} \frac{\partial y_i}{\partial x_i}; \hspace{0.2in} \frac{\partial z}{\partial x} = \frac{\partial z}{\partial y} \frac{\partial y}{\partial x}. \]
+\end{enumerate}
+
+\noindent Recall that whenever $f$ is differentiable at $a$, then $D_v f(a) = D f(a)(v)$. In particular, $D_v f(a)$ is linear in $v$. Also recall that $f$ is not necessarily differentiable at $a$, even if all the directional derivatives at $a$ exist. For example, let 
+\[ f(x, y) = \begin{cases} \frac{x^2y}{x^4 + y^2} & \text{if } (x, y) \neq (0, 0), \\ 0 & \text{if } (x, y) = (0, 0). \end{cases} \]
+Then letting $v = (h, k)$, we get $D_v f(0, 0) = \lim_{t \to 0} \frac{f(th, th) - f(0, 0)}{t} = \lim_{t \to 0} \frac{h^2 k}{t^2 h^4 + k^2}$, which is equal to $\frac{h^2}{k}$ if $k \neq 0$ and $0$ if $k = 0$. Clearly, the directional derivatives are not commensurate to a single value, and so the derivative does not exist. In fact, $f$ is differentiable on every straight line through $0$, but it isn't even continuous at $0$.
+\medskip\newline
+For example, let $f(x, x^2) = \frac{1}{2}$. This function is not continuous at $0$. To see this, consider $f(x, mx)$ with $y = mx, \frac{mx}{x^2 + y^2}$.\footnote{what}
+
+\newpage
+\begin{simplethm}[Differentiability Condition]
+    Let $f : (U \subset \RR^n) \to \RR^n$. If all $\frac{\partial f_i}{\partial x_j}$ exist in an open neighborhood of $a$ and are continuous at $a$, then $Df(a)$ exists.
+\end{simplethm}
+\noindent Start by assuming $m = 1$. Then let us have $a = (a_1, \dots, a_n), h = (h_1, \dots, h_n)$.\footnote{no idea what's going on here btw}
+\begin{align*}
+    f(a + h) - f(a) &= f(a_1 + h_1, a_2, \dots, a_n) - f(a_1, \dots, a_n) \\
+    & \,\,\, + f(a_1 + h_1, a_2 + h_2, a_3, \dots, a_n) - f(a_1 + h_1, a_2, \dots, a_n) \\
+    & \,\,\, + f(a_1 + h_1, \dots, a_n + h_n) - f(a_1 + h_1, \dots, a_{n-1} + h_{n-1}, a_n) \\
+    &= h_1 \frac{\partial f}{\partial x_1} (b_1, \dots, a_n) \\
+    & \,\,\, + h_i \frac{\partial f}{\partial x_i} (a_1 + h_1, \dots, b_i, a_n) \\
+    & \,\,\, + \dots. \\
+\end{align*}
+Let's write the above as $\sum_{i=1}^n h_i \frac{\partial f}{\partial x_i} (c_i)$, with $c_i \to a$ as $h \to 0$.
+\begin{align*}
+    & \lim_{h \to 0} \frac{f(a + h) - f(a) - \sum_{i=1}^n \frac{\partial f}{\partial x_i} (a) \cdot h_i}{\abs{h}} \\
+    &= \lim_{h \to 0} \frac{\sum_{i=1}^n \left(\frac{\partial f}{\partial x_i}(c_i) - \frac{\partial f}{\partial x_i}(a)\right) \cdot h_i}{\abs{h}} \\
+    &= 0 
+\end{align*}
+by continuity of the partial at $a$, and $\frac{\abs{h_i}}{\abs{h}} = 1$. \qed
