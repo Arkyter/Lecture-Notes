@@ -1,0 +1,24 @@
+\section{Day 13: Gradient (Oct. 2, 2024)}
+What is the different of fastest increase of a differentiable function? Let $f : (U \subset \RR^n) \to \RR$ be differentiable at $a \in U$. Then
+\[ D_x f(a) = D f(a)(x) = \underbrace{\left( \frac{\partial f}{\partial x_1} (a), \dots, \frac{\partial f}{\partial x_n}(a)\right)}_{\nabla f(a)} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = \left< \nabla f(a), x \right>, \]
+where $\nabla$ denotes the gradient of the function $f$. Invariably, $D f(a) \in (\RR^n)^\ast$ (dual space), so there exists a unique $y \in \RR^n$ such that $D f(a) (x) = \left<y, x\right>$. We denote $y$ by $\mathrm{grad} f(a)$ or $\nabla f(a)$. Let $e$ be a unit vector; then $D_e f(a)$ is the slope of the curve at $a$, obtained by intersecting the graph of $f$ with vertical planes through the line $x = a + te$ (for $t \in \RR$). Then
+\begin{align*}
+    D_e f(a) &= \left< \nabla f(a), e \right> \\
+    &= \abs{\nabla f(a)} \cos \theta,
+\end{align*}
+where $\theta$ is given by the angle between $e$ and $\nabla f(a)$ (let's just assume it's nonzero); i.e., the directional derivative $D_e f(a)$ attains its largest value when $\theta = 0 \implies \cos \theta = 1$, where $e$ is in the direction of $\nabla f(a)$. For example, if $f(x_1, x_2)$ denotes the temperature of a point $(x_1, x_2)$ in the plane, then a heat-seeking bug will move in the direction of the gradient. If $\nabla f(a) = 0$, then there may still be directions of fastest increase, but they are not necessarily unique; for example, graph $z = x^2 - y^2$; we see that $z$ increases along the $x$ axis in both directions.
+\medskip\newline
+We now discuss differentiation under the integral sign. Given that $f(x, y)$ is continuous on $[a, b] \times [c, d]$, we have that $\frac{\partial f}{\partial y}$ is also continuous on the rectangle. Let
+\[ F(y) = \int_a^b f(x, y) \, dx. \]
+Then $F(y)$ is continuously differentiable on $[c, d]$, and $F'(y) = \int_a^b \frac{\partial f}{\partial y}(x, y) \, dx$. 
+More generally, if $f \in C^n \implies F \in C^n$, where $C^n = \{f : \RR^2 \to \RR \mid f \text{ is } n \text{ times cont. diff.}\}$. To prove this, let us consider
+\begin{align*}
+    & F(y + h) - F(y) - \int_a^b \frac{\partial f}{\partial y}(x, y) \, dx \cdot h \\
+    &= \int_a^b f(x, y + h) - f(x, y) \, dx - \frac{\partial f}{\partial y}(x, y) \cdot h \, dx. \tag{13.1}
+\end{align*}
+Then $\frac{\partial f}{\partial y}$ is uniformly continuous on $[a, b] \times [c, d]$, so given $\eps > 0$, there exists $\delta > 0$ such that
+\[ \abs{y_1 - y_2} < \delta \implies \abs{\frac{\partial f}{\partial y} (x, y_1) - \frac{\partial f}{\partial y} (x, y_2)} < \eps, \]
+meaning $f(x, y + h) - f(x, y) = \frac{\partial f}{\partial y} (x, y_n) \cdot h$ for some $y_n \in (y, y + h)$ by MVT. Thus,
+\[ (13.1) = h \int_a^b \frac{\partial f}{\partial y} (x, y_n - y) \, dx, \]
+then $\int_a^b \frac{\partial f}{\partial y} (x, y_n - y) \, dx \leq \eps (b - a)$, if $\abs{h} < \delta$, by uniform continuity. Thus, we have that
+\[ \frac{F(y + h) - F(y) - \int_a^b \frac{\partial f}{\partial y}(x, y) \, dx}{h} \xrightarrow[]{h \to 0} 0. \qed \]
