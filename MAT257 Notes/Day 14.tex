@@ -1,0 +1,25 @@
+\section{Day 14: Inverse Function Theorem (Oct. 4, 2024)}
+Let $A$ be an open set on $\RR^n$, and let $f : A \to \RR^n$ be a $C^r$ map (where $1 \leq r < \infty$). Let $a \in A$; if $D f_a : \RR^n \to \RR^n$ is invertible, then there exist an open neighborhood $U$ of $a$ where $U \subset A$ such that $V$ of $f(a)$ in $\RR^n$, $\restr{f}{u} : U \to V$ has a $C^r$ inverse $g = (\restr{f}{u})^{-1} : V \to U$. Consider the following,
+\begin{enumerate}[label=(\alph*)]
+    \item If $g$ is merely differentiable on $V$, using $f \circ g = \id_V$, for all $y \in V$, we have $D f_{g(y)} \circ D g_y = D(\id_V)_y = \id_{\RR^n}$.
+    \item (a) says that $D_g = \text{``Inversion''} \circ D_f \circ f^{-1} \in C^{\infty} \circ C^{r-1} \circ g$. By induction, we see that $g$ is $C^r$. Thus, in the inverse function theorem, it suffices to prove that $g$ is differentiable (Neumann series).
+    \item The proof is trivial in $1$ dimension; it is non-trivial in higher dimensions, involving compactness and the Banach contraction fixed point theorem.
+    \item Continuity of the derivative is essential; for example, if $f : \RR \to \RR$ is such that $f'(0) \neq 0$, but $f$ is not invertible in any neighborhood of zero, then we may pick
+    \[ f(x) = \begin{cases} cx + x^2 \sin \left(\frac{1}{x}\right) & x \neq 0, 0 < c < 1, \\ 0 & x = 0. \end{cases} \]
+    Then
+    \[ f'(x) = \begin{cases} c+ 2x \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right) & x \neq 0, 0 < c < 1, \\ c & x = 0. \end{cases} \]
+    But $f'(\frac{1}{n}) = c + 0 - (-1)^n \in \{c-1, c+1\}$.
+    \item The theorem gives sufficient (but not necessary) conditions. For example, take $f : \RR \to \RR$. $f(x) = x^3$ is $C^\infty$, and $f'(0) = 0$. Yet it has a globally continuous inverse $f^{-1} : \RR \to \RR$, $y \mapsto y^{\frac{1}{3}}$. Of course, $f^{-1}$ is not differentiable at $f(0) = 0$, otherwise it would contradict the chain rule.
+    \item The theorem is purely local: consider $f : \RR^2 \to \RR^2$, and $f(x, y) = (e^x \cos y, e^x \sin y)$. Then
+    \[ f'(x, y) = \begin{bmatrix} e^x \cos y & -e^x \sin y \\ e^x \sin y & e^x \cos y \end{bmatrix}, \] 
+    so $\det f'(x, y) = e^{2x} > 0$, but $f$ is not invertible (it is periodic in $y$).
+\end{enumerate}
+We now present some examples.
+\begin{enumerate}[label=(\alph*)]
+    \item Let $f : \RR^2 \to \RR^2$, $f(r, \theta) = (r \cos \theta, r \sin \theta)$. Then
+    \[ f'(r, \theta) = \begin{bmatrix} \cos theta & - r \sin \theta \\ \sin \theta & r \cos \theta \end{bmatrix} \implies det f'(r, \theta) = r, \]
+    which is obviously nonzero for $r \neq 0$. A typical restriction of $f$ is to $(0, \infty) \times (\theta_1, \theta_2)$ such that $0 < \theta_2 - \theta_1 \leq 2\pi$; for example, $(0, \infty) \times (-\pi, \pi)$ or $(0, \infty) \times (0, 2\pi)$ are both suitable.
+    \medskip\newline
+    Let $g : \RR^2 \to \RR$, $g(x, y) = \sqrt{x^2 + y^2}$. Then $(g \circ f)(r, \theta) = g(r \cos \theta, r \sin \theta) = \sqrt{r^2} = r$; i.e., changing coordinates (composing $f$ resp. $f^{-1}$) can simplify things greatly!
+    \item Let $f(r, \theta, \varphi) = (r \sin \theta \cos \varphi, r \sin \theta \sin \varphi, r \cos \theta)$, where $r \in (0, \infty)$ specifies the radius, $\theta \in (0, \pi)$ specifies the inclination, and $\varphi \in (0, 2\pi)$ is the angle within the plane. This is the parametrization of a sphere (I'm not sure if we did anything else with this in class...).
+\end{enumerate}

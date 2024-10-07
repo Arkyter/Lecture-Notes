@@ -11,7 +11,7 @@ where $\theta$ is given by the angle between $e$ and $\nabla f(a)$ (let's just a
 We now discuss differentiation under the integral sign. Given that $f(x, y)$ is continuous on $[a, b] \times [c, d]$, we have that $\frac{\partial f}{\partial y}$ is also continuous on the rectangle. Let
 \[ F(y) = \int_a^b f(x, y) \, dx. \]
 Then $F(y)$ is continuously differentiable on $[c, d]$, and $F'(y) = \int_a^b \frac{\partial f}{\partial y}(x, y) \, dx$. 
-More generally, if $f \in C^n \implies F \in C^n$, where $C^n = \{f : \RR^2 \to \RR \mid f \text{ is } n \text{ times cont. diff.}\}$. To prove this, let us consider
+More generally, $f$ being $C^n$ implies $F$ being $C^n = \{f : \RR^2 \to \RR \mid f \text{ is } n \text{ times cont. diff.}\}$. To prove this, let us consider
 \begin{align*}
     & F(y + h) - F(y) - \int_a^b \frac{\partial f}{\partial y}(x, y) \, dx \cdot h \\
     &= \int_a^b f(x, y + h) - f(x, y) \, dx - \frac{\partial f}{\partial y}(x, y) \cdot h \, dx. \tag{13.1}
