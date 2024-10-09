@@ -1,0 +1,41 @@
+\section{Day 16: Inverse Function Theorem, Pt. 3 (Oct. 9, 2024)}
+\textit{(Note that this is my formulation)} If $f$ is a continuously differentiable function from an open subset $U \subset \RR^n$ to $\RR^n$, and the derivative $f'(a)$ is invertible at $a$ (i.e., $\det f'(a) \neq 0$), then
+\begin{enumerate}[label=(\alph*)]
+    \item There exist open neighborhoods $V$ of $a$, $W$ of $f(a)$ such that $f(V) \subset W$, $f : V \to W$ is bijective, and $f^{-1} W \to V$ is continuously differentiable.
+    \item $f^{-1}$ is given by
+    \[ (f^{-1})'(y) = \frac{1}{f'(f^{-1}(y))}. \]
+\end{enumerate}
+To prove the theorem, we can assume that $Df(a) = \id$; let $\lambda = Df(a)$, and $g = \lambda^{-1} \circ f$; and so we have that $D_g(a) = \id$ as well. If the theorem is true for $g$, then it is true for $f = \lambda \circ g$, i.e.
+\[ f : V \xrightarrow[]{g} W \xrightarrow[]{\lambda} \lambda(W), \]
+with inverse $g^{-1} \circ \lambda^{-1}$, which is continuous.
+\begin{enumerate}[label=(\alph*)]
+    \item To start, we can't have that $f(x) = f(a)$ if $x \neq a$ is sufficiently close to $a$:
+    \[ \lim_{h \to a} \frac{f(a + h)- f(a) - \overbrace{Df(a)}^{\id}h}{\abs{h}} = 0. \]
+    If $f(a + h) = f(a)$, then the limit goes to $\frac{h}{\abs{h}}$, which has norm $1$. So $f(a + h) \neq f(a)$ for small enough $h$, i.e. there exists a closed ball $B$, centered at $a$, such that $f(x) \neq f(a)$ whenever $x \neq a$ is in $B$.
+    \medskip\newline
+    We can also assume that for $x \in B$, we have that $\det f'(x) \neq 0$ and
+    \[ \abs{\frac{\partial f_i}{\partial x_j}} (x) - \frac{\partial f_i}{\partial x_j}(a) < \frac{1}{2n} \]
+    for all $i, j$. With this, let $g(x) = f(x) - x$. Then
+    \[ \frac{\partial f_i}{\partial x_j}(x) - \frac{\partial f_i}{\partial x_j}(a) = \frac{\partial g_i}{\partial x_j}(x), \]
+    where we may note $\frac{\partial f_i}{\partial x_j}(a)$ is literally just entries from the identity matrix. By the mean value lemma, we have that
+    \begin{align*}
+        \abs{g(x_1) - g(x_2)} &\leq n \frac{1}{2n} \abs{x_1 - x_2}, \tag{$x_1, x_2 \in B$} \\
+        \implies \abs{f(x_1) - x_1 - [f(x_2) - x_2]} &\leq \frac{1}{2} \abs{x_1 - x_2} \\
+        \implies \abs{x_1 - x_2} &\leq \mathrm{LHS} + \abs{f(x_1) - f(x_2)} \\
+        &\leq \frac{1}{2}\abs{x_1 - x_2} + \abs{f(x_1) - x_2} \\
+        &\leq 2 \abs{f(x_1) - f(x_2)} \tag{$\ast$}.
+    \end{align*}
+    In particular, $f$ is one to one on $B$. \qed   
+\end{enumerate}
+
+\newpage
+\begin{simpleclaim}
+    $f(\mathrm{Int}(B))$ is open in $\RR^n$.
+\end{simpleclaim}
+\noindent Once we prove this, we get (a) by taking $V = \mathrm{It}(B)$, $W = f(V)$; then $f^{-1}$ is continuous by $(\ast)$, i.e.
+\[ \abs{f^{-1}(y) - f^{-1}(y_2)} \leq 2\abs{y_1 - y_2}. \]
+To prove the claim, consider $x_0 \in \mathrm{Int}(B)$, $y_0 \in f(x_0)$. We have to find an open ball containing $y_0$ in $f(\mathrm{Int}(B))$. Let $d = d(y_0, f(\mathrm{Bdry}(B))$. Let us show that $B(y_0, \frac{d}{2}) \subset f(\mathrm{Int}(B))$; we will define $B_{\frac{d}{2}} := B(y_0, \frac{d}{2})$ from here on. Let $y \in B_{\frac{d}{2}}$; if $x \in \mathrm{Bdry}(B)$, then $\abs{y - y_0} < \abs{y - f(x)}$. Then we just need to find $x \in \mathrm{Int}(B)$ such that $y = f(x)$. Define $h : B \to \RR$, where $h(x) = \abs{y - f(x)}^2 = \sum_{i=1}^n (y_i - f_i(x))^2$. $h$ is continuous, and so it attains minimum on $B$. By $\abs{y - y_0} < \abs{y - f(x)}$, it cannot occur on the boundary of $B$, and so it is strictly in the interior, at a critical point $x$, i.e. $\frac{\partial h}{\partial x_j} = 0$ for all $j$.
+\medskip\newline
+Thus, we have that
+\[ \sum_{i=1}^n 2(y_i - f_i(x)) \frac{\partial f_i}{\partial x_j}(x) = 0, \]
+where $\frac{\partial f_i}{\partial x_j}(x)$ are the entries of an invertible matrix. Therefore, $y_i - f_i(x) = 0$ for all $i$, which concludes the proof. \qed
