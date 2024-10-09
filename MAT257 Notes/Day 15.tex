@@ -1,0 +1,32 @@
+\section{Day 15: Inverse Function Theorem, Pt. 2 (Oct. 7, 2024)}
+Given $f : (U \subset \RR^n) \to \RR^n$ with $U$ open, if $a \in U$ and $\det f'(a) \neq 0$, then
+\begin{enumerate}[label=(\alph*)]
+    \item There exists open sets $V \ni a$, $W \ni f(a)$ such that $f : V \to W$ has a continuous inverse $f^{-1} : W \to V$,
+    \item $f^{-1}$ is differentiable, and $(f^{-1})' (y) = \left(f'(f^{-1}(y))\right)^{-1}$.
+\end{enumerate}
+We now make a few remarks;
+\begin{enumerate}[label=(\alph*)]
+    \item If we know that $f^{-1}$ is differentiable, then the formula follows directly from the chain rule,
+    \[ f(f^{-1}(y)) = y \implies f'(f^{-1}(y)) \cdot (f^{-1})'(y) = \id. \]
+    \item $f^{-1}$ may exist even if $f'(a) = 0$. For example, let $y = x^3$; then $\restr{\frac{dy}{dx}}{x=0} = 0$. However, if $\det f'(a) = 0$, then $f^{-1}$ is not differentiable at $f(a)$, because if it were, then
+    \[ (f^{-1})' (f(a)) \cdot \underbrace{f'(a)}_{\det = 0} = \id, \]
+    which is contradictory. Also, we can't eliminate the hypothesis that $f$ is continuously differentiable.
+    \item It follows from the IFT theorem that $f$ is $C^1$; we want to show that the entries of the matrix $f'(f^{-1}(y))^{-1}$ are continuous. Let $A$ be invertible, and consider $A^{-1}_{ji} = \pm \frac{\det A^{(ij)}}{\det A}$, where $A^{(ij)}$ is $A$ with its $i$th row and $j$th column eliminated. Clearly, we see that the entries of $A^{-1}$ are rational functions of entries in $A$.
+    \item If $f$ is $C^r$ (i.e., all partial derivatives of order up to $r$ exist and are continuous), then $f^{-1}$ is $C^r$:
+    \[ f \text{ is } C^r \iff f \text{ cts. and } D_f \text{ is } C^{r-1}, \]
+    and so $f$ is $C^r$ implies that $f$ is $C^{r-1}$ and $D_f$ is $C^{r-1}$, meaning $f^{-1}$ is $C^{r-1}$ by induction on $r$, i.e.
+    \[ (f^{-1})'(y) = (f'(f^{-1}(y)))^{-1} \]
+    is $C^{r-1}$ by the chain rule. \qed
+\end{enumerate}
+We'll need the following consequences of the mean value theorem;
+\begin{simplelemma}
+    Given us have a continuous function $f : B \to \RR^m$, where $B$ is a closed ball in $\RR^n$, such that $f$ is differentiable on $\mathrm{Int}(B)$, if $\abs{\frac{\partial f_i}{\partial x_j}} \leq M$ on $\mathrm{Int}(B)$ for all $i, j$, then $\abs{f(x) - f(y)} \leq \sqrt{mn} M \abs{x - y}$ for $x, y \in B$.
+\end{simplelemma}
+\noindent If $f = (f_1, \dots, f_n)$ and $\abs{f(x) - f(y)} \leq \sqrt{m} \max_i \abs{f_i(x) - f_i(y)}$, so it is enough to prove that the lemma for $m = 1$, i.e. $f : B \to \RR$, $B \subset \RR^n$. Let $g(t) = f((1 - t)x + ty)$ for given $x, y$; then
+\begin{align*}
+    f(y) - f(x) &= g(1) - g(0) \\
+    &= g'(t_0) \tag{for some $t_0 \in (0, 1)$ by MVT} \\
+    &= D_f(c_0)(y - x) \tag{where $c_0 = (1 - t_0)x + t_0y$} \\
+    &= \left<\nabla f(c_0), y - x\right>,
+\end{align*}
+and so we have that $\abs{f(y) - f(x)} \leq \abs{\nabla f(c_0)} \abs{y - x} \leq \sqrt{n} \max \abs{\frac{\partial f}{\partial x_j}}$. \qed
