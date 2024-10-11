@@ -16,8 +16,8 @@ Current list of classes:
 Audit list (notes may be kept, but sparsely):
 - MAT1304 (Extremal Combinatorics)
 
-**Catchup List**:
-- MAT257 Day 11; will be done on 9/30/24.
+**Todo List**:
+- Rework style files system (like, 10% done or whatev...)
 
 Errata list (?):
 - Empty for now!
