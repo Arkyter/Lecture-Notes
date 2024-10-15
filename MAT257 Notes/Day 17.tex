@@ -1,0 +1,25 @@
+\section{Day 17: Inverse Function Theorem, Pt. 4 (Oct. 11, 2024)}
+If $f : (U \subset \RR^n) \to \RR^n$ is continuously differentiable, given $a \in U$ such that $\det f'(a) \neq 0$, we have that
+\begin{enumerate}[label=(\alph*)]
+    \item There are open neighborhoods $V$ of $a$, $W$ of $f(a)$, such that $f : V \to W$ has a continuous inverse $f^{-1} : W \to V$ with the property
+    \[ \abs{f^{-1}(y_1) - f^{-1}(y_2)} \leq 2\abs{y_1 - y_2} \]
+    for any $y_1, y_2 \in W$.
+    \item Today in class, we will show that $f^{-1}$ is differentiable, and $(f^{-1})'(y) = f'(f^{-1}(y))^{-1}$.
+\end{enumerate}
+\noindent Let $y_0 \in W$, $x_0 = f^{-1}(y_0)$, and $\mu = D f(x_0)$. We want to show that $f^{-1}$ is differentiable at $y_0$, and $(f^{-1})'(y_0) = \mu^{-1}$. Then observe that $f(x) = f(x_0) + \mu(x - x_0) + \varphi(x - x_0)$, where
+\[ \lim_{x \to x_0} \frac{\varphi(x - x_0)}{\abs{x - x_0}} = 0. \]
+We have that $\mu^{-1}(f(x_0) - f(x)) = x - x_0 + \mu^{-1} \varphi(x - x_0)$, and each $y \in W$ can be written $y = f(x)$, $x \in V$. Write
+\[ \mu^{-1}(y - y_0) = f^{-1}(y) - f^{-1}(y_0) + \mu^{-1} \varphi(f^{-1}(y) - f^{-1}(y_0)). \]
+We have to show that
+\[ \lim_{y \to y_0} \frac{\mu^{-1} \varphi(f^{-1}(y) - f^{-1}(y_0))}{y - y_0} = 0. \]
+It is enough to show that the inside term goes to $0$. Write
+\[ \lim_{y \to y_0} \frac{\varphi(f^{-1}(y) - f^{-1}(y_0))}{y - y_0} = \lim_{y \to y_0} \underbrace{\frac{\varphi(f^{-1}(y) - f^{-1}(y_0))}{\abs{f^{-1}(y) - f^{-1}(y_0)}}}_{= 0} \cdot \underbrace{\frac{\abs{f^{-1}(y) - f^{-1}(y_0)}}{\abs{y - y_0}}}_{\leq 2}. \]
+Notice that the first term goes to $0$ as $y \to y_0$ because $f^{-1}(y) \to f^{-1}(y_0)$ by continuity of $f^{-1}$. The second term is bounded above by $2$, as per our lemma in (a). Thus, we see that the limit as a whole goes to $0$ as $y \to y_0$. Since we already have $\frac{\varphi(t)}{\abs{t}} \to 0$ as $t \to 0$ (we may just take $t = f^{-1}(y) - f^{-1}(y_0)$), we are done as per our earlier observation. \qed
+\medskip\newline
+At the beginning of the proof, we said that we could assume that $f'(a) = \id$. Let $\lambda = f'(a)$, $g = \lambda^{-1} \circ f$. Then $D g(a) = \lambda^{-1} \circ D f(a) = \id$. 
+\begin{simpleclaim}
+    If $g$ satisfies the theorem, then so does $f$.
+\end{simpleclaim}
+\noindent We have that $f = \lambda \circ g$, meaning $f : V \xrightarrow[]{y} W \xrightarrow[]{\lambda} \lambda(W)$; we also have $f^{-1} = g^{-1} \circ \lambda^{-1}$. If $g^{-1}$ is continuous, we have that $f^{-1}$ is continuous; the same goes with differentiability, where if $g^{-1}$ is differentiable, then so is $f^{-1}$ by the chain rule. We may also observe that $W$ is an open set for $g$, and $\lambda(W)$ an open set for $f$. \qed
+\medskip\newline
+\textbf{Test administrative details!} There will be 3 to 4 problems, similar to the ones on the problem set. Make sure you understand how to do all the problems on the past homeworks, even better if textbooks one are understood well too. Material is covered up to more or less a week before the test. The test is supposed to be straightforward
