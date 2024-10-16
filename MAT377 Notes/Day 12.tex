@@ -1,0 +1,35 @@
+\section{Day 12: Inequalities (Oct. 16, 2024)}
+Let $X_i$ be independently distributed $\mathrm{B(p)}$, and consider $X_n = \frac{1}{n} \sum_{i=1}^n X_i$. Then (where $q > p$)
+\[ \PP\left(\overline{X_n} \geq q\right) \leq e^{-n \lambda q} \EE[e^{\lambda x_i}]^n = e^{-n \left\{\lambda q - \log(1 - p \pm pe^{\lambda})\right\}}. \]
+We want to take the supremum of $\{\lambda q - \log (1 - p + pe^\lambda)\}$; then we have
+\[ f'(\lambda) = q - \frac{pe^{\lambda}}{1 - p + pe^\lambda}, \]
+where we note if $f'(\lambda) = 0$, then $q(1 - p) + qpe^\lambda = pe^\lambda$ implies $e^\lambda = \frac{q(1 - p)}{p(1 - q)} > 1$. We write $D(q \abs{} p)$ to be the Kullback-Leibler divergence, aka relative entropy, i.e. $H(q \abs{} p)$. Let $M$ be a differentiable manifold of dimension $n$. Then let $D : M \times M \to [0, \infty)$, and consider $M$ as a parameterized family of probability measures. Then
+\begin{align*}
+    D(q, p) &\geq 0; \\
+    D(q, p) &= 0; \tag{if and only if $q = p$} \\
+    D(p, p + dp) & \tag{should be positive def. quadratic in $dp$}.
+\end{align*}
+We check that this is indeed true.
+\begin{enumerate}[label=(\alph*)]
+    \item We check that $D$ is non-negative.
+    \begin{align*}
+        & q \log \frac{q}{p} + (1 - q) \log \frac{1 - q}{1 - p} \\
+        &= q \left(- \log \frac{p}{q}\right) + (1 - q)\left(- \log \frac{1 - p}{1 - q}\right) \\
+        &\geq q\left(1 - \frac{p}{q}\right) + (1 - q)\left(1 - \frac{1 - p}{1 - q}\right) \\
+        &= q - p + 1-q - (1 - p) = 0.
+    \end{align*}
+    \item We now check that it is identically zero iff $q = p$. Intuitively, there is no entropy needed to move $p \to q$ if they are equal.
+    \begin{align*}
+        & \inf_q \underbrace{\left\{ q \log \frac{q}{p} + (1 - q)\log \frac{1-q}{1-p} \right\}}_{g'(a)} \\
+        g'(a) &= \log \frac{q}{p} - q \frac{p}{q} \frac{1}{p} - \log \frac{1-q}{1-p} = 1 \\
+        \implies \log \frac{q}{p} &= \log \frac{1-q}{1-p},
+    \end{align*}
+    which occurs only when $p = q$.
+    \item We leave the third alone for now.
+\end{enumerate}
+An application of this is to classification algorithms. Consider $t$ a classifier, and $E_n$ an empirical error, i.e.
+\[ E_n(t) = \frac{1}{n} \sum_{i=1}^m L(y_i, f(x_i)), \]
+where $L$ is some loss function, and we consider $(X_i, Y_i)$ i.i.d. $\SF = \{f_1, \dots, f_N\}$. The generalization error $E(f) = E[L(X, f(y))]$, and suppose we have
+\[ \PP(E_n(f) \geq E(f) + \eps) < e^{-c n \eps^2}. \]
+Then $\PP(\forall f \in \SF, E(f) \leq E_n(f) + \eps) \geq 1 - Ne^{c n \eps^2}$. Let $\delta = Ne^{-C n \eps^2}$; to get confidence $1 - \delta$ that the generalization error is within $\eps$; then we need $n = \frac{1}{c \eps^2} \log \frac{N}{\delta}$. 
+
