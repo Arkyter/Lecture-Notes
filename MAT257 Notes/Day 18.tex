@@ -18,7 +18,7 @@ where $f_1, \dots, f_n$ are functions in $m + n$ variables, i.e. $f(x, y) = 0$ w
 Consider the linear equation $Ax + By = 0$, where $A \in M_{n \times m}(\RR)$ and $B \in M_{n \times n}(\RR)$. If $\det B \neq 0$, then $B$ is invertible, meaning we can solve for $y$ as a function of $x$, i.e. $y = -B^{-1}Ax$. Then $Ax + By = B(B^{-1} Ax + y)$.
 \begin{simplethm}[Implicit Function Theorem]
     If $U$ is an open set in $\RR^m \times \RR^n$, consider $f : U \to \RR^n$ and let $f$ be of class $C^r$, i.e. all partials exist up to order $r$ and are continuous. Then for $(a, b) \in U, f(a, b) = 0$, then let
-    \[ M = \left(\frac{\partial f_i}{\partial y_j} (a, b)\right) = \frac{\partial (f_1, \dots, f_m)}{\partial (y_1, \dots, y_n)}(a, b). \]
+    \[ M = \left(\frac{\partial f_i}{\partial y_j} (a, b)\right) = \frac{\partial (f_1, \dots, f_n)}{\partial (y_1, \dots, y_n)}(a, b). \]
     If $\det M \neq 0$, then there exist open sets $A \ni a$ in $\RR^m$, $B \ni b$ in $\RR^n$ such that, for all $x \in A$, there exists a unique $y \in B$ with $f(x, y) = 0$, i.e. $y = g(x)$. Moreover, $g$ is of class $C^r$.
 \end{simplethm}
 \noindent Let $F : U \to \RR^m \times \RR^n$, where $F(x, y) = (x, f(x, y))$ with $F(a, b) = (a, 0)$. Then

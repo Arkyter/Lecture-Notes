@@ -1,1 +1,19 @@
 \section{Day 19: Implict Function Theorem, Pt. 2 (Oct. 18, 2024)}
+Recall that given $f(x, y) = 0$ where
+\begin{align*}
+    f &= (f_1, \dots, f_n), \\
+    x &= (x_1, \dots, x_m), \\
+    y &= (y_1, \dots, y_n),
+\end{align*}
+with $f$ being $C^r$ in a neighborhood of $(a, b)$ in $\RR^{m + n}$, and $f(a, b) = 0$, if $\det \frac{\partial f_i}{\partial y_j} (a, b) \neq 0$, then we can solve $f(x, y) = 0$ for a $C^r$ function $y = g(x)$ satisfying $g(a) = b$, i.e. $f(x, g(x)) = 0$, i.e. there are open sets $A \ni a$, $B \ni b$ such that, for all $x \in A$, there exists a unique $y \in B$ such that $f(x, y) = 0$. Write $y = g(x)$; moreover, $g$ is $C^r$.
+\medskip\newline
+We may find $g'(x)$ by implicit differentiation, i.e. at $f_i(x, g(x)) = 0$, for all $i = 1, \dots, n$, we have
+\begin{align*}
+    \frac{\partial f_i}{\partial x_j} (x, g(x)) &+ \underbrace{\sum_{k=1}^n \frac{\partial f_i}{\partial y_k} (x, g(x))}_{\text{Matrix w/ invt. entries near }(a, b)} \frac{\partial g_k}{\partial x_j}(x) \\
+    \left(\frac{\partial g_k}{\partial x_j}(x)\right) &= -\left(\frac{\partial f_i}{\partial y_k}(x, g(x))\right)^{-1} \left(\frac{\partial f_i}{\partial x_j}(x, g(x))\right).
+\end{align*}
+The answer, of course, depends on $g(x)$. Moreover, since the implicit function theorem is more or less a generalization of the inverse function theorem, we prove that ImFT implies IFT. Let $U \subset \RR^n$, and given $f : U \to \RR^n$, consider that $f$ is $C^r$ in an open set $U$, and for $a \in U$, $\det f'(a) \neq 0$. Then let $F(x, y) = y - f(x)$, $b = f(a)$, $F(a, b) = 0$, where $F$ is $C^r$ in a neighborhood of $(a, b)$. Then $\det \partial_x F (a, b) = \det (- f'(a))$. By the implicit function theorem, there are open neighborhoods $A$ of $G$, $B$ of $A$, such that for all $y \in A$, there exist unique $x \in B$ (using $x = g(y)$) such that $F(g(y), y) = 0$, i.e. $y = f(g(y))$. We may take $V = B \cap f^{-1}(A), W = A$ to see that $f : V \to W$ has $C^r$ inverse $g$. \qed
+\medskip\newline
+We go over a few examples now. Let $y^2 = x^2(x + 1)$ be a curve in $\RR^2$, and let $f(x, y) = y^2 - x^2(x+1)$; on $f(x, y) = 0$, $\frac{\partial f}{\partial y} = 2y \neq 0$ at every point of the curve where $y \neq 0$, so we can solve for $y$ as a function of $x$.
+\[ \partial_x f = -3x^2 - 2x = -x(3x + 2) \neq 0 \]
+except when $x = 0$ or $-\frac{2}{3}$. IVT allows us to distinguish between smooth points and singularities; if $f$ is smooth everywhere in $1$ dimension, we call it a manifold. For example, Whitney's umbrella, $X : x^2 - xy^2 = 0$ is smooth according to the implicit function theorem except on the $x$ axis.
