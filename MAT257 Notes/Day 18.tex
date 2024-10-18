@@ -1,0 +1,34 @@
+\section{Day 18: Implicit Function Theorem (Oct. 16, 2024)}
+We start with an example. Let $f(x, y) = x^2 + y^2 - 1$, and consider the region on $\RR^2$ in which $f(x, y) = 0$. Can we solve $f(x, y) = 0$ for $y = g(x)$ near $x = a$, with $g(a) = b$? If $a \neq \pm 1$, then there are open intervals $I \ni a$ and $J \ni b$ such that, for all $x \in I$, there is a unique $y \in J$ such that $f(x, y) = 0$. Writing $y = g(x)$, we are done.
+\medskip\newline
+In general, we can solve for $y = g(x)$ whenever $\partial_y f (a, b) \neq 0$. We may proceed in the example with implicit differentiation; let $f(x, g(x)) = 0$, and consider
+\[ \frac{\partial f}{\partial x} (x, g(x)) + \frac{\partial f}{\partial y}(x, g(x)) \frac{dg}{dx} = 0. \]
+In our example, this is given by $2x + 2y \frac{dg}{dx}$. Then
+\[ g'(x) = -\frac{\partial_x f(x, g(x))}{\partial_y f(x, g(x))} \]
+near $x = a$, which means $g'(x) = -\frac{x}{y}$ on the curve near $(a, b)$ with $b \neq 0$. Of course, $g(x) = \sqrt{1 - x^2}$; we may consider $(a, -b)$ and proceed to solve for $g_1(x) = -\sqrt{1 - x^2}$.
+\medskip\newline
+In general, in a system of $n$ equations, let
+\begin{align*}
+    f_1(x_1, \dots, x_m, y_1, \dots, y_n) &= 0, \\
+    &\vdots \\
+    f_n(x_1, \dots, x_m, y_1, \dots, y_n) &= 0,
+\end{align*}
+where $f_1, \dots, f_n$ are functions in $m + n$ variables, i.e. $f(x, y) = 0$ where $x = (x_1, \dots, x_m) \in \RR^m$, $y = (y_1, \dots, y_n) \in \RR^n$, and $f = (f_1, \dots, f_n) : \RR^{m+n} \to \RR^n$, given $(a, b)$, can we find, for all $x$ close to $a \in \RR^m$, a unique $y$ near $b$ such that $f(x, y) = 0$? (note that $y = g(x)$)
+\medskip\newline
+Consider the linear equation $Ax + By = 0$, where $A \in M_{n \times m}(\RR)$ and $B \in M_{n \times n}(\RR)$. If $\det B \neq 0$, then $B$ is invertible, meaning we can solve for $y$ as a function of $x$, i.e. $y = -B^{-1}Ax$. Then $Ax + By = B(B^{-1} Ax + y)$.
+\begin{simplethm}[Implicit Function Theorem]
+    If $U$ is an open set in $\RR^m \times \RR^n$, consider $f : U \to \RR^n$ and let $f$ be of class $C^r$, i.e. all partials exist up to order $r$ and are continuous. Then for $(a, b) \in U, f(a, b) = 0$, then let
+    \[ M = \left(\frac{\partial f_i}{\partial y_j} (a, b)\right) = \frac{\partial (f_1, \dots, f_m)}{\partial (y_1, \dots, y_n)}(a, b). \]
+    If $\det M \neq 0$, then there exist open sets $A \ni a$ in $\RR^m$, $B \ni b$ in $\RR^n$ such that, for all $x \in A$, there exists a unique $y \in B$ with $f(x, y) = 0$, i.e. $y = g(x)$. Moreover, $g$ is of class $C^r$.
+\end{simplethm}
+\noindent Let $F : U \to \RR^m \times \RR^n$, where $F(x, y) = (x, f(x, y))$ with $F(a, b) = (a, 0)$. Then
+\[ F'(a, b) = \left(\begin{array}{c|c} I_m & 0 \\ \hline \ast & M \end{array}\right) \implies \det F'(a, b) = \det M \neq 0. \]
+By the inverse function theorem, there are open sets $U \ni (a, b)$ and $V \ni (a, 0)$ such that $F : U \to V$ has $C^r$ inverse $F^{-1} : V \to U$. We can assume $U$ is of the form $A \times B$ by taking a smaller open set. Let $(u, v) = F(x, y)$, which implies that $F^{-1}$ is of the form $(u, h(u, v))$. Then
+\begin{align*}
+    F(F^{-1}(u, v)) &= (u, v) \\
+    \implies F(u, h(u, v)) &= (u, v) \\
+    \implies (u, f(u, h(u, v))) &= (u, v) \\
+    \implies f(u, h(u, v)) &= (u, v) \\
+    \implies f(u, h(u, 0)) &= 0.
+\end{align*}
+Thus, $f(x, g(x)) = 0$ where $g(x) = h(x, 0)$ is $C^r$. \qed
