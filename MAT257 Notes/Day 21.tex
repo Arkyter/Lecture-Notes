@@ -1,0 +1,29 @@
+\section{Day 21: Rank Theorem, Tangent Spaces (Oct. 23, 2024)}
+Let $f : \RR^p \to \RR^n$ be $C^r$ in a neighborhood of $a$. Suppose $f$ has constant rank $r$ in a neighborhood of $a$; then there exists a $C^r$ coordinate change $x = H(u, v)$ near $a$, and $K$ near $f(a)$ such that $K \circ f \circ H : (u, v) \to (v, 0)$, where $u, v$ are $p-1, r$-tuples, i.e. $u = u_1, \dots, u_{p-1}$, and $v = v_1, \dots, v_r$. We also showed that after a permutation of coordinates in the target space, there exists a coordinate change $x = H(u, v)$ such that
+\begin{align*}
+    (f \circ H)(u, v) &= (v, \varphi(u, v)), \\
+    v &= v_1, \dots, v_r, \\
+    \varphi &= \varphi_1, \dots, \varphi_{n-r}.
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+    \item $\varphi$ follows the index of $u$, i.e.
+    \[ D(f \circ H) = \left(\begin{array}{c|c} 0 & I_r \\ \hline \partial_{u_i} \varphi_k & \partial_{v_j} \varphi_k \end{array}\right), \]
+    where $i = 1, \dots, p-r$, $j = 1, \dots, r$, and $k = 1, \dots, n-r$. Thus, rank $r$ implies that $\partial_{u_i} \varphi_k = 0$ for all $i, k$, and so $\varphi(u, v) = \varphi(v)$; this means we have $(f \circ H)(u, v) = (v, \varphi(v))$ with $(v, w)$ being the coordinates in the target space.
+
+    \item We can make the change of coordinates $K$ in the target space \textit{after} the specific $\varphi$s vanish, i.e. $(v, w) \mapsto (v, w - \varphi(v))$.
+\end{enumerate}
+
+\noindent We now move onto tangent spaces.\footnote{mb if information isn't the most accurate, i am comprehending it myself atm x3}
+\begin{enumerate}[label=(\alph*)]
+    \item Let us have a plane curve $C$, given by $f(x, y) = 0$ of which is $C^r$, with $\partial_y f (a, b) = 0$. By IVT, we can solve this as $y = g(x)$ being $C^r$ near $a$, where $\varphi(a) = b$. The tangent space at $(a, b)$ is given by $y - b = g'(a)(x - a)$, i.e. $f(x, g(x)) = 0$ and $\partial_x f(a, b) + \partial_y f(a, b) g'(a) = 0$. Expanding $g'(a)$, we get
+    \[ \frac{\partial f}{\partial x}(a, b)(x - a) + \frac{\partial f}{\partial y}(a, b)(y - b) = 0 \]
+    is a tangent space to $C$ at $(a, b)$. By symmetry, we obtain an equivalent result if $\partial_x f (a, b) \neq 0$: if $\nabla f(a, b) \neq 0$, we can define a tangent line at $(a, b)$ as $\partial_x f(a, b) (x - a) + \partial_y f(a, b) (y - b) = 0$. We say $C$ is $C^r$ smooth at $(a, b)$, or a $C^r$ manifold near $(a, b)$.
+
+    \item Let $M \subset \RR^n$ be given by the set of points $f(x_1, \dots, x_n) = 0$, with $f$ being $C^r$. Suppose $\nabla f(a) \neq 0$, i.e. $\partial_{x_i} f(a) \neq 0$ for some $i$. For example, if $i = n$, then $x_n = g(x_1, \dots, x_{n-1})$ near $(a_1, \dots, a_{n-1})$, where $g$ is $C^r$, and $g(a_1, \dots, a_{n-1}) = a_n$. Then the tangent space at $a$ is given by
+    \[ x_n - a_n = g'(a_1, \dots, a_{n-1}) \begin{pmatrix} x_1 - a_1 \\ \vdots \\ x_{n-1} - a_{n-1} \end{pmatrix} = \sum_{i=1}^{n-1} \frac{\partial g}{\partial x_i}(a_1, \dots, a_{n-1}) (x_i - a_i), \]
+    where $f(x_1, \dots, x_{n-1}, g(x_1, \dots, x_{n-1})) = 0$. Then for all $i = 1, \dots, n-1$, we have
+    \[ \frac{\partial f}{\partial x_i}(a) + \frac{\partial f}{\partial x_n}(a) \frac{\partial g}{\partial x_i}(\tilde{a}) = 0. \]
+    Then the $x(x_i - a_i)$ terms add up for $i = 1, \dots, n-1$ to give
+    \[ \frac{\partial f}{\partial x_i}(a)(x_1 - a_1) + \dots + \frac{\partial f}{\partial x_i}(a)(x_n - a_n) = 0. \] 
+    Specifically, if $\nabla f(a) \neq 0$, we can define a tangent space at $a$ as the above formula, i.e. $\left< \nabla f(a), x - a \right> = 0$. We say that $M$ is $C^r$ smooth at $a$, or a $C^r$ manifold at $a$ of dimension $n-1$.
+\end{enumerate}
