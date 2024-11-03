@@ -1,0 +1,33 @@
+\section{Day 22: Tangent Spaces Pt. 2 (Oct. 25, 2024)}
+We start with an example;
+\begin{enumerate}[label=(\alph*)]
+    \item Let us find the tangent planes to the ellipsoid
+    \[ X : \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1 \]
+    at a point $(x_0, y_0, z_0) \in X$. Since tangent planes are orthogonal to the derivative at $(x_0, y_0, z_0)$, we have
+    \[ \frac{2x_0}{a^2}(x - x_0) + \frac{2y_0}{b^2}(y - y_0) + \frac{2z_0}{c^2}(z - z_0) = 0, \]
+    or
+    \[ \frac{x_0 x}{a^2} + \frac{y_0 y}{b^2} + \frac{z_0 z}{c^2} = 1. \]
+\end{enumerate}
+In general, for $f : \RR^p \to \RR^n$, with $p \geq n$ and $M : \{x \in \RR^p \mid f(x) = 0\}$, given a point $a \in M$ where $f$ has rank $n$, we have
+\[ \det \frac{\partial(f_1, \dots, f_n)}{\partial (x_1, \dots, x_n)} (a) \neq 0. \]
+For example, $f : \RR^m \times \RR^n \to \RR^n$, where $\det \partial_y f(a, b) \neq 0$, by the implicit function theorem, we can solve for $y = g(x)$ near $(a, b)$, i.e. $g(a) = b$, $f(x, g(x)) = 0$ near $x = a$. The tangent space at $(a, b)$ is given by $y - b = g'(a)(x - a)$, i.e.
+\[ \begin{pmatrix} y_1 - b_1 \\ \vdots \\ y_n - b_n \end{pmatrix} = \frac{\partial g_i}{\partial x_j}(a) \begin{pmatrix} x_1 - a_1 \\ \vdots \\ x_n - a_n \end{pmatrix}. \]
+Given $f(x, g(x)) = 0$, we have $\partial_{x_i} f(a, b) + \sum_{j=1}^n \partial_{y_j} f(a, b) \partial_{x_i} g(a) = 0$ for $i = 1, \dots, m$, and $\partial_x f(a, b) + \partial_y f(a, b) g'(a) = 0$. Thus, we have
+\[ g'(a) = -\frac{\partial_y f(a, b)}{\partial_x f(a, b)}, \]
+i.e. the tangent space to $M$ at $a$ is $Df(a) (x - a) = 0$. When $f$ has rank $n$ at $a$, i.e., wherever tangent spaces may be defined, we say $M$ is $C^r$ smooth at $a$, or a manifold of dimension $p - n$ near $a$.
+\begin{enumerate}[label=(\alph*)]
+    \item Let $f(x, y) = 0$ and $g(x, y) = 0$ be two smooth curves in $\RR^2$; we consider them at a common point $(a, b)$ (meaning $(a, b)$ lies on both the curves), i.e. $\nabla f(a) \neq 0$ and $\nabla g(a) \neq 0$. For example, the tangent lines to $f = 0$ at $(a, b)$ are represented by
+    \[ \frac{\partial f}{\partial x}(a, b)(x - a) + \frac{\partial f}{\partial y}(a, b)(y - b) = 0. \]
+    The curves are orthogonal at $(a, b)$ if
+    \[ \left( \frac{\partial f}{\partial x} \frac{\partial g}{\partial x} + \frac{\partial f}{\partial y} \frac{\partial g}{\partial y} \right)(a, b) = 0, \]
+    and tangent at $(a, b)$ if
+    \[ \left( \frac{\partial f}{\partial x} \frac{\partial g}{\partial x} - \frac{\partial f}{\partial y} \frac{\partial g}{\partial y} \right)(a, b) = 0. \]
+    \item How to find a point of a surface $g(x, y, z) = 0$ which has least (or greatest) distance from the origin? i.e., find the extreme values of $f(x, y, z) = x^2 + y^2 + z^2$\footnote{root is order preserving} on a given surface $g(x, y, z) = 0$. Supposing we may solve $g(x, y, z)$ as $z = h(x, y)$, we now want to find the extreme values of $f(x, y, h(x, y))$; if the functions are $C^r$ for $r \geq 1$, then extreme points occur at critical points, i.e.
+    \begin{align*}
+        f_x + f_zh_x &= 0, \\ 
+        f_y + f_zh_y &= 0, \\
+        g_x + g_zh_x &= 0, \\
+        g_y + g_zh_y &= 0.
+    \end{align*}
+    Then $f_x + \lambda g_x = 0$, $f_y + \lambda g_y = 0$, $f_z + \lambda g_z = 0$, where $\lambda = -\frac{f_z}{g_z}$, and $g(x, y, z) = 0$. There are $4$ equations and $4$ unknowns, so we may solve this. \qed
+\end{enumerate}
