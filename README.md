@@ -18,7 +18,7 @@ Audit list (notes may be kept, but sparsely):
 
 **Todo List**:
 - Rework style files system (like, 10% done or whatev...)
-- 257 day 21
+- smth smth tutorial answers? idk if i *want* to do it tho hmm.
 
 Errata list (?):
 - Empty for now!
