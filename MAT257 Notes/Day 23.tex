@@ -1,0 +1,35 @@
+\section{Day 23: Lagrange's Method (Nov. 4, 2024)}
+We introduce Lagrange's method for obtaining extreme points on an objective function subject to a constraint.
+\begin{simplethm}[Lagrange Method]
+    Let $g : U \to \RR^p$ be $\SC^r$ and $f : U \to \RR$ be differentiable, with a local maximum or mnimum at some point $a \in g^{-1}(0)$. If $g$ has rank $p$ at $a$, i.e. $g^{-1}(0)$ is $\SC^r$ smooth at $a$ or $\nabla g_i(a)$ is linearly independent for $p$ choices of $i$, then there exists $\lambda_1, \dots, \lambda_p \in \RR$ called \textit{multipliers} such that we may construct the system of equations (where $i = 1, \dots, p$)
+    \[ \frac{\partial f}{\partial x_j} (a) + \lambda_i \frac{\partial g_i}{\partial x_j} (a) = 0, \]
+    as well as $g_i(a) = 0$. In particular, this may be written as $\nabla f(a) + \lambda \nabla g(a) = 0$, where $\lambda = (\lambda_1, \dots, \lambda_p)$.
+\end{simplethm}
+\noindent To prove this, let us have
+\[ \det \frac{\partial(g_1, \dots, g_n)}{\partial(x_{j_1}, \dots, x_{j_p})} \neq 0 \]
+for some $j_1 < j_2 < \dots < j_p$. By permutation of variables, we can assume that $(x_{j_1}, \dots, x_{j_p}) = (x_{n-p+1}, \dots, x_n)$; with this, let us write $x = (u, v)$, where $(u, v) = (u_1, \dots, u_{n-p}, v_1, \dots, v_p)$. By the implicit function theorem, we solve $g(u, v) = 0$ for $v$ as a $\SC^1$ function $v = h(u)$, i.e. $g(u, h(u)) = 0$ over $u = (a_1, \dots, a_{n-p}))$; this means $f(u, h(u))$ has a local extremum at $u = (a_1, \dots, a_{n-p})$, i.e. $(a_1, \dots, a_{n-p})$ is a critical point of $\varphi(v) = f(u, h(u)) = f \circ H(u)$, where $H$ is given by $H(u) = (u, h(u))$. Then we may write
+\[ \varphi'(u) = f'(u, h(u)) \binom{I}{h'(u)}, \]
+and we have
+\[ 0 = f'(a) \binom{I}{h'(a_1, \dots, a_{n-p})} = \underbrace{\nabla f(a)}_{\in \ker} \binom{I}{h'(a_1, \dots, a_{n-p})}. \]
+Since $g_i(u, h(u)) = 0$ for $i = 1, \dots, p$, we have that
+\[ 0 = g_i'(a) \binom{I}{h'(a_1, \dots, a_{n-p})} = \nabla g_i(a) \binom{I}{h'(a_1, \dots, a_{n-p})}; \]
+since $\nabla g_i(a)$ is linearly independent and the latter matrix is of rank $n - p$, we conclude that $\dim \ker = p$, i.e. $\nabla f(a)$ is a linear combination of $\nabla g_i(a)$. \qed
+\begin{remark}
+    To apply Lagrange's method, let us have a constraint function $g$ and objective function $f$. If $\nabla g \neq 0$ over $g^{-1}(\{0\})$ and the set of all points where $g = 0$ is compact (it is useful to check the continuity of $g$, then use Heine-Borel here), then we may apply EVT to $f : g^{-1}(\{0\}) \to \RR$ to see that it must admit an extreme point.
+\end{remark}
+
+\noindent We now provide some examples.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose we want to find the point on a $\SC^1$ hypersurface $g(x_1, \dots, x_n) = 0$ at a local maximum or minimum distance from a fixed point $x$. We may use the objective function $f(x) = \abs{x - c}^2$.\footnote{what?} This method may fail if $g^{-1}(0)$ is not smooth at $a$.
+    \item Find the triangle with given perimeter and largest possible area. We use the formula $f(x, y, z) = s(s - x)(s - y)(s - z)$, where the perimeter is given by $2s$, to find the area of the triangle.
+    \medskip\newline
+    Here, we want to find the maximum of $f$ subject to the condition $g(x, y, z) = x + y + z - 2s = 0$, where $x, y, z \geq 0$, $x + y \geq z$, $y + z \geq x$, and $z + x \geq y$. On the boundary of the feasible set, one of the inequalities above becomes an equality, and so we have $f = 0$; thus, the maximum of $f$ occurs at a critical point on the interior. Write
+    \[ \frac{\partial f}{\partial x} + \lambda \frac{\partial g}{\partial x} = 0, \]
+    which yields the system
+    \begin{align*}
+        -s(s - y)(s - z) + \lambda &= 0, \\
+        -s(s - x)(s - z) + \lambda &= 0, \\
+        -s(s - x)(s - y) + \lambda &= 0.
+    \end{align*}
+    Substituting $z$, we have $x = y$, along with $x = z$, $y = z$ by symmetry. Thus, the area of the triangle is maximized when it is an equilateral.
+\end{enumerate}
