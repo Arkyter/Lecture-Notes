@@ -1,0 +1,35 @@
+\section{Day 24: Holder's Inequality, Lagrange Method Examples (Nov. 6, 2024)}
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that $uv \leq \frac{1}{\alpha}u^\alpha + \frac{1}{\beta} v^\beta$ for $u, v \geq 0$, $\alpha, \beta > 0$ such that $\frac{1}{\alpha} + \frac{1}{\beta} = 1$.
+    \medskip\newline
+    Start by substituting
+    \[ u = \frac{u_i}{\left(\sum_{j=1}^n u_j^\alpha \right)^{1/\alpha}}, \hspace{0.3in} v = \frac{v_i}{\left(\sum_{j=1}^n v_j^\beta \right)^{1/\beta}}, \]
+    where $u_i, v_i \geq 0$, and at least one of $u_i, v_i \neq 0$. Summing over $i = 1, \dots, n$, we have
+    \[ \sum_{i=1}^n u_iv_i \leq \left(\sum_{j=1}^n u_j^\alpha\right)^{1/\alpha} \left(\sum_{j=1}^n v_j^\beta\right)^{1/\beta} \]
+    for all $u_i, v_i \neq 0$ and all $\alpha, \beta > 0$ such that $\frac{1}{\alpha} + \frac{1}{\beta} = 1$. Observe that for any $t > 0$, the inequality holds for $u, v$ if and only if it holds for $U = ut^{1/\alpha}$ and $V = vt^{1/\beta}$, since
+    \begin{align*}
+        uv &\leq \frac{1}{\alpha} u^\alpha + \frac{1}{\beta} v^\beta \\
+        uvt &\leq \left( \frac{1}{\alpha} u^\alpha + \frac{1}{\beta} v^\beta \right) t \\
+        UV &\leq \frac{1}{\alpha} U^\alpha + \frac{1}{\beta} V^\beta
+    \end{align*}
+    The inequality is trivial if $u$ or $v = 0$, so we may assume that $uv \neq 0$. Given $u, v$ such that $uv \neq 0$, if we let $t = uv$, we get $UV = 1$. It's enough to prove that the inequality holds when $uv = 1$, i.e.
+    \[ \frac{1}{\alpha} u^\alpha + \frac{1}{\beta} v^\beta \geq 1 \]
+    when $u, v \geq 0$ and $uv = 1$. Using Lagrange's method, we want to minimize $f(u, v) = \frac{1}{\alpha} u^\alpha + \frac{1}{\beta} v^\beta$ on the curve $uv = 1$. The minimum must occur where the curve is smooth, so by Lagrange's method, the minimum occurs at a critical point where
+    \[ \frac{1}{\alpha} u^{1/\alpha} \frac{1}{\beta} v^\beta - \lambda u v, \]
+    i.e., said point satisfies
+    \begin{align*}
+        u^{\alpha - 1} - \lambda v &= 0 \\
+        v^{\beta - 1} - \lambda u &= 0 \\
+        u^\alpha &= \lambda \\
+        v^\beta &= \lambda.
+    \end{align*}
+    Also, we have that $uv = 1$, implying we have $\lambda = 1, u = 1, v = 1$. Thus, we see
+    \[ \frac{1}{\alpha} u^\alpha + \frac{1}{\beta} v^\beta \geq \frac{1}{\alpha} + \frac{1}{\beta} = 1. \]
+    \item We may apply the second derivative test in higher dimensions. Recall that
+    \[ f(a + h) = f(a) + f'(a)h + \frac{f''(a)}{2!} h^2 + \dots + \frac{f^{(k)}(a)}{k!} h^k; \]
+    in $n$ variables, we have that the sum of terms are given by
+    \[ \frac{1}{k!} \frac{\partial^k f}{\partial x_{i_1} \dots \partial x_{i_k}} (a) h_{i_1} \dots h_{i_k}. \]
+    We have that the sum of like terms may be written as follows,
+    \[ \sum_{\substack{\alpha \in \NN^n \\ \abs{\alpha} = k}} \frac{1}{\alpha!} \frac{\partial^{\abs{\alpha}} f}{\partial x^2} (a) h^\alpha. \]
+    Note that $\alpha = (\alpha_1, \dots, \alpha_n)$, $\abs{\alpha} = \alpha_1 + \dots + \alpha_n$, $\alpha! = \alpha_1! \dots \alpha_n!$, and $h^\alpha = h_1^{\alpha_1} \dots h_n^{\alpha_n}$. There are exactly $\frac{k!}{\alpha!}$ different ways to choose the partial in the expression by combinatorics.
+\end{enumerate}
