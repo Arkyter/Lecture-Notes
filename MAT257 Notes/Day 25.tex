@@ -1,1 +1,35 @@
-\section{Day 25: }
+\section{Day 25: Taylor Expansion in Several Variables (Nov. 8, 2024)}
+Let $f(x_1, \dots, x_n)$ be differentiable at $a = (a_1, \dots, a_n)$. Then
+\[ f(a + h) = f(a) + \sum_{i=1}^n \frac{\partial f}{\partial x_i}(a) h_i + O(\abs{h)}), \]
+which is the best linear approximation of $f$ at $a$. Assuming that $f$ has derivatives up to $k + 1$ in a neighborhood of $a$, let $F(t) = f(a + th)$, with $0 \leq t \leq 1$, be a parameterization of $f$ from $a$ to $a+h$. Then the Taylor expansion of order $k$ of $F(t)$ at $t = 0$ with the Lagrange remainder is given by
+\[ F(0) + F'(0)t + \frac{F''(0)}{2!}t^2 + \dots + \frac{F^{(k)}(0)}{k!} t^k + \frac{F^{(k+1)}(\theta t)}{(k+1)!} t^{k+1}, \]
+for some $0 \leq \theta \leq 1$. Note that this is a Taylor polynomial of order $k$. Now, let us set $t = 1$. We have $f(a + h)$ has the Taylor expansion
+\begin{align*}
+    & f(a) + \sum_{i=1}^n \frac{\partial f}{\partial x_i}(a) h_i + \frac{1}{2!} \sum_{i=1}^n \sum_{j=1}^n \frac{\partial^2 f}{\partial x_i \partial x_j} (a) h_i h_j + \dots \\
+    & + \frac{1}{k!} \sum_{i_1 = 1}^n \dots \sum_{i_k = 1}^n \frac{\partial^k f}{\partial x_{i_1} \dots \partial x_{i_k}} (a) h_{i_1} \dots h_{i_k} + R,
+\end{align*}
+where $R$ is the Lagrange remainder term given by 
+\[ R = \sum_{i_1 = 1}^n \dots \sum_{i_{k+1} = 1}^n \frac{1}{(k+1)!} \frac{\partial^{k+1} f}{\partial x_{i_1} \dots \partial x_{i_{k+1}}} (a + \theta h) h_{i_1} \dots h_{i_{k+1}}. \]
+Note that the summations are slightly clunky; we can really just write them as tuples of indices as seen in last lecture; i.e.,
+\[ f(a + h) = \sum_{\substack{\alpha \in \NN^n \\ \abs{\alpha} \leq k}} \frac{1}{\alpha!} \frac{\partial^{\abs{\alpha}} f}{\partial x^\alpha} (a) h^\alpha + R. \]
+Of course, we may expand the notation used in here as follows,
+\begin{align*}
+    \alpha &= (\alpha_1, \dots, \alpha_n), \\
+    \abs{\alpha} &= \alpha_1 + \dots + \alpha_n, \\
+    x^\alpha &= x_1^{\alpha_1} + \dots + x_n^{\alpha_n}, \\
+    \alpha! &= \alpha_1! \dots \alpha_n!, \\
+    \partial^{\abs{\alpha}} &= \partial^{\alpha_1} \dots \partial^{\alpha_n}, \\
+    \partial x^2 &= \partial x_1^{\alpha_1} \dots \partial x_n^{\alpha_n}.
+\end{align*}
+The remainder term $R$ can be written using tuples as well; i.e.,
+\[ R = \sum_{\abs{\alpha} = k+1} \frac{1}{\alpha!} \frac{\partial^{\abs{\alpha}} f}{\partial x^\alpha} (a + \theta h) h^\alpha. \]
+We now give an application: the escond derivative test for local extrema in $2$ variables. Let $f(x, y)$ be $\SC^2$ with critical point $(a, b)$. Let us consider $f(a + h, b + k) - f(a, b)$, given by
+\[ \frac{1}{2} \left( f_{xx} (a^\ast, b^\ast) h^2 + 2 f_{xy} (a^\ast, b^\ast) + f_{yy} (a^\ast, b^\ast) k^2 \right), \]
+where $a^\ast, b^\ast$ are given by $a + \theta h, b + \theta h$ respectively. Consider the quadratic form $Q(h, k) = Ah^2 + 2Bhk + Ck^2$.
+\begin{itemize}
+    \item $Q$ is said to be \textit{definite} if $Q \geq 0$ or $Q \leq 0$ always, with $Q = 0$ if and only if $h = k = 0$, such as $\pm(h^2 + k^2)$.
+    \item We say that $Q$ is \textit{indefinite} if it takes values of a different sign, e.g. $h^2 - k^2$.
+    \item We say that $Q$ is \textit{semidefinite} if it is always $\geq 0$ or $\leq 0$, but it is zero for some nonzero $(h, k)$, such as $h^2$.
+\end{itemize}
+By completing the square, we can put $Q$ in one of the forms above, and also show that
+\[ Q \text{ is } \begin{cases} \text{definite} \\ \text{indefinite} \\ \text{semidefinite} \end{cases} \implies \begin{cases} AC - B^2 &> 0, \\ AC - B^2 &< 0, \\ AC - B^2 &= 0. \end{cases} \] 
