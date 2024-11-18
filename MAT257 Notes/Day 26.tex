@@ -1,0 +1,30 @@
+\section{Day 26: Extrema in Two Variables (Nov. 11, 2024)}
+Let $f(x, y)$ be $\SC^2$ in two variables in a neighborhood of a critical point $(a, b)$. We may write,
+\[ f(a + h, b + k) - f(a, b) = \frac{1}{2}(f_{xx}(a^\ast, b^\ast) h^2 + 2f_{xy}(a^\ast, b^\ast) hk + f_{yy}(a^\ast, b^\ast) k^2), \]
+where $(a^\ast, b^\ast) = (a + \theta h, b + \theta k)$ for some $0 \leq \theta \leq 1$. Consider the quadratic form $Q(h, k) = Ah^2 + 2Bhk + Ck^2$. We have two cases;
+\begin{itemize}
+    \item If $A = C = 0$, then $Q(h, k) = 2Bhk = B(u^2 - v^2)$, and after the change of variables
+    \[ h = \frac{1}{\sqrt{2}}(u + v); \hspace{0.3in} k = \frac{1}{\sqrt{2}}(u - v), \]
+    we get $AC - B^2 < 0$, so we see that $Q$ is in indefinite form.
+    \item If $A \neq 0$, let us complete the square as follows;
+    \[ Q = A \left( (h + \frac{B}{A}k)^2 + \frac{AC - B^2}{A^2}k^2 \right). \]
+    Then we can have three cases. We have that $Q$ is definite, i.e. it only takes one sign and vanishes only at zero, whenever $AC - B^2 < 0$. However, if $AC - B^2 = 0$, then while it still only takes one sign, it vanishes outside of just zero; specifically, on the line $h - \frac{B}{A}k = 0$. If we write
+    \[ Q = A(u^2 + v^2) \]
+    where $u = h + \frac{B}{A}k$ and $v = \sqrt{\frac{AC - B^2}{A^2}}k$, then $Q = Au^2$ where $u = h + \frac{B}{A}k$ and $v = k$.
+    \medskip\newline
+    We say that $Q$ is indefinite when $AC - B^2 < 0$; we may write $Q = A(u^2 - v^2)$, where $u = h + \frac{B}{A}k$ and $v = \sqrt{\frac{B^2 - AC}{A^2}}k$.
+\end{itemize}
+
+\noindent Recall the second derivative test from 157; we now extend it to two variables. For $f(x, y)$ that is $\SC^2$ near the critical point $(a, b)$, if, at $(a, b)$, we have
+\begin{align*}
+    f_{xx} f_{yy} - f_{xy}^2 &> 0 \tag{i}, \\
+    f_{xx} f_{yy} - f_{xy}^2 &< 0 \tag{ii}, \\
+    f_{xx} f_{yy} - f_{xy}^2 &= 0 \tag{iii}.
+\end{align*}
+Then we have the respective three cases;
+\begin{enumerate}[label=(\roman*)]
+    \item There is a local maximum or minimum; if $f_{xx}(a, b) < 0$, it is a maximum; if $f_{xx}(a, b) > 0$, it is a minimum.
+    \item There is no local max. or min.; this is called a ``saddle point''.
+    \item Indeterminate; for example, $x^2 \pm y^3$, or $x^2 \pm y^n$.
+\end{enumerate}
+We may prove the above by completing the square; leaving it as an exercise, though. We give another example for now; suppose $f(x, y) = (x - y)^n + (y - 1)^n \geq 0$. Let $n$ be a positive even integer; if $f(x, y) = 0$, then $y = 1, x = y = 1$. We see that $(1, 1)$ is a critical point, and that it attains a local minimum, even if the second derivative test is inconclusive. 
