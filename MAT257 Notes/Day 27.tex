@@ -1,0 +1,47 @@
+\section{Day 27: Manifolds / Submanifolds (Nov. 13, 2024)}
+A subset $M \subset \RR^n$ is a $\SC^r$ submanifold of $\RR^n$ of dimension $k$ if it satisfies any of the equivalent conditions in the following theorem.
+\begin{simplethm}
+    The following conditions are equivalent,
+    \begin{enumerate}[label=(\alph*)]
+        \item For all $a \in M$, there is a $\SC^r$ map $f : U \to \RR^{n-k}$ where $U$ is an open neighborhood such that $M \cap U = f^{-1}(0)$ and $f$ has rank $n-k$ at every point of $M \cap U$.
+        \item Every point of $M$ has an open neighborhood $U = V \times W \subset \RR^{k} \times \RR^{n-k}$ such that $M \cap U$ is a graph of a $\SC^r$ function. If we write $z = g(y)$ where $y = (y_1, \dots, y_k) \in V$, $z = (z_1, \dots, z_{n-k}) \in W$, after a permutation of coordinates, we have
+        \[ (y, z) = (x_{\sigma(1)}, \dots, x_{\sigma(n)}). \]
+    \end{enumerate}
+\end{simplethm}
+\noindent The forwards direction (i.e., (a) implies (b)) is given by the implicit function theorem; for the opposite direction, we see that by taking $f(y, z) = z - g(y)$.
+\medskip\newline
+We now give some examples of manifolds.
+\begin{enumerate}[label=(\alph*)]
+    \item A point in $\RR^n$.
+    \item An open subset of $\RR^n$.
+    \item A smooth curve is a $1$-dimensional manifold, a smooth surface is a $2$-dimensional manifold.
+    \item $S^{n-1} = \{(x_1, \dots, x_n) \in \RR^n \mid x_1^2 + \dots + x_n^2 = 1\}$, i.e. the $n-1$ sphere. If we let $f(x) = x_1^2 + \dots + x_n^2 - 1$, then $S^{n-1} = f^{-1}({0})$, and $\nabla f(x) = 2(x_1, \dots, x_n) \neq 0$ at every point of $S^{n-1}$. Thus, $f$ has rank $1$ at every point of $S^{n-1}$.
+\end{enumerate}
+\begin{definition}
+    A \textit{diffeomorphism} is a $\SC^r$ map with a $\SC^r$ inverse.
+\end{definition}
+\noindent We continue the above theorem.
+\begin{simplethm}
+    We have a third equivalent condition to the two above;
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{2}
+        \item For all $a \in M$, there is an open neighborhood $U$ of $a$, an open subset $V$ of $\RR^n$, and a $\SC^r$ diffeomorphism $h : U \to V$ such that $h(M \cap U) = V \cap (\RR^n \times \{0\})$, which is equal to the set $\{(y_1, \dots, y_n) \in V \mid y_{k+1} = \dots = y_n = 0 \}$.
+    \end{enumerate}
+\end{simplethm}
+\noindent To see that (b) implies (c), let $h(y, z) = (y, z - g(y))$, and to see (c) implies (b), let $f(x) = (h_{k+1}(x), \dots, h_n(x))$.
+\medskip\newline
+There is another very important characterization of manifolds;
+\begin{simplethm}[Coordinate Charts; Spivak Theorem 5-2]
+    We have a fourth equivalent condition to the three above;
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{3}
+        \item For $a \in M$, there is an open neighborhood $U$ of $a$, open subset $W$ of $\RR^n$, and $\SC^r$ map $\varphi : M \to \RR^n$ such that
+        \begin{enumerate}[label=(\roman*)]
+            \item $\varphi$ is one-to-one,
+            \item $\varphi(W) = M \cap W$,
+            \item $\varphi'$ has rank $k$ at every point of $W$,
+            \item for every open open subset $\Omega$ of $W$, $\varphi(\Omega) = \varphi(W) \cap \omega'$, for some open subset $\Omega'$ of $\RR^n$.
+        \end{enumerate}
+        Note the topology definition for (iv); we say $\varphi(\Omega)$ is open in $\varphi(W)$ in the ``subspace topology'', i.e. so $\varphi^{-1} : \varphi(W) \to W$ is continuous.
+    \end{enumerate}
+\end{simplethm}
