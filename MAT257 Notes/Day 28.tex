@@ -1,0 +1,32 @@
+\section{Day 28: Manifolds, Pt. 2 (Nov. 15, 2024)}
+Recall that a manifold $M \subset \RR^n$ of dimension $k$ satisfies:
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{2}
+    \item For all $a \in M$, there is an open neighborhood $U$ of $a$, an open subset $V$ of $\RR^n$, and a $\SC^r$ diffeomorphism $h : U \to V$ such that $h(M \cap U) = V \cap (\RR^k \times \{0\})$, which is equal to the set $\{(y_1, \dots, y_n) \in V \mid y_{k+1} = \dots = y_n = 0 \}$.
+    \item For $a \in M$, there is an open neighborhood $U$ of $a$, open subset $W$ of $\RR^n$, and $\SC^r$ map $\varphi : W \to \RR^n$ such that
+        \begin{enumerate}[label=(\roman*)]
+            \item $\varphi$ is one-to-one,
+            \item $\varphi(W) = M \cap U$,
+            \item $\varphi'$ has rank $k$ on $W$,
+            \item for every open $\Omega \subset W$, $\varphi(\Omega) = \varphi(W) \cap \tilde{U}$, where $\tilde{U}$ is some open subset of $\RR^n$.
+        \end{enumerate}
+\end{enumerate}
+To see (c) implies (d), take $\varphi = \restr{h^{-1}}{V \cap (\RR^n \times \{0\})}$. For (d) implies (c), consider $a \in M$, $b \in W$ such that $\varphi(b) = a$; we can assume that $\partial_{y_1, \dots, y_k} (\varphi_1, \dots, \varphi_k)$ has rank $k$ on $W$. Define $\psi : W \times \RR^{n-k}\to \RR^n$ to be the map
+\[ (y, z) \mapsto (\varphi_1(y), \dots, \varphi_k(y), \varphi_{k+1}(y) + z_1, \dots, \varphi_{n}(y) + z_{n-k}), \]
+and consider that
+\[ \psi(y, z) = \left(\begin{array}{c|c} \dfrac{\partial (\varphi_1, \dots, \varphi_k)}{\partial (y_1, \dots, y_k)} & 0 \\ \hline \ast & I_{n-k} \end{array}\right) \]
+By the inverse function theorem, there exists an open neighborhood $V'$ of $(k, 0)$, $U'$ of $a$ such that $\psi : U' \to V'$ is $\SC^r$.
+\medskip\newline
+Now, consider the set $\{\varphi(y) \mid (y, 0) \in V'\} = \varphi(W) \cap U''$, where $U''$ is open in $\RR^n$. Take $U_1 = U_1' \cap U''$, $V_1 = \psi^{-1}(U_1)$, and $h = \restr{\psi^{-1}}{U_1}$. Then
+\begin{align*}
+    M \cap U_1 &= \{\varphi(y) \mid (y, 0) \in V_1 \} \\ 
+    &= \{\psi(y, 0) \mid (y, 0) \in V_1 \},
+\end{align*}
+and
+\begin{align*}
+    h(M \cap U_1) &= \psi^{-1} (M \cap U_1) \\
+    &= \psi^{-1} \{ \psi(y, 0) \mid (y, 0) \in V_1 \} \\
+    &= \{ (y, 0) \mid (y, 0) \in V_1 \} \\
+    &= V_1 \cap (\RR^k \times \{0\}).
+\end{align*}
+A remark on (d) from the proof above; let $a = \psi(b) \in M$, and $b \in W$. $\psi^{-1}$ is given near $a$ by the...?? \textit{if someone knows what this is pls lmk lmao}
