@@ -1,0 +1,73 @@
+\section{Day 31: Integration (Nov. 22, 2024)}
+The integral over a rectangle is given as follows,
+\begin{itemize}
+    \item The closed rectangle $A = [a_1, b_1] \times \dots \times [a_n, b_n] \subset \RR^n$.
+    \item The volume of $A$ is given by $(b_1 - a_1) \dots (b_n - a_n)$.
+    \item A partition of $A$, $P = \{P_1, \dots, P_n\}$ where $P_i$ is a partition of $[a_i, b_i]$. If each $P_i$ has $k$ subintervals, then $A$ has $k_1, \dots, k_n$ subrectangles. Let $f : A \to \RR$ be bounded. Then for all subrectangles $S$ of $A$,
+    \begin{align*}
+        m_S(f) &= \inf \{f(x) \mid x \in S\}, \\
+        M_S(f) &= \sup \{f(x) \mid x \in S\}.
+    \end{align*} 
+    \item The lower and upper bounds are given by
+    \begin{align*}
+        L(f, P) &= \sum_S m_S(f) v(S), \\
+        U(f, P) &= \sum_S M_S(f) v(S),
+    \end{align*}
+    where $L(f, P) \leq U(f, P)$. If $P'$ is a refinement of $P$, i.e., every $P_i'$ is a refinement of $P_i$, then $L(f, P) \leq L(f, P')$ and $U(f, P) \geq U(f, P')$. This is true since every subrectangle $S$ of $P$ is divided into subrectangles $S_1, \dots, S_m$ of $P'$. In particular, $m_{S_i}(f) \geq m_S(f)$, and
+    \[ m_S(f) V(s) = m_S(f) \sum_j v(S_j) \leq \sum_j m_{S_j} v(s_j), \]
+    so $L(f, P) \leq L(f, P')$ as desired.
+    \item For any two partitions $P, P'$ of $A$, $L(f, P) \leq U(f, P')$. We can see this by comparing them to a common refinement; then $\sup_P L_(f, P) \leq \inf_P U(f, P)$. 
+\end{itemize}
+\begin{definition}
+    A bounded function $f : A \to \RR$ is called \textit{integrable} if $\sup_P L(f, P) = \inf_P U(f, P)$. In this case, we write $\int_A f$ for this common valve, e.g. $n = 1$, 
+    \[ \int_{[a, b]} f = \int_a^b f. \]
+\end{definition}
+\begin{simplelemma}
+    A bounded function $f : A \to \RR$ is integrable on the closed rectangle $A$ if $\forall \eps > 0$, there exists a partition $P$ of $A$ such that $U(f, P) - L(f, P) < \eps$.
+\end{simplelemma}
+\begin{itemize}
+    \item[$(\Leftarrow)$] Yes.
+    \item[$(\Rightarrow)$] Integrable means for all $\eps > 0$, there are partitions $P, P'$ of $A$ such that $U(f, P') - L(f, P) < \eps$, so a common refinement $P''$ satisfies $U(f, P'') - L(f, P'') < \eps$.
+\end{itemize}
+We now give some examples.
+\begin{enumerate}[label=(\alph*)]
+    \item If $f(x) = c$ is constant, then $\int_A f = cv(A)$ because for all subrectangles $S$ of partition $P$ of $A$, $m_S(f) = c = M_S(f)$.
+    \item Let $A = [0, 1] \times [0, 1] \subset \RR^2$. Then let $f(x, y) = 1_\QQ(x)$; then $f$ is not integrable on $A$, since $L(f, P) = \sum_S m_S(f) v(S) = 0$, while $U(f, P) = \sum_S M_S(f) v(S) = 1$.
+\end{enumerate}
+Some basic properties of integration; suppose $f : A \to \RR$ is integrable. Then
+\begin{enumerate}[label=(\roman*)]
+    \item $f + g$, $c \cdot f$ integrable, and
+    \begin{align*}
+        \int_A (f + g) &= \int_A f + \int_A g, \\
+        \int_A cf &= c \int_A f.
+    \end{align*}
+    \item If $f \leq g$, then $\int_A f \leq \int_A g$.
+    \item If $f$ is integrable, then $\abs{f}$ integrable and in fact $\abs{\int_A f} \leq \int_A \abs{f}$.
+    \item If $f, g$ are integrable, then $f \circ g$ is integrable.
+\end{enumerate}
+We prove the third property; consider the three cases.
+\begin{enumerate}[label=(\alph*)]
+    \item $f \geq 0$ on a subrectangle $S$. Then
+    \begin{align*}
+        M_S(\abs{f}) &= M_S(f), \\
+        m_S(\abs{f}) &= m_S(f),
+    \end{align*}
+    so $M_S(\abs{f}) - m_S(\abs{f}) = M_s(f) - m_s(f)$.
+    \item Let $f \leq 0$ on $S$.
+    \begin{align*}
+        M_S(\abs{f}) &= -M_S(f), \\
+        m_S(\abs{f}) &= -m_S(f);
+    \end{align*}
+    again, we obtain the same result.
+    \item Let $m_S(f) \leq 0 \leq M_S(f)$.
+    \begin{align*}
+        -m_S(f) &\leq M_S(f), \\
+        M_S(\abs{f}) &= M_S(f), \\
+        M_S(\abs{f}) & m_S(\abs{f}) \leq M_S(f) \leq M_S(f) - m_s(f).
+    \end{align*}
+    The other case is... left as an exercise?
+\end{enumerate}
+In all cases, we have that
+\[ M_S(\abs{f}) - m_S(\abs{f}) \leq M_S(f) - m_S(f). \]
+So $\abs{f}$ is integrable, and
+\[ -\int_A \abs{f} \leq \int_A f \leq \int_A \abs{f}. \] 
