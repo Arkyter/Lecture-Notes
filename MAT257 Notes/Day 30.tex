@@ -1,1 +1,28 @@
-\section{Day 30: (Nov. 20, 2024)}
+\section{Day 30: Tangent Space (Nov. 20, 2024)}
+A tangent space to $\RR^n$ at a point $a$, $\RR_a^n$, is a copy of $\RR^n$ ``centered at $a$''. We write vectors $v \in \RR_a^n$ as $v_a$ or $(a, v)$. $v_a = (v_1, \dots, v_n) = \sum v_i e_{i,a}$. We can identify $v_a \in \RR_a^n$ with directional derivative at $a$, along $v_i$ tangent vectors operate on $\SC^1$ functions.
+\[ V_a(f) = D_u f(a) = \sum_{i=1}^n v_i \frac{\partial f}{\partial x_i}(a). \]
+Subsequently equal to
+\[ \left( \sum_{i=1}^n v_i \Eval{\frac{\partial f}{\partial x_i}}{a}{} \right)(f) \]
+so we identify
+\[ v_a = \sum v_ie_{i,a} \text{ with } \sum v_i \Eval{\frac{\partial}{\partial x_j}}{a}{}, \]
+where $\Eval{\frac{\partial}{\partial x_j}}{a}{}$ is the standard basis of $\RR^n_a$, with $dx_i(a)$ dual basis, and
+\[ \RR_n^a = \{ \text{tangent vectors } \gamma'(0) \text{ to } \SC^1 \text{ curves } \gamma : (-\delta, \delta) \to \RR^n, \gamma(0) = a \}. \]
+In particular, $v_a \in \RR_a^n$ is $\gamma'(0)$ where $\gamma(t) = a + tv$. Let $M$ be a $\SC^r$ submanifold of $\RR^n$ of dimension $k$.
+\begin{definition}
+    The tangent space $M_a$ or $TM_a$ is given by the above, or $\varphi^{-1} \circ \gamma$ being $\SC^1$ for any coordinate chart at $a$.
+\end{definition}
+\noindent Let $m : (-\delta, \delta) \to W$, $m(0) = \alpha$ be a $\SC^1$ curve in $W$, and $\eta(0) = b$ if and only if $\gamma = \varphi \circ \eta$ $\SC^1$ curve in $M$, $\gamma(0) = a$. Then
+\[ \gamma'(0) = D \varphi(b) \cdot \eta'(0) \]
+so $M_a$ is the $k$-dimensional linear subspace of $\RR_a^n$ given by $D \varphi(b)(\RR_b^k)(a)$ rank $k$. In terms of other definitions of manifolds,
+\begin{enumerate}[label=(\roman*)]
+    \item $h : (U \ni a) \to V \subset \RR^n$ diffeomorphism such that $h(M \cap U) = V \cap (\RR^k \times \{0\})$. $TM_a = Dh(a)^{-1} (\RR^k \times \{0\})$ subspace of $\RR_{h(a)}^n$.
+    \item $M \cap U$ is the graph of $z = g(y)$ of a $\SC^r$ map $g : V \to W$, with $a = (b, a)$ from earlier\footnote{???} then
+    \[ TM_a = \{(y, z) \in \RR_{(b, a)}^n \mid z = Dg(b) y \}, \]
+    $\varphi : y \mapsto (y, g(y))$ is a coordinate chart, and $D \varphi(b) = \binom{I}{Dg(b)}$.
+    \item $M \cap U = f^{-1}(0)$, $f : U \to \RR^{n-k}$. $Df(a) = \RR_a^n \to \RR_{f(a)}^{n-k}$. $TM_a = Df(a)^{-1}(\{0\}) = \ker Df(a)$. To see this, let $\gamma$ be a $\SC^1$ curve $\gamma : (-\delta, \delta) \to M$, $\gamma(0) = a$. $f \circ \gamma = 0$, $Df(a)\gamma'(0) = 0$, i.e. $\gamma'(0) \in \ker Df(a)$, so $TM_a \subset \ker Df(a)$ since both are of dimension $k$.  
+\end{enumerate}
+Let $f : (M \subset \RR^n) \to (N \subset \RR^p)$ be a $\SC^1$ map of manifolds of dimension $k$ and $\ell$, respectively. Then this induces a linear transformation
+\[ f_{\ast a}: TM_a \to TN_{f(a)}. \]
+For example, if $M = \RR^n$ and $N = \RR^p$, then $f_{\ast a}$ is given by $Df(a)$. We define $f_{\ast a}$ as
+\[ D \psi (f(a)) D(\psi^{-1} \circ f \circ \varphi)(b) D \varphi(b)^{-1}, \]
+where $a = \varphi(b)$ and $\psi(c) = f(a)$. In a way, $f = \psi \circ (\psi^{-1} \circ f \circ \varphi) \circ \varphi^{-1}$.

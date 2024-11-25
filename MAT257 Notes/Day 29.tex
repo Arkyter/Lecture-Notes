@@ -1,1 +1,28 @@
 \section{Day 29: Smooth mappings between manifolds (Nov. 18, 2024)}
+Let $V \subset \RR^m$ be open, and let us consider the function $f : V \to M \subset \RR^n$. Today we will talk about functions to a $\SC^r$ submanifold $M$ of dimension $k$.
+\begin{simpleclaim}
+    $f$ is smooth as a mapping to $\RR^n$ if and only if $f \circ \varphi^{-1}$ is $\SC^r$ for all coordinate charts $\varphi$; i.e., $f \circ \varphi^{-1}$ is defined on $f^{-1}(\varphi(W))$.
+\end{simpleclaim}
+\begin{itemize}
+    \item[$(\Leftarrow)$] $\varphi^{-1} \circ f$ is $\SC^r$ implies that $f = \varphi (\varphi^{-1} \circ f)$ by the chain rule.
+    \item[$(\Rightarrow)$] $f$ is $\SC^r$ implies that $\varphi^{-1} \circ f$ is $\SC^r$. For all $a \in \varphi(W)$, there exists a $\SC^r$ diffeomorphism $h : U \to V$ where $U$ is open in $\RR^n$, and $V$ is open in $\RR^k \times \RR^{n-k}$ such that $h(M \cap U) = V \cap (\RR^n \times \{0\})$, i.e. $\varphi = \restr{h^{-1}}{V \cap (\RR^n \times \{0\})}$. \qed
+\end{itemize}
+If $\varphi_1 : W_1 \to \RR^n$ and $\varphi_2 : W_2 \to \RR^n$ are two different coordinate charts for $M$, then $\varphi_2^{-1} \circ \varphi_1$ is $\SC^r$ as the map $\varphi_1^{-1} (\varphi_2 (W_2)) \to \RR^k$ with $\SC^r$ inverse on $\varphi_2^{-1} (\varphi_1 (W_1))$.
+\begin{definition}[Functions defined on a $\SC^r$ submanifold $M$ of $\RR^n$]
+    Let $f : M \to \RR$ be $\SC^r$ at a point if there exists a coordinate chart $\varphi : W \to \RR$ for $M$ at $a$ (i.e., $a \in \varphi(W)$) such that $f \circ \varphi$ is $\SC^r$ at $b$, where $a = \varphi(b)$.
+\end{definition}
+\noindent This definition is independent of the choice of coordinate chart by the previous remark.
+\begin{simplelemma}
+    Let $f : M \to \RR$ be $\SC^r$ at a point $a$ if there is an open neighborhood $U$ of $a$ in $\RR^n$ and $\SC^r$ function $g : U \to \RR$ such that $\restr{f}{M \cap U} = \restr{g}{M \cap U}$.
+\end{simplelemma}
+\begin{itemize}
+    \item[$(\Leftarrow)$] Because $f \circ \varphi = g \circ \varphi$ is $\SC^r$.
+    \item[$(\Rightarrow)$] Take $g = f \circ h^{-1} \circ \mathrm{pr} \circ h$, where $\mathrm{pr}$ is a projection from $\RR^k \times \RR^{n-k}$. $h^{-1}$ on $V \cap (\RR^k \times \{0\}) (\varphi)$.
+\end{itemize}
+\noindent We start with some definitions.
+\begin{definition}
+    $f : M \to \RR^n$ is $\SC^r$ at $a$ if every component $f_i$ of $f$ is $\SC^r$, i.e. $f = (f_1, \dots, f_n)$.
+\end{definition}
+\begin{definition}
+    $\SC^r$ mappings between manifolds $M \subset \RR^n$ of dimension $k$ and $N \subset \RR^p$ of dimension $\ell$. $f : M \to N$ is $\SC^r$ if for all coordinate charts $\varphi : W \to \RR^n$ for $M$, $\psi : Z \to \RR^p$ for $N$, we have that $\psi^{-1} \circ f \circ \varphi$ is $\SC^r$ and $\varphi^{-1} \circ f \circ \psi$ is too.
+\end{definition}
