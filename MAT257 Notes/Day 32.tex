@@ -1,0 +1,50 @@
+\section{Day 32: Integrals over General Bounded Sets (Nov. 25, 2024)}
+We start with some definitions.
+\begin{definition}
+    We say that $A \subset \RR^n$ has $n$-dimensional \textit{measure zero} if, for all $\eps > 0$, there is a covering $\{U_1, \dots, \}$ by countably many closed rectangles with $\sum_{i=1}^\infty v(U_i) < \eps$. Note that we need not use closed rectangles necessarily; open rectangles, open or closed balls would work too.
+\end{definition}
+\noindent Here are some examples.
+\begin{enumerate}[label=(\alph*)]
+    \item A finite subset of $\RR^n$ has measure zero.
+    \item A countable subset $\{a_1, a_2, \dots \}$ of $\RR^n$ has measure zero. Cover each $a_i$ by a closed rectangle $U_i$, with $v(U_i) < \frac{\eps}{2^i}$. Then $\sum v(U_i) < \eps$.
+\end{enumerate}
+\begin{simplelemma}
+    Any countable union $A = A_1 \cup A_2 \cup \dots$ of subsets $A_i$ of $\RR^n$ with measure zero has measure zero.\footnote{wordsalad definition}
+\end{simplelemma}
+Cover each $A_i$ by countably many closed rectangles $\{U_{i1}, U_{i2}, \dots, \}$ with
+\[ \sum_{j=1}^n v(U_{ij}) < \frac{\eps}{2^i}. \]
+Then $\{U_{ij}\}$ covers $A$, and is countable by a diagonal argument. Thus, $\{U_{ij}\}$ can be rearranged as $\{V_k\}$, and we have
+\[ \sum_{k=1}^\infty v(V_k) < \sum_{i=1}^\infty \frac{\eps}{2^i} = \eps. \qed \] 
+\begin{simplethm}
+    Given a closed rectangle $A \subset \RR^n$ and a bounded function $f : A \to \RR$, $f$ is integrable on $A$ if and only if $\{x \in A \mid f \text{discont. at } a\}$ has measure zero.
+\end{simplethm}
+\noindent This will be proved in the next lecture.
+\medskip\newline
+\begin{definition}[Characteristic Function]
+    For $C$ in $\RR^n$, let us define the \textit{characteristic function} of $C$ as follows,
+    \[ \chi_C (x) = \begin{cases} 1 & x \in C, \\ 0 & x \not\in C. \end{cases} \]
+    If $f : C \to \RR$ is bounded, then $f \circ \chi_C$ makes sense as a function on $\RR^n$. Note that the characteristic function and indicator function are of the same notion, just used in different fields..?
+\end{definition}
+\noindent As an example, if $C \subset A$ rectangle, we can define
+\[ \int_C f = \int_A f \circ \chi_C \]
+if the latter exists.
+\begin{simplelemma}
+    $\{x \in \RR^n \mid \chi_C \text{ discont. at } x\} = \mathrm{bdry}(C)$.
+\end{simplelemma} 
+\noindent Consider the following cases.
+\begin{enumerate}[label=(\roman*)]
+    \item Let $x$ be in the interior of $C$. Then $x \in U \subset \mathrm{int}(C)$, where $U$ is an open rectangle. And so $\chi_C = 1$ on $U$, and so it contains all such $x$. 
+    \item Let $x$ be in the exterior of $C$. Then $x \in U \subset \mathrm{int}(C)$, where $\chi_C = 0$ on $U$, and so it contains all such $x$.
+    \item Let $x$ be on the boundary of $C$. For any open rectangle $U \ni x$, there exists $x_1 \subset C$, where $x_1 \in U : \chi_C(x_1) = 1$, and $x_2 \subset C$, where $x_2 \not\in U : \chi_C(x_2) = 0$. Thus, $\chi_C$ is not continuous at $x$.
+\end{enumerate}
+\begin{simplecor}
+    If $C \subset A$, where $A$ is a closed rectangle and $f : A \to \RR$ is continuous, then $f$ is integrable on $C$ if and only if the boundary of $C$ has measure zero.
+\end{simplecor}
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{2}
+    \item $[a, b] \subset \RR$ with $a < b$ does not have measure zero. Any cover of $[a, b]$ by open intervals has finite subcover $\{U_1, \dots, U_n\}$ since the interval is compact. Then
+    \[ \sum_{i=1}^n v(U_i) \geq b-a. \]
+    To see this, say $U_i = (a_i, b_i)$. Then the endpoints of all $(a_i, b_i)$ form a partition $\{t_0, \dots, t_k\}$ of a closed interval containing $[a, b]$. Every $[t_{j-1}, t_j] \subset [a_i, b_i]$ for some $i$; then
+    \[ \sum_{i=1}^n v((a_i, b_i)) \geq \sum_{j=1}^n v([t_{j-1}, t_j]) \geq b-a. \]
+    \item If $C$ is a bounded set of measure zero, does the boundary have measure zero? Not necessarily; let $C = \QQ \cap [0, 1]$. $C$ is a countable set, is of measure zero, but $\mathrm{bdry}(C) = [0, 1]$ which is clearly not measure zero as per the previous example.
+\end{enumerate}
