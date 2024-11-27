@@ -1,0 +1,35 @@
+\section{Day 33: Integrals, Pt. 3 (Nov. 27, 2024)}
+\begin{simplethm}
+    Given a bounded function $f : A \to \RR$ on a closed rectangle $A \subset \RR^n$, $f$ is integrable on $A$ if and only if the set of discontinuities $B = \{x \in A \mid f \text{ discont.}\}$ has measure zero.
+\end{simplethm}
+\begin{itemize}
+    \item[$(\Leftarrow)$] Let $\eps > 0$. We can cover $B$ by interiors of countable many closed rectangles $U_1, U_2, \dots$ in $\RR^n$ such that $\sum_{i=1}^\infty v(U_i) < \eps$ (by definition of measure zero). If $x \in A \setminus B$, then there is a closed rectangle $V_x \subset \RR^n$ such that $M_{V_x \cap A}(f) - m_{V_x \cap A}(f) < \eps$, $x \in \mathrm{int}(V_x)$ by continuity. Recall that continuity means $\abs{f(y) - f(x)} < \frac{\eps}{2}$ when $\abs{y - x} < \delta$, i.e. $f(x) - \frac{\eps}{2} < f(y) < f(x) + \frac{\eps}{2}$.
+    \medskip\newline
+    Since $A$ is compact, there exists a finite subcollection of $\{U_i, V_x\}$ covering $A$. Choose a partition $P$ of $A$ such that every subrectangle $S$ of $P$ lies in some $V_x$ or $U_i$. If $\abs{f(x)} \leq M$, then
+    \begin{align*}
+        U(f, P) - L(f, P) &= \sum_S (M_S(f) - m_S(f)) v(S) \\
+        &\leq \sum_{S \subset V_x} (\dots) + \sum_{S \subset U_i} (\dots) \tag{for some $i$, $x$} \\
+        &< \sum_{s \subset V_x} \eps v(S) + \sum_{S \subset U_i} 2 M v(S) \tag{where $2M \sum_{S \subset S_i} v(S) \leq 2 M \sum v(U_i)$} \\
+        &\leq \eps v(A).
+    \end{align*}
+    \item[$(\Rightarrow)$] We will check this later on.
+\end{itemize}
+We start by giving some examples. The derivation of a bounded function from continuity is given as follows (???); given $X \subset \RR^n$, $f : X \to \RR$ bounded, $\delta > 0$ and $a \in X$,
+\begin{align*}
+    M(f, a, \delta) &= \sup\{f(x) \mid x \in X, \abs{x - a} < \delta\}, \\
+    m(f, a, \delta) &= \inf\{f(x) \mid x \in X, \abs{x - a} < \delta\}.
+\end{align*}
+Then we say that the \textit{oscillation} of $f$ at $a$ is
+\[ o(f, a) = \lim_{\delta \to 0} M(f, a, \delta) - m(f, a, \delta). \]
+This necesssarily exists, since the difference is monotonically decreasing in $\delta$.
+\begin{simplelemma}
+    $f$ is continuous at $a$ if and only if $o(f, a) = 0$.
+\end{simplelemma}
+\begin{itemize}
+    \item[$(\Leftarrow)$] For all $\eps > 0$, there exists $\delta > 0$ such that $\abs{f(x) - f(a)} < \eps$ implies $\abs{x - a} < \delta$ where $x \in X$. Thus, $M(f, a, S) - m(f, a, S) \leq 2 \eps$, i.e. $f(a) - \eps < f(x) < f(a) + \eps$. This applies for any $\eps > 0$, so $o(f, a) = 0$.
+    \item[$(\Rightarrow)$] Essentially the same argument; left as an exercise.
+\end{itemize}
+\begin{simpleprop}
+    Let $X \subset \RR^n$ be closed, and $f : X \to \RR^n$ be bounded on $X$. For any $\eps > 0$, $\{x \in X \mid o(f, x) \geq \eps\}$ is closed.
+\end{simpleprop}
+\noindent Let $Y = \{x \in X \mid o(f, x) \geq \eps\}$. To show that $\RR^n \setminus Y$ is open, let $x$ be an element. If $x \in X$, then there is an open ball $B$ such that $x \in B$ and $B \subset \RR^n \setminus X \subset \RR^n \setminus Y$. On the other hand, if $x \in X$, then there exists $\delta$ such that $M(f, x, \delta) - m(f, x, \delta) < \eps$. Let $B$ be an open ball centered at $x$ with radius $\delta$. If $y \in B$, then there is $\delta_1 > 0$ such that if $\abs{z - y} < \delta_{x}$, then $\abs{z - x} < \delta$. So $M(f, y, \delta_1) - m(f, y, \delta_1) < \eps$. Therefore, $o(f, y) < \eps$, and so $B \subset \RR^n \setminus Y$ as desired. \qed
