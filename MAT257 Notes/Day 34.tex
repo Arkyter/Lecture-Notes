@@ -1,0 +1,21 @@
+\section{Day 34: Integrals, Pt. 4 (Nov. 29, 2024)}
+\begin{simplethm}
+    Given a bounded function $f : A \to \RR$ on a closed rectangle, we have that $f$ is integrable on $A$ if and only if $\{x \in A \mid f \text{ discont. }\}$ has measure zero.
+\end{simplethm}
+\begin{itemize}
+    \item[$(\Leftarrow)$] Done last lecture.
+    \item[$(\Rightarrow)$] For any $\eps > 0$, let $B_\eps = \{x \in A \mid o(f, x) > \eps\}$. $B_\eps$ is closed, and is also compact. If we let $B = \{x \in A \mid o(f, x) > 0\}$, it is enough to write $B = B_1 \cup B_{1/2} \cup B_{1/3} \cup \dots$, and it suffices to write $B_{1/k}$ has measure zero for any $k$.
+    \medskip\newline
+    Given some $\eps > 0$, there is a partition $P$ of $A$ such that $U(f, P) - L(f, P) < \eps$. Let $\mathcal{S}$ be the set of subrectangles of $P$ such that $S \cap B_{1/k} \neq \emptyset$. Let $\mathcal{S}'$ be the set of $S \in \mathcal{S}$ such that $\inf S \cap B_{1/k} \neq \emptyset$. Then $M_S(f) - m_S(f) \geq \frac{1}{k}$. Cover the boundaries of all $S \in P$ by finitely many closed rectangles of total volume $\eps$. The latter rectangles together with $\mathcal{S}'$ cover $B_{1/k}$. In fact, finitely many cover $B_{1/k}$. Directly compute the volume as follows,
+    \[ \sum_{s \in P} \left(M_S(f) - m_S(f)\right) v(S) < \eps \implies \sum_{S \in \mathcal{S}'} \underbrace{\left(M_S(f) - m_S(f)\right)}_{\geq \frac{1}{k}} v(S) < \eps, \]
+    meaning we have $\sum_{s \in \mathcal{S}'} v(S) < k \eps$. Thus, the total volume is less than $\sum_{s \in \mathcal{S}'} v(S) + \eps < (k + 1)\eps$. \qed
+\end{itemize}
+\begin{definition}
+    A bounded subset $C$ of $\RR^n$ is \textit{Jordan measurable} if the boundary of $C$ has measure $0$.
+\end{definition}
+\noindent In this case, we define the $n$-dimensional volume of $C$ as $\int_C 1$, which is equal to $\int_A \chi_C$ for any rectangle $A \supset C$. For example, $1$-dimensional volume is referred to as \textit{length}, $2$-dimensional volume as \textit{area}, and so forth. We now give some examples.
+\begin{enumerate}[label=(\alph*)]
+    \item A bounded set $C$ of measure zero does not necessarily have to be Jordan measurable. For example, take $C = \QQ \cap [0, 1]$.
+    \item A bounded open set is not necessarily Jordan measurable. For example, let $C$ be the union of intervals $(a_i, b_i) \subset (0, 1)$ such that each rational in $(0, 1)$ is in some $(a_i, b_i)$, and $\sum (b_i - a_i) < 1$. Then the boundary of this set is given by $[0, 1] \setminus C$. This is clearly not measure zero, since if it were, we could cover it with a countable set of open intervals with volume as small as desired; however, $[0, 1]$ is covered by finitely many of these and the $(a_i, b_i)$; however, the total length is less than $\sum (b_i - a_i) + 1 - \sum_(b_i - a_i) < 1$.
+    \item A bounded closed set is not necessarily Jordan measurable. The complement in $[0, 1]$ of our example in (b) suffices.
+\end{enumerate} 
