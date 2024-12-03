@@ -1,0 +1,44 @@
+\section{Day 35: Fubini's Theorem (Dec. 2, 2024)}
+We start with \textit{Cavalieri's principle}: it is reasonable to expect, for $A = [a, b] \times [c, d]$, that
+\[ \int_A f = \int_a^b h(x) \, dx = \int_a^b \left(\int_c^d f(x, y) \, dy\right) \, dx. \] 
+However, even if $f$ is integrable on $A$, i.e., the set of discontinuities of $f$ lies in $\{x_0\} \times [c, d]$, $\int_c^d f(x_0, y) \, dy$ may not exist. For this region, formulate the integral in a more general way as follows; suppose $z = f(x, y) \geq 0$ is continuous. Then the area of the cross section
+\[ h(x) = \int_c^d g(x) = \int_c^d f(x, y) \, dy, \]
+i.e. $g_x(y) = f(x, y)$ (as in, we're fixing $x$ and considering said cross section). If $f : A \to \RR$ is a bounded function on a closed rectangle $A \subset \RR^n$, then let us consider the lower and upper integrals of $f$ on $A$:
+\begin{align*}
+    L_A f &= \sup \text{ of all lower sums,} \\
+    U_A f &= \inf \text{ of all upper sums,}
+\end{align*}
+which always exist.
+\begin{simplethm}[Fubini's Theorem]
+    Let $A \subset \RR^n$, $B \subset \RR^p$ be closed rectangles, and let $f : A \times B \to \RR$ be integrable.
+\end{simplethm}
+\noindent Given $x \in A$, let $g_x : B \to \RR$ be given by $g_x(y) = f(x, y)$. Set
+\begin{align*}
+    \mathcal{L}(x) &= L_B g_x = L \int_B f(x, y) \, dy, \\
+    \SU(x) &= U_B g_x U \int_B f(x, y) \, dy.
+\end{align*}
+Then $\SL, \SU$ are integrable on $A$, and
+\begin{align*}
+    \int_{A \times B} f &= \int_A \mathcal{L} = \int_A \left( L \int_B f(x, y) \, dy \right) \, dx \\
+    &= \int_B U = \int_A \left( U \int_B f(x, y) \, dy \right) \, dx.
+\end{align*}
+A few remarks;
+\begin{enumerate}[label=(\roman*)]
+    \item A similar proof will give
+    \begin{align*}
+        \int_{A \times B} f &= \int_B \left( L \int_A f(x, y) \, dx \right) \, dy \\
+        &= \int_B \left( U \int_A f(x, y) \, dx \right) \, dy.
+    \end{align*}
+    \item If $g_x$ is integrable, then for all $x$, we have that
+    \[ \int_{A \times B} f = \int_A \left( \int_B f(x, y) \, dy \right) \, dx. \]
+    \item If $A = [a_1, b_1] \times \dots \times [a_n, b_n]$ and $f$ is nice enough, then we can interate the formula
+    \[ \int_A f = \int_{a_1}^{b_1} \dots \int_{a_n}^{b_n} f(x_1, \dots, x_n) \, dx_n \dots dx_1. \]
+\end{enumerate}
+We now prove Fubini's Theorem. Let $P_A, P_B$ be partitions of $A, B$ respectively, with subrectangles $S_A, S_B$. We have that $P_A, P_B$ determine the partition $P$ of $A \times B$. Every subrectangle $S$ of $P$ is of form $S_A \times S_B$. Moreover, every partition $P$ of $A \times B$ has this form,
+\begin{align*}
+    L(f, P) &= \sum_S m_S(f) \cdot v(S) \\
+    &= \sum_{S_A, S_B} m_{S_A \times S_B} (f) v(S_A \times S_B) \\
+    &= \sum_{S_A} \left( \sum_{S_B} m_{S_A \times S_B} (f) v(S_B) \right) v(S_A) \leq \mathcal{S}(x)
+\end{align*}
+for all $x \in S_A$. If $x \in A$, $m_{S_A \times S_B}(f) \leq m_{S_B}(g_\alpha)$. So
+\[ \sum_{S_B} m_{S_A \times S_B} (f) v(S_B) \leq \sum_{S_B} m_{S_B}(g_\alpha) (S_B) \leq L_B \int g_x = \mathcal{L}(x). \]
