@@ -1,0 +1,20 @@
+\section{Day 36: Fubini's Theorem, Pt. 2 (Dec. 3, 2024)}
+\begin{simplethm}[Fubini's Theorem]
+    Let $f : A \times B \to \RR$ integrable, where $A, B$ are rectangles in $\RR^n, \RR^p$ respectively. Let $x \in A$; then $g_x : B \to \RR$ with $g_x(y) = f(x, y)$. Set $\mathcal{L}(x) = L \int_B g(x) = L \int_B f(x, y) \, dy$, with $\SU(x)$ defined analogously. Then $\mathcal{L}, \SU$ are integrable on $B$, and
+    \[ \int_{A \times B} f = \int_A \mathcal{L} = \int_A \left(L \int_B f(x, y) \, dy \right) \, dx = \int_A \SU. \]
+\end{simplethm}
+\noindent We continue the proof; consider partitions $P_A, P_B$ of $A, B$ with subrectangles $S_A, S_B$ respectively. Let $P_A, P_B$ define the partition $P$ of $A \times B$ with subrectangles $S_A \times S_B$. Then
+\begin{align*}
+    L(f, P) &= \sum_{S_A, S_B} m_{S_A \times S_B}(f) v(S_A \times S_B) \\
+    &= \sum_{S_A} \left( \sum_{S_B} \underbrace{m_{S_A \times S_B}(f)}_{\leq m_{S_B} g(x) \forall x \in S_A} v(S_B) \right) v_(S_A),
+\end{align*}
+where we may note that $\sum_{S_B} m_{S_A \times S_B}(f) v(S_B) \leq L \int_B g_x = \mathcal{S}(x)$ for all $x \in S_A$. Thus,
+\[ L(f, P) \leq L(\mathcal{L}, P_A) \leq U(L, P_A) \leq U(\SU, P_A) \leq U(f, P), \]
+and we're given $\sup_p L(f, P) = \inf_p U(f, P) = \int_{A \times B} f$. Thus, $\mathcal{L}$ is integrable on $A$, and $\int_{A \times B} f = \int_A \mathcal{L}$. Running the same argument for $\SU$, we would obtain
+\[ L(f, P) \leq L(\mathcal{L}, P_A) \leq L(\SU, P_A) \leq U(\SU, P_A) \leq U(f, P). \qed \]
+\begin{remark}
+    When can we write the iterated integral with $L \int_B$? For example, when $g_x$ is integrable on $B$ except for finitely many $x$, beacuse $\int_A L$ is unchanged if you change the value of $\mathcal{SL}$ at finitely many $L$. Nevertheless, we sometimes need the theorem as written. For example, let $A \times B = [0, 1] \times [0, 1]$, with
+    \[ f(x, y) = \begin{cases} 1 & x, y \not\in \QQ, \\ 1 - \frac{1}{q} & x, y \in \QQ, x = \frac{p}{q}, \gcd(p, q) = 1. \end{cases} \]
+    Then $f$ is integrable, and $\int_{A \times B} f = 1$. However, if $x$ is irrational, then $\int_B f(x, y) \, dy = 1$. If $x$ is rational, then $\int_B f(x, y) \, dy$ is undefined. Applying Fubini's theorem to ealuate $\int_{C} f$, where $f$ is integrable, e.g. continuously bounded and $C$ Jordan measurable, then $\int_C f = \int_A f \chi_C$ where $C \subset A$ rectangle.\footnote{idk where the hell this went in the end}
+\end{remark}
+We now give one last example; let $C = [-1, 1] \times [-1, 1] \setminus \{(x, y) \mid x^2 + y^2 \leq 1\}$, i.e. with the unit disc removed. Then the integral something something wasn't continued in class I think. mb
