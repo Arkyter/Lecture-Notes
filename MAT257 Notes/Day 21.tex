@@ -15,7 +15,7 @@ Let $f : \RR^p \to \RR^n$ be $C^r$ in a neighborhood of $a$. Suppose $f$ has con
 
 \noindent We now move onto tangent spaces.\footnote{mb if information isn't the most accurate, i am comprehending it myself atm x3}
 \begin{enumerate}[label=(\alph*)]
-    \item Let us have a plane curve $C$, given by $f(x, y) = 0$ of which is $C^r$, with $\partial_y f (a, b) = 0$. By IVT, we can solve this as $y = g(x)$ being $C^r$ near $a$, where $\varphi(a) = b$. The tangent space at $(a, b)$ is given by $y - b = g'(a)(x - a)$, i.e. $f(x, g(x)) = 0$ and $\partial_x f(a, b) + \partial_y f(a, b) g'(a) = 0$. Expanding $g'(a)$, we get
+    \item Let us have a plane curve $C$, given by $f(x, y) = 0$ of which is $C^r$, with $\partial_y f (a, b) \neq 0$. By IVT, we can solve this as $y = g(x)$ being $C^r$ near $a$, where $\varphi(a) = b$. The tangent space at $(a, b)$ is given by $y - b = g'(a)(x - a)$, i.e. $f(x, g(x)) = 0$ and $\partial_x f(a, b) + \partial_y f(a, b) g'(a) = 0$. Expanding $g'(a)$, we get
     \[ \frac{\partial f}{\partial x}(a, b)(x - a) + \frac{\partial f}{\partial y}(a, b)(y - b) = 0 \]
     is a tangent space to $C$ at $(a, b)$. By symmetry, we obtain an equivalent result if $\partial_x f (a, b) \neq 0$: if $\nabla f(a, b) \neq 0$, we can define a tangent line at $(a, b)$ as $\partial_x f(a, b) (x - a) + \partial_y f(a, b) (y - b) = 0$. We say $C$ is $C^r$ smooth at $(a, b)$, or a $C^r$ manifold near $(a, b)$.
 
