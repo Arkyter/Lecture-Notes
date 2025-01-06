@@ -40,7 +40,9 @@ Using symmetry, we may observe as follows,
     &= \iint_{x^2 + y^2 \leq \frac{1}{2}} \left(1 - (x^2 + y^2) - (x^2 + y^2) \right) \, dx \, dy \\
     &= \frac{1}{2} \cdot \frac{\pi}{2} - \iint_{x^2 + y^2 \leq \frac{1}{2}} (x^2 + y^2) \, dx \, dy.
 \end{align*}
-We now change to polar coordinates, with $x = r \cos \theta$ and $y = r \sin \theta$.
+We now change to polar coordinates, with $x = r \cos \theta$ and $y = r \sin \theta$. Notice that
+\[ \frac{\partial(x, y)}{\partial(r, \theta)} = \begin{pmatrix} \cos \theta & - r \sin \theta \\ \sin \theta & r \cos \theta \end{pmatrix}; \hspace{0.2in} \abs{\frac{\partial(x, y)}{\partial(r, \theta)}} = r. \]
+Then we may perform the following substitution,
 \begin{align*}
     \frac{\pi}{4} - \int_0^{2\pi} \left( \int_0^{\frac{1}{\sqrt{2}}} r^2 r \, dr \right) \, d\theta &= \frac{\pi}{4} - \int_0^{2\pi} d \theta \Eval{\frac{r^4}{4}}{0}{\frac{1}{\sqrt{2}}} \\
     &= \frac{\pi}{4} - 2 \pi \cdot \frac{1}{16} = \frac{\pi}{8}.
