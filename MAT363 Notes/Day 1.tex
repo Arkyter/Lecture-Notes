@@ -1,2 +1,48 @@
-\section{Day 1: (Jan. 6, 2025)}
-test
+\section{Day 1: Introduction to the Class (Jan. 6, 2025)}
+\textit{Course administrative details!} First day slides are given \href{https://q.utoronto.ca/courses/382094/files/35481757?module_item_id=6420963}{here}. This is a class in classical differential geometry; the following 12 weeks will be split up as follows,
+\begin{enumerate}[label=(\alph*)]
+    \item Curves, for two weeks;
+    \item Surfaces, for three weeks;
+    \item Curvature of surfaces, for three weeks;
+    \item Geodesics, for three weeks;
+    \item Gauss-Bonnet theorem, for one week.
+\end{enumerate}
+Grading will be done by 5\% on PCEs, 15\% on problem sets, 15\% on quizzes, 25\% on the term test, 30\% on the final exam, and 10\% weighted towards your best test.
+\bigskip\hrule\medskip
+\noindent To start, consider the following maps $\gamma : I = (-10, 10) \to \RR^3$, given by
+\begin{align*}
+    \gamma(t) &= (t, t, t); \\
+    \gamma(t) &= (\abs{t}, \abs{t}, \abs{t}); \\
+    \gamma(t) &= (t, t^2, t^3); \\
+    \gamma(t) &= (t^3, t^3, t^3); \\
+    \gamma(t) &= (\cos t, \sin t, t); \\
+    \gamma(t) &= (t \cos t, t \sin t, t).
+\end{align*}
+In this class, we say that a curve is a \textit{parameterized curve} if it is a smooth function $\gamma : I \to \RR^n$, where $I \subset \RR$ is an interval. In particular, of the six examples given above, only $t \mapsto (\abs{t}, \abs{t}, \abs{t})$ is not smooth.
+\begin{definition}[Regular Curve]
+    Let $\gamma : I \to \RR^n$ be a curve; it is said to be \textit{regular} if $\abs{\gamma'(t)} \neq 0$ for all $t \in I$, i.e. the speed is always nonzero.
+\end{definition}
+\noindent Note that $\gamma'(t)$ and $\abs{\gamma'(t)}$ describe different qualities, with the former describing velocity and the latter describing speed (i.e., one describes speed as well, while the other is a scalar quantity). As an example, consider the curve $\gamma(t) = (\cos t, \sin t, t)$. To find the distance travelled from $t = 0$ to $t = 2\pi$, we may observe that
+\[ \abs{\gamma'(t)} = \sqrt{\sin^2 t + \cos^2 t + 1} = \sqrt{2}. \]
+Since the speed is constant, the total distance traveled is simply $2\pi \sqrt{2}$. \qed
+\begin{definition}[Closed Curve]
+    Consider a curve $\gamma : [a, b] \to \RR^n$. We say that $\gamma$ is a \textit{closed curve} if $\gamma(a) = \gamma(b)$ and $\gamma^{(n)}(a) = \gamma^{(n)}(b)$ for all naturals $n$.
+\end{definition}
+\begin{definition}[Simple Curve]
+    We say that $\gamma$ is a simple curve if it is injective on $[a, b)$.
+\end{definition}
+\noindent Note that while in topology we do not care if there is a ``sharp corner'' at $\gamma(a) = \gamma(b)$, such things do matter, as per the condition that the $n$th derivative of $\gamma$ must agree on $a$ and $b$ (for example, the velocity $\gamma'$ at $a, b$ must be equal).
+\medskip\newline
+\noindent In this class, we automatically take the inner product $\left< , \right>$ as the Euclidean inner product,
+\[ \left< x, y \right> = x_1y_1 + \dots + x_ny_n. \]
+For any subspace $V \subset \RR^n$, we may decompose any vector $x \in \RR^n$ uniquely as $x = x^{\parallel} + x^{\perp}$, where $x^{\parallel} \in V$ and $\left<x^{\perp}, v\right> = 0$ for any vector $v \in V$. Now, consider any curve $\gamma : I \to \RR^n$. We have the following proposition,
+\begin{simpleprop}
+    If $\abs{\gamma(t)}$ is constant, then $\left< \gamma(t), \gamma'(t) \right> = 0$ for all $t \in I$.
+\end{simpleprop}
+\noindent To see this, let $\abs{\gamma(t)}^2 = c$ be constant; then
+\[ \frac{d}{dt} \abs{\gamma(t)}^2 = 0 \implies \frac{d}{dt} \left(\left< \gamma(t), \gamma(t) \right>\right) = \left<\gamma'(t), \gamma(t)\right> + \left<\gamma(t), \gamma'(t)\right> = 0m \]
+i.e. $\left<\gamma(t), \gamma'(t)\right> = 0$ as desired. \qed
+\medskip\newline
+Given a regular curve $\gamma : I \to \RR^n$, we may compute the velocity and acceleration as $\gamma'(t), \gamma''(t)$, which are denoted $v(t), a(t)$ respectively. In particular, we may write
+\[ a(t) = a^{\parallel}(t) + a^{\perp}(t), \]
+with $a^{\parallel}(t)$ being the tangential acceleration, and $a^{\perp}(t)$ being the normal acceleration. We may find these by projecting $a(t)$ into the subspace $\spn\{v\}$ (i.e., the span of the velocity vector).
