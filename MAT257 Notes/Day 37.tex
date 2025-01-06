@@ -1,2 +1,47 @@
-\section{Day 37: Existence (Jan. 6, 2025)}
-kiyahhh
+\section{Day 37: Computation of Integrals (Jan. 6, 2025)}
+\textit{Course administrative information!} Our new time for office hours, starting next week, is \textbf{3:30} to \textbf{4:30pm} on Mondays.
+\medskip\newline
+\noindent Sometimes, there is an advantage to integrating with respect to one of the variables first; let's start with the following example, where we wish to show
+\[ \iint_{x^2 + y^2 \leq 1} x^2y^2 \, dx \, dy. \tag{1} \]
+Intuitively, we are integrating over the unit disc. Since the integral is symmetric, it doesn't matter if we integrate with respect to $x$ or $y$ first. Let us write as follows,
+\begin{align*}
+    \iint_{x^2 + y^2 \leq 1} x^2y^2 \, dx \, dy &= 4 \int_0^1 \left( \int_0^{\sqrt{1 - x^2}} x^2y^2 \, dy \right) \, dx \\
+    &= 4 \int_0^1 \left( \Eval{x^2 \frac{y^3}{3}}{0}{\sqrt{1-x^2}} \right) \, dx \\
+    &= \frac{4}{3} \int_0^1 x^2 (1 - x^2)^{\frac{3}{2}} \, dx.
+\end{align*}
+Having put the integral in this form, we observe that it is useful to perform the trig sub $x = \sin \theta$ and $dx = \cos \theta \, d \theta$, which gives us
+\begin{align*}
+    \frac{4}{3} \int_0^1 x^2 (1 - x^2)^{\frac{3}{2}} \, dx &= \frac{4}{3} \int_0^{\frac{\pi}{2}} \sin^2 \theta \cos^4 \theta \, d\theta.
+\end{align*}
+We now evaluate a second integral as an example;
+\[ \int_0^2 \int_{\frac{y}{2}}^1 ye^{-x^3} \, dx \, dy. \tag{2} \]
+We evaluate the integral as follows,
+\begin{align*}
+    \int_0^2 \int_{\frac{y}{2}}^1 ye^{-x^3} \, dx \, dy &= \int_0^1 \left(\int_0^{2x} ye^{-x^3} \, dy \right) \, dx \\
+    &= \int_0^1 \left(\Eval{\frac{y^2}{2}}{0}{2x} \cdot e^{-x^3} \right) \, dx \\
+    &= 2 \int_0^1 x^2 e^{-x^3} \, dx \\
+    &= -\frac{2}{3} \Eval{e^{-x^3}}{0}{1} \\
+    &= \frac{2}{3} (1-e^{-1}).
+\end{align*}
+For a third integral, we have
+\[ \int_2^4 \int_{\frac{4}{x}}^{\frac{20 - 4x}{3 - x}} (y - 4) \, dy \, dx. \tag{3} \]
+Start by rewriting the bounds on the integral as follows; if we let $y = \frac{4}{x}$, we have $x = \frac{4}{y}$, and we may write
+\[ y = \frac{20 - 4x}{8 - x} = 4 - \frac{12}{8-x}; \hspace{0.2in} x = 8 - \frac{12}{4 - y}. \]
+With these bounds, we may integrate with respect to $x$ first, in which the integrand $y - 4$ is constant w.r.t. $x$, yielding
+\begin{align*}
+    \int_2^4 \int_{\frac{4}{x}}^{\frac{20 - 4x}{3 - x}} (y - 4) \, dy \, dx &= \int_1^2 \left(\int_{\frac{4}{y}}^{8 - \frac{12}{4 - y}} (y - 4) \, dx \right) \, dy \\
+    &= \int_1^2 (y - 4)\left(8 - \frac{12}{4 - y} - \frac{4}{y}\right) \, dy,
+\end{align*}
+which is easy to integrate. Now for a fourth integral!
+\[ \iiint_{\substack{x^2 + y^2 \leq z^2 \\ x^2 + y^2 + z^2 \leq 1 \\ z \geq 0}} z \, dx \, dy \, dz. \]
+Using symmetry, we may observe as follows,
+\begin{align*}
+    \iiint_{\substack{x^2 + y^2 \leq z^2 \\ x^2 + y^2 + z^2 \leq 1 \\ z \geq 0}} z \, dx \, dy \, dz &= \iint_{x^2 + y^2 \leq \frac{1}{2}} \left( \int_{\sqrt{x^2 + y^2}}^{\sqrt{1 - (x^2 + y^2)}} z \, dz \right) \, dx \, dy \\
+    &= \iint_{x^2 + y^2 \leq \frac{1}{2}} \left(1 - (x^2 + y^2) - (x^2 + y^2) \right) \, dx \, dy \\
+    &= \frac{1}{2} \cdot \frac{\pi}{2} - \iint_{x^2 + y^2 \leq \frac{1}{2}} (x^2 + y^2) \, dx \, dy.
+\end{align*}
+We now change to polar coordinates, with $x = r \cos \theta$ and $y = r \sin \theta$.
+\begin{align*}
+    \frac{\pi}{4} - \int_0^{2\pi} \left( \int_0^{\frac{1}{\sqrt{2}}} r^2 r \, dr \right) \, d\theta &= \frac{\pi}{4} - \int_0^{2\pi} d \theta \Eval{\frac{r^4}{4}}{0}{\frac{1}{\sqrt{2}}} \\
+    &= \frac{\pi}{4} - 2 \pi \cdot \frac{1}{16} = \frac{\pi}{8}.
+\end{align*}
