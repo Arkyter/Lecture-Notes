@@ -1,0 +1,64 @@
+\section{Day 21: Markov Chains (Nov. 25, 2024)}
+Assume that our state space is finite. The period $d_i$ of a state $s_i$ is defined by
+\[ d_i = \gcd \{ n \geq 1 \mid p_{ii}(n) > 0 \}. \]
+If $d_i = 1$, then $s_i$ is called \textit{aperiodic}. A Markov chain is called \textit{irreducible} if each pair of states communicates.
+\begin{simplelemma}
+    If a Markov chain is irreducible and aperiodic, then there exists an $N$ so that, for all $n \geq N$, and $i, j$, $p_{ij}(n) > 0$.
+\end{simplelemma}
+\noindent Let $d$ be the smallest integer greater than $1$ such that $d$ can be written $a_1n_1 + \dots + a_kn_k$, where $a_i$'s are integers (not necessarily positive), and $n_i$'s are all in $T(s_j) = \{n \geq 1 \mid p_{11}(n) > 0\}$, i.e. the set of all times the chain starting at $s_1$ can return to $s_1$. Start by claiming that $d = 1$. If $d$ divides all $n \in T(s_1)$, then $d = 1$ clearly. Supposing not, then $n = ad + r$ with $1 \leq r < d$. But $r = n - ad = n - a(a_1n_1 + \dots + a_kn_k)$, contradicting the minimality of $d$. So we learn that $1 = a_1n_1 + \dots + a_kn_k$.
+\medskip\newline
+Taking the largest $\abs{a_k}$, which we may as well call $\abs{a_1}$, we have that
+\[ N_1 = \abs{a_1} n_1 (n_1 + \dots + n_k). \]
+We claim that for any $n \geq N_1$, $n = c_1n_1 + \dots + c_kn_k$, where $c_k \geq 0$ are integers. Let $n = N_1 + \ell$, with $1 \leq \ell < n_1$. Then
+\[ n = N_1 + \ell = \abs{a_1} n_1 (n_1 + \dots + n_k) + \ell (a_1n_1 + \dots + a_kn_k) = c_1 n_1 + \dots + c_k n_k. \]
+In particular, $c_1 = \abs{a_1} n_1 + \ell a_i \geq \ell (\abs{a_1 + a_i}) \geq 0$. Letting $N_1 + n_1 = (\abs{a_1}n_1 + 1)n_1 + \abs{a_1}n_1(n_2 + \dots + n_k)$, $n = N_1 + n_1 + \ell$. Thus, we have $p_{11}(n) \geq (p_{11}(n_1))^{c_1} \dots (p_{11}(n_k))^c_k > 0$. So for all $n \geq N_1, p_{11}(n) > 0$, and so on for all $N_m$ and $p_{mm}(n) > 0$ respectively. Let $N' = \max \{N_1, \dots, N_m\}$. Then $p_{ii}(n) > 0$ if $n \geq N'$. For all $i, j$, there exists $k$ such that $1 \leq k \leq m$, with $p_{ij}(k) > 0$. Thus, $N = N' + m$, then for all $n \geq N$, $p_{ij}(n) > 0$. \qed
+\medskip\newline
+Last week, we showed that there is always at least one stationary distribution. If the state space $S$ were not finite, then we may take $S = \ZZ$ and $p_{i, i+1} = 1, p_{ii} = 0$ to see that there is no stationary distribution.
+\begin{simplelemma}
+    If a Markov chain is irreducible, then the statinoary distribution is unique.
+\end{simplelemma}
+\noindent To start, with, we have that $(P - I)(1) = 0$. We now show that irreducible implies that $\rank(P - I) = m - 1$. Let $v_z$ be the largest index in $v$; then
+\[ v_z = \sum_{j=1}^m p_{zj} v_j \leq \sum_{j=1}^m p_{zj} v_z. \]
+In particular, $p_{zj} v_j = p_{zj} v_z$ for all $j$, and all $v_j$'s with $p_{zj}(z) > 0$ are also equal to $p_z$. By irreducibility, there exists some $k$ such that $p_{zj}(k) > 0$; then $\ker (P - I)^t$ is one dimensional if and only if the stationary distribution is unique. We may then write
+\[ \frac{1}{n} \left(1 + P + P^2 + \dots + P^{n-1}\right) \to A = \begin{pmatrix} \vec{\mu} \\ \vdots \\ \vec{\mu} \end{pmatrix}, \]
+so $\lim_{n \to \infty}$ of the above gives the desired $A$. \qed
+\medskip\newline
+Let $f : S \to \RR$;
+\[ \lim_{n \to \infty} \EE \left[ \frac{1}{n} \sum_{k=1}^n f(X_k) \right] = \sum_{i=1}^m f(i) \mu_i. \]
+Then $f = \sum f(X_i) 1_{S}$. By the law of large numbers,
+\[ \lim_{n \to \infty} \frac{1}{n} \sum_{k=0}^{n-1} f(X_k) = \sum_{i=1}^m f(s_i) \mu_i. \]
+This is called the ergodic theorem.
+\begin{simplethm}
+    If a Markov chain is aperiodic and irreducible, then
+    \[ \lim_{n \to \infty} p^n = \begin{pmatrix} \vec{\mu} \\ \vdots \\ \vec{\mu} \end{pmatrix} \]
+    if $v_i = P(X_0 = S_1)$, then $\lim_{n \to \infty} P(X_n = s_j)) = \mu_j$.
+\end{simplethm}
+\noindent $P$ contracts $L^1$ norm on $\RR^m$; $\norm{x}_1 = \sum_{i=1}^m \abs{x_i}$. Then
+\[ \norm{xP - yP}_1 = \sum_{i=1}^m \abs{ \sum_{i=1}^m p_{ij}(x_i - y_i) } \leq \sum_{j=1}^m \sum_{i=1}^m p_{ij}\abs{x_i - y_i} = \sum_{i=1}^m \abs{x-i - y_i} = \norm{x - y}_1. \]
+Then there exists $N$ such that $p_{ij}(N) > 0$; for all $i, j$, let $\eps$ be the minimum over $i, j$, so $p_{ij}(N) \geq \eps > 0$. Then
+\begin{align*}
+    \norm{xP^n - yP^n}_1 &= \sum_{j=1}^m \abs{\sum_{i=1}^m (p{ij}(N) - \eps) (x_i - y_i) } \\
+    & \leq \sum_{j=1}^m \sum_{i=1}^m (p_{ij}(N) - \eps) \abs{x_i - y_i} = (1 - m\eps) \norm{x - y_1}.  
+\end{align*}
+Thus, we have that $\norm{vP^N - \mu}_1 \leq (1 - m \eps) \norm{v - \mu}_1$. In particular, $\norm{vP^{Nk} - \mu}_1 \leq (1 - m\eps)^k \norm{v - \mu}_1$; then
+\[ \norm{v P^n - \mu}_1 \leq (1 - m \eps)^{\floor{\frac{n}{N}}} \norm{v - \mu}_1 \to 0 \]
+as $n \to \infty$. \qed
+\medskip\newline
+We say that $M$ is reversible if
+\[ \mu_i p_{ij} = \mu_j p_{ji}. \]
+This is a stronger condition than being stationary. We check this by proving that if $M$ is reversible, then it is stationary;
+\[ \sum_{i} \mu_i p_{ij} = \sum_i \mu_j p_{ji} = \mu_j \]
+then
+\begin{align*}
+    P(X_0 = s_i, X_1 = s_j) &= \mu_i p_{ij}, \\
+    P(X_0 = s_j, X_1 = s_i) &= \mu_j p_{ji}, \\
+    P(X_0 = s_i, X_1 = s_j, X_2 = s_k) &= \mu_i p_{ij} p_{jk}, \\
+    P(X_0 = s_k, X_1 = s_j, X_2 = s_i) &= \mu_k p_{kj} p_{ji},
+\end{align*}
+and so on. For an example, let $S = \{1, \dots, N\}$, with the equivalence relation of modulo $N$, with $p_{i, i+1} = p$, $p_{i, i - 1} = 1 - p$, and $p_{ij} = 0$ otherwise. Then the stationary distribution (invariant measure) is $\mu_{i-1} p_{i-1, 1} + \mu_{i+1} p_{i+1, i} = \mu_i$, and we may pick $\mu_i = \frac{1}{N}$.
+\medskip\newline
+Another example; let $V$ be a set of vertices (read: states), and $E \subset V \times V$. Let $n_i$ be the number of neighbors of $s_i$, and let
+\[ p_{ij} = \begin{cases} \frac{1}{N_i} & \text{if } (s_i, s_j) \in E, \\ 0 & \text{otherwise.} \end{cases} \]
+Irreducibility in graphs is equivalent to the graph connectivity condition, i.e. you can get from anywhere to anywhere else in a finite number of steps. $mu$ is reversible means that $\mu_i \frac{1}{N_i} = \mu_j \frac{1}{N_j}$, which is equal to some constant independent of $i, j$. Said constant $C$ is given by $\sum \mu_i = C \sum N_i$, so the constant is just the reciprocal of the sum of neighbors; so
+\[ \mu_i = \frac{N_i}{N} \]
+is reversible (and is thus stationary). \qed 

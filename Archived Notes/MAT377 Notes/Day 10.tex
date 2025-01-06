@@ -1,0 +1,68 @@
+\section{Day 10: Erd\"os-Renyi Random Graphs and Cliques, Chebyshev Inequality, Moment Generating Function (Oct. 7, 2024)}
+We start at \textit{Example 1.5.5} in Panchenko. Consider the Erd\"os-Renyi random graph, $G(n, p)$, where $n$ is the number of vertices of the graph, and $p$ is the probability that an edge is in the graph. Then a clique subset of $V = \{v_1, \dots, v_n\}$ is a complete graph, and we denote $N_k$ to be the number of cliques of size $k$. We also define
+\[ f(k) = \EE N_k = \binom{n}{k} p^{\binom{k}{{2}}}, \]
+i.e. $f(1) = n$, $f(n) = p^{\binom{n}{2}}$. Then $k_0$, defined as $f(k_0) \geq 1 > f(k_0 + 1)$, has $k_0 \sim c_p \log n$, where $c_p = \frac{2}{\abs{\log p}}$. We also have
+\[ f(k + 1) = \frac{n-k}{k+1} p^k f(k) \leq np ^k f(k), \hspace{0.2in} f(k_0 + m) \leq \frac{1}{n^m}(1 - \eps). \]
+Then we also get bounds on $k_0$, which is greater than $\frac{(2 - \eps)\log n}{\abs{\log p}}$, and so $p^k_0 \leq \frac{1}{n^{2 - \eps}}$.
+\medskip\newline
+Using Chebyshev, we get that
+\[ \PP(N_{k_0 + m + 1} > 0) \leq \EE[N_{k_0 + m + 1}] \leq \frac{1}{n^{m(1 - \eps)}}. \]
+Observe that we have $\frac{(2 - \eps) \log n}{\abs{\log p}} < k < k_0$, and $p^k \leq \frac{1}{n^{2-\eps}}$, and
+\[ \frac{f(k + 1)}{f(k)} = \frac{n-k}{k+1}p^k \leq np^k \leq \frac{1}{n^{1 - \eps}}. \]
+We want to prove that there are lots of cliques there. To do this, we use the second moment method, $\PP(\abs{N_k - \EE N_k} \geq x) \leq \frac{\Var(N_k)}{x^2}$. Using the fact that $N_k$ is defined as
+\[ N_k = \sum_{\substack{W \subset V \\ \abs{W} = k}} 1(W \text{ is a clique}), \]
+we get that
+\[ \Var \, N_k = \sum_{W, W'} \Cov(1_W, 1_{W'}). \]
+If $\abs{W \cap W'} \leq 1$, then $1_W, 1_{W'}$ are clearly independent, so $\Cov(1_W, 1_{W'}) = 0$. If $W$ and $W'$ share more than $1$ vertex, though, call this number $i$. Then
+\[ \Cov(1_W, 1_{W'}) = \EE [1_W' 1_W] - \EE[1_W] \EE[1_{W'}] \leq \EE[1_W' 1_W] = \PP(W, W' \text{ cliques}). \]
+Note that there are $\binom{n}{k} \binom{k}{i} \binom{n-k}{k-i}$ pairs of $W, W'$ with $i$ vertices in common.
+Thus, we have that the probability of $W, W'$ being cliques is given by
+\[ \PP(W, W' \text{ cliques}) = p^{\binom{k}{2}} p^{\binom{k}{2} - \binom{i}{2}}. \]
+Then we may write
+\begin{align*}
+    \Var(N_k) &\leq \sum_{i=2}^k \binom{n}[k] \binom{k}{i} \binom{n-k}{k-i} p^{\binom{k}{2}} p^{\binom{k}{2} - \binom{i}{2}} \\
+    &= f^2(k) \sum_{i=2}^k \frac{\binom{k}{i} \binom{n-k}{k-i}}{\binom{n}{k}} p^{-\binom{i}{2}}.
+\end{align*}
+Using Chebyshev from earlier, we get
+\[ \PP(\abs{N_k - \EE E_k} \geq \delta \EE N_k) \leq \frac{1}{\delta^2} \sum_{i=2}^k a(i). \]
+It remains to show that the right hand side is small for $k$ in the range. This just leads to tedious calculation; to start, let us check $a(2)$:
+\begin{align*}
+    a(2) &= \frac{\binom{k}{2} \binom{n-k}{k-2}}{\binom{k}{2}} p^{-\binom{2}{2}} \\
+    &= \frac{k^2 (k-1)^2}{2} \frac{(n-k) \dots (n-2k+3)}{n(n-1) \dots (n-k+1)} \frac{1}{p} \\
+    &\leq \frac{k^4}{(n - k)^2} \frac{1}{2p} \leq c_p \frac{(\log n)^4}{n^2}.
+\end{align*}
+We also have that
+\[ a(k) = \frac{1}{\binom{n}{k}} p^{-\binom{k}{2}} = \frac{1}{f(k)}. \]
+Let us define $b(i)$ as the ratio of two consecutive $a(i)$, and write
+\[ b(i) = \frac{a(i+1)}{a(i)} = \frac{\binom{k}{i+1}}{\binom{k}{i}} \frac{\binom{n-k}{k-i-1}}{\binom{n-k}{k-i}} p^{-\binom{i+1}{2} + \binom{i}{2}} = \frac{(k-i)^2}{(i + 1)(n - 2k + i + 1)} p^{-i}. \]
+We may derive the properties of $a$ from $b$; in particular, we like $b$ more because it is ``nicer'' than $a$. In particular, if $i \leq \frac{1}{3} \frac{\log n}{\abs{\log p}}$, then $p^{-1} \leq n^{\frac{1}{3}}$, and we have $b(i) \sim n^{-\frac{2}{3}} \lessapprox 1$.
+\medskip\newline
+Likewise, if $i > \frac{3}{2} \frac{\log n}{\abs{\log p}}$, then $p^{-i} > n^{\frac{3}{2}}$. Then $b(i) \gtrapprox \frac{n^{\frac{1}{2}}}{k} > 1$. We have that $\frac{b(i + 1)}{b(i)} \gtrapprox \frac{1}{p} > 1$, so $b$ is increasing.
+\medskip\newline
+We now return to sums of independent random variables. Let $X_1, \dots, X_n$ be i.i.d., and $\EE X_i^2 < \infty$. Let us have $\overline{X_n} = \frac{1}{n} \sum_{i=1}^n x_i$, and
+\[ \PP(\abs{\overline{X_n} - EE X_1} > \eps) = \frac{\Var \, \overline{X_n}}{\eps^2} = \frac{\sigma^2}{n \eps^2}, \]
+where we let $\eps^2$ be the variance of $X_i$. We could do better, i.e.
+\[ \PP(X \geq t) \leq \frac{\EE[e^{\lambda x}]}{e^{\lambda t}}. \]
+This gives
+\[ \PP(X_1 + \dots + X_n \geq t) \leq \frac{\EE[e^{\lambda(X_1 + \dots + X_n)}]}{e^{\lambda t}} = \frac{EE[e^{\lambda X_1}]^n}{e^{\lambda t}}. \]
+This is called exponential Chebyshev. For example, let $X = \sum \eps_i a_i$, where $\eps_i$ are independent Rademacher with $\PP(\eps_i = 1) = \frac{1}{2} = \PP(\eps_i = -1)$ (read: coinflip distribution). Then we may apply exponential Chebyshev and optimize to get (Theorem 3.1 in Panchenko)
+\[ \PP \left( \sum_{i=1}^n \eps_i a_i \geq t \right) \leq e^{-\frac{t^2}{2 \sum_{i=1}^n a_i^2}}. \]
+We also have
+\[ \PP \left( \abs{\sum_{i=1}^n \eps_i a_i} \geq t \right) \leq 2e^{-\frac{t^2}{2 \sum_{i=1}^n a_i^2}}. \]
+By the law of large numbers for a fair coin, we may take $a_i = \frac{1}{n}$ as per $\overline{X_n}$, and we get
+\[ \PP \left( \abs{\frac{1}{n} \sum_{i=1}^n \eps_i} \geq t \right) \leq 2e^{-\frac{nt^2}{2}}. \qed \]
+Small digression; let $X_1, \dots$ be i.i.d., and consider $\EE[e^{\lambda x}] < \infty$. We call the LHS $M(\lambda)$, i.e. the moment generating function. In particular, $M'(0) = \EE[X]$. We also have $M''(0) = \EE[X^2] = \sum_{n=0}^\infty \frac{\lambda^n}{n!} \EE[X^n]$, meaning that we have $X^n \leq C_\lambda [e^{\lambda X} + e^{-\lambda X}]$. Notice that we may write
+\[ \PP\left(\frac{X_1 + \dots + X_n}{n} > t\right) \leq \frac{M(\lambda)^n}{e^{\lambda t n}} = e^{-n \{\lambda t - \log M(\lambda)\}}. \]
+Optimizing this over $\lambda$, we get that the LHS is less than or equal to $e^{-n I(d)}$, where $I(t) = \sup_\lambda \{\lambda t - \log M(\lambda)\}$.
+\medskip\newline
+Let $a_1^2 + \dots + a_n^2 = 1$. Then $\EE X^{2k+1} = 0$, and we may write
+\begin{align*}
+    \EE X^{2k} &= \int_0^\infty 2k t^{2k-1} \PP(\abs{X}  > t) \, dt \\
+    &\leq \int_0^\infty 2k t^{2k-1} 2 e^{-\frac{t^2}{2}} \, dt \\
+    &= k 2^{k+1} \int_0^\infty u^{k-1} e^{-i} \, du \\
+    &= k 2^{k+1} \Gamma(k) \\
+    &= k 2^{k+1} (k-1)! = 2^{k+1} k!.
+\end{align*}
+Let $Z \sim N(0, 1)$. Then we have
+\[ \EE[e^{\lambda z^2}] = \int_{-\infty}^\infty e^{\lambda z^2 - \frac{z^2}{2}} \, \frac{dz}{\sqrt{2\pi}}. < \infty \]
+if and only if $\lambda < \frac{1}{2}$. Let $Y = X^2 - 1$. Then $e^x \leq 1 + x + \frac{x^2}{2} + \sum_{k=3}^\infty \frac{x_+^k}{k!}$. We denote $x_+ = x$ if $x \geq 0$, and $0$ otherwise. \qed

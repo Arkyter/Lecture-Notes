@@ -1,0 +1,82 @@
+\section{Day 4: Independence and Dependence (Sep. 16, 2024)}
+Let $(\Omega, P)$ be our probability space. We define
+\[ P (A \mid B) := \frac{P(A \cap B)}{P(B)} \]
+to be the conditional probability, i.e. probability of $A$ given $B$, as long as $P(B) > 0$ (this is called Bayes' Rule). If $P(A \mid B) = P(A)$, then $A$ is said to be independent of $B$. In particular, if $A_1, \dots, A_n$ are independent, then
+\[ P\left(\bigcap_{i = 1}^n A_i \right) = \prod_{i=1}^n P(A_i). \]
+If the above is true for only pairs of events $A_i, A_j$, then we say that they are pairwise independent.
+\medskip\newline
+\noindent Let $\Omega_i, P_i$ be probability spaces, and consider $\Omega = \Omega_1 \times \dots \times \Omega_n = \prod_{i=1}^n \Omega_i$, where we define a probability event in $\omega \in \Omega$ to be $(\omega_1, \dots, \omega_n) = \omega$ with $\omega_i \in \Omega_i$. Specifically, we have
+\[ P(\omega) := \prod_{i=1}^n P_i(\omega_i). \]
+For example, let $A = A_1 \times \dots \times A_n$, and $A_i \in \Omega_i$. then
+\[ P(A) := \sum_{\omega \in A} P(\omega) = \sum_{\substack{\omega_i \in A_i \\ i = 1, \dots, n}} \prod_{i=1}^n P_i(\omega_i) = \prod_{i=1}^n \sum_{\omega_i \in A_i} P_i(\omega_i) = \prod_{i=1}^n P_i(A_i). \]
+Let us have random variables $X_i : \Omega_i \to \RR$ where $1 \leq i \leq n$. Then $X_i^{(\omega)} = f_i(\omega_i)$ are independent if $P(X_1 \in A_1, \dots, X_n \in A_n) = \prod_{i=1}^n P(X_i \in A_i)$. In other words, $X_i^{-1}(A_i)$ are independent.\footnote{note on board: for any $A_1, \dots, A_n$ borel sets, intervals are enough, like $(-\infty, x_i]$. confusion?} We may continue simplifying the expression as follows,
+\[ \prod_{i=1}^n P(X_i \in A_i) = \prod_{i=1}^n P_i(f_i(\omega_i) = x_i) = \prod_{i=1}^n P(X_i = x_i). \]
+Now, suppose $X, Y$ are independent and $f, g$ are functions. Then we claim that $f(X), g(Y)$ are independent. To check this, let us write
+\begin{align*}
+    P(f(X) = a, g(Y) = b) &= P(X = f^{-1}(a), y = g^{-1}(b)) \\
+    &= P(X \in f^{-1}(a)) P(Y \in g^{-1}(b)) \\
+    &= P(f(X) = a) P(g(Y) = b).
+\end{align*}
+We can also do this with grouping; let $\{1, \dots, n\} = U_{k=1}^m I_k$ with $I_k$ disjoint; i.e., we're sorting $[n]$ into disjoint subsets $I_k$. Then let $y_k = f_k(\{x_i\}_{i \in I_k})$ for some function $f_k : \RR^{\abs{I_k} \to \RR}$, and we have that $y_k$ are independent. To prove this, observe that
+\begin{align*}
+    P(y_1 \in A_1, \dots, y_m \in A_m) &= P(f_1 \in A_1, \dots, f_m \in A_m) \\
+    &= P(\{X_i\}_{i \in I_1} \in f_1^{-1}(A_1), \dots, \{X_i\}_{i \in I_m} \in f_m^{-1}(A_m)) \\
+    &= \prod_{j=1}^m P(\{X_i\}_{i \in I_j} \in f_j^{-1}(A_j)) \\
+    &= \prod_{j=1}^m P(y_j \in A_j).
+\end{align*}
+We need to show that $P(\{X_i\}_{i \in I_1} = b_1, \{X_i\}_{i \in I_2} = b_2) = P(\{X_i\}_{i \in I_1} = b_1)P(\{X_i\}_{i \in I_2} = b_2)$; but as per earlier, this is true.
+\medskip\newline
+Now, suppose our random variables $X_i$s are independently binomial distributed. Then
+\[ X_1 + \dots + X_{m_1} \sim \mathrm{Bin}(m_1, p) \sim \mathrm{Poiss}_{\lambda_1}, \tag{$\lambda_1 = pm_1$} \]
+\[ X_{m_1 + 1} + \dots + X_{m_1 + m_2} \sim \mathrm{Bin}_{m_2, p} \sim \mathrm{Poiss}_{\lambda_2} \tag{$\lambda_2 = pm_2$} \]
+We may combine the groupings above to get $X_1 + \dots X_{m_1 + m_2} \sim \mathrm{Bin}(m_1 + m_2, p) \sim \mathrm{Poiss}_{\lambda_1 + \lambda_2}$.
+\begin{simplelemma}
+    If $X$ and $Y$ are indepnendent and $E[\abs{X}] < \infty$, $E[\abs{Y}] < \infty$, then $E[XY] = E[X] E[Y]$.\footnote{i'm sick of the no bracket nonsense}
+\end{simplelemma}
+\noindent First, assume $X, Y > 0$. Let us directly write
+\begin{align*}
+    E[XY] &= \sum_{\omega \in \Omega} X(\omega) Y(\omega) P(\omega) \\
+    &= \sum_{n, m} a_n b_m P(X = a_n, Y = b_m) \\
+    &= \sum_{n, m} a_n b_m P(X = a_n) P(Y = b_m) \\
+    &= \sum_{n} a_n P(X = a_n) \sum_m b_m P(Y = b_m) \\
+    &= E[X] E[Y].
+\end{align*}
+In the case that the random variables are not necessarily non-negative, we may simple consider
+\begin{align*}
+    X &= X 1(X \geq 0) - \abs{X} 1(X < 0) = X_+ - X_-, \\
+    Y &= Y 1(Y \geq 0) - \abs{Y} 1(Y < 0) = Y_+ - Y_-.
+\end{align*}
+However, do note that in the OPPOSITE direction that $E[XY] = E[X] E[Y]$ does NOT imply that $X, Y$ are independent. It is true that $E[f(X) g(Y)] = E[f(X)] E[g(y)]$ for ``lots of'' $f, g$ would imply that $X, Y$ independent (if this is true for \textit{all} $f, g$, then it is independent), but this is unreliable.
+\medskip\newline
+\noindent Using Fubini's theorem, we may consider $X, Y$ on non-discrete probability spaces, and write
+\begin{align*}
+    E[f(X, Y)] &= \sum_{n, m} f(a_n, b_m) P(X = a_n, Y = b_m) \\
+    &\stackrel{\text{if indep.}}{=} f(a_n, b_m) P(X = a_n) P(Y = b_m) \\
+    &\stackrel{\text{if ``nice''}}{=} \sum_n \left[ \sum_m f(a_n, b_m) P(Y = b_m) \right] P(X = a_n).
+\end{align*}
+We say that the above is ``nice'' if $f \geq 0$, or $E[f(x, y)] < \infty$, or
+\[ \sum_n \left[ \sum_m \abs{f(a_n, b_m)} P(Y = b_m) \right] P(X = a_n) < \infty. \]
+Alternatively, if we dont have our ``nice'' cases, we have
+\[ \sum_n \left[ \sum_m f(a_n, b_m) P(Y = b_m \mid X = a_n) \right] P(X = a_n). \]
+\medskip\newline
+Now, we inntroduce the conditional distribution $P(y = b_m \mid X = a_n)$, where the distribution is $Y$ given $X = a_n$. We can write the expectation
+\[ E[g(Y) \mid X = a_n] = \sum_m g(b_m) P(y = b_m \mid x = a_n), \]
+i.e. the conditional expectation of $g(Y)$ given $X = a_n$. For example, let $X_1, X_2, \dots$ be i.i.d. $\mathrm{Ber}_p$ and $N$ indep. $\mathrm{Poiss}_\lambda$. Then $Y = X_1 + \dots + X_N$ has
+\[ P(Y = k) = \sum_{n = 0}^\infty P(Y = k, N = n) = \sum_{n = 0}^\infty P(y = k \mid N = k) P(N = n). \]
+If $N = n$, then $Y = X_1 + \dots + X_n$, and we have
+\[ P(Y = k \mid N = n) = P(X_1 + \dots + X_n = k) = \binom{n}{k} p^k (1-p)^{n-k}. \] 
+Specifically,
+\begin{align*}
+    P(y) &= \sum_{n=0}^\infty \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k} \frac{\lambda^n}{n!} e^{-\lambda} \\
+    &= \frac{(\lambda k)^k}{k!} \left( \sum_{n=0}^\infty \frac{(1-p)^{n-k}}{(n-k)!} \lambda^{n-k} \right) e^{-\lambda} \\
+    &= \frac{(\lambda p)^k}{k!} e^{-p \lambda} \sim \mathrm{Poiss}_{p \lambda}.
+\end{align*}
+\medskip\newline
+\noindent Now for another example; let $X_1, X_2, \dots$ be i.i.d. $\mathrm{Ber}_{y_2}$; i.e. let $x_i \in \{0, 1\}^\NN$; let $x \in [0, 1) = \Omega$, $X = 0, X_1, X_2, \dots$. Let $P$ be on $[0, 1)$. Then $P([a, b)) = b - a$ where $b > a$; we claim that they are i.i.d. $\mathrm{Ber_{y_2}}$, which is proven by subdividing the intervals (whatever this means).
+\medskip\newline
+\noindent Let $P(X_1 = x_1, \dots, X_n = x_n)$. Then this is equal to
+\begin{align*}
+    &= P(X_n = x_n \mid x_1 = x_1, \dots, X_{n-1} = x_{n-1}) P(X_1 = x_1, \dots, X_{n-1} = x_{n-1}) \\
+    &= \prod_{k=0}^{n-1} P(X_{k+1} = x_{k+1} \mid X_1 = x_1, \dots, X_k = x_k).
+\end{align*}
+In this specific kind of system where the probability of $X_{k+1}$ only depends on the ones the step right before, we call it a \textit{Markov Chain}, i.e. a probabilisitic version of dynamical systems.
