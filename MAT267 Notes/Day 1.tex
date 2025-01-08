@@ -1,0 +1,66 @@
+\section{Day 1: Introduction to Class (Jan. 8, 2025)}
+\textit{Class administrative details!} Some classes will be on Zoom (such as this Friday); class materials are Hirsch-Smale-Devaney's \textit{Differential Equations, Dynamical Systems, and Linear Algebra}, Tenenbaum and Pollard's \textit{Ordinary Differential Equations}, Perko's \textit{Differential Equations and Dynamical Systems}, and Paul's online notes on ODEs.
+\medskip\newline
+Exam testing topics include statements of theorems (along with their proofs), harder homework questions (easier homework questions can show up on quizzes as well). Quizzes will be held in approximately the first ten minutes of class, every Wednesday, aside from weeks in which there are midterms.
+\medskip\newline
+We start with a few examples of ODEs. Newton's law states that $F = ma$, where $F$ represents force, $m$ represents mass, and $a$ represents acceleration. Consider a moving object;
+\begin{itemize}
+    \item $x(t)$ represents the displacement of an object;
+    \item $x'(t) = v(t)$ represents the velocity of the object;
+    \item $x''(t) = a(t)$ represents the acceleration of the object.
+\end{itemize}
+\textit{Hooke's Law} states that $F(x) = - kx$, i.e. $m x''(t) = - k x(t)$. In a swinging pendulum system, where $\alpha$ is the angle of the pendulum from the vertical, we have that $m \alpha '' = k \sin \alpha$; $x''(t) = -\frac{k}{m} x(t)$, where a solution could be given as $x(t) = \cos (\omega t)$, with $\omega = \sqrt{\frac{k}{m}}$. More generally, $x(t) = A \cos (\sqrt{\frac{k}{m}} t) + B \sin (\sqrt{\frac{k}{m}} t)$, with $A, B$ constants. These are all the possible solutions to the system.
+\begin{definition}
+    An ODE is an equation $F(t, x(t), x'(t), \dots, x^{(k)}(t)) = 0$, where $x$ is a vector valued function on an open interval $I \subset \RR$, which is $k$-times differentiable.
+\end{definition}
+\noindent Note that this means
+\[ x = \begin{pmatrix} x^1 \\ \vdots \\ x^n \end{pmatrix}; \hspace{0.2in} F = \begin{pmatrix} F^1 \\ \vdots \\ F^m \end{pmatrix}, \]
+where $m = n$ usually; if $m > 1$, this is a vector valued system of ODEs.
+\begin{definition}
+    A \textit{classical solution} of an ODE $F(t, x, x', \dots, x^{(k)}) = 0$ is a function $\phi : I \to \RR^n$ (where $I$ is an open interval) which is $\SC^k(I)$, such that
+    \[ F(t, \phi(t), \phi'(t), \dots, \phi^{(k)}(t)) = 0 \]
+    for all $t \in I$.
+\end{definition}
+\noindent A \textit{non-example} of a function is $y = \sqrt{-(1 + x^2)}$, and is not a solution to an ODE. An example of an ODE is $x + y y' = 0$. As another example, $\abs{\frac{dy}{dx}} + \abs{y} + 1 = 0$ has no solutinos.
+\medskip\newline
+As an example of notation conventions, $x'$ and $\dot x$ are examples of ways to write derivatives, with the former being more common in math and latter more common in physics. In this class, it is expected to be clear on which derivative is being taken.
+\begin{definition}
+    The general solution for an ODE is a formula for \textit{all} possible solutions.
+\end{definition}
+\noindent For example, $mx'' + kx = 0$ has a general solution
+\[ \varphi(t) = A \cos \left(\sqrt{\frac{k}{m}} t\right) + B \sin \left(\sqrt{\frac{k}{m}} t\right). \]
+An ODE is said to be in \textit{implicit form} if it is written as $F(t, x, \dots, x^{(k)}) = 0$. It is said to be written in \textit{explicit} or \textit{standard form} if it is written as $x^{(k)} = G(t, x, \dots, x^{(k-1)})$.
+\medskip\newline
+There is a standard trick we can perform with ODEs; we can turn a higher order ODE into a system of first order ODEs, the former being more useful to solve, and the latter being more useful for abstract theorems (existence, uniqueness, etc.). For example, let $m x'' = -kx  - cx'$. Then let $x_1 = x$, $x_2 = x'$, and we may construct the system
+\begin{align*}
+    x_1' &= x_2, \\
+    mx_2' &= -k x_1 - cx_2.
+\end{align*}
+From this, we get
+\[ \binom{x_1}{x_2}' = \binom{x_2}{-\frac{k}{m}x_1 - \frac{c}{m}x_2}. \]
+The philosophy of the course is that there may be problems from philosophy, economics, physics, etc. and we wish to order them into first order ODE systems (i.e. vector fields in $\RR^n$), of which we will find the general solution, and turn into a group of $\SC^1$ or $\SC^k$ diffeomorphisms (with structure provided from composition).
+\medskip\newline
+We now give some ODE examples.
+\begin{enumerate}[label=(\roman*)]
+    \item Consider $x' = 0$ on $\RR$. Then the general solution is given by $x(t) = c$; this is true by the mean value theorem, since $x(t_1) - x(t_2) = (t_1 - t_2) x'(c)$ for some $c \in (t_1, t_2)$; since $x'(c) = 0$ as per the ODE, we have that $x(t_1) = x(t_2)$, and we have that $x$ is constant.
+    \item Let $x' = f(t)$. By FTC, the general solution is $x(t) = x_0 + \int_0^t f(s) \, ds$. We may let $x_0 = x(0)$; this is called the parameter.
+    \item Let $x' = ax$. Then $a \in \RR$ fixes $x(t) = Ae^{at}$ as the general solution. Let $y(t) = e^{-at} x(t)$. Assume $x(t)$ is a solution. Then
+    \[ y'(t) = \frac{d}{dt} (e^{-at} x(t)) = -a e^{-at} x + e^{-at} \underbrace{x'}_{=ax} = 0. \]
+    By MVT, we have that $y(t) = A$ yields $x(t) = Ae^{at}$ as desired. \qed
+    \item Something something on unstable and stable stationary points, the idea that if you deviate a little on an unstable stationary point you will ``leave'' it, but if you deviate a little on a stable one you will go back.
+\end{enumerate}
+List of readings to do before next class; chapter 1 of HSD, and 1-5 of TP.
+\medskip\newline
+Consider the Logistic EQ (\textit{note: page 4 in HSD, section 1.2}),
+\[ x' = a x\left(1 - \frac{x}{N}\right), \]
+where $x \in \RR$, and $a, N$ being fixed constants. Without loss of generality, let $N = 1$. Then the ODE reduces to $x' = f_a(x) = ax(1 - x)$. This is an example of a first order, autonomous, and nonlinear ODE (definitions in the book); we now solve the ODE through separation of variables.
+\medskip\newline
+In a nutshell, the idea is separating all the $x$'s to one side, and all the $t$'s to the other side, then integrating. Recall that
+\[ \frac{dx}{dt} = f(t) g(x), \]
+with $f, g$ continuous. If $g(x_0) = 0$, then $x(t) = x_0$ is a solution. We may directly write as follows,
+\[ \frac{dx}{g(x)} = f(t) \, dt \implies \int \frac{dx}{g(x)} = \int f(t) \, dt \implies G(x) = F(x) + C, \]
+where $C$ is a constant, $G'(x) = \frac{1}{g(x)}$ and $F'(t) = f(t)$. Then we claim that $x = G^{-1}(F(t) + C)$ on $(a, b)$ if $G^{-1}$ exists. As justification, through a change of variables, we have
+\[ \frac{x'(t)}{g(x(t))} = f(t) \iff \int \frac{x'(t) \, dt}{g(x(t))} = \int f(t) \, dt \implies G(x(t)) = F(t) + C, \]
+where our change of variables is given by $\frac{d}{dt} G(x(t)) = \frac{x'(t)}{g(x(t))} = f(t)$. Note that this process works as long as $g(x) \neq 0$. \qed
+\medskip\newline
+IUT proceeded to integrate both sides as page 5 in the textbook which I did not bother to write out lmao. He also drew the slope field for the ODE (figure 1.3).
