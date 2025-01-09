@@ -1,0 +1,47 @@
+\section{Day 2: Curvature of a Curve (Jan. 9, 2025)}
+\begin{definition}
+    Suppose that $\gamma : I \to \RR^n$ is a regular curve. A \textit{reparameterization} of $\gamma$ is a function of the form $\tilde{\gamma} = \gamma \circ \phi : \tilde{I} \to \RR^n$, where $\tilde{I}$ is an interval, and $\phi : \tilde{I} \to I$ is a smooth bijection with nowhere vanishing derivative $\phi'(t) \neq 0$ for all $t \in \tilde{I}$.
+\end{definition}
+\begin{definition}
+    We say that $\gamma, \tilde{\gamma}$ have the same orientation (i.e., the parameterization is \textit{orientation-preserving}) if $\phi' > 0$, and orientation-reversing if $\phi' < 0$.
+\end{definition}
+\noindent Note that since $\phi$ is smooth, it is impossible for $\phi'$ to have places on which it is greater than $0$ and less than $0$, since IVT holds on $\tilde{I}$ and $\phi'(t) \neq 0$.
+\medskip\newline
+We now present an example;
+\begin{align*}
+    \gamma &: [0, 1] \to \RR^3 \text{ with } \gamma(t) = (t, t), \\
+    \beta &: [0, \pi/2] \to \RR^3 \text{ with } \beta(t) = (\sin t, \sin t).
+\end{align*}
+While these both parameterize the same curve, we prefer $\gamma$ greatly because $\abs{\gamma'(t)} = \sqrt{2}$ while $\abs{\beta'(t)} = \cos t$; specifically, constant speed parameterizations are much nicer to deal with. Even better,
+\begin{definition}
+    A curve $\gamma$ is said to be parameterized by arclength if $\abs{\gamma'(t)} = 1$.
+\end{definition}
+\noindent In particular, we may turn our above $\gamma : t \mapsto (t, t)$ into an arclength parameterization by considering it to be $t \mapsto (\frac{t}{\sqrt{2}}, \frac{t}{\sqrt{2}})$ instead, since we would then have
+\[ \abs{\phi'(t)} = \sqrt{2 \cdot \left(\frac{1}{\sqrt{2}}\right)^2} = 1. \qed \]
+We now introduce the idea of curvatures of curves. A few ideas first:
+\begin{itemize}
+    \item A smaller circle has \textit{larger} curvature (naturally, it is more curved than a large circle).
+    \item The curvature of a curve is given by a function $\kappa : I \to [0, \infty)$; i.e., it cannot be negative. Specifically, it is given by
+    \[ \kappa(t) = \frac{\abs{a^\perp(t)}}{\abs{v}^2}. \]
+\end{itemize}
+Curvature enjoys two main properties; $\kappa$ is independent of the parameterization of the curve, and that $\kappa = \frac{1}{r}$, where $r$ is the radius of the circle that approximates the curve at the particular point. If $\gamma$ is parameterized by arclength, then $\kappa(t) = a(t)$. To see this, observe that
+\[ \kappa(t) = \frac{\abs{a^\perp(t)}}{\abs{v}^2} = \abs{a^\perp(t)} = \abs{a(t)}. \]
+In particular, since $\abs{v(t)}$ is constant, so is $\abs{v(t)}^2$. Then
+\[ \frac{d}{dt} \left< v(t), v(t) \right> = 0 \implies \left< v;(t), v(t) \right> = 0 \implies \left< a(t), v(t) \right> = 0. \]
+From this, along with $a(t) = a^\perp(t) + a^\parallel(t)$, we have that $a^\parallel(t) = 0$.\footnote{for more detail, check proposition 1.18 in the textbook; $\gamma'$ and $\gamma''$ are perpendicular if $\gamma$ is a curve with constant speed.} \qed
+\begin{definition}
+    Let $\gamma : I \to \RR^n$ be a regular curve. We define the unit tangent vector and unit normal vector as
+    \[ T(t) = \frac{v(t)}{\abs{v(t)}}; \hspace{0.2in} n(t) = \frac{a^\perp(t)}{\abs{a^\perp(t)}}, \]
+    respectively.
+\end{definition}
+\noindent Note that the textbook uses $\kt, \kn$ respectively, but these are hard to write on paper.
+\begin{definition}[Osculating Plane]
+    At a fixed point on a regular curve with $\kappa \neq 0$, we define the \textit{osculating plane} by
+    \[ \spn\{T, n\}, \]
+    and we define the \textit{osculating circle} to be the unique circle with these properties:
+    \begin{enumerate}[label=(\alph*)]
+        \item Radius $\frac{1}{\kappa}$,
+        \item It is in the osculating plane,
+        \item It is centered at $0$.
+    \end{enumerate}
+\end{definition}
