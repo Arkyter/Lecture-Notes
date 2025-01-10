@@ -1,0 +1,39 @@
+\section{Day 2: Existence and Uniqueness Theorem (Jan. 10, 2025)}
+\begin{simplethm}[Existence and Uniqueness Theorem]
+    Let $x' = F(t, x)$, $x(t_0) = x_0$ for $x \in U \subset \RR^n$ where $U$ is open, and $t_0 \in \RR$. If $F$ is $\SC^1(I \times U)$, where $I$ represents time and $U$ is the domain, then for $t_0 \in I$, for all $x_0 \in U$, there exists a unique solution $x(t)$ with $x(t_0) = x_0$. $x(t)$ is defined on a time interval $J$ depending on $(t_0, x_0)$.\footnote{7.2 in HSD.. picard lindel\"of? page 144.}
+\end{simplethm}
+\noindent If solutions cross at $\overline{x_0}$, then at $\overline{x_0}$ we would have more than one solution, which is a contradiction; and so, solutions don't cross. If a solution set covers $\RR^2$, then we have the general solution. As a consequence, $x \equiv 1, x \equiv 0$ are solutions if $x_0 \in (0, 1) \implies x(t) \in (0, 1)$. As an example, let
+\[ \frac{dy}{dx} = \sqrt{\abs{y}}. \]
+Then $y \equiv 0$ is a solution. To see this, let us separate the variables as follows,
+\begin{align*}
+    \frac{dy}{\sqrt{\abs{y}}} = dx &\implies 2 \sqrt{\abs{y}} = x - c \\
+    &\implies \begin{cases} y &= \frac{1}{4}(x-c)^2, \\ y &= -\frac{1}{4}(x-c)^2. \end{cases},
+\end{align*}
+where $x \in (c, \infty)$ is a solution for all $c \in \RR$, and the latter if $x \in (-\infty, c)$ is a solution. In particular,
+\[ y_{ab}(x) = \begin{cases} - \frac{(x - a)^2}{4} &, x < a \\ 0 &, a \leq x \leq b \\ \frac{(x - b)^2}{4} &, x > b, \end{cases} \]
+for all $x \in \RR$ and $a < b$. Recall that the initial value problem $y' = \sqrt{\abs{y}}$, $y(0) = 0$ has infinitely many solutions, including $y \equiv 0$. Our problem at hand is that if $y(x_0) = x_0 < 0$, then the solution reaches $0$ in finite time, which allows the solution to be continued by $0$. If $y(x_0) = x_0 > 0$, the same happens by going backwards in time. Consider
+\[ x' = a x(1 - x) = \int a(x). \]
+Near $0$, $x > 0$ implies $\int a(x) > 0$, with slopes greater than $0$, and so the solution is increasing. If $x < 0$, the opposite holds. Thus, we are moving away from $0$, i.e., $0$ is the source. Similarly, $x = 1$ is a sink. Analytically,
+\[ \int a'(x) = a - 2ax \]
+Evaluating at $x = 0$, we have that $\int a'(0) = a > 0$, i.e., the slopes are increasing through $0$ as $x$ passes through $0$. Specifically, the slopes are $< 0$ for $x < 0$, and $> 0$ for $x > 0$. Thus, the solutions are moving through $0$.
+\medskip\newline
+We now enter chapter $2$ material: linear systems of ODEs. Let $X' = A(t) x + f(t)$. $A$ is an $n \times n$ matrix of coefficients, $f : I \to \RR^n$, and $f(t)$ is called the \textit{inhomogeneity}. Let
+\[ x(t) = \begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix}; \]
+if $f(t) \equiv 0$, then $X' = A(t) x + f(t)$ is said to be homogeneous. If $A(t) = A$ constantly, then the system is said to be of constant coefficient ODEs. Morally, $x' - Ax = f$ implies $Bx = C$, and we have $x = B^{-1} C$. We now examine cases.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose $A(t) = A$ constantly. Then $x' = Ax$. $A$ is a $\RR^{n \times n}$ fixed matrix; if $n = 1$, we would have $x' = ax \implies x = Ae^{at}$. If $x \equiv 0$, then we have an equilibrium point. We \textit{guess} for now that $x(t) = x_0 e^{At}$, where $x \in \RR^n$. For example,
+    \[ \binom{x}{y}' = \begin{pmatrix} 2 & 3 \\ 1 & 0 \end{pmatrix} \binom{x}{y}. \]
+    We \textit{hope} that
+    \[ e^{tA} := \sum_{k=0}^\infty \frac{t^k}{k!} A^k. \]
+    First, does the series above converge? Second, is it differentiable w.r.t. $t$? Ideally, we want $\frac{d}{dt} e^{tA} = A e^{tA}$. Note that at $t = e$, $e^{0A} = \id$. To start, $x(t) = x_0 e^{tA}$ solves $x' = Ax$ for all $x_0 \in \RR^n$, and is a general solution. In particular,
+    \[ e^{tA} := \sum_{k=0}^\infty \frac{t^k A^k}{k!} = \id + tA + \frac{t^2}{2}A^2 + \frac{t^3}{6}A^3 + \dots. \]
+    The idea is that we wish to seek solutions $x' = Ax$ of the form
+    \[ x(t) = e^{\lambda t} \sigma, \]
+    where $\lambda$ is the unknown parameter, and $\sigma$ is to be determined as well. Let us solve it as follows; \footnote{the hell}
+    \begin{align*}
+        x'(t) &= \lambda e^{\lambda t} \sigma \\
+        \implies x(t) &= e^{\lambda t} v \\
+        \implies e^{\lambda t} \lambda \sigma &= e^{\lambda t} A v.
+    \end{align*}
+    Another example was presented in class but the handwriting was illegible.
+\end{enumerate}
