@@ -1,0 +1,24 @@
+\section{Day 39: Partition of Unity, Pt. 2 (Jan. 10, 2025)}
+A $\SC^\infty$ partition of unity for $A \subset \RR^n$ is subordinate to the open cover $\SO$ of $A$ if there is a countable collection $\Phi$ of $\SC^\infty$ functions $\varphi : \RR^n \to \RR$ such that
+\begin{enumerate}[label=(\roman*)]
+    \item $0 \leq \varphi \leq 1$;
+    \item For all $x \in A$, there is an open neighborhood $V$ of $x$ such that all but finitely many $\varphi \in \Psi$ vanish on $V$;
+    \item For all $x \in A$, $\sum_{\varphi \in \Psi} \varphi(x) = 1$.
+    \item For all $\varphi$, there is $U \in \SO$, such that $\varphi(x) = 0$ outside some compact subset of $U$.
+\end{enumerate}
+We start with a few examples to consider. \footnote{i highly recommending reading spivak page 63 onwards for the latter 3 cases, cuz i was not really paying too much attention here}
+\begin{enumerate}[label=(\alph*)]
+    \item If $A$ is compact, then finitely many $U \in \SO$ are enough to cover $A$, say, $\SO' = \{U_1, \dots, U_n\}$. Then it is enough to find a partition of unity that is subordinate to the collection $\SO'$. Now, for all $i$, let us find compact $D_i \subset U_i$ for each $i$ such that the interiors of $D_i$ also cover $A$. To see that this is possible, for all $x \in A$, take a closed ball $D_x$ in some $U_i$; by compactness, we may choose $D_{x_1}, \dots, D_{x_n}$ whose\footnote{who's? whos? whomstdve? what?} interiors cover $A$. Now, construct $D_i$ by
+    \[ D_i = \bigcup_{D_{x_j} \subset U_i} D_{x_j}. \]
+    For all $i = 1, \dots, k$, let $\psi_i$ be nonnegative $\SC^\infty$ such that $\psi_i > 0$ on $D_i$, and equal to $0$ outside some compact subset of $U_i$. Clearly, $\psi_1 + \dots + \psi_k > 0$ on some open set $U \supset A$. To start, we may let
+    \[ \varphi_i(x) = \frac{\psi_i(x)}{(\psi_1 + \dots + \psi_k)(x)} \]
+    for all $x \in U$; let $f(x)$ be non-negative $\SC^\infty$ on which $f = 1$ on $A$, and $0$ outside a compact subset of $U$. Then $\Psi = \{\abs{\varphi_i}\}$ is indeed a partition of unity as desired. \qed
+    \item Suppose $A = A_1 \cup A_2 \cup \dots$, where $A_i \subset \mathrm{int} A_{i+1}$, and each $A_i$ is compact. We revisit this example later.
+    \item Suppose $A$ is an open set, and $A = A_1 \cup A_2 \cup \dots$ with the same constraints as case (b). Let $A_i = \{x \mid \abs{x} \leq i\} \cap \{x \in A \mid d(x, \RR^n \setminus A) \geq \frac{1}{i}\}$.
+    \item If $A$ is arbitrary, let $B = \bigcup_{U \in \SO} U$. By the above case, there is a partition of unity for $B$, and so there is a partition of unity for $A$.
+\end{enumerate}
+We now revisit case (b). Let $B_i = A_i \setminus \mathrm{int} A_{i-1}$; by construction, $B_i$ is compact. Let $\SO_i$ be the collection of all $U \cap (\mathrm{int} A_{i+1} \setminus A_{i-2})$; this forms an open cover of $B_i$. Then there is a partition of unity $\Psi_i$ for $B_i$, subordinate to $\SO_i$. Let
+\[ \sigma(x) = \sum_i \sum_{\varphi \in \Psi_i} \varphi(x). \]
+This is a finite sum on an open neighborhood $V$ of $x$ for all $x \in A$. Let
+\[ \psi(x) = \frac{\varphi(x)}{\sigma(x)} \]
+for all $\varphi \in \Psi_i$, for all $i$. This is the partition of unity as desired. \qed
