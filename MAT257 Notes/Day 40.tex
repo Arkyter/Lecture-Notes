@@ -1,0 +1,23 @@
+\section{Day 40: Extended Definition of Integral (Jan. 13, 2025)}
+Recall that a bounded function on a closed rectangle $A$ is integrable if and only if its set of discontinuities has measure zero. Let $C \subset A \subset \RR^n$ be bounded, and consider a bounded function $f : C \to \RR$. Then $\int_C f$ is defined as $\int_A f \cdot \chi_C$, provided that it exists. So $f$ is integrable on $C$ if and only if the discontinuities of $f \chi_C$ has measure zero. We say that the boundary $\partial C$ is given by the discontinuities of $\chi_C$. The bounded set $C$ is \textit{Jordan measurable} if $\partial C$ has measure zero.
+\medskip\newline
+A continuous function on a bounded open set is \textit{not necessarily} integrable. For example, consider $x^{-1}$ on the open unit interval $(0, 1)$.
+\begin{remark}
+    Consider $A \subset \RR^n$ open, and let $f : A \to \RR$ be locally bounded (i.e., bounded on some neighborhood of any point), and the set of discontinuities of $f$ has measure zero. If $f$ vanishes outside a compact subset $C$ of $A$, then $f$ is integrable on any bounded subset $U$ of $A$ containing $C$, and $\int_U f = \int_C f$.
+\end{remark}
+\noindent With this, it makes sense to say that $f$ is integrable on $A$ and to define $\int_A f$ as $\int_C f$. We now introduce the extended definition of the integral,
+\begin{definition}
+    Let $A \subset \RR^n$ be open, and let $f : A \to \RR$ be a locally bounded function whose set of discontinuities has measure $0$. Let $\Phi$ be a $\SC^\infty$ partition of unity for $A$ with compact support, subordinate to $\SO = \{A\}$. Then $\int_A f \abs{\varphi}$ exists, for all $\varphi \in \Psi$. We have that $f$ is integrable on $A$ if $\sum_{\varphi \in \Phi} \int_A \varphi \abs{f}$ converges. In this case, we define
+    \[ \int_A f = \sum_{\varphi \in \Phi} \int_A \varphi \cdot f. \]
+\end{definition}
+\begin{simplethm}
+    Let $A \subset \RR^n$ be open, and let $f : A \to \RR$ be bounded, whose set of discontinuities has measure zero. Then let $\Phi$ be a $\SC^\infty$ partition of unity for $A$ with compact support, subordinate to $\{A\}$. Then,
+    \begin{enumerate}[label=(\roman*)]
+        \item If $\sum_{\varphi \in \Phi} \int_A \varphi \abs{f}$ converges and $\Psi$ is another such partition of unity satisfying the above conditions such that $\sum_{\psi \in \Psi} \int_A \psi \abs{f}$ converges, then
+        \[ \sum_{\varphi \in \Phi} \int_A \varphi \cdot f = \sum_{\psi \in \Psi} \int_A \psi \cdot f \]
+        \item If $A$ and $f$ are bounded, then $\sum_{\varphi \in \Phi} \int_A \varphi \abs{f}$ converges.
+        \item If $A$ is Jordan measurable and $f$ is bounded, then
+        \[ \int_A f = \sum_{\varphi \in \Phi} \int_A \varphi \cdot f, \]
+        where the left hand side is the original integral.
+    \end{enumerate}
+\end{simplethm}
