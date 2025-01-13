@@ -1,0 +1,68 @@
+\section{Day 3: Angle Function and Rotation Index (Jan. 13, 2025)}
+We begin with a few questions.
+\begin{enumerate}[label=(\alph*)]
+    \item Why is $\kappa_s(t)$ only defined for planar curves and not in $\RR^n$ for $n > 2$? In $\RR^2$, the orthogonal vector is $1$-dimensional; in higher dimensions, it is $n-1$-dimensional, which does not make sense to apply a $90$-degree rotation to; i.e., the notions of ``clockwise'' and ``counter-clockwise'' rotation are not that well defined in $\RR^n$.
+    \item How can the angle function $\theta(t)$ increase by more than $2\pi$ along a curve? This is possible by having multiple loops; check figure 1.23, on page 37 in the textbook.
+    \item What is the geometric meaning behind the equation $\theta'(t)= \kappa_s(t)$? Intuitively, $\theta'$ measures the change in the angle measuring how much the curve deviates from a straight line.
+    \item Why is the rotation index of a unit-speed closed plane curve always an integer? Since the curve is closed and smooth, $\theta$ has an equal evaluation at the beginning and end of the interval the curve is parameterized on, with a difference of a multiple of $2\pi$ per definition; thus, we have that
+    \[ \frac{\theta(b) - \theta(a)}{2 \pi} \]
+    evaluates out to an integer always.
+\end{enumerate}
+An example graph of $\theta(t)$ for curve $\gamma$ was given in class; we record the answers here, but not the figure.
+\begin{enumerate}[label=(\alph*)]
+    \item The rotation index is $\frac{1}{4}$.
+    \item The curve is not closed, since the rotation index is not an integer.
+    \item Clockwise means negative $\theta$, and counterclockwise means positive $\theta$.
+    \item The maximum curvature, $\max \abs{\theta'(t)}$, is approximately $6 \pi$ (which is a guess).
+\end{enumerate}
+Let $\gamma : [a, b] \to \RR^2$ be a simple closed curve. Let $C = \gamma([a, b])$ denote its trace.
+\begin{simplethm}[Hopf's Umlaufsatz]
+    The rotation index of $\gamma$ is either $-1$ or $1$.
+\end{simplethm}
+\begin{simplethm}[Jordan Curve Theorem]
+    $\RR^2 \setminus C = \{p \in \RR^2 \mid p \not\in C\}$ has exactly two path connected components. Their common boundary is $C$. One component (which we will call the interior) is bounded, while the other (which we call the exterior) is unbounded. 
+\end{simplethm}
+\begin{definition}
+    In the above context, we say that $\gamma$ is positively oriented if the rotation index of $\gamma$ is $1$, and negatively oriented if the index is $-1$.
+\end{definition}
+\begin{definition}
+    A \textit{piecewise regular curve} in $\RR^n$ is a continuous function $\gamma : [a, b] \to \RR^n$ with partition $a = t_0 < \dots < t_n = b$ such that each $\restr{\gamma}{[t_i, t_{i+1}]}$ is a regular curve. We call the points $\gamma(t_i)$ for $i = 1, \dots, n-1$ the ``corners'' of $\gamma$.
+\end{definition}
+\begin{definition}
+    In the above context, the \textit{signed angle} at $\gamma(t_i)$ denoted by $\alpha_i \in [-\pi, \pi]$ is given by the angle between $v^-(t_i)$ and $v^+(t_i)$ with $\alpha_i > 0$ for a counterclockwise and $\alpha_i < 0$ for a clockwise turn.
+\end{definition}
+
+\newpage
+\begin{simplethm}[Generalized Hopf's Umlaufsatz]
+    Let $\gamma : [a, b] \to \RR^n$ be a unit-speed positively oriented piecewise regular simple closed plane curve. Let $\kappa_s$ denote its signed curvature function, and let $(\alpha_i)_i$ be the list of signed angles at its corners. Then
+    \[ \int_a^b \kappa_s(t) \, dt + \sum \alpha_i = 2 \pi. \]
+\end{simplethm}
+\noindent We now move onto space curves. Note that $\RR^2$ may be embedded into $\RR^3$ by considering $\RR^2 \cong \RR^2 \times \{0\} \subset \RR^3$.
+\begin{definition}
+    Consider a regular space curve $\gamma : I \to \RR^3$ and $t \in I$ such that $\kappa(t) \neq 0$. The \textit{Frenet frame} at $t$ is the orthonormal basis $\{T, n, B\}$ of $\RR^3$ defined by
+    \begin{align*}
+        T(t) &= \frac{v(t)}{\abs{v(t)}}, \\
+        n(t) &= \frac{a^\perp(t)}{\abs{a^\perp(t)}}, \\
+        B(t) &= T(t) \times n(t).
+    \end{align*}
+\end{definition}
+\noindent In particular, $\abs{B'}$ is a natural choice to measure the changing tilt of the osculating plane because $B$ is constant length, and that it is orthogonal to both $B$ and $T$. Moreover, $\left< B', n \right>$ and $\abs{B'}$ are related as follows,
+\[ \left< B', n \right> = \abs{B'} \abs{n} \cos \varphi = \pm \abs{B'}, \]
+where $\varphi$ is the angle between $B$ and $n$ (note that this is either $0$ or $\pi$, since $B \parallel n$).
+\begin{definition}
+    Consider a regular space curve $\gamma : I \to \RR^3$ and $t \in I$ such that $\kappa(t) \neq 0$. The torsion of $\gamma$ at $t$ is given by
+    \[ \tau(t) = \frac{-\left<B'(t), n(t)\right>}{\abs{v(t)}}. \]
+    The torsion is independent of parameterization.
+\end{definition}
+\noindent As an example, if $\gamma : I \to \RR^3$ is such that for all $t \in I$, $\kappa(t) \neq 0$ and $\tau(t) = 0$, we have that $\abs{B'} = 0$, $B$ is constant, and so $\spn \{T, u\} = P$. In particular, this means that $\gamma$ is planar; i.e., for all $t \in I$, $\gamma(t) \in \gamma(t_0) + P$.
+\begin{simplethm}[Frenet Equations]
+    For a regular curve $\gamma : I \to \RR^3$, the following equations hold whenever $\kappa(t) \neq 0$:
+    \begin{align*}
+        T' &= \abs{v} \kappa n \\
+        n' &= \abs{v} \abs{-\kappa T + \tau B} \\
+        B' &= - \abs{v} \tau n.
+    \end{align*}
+    In matrix form, this is written as
+    \[ \begin{pmatrix} T \\ n \\ B \end{pmatrix}' = \abs{v} \begin{pmatrix} 0 & \kappa & 0 \\ -\kappa & 0 & \tau \\ 0 & -\tau & 0 \end{pmatrix} \begin{pmatrix} T \\ n \\ B \end{pmatrix}. \]
+\end{simplethm}
+\noindent Next class, we will prove the above; in particular, there exists a unique solution by the Picard-Lindel\"of theorem. We did not cover Taylor approximations because we ran out of time.
