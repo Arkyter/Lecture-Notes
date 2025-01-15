@@ -1,0 +1,83 @@
+\section{Day 3: Linear ODE Systems (Jan. 15, 2025)}
+Our quiz today was on exercise (\textit{\S 1.13}) from the textbook, and to state the simple version of the existence and uniqueness theorem.
+\medskip\newline
+Let $x' = Ax$; then a solution to the system is given by $x(t) = ve^{\lambda t}$, where $v$ is a vector in $\RR^n$, and $A \in \RR^{n \times n}$. We know that $x(t)$ is a solution if $Av = \lambda v$; i.e., $v$ is an eigenvector.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Let $A = \begin{pmatrix} 2 & 3 \\ 1 & 0 \end{pmatrix}$; specifically, the system can be written as
+    \begin{align*}
+        x' &= 2x + 3y, \\
+        y' &= x.
+    \end{align*}
+    To derive the general solutoin of this system, we may solve the characteristic polynomial $\det (A - \lambda I) = 0$ to obtain the eigenvalues (in our case, $\lambda_1 = 3, \lambda_2 = -1$), and then find vectors in the kernel of $A - \lambda_i I$. In this case, we have
+    \[ v_1 = \binom{3}{1}; \hspace{0.2in} v_2 = \binom{1}{-1}. \]
+    In this way, we have two solutions,
+    \begin{align*}
+        x_1(t) &= e^{3t} \binom{3}{1}, \\
+        x_2(t) &= e^{-t} \binom{1}{-1}.
+    \end{align*}
+    Together, these two provide equilibrium solutions in the $xy$-plane in the form of two lines passing through the origin. Do note that, if $\tilde{\lambda} = 0$, then $x_i(t) = e^{\tilde{\lambda} t} v = v$, as expected.
+\end{enumerate}
+\begin{simplethm}[Superposition Principle]
+    Suppose $x_1(t)$ solves $x' = A(t)x + f_1(t)$, and $x_2(t)$ solves $x' = A(t)x + f_2(t)$. If $a_1, a_2 \in \RR$, then $x(t) = a_1x_1(t) + a_2x_2(t)$ solves $x' = A_t(x) + a_1f_1(t) + a_2f_2(t)$. In general, solutions to $x' = A(t) x$, i.e., a homogeneous system, are a vector space, and the general solution of $x' = A(t)x + f(t)$ is given by $\hat{x}(t) + y(t)$, where $\hat{x}(t)$ is the general solution of $x' = A(t) x$ (the homogeneous equation), and $y(t)$ is \textit{one} particular solution of $x' = A(t) x + f(t)$.
+\end{simplethm}
+\noindent Let $A(t) \in \RR^{n \times n}$ be a vector space of $\dim n$. We start with a special case. 
+\begin{simpleclaim}
+    Let $v_1, \dots, v_n$ be linearly independent eigenvectors of $A$, i.e. $A v_i = \lambda_i v_i$ for some $\lambda_1, \dots, \lambda_n \in \RR$. Then $x_i(t) = e^{\lambda_i t} v_i$ solves $x' = A_x$, $x(0) = v_i$.
+\end{simpleclaim}
+\begin{simpleclaim}
+    We have that $x(t) = a_1x_1(t) + \dots + a_nx_n(t)$, where $a_1, \dots, a_n \in \RR$ is the general solution.
+\end{simpleclaim}
+\noindent The first statement is proven by the existence and uniqueness theorem. For the second claim, fix $a_1, \dots, a_n \in \RR$. Set $y(t) = a_1 e^{\lambda_1 t} v_1 + \dots + a_n e^{\lambda_n t} v_n$. By superposition, we have that $y' = Ay$ and $y(0) = a_1v_1 + \dots + a_nv_n$.
+\begin{simpleclaim}
+    $y(t)$ is the only solution of $x' = Ax$ with $x(0) = a_1v_1 + \dots + a_nv_n = x_0$.
+\end{simpleclaim}
+\noindent Assume $z(t)$ is another solution of the above; since $\{v_1, \dots, v_n\}$ forms a basis of $\RR^n$, we have that $z(t) = b_1(t) v_1 + \dots + b_n(t) v_n$, and so $b_i(0) = a_i$, because $z(0) = x_0 + y(0)$. Now, write
+\begin{align*}
+    z(t) &= b_1(t) v_1 + \dots + b_n(t) v_n, \\
+    z'(t) &= b_1'(t)v_1 + \dots + b_n'(t)v_n,
+\end{align*}
+and so
+\begin{align*}
+    Az(t) &= A(b_1(t)v_1) + \dots + b_n(t)v_n) \\
+    &= b_1(t)\lambda_1v_1 + \dots + b_n(t)\lambda_nv_n,
+\end{align*}
+i.e. $\{v_1, \dots, v_n\}$ is a basis and so we have $b_i'(t) = \lambda_i b_(t)$ with $b_i(0) = a_i$ as an ODE on $\RR$. Thus, the solution is provided by $b_i(t) = e^{\lambda_i t} a_i$, implying $z = y$. \qed
+\medskip\newline
+To expand on the one-line proof with existence and uniqueness for claim 3.1, consider the initial value problem $x' = A(t) x$ with $x(0) = v$. Then if $S$ is the set of solutions to the IVP, with $x \in S$, then the operator $T : x \mapsto x(0) = v \in \RR^n$. Since $T$ is linear, onto, and injective, we have that it is a linear isomorphism, so $S$ is a vector space of $\dim n$ as desired. \qed
+\begin{definition}
+    The system $x' = Ax$ has a saddle point at $0$ if $A$ has eigenvalues $\lambda_2 < 0 < \lambda_1$.
+\end{definition}
+\noindent We go back to giving examples.
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{1}
+    \item Let $B = \begin{pmatrix} 4 & 3 \\ 1 & 2 \end{pmatrix} = A + 2I$. We have that $\lambda_1 = 5, \lambda_2 = 1$, and $v_1 = \binom{3}{1}$, $v_2 = \binom{1}{-1}$, and so we have two solutions
+    \begin{align*}
+        x_1(t) &= e^{5t} \binom{3}{1}, \\
+        x_2(t) &= e^t \binom{1}{-1}.
+    \end{align*}
+    Since $0 < \lambda_2 < \lambda_1$, we have that the ``speed'' that we move along at on $x_1$ is called the ``fast direction''. Once again, we say that a node (in our case, the origin), is stable if it is a sink, unstable if it is a source, and semistable otherwise. Since the eigenvalues are both positive, it is indeed a source. In general, eigenvectors determine the direction in which the equilibrium lines are / the solutions, and eigenvalues determine the dynamics (i.e., speed). \footnote{intuitively, this is just because of how we put $e^\lambda t$ so the speed is exponential nyoooommmm}
+    \item Let $C = A - 5I$. Now, we have $\lambda_1 = -2$ and $\lambda_2 = -6$, with corresponding eigenvectors $\binom{3}{1}$ and $\binom{1}{-1}$. In this case, the phase portrait would have a sink at the origin (the node is at the origin since $\det C \neq 0$).
+\end{enumerate}
+We now discuss complex eigenvectors.\footnote{iut quote: uhhh everybody fine with kindergarten complex numbers?}
+\begin{simplelemma}
+    Let $A \in \RR^{n \times n}$, and choose an eigenvector $v$ with eigenvalue $\lambda$. If $\lambda \not\in \RR$ (and we write $\lambda = \alpha + \beta i$, with $\beta \neq 0$), then:
+    \begin{enumerate}[label=(\roman*)]
+        \item $v$ is not real; in particular, $\Re(v), \Im(v)$ are linearly independent.
+        \item $\overline{\lambda}$ is also an eigenvalue with eigenvector $\overline{v}$.
+    \end{enumerate}
+\end{simplelemma}
+\noindent Directly write, $Av = \lambda v \iff \overline{\lambda} \overline{v} = \overline{Av} = A \overline{v}$, since $A$ is real. This resolves (ii); we now check (i). $\lambda = \alpha + \beta i$, where $\beta \neq 0$. Then $Av = \lambda v$, and $v = u + iw$, where $u, w \in \RR^n$.
+\begin{simpleclaim}
+    $\{\Re(v), \Im(v)\}, \{u, w\}$ are linearly independent over $\RR$.
+\end{simpleclaim}
+\noindent Proceed by contradiction; suppose they are LD. Then we may write $u = s v_0$, $w = t v_0$, where $s, t \in \RR$ and $v_0 \in \RR^n$. Then $v = u + iw = (s + it) v_0$; thus, we have that $v_0$ is also an eigenvector with eigenvalue $\lambda$, i.e. $A v_0 = \lambda v_0 = (\alpha + \beta i) v_0$. However, each of the components in this equation are real, aside from $\alpha + \beta i$, and so this is a contradiction. Thus, they are indeed linearly independent.
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{3}
+    \item Let $A = \begin{pmatrix} 2 & -1 \\ 1 & 2 \end{pmatrix}$, and consider $x' = Ax$. Then the characteristic polynomial is given by $\lambda^2 - 4 \lambda + 5 = 0$, and the eigenvalues are $2 + i$ and $2 - i$, with corresponding eigenvectors $\binom{i}{1}$ and $\binom{-i}{1}$.
+\end{enumerate}
+The general complex solution is given by
+\[ z(t) = c_1 e^{\lambda_1 t} v + c_2 e^{\overline{\lambda_1} t} + \overline{v}, \]
+where $c_1, c_2 \in \CC$. The real solution is given by
+\[ x(t) = \Re(z(t)) = \frac{1}{2}(z + \overline{z}). \]
+Given the complex solution, $z = e^{\lambda t} v$. We will construct the real solution explicitly next time.
