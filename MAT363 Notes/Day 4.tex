@@ -2,4 +2,42 @@
 We start with a quick refresher of linear algebra properties;
 \begin{definition}
     A matrix $A \in \RR^{n \times n}$ is said to be \textit{orthogonal} if any of the following equivalent conditions are fulfilled,
+    \begin{enumerate}[label=(\alph*)]
+        \item For all $p \in \RR^n$, $\abs{Ap} = \abs{p}$, i.e., $A$ is norm-preserving.
+        \item For all $p, q \in \RR^n$, $\left<Ap, Aq\right> = \left<p, q\right>$, i.e., inner product preserving.
+        \item $A$ sends an orthonormal basis of $\RR^n$ to an orthonormal basis of $\RR^n$.
+        \item The columns of $A$ are an orthonomal basis of $\RR^n$.
+        \item $A^{\top} A = I$.
+    \end{enumerate}
 \end{definition}
+\noindent In particular, if $A$ is orthogonal, then $\det A = \pm 1$, and its inverse is also orthogonal; the product of two orthogonal matrices is also orthogonal.
+\begin{definition}
+    A \textit{rigid motion} of $\RR^n$ means a function $f : \RR^n \to \RR^n$ such that
+    \[ \abs{f(p) - f(q)} = \abs{p - q} \]
+    for all $p, q \in \RR^n$.
+\end{definition}
+\begin{definition}
+    For $A \in \RR^{n \times n}$, we formally denote the associated linear map $L_A : \RR^n \to \RR^n$. For $q \in \RR^n$, we define the translation $T_q : \RR^n \to \RR^n$ with $T_q(p) = p + q$. Note that translations are rigid motions.
+\end{definition}
+\begin{simplethm}
+    If $f$ is a rigid motion of $\RR^n$, then $f = T_q \circ L_A$ for a unique choice of $q$ and $A$.
+\end{simplethm}
+\noindent To prove this, observe that if we let $q := f(0)$ and define $g := (T_q)^{-1} \circ f$, then we may note that $g$ is a rigid motion with $g(0) = 0$ by our choice of $q$, and that for any $v \in \RR^n$, $\abs{g(v)} = \abs{g(v) - g(0)} = \abs{v - 0} = \abs{v}$ as desired. Thus, $g$ preserves all norms, and so $g = L_A$ for some orthogonal matrix $A$, and we have that $f = T_q \circ L_A$ as desired. \qed
+\medskip\newline
+We leave the proof of uniqueness as a quick exercise.
+\begin{definition}
+    A rigid motion $f = T_q \circ L_A$ is said to be proper if $\det A = 1$ and improper if $\det A = -1$.
+\end{definition}
+\noindent We are now able to answer one of the recurring questions in this class: if we have an object $G$, with geometric property $P$, and a map $f$ of type $T$, does $f(G)$ still have the same property $P$, or can we at least predict some properties of it?
+\begin{simplethm}
+    A \textit{proper} rigid motion preserves the curvature, torsion, and signed curvature of a curve, space curve, and plane curve respectively. An impropert rigid motion preserves curvature, but multiplies torsion and signed curvature by $-1$.
+\end{simplethm}
+\noindent For simplicity, we prove that this holds for curvatures. Let $\gamma : I \to \RR^n$ be smooth, and let $A \in \RR^{n \times n}$ and its associated linear map $L_A$. Then
+\[ (L_A \circ \gamma)' = (dL_A \circ \gamma) \cdot \gamma' = A \gamma', \]
+since the differential of $L_A$ is just itself. Without loss of generality, let $\abs{\gamma'} = 1$, and let $\overline{\gamma} = f \circ \gamma$. Then
+\[ \overline{\kappa} = \abs{\overline{a}} = \abs{(\overline{v})'} = \abs{((f \circ \gamma)')'} = \abs{((T_q \circ L_A \circ \gamma)')'} = \abs{((L_A \circ \gamma)')'} = \abs{A \circ \gamma''}, \]
+and so $\abs{\gamma''} = \abs{a} + \kappa$. \qed
+\begin{simplethm}
+    If $I \subset \RR$ is an interval and $\kappa_s : I \to \RR$ is smooth, then there exists a unit-speed plane curve $\gamma : I \to \RR^2$ with signed curvature $\kappa_s$. $\gamma$ is unique up to proper rigid motion.
+\end{simplethm}
+\noindent Fix $t_0 \in I$. Define $\theta(t) := \int_{t_0}^t \kappa_s(u) \, du$, and define $v(t) = (\cos \theta(t), \sin \theta(t))$. Then we may define $\gamma(t) := \int_{t_0}^t v(u) \, du$. Then $\gamma(t)$ has signed curvature $\kappa_s$. We will check uniqueness next class. Also, something something about Frenet equations.
