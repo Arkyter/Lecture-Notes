@@ -1,0 +1,34 @@
+\section{Day 41: Extended Definition of Integral, Pt. 2 (Jan. 15, 2025)}
+Given $A \subset \RR^n$ open, let $f : A \to \RR$ be locally bounded such that its discontinuities are of measure zero. Let $\Phi$ be a $\SC^\infty$ partition of unity for $A$ with compact support, subordinate to $\{A\}$. We say $f$ is integrable on $A$ if
+\[ \sum_{\varphi \in \Phi} \int_A \varphi \abs{f} \]
+converges. If it does, we define $\int_A f = \sum_{\varphi \in \Phi} \int_A \varphi f$.
+\begin{enumerate}[label=(\roman*)]
+    \item If $\sum_{\varphi \in \Phi} \int_A \varphi \abs{f}$ converges, and $\Psi$ is another partition of unity, then $\sum_{\psi \in \Psi} \int_A \psi \abs{f}$ also converges, and
+    \[ \sum_{\psi \in \Psi} \int_A \psi f = \sum_{\varphi \in \Phi} \varphi f. \]
+    \begin{proof}
+        For any $\varphi \in \Phi$, $\varphi f$ vanishes outside a compact subset of $A$, and only finitely many $\psi \in \Psi$ are nonzero on a given compact set. So we may write
+        \[ \sum_{\varphi \in \Phi} \int_A \varphi f = \sum_{\varphi \in \Phi} \int_A \sum_{\psi \in \Psi} \psi \varphi f  = \sum_{\varphi \in \Phi} \sum_{\psi \in \Psi} \int_A \psi \varphi f, \]
+        which is a convergent series. Rewriting the above, we have that
+        \[ \sum_{\varphi \in \Phi} \int_A \varphi \abs{f} = \sum_{\varphi \in \Phi} \sum_{\psi \in \Psi} \int_A \psi \varphi \abs{f}, \]
+        which means it converges absolutely as well, because $\abs{\int_A \psi \varphi f} \leq \int_A \psi \varphi \abs{f}$. A rearrangement gives the convergence of $\sum_{\psi \in \Psi} \int_A \psi \abs{f}$ as desired.
+    \end{proof}
+    \item If $A, f$ are both bounded, then $\sum_{\varphi \in \Phi} \int_A \varphi \abs{f}$ converges, and so $f$ is integrable on $A$.
+    \begin{proof}
+        Let $\abs{f} \leq M$ on $A$. It is enough to show that the partial sums are bounded on $B \supset A$, where $B$ is a closed rectangle. Let $\Theta$ be a finite subset of $\Phi$, then
+        \[ \sum_{\varphi \in \Theta} \int_A f \varphi \abs{f} \leq \sum_{\varphi \in \Theta} M \int_A \varphi = M \underbrace{\int_A \sum_{\varphi \in \Theta} \varphi}_{\leq 1} \leq M v(B). \]
+        Hence, $f$ is integrable on $A$.
+    \end{proof}
+
+    \newpage
+    \item If $A$ is Jordan measurable and $\abs{f}$ is bounded, then $\int_A f = \sum_{\varphi \in \Phi} \int_A \varphi f$.
+    \begin{proof}
+        We'll use Spivak problem 3-22. For all $\eps > 0$, there exists a compact Jordan measurable $C \subset A$ such that $\int_{A \setminus C} 1 = \int_A \chi_{A \setminus C} < \eps$. Only finitely many $\varphi \in \Phi$ are nonzero on $C$;
+        \begin{align*}
+            \abs{\int_A f - \sum_{\varphi \in \Theta} \int_A \varphi f} &\leq \int_A \abs{f - \sum_{\varphi \in \Theta} \varphi f} \\
+            &\leq M \int_A \abs{1 - \sum_{\varphi \in \Theta} \varphi} \\
+            &= M \int_A \left(1 - \sum_{\varphi \in \Theta} \varphi\right) \\
+            &= M \int_A \sum_{\varphi \in \Theta} \varphi \leq M \int_{A \setminus C} 1 < M \eps
+        \end{align*}
+        as desired.
+    \end{proof}
+\end{enumerate}
