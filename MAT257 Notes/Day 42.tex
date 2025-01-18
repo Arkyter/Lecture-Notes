@@ -1,0 +1,13 @@
+\section{Day 42: Change of Variables (Jan. 17, 2025)}
+Recall the definition of integration by substitution; let $g : [a, b] \to \RR$ be continuously differentiable, and let $f : \RR \to \RR$ be continuous. Then
+\[ \int_{g(a)}^{g(b)} f = \int_a^b (f \circ g) g'. \]
+If $g$ is injective, then
+\[ \int_{g([a, b])} f = \int_{a, b]} (f \circ g) \abs{g'}, \]
+where we consider the cases in which $g$ is increasing or decreasing separately.
+\begin{simplethm}
+    Given $A \subset \RR^n$ open, $g : A \to \RR^n$ injective and continuously differentiable, and $\det g'(x) \neq 0$ at every point of $A$, then $f : [a, b] \to \RR$ is integrable if and only if $f \circ g \abs{\det g'} : A \to \RR$ is integrable, i.e.
+    \[ \int_{g(A)} f = \int_A f \circ g \abs{\det g'}., \] 
+\end{simplethm}
+\noindent It's enough to prove that $f : g(A) \to \RR$ is integrable implies that $f \circ g \abs{\det g'} : A \to \RR$ is integrable, and the above equality is true; i.e., $F = f \circ g \abs{\det g'}$ is integrable, then $f$ is integrable. This is because by applying the weaker version of the theorem to $g^{-1}$, $F$ is integrable implies that $(F \circ g^{-1}) \abs{\det g^{-1}}$ is integrable, and
+\[ (F \circ g^{-1}) \abs{\det g^{-1}} (y) = F(g^{-1}(y)) \frac{1}{\abs{\det g'(g^{-1}(y))}} = f(y), \]
+since $(g^{-1})'(y) = (g'(g^{-1}(y)))^{-1}$ by the inverse function theorem.
