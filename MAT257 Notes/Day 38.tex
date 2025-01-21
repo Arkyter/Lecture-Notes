@@ -4,8 +4,8 @@ This lecture, we will build up to the idea of a \textit{bump function}. Given $C
 \begin{enumerate}[label=(\roman*)]
     \item Let $g : \RR \to \RR$ be a $\SC^\infty$ function such that $g(x) > 0$ on $(-1, 1)$ and $g(x) = 0$ outside $(-1, 1)$. Then $g(x)$ can be given by
     \[ g(x) = \begin{cases} e^{-\frac{1}{(x-1)^2}} e^{-\frac{1}{(x+1)^2}}, &x \in (-1, 1), \\ 0, &x \not\in (-1, 1). \end{cases} \]
-    \item Given $a \in \RR^n$, $\delta > 0$, there is a $\SC^\infty$ function $g_{a,d} : \RR^n \to \RR$  such that $g_{a,d}(x) \geq 0$ on the ball $\abs{x - a} < \delta$ and equal to $0$ otherwise. In particular, we may write
-    \[ g_{a,d}(x) = g\left(\frac{\abs{x - a}^2}{\delta^2}\right). \]
+    \item Given $a \in \RR^n$, $\delta > 0$, there is a $\SC^\infty$ function $g_{a,\delta} : \RR^n \to \RR$  such that $g_{a,\delta}(x) \geq 0$ on the ball $\abs{x - a} < \delta$ and equal to $0$ otherwise. In particular, we may write
+    \[ g_{a,\delta}(x) = g\left(\frac{\abs{x - a}^2}{\delta^2}\right). \]
     \item Given $C \subset U \subset \RR^n$, there is a $\SC^\infty$ function $F : \RR^n \to \RR$ such that $F \geq 0$, with $F(x) > 0$ whenever $x \in C$ and $F(x) = 0$ if $x$ is outside some compact subset of $U$. Take $F = \sum_{k} g_{a_k, \delta_k}$.
     \item Given $\eps > 0$, there is a $\SC^\infty$ function $h_\eps : \RR \to \RR$ such that $0 \leq h_\eps \leq 1$, where $h_\eps(x) = 0$ if $x \leq 0$ and $h_\eps(x) = 1$ if $x \geq \eps$. Let $g$ be a $\SC^\infty$ function such that $g(x) \geq 0$ on $(0, \eps)$, and $0$ outside of $(0, \eps)$ with the same construction from (ii). Take
     \[ h_\eps(x) = \dfrac{\int_0^x g}{\int_0^\eps g}. \]
