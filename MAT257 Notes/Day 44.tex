@@ -1,0 +1,24 @@
+\section{Day 44: Change of Variables, Pt. 2 (Jan. 22, 2025)}
+Given $A \subset \RR^n$ open, $g : A \to \RR^n$, injective, and continuously differentiable with $\det g'(x) \neq 0$ for $x \in A$, if $f$ is integrable on $g(A)$, then $f \circ g \abs{\det g'}$ is integrable on $A$, and
+\[ \int_{g(A)} f = \int_A f \circ g \abs{\det g'}. \]
+We provide a correction to a previous lemma;
+\begin{simplelemma}
+    Given $A \subset \RR^n$ open, $\SC^1$ $g : A \to \RR^m$, if $B \subset A$ has measure zero, then $g(B)$ has measure zero.
+\end{simplelemma}
+\noindent This is true if $g$ is $\SC^1$, by MVT.
+\medskip\newline
+For example, let $g : \RR^n \to \RR^n$, $g(x) = T(x)$, where $T$ is a linear transformation. If $A \subset \RR^n$ is Jordan measurable, i.e. $g'(x) = T$, then $g(A)$ is Jordan measurable and $\mathrm{vol}(g(A)) = \abs{\det T \cdot \mathrm{vol}(A)}$.
+\begin{enumerate}[label=(\roman*)]
+    \item If $T$ is invertible, then $g$ takes $\int A$ to $\int B$, and $g(A)$ is Jordan measurable by the lemma,
+    \[ \mathrm{vol}(g(A)) = \int_{g(A)} 1 = \int_A \abs{\det g'} = \abs{\det T} \int_A 1 = \abs{\det T} \mathrm{vol}(A). \]
+    \item If $T$ is not invertible at $0$, then let $T = 0$. $T$ is linear, so $g(A)$ lies in a proper linear subspace, and therefore has measure zero.
+\end{enumerate}
+We now prove the Change of Variables theorem. Consider $U \subset A$ open, Jordan measurable, with closure in $A$. If $f$ is integrable on $g(A)$, then $f$ is integrable on $g(U)$, which is open, Jordan measurable, has closure in $g(A)$, i.e., is bounded on $g(U)$, since the closure of $g(U)$ is compact. Moreover, its discontinuities are of measure zero.
+\begin{enumerate}[label=(\roman*)]
+    \item (\textit{Reduction to Local Statement}) Let $\SO$ be an open cover of $A$ by sets $U$ as per above; i.e., for each $U \in \SO$ and any integrable $f$, we have
+    \[ \int_{g(U)} f = \int_U (f \circ g) \abs{\det g'}. \]
+    Then the thereom is true on the entirety of $A$, since $g$ is automatically locally injective for each point. To prove this, observe that $\{g(U) \mid U \in \SO\}$ covers $g(A)$. Then let $\Phi$ be a compactly supported partition of unity subordinate to this cover; every $\varphi \in \Phi$ vanishes outside a compact subset of $g(U)$ for some $U$, so $\varphi \circ g$ vanishes outside a compact subset of $U$, from the local injectivity of $g$, and so we have
+    \[ \int_{g(A)} \varphi f = \int_{g(U)} \varphi f = \int_U (\varphi f) \circ g \abs{\det g'} = \int_A (\varphi f) \circ g \abs{\det g'} \]
+    as desired.
+\end{enumerate}
+The other $3$ cases from Spivak will be covered in next lecture.
