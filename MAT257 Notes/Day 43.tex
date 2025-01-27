@@ -1,0 +1,30 @@
+\section{Day 43: Examples of Change of Variables (Jan. 20, 2025)}
+We give some examples of change of variables today.\footnote{good lord this is tikz hell}
+\begin{enumerate}[label=(\alph*)]
+    \item (\textit{Polar Coordinates}) Let $A, C$ be open, closed rectangles respectively in $\RR^2$, such that $A = (0, r) \times (0, \theta)$ and $C = [0, r] \times [0, \theta]$ (with $\theta \leq 2\pi$). Then we may perform a change of coordinates with $(x, y) \mapsto (r \cos \theta, r \sin \theta)$. Note that we have
+    \[ \frac{\partial(x, y)}{\partial(r, \theta)} = \begin{pmatrix} \cos \theta & - r \sin \theta \\ \sin \theta & r \cos \theta \end{pmatrix} \implies \abs{\det \frac{\partial(x, y)}{\partial(r, \theta)}} = r, \]
+    and so
+    \[ \iint_B f(x, y) \, dx \, dy = \iint_A f(r \cos \theta, r \sin \theta) r \, dr \, d\theta, \]
+    where $B$ is the sector of the circle with radius $r$, angle measure $\theta$ obtained from the transformation above.
+    \item (\textit{Spherical Coordinates}) Let $(x, y, z) \mapsto (r \cos \theta \sin \varphi, r \sin \theta \cos \varphi, r \cos \theta)$, bounded by $(r, \theta, \varphi) \in [0, \infty) \times [0, \pi] \times [0, 2\pi]$. We then compute the Jacobian and find that $\det = r^2 \sin \theta$, as shown below,
+    \[ \frac{\partial(x, y, z)}{\partial(r, \theta, \varphi)} = \begin{pmatrix} \cos \varphi \sin \theta & r \cos \varphi \cos \theta & - r \sin \varphi \sin \theta \\ sin \varphi \sin \theta & r \sin \varphi \cos \theta & r \cos \varphi \sin \theta \\ \cos \theta & - r \sin \theta & 0 \end{pmatrix}, \]
+    in which we may evaluate $\abs{\det \partial_{r, \theta, \varphi}(x, y, z)} = r^2 \sin \theta$ as desired through cofactor expansion. In particular, by the same construction as previous, we have
+    \[ \iiint_B f(x, y, z) \, dx \, dy \, dz = \iiint_A f(r, \theta, \varphi) r^2 \sin \theta \, dr \, d\theta \, d\varphi. \]
+    For example, the volume of a ball with radius $r$ is given by the above,
+    \[ \int_0^{2\pi} \int_0^\pi \int_0^r \rho^2 \sin \theta \, d\rho \, d\theta \, d\varphi = \Eval{\frac{\rho^3}{3}}{0}{r} \cdot \Eval{(-\cos \theta)}{0}{2\pi} \cdot 2\pi = \frac{4}{3} \pi r^3. \]
+    \item (\textit{Volume of an Ellipsoid of Revolution}) For an example, consider the region given by the following equation,
+    \[ \frac{x^2 + y^2}{a^2} + \frac{z^2}{b^2} \leq 1, \]
+    where the boundary is given by $z = \pm \frac{b}{a} \sqrt{a^2 - x^2 - y^2}$. We may express half the volume of the ellipsoid as
+    \[ \frac{V}{2} = \frac{b}{a} \iint_{x^2 + y^2 \leq a^2} \sqrt{a^2 - x^2 - y^2} \, dx \, dy, \]
+    and use polar coordinates to rewrite as follows,
+    \[ \frac{b}{a} \int_0^{2\pi} \int_0^a r \sqrt{a^2 - r^2} \, dr \, d\theta = \frac{b}{a} \cdot 2\pi \int_0^a r \sqrt{a^2 - r^2} \, dr = \frac{b}{a} \cdot 2\pi \cdot \frac{a^3}{3}, \]
+    where we obtain $V = \frac{4}{3} \pi a^2 b$.
+    \item (\textit{Volume of a General Ellipsoid}) Consider the region given by the following equation,
+    \[ E : \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} \leq 1. \]
+    We could use generalized spherical coordinates, i.e.
+    \[ (x, y, z) \mapsto (a \cos \varphi \sin \theta, b \sin \varphi \sin \theta, c \cos \theta), \]
+    or $(x, y, z) \mapsto (au, bv, cw)$, which takes $B : u^2 + v^2 + w^2 \leq 1$ to the ellipsoid. Then we have
+    \[ \abs{\det \frac{\partial(x, y, z)}{\partial(u, v, w)}} = abc, \]
+    and we get
+    \[ \iiint_{E} 1 \, dx \, dy \, dz = \iiint_{B} abc \, du \, dv \, dw = abc \cdot \left(\frac{4}{3} \pi\right). \]
+\end{enumerate}
