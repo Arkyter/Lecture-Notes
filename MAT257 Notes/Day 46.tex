@@ -1,0 +1,21 @@
+\section{Day 46: Change of Variables, Pt. 4 (Jan. 27, 2025)}
+Today, we complete the proof of the change of variables theorem. Given a point $a \in A$, we can assume $g'(a) = I$; we may do this since $T = g'(a)$, and consider that
+\[ (T^{-1} \circ g)'(a) = T^{-1} \circ g'(a) = I, \]
+and $g = T \circ T^{-1}(g)$ as desired. We now prove the theorem by inducting on $n$;
+\begin{itemize}
+    \item For $n = 1$, the theorem clearly holds as per integration by substitution.
+    \item Assume that the theorem holds for $n-1$; it is enough to show that for all $a \in A$, there exists a Jordan measurable open subset $U$ with closure in $A$ such that the theorem holds for $U$ with $f = 1$; we may also assume that $g'(a) = I$. Let's express $g$ \textit{locally} as a composite of two mappings, each of which changes fewer than $n$ coordinates. Let $h : A \to \RR^n$, and $h(x) = (g_1(x), \dots, g_{n-1}(x), x_n)$, with $h'(a) = I$; so there exists an open neighborhood $U' \ni a$ such that $\restr{h}{U'}$ is a $\SC^1$ injective function that satisfies $\det(\restr{h}{U'})'(x) \neq 0$.
+    \medskip\newline
+    Let $k : h(U') \to \RR^n$ be given by $y \mapsto (y_1, \dots, y_{n-1}, g_n(h^{-1}(y)))$, and $g = k \circ h$ on $U'$. With this, we have expressed $g$ as the composition of two maps, each of which changes fewer than $n$ coordinates, and so there is an open neighborhood $V$ of $h(a)$ in $h(U')$ on which $h$ is $\SC^1$ and injective, with $\det h'(y) \neq 0$.
+    \medskip\newline
+    Take $U = h^{-1}(V)$, and $g = h \circ k$, where $h : U \to \RR^n$, $k : V \to h(U) \to \RR^n$. By (iii) from last lecture, it is enough to prove the theorem for $h, k$ individually. Given $a \in U$, let $D'$ be a closed rectangle in $U$ with $a \in \mathrm{int} \, D'$, and $D' = D \times [a_n, b_n]$, where $D$ is a rectangle in $\RR^{n-1}$. We want to show that
+    \[ \int_{h(D')} 1 = \int_{D'} \abs{\det h'}; \]
+    specifically, by Fubini's, we have
+    \[ \int_{h(D')} 1 = \int_{[a_n, b_n]} \left( \int_{h(D \times \{x_n\})} 1 \, dx_1, \dots, \, dx_{n-1} \right) dx_n. \]
+    Let $h_{x_n}(x_1, \dots, x_{n-1}) = (g_1(x_1, \dots, x_n), \dots, g_{n-1}(x_1, \dots, x_n)))$. Then $h_{x_n} : D \to \RR^{n-1}$, is injective because $h$ is also injective, and we get that the above integral is equal to
+    \begin{align*}
+        &= \int_{[a_n, b_n]} \left( \int_D \abs{\det h_{x_n}' (x_1, \dots, x_{n-1})} \, dx_1, \dots, dx_{n-1} \right) dx_n \\
+        &= \int_{[a_n, b_n]} \left( \int_D \abs{\det h' (x_1, \dots, x_{n-1})} \, dx_1, \dots, dx_{n-1} \right) dx_n \\
+        &= \int_{D'} \abs{\det h'}. \qed
+    \end{align*}
+\end{itemize}
