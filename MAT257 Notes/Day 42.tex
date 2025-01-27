@@ -10,4 +10,11 @@ where we consider the cases in which $g$ is increasing or decreasing separately.
 \end{simplethm}
 \noindent It's enough to prove that $f : g(A) \to \RR$ is integrable implies that $f \circ g \abs{\det g'} : A \to \RR$ is integrable, and the above equality is true; i.e., $F = f \circ g \abs{\det g'}$ is integrable, then $f$ is integrable. This is because by applying the weaker version of the theorem to $g^{-1}$, $F$ is integrable implies that $(F \circ g^{-1}) \abs{\det g^{-1}}$ is integrable, and
 \[ (F \circ g^{-1}) \abs{\det g^{-1}} (y) = F(g^{-1}(y)) \frac{1}{\abs{\det g'(g^{-1}(y))}} = f(y), \]
-since $(g^{-1})'(y) = (g'(g^{-1}(y)))^{-1}$ by the inverse function theorem.
+since $(g^{-1})'(y) = (g'(g^{-1}(y)))^{-1}$ by the inverse function theorem. We can use this function to ``compare'' definite integrals as follows; consider $A \subset C \subset \RR^n$, with $A$ open, $C$ compact, and $C \setminus A$ measure zero. Then $A, C$ are Jordan measurable, since $\partial C, \partial C \setminus A$ are of measure zero. Assume $g$ is injective, continuously differentiable on $A$, $\det g'(x) \neq 0$, and $x \in A$; then $f$ is integrable on $g(C)$ if and only if $f \circ g \abs{\det g'}$ is integrable on $C$, and
+\[ \int_{g(C)} f = \int_C f \circ g \abs{\det g'}. \]
+This follows from the theorem, since $g(C) \setminus g(A) \subset g(C \setminus A)$, and so $g(C) \setminus g(A)$ is of measure zero. Then we have that
+\[ \int_{g(C)} f = \int_{g(A)} f = \int_A f \circ g \abs{\det g'} = \int_C f \circ g \abs{\det g'}. \]
+\begin{simplelemma}
+    If $A \subset \RR^n$, $g : A \to \RR^n$ is continuous and $B \subset A$ is of measure zero, then $g(B)$ is of measure zero.
+\end{simplelemma}
+\noindent It is enough to prove that if $C \subset A$ is compact, then $g(B \cap C)$ is of measure zero. $A$ can be covered by an expanding union of compact sets $\{C_i\}$ (with $C_i \subset C_{i+1}$) so that $\{g(C_i)\}$ to form a countable cover of $g(A)$. Then there exists $\delta > 0$ such that $\abs{g(x) - g(y)} \leq c \abs{x - y}$ for all $x \in C$ and $\abs{x - y} < \delta$, by uniform continuity of $g$ on a neighborhood of $C$. Therefore, every ball of radius $\eps$ is mapped to a ball of radius $\eps$ (which is what we mean when we say measure zero).
