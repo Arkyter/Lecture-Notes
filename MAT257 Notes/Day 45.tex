@@ -1,0 +1,40 @@
+\section{Day 45: Change of Variables, Pt. 3 (Jan. 24, 2025)}
+Given $A \subset \RR^n$ open, let $g : A \to \RR$ be injective, $\SC^1$, $\det g'(x) \neq 0$ on $A$. Then if $f : g(A) \to \RR$ is integrable, then $(f \circ g) \abs{\det' g}$ is integrable on $A$, and
+\[ \int_{g(A)} f = \int_A (f \circ g) \abs{\det g'}. \]
+We now prove the theorem.
+\begin{enumerate}[label=(\roman*)]
+    \item (\textit{Coverings}) It's enough to prove that for all open covers $\SO$ of $A$ by Jordan measurable sets $U$ with closure in $A$, we have, for all $U \in \SO$,
+    \[ \int_{g(U)} f = \int_U (f \circ g) \abs{\det g'}. \]
+    Let $\{g(U) \mid U \in \SO\}$ be an open cover of $A$ by sets as above; then let $\Phi = \{\varphi\}$ be a compactly supported, $\SC^\infty$ partition of unity subordinate to $\{g(U)\}$. Then $\{\varphi \circ g\}$ is a partition of unity subordinate to $\SO$, and
+    \[ \int_{g(A)} \varphi f = \int_{g(U)} \varphi f = \int_U (\varphi f) \circ g \abs{\det g'} = \int_A (\varphi f) \circ g \abs{\det g'}, \]
+    in which we may note
+    \[ \int_{g(A)} f = \sum_{\varphi \in \Phi} \int_{g(A)} \varphi f = \sum_{\varphi \in \Phi} \int_A \underbrace{(\varphi f) \circ g}_{= \, (\varphi \circ g)(f \circ g)} \abs{\det g'}. \]
+    The same equation holds with $\abs{f}$ in place of $f$, which shows that $(f \circ g) \abs{\det g'}$ is indeed integrable on $A$.
+    \begin{remark}
+        The theorem also follows from the assumption that
+        \[ \int_V f = \int_{g^{-1}(V)} (f \circ g)\abs{\det g'} \]
+        for $V$ in some admissible cover of $g(A)$. This follows from (i) applied to $g^{-1}$.
+    \end{remark}
+    \item (\textit{Constant Functions}) If $\{V\}$ is an open cover of $g(A)$ by open rectangles with closure in $g(A)$, then for all $V$,
+    \[ \int_V f = \int_{g(V)} (f \circ g) \abs{\det g'} \]
+    for $f = 1$. To start, it is enough to show that the above equation holds for any integrable $f$; if it holds for $f = 1$, then it holds for any $f = c$, where $c$ is some constant. Let $P$ be a partition of $V$, and let, for all subrectangles $S$ of $P$, $f_S = m_S(f)$ a constant function; then write
+    \begin{align*}
+        L(f, P) &= \sum_S m_S(f) v(S) = \sum_S \int_S f_s \\
+        &= \sum_S \int_{g^{-1}(\int S)} (f_s \circ g) \abs{\det g'} \\
+        &\leq \sum_S \int_{g^{-1}(\int S)} (f \circ g) \abs{\det g'} \leq \int_{g^{-1}(V)} (f \circ g) \abs{\det g'}.
+    \end{align*}
+    We may note that $\int_V f = \sup_P L(f, P)$, which shows
+    \[ \int_V f \leq \int_{g^{-1}(V)} (f \circ g) \abs{\det g'} \]
+    as desired; a similar argument with $f_S = M_S(f)$ yields the above inequality in the opposite direction.
+    \item (\textit{Compositions}) If the theorem is true for $g : A \to \RR^n$ and $h : g(A) \to \RR^n$, then it holds for $h \circ g : A \to \RR^n$. Directly write as follows,
+    \begin{align*}
+        \int_{h \circ g(A)} f &= \int_{g(A)} (f \circ h) \abs{\det h'} \\
+        &= \int_A ((f \circ h) \abs{\det h'}) \circ g \cdot \abs{\det g'} \\
+        &= \int_A f \circ (h \circ g) \abs{\det (h \circ g)'},
+    \end{align*}
+    as desired.
+    \item (\textit{Invertible Linear Transformations}) The theorem is true if $g$ is an invertible linear transformation, i.e. $g'(x) = g$.\footnote{watefak} By (i), (ii), it is enough to show that for all open rectangles $V$ with closure in $g(A)$, we have that
+    \[ \int_{g(U)} 1 = \int_U \abs{\det g'}, \]
+    i.e., $\mathrm{vol}(g(U)) = \abs{\det g'} \mathrm{vol}(U)$. Then $g$ is a composite of elementary functions; by (iii), it is enough to prove that the theorem holds for elementary functions.
+\end{enumerate}
+We finish the proof next lecture.
