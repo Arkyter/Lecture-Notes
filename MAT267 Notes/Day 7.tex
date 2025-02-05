@@ -1,0 +1,62 @@
+\section{Day 7: Recap on Jordan Forms; Matrix Exponential (Jan. 29, 2025)}
+We start with a recap on Jordan forms, and how to work with them. Follow along on the handout \href{https://q.utoronto.ca/courses/381819/files/35834900?module_item_id=6520178}{here}. Let $V$ be a finite-dimensional vector space over $F$, and suppose $T : V \to V$ is a linear operator satisfying
+\[ (T - \lambda_1)^{k_1} \dots (T - \lambda_m)^{k_m} = 0, \]
+for distinct $\lambda_1, \dots, \lambda_m \in F$, with accompanying Jordan form
+\[ J = \begin{pmatrix} J(\lambda_1, k_1) & & 0 \\ & \ddots & \\ 0 & & J(\lambda_n, k_n) \end{pmatrix}. \]
+We may decompose $V = \bigoplus_{i=1}^m \ker(T - \lambda_i)^k_i$. We now look at the Jordan blocks individually; we start with the following proposition,
+\begin{simpleprop}
+    Let $\textbf{t} = (t_0, t_1, \dots)$ where $t_i = \dim \ker(T - a)^i$. Then $T$ has $s_i$ Jordan blocks of size $i$, where $\textbf{s} = (s_0, s_1, \dots)$ given by
+    \[ \textbf{s} = -R(L - 1)^2\textbf{t}, \]
+    where $L, R$ are the left and right shift operators on sequences.
+\end{simpleprop}
+\noindent We then iterate this over all $a = \lambda_i$. How do we find a Jordan basis? While we must note that the choice of Jordan basis is not unique, the Jordan form will always consist of the same number of blocks of each size; specifically, we may proceed as follows.
+\begin{definition}
+    Let $U \subset V$ be a linear subspace. Then we say that the list of vectors $\{v_1, \dots, v_\ell\}$ in $V$ is ``linearly independent mod $U$'' when $\sum \alpha_i v_i \in U$ implies $\alpha_i = 0$ for each index $i$. We say that $\{v_1, \dots, v_\ell\}$ is a ``basis of $V$ mod $U$'' when it is linearly independent mod $U$ and $V = U + \spn\{v_1, \dots, v_\ell\}$.
+\end{definition}
+\noindent It is easy to find a basis of $V$ mod $U$; simply choose a basis for $U$, and extend it to one for $V$; then the vectors in the extension are a basis of $V$ mod $U$. We now provide a method to find a Jordan basis; to do this, we will do it one eigenvalue at a time, which we will denote $a$ for the remainder of this procedure; the idea is to find a cyclic vector for each Jordan block, which then generates the Jordan basis for that block.
+\begin{enumerate}[label=(\roman*)]
+    \item Choose a basis $\{v_k^1, \dots, v_k^{s_k}\}$ of $V(a) = \ker (T - a)^k$ mod $\ker (T - a)^{k-1}$. These will be our cyclic vectors for the Jordan blocks of size $k$. There are $s_k = t_k - t_{k-1}$ of them.
+    \item If $k = 1$, we may stop here; otherwise, apply $(T - a)$ to the cyclic vectors from the previous step, obtaining $(T - a)v_k^i$ in $\ker (T - a)^{k-1}$. Then the idea is that
+    \[ \{(T - a) v_k^1 , \dots, (T - a) v_k^{s_k}\} \text{ is linearly independent } \mathrm{mod} \, \ker (T - a)^{k-2}, \]
+    in which we may extend to a basis of $\ker (T - a)^{k-1} \mathrm{mod} \, \ker (T - a)^{k-2}$, which we may do by choosing $\{v_{k-1}^1, \dots, v_{k-1}^{s_k-1}\}$, which are then cyclic vectors for the Jordan blocks of size $k-1$.
+    \item We may then repeat step $2$, with $k$ replaced with $k-1$ until we reach $k = 1$. This is a finite algorithm, since $V$ is finite dimensional.
+\end{enumerate}
+It may be more useful to access \href{https://q.utoronto.ca/courses/339533/pages/lecture-notes?module_item_id=5307111}{Meinrenken's notes} instead.
+\newpage
+\noindent For any square matrix $A \in \RR^{n \times n}$, let us define the matrix exponential function
+\[ E(t) := e^{tA} := \sum_{k=0}^\infty \frac{t^k}{k!} A^k, \]
+where $t \in \RR$. In particular, we have that $X' = AX$ with initial value $E(0) = \id$ has $E(t)$ as the unique solution. We call this the \textit{fundamental solution} of said ODE. We note that $e^{tA}$ enjoys several properties;
+\begin{enumerate}[label=(\roman*)]
+    \item (\textit{Inheritance of Eigenvalues and Eigenvectors}) Suppose $v$ is an eigenvector of $A$, with eigenvalue $\lambda$. Then $v$ is also an eigenvector of $e^{tA}$.
+    \item (\textit{Semigroup Property}) For any $s, t \in \RR$, $e^{(s+t)A} = e^{sA} e^{tA}$. In particular, $e^{0A} = I$, and $e^{(-t)A} = (e^{tA})^{-1}$.
+    \item (\textit{Commuting Matrices}) If $AB = BA$, then $e^{t(A+B)} = e^{tA} e^{tB}$. Note that this property fails in general if $AB \neq BA$.
+\end{enumerate}
+In particular, we may write the following; let
+\[ A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}; \hspace{0.2in} B = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}. \]
+Then we may write,
+\begin{align*}
+    e^{t(A + B)} &= \sum_{k \geq 0} \frac{t^k}{k!} (A+B)^k \\
+    &= \underbrace{\sum_{\ell \geq 0} \frac{t^{2\ell}}{(2\ell)!} I}_{\cosh t} + \underbrace{\sum_{\ell \geq 0} \frac{t^{2\ell + 1}}{(2\ell + 1)!} (A + B)}_{\sinh t} \\
+    &= \begin{pmatrix} \cosh t & \sinh t \\ \sinh t & \cosh t \end{pmatrix},
+\end{align*}
+where
+\[ e^{tA} e^{tB} = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ t & 1 \end{pmatrix}. \]
+We now provide some more examples.
+\begin{enumerate}[label=(\roman*)]
+    \item Let $A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$; then
+    \[ A \mapsto -I \mapsto -A \mapsto I \mapsto \dots, \]
+    as $A$ multiplies with itself. Thus, we may write
+    \[ e^{tA} = \sum_{k \geq 0} \frac{t^k}{k!} A^k = \sum_{\ell \geq 0} \frac{t^{2\ell}}{(2\ell)!} (-1)^\ell I + \frac{t^{2\ell + 1}}{(2\ell + 1)!} (-1)^\ell A = \begin{pmatrix} \cos t & - \sin t \\ \sin t & \cos t \end{pmatrix} + \mathrm{SO}(2). \]
+    This is indeed a two-dimensional rotation matrix.
+    \item Let $A = \begin{pmatrix} 0 & a & -b \\ -a & 0 & c \\ b & -c & 0 \end{pmatrix}$, i.e., $A$ is a skew-symmetric matrix with $a, b, c \in \RR$ (but not all zero), then $e^{tA}$ is a $3$-dimensional rotation matrix. To see this, let us claim that $\{e^{tA}\}$ is a subgroup; consider the map $t \mapsto e^{tA}$. Then we do indeed have the property that
+    \[ e^{(t + s)A} = e^{tA} e^{sA}. \]
+    To start, $\lambda_1 = 0$ is an eigenvalue of $A$; notice that
+    \[ 0 = \det{A - \lambda I} = \det{A^t - \lambda I} = \det{-A - \lambda I} = (-1)^3 \det{A + \lambda I}, \]
+    and we have that if $\lambda$ is an eigenvalue, so is $-\lambda$. We also claim that if $\lambda \neq 0$, then $\Re(\lambda) = 0$. To see this, observe that for all $x$, we have that
+    \[ \overline{x}^t(A + \overline{A}^t) x = 0, \]
+    of which we may take $x = v$ as an eigenvector with eigenvalue $\lambda$. Then
+    \[ 0 = \overline{v}^t (A + \overline{A}^t) v = \overline{v}^t Av + (\overline{v}^t \overline{A}^t) v = \overline{v}^t v(\lambda + \overline{\lambda}) = \lambda + \overline{\lambda} = 0. \]
+    For $\lambda_1 = 0$, observe that $v_1 = (c, b, a)^t$ is an eigenvector. We may assume $a^2 + b^2 + c^2 = 1$, and so $\det(A - \lambda I) = -\lambda^3 - (a^2 + b^2 + c^2)\lambda = -\lambda(\lambda^2 + 1)$; then we have that $\lambda_2 = i, \lambda_3 = -i$. Finally, since $A$ is skew-symmetric, we have that $v_2, \overline{v_2}$ are orthogonal, of which both of them are orthogonal to $v_1$.\footnote{some more details I missed because I can't see the board well :( sorry} We get that
+    \[ C = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0 \end{pmatrix} \implies e^{tC} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & \cos t & - \sin t \\ 0 & \sin t & \cos t \end{pmatrix}, \]
+    which is indeed a rotation matrix. We then have that $e^{tA} = T e^{tC} T^{-1}$, which is just a change of basis away from a rotation matrix, rendering $e^{tA}$ a rotation matrix as well. \qed
+\end{enumerate}
