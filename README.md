@@ -1,4 +1,6 @@
 # lecture-notes
+**Heads up!!** - I'm currently unable to walk to most of my lectures, *but* i'll try to keep updating this whenever I can. Sorry!! :c
+
 Lecture notes from my classes at UofT; will be updated daily (hopefully).
 
 **Disclaimer:** This is updated as often as I want... which is most likely daily, unless I burn out or something. If a day is missing, or if some details are wrong, message me (@arkyter on Discord) so I can fix them :3
