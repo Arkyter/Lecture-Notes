@@ -14,7 +14,6 @@ This also means I will revise / change some details from class if I think it hel
 Current list of classes:
 - MAT257 (Analysis II)
 - MAT267 (Advanced ODEs)
-~~- MAT363 (Geometry of Curves and Surfaces)~~
 - APM461 (Combinatorial Methods)
 
 Audit list (notes may be kept, but sparsely):
