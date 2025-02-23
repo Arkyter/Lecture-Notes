@@ -1,2 +1,29 @@
 \section{Day 48: Integration of Lower Dimensional Subsets (Jan. 31, 2025)}
-asdf!
+How do we integrate over a lower dimensional subset of $\RR^n$, such as over a curve or a manifold?
+\begin{enumerate}[label=(\roman*)]
+    \item Let us consider the integral of a continuous function $f(x_1, \dots, x_n)$ over a curve $C$ in $\RR^n$. Let $\gamma$ be a piecewise, $\SC^1$, parameterized curve $C : x = \gamma(t), t \in [a, b]$, where $\gamma$ is continuous except at finitely many points in $[a, b]$. We ask that $\gamma$ be smooth, injective, and $\gamma'(t) \neq 0$ for any $t$. For example, consider $\gamma(\theta) = (\cos \theta, \sin \theta)$ on $[0, 2\pi]$, where we may exclude $\theta = 0$. Can we define $\int_C f$ as $\int_a^b f(\gamma(t)) \, dt$? This depends on the parameterization; for example, $t : [c, d] \to [a, b]$ with $t(s)$ $\SC^1$, $t'(s) > 0$ on $(a, b)$, and $C : x = \delta(s)$, where $\delta(s) = \gamma(t(s))$, we have
+    \[ \int_a^b (f \circ \gamma)(t) \, dt = \int_c^d (f \circ \delta)(s) \delta'(s) \, ds; \]
+    In a way, we may choose a parameterization that depends only on arclength. Recall that the length of $C$ is given by
+    \[ \ell(c) = \int_a^b \abs{\gamma'(t)} \, dt. \]
+    We may define length as the supremum of polygonal approximations to $C$. Let $P = \{t_i\}$ be a partition of $[a, b]$, and let $\ell_P (c) = \sum_{i=1}^k \abs{\gamma(t_i) - \gamma(t_{i-1})}$. We say that $\gamma$ is \textit{rectifiable} if $\sup_P \ell_P(c)$ exists; if it does exist, then we define length as such.
+    \begin{exercise}[Using Riemann sums]
+        If $\gamma$ is $\SC^1$, then $\gamma$ is rectifiable and the length is given by $\int_a^b \abs{\gamma'(t)} \, dt$, which we may write as $\int_C f \, ds$. In this manner, we may define the integral of $f$ over $C$ with respect to arclength as
+        \[ \int_C f \, ds = \int_a^b f(\gamma(t)) \abs{\gamma'(t)} \, dt, \]
+        which depends only on $C$.
+    \end{exercise}
+    \item For line integrals, let the integral over $C : x = \gamma(t)$ with $t \in [a, b]$, and let us have the function $g(x) = (g_1(x), \dots, g_n(x))$ be continuous. Then we have that
+    \[ \int_C g_1(x) \, dx_1 + \dots + g_n(x) \, dx_n = \int_a^b (g_1 \circ \gamma)(t)\gamma_1'(t) + \dots + (g_n \circ \gamma)(t) \gamma_n'(t) \, dt. \]
+    The index of parameterization is the differential form $g_1(x) \, dx_1 + \dots + g_n(x) \, dx_n$, i.e., the differential of a $\SC^1$ function $f(x)$ where
+    \begin{align*}
+        \partial f &= \frac{\partial f}{\partial x_1} \, dx_1 + \dots + \frac{\partial f}{\partial x_n} \, dx_n \\
+        \omega &= \sum_{i=1}^n g_i(x) \, dx_i.
+    \end{align*}
+    If $\omega = df$, we say that $f$ is primitive of $\omega$; then $\int_C \omega = f(\gamma(b)) - f(\gamma(a))$, where
+    \[ \int_C \omega = \int_a^b \sum_{i=1}^n \frac{\partial}{\partial x_i} (f \circ \gamma)(t) \gamma_i'(t) = \int_a^b \frac{d(f \circ \gamma)(t)}{dt} \, dt. \]
+    Recall that the tangent space of $\RR^n$ at a point $a$ can be identified with vectors $v = v_a \in \RR$ that are the directional derivatives at $a$;
+    \begin{align*}
+        v_a(f) &= (D_v f)(a) = Df(a)(v) = \sum_{i=1}^n \frac{\partial f}{\partial x_j}(a) v_i \\
+        &= \left(\sum_{i=1}^n v_i \restr{\frac{\partial}{\partial x_i}}{a}\right) (f),
+    \end{align*}
+    where we have that $v_a = \sum_{i=1}^n v_i e_{i,a}$. In particular, we may identify $\restr{\frac{\partial}{\partial x_i}}{a}$ with the standard basis $e_{i,a}$ of $\RR^n_a$, and we have that $dx_i(a)$ is a dual basis. The dual basis of $\RR^n_a$ w.r.t. $e_{i,a}$ are the coordinate functions, if $v_a = \sum_{j=1}^n v_j e_{j,a}$, i.e. $v = (v_1, \dots, v_n)$, then $dx_i(a)(v_a) = v_i$.
+\end{enumerate}
