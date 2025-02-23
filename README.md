@@ -1,5 +1,7 @@
 # lecture-notes
-**Heads up!!** - I'm currently unable to walk to most of my lectures, *but* i'll try to keep updating this whenever I can. Sorry!! :c
+### **Heads up!!** - I'm currently unable to walk to most of my lectures, *but* i'll try to keep updating this whenever I can. Sorry!! :c
+### Update (Feb. 23, 2025) - I'm cleared to walk again, but am currently busy re-learning how to... will return to lectures and catch up on notes now c: meowow
+---
 
 Lecture notes from my classes at UofT; will be updated daily (hopefully).
 
@@ -12,7 +14,7 @@ This also means I will revise / change some details from class if I think it hel
 Current list of classes:
 - MAT257 (Analysis II)
 - MAT267 (Advanced ODEs)
-- MAT363 (Geometry of Curves and Surfaces)
+~~- MAT363 (Geometry of Curves and Surfaces)~~
 - APM461 (Combinatorial Methods)
 
 Audit list (notes may be kept, but sparsely):
@@ -20,6 +22,7 @@ Audit list (notes may be kept, but sparsely):
 
 Archived class list!
 - MAT327 (Intro to Topology); textbook link [here](https://people.math.ethz.ch/~dkosanovic/24-FS/Munkres-Topology.pdf)
+- MAT363 (Geometry of Curves and Surfaces); I dropped this class because I didn't like it :c
 - MAT377 (Probability Theory); class follows the [textbook](https://drive.google.com/file/d/1Rpkr-NCEyqygvypR65RznaZkb36KHB29/view?pli=1) closely, so I won't record notes for some days. Each class goes over about 1 subsection in the book.
 - MAT482 (Composition Laws, Rings of Low Rank, and Related Counting Problems; tl;dr, arithmetic statistics stuff); class has notes taken by professor, so I won't be keeping notes for this as often.
 - MAT1304 (Extremal Combinatorics); ended up not keeping notes for this.
@@ -27,7 +30,7 @@ Archived class list!
 **Todo List**:
 - Rework style files system (like, 10% done or whatev...)
 - smth smth tutorial answers? idk if i *want* to do it tho hmm.
-- day 4-6 of 267, day 2-3 of apm461, day 5-7 of 363
+- day 4-6 of 267, day 2-3 of apm461, one gajillion notes to catch up on. oopsies-
 
 Errata list (?):
-- Empty for now!
+- revisit sard's theorem sometime!
