@@ -1,0 +1,40 @@
+\section{Day 9:}
+Consider the equation $mx'' + vx' = C \sin x$, where $C$ is some constant. This is a differential equation modeling the pendulum system. We may set this up as the system
+\begin{align*}
+    x' &= v, \\
+    v' &= rv - \sin x.
+\end{align*}
+The steady states are given by $v = 0, \sin x = 0$, where $x = k \pi$ and $k \in \ZZ$; specifically, we have
+\[ f(x, v) = \binom{v}{-rv - \sin x} ; \hspace{0.2in} Df(k\pi, 0) = \restr{\begin{pmatrix} 0 & 1 \\ - \cos x & -r \end{pmatrix}}{x=k\pi} \]
+If $k$ is even, then the bottom left entry is $-1$; if it is odd, then the entry is $1$. In particular, their linearizations are given by
+\[ \begin{pmatrix} 0 & 1 \\ 1 & -r \end{pmatrix}, \begin{pmatrix} 0 & 1 \\ -1 & -r \end{pmatrix} \]
+respectively, with determinant $\mp 1$. In particular, if $0 < r < 2$, then the phase portrait is a spiral sink, and a regular sink if $r > 2$.
+\medskip\newline
+We now move onto lessons from TP, $9$ to $11$. Consider the equation $P(x, q) \, dx + Q(x, y) \, dy = 0$; then the equation is said to be \textit{exact} if there exists some $f(x, y)$ such that
+\[ \frac{\partial f}{\partial x} = P(x, y), \hspace{0.2in} \frac{\partial f}{\partial y} = Q(x, y). \]
+If so, we have a one parameter family of solutions given by the level sets $f(x, y) = c$. In particular, if the equation is exact, then we have that
+\[ \frac{\partial}{\partial y} P(x, y) = \frac{\partial}{\partial x} Q(x, y), \]
+where $P, Q, \frac{\partial P}{\partial x}, \frac{\partial P}{\partial y}, \frac{\partial Q}{\partial x}, \frac{\partial Q}{\partial y}$ exist and are contained in and simply connected in region $R$. We now prove that the implication and its converse are true.
+\begin{itemize}
+    \item[$(\Rightarrow)$] If the equation is exact, then $P = \frac{\partial f}{\partial x}, Q = \frac{\partial f}{\partial y}$. In particular,
+    \[ \frac{\partial P}{\partial y} = \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial f^2}{\partial y \partial x} = \frac{\partial Q}{\partial x}. \]
+    \item[$(\Leftarrow)$] If there exists an $f$ such that $\frac{\partial f}{\partial x} = P(x, y)$, then
+    \[ f(x, y) = \int_{x_0}^x P(x, y) \, dx + R(y), \]
+    where $R$ is constant in $x$. We should also have
+    \[ \frac{\partial f}{\partial y} = Q(x, y) \implies Q(x, y) = \frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \int_{x_0}^x P(x, y) \, dx + R'(y), \]
+    which is equal to $Q(x, y) - Q(x_0, y) + R'(y) \int_{x_0}^x \frac{\partial}{\partial x} Q(x, y) \, dy$. In particular, we also have $R'(y) = Q(x_0, y)$ and $R(y) = \int_{y_0}^y Q(x_0, y) \, dy$. Thus, we obtain
+    \[ f(x, y) = \int_{x_0}^x P(x, y) \, dx + \int_{y_0}^y Q(x_0, y) \, dy, \]
+    where $(x_0, y_0)$ is a point in $R$.
+\end{itemize}
+We now talk about integrating factors. If a differential is not exact, then there exists some multiplying factor that converts the equation into an exact one. Theoretically, there exists an integrating factor for every equation of the form $P(x, y) \, dx + Q(x, y) \, dy = 0$, but we do not yet know a general rule to find it for every DE. TP Lesson 10.3 discusses multiple ways to find integrating factors.
+\medskip\newline
+Yeah, I don't feel like transcribing more notes. Just read TP 9-11.
+\medskip\newline
+We now move onto dynamical systems. A smooth dynamical system on $\RR^n$ is a family of continuously differentiable maps $\phi : \RR \times \RR^n \to \RR^n$ where $\phi(t, X) = \phi_t(X)$ for notation, satisfying
+\begin{enumerate}[label=(\roman*)]
+    \item $\phi_0 : \RR^n \to \RR^n$ is the identity function $\phi_0(X_0) = X_0$.
+    \item The composition $\phi_t \circ \phi_s = \phi_{t+s}$ for any $t, s \in \RR$.
+\end{enumerate}
+Specifically, in this class, we consider that $\phi$ is smooth in both $X$ and $t$. If $s, t \in \NN$, then we are talking in discrete time; if $s, t \geq 0$, then we have the semigroup property, which relates to PDEs. We can also replace $\RR^n$ with manifolds $M$ to obtain differential geometry. We now introduce existence and uniqueness.
+\medskip\newline
+Here is a bad example on $\RR$: Let $x' = -1$ when $x \geq 0$, and $1$ when $x < 0$. Solving $x' = F(x)$, we see that if $F$ is discontinuous, then existence might fail. If $F$ is continuous, but not smooth, then uniqueness might fail.
