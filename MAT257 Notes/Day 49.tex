@@ -1,0 +1,37 @@
+\section{Day 49: Multilinear Algebra (Feb. 3, 2025)}
+The coordinates for $\RR^n$, $x = (x_1, \dots, x_n)$ with respect to the standard basis, can be thought of as linear functions $x_i : \RR^n \to \RR$ where $a \mapsto a_i$, i.e., $x_i = \pi_i$, which is the projection onto the $i$th component. Then $\RR^n_a$ tangent space to $\RR^n$ at $a$, where we may denote $e_{i,a}$ as the standard basis or $\restr{\frac{\partial}{\partial x_j}}{a}$. Then for $v_a \in \RR^n_a$, where $v_a = (v_1, \dots, v_n)$ and $dx_i(a)$ is the dual basis, with $dx_i(a)(v_a) = v_i$. Then the $\SC^r$ function $f : \RR^n \to \RR$ determines the $\SC^{r-1}$ $1$-form,
+\[ df : x \mapsto \text{element of dual to tangent space } \RR^n_x. \]
+We can write $df(a)(v_a) = Df(a)(v) = v_a(f)$. For example, let $f = x_i = pi_i : \RR^n \to \RR$ is the projection onto the $i$th coordinate; then
+\begin{align*}
+    dx_i(a)(v_a) &= d \pi_i(a) (v_a) \\
+    &= D \pi_i(a) (v_a) \\
+    &= v_i.
+\end{align*}
+We also have that
+\[ dx_i(a) \left(\restr{\frac{\partial}{\partial x_j}}{a}\right) = \restr{\frac{\partial}{\partial x_j}}{a} (x_i) = \delta_{ij}. \]
+Specifically, $dx_i(a)$ is a dual basis.
+\begin{simplelemma}
+    $df = \frac{\partial f}{\partial x_1} \, dx_1 + \dots + \frac{\partial f}{\partial x_n} \, dx_n$.
+\end{simplelemma}
+\noindent To see this, simply write
+\[ df(a)(v_a) = Df(a)(v) = \sum_{i=1}^n \frac{\partial f}{\partial x_i}(a) v_i = \sum_{i=1}^n \frac{\partial f}{\partial x_i}(a) dx_i(a) (v_a). \]
+We now give some background on multilinear algebra. Let $V$ be an $n$-dual vector space over $\RR$, and let $T : V^k \to \RR$. We say that $T$ is a multilinear function, or equivalently, a $k$-tensor if $T(v_1, \dots, v_k)$ is linear in each $v_i$. We denote $\ST^k(v)$ to be the set of all such tensors. $\ST^k(v)$ has the structure of a vector space; specifically,
+\begin{align*}
+    (S + T)(v_1, \dots, v_k) &= S(v_1, \dots, v_k) + T(v_1, \dots, v_k), \\
+    (aT)(v_1, \dots, v_k) &= aT(v_1, \dots, v_k),
+\end{align*}
+For example, $\ST^1(V)$ is the same as the dual space $V^\ast$. A \textit{tensor product} is the operation $\otimes: \ST^k(V) \times \ST^\ell(V) \to \ST^{k + \ell}(V)$, where
+\[ (S \otimes T)(V_1, \dots, V_{k+\ell}) = S(v_1, \dots, v_k) T(v_{k+1}, \dots, v_{k+\ell}). \]
+Note that $\otimes$ is not commutative, but is distributive and associative, i.e.
+\begin{align*}
+    (S_1 + S_2) \otimes T &= S_1 \otimes T + S_2 \otimes T, \\
+    S \otimes (T_1 + T_2) &= S \otimes T_1 + S \otimes T_2, \\
+    (aS) \otimes T &= a(S \otimes T), \\
+    (S \otimes T) \otimes U &= S \otimes (T \otimes U),
+\end{align*}
+where we may simply write $S \otimes T \otimes U$ instead.
+\begin{simpleprop}
+    Let $v_1, \dots, v_n$ be a basis of $V$, and let $\varphi_1, \dots, \varphi_n$ be a dual basis. Then $\varphi_{i_1}, \dots, \varphi_{i_k}$, where $1 \leq i_1, \dots, i_k \leq n$, is a basis of $\ST^k(V)$. In particular, $\dim \ST^k(V) = n^k$.
+\end{simpleprop}
+\noindent The proof is straightforward. Let us write as follows,
+\[ (\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k})(v_{ji}, \dots, v_{jk}) = \delta_{i_1,j_1} \delta_{i_2,j_2} \dots \delta_{i_k,j_k} = \begin{cases} 1 & \text{if } i_1 = j_1, \dots, i_k = j_k, \\0 & \text{otherwise.} \end{cases} \]
