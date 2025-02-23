@@ -1,0 +1,12 @@
+\section{Day 47: Sard's Theorem (Jan. 29, 2025)}
+The change of variables theorem is true without the hypothesis that $\det g'(x) \neq 0$ for all $x \in A$.
+\begin{simplethm}
+    Given $A \subset \RR^n$, open, $\SC^1$ function $g : A \to \RR^n$, let $B = \{ x \mid A \mid \det g'(x) = 0\}$. Then $g(B)$ has measure zero.
+\end{simplethm}
+\noindent It is enough to prove that if $J$ is a closed cube in $A$, then $g(J \cap B)$ has measure zero. This is because we can cover $A$ with countably many closed cubes in $A$. Subdivide $J$ into $N^n$ subcubes with sidelength $\ell/N$; given $\eps$, we can choose $N$ such that, for all $x, y$ in some subcube $S$, we have
+\[ \abs{Dg(x)(y - x) - g(y) + g(x)} < \eps \abs{x - y}. \]
+If $A = (a_{ij})$, then let $\abs{A} = \max_{i,j} \abs{a_{ij}}$. $Dg(x)$ uniformly acts on $J$, so we can choose $N$ such that $\abs{Dg(x) - Dg(y)} < \frac{\eps}{n^2}$ for all $x, y \in S$. Since a continuous function on a compact set is uniformly continuous, consider $x \in S$, and let $f(z) = Dg(x)(z) - g(z)$, which is a $\SC^1$ function on $z$. Then $Df(z) = Dg(x) - Dg(z)$, so $\abs{Df(z)} < \frac{\eps}{n^2}$, for any $z \in S$. Then we have that
+\[ \abs{Dg(x)(y - x) - g(y) + g(x)} = \abs{f(y) - f(x)} < \eps \abs{x - y} \]
+by MVT as desired. If $S \cap B \neq \emptyset$, then take $x \in B$; since $\det g'(x) = 0$, as the image lies in a proper linear subspace, we have that $Dg(x)(y-x)$ lies in an $n-1$ dimensional linear subspace $V$ of $\RR^n$. Let $Dg(x)(y-x) + g(x) \in V + g(x)$; so $g(y) < \sqrt{n} \eps \frac{\ell}{N}$. Therefore, $\{ g(y) \mid y \in S \}$ lies within $\eps \sqrt{n} \frac{\ell}{N}$ of $v + g(x)$, and we have that
+\[ \abs{g(y) - g(x)} < M \abs{x - y} < M \sqrt{n} \frac{\ell}{N} \]
+for all $x, y \in S$, by MVT. Therefore, $g(y)$ lies within a cylinder with radius $\eps \sqrt{n} \frac{\ell}{N}$ above a ball of radius $M \sqrt{n} \frac{\ell}{N}$ centered on $g(x)$, in $V + g(x)$. The volume of said cylinder is less than $c \eps \left(\frac{\ell}{N}\right)^n$, and so $g(J \cap B)$ lies in a set of volume less than $c \eps \ell^n$ for all $\eps > 0$, which we may take $\eps \to 0$ to see $g(J \cap B)$ has measure zero. \footnote{note to self: revisit this proof. i don't intuitively get it.}
