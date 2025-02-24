@@ -1,0 +1,43 @@
+\section{Day 51: Alternating Tensors and Wedge Product (Feb. 7, 2025)}
+Consider the projection $\Alt$ of $\ST^k(V)$ onto $\Omega^k(V)$, where
+\[ \Alt T(v_1, \dots, v_k) = \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) (v_{\sigma(1)}, \dots, v_{\sigma(k)}). \]
+Let us define the wedge product,
+\begin{align*}
+    \wedge &: \Omega^k(V) \times \Omega^\ell(V) \to \Omega(k + \ell)(V) \\
+    \omega \wedge \eta &= \frac{(k + \ell)!}{k! \ell!} \Alt(\omega \otimes \eta).
+\end{align*}
+We have that $\wedge$ enjoys a handful of properties, specifically
+\begin{align*}
+    (\omega_1 + \omega_2) \wedge \eta &= \omega_1 \wedge \eta + \omega_2 \wedge \eta \\
+    \omega \wedge (\eta_1 + \eta_2) &= \omega \wedge \eta_1 + \omega \wedge \eta_2 \\
+    (a\omega \wedge \eta) &= a (\omega \wedge \eta) \\
+    \omega \wedge \eta &= (-1)^{k \ell} \eta \wedge \omega \\
+    f^\ast (\omega \wedge \eta) &= f^\ast \omega \wedge f^\ast \eta.
+\end{align*}
+Additionally, $\wedge$ is associative, i.e. $(\omega \wedge \eta) \wedge \theta = \omega \wedge (\eta \wedge \theta)$, but requires more work to prove.
+\begin{simplelemma}[Spivak 4-4]
+    The alternating tensor enjoys the following properties,
+    \begin{enumerate}[label=(\roman*)]
+        \item If $S \in \ST^k(V)$, $T \in \ST^\ell(V)$, and $\Alt S = 0$, then $\Alt (S \otimes T) = \Alt (T \otimes S) = 0$.
+        \item If $S \in \ST^k(V)$, $\eta \in \Omega^\ell(V)$, then $\Alt S \wedge \eta = \frac{(k+\ell)!}{k! \ell!} \Alt(S \otimes \eta)$.
+    \end{enumerate}
+\end{simplelemma}
+\noindent The first part of the lemma is left in a future homework assignment. For the second part, we have that
+\[ \Alt S \wedge \eta = \frac{(k+\ell)!}{k! \ell!} \Alt(\Alt S \otimes \eta), \]
+and so on. (where are we going with this?)
+\begin{simplelemma}[Spivak 4-4, part (iii)]
+    The alternating tensor also enjoys the property,
+    \begin{enumerate}[label=(\roman*)]
+        \setcounter{enumi}{2}
+        \item Let $\omega \in \Omega^k(V), \eta \in \Omega^\ell(V), \theta \in \Omega^m(V)$, then
+        \[ (\omega \wedge \ell) \wedge \theta = \omega \wedge (\ell \wedge \theta) = \frac{(k + \ell + m)!}{k! \ell! m!} \Alt(\omega \otimes \eta \otimes \theta). \]
+    \end{enumerate}
+\end{simplelemma}
+To see that this is true, simply plug in as follows,
+\begin{align*}
+    (\omega \wedge \ell) \wedge \theta &= \frac{(k + \ell + m)!}{(k + \ell)! m!} \Alt((\omega \wedge \eta) \otimes \theta) \\
+    &= \frac{(k + \ell + m)!}{(k + \ell)! m!} \frac{(k + \ell)!}{k! \ell!} \Alt(\omega \otimes \eta \otimes \theta).
+\end{align*}
+\begin{simpleprop}
+    Let $v_1, \dots, v_n$ be a basis of $V$, and let $\varphi_1, \dots, \varphi_n$ be a dual basis. Then $\varphi_{i1} \wedge \dots \wedge \varphi_{in}
+\end{simpleprop}
