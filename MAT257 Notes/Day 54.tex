@@ -1,0 +1,34 @@
+\section{Day 54: Differential Forms, Pt. 2 (Feb. 14, 2025)}
+Let $f : \RR^n \to \RR^p$, and consider the map $f_{\ast a} : \RR^n_a \to \RR^p_{f(a)}$. We define $f_{\ast a}$ to be the map given by
+\[ f_{\ast a}(v_a) = (Df(a)(v))_{f(a)}; \]
+specifically, $f_{\ast a}(e_{i,a}) = (Df(a)(e_i))_{f(a)} = \sum_{j=1}^p \frac{\partial f_j}{\partial x_i}(a)(e_j) f(a)$. We can also write
+\[ f_{\ast a} \left(\restr{\frac{\partial}{\partial x_i}}{a}\right) = \sum_{j=1}^p \frac{\partial f_j}{\partial x_i}(a) \restr{\frac{\partial}{\partial y_j}}{f(a)}, \]
+or $f_{\ast a}(\frac{\partial}{\partial x_i}) = \sum_{j=1}^n \frac{\partial f_j}{\partial x_i} \frac{\partial}{\partial y_j}$. $f_{\ast a}$ induces $f_a^\ast : \Omega^k(\RR^p_{f(a)}) \to \Omega^k(\RR^n_a)$, where
+\[ (f^\ast_a \omega)(v_1, \dots, v_k) = \omega(f_{\ast a}v_1, \dots, f_{\ast a}v_k), \]
+where $v_i \in \RR^n_a$. In particular, $f^\ast$ takes $k$-forms on $\RR^p$ and send them to $k$-forms on $\RR^n$, i.e. $\omega \mapsto f^\ast \omega$. For example,
+\[ (f^\ast \omega)(a)(v_1, \dots, v_k) = \omega(f(a))(f_{\ast a} v_1, \dots, f_{\ast a} v_k). \]
+A $0$-form on $\RR^p$ is a function $g$ on $\RR^p$, where $(f^\ast g)(x) = g(f(x))$, i.e. $f^\ast g = g \circ f$.
+\begin{simpleprop}[Spivak 4-8]
+    We have four properties:
+    \begin{enumerate}[label=(\roman*)]
+        \item $f^\ast(dy_i) = \sum_{j=1}^n \frac{\partial f_i}{\partial x_j} dx_j = df_i = d(y_i \circ f)$,
+        \item $f^\ast(\omega + \eta) = f^\ast \omega + f^\ast \eta$,
+        \item $f^\ast(g \omega) = (g \circ f) f^\ast \omega$,
+        \item $f^\ast(\omega \wedge \eta) = f^\ast \omega \wedge f^\ast \eta$.
+    \end{enumerate}
+\end{simpleprop}
+\begin{proof}
+    Directly write as follows,
+    \begin{align*}
+        (f^\ast dy_i)(a)(v_a) &= dy_i (f(a)) (f_{\ast a} v_a) \\
+        &= dy_i (f(a))\left( \sum_{j=1}^n \frac{\partial f_1}{\partial x_j}(a) v_j, \dots, \sum_{j=1}^n \frac{\partial f_p}{\partial x_j}(a) v_j \right) \\
+        &= \sum_{j=1}^n \frac{\partial f_i}{\partial x_j}(a) v_j = \sum_{j=1}^n \frac{\partial f_i}{\partial x_j}(a) dx_j(a) (v_a).
+    \end{align*}
+    For example,
+    \[ f^\ast dg = f^\ast \left(\sum_{i=1}^n \frac{\partial g}{\partial y_i} dy_i \right) = \sum_{i=1}^n \frac{\partial g}{\partial y_i} (f) (f^\ast (dy_i)) = \sum_{i=1}^n \frac{\partial g}{\partial y_i} (f) \left(\sum_{j=1}^n \frac{\partial f_i}{\partial x_j} dx_j\right), \]
+    which is equal to $d(g \circ f) = d(f^\ast g)$.
+\end{proof}
+\begin{simpleprop}[Spivak 4-9]
+    Let $f : \RR^n \to \RR^n$ be $\SC^r$, and let $y = f(x)$. Then
+    \[ f^\ast(g dy_1 \wedge \dots \wedge dy_n) = (g \circ f) \det g' dx_1 \wedge \dots \wedge dx_n. \]
+\end{simpleprop}
