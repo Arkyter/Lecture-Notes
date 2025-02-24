@@ -1,0 +1,46 @@
+\section{Day 50: Multilinear Algebra, Pt. 2 (Feb. 5, 2025)}
+We recap the proposition from class last time.
+\begin{simpleprop}
+    Let $\{v_1, \dots, v_n\}$ be a basis of $V$, $\{\varphi_1, \dots, \varphi_n\}$ be a dual basis. Then $\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k}$, over all combinations $1 \leq i_1, \dots, i_k \leq n$, forms a basis of $\ST^k(V)$.
+\end{simpleprop}
+\noindent Let $T \in \ST^k(V)$, and let $w_j = \sum_{i=1}^n a_{ji} v_i$, where $j = 1, \dots, k$. Then
+\begin{align*}
+    T(w_1, \dots, w_k) &= \sum_{i_1, \dots, i_k = 1}^n a_{1_{i_1}} \dots a_{k_{i_k}}T(v_{i_1}, \dots, v_{i_k}) \\
+    &= \sum_{i_1, \dots, i_k = 1}^n T(v_{i_1}, \dots, v_{i_k}) (\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k}) (w_1, \dots, w_k), 
+\end{align*}
+where $(\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k})(v_{ji}, \dots, v_{jk}) = 1$ if $(j_1, \dots, j_k) = (i_1, \dots, i_k)$, and $0$ otherwise. Therefore,
+\[ T = \sum_{i_1, \dots, i_k = 1}^n T(v_{i_1}, \dots, v_{i_k}) (\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k}). \qed \]
+A linear transformation $f : V \to W$ induces the linear transformation $f^\ast : \ST^k(W) \to \ST^k(V)$ through $(f^\ast T)(v_1, \dots, v_k) = T(f(v_1), \dots, f(v_k))$. $f^\ast$ commutes with $\otimes$, i.e., $f^\ast(S \otimes T) = f^\ast S \otimes f^\ast T$.
+\begin{enumerate}[label=(\roman*)]
+    \item The inner product on $V$ is a $2$-tensor $T$ which is symmetric and positive-definite ($T(v, v) \geq 0$, $= 0$ iff $v = 0$). If $T$ is an inner product on $V$, there exists an orthonormal basis $v_1, \dots, v_n$ w.r.t. $T$ i.e. $T(v_i, v_j) = \delta_{ij}$. An orthonormal basis for $T$ provides an isomorphism $f : \RR^n \to V$ such that $f^\ast T = \left< \, , \right>$.
+    \begin{proof}
+        By the Gram-Schmidt process, we have $f(x_1, \dots, x_n) = \sum_{i=1}^n x_i v_i$.
+    \end{proof}
+    \item Determinant function. Consider an alternating $k$-tensor $\omega \in \ST^k(V)$, where $\omega(v_1, \dots, v_i, \dots, v_k)$ has the property that ``if we interchange two of the vectors, it changes sign''. Specifically, we say that it is alternating and skew-symmetric. Consider,
+    \[ \Alt : \ST^k(V) \to \ST^k(V), \]
+    where
+    \[ (\Alt T)(v_1, \dots, v_k) = \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) T(v_{\sigma(1)}, \dots, v_{\sigma(k)}), \]
+    where $S_k$ is the symmetric group on $k$ symbols. Let $\Omega^k(V) \subset \ST^k(V)$ be the subspace of alternating tensors.
+    \begin{simplethm}
+        $\Alt : \ST^k(V) \to \ST^k(V)$ is a projection onto $\Omega^k(V)$. Specifically,
+        \begin{enumerate}[label=(\alph*)]
+            \item $\Alt T \in \Omega^k(V)$,
+            \item $w \in \Omega^k(V) \implies \Alt w = w$,
+            \item $\Alt(\Alt T) = \Alt T$.
+        \end{enumerate}
+        \begin{proof}
+            Note that (c) follows (a) and (b). For (a), observe that
+            \begin{align*}
+                \Alt T(v_1, \dots, v_i, \dots, v_j, \dots, v_k) &= \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) T(v_{\ST(\sigma(1))}, \dots, v_{\ST(\sigma(k))}) \\
+                &= \frac{1}{k!} \underbrace{\sgn \ST}_{= \, -1} \sum_{\sigma \in S_k} (\sgn \ST \sigma) TT(v_{\ST(\sigma(1))}, \dots, v_{\ST(\sigma(k))}) \\
+                &= - \Alt T(v_1, \dots, v_k)
+            \end{align*}
+            For (b), we have
+            \begin{align*}
+                w(v_{\sigma(1)}, \dots, v_{\sigma(k)}) &= \sgn \sigma \cdot w(v_1, \dots, v_k) \\
+                (\Alt w)(v_1, \dots, v_k) &= \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) \underbrace{w(v_{\sigma(1)}, \dots, v_{\sigma(k)})}_{\sgn \sigma \cdot w(v_1, \dots, v_k)} \\
+                &= w(v_1, \dots, v_k). \qedhere
+            \end{align*}
+        \end{proof}
+    \end{simplethm}
+\end{enumerate}
