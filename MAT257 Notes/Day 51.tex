@@ -38,6 +38,23 @@ To see that this is true, simply plug in as follows,
     (\omega \wedge \ell) \wedge \theta &= \frac{(k + \ell + m)!}{(k + \ell)! m!} \Alt((\omega \wedge \eta) \otimes \theta) \\
     &= \frac{(k + \ell + m)!}{(k + \ell)! m!} \frac{(k + \ell)!}{k! \ell!} \Alt(\omega \otimes \eta \otimes \theta).
 \end{align*}
-\begin{simpleprop}
-    Let $v_1, \dots, v_n$ be a basis of $V$, and let $\varphi_1, \dots, \varphi_n$ be a dual basis. Then $\varphi_{i1} \wedge \dots \wedge \varphi_{in}
+\begin{simpleprop}[Spivak 4-5]
+    Let $v_1, \dots, v_n$ be a basis of $V$, and let $\varphi_1, \dots, \varphi_n$ be a dual basis. Then $\varphi_{i1} \wedge \dots \wedge \varphi_{ik}$, over $1 \leq i_1 < \dots < i_k \leq n$, forms a basis of $\Omega^k(V)$. In particular $\dim \Omega^k(V) = \binom{n}{k}$.
 \end{simpleprop}
+\begin{proof}
+    Linear independence is just like before (Spivak 4-1); for the span, let $\omega \in \Omega^k(V)$. Then
+    \[ \omega = \sum_{i_1, \dots, i_k = 1}^n a_{i_1, \dots, i_k} \varphi_{i_1} \otimes \dots \otimes \varphi_{i_k}. \]
+    Then
+    \[ \omega = \Alt \omega = \sum_{i_1, \dots, i_k = 1}^n a_{i_1, \dots, i_k} \Alt(\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k}). \]
+    Since each $\Alt(\varphi_{i_1} \otimes \dots \otimes \varphi_{i_k})$ is a constant multiple of $\varphi_{i_1} \wedge \dots \wedge \varphi_{i_k}$, these elements span $\Omega^k(V)$.
+\end{proof}
+\begin{simpleprop}[Spivak 4-6]
+    Let $\omega \in \Omega^n(V)$, $n = \dim V$, and $v_1, \dots, v_n \in V$. Let $w_i = \sum a_{ij} v_j$, where $i = 1, \dots, n$. Then
+    \[ \omega(w_1, \dots, w_n) = \det(a_{ij}) \omega(v_1, \dots, v_n), \]
+    and so $\omega(v_1, \dots, v_n) = 0$ if $v_1, \dots, v_n$ are linearly dependent.
+\end{simpleprop}
+\begin{proof}
+    Define $\eta \in \ST^n(\RR^n)$ by
+    \[ \eta((a_{11}, \dots, a_{1n}), \dots, (a_{n1}, \dots, a_{nn})) = \omega \left( \sum_{j=1}^n a_{ij}v_j, \dots, \sum_{j=1}^n a_{nj} v_j \right). \]
+    Then $\eta \in \Omega^n(\RR^n)$, so $\eta = \lambda \cdot \det$ for some $\lambda \in \RR$ and $\lambda = \eta(e_1, \dots, e_n) = \omega(v_1, \dots, v_n)$.
+\end{proof}
