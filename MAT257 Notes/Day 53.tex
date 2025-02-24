@@ -1,0 +1,38 @@
+\section{Day 53: Vectors Fields and Differential Forms (Feb. 12, 2025)}
+A vector field $F$ is a function on an open set $U \in \RR^n$ such that $F(x) \in \RR^n_a$, for some $a \in U$, i.e.
+\[ F(a) = \sum_{i=1}^n F_i(a) e_{i,a} = (F_1(a), \dots, F_n(a))_a. \]
+We say that $F$ is $\SC^r$ if each component function $F_i$ is $\SC^r$. Here are a few examples.
+\begin{enumerate}[label=(\roman*)]
+    \item $(x, y)$ may be written as $xe_{1,(x,y)} + ye_{2,(x,y)}$,
+    \item $(x, -y)$ may be written as $xe_{1,(x,y)} - ye_{2,(x,y)}$,
+    \item The gradient vector field, $F(a) = \nabla f(a)$, is a $\SC^r$ vector field (given that $f$ is $\SC^r$).
+\end{enumerate}
+Operators on a vector field are induced by pointwise operations, such as
+\begin{align*}
+    (F + G)(p) &= F(p) + G(p), \\
+    \left<F, G\right>(p) &= \left<F(p), G(p)\right>, \\
+    (f \cdot F)(p) &= f(p) F(p).
+\end{align*}
+If $F_1, \dots, F_{n-1}$ are vector fields in $\RR^n$, we can also define their cross product,
+\[ (F_1 \times \dots \times F_{n-1})(p) = F_1(p) \times \dots \times F_{n-1}(p). \]
+We now introduce some more definitions.
+\begin{definition}[Divergence]
+    The divergence of $F$, denoted $\div F$, where $F$ has components $(F_1, \dots, F_n)$, is given by
+    \[ \div F = \sum_{i=1}^n D_i F_i = \sum_{i=1}^n \frac{\partial F_i}{\partial x_i} = \left<\nabla, F\right>. \]
+    Note that $\nabla = \sum_{i=1}^n D_i \cdot e_i$.
+\end{definition}
+\begin{definition}[Curl]
+    Similarly, the vector field $\nabla \times F$ is called $\curl F$. In $\RR^3$, we have that
+    \[ (\nabla \times F)(a) = (D_2F_3 - D_3F_2)(a)e_{1,a} + (D_3F_1 - D_1F_3)(a)e_{2,a} + (D_1F_2 - D_2F_1)(a)e_{3,a}. \]
+\end{definition}
+\noindent Expanding the notion of a vector field to a submanifold $M \subset \RR^n$, we may denote $F : x \mapsto F(x) \in TM_x$, which is a function assigning vectors in the tangent space to each point on the submanifold $M$ (which we will call a \textit{vector field on $M$}). If $\varphi : W \to M$ is a $\SC^r$ coordinate system for $M$, then there exists a unique (differentiable) vector field $J$ on $W$ such that $\varphi_{\ast a}(G(a)) = F(\varphi(a))$, where $\varphi_{\ast a}$ is an injective linear transformation $TM_a \to \RR^n_x$ (where $f(x) = a$).\footnote{note: we are skipping ahead from page 88 to page 115. i don't know what bierstone was writing but the book explains it better, so read there tbh}
+\medskip\newline
+We say that $F$ is $\SC^r$ is $G$ is $\SC^r$ for any coordinate system. The definition is independent of the choice of coordinate system on a manifold of class $\SC^{r+1}$. Now, consider a vector field $H$ on $V$ such that $\psi_{\ast b}(H(b)) = F(\psi(b))$. If $\varphi(a) = \psi(b)$, i.e. $b = (\psi^{-1} \circ \varphi)(a)$, then
+\[ H(b) = (\psi^{-1} \circ \varphi)_{\ast a}(J(a)) = D(\psi^{-1} \circ \varphi)(a) \cdot J(a). \]
+We now proceed to define $k$-forms.
+\begin{definition}[Differential $k$-form]
+    A differential $k$-form on an open subset $U$ of $\RR^n$ is a function $\omega$ where $(a \in U) \mapsto \omega(a) \in \Omega^k(\RR^n_a)$. Specifically, it is a function that assigns each point $a \in U$ an alternating $k$-tensor on the tangent space at $x \in M$, where $x = f(a)$.
+\end{definition}
+\noindent In particular, we may write
+\[ \omega(a) = \sum_{i_1 < \dots < i_k} \omega_{i_1, \dots, i_k}(a) \cdot (\varphi_{i_1}(a) \wedge \dots \wedge \varphi_{i_k}(a)), \]
+where $\varphi_i(a)$ for $i = 1, \dots, n$ is the dual basis w.r.t. to $(e_i)_a$. We say that $\omega$ is $\SC^r$ if each $\omega_{i_1, \dots, i_k}$ is also $\SC^r$. Operations such as $\omega + \eta, f \cdot \omega, \omega \wedge \eta$ are defined in the usual way, and a function $f$ is said to be a $0$-form, where $f \cdot \omega$ is also written $f \wedge \omega$.
