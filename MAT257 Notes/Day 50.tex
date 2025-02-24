@@ -21,26 +21,26 @@ A linear transformation $f : V \to W$ induces the linear transformation $f^\ast 
     where
     \[ (\Alt T)(v_1, \dots, v_k) = \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) T(v_{\sigma(1)}, \dots, v_{\sigma(k)}), \]
     where $S_k$ is the symmetric group on $k$ symbols. Let $\Omega^k(V) \subset \ST^k(V)$ be the subspace of alternating tensors.
-    \begin{simplethm}
+    \begin{simplethm}[Spivak 4-3]
         $\Alt : \ST^k(V) \to \ST^k(V)$ is a projection onto $\Omega^k(V)$. Specifically,
         \begin{enumerate}[label=(\alph*)]
             \item $\Alt T \in \Omega^k(V)$,
             \item $w \in \Omega^k(V) \implies \Alt w = w$,
             \item $\Alt(\Alt T) = \Alt T$.
         \end{enumerate}
-        \begin{proof}
-            Note that (c) follows (a) and (b). For (a), observe that
-            \begin{align*}
-                \Alt T(v_1, \dots, v_i, \dots, v_j, \dots, v_k) &= \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) T(v_{\ST(\sigma(1))}, \dots, v_{\ST(\sigma(k))}) \\
-                &= \frac{1}{k!} \underbrace{\sgn \ST}_{= \, -1} \sum_{\sigma \in S_k} (\sgn \ST \sigma) TT(v_{\ST(\sigma(1))}, \dots, v_{\ST(\sigma(k))}) \\
-                &= - \Alt T(v_1, \dots, v_k)
-            \end{align*}
-            For (b), we have
-            \begin{align*}
-                w(v_{\sigma(1)}, \dots, v_{\sigma(k)}) &= \sgn \sigma \cdot w(v_1, \dots, v_k) \\
-                (\Alt w)(v_1, \dots, v_k) &= \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) \underbrace{w(v_{\sigma(1)}, \dots, v_{\sigma(k)})}_{\sgn \sigma \cdot w(v_1, \dots, v_k)} \\
-                &= w(v_1, \dots, v_k). \qedhere
-            \end{align*}
-        \end{proof}
     \end{simplethm}
+    \begin{proof}
+        Note that (c) follows (a) and (b). For (a), observe that
+        \begin{align*}
+            \Alt T(v_1, \dots, v_i, \dots, v_j, \dots, v_k) &= \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) T(v_{\ST(\sigma(1))}, \dots, v_{\ST(\sigma(k))}) \\
+            &= \frac{1}{k!} \underbrace{\sgn \ST}_{= \, -1} \sum_{\sigma \in S_k} (\sgn \ST \sigma) TT(v_{\ST(\sigma(1))}, \dots, v_{\ST(\sigma(k))}) \\
+            &= - \Alt T(v_1, \dots, v_k)
+        \end{align*}
+        For (b), we have
+        \begin{align*}
+            w(v_{\sigma(1)}, \dots, v_{\sigma(k)}) &= \sgn \sigma \cdot w(v_1, \dots, v_k) \\
+            (\Alt w)(v_1, \dots, v_k) &= \frac{1}{k!} \sum_{\sigma \in S_k} (\sgn \sigma) \underbrace{w(v_{\sigma(1)}, \dots, v_{\sigma(k)})}_{\sgn \sigma \cdot w(v_1, \dots, v_k)} \\
+            &= w(v_1, \dots, v_k). \qedhere
+        \end{align*}
+    \end{proof}
 \end{enumerate}
