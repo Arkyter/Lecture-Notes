@@ -1,0 +1,22 @@
+\section{Day 52: Orientation and Volume (Feb. 10, 2025)}
+Previously, we showed that if $\omega \in \Omega^n(V)$ where $\dim V = n$, and $v_1, \dots, v_n \in V$, we have that
+\[ w_i = \sum_{j=1}^n a_{ij} v_j. \tag{$i = 1, \dots, n$}, \]
+or more specifically,
+\[ \begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} = \begin{pmatrix} a_{11} & \dots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} & \dots & a_{nn} \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_n \end{pmatrix}, \]
+then we have $\omega(w_1, \dots, w_n) = \det(a_{ij}) \omega(v_1, \dots, v_n)$. This can be regarded as the ``change of basis'' analogue with tensors. This means that if $\dim V = n$, and $\omega \in \Omega^n(V)$ is nonzero, then $\omega$ divides up the bases of $V$ into two disjoint classes,
+\[ \omega(v_1, \dots, v_n) \begin{array}{ll} > 0, \text{ or} \\ < 0. \end{array} \]
+In particular, $(v_1, \dots, v_n)$ and $(w_1, \dots, w_n)$ are in the same class if and only if $\det(a_{ij}) > 0$, where $w_i = \sum_{j=1}^n a_{ij} v_j$. These classes are called \textit{orientations} for $V$. The orientation to which a basis $\{v_1, \dots, v_n\}$ of $V$ belongs to is denoted $[v_1, \dots, v_n]$, and is specifically an equivalence class, with the opposite orientation being denoted $-[v_1, \dots, v_n]$. In $\RR^n$, we write $[e_1, \dots, e_n]$ as the standard orientation.
+\medskip\newline
+Suppose $V$ admits an inner product $T$, and consider two orthonormal bases $\{v_1, \dots, v_n\}$ and $\{w_1, \dots, w_n\}$ with respect to $T$; then
+\[ w_i = \sum_{j=1}^n a_{ij}v_j, \]
+where $\det (a_{ij}) = \pm 1$, which we see from
+\[ \underbrace{T(w_i, w_j)}_{= \delta_{ij}} = T\left(\sum_{k=1}^n a_{ik}v_k, \sum_{\ell=1}^n a_{j\ell} v_\ell\right) = \sum_{k, \ell} a_{ik} a_{j\ell} \underbrace{T(v_k, v_\ell)}_{= \delta_{k\ell}} = \sum_k a_{ik}a_{jk}, \]
+and since $AA^T = I$, we have $\det A = \pm 1$. If $\omega \in \Omega^n(V)$, and $\omega(v_1, \dots, v_n) = 1$, it follows from Spivak 4-6 that $\omega(w_1, \dots, w_n) = \pm 1$. Therefore, given some inner product $T$ and orientation $\mu$ for $V$, there exists a unique alternating $n$-tensor over $V$ (which we will call $\omega$) such that $\omega(v_1, \dots, v_n) = 1$ when $\{v_1, \dots, v_n\}$ are orthonormal, and $[v_1, \dots, v_n] = \mu$. Such a unique $\omega$ is called the \textit{volume element} defined by inner product $T$ and orientation $\mu$.
+\medskip\newline
+As an example, $\det$ is the volume element of $\RR^n$ equipped with the standard inner product and usual orientation.
+\medskip\newline
+For another example, consider $v_1, \dots, v_{n-1} \in \RR^n$, with $\varphi$ defined by
+\[ \varphi(w) = \det\begin{pmatrix} v_1 \\ \vdots \\ v_{n-1} \\ w \end{pmatrix}. \]
+Then $\varphi \in \Omega^1(\RR^n)$; therefore, there exists some unique $z \in \RR^n$ such that $\left<w, z\right> = \varphi(w)$, which is more specifically denoted $z = v_1 \times \dots \times v_{n-1}$, where $\times$ is the cross product. For example, if we are working in $\RR^3$ with $u = (u_1, u_2, u_3)$ and $v = (v_1, v_2, v_3)$ already given as $v_1, v_2$ above, we obtain that
+\[ \det \begin{pmatrix} u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \\ w_1 & w_2 & w_3 \end{pmatrix} = \left< u \times v, w \right>. \]
+\textit{Note:} Bierstone introduced a tiny bit of vector fields and differential forms in this lecture, but I'm going to move everything to the next day's notes for cohesion purposes.
