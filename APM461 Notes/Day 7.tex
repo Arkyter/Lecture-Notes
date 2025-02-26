@@ -1,0 +1,97 @@
+\section{Day 7: ... (Feb. 26, 2025)}
+Today, we will discuss more probabilistic methods. We start with an example problem. Let us pick $10$ numbers from $\{1, \dots, 100\}$. What is the probability that there exist distinct subsets $A, B$ such that the sum of the elements in $A$ is equal to the sum of the elements in $B$?
+\[ 17, 38, 9, 29, 95, 66, 31, 12, 91, 13 \tag{Example Set} \]
+Let us consider this in a pigeonhole fashion; for each subset $S$ (which we will denote as pigeons), we shall send them to their respective sums of elements (which we will denote as pigeonholes). To start, there are a total of $2^{10}$ pigeons (since each of the ten numbers may either be picked, or not picked, in forming a subset), and there are at most $1000$ pigeons. Thus, there always exists such subsets $A, B$ by the pigeonhole principle.
+\begin{simplethm}
+    Pick $n$ numbers in $\{1, 2, \dots, F(n)\}$. Then there exist two subsets that have the same sum of elements.
+\end{simplethm}
+\noindent We note that $F(n) = \frac{2^n}{n}$ works in this theorem. In particular, the sums of the numbers we picked lie in the set $\{n, \dots, nf(n)\}$ (and so there are $nf(n) - n + 1$ pigeonholes). If $f(n) < \frac{2^n}{n} - n$, then there always exist some hole with two pigeons, i.e., such two subsets exist.%\footnote{note. the thing written on the board was ``2 pigeons in one hole'', but he said some contradictory things afterwards. look into this a little more}
+\begin{conjecture}[Erdos Conjecture]
+    There exists $f(n) = \Omega(2^n)$ that makes the theorem above true.
+\end{conjecture}
+\noindent We seek to prove something simpler for now,
+\begin{simplethm}
+    We may take $f(n) = \Omega(\frac{2^n}{\sqrt{n}})$ for the theorem.
+\end{simplethm}
+\noindent Let $M = \Omega(\frac{2^n}{\sqrt{n}})$, whose value is to be determined. We have $a_1, \dots, a_n \in \{1, \dots, M\}$, and we want to show that there exist two subsets of $\{a_1, \dots, a_n\}$ that have the same sum.
+\medskip\newline
+To do this, we give a random process that we will be working on. Let $X_1, \dots, X_n$ be independent random variables distributed $B(0.5)$, i.e. $X_1 = 0$ or $1$ with equal probabilities. Let us consider the random set $S = \{a_i \mid X_i = 1\}$, and let $Z$ be equal to the sum of the elements in $S$. Let us estimate $\EE[Z]$ and $\Var(Z)$ to conclude there is a small interval $I$ with $P[Z \in I] \geq 0.9$.\footnote{$0.9$ just happens to be good enough; we may refine this number more, but for the purposes of this proof, we choose a nice constant} Directly write as follows,
+\[ \EE[Z] = \EE\left[\sum_{i=1}^n a_i X_i\right] = \sum_{i=1}^n \EE[a_iX_i] = \frac{1}{2} \sum_{i=1}^n a_i. \]
+For variance, let us write
+\begin{align*}
+    \Var(Z) = \EE\left[\left(Z - \frac{1}{2} \sum_{i=1}^n a_i\right)^2\right] &= \EE\left[ \sum_{i=1}^n \left(a_i X_i - \frac{a_i}{2}\right)^2 \right] \\
+    &= \EE\left[\sum_{i,j = 1}^n a_i\left(x_i - \frac{1}{2}\right) a_j\left(x_j - \frac{1}{2}\right) \right] \\
+    &= \sum_{i,j = 1}^n a_ia_j \EE \left[\left(X_i - \frac{1}{2}\right)\left(X_j - \frac{1}{2}\right)\right] \\
+    &= \sum_{i=1}^n a_i^2 \EE\left[\left(X_i - \frac{1}{2}\right)^2\right] = \frac{1}{4} \sum_{i=1}^n a_i^2.
+\end{align*}
+Applying Chebyshev's inequality, as given below,
+\[ P(\abs{Z - \mu} > t) \leq \frac{\Var(Z)}{t^2}, \]
+we obtain that the RHS in our situation is $\frac{1}{4t^2} \sum_{i=1}^n a_i^2$. Setting $t = 10 \sqrt{ \frac{1}{4} \sum_{i=1}^n a_i^2 }$, we have that $P(\abs{Z - \mu} \geq t) \leq 0.1$, and so $P(Z \in [\mu - t, \mu + t]) \geq 0.9$. In the acse that $0.9 \cdot 2^n > 2t$, by the pigeonhole principle, we have that there exists two subsets with the same sum of elements. Thus, we simply want
+\[ 0.9 \cdot 2^n > 2 \cdot 10 \cdot \frac{1}{2} \cdot \sqrt{\sum_{i=1}^n a_i^2} = 10 \sqrt{\sum_{i=1}^n a_i^2} \]
+In particular, we know that $10 \sqrt{\sum_{i=1}^n a_i^2} \leq 10 \sqrt{M^2 n} = 10 \sqrt{n} M$. Thus, if
+\[ M < \frac{0.9 \cdot 2^n}{10 \sqrt{n}}, \]
+then our above desired inequality is satisfied. Now, we wish to find $t$ such that there is a ``collision'', i.e. the event that there exists two distinct subsets that have the same sum. This occurs when we have
+\[ t < \frac{2^n}{2}\left(1 - \frac{1}{k^2}\right); \]
+If $\frac{k}{2} M \sqrt{n} < \frac{2^n}{2} (1 - \frac{1}{k^2})$, then we have found a collision; thus, we just want
+\[ M < \frac{2^n}{\sqrt{n}} \left(\frac{1}{2}\left(1 - \frac{1}{k^2}\right) \cdot \frac{2}{k}\right) = \frac{2^n}{\sqrt{n} k} \left(1 - \frac{1}{k^2}\right). \]
+We now introduce Sperner's lemma; to start, here is the prerequisite knowledge. Let $S$ be a set, and let $\SP(S)$ be its power set; then $\subseteq$ induces a partial ordering on $\SP(S)$, where
+\begin{itemize}
+    \item $a \subseteq a$ for all $a \in S$;
+    \item $a \subseteq b$ and $b \subseteq a$ implies $a = b$;
+    \item $a \subseteq b$ and $b \subseteq c$ implies $a \subseteq c$.
+\end{itemize}
+An \textit{antichain} is a subset $F \subseteq \SP(S)$  such that, for all $A, B \in F$, $A \subsetneq B$ and $B \subsetneq A$, i.e., a collection of \textit{incomparable} subsets of $S$. To start, we may observe that $\binom{S}{m}$ is an antichain (i.e., the collection of all $m$-element subsets of $S$), and
+\[ \abs{\binom{S}{m}} = \binom{n}{m} \]
+is largest when $m = \floor{n/2}$.
+\begin{simplelemma}[Sperner's Lemma]
+    Any antichain in $\SP(S)$ has at most $\binom{n}{\floor{n/2}}$ sets.
+\end{simplelemma}
+\noindent Let $a_1, \dots, a_m$ be the elements of the antichain, and let $\pi$ be a uniformly random permutation of $S = \{1, \dots, n\}$. Define the event $E_i$ to be that the first $\abs{A_i}$ elements of this sequence equals $A_i$. For example, let $S = \{1, 2, 3, 4\}$. Then if $A_1 = \{1, 2\}, A_2 = \{2, 3, 4\}, A_3 = \{1, 4\}$, then
+\begin{align*}
+    E_1 &= ``\{\pi(1), \pi(2)\} = \{1, 2\}''; \\
+    E_2 &= ``\{\pi(1), \pi(2), \pi(3)\} = \{2, 3, 4\}''; \\
+    E_3 &= ``\{\pi(1), \pi(2)\} = \{1, 4\}''.
+\end{align*}
+In particular,
+\[ P(E_1) = \frac{1}{\binom{4}{2}}, \hspace{0.2in} P(E_2) = \frac{1}{\binom{4}{3}}, \hspace{0.2in} P(E_3) = \frac{1}{\binom{4}{2}}. \]
+\begin{simpleclaim}
+    The events $E_i$ are disjoint.
+\end{simpleclaim}
+\noindent Let $E_i, E_j$ be distinct events, and suppose they both happen; then $A_i, A_j$ are both prefixes of $\pi(1), \pi(2), \dots, \pi(n)$; but then $\{\pi(1), \dots, \pi(\abs{a_i})\}$ and $\{\pi(1), \dots, \pi(\abs{a_j})\}$ are both comparable, which contradicts our assumption.
+\medskip\newline
+Thus, we must have that
+\[ \sum_i P(E_i) \leq 1 \implies \sum_{i=1}^m \frac{1}{\binom{n}{\abs{A_i}}} \leq 1. \]
+In particular,
+\[ 1 \geq \sum_{i=1}^m \frac{1}{\binom{n}{\abs{A_i}}} \geq \frac{M}{\binom{n}{\floor{n/2}}} \implies m \leq \binom{n}{\floor{n/2}}. \]
+We now move onto the Littlewood Offord Problem. Let $a_1, \dots, a_n \in \RR$ be nonzero, and pick i.i.d. random Rademacher variables $\eps_1, \dots, \eps_n \in \{\pm 1\}$. Consider $P(\sum_{i=1}^n \eps_i a_i = 0)$. How high can this probability be? Littlewood and Offord showed that the probability is always less than or equal to $O(\frac{1}{n^{0.4}})$ using very difficult methods. Erdos showed that the probability is less than or equal to
+\[ \frac{\binom{n}{\floor{n/2}}}{2^n} = \Theta\left(\frac{1}{\sqrt{n}}\right). \]
+This bound is tight, since if $n$ is even and $a_1, \dots, a_n = 1$, then
+\[ P\left(\sum_{i=1}^n \eps_i a_i = 0\right) = \frac{\binom{n}{n/2}}{2^n}. \]
+We now prove the Erdos bound. Assume, since we are already using Rademacher variables, that each $a_i$ is positive. For each $\vec{\eps} \in \{\pm 1\}^n$, define $A(\vec{\eps}) \subseteq [n]$, where $A(\vec{\eps}) = \{i \in [n] \mid \eps_i = 1\}$, i.e., the collection of indices such that $\eps_i = 1$. Then we have that
+\[ \sum_{i=1}^n \eps_i a_i = 2 \left(\sum_{i \in A(\vec{\eps})} a_i \right) - \left(\sum_{i \in [n]} a_i \right). \]
+If $\sum_{i=1}^n \eps_i a_i = 0$ and $\sum_{i=1}^n \eps_i' a_i = 0$ (where $\eps'$ is another vector of Rademacher variables), then
+\[ \sum_{i \in A(\vec{\eps})} a_i = \sum_{i \in A(\vec{\eps'})} a_i. \]
+In particular, this means that $A(\vec{\eps})$ and $A(\vec{\eps'})$ are incomparable. Now, let us consider the family
+\[ \SF = \{A(\vec{\eps}) \mid \sum_{i=1}^n \eps_i a_i = 0; \vec{\eps} \in \{\pm 1\}^n\}; \]
+from earlier, we see that $\SF$ is indeed an antichain. By Sperner's lemma, we now have that $\abs{\SF} \leq \binom{n}{n/2}$, and so
+\[ \abs{\{\vec{\eps} \in \{\pm 1\}^n \mid \left< \vec{\eps}, a \right> = 0 \}} \leq \binom{n}{\floor{n/2}}. \]
+Now, let us consider unit vectors $v_1, \dots, v_n \in \RR^m$.
+\begin{simpleclaim}
+    There is a signing $\eps_1, \dots, \eps_n \in \{\pm 1\}$ such that
+    \[ \norm{\sum_{i=1}^n \eps_i v_i}_2 \leq \sqrt{n}. \]
+    Similarly, there exists a signing such that
+    \[ \norm{\sum_{i=1}^n \eps_i v_i}_2 \geq \sqrt{n}. \]
+\end{simpleclaim}
+\noindent Note that we have
+\[ \EE \left[ \norm{\sum_{i=1}^n \eps_i v_i}_2^2 \right] = n. \]
+Choose $(\eps_1, \dots, \eps_n) \in \{\pm 1\}^n$ uniformly, where the $\eps_i$ are i.i.d. Rademacher. Consider $\sum_{i=1}^n \eps_i v_i$; while we cannot study
+\[ \EE\left[ \norm{\sum_{i=1}^n \eps_i v_i}_2 \right] \]
+as easily, we have that
+\begin{align*}
+    \EE\left[ \norm{\sum_{i=1}^n \eps_i v_i}_2^2 \right] &= \EE \left[\left< \sum_i \eps_i v_i, \sum_j \eps_j v_j \right>\right] \\
+    &= \EE\left[ \sum_{i,j} \eps_i \eps_j \left<v_i, v_j\right> \right] \\
+    &= \sum_{i,j} \left<v_i, v_j\right> \EE[\eps_i \eps_j] = \sum_i \norm{v_i}^2 = n.
+\end{align*}
+The average norm squared as $\eps$ varies over all choices. Therefore, there is some signing such that the norm squared is at least $n$, some signing that it is at most $n$, which implies our claim from earlier.
+\medskip\newline
+Next class, we will study Ramsay theory.
