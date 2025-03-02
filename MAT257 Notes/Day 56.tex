@@ -1,0 +1,36 @@
+\section{Day 56: Closed and Exact Forms (Feb. 26, 2025)}
+We say that a differential form is \textit{closed} if $d\omega = 0$ (where $\omega$ is $\SC^1$), and \textit{exact} if $\omega = dy$ for some $\SC^1$ $y$. In particular, since $d^2 = 0$ is exact, we have that every exact differential form is necessarily closed. For example, let $\omega = P(x, y) \, dx + Q(x, y) \, dy$ be a $\SC^1$ $1$-form on some open set $U \subset \RR^2$. Then
+\[ d\omega = \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) \, dx \wedge dy; \]
+in the case that $\omega$ is closed, we have that $\partial_x Q = \partial_y P$. This is sufficient for $\omega$ exact if $U = \RR^2$, or if it some open disk or rectangle. We may define
+\[ f(x, y) = \int_0^x P(t, 0) \, dt + \int_0^y Q(x, t) \, dt. \]
+Note that this looks just like the integrating factor as shown in MAT267! Note that, per construction of $f$, we indeed have
+\begin{align*}
+    \frac{\partial f}{\partial y}(x, t) &= Q(x, y), \\
+    \frac{\partial f}{\partial x}(x, y) &= P(x, 0) + \int_0^y \frac{\partial Q}{\partial x} (x, t) \, dt \\
+    &= P(x, 0) + \int_0^y \frac{\partial P}{\partial y}(x, t) \, dt \\
+    &= P(x, 0) + P(x, y) - P(x, 0) = P(x, y).
+\end{align*}
+Specifically, this means we have $df = \omega$ (and so $\omega$ is exact). For another example, let us consider $U = \RR^2 \setminus \{0\}$ to be the punctured plane\footnote{this is exercise 4-21 in Spivak, also discussed page 93 as the classic example of if $\omega$ is defined on only a subset of $\RR^2$, then such a function for $\omega = dy$ may not necessarily exist}, and let
+\[ \omega = -\frac{y}{x^2 + y^2} \, dx + \frac{x}{x^2 + y^2} \, dy. \]
+We have that $\omega$ is closed (which we may indeed check by differentiating), but $\omega$ is not exact. Transforming to polar coordinates with $f(x, y) = (r \cos \theta, r \sin \theta) \in (0, \infty) \times [0, 2\pi]$, we obtain that $\omega = d \theta$. However, suppose that $\omega = df$ where $f$ is $\SC^1$ on $U = \RR^2 \setminus \{0\}$. Then
+\begin{align*}
+    \frac{\partial f}{\partial x} &= \frac{\partial \theta}{\partial x}, \\
+    \frac{\partial f}{\partial y} &= \frac{\partial \theta}{\partial y},
+\end{align*}
+meaning $f = \theta + C$, where $C$ is some constant, meaning that $\theta$ cannot be extended to a continuous function on the punctured plane, and so such an $f$ cannot exist. Thus, $\omega$ is not exact. 
+\begin{simplethm}[Spivak 4-11; Poincar\'e Lemma]
+    Let $A \subset \RR^n$ be a strictly convex open set. Then every closed $\SC^1$ form $\omega$ is exact.\footnote{more generally, this is true for any star shaped convex set w.r.t. origin}
+\end{simplethm}
+\noindent Recall the fundamental theorem of calculus, where we have that
+\[ \int_a^b f(t) \, dt = f(b) - f(a). \]
+We may rewrite the above as follows,
+\[ \int_{[a, b]} f = \int_{\partial [a, b]} f. \]
+As a notational digression, more generally, let $\omega$ be a $\SC^0$ $1$-form on an open $U \subset \RR^n$, and let $\gamma : [0, 1] \to U$ be a $\SC^1$ curve. Then
+\[ \omega = \sum_{i=1}^n \omega_i(x) \, dx_i \]
+means we have that
+\[ \int_\gamma \omega := \int_\gamma \omega_1(x) dx_1 + \dots + \omega_n(x) dx_n, \]
+where we may substitute in $x = \gamma(t) = (\gamma_1(t), \dots, \gamma_n(t))$ to yield $dx_i = \gamma_i'(t) \, dt$ to obtain
+\[ \int_0^1 \left(\omega_1(\gamma(t)) \gamma_1'(t) + \dots + \omega_n(\gamma(t)) \gamma_n'(t)\right) \, dt. \]
+We now return to the lemma. If $\omega$ is exact, then $\omega = df$, where $f$ is $\SC^1$. Then
+\[ \int_\gamma \omega = \int_\gamma df = \int_{[0, 1]} \gamma^\ast(df) = \int_{[0, 1]} d(\gamma^\ast f) = \int_{[0, 1]} d(f \circ \gamma) = f(\gamma(1)) - f(\gamma(0)) \stackrel{\text{def}}{=} \int_{\partial \gamma} f. \]
+We complete the other case of the proof next lecture.
