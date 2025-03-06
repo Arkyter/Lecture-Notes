@@ -1,0 +1,52 @@
+\section{Day 55: Differential of a \texorpdfstring{$k$}{k}-form (Feb. 24, 2025)}
+We discuss the differential of a $k$-form today. For a starting example, let $f$ be a $0$-form that is $\SC^r$; then
+\[ df = \frac{\partial f}{\partial x_1} dx_1 + \dots + \frac{\partial f}{\partial x_n} dx_n \]
+is a $1$-form that is $\SC^{r-1}$. The differential $d$ is an operator that takes $\SC^r$ $k$-forms to $\SC^{r-1}$ $(k+1)$-forms; specifically, it takes
+\[ \omega = \sum_{i_1 < \dots < i_k} \omega_{i_1, \dots, i_k} \, dx_{i_1} \wedge \dots \wedge dx_{i_k} \]
+and sends them to
+\[ d\omega = \sum_{i_1 < \dots < i_k} d\omega_{i_1, \dots, i_k} \wedge dx_{i_1} \wedge \dots \wedge dx_{i_k} = \sum_{i_1 < \dots < i_k} \sum_{\alpha = 1}^n \frac{\partial \omega_{i_1, \dots, i_k}}{\partial x_\alpha} dx_{\alpha} \wedge dx_{i_1} \wedge \dots \wedge dx_{i_k}. \]
+We have a few claims to assess.
+\begin{simplethm}[Spivak 4-10, Part (a) and (b)]
+    $d(\omega + \eta) = d\omega + d\eta$. If $\omega$ is a $k$-form, $\eta$ is an $\ell$-form, then
+    \[ d(\omega \wedge \eta) = d\omega \wedge \eta + (-1)^k \omega \wedge d\eta. \]
+\end{simplethm}
+\noindent The first statement is trivial; we prove (b) now. It is enough to prove this for $\omega = f \, dx_{i_1} \wedge \dots \wedge dx_{i_k}$ and $\eta = g \, dx_{j_1} \wedge \dots \wedge dx_{j_\ell}$, where we may directly write
+\[ \omega \wedge \ell = fg \, dx_{i_1} \wedge \dots \wedge dx_{i_k} \times dx_{j_1} \wedge \dots \wedge dx_{j_\ell}; \]
+then
+\begin{align*}
+    d(\omega \wedge \eta) &= d(fg) \wedge dx_{i_1} \wedge \dots \wedge dx_{i_k} \wedge dx_{j_1} \wedge \dots \wedge dx_{j_\ell} \\
+    &= (g \, df + f \, dg) \wedge dx_{i_1} \wedge \dots \wedge dx_{i_k} \wedge dx_{j_1} \wedge \dots \wedge dx_{j_\ell} \\
+    &= df \wedge dx_{i_1} \wedge \dots dx_{i_k} \times g \, dx_{j_1} \wedge \dots \wedge dx_{j_\ell} \\
+    & \,\,\,\,\,\,\, + f \, dx_{i_1} \wedge \dots \wedge dx_{i_k} \times (-1)^k dg \wedge dx_{j_1} \wedge \dots \wedge dx_{j_\ell} \\
+    &= d\omega \wedge \eta + (-1)^k \omega \wedge d\eta.
+\end{align*}
+\begin{simplethm}[Spivak 4-10, Part (c)]
+    $d(d \omega) = 0$; i.e., $d^2 = 0$, where $\omega$ is $\SC^r$ with $r \geq 2$.
+\end{simplethm}
+\noindent Directly write as follows,
+\[ d(d\omega) = \sum_{i_1 < \dots < i_k} \sum_{\alpha, \beta = 1}^n \frac{\partial^2 \omega_{i_1, \dots, i_k}}{\partial x_\alpha \partial x_\beta} dx_\beta \wedge dx_\alpha \wedge dx_{i_1} \wedge \dots \wedge dx_{i_k}. \]
+Note that the terms with $dx_\alpha \wedge dx_\beta$ and $dx_\beta \wedge dx_\alpha$ cancel if $r \geq 2$.
+\begin{simplethm}[Spivak 4-10, Part (d)]
+    If $\omega$ is a $k$-form on $\RR^m$ and $f : \RR^n \to \RR^m$, then $f^\ast(d\omega) = d(f^\ast \omega)$.
+\end{simplethm}
+\noindent We proceed by induction; this is trivially true if $\omega$ is a $0$-form, so we suppose that the above holds for $k$-forms. We now show it holds for $(k+1)$-forms. We have that
+\begin{align*}
+    f^\ast(d(\omega \wedge dx_i)) &= f^\ast(d\omega \wedge dx_i + (-1)^k \omega \wedge d(dx_i)) \\
+    &= f^\ast (d\omega \wedge dx_i) = f^\ast (d\omega) \wedge f^\ast (dx_i) \\
+    &= d(f^\ast \omega \wedge f^\ast (dx_i)) = d(f^\ast(\omega \wedge dx_i))
+\end{align*}
+as desired.
+\medskip\newline
+We say that a differential form is \textit{closed} if $d\omega = 0$, when $\omega$ is $\SC^1$; it is \textit{exact} if $\omega = d\eta$ for some $(k-1)$-form $\eta$ (given that $\omega$ is a $k$-form).
+\begin{simpleclaim}
+    Every exact form is closed.
+\end{simpleclaim}
+\noindent Is being closed sufficient for being exact? For example in $1$ variable, we have that $\omega = f(x) \, dx$ is always closed, and it is always exact because $\omega = dg$, where $g$ is a primitive of $f$, i.e. $g' = f$. In two variables, we have
+\[ \omega = P \, dx + Q \, dy, \]
+where
+\begin{align*}
+    d\omega &= dP \wedge dx + dQ \wedge dy \\
+    &= \left(\frac{\partial P}{\partial x} \, dx + \frac{\partial P}{\partial y} \, dy\right) \wedge dx + \left(\frac{\partial Q}{\partial x} \, dx + \frac{\partial Q}{\partial y} \, dy\right) \wedge dy \\
+    &= \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) \, dx \wedge dy.
+\end{align*}
+Thus, $d\omega$ is exact if and only if $\frac{\partial Q}{\partial x} = \frac{\partial P}{\partial y}$. 
