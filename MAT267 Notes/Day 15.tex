@@ -1,0 +1,15 @@
+\section{Day 15: Cauchy-Peano Theorem (Mar. 5, 2025)}
+The Cauchy-Peano theorem is given as follows; let us have the IVP
+\begin{align*}
+    x'(t) &= f(t, x(t)) \tag{$t \in [t_0, t_1], x(t) \in \RR^n$} \\
+    x(t) &= \xi_0
+\end{align*}
+If $f : [t_0, t_1] \times \RR^n \to \RR^n$ is continuous and bounded, then the  IVP has at least one solution $x \in \SC^1([t_0, t_1], \RR^n)$.
+\medskip\newline
+Without loss of generality, we may pick $t_0 = 0, t_1 = 1$. For  $k = 1, 2, \dots$, we may let
+\[ x_k(t) = \begin{cases} \xi_0, & \text{ if } 0 \leq t \leq \frac{1}{k}; \\ \xi_0 + \int_0^{t - \frac{1}{k}} f(s, x_k(s)) \, ds, & \text{ otherwise.} \end{cases} \]
+Note that $x_k'(t) = f(t - \frac{1}{k}, x_k(t - \frac{1}{k}))$ is close to $f(t, x_k(t))$ provided that $k$ is sufficiently large. By Arzela-Ascoli, using $M$ as a bound for $f$, we have
+\[ \abs{x_k(t)} \leq \abs{\xi_0} + \int_0^{t - \frac{1}{k}} \abs{f(s, x_k(s))} \, ds \leq \abs{\xi_0} + M, \]
+and we have that $\abs{\xi_0} + M$ is a uniform bound for each $x_k$.
+\medskip\newline
+I'm going to be honest, between trying to read the tiny handwriting and figuring out what is going on, I don't feel very motivated to keep writing here. I'll just read stuff on my own from now on I think. Sorry-
