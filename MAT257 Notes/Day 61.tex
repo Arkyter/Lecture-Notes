@@ -1,0 +1,19 @@
+\section{Day 61: Differential Forms and Vector Fields on a Manifold (Mar. 10, 2025)}
+Let $M \subset \RR^n$ such that $\dim M = k$. Then a $p$-form on $M$ is a function taking $x \in M$ to an alternating $k$-tensor on the tangent space, $\omega(x) \in \Omega^p(M_x)$, and a vector space on $M$ is a function $f$ taking $x \in M$ to $f(x) \in M_x$.
+\medskip\newline
+Assuming $M$ is $\SC^{r+1}$, $\omega$ is $\SC^r$ if $\varphi^\ast \omega$ is $\SC^r$ for every coordinate chart $\varphi : W \to \RR^n$ of $M$. We showed that this definition is independent of coordinate charts. Likewise, for a vector field $F$ on $M$,
+\[ F(\varphi(x)) = \varphi_{\ast x} G(x), \]
+where $G$ is a vector field on $W$. In particular, $\varphi_{\ast x} : \RR^k_x \xrightarrow{\sim} M_{\varphi(x)}$, i.e., is an isomorphism, so $G$ is uniquely defined. We say $F$ is $\SC^r$ is $G$ is also $\SC^r$ for every coordinate system $\varphi$; again, the definition is independent of coordinate systems. Consider also $F(\psi(y)) = \psi_{\ast y} H(y)$, where $\psi$ is another coordinate chart and $H$ is a vector field on the domain of $\psi$. Then $G(x) = f_{\ast y} H(y)$ is $\SC^r$, where $\varphi(x) = \psi(y)$, i.e. $x = f(y)$.
+\medskip\newline
+What is the differential $d\omega$ of a $\SC^r$ $p$-form $\omega$ on $M$? To start, $d\omega$ is a $\SC^{r+1}$ $(p+1)$-form.
+\begin{simpleprop}[Spivak 5-3]
+    Given a $\SC^r$ $p$-form $\omega$ on $M$, there is a unique $\SC^{r+1}$ $(p+1)$-form $d\omega$ on $M$ such that $\varphi^{\ast} d\omega = d(\varphi^\ast \omega)$ for every coordinate chart $\varphi : W \to \RR^n$.
+\end{simpleprop}
+\begin{proof}
+    Given a coordinate chart $\varphi$, let us define $d^\varphi \omega$ by
+    \[ (d^\varphi \omega)(a)(v_1, \dots, v_{p+1}) = d(\varphi^\ast \omega)(x)(w_1, \dots, w_{p+1}), \tag{$v_i \in M_a$} \]
+    where $a = \varphi(x)$, and $\varphi_{\ast x}(w_i) = v_i$. We claim that $d^\varphi \omega$ is the unique $\SC^{r+1}$ $(p+1)$-form $\eta$ on $\varphi(W)$ such that $\varphi^\ast \eta = d(\varphi^\ast \omega)$. In particular, $\varphi^\ast_x : \Omega^{p+1}(M_{\varphi(x)}) \xrightarrow{\sim} \Omega^{p+1}(\RR^k_x)$, which is an isomorphism. We have to show that in the overlap of two coordinate charts $\varphi, \psi$, we have $d^\varphi \omega = d^\psi \omega$, i.e. $\psi^\ast (d^\varphi \omega) = d^\psi \omega$. We have that $\psi = \varphi \circ (\varphi^{-1} \circ \psi)$, and so
+    \[ \psi^{\ast} (d^\varphi \omega) = (\varphi^{-1} \circ \psi)^\ast \varphi^\ast (d^\varphi \omega) = (\varphi^{-1} \circ \psi)^\ast d(\varphi^\ast \omega) = d((\varphi^{-1} \circ \psi)^\ast \varphi^\ast \omega). \]
+    Clearly, we have that $(\varphi^{-1} \circ \psi)^\ast \varphi^\ast = \psi^\ast$, so we have that the above expression is equal to $d(\psi^\ast \omega) = d^\psi \omega$. With this, we are done.
+\end{proof}
+\noindent We now discuss the orientation of a manifold.\footnote{fml u only have 4 minutes left to cover this} An orientation of a manifold $M \subset \RR^n$ is given by consistent orientations $u_x$ on each tangent space $M_x$, where \textit{consistent} means that for every coordinate chart $\varphi : W \to \RR^n$ and any two points $a, b \in W$, $[\varphi_{\ast a} e_{1,a}, \dots, \varphi_{\ast a} e_{k, a}] = \mu_{\varphi(a)}$ if and only if $[\varphi_{\ast b} e_{1, b}, \dots, \varphi_{\ast b} e_{k, b}] = \mu_{\varphi(b)}$.
