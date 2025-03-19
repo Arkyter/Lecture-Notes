@@ -1,0 +1,40 @@
+\section{Day 65: Stokes' Theorem (Mar. 19, 2025)}
+\begin{simplethm}[Stokes' Theorem, Spivak 5-5]
+    Let $M$ be a compact, oriented, $k$-dimensional manifold with boundary on $\RR^n$; let $M$ be $\SC^2$. Then let $\omega$ be a $(k-1)$-form on $M$ (by definition, is $\SC^1$); we have that
+    \[ \int_{\partial M} \omega = \int_M \partial \omega, \]
+    where $\partial M$ is given the induced orientation.
+\end{simplethm}
+\noindent If $c : [0, 1]^p \to \RR^n$ is a singular $\SC^1$ $p$-cube on $M$, then $\int_c \omega = \int_{[0, 1]^p} c^\ast \omega$. The statement holds likewise for integration on chains, i.e., $\int_{\mathrm{chain}}$. For the theorem, we'll only use that for $P = k$, and we'll always work with the $k$-cube $c$ satisfying the stronger condition that there is a coordinate chart $\xi : W \to \RR^n$ for $M$, such that $[0, 1]^k \in W$ and $c = \restr{\xi}{[0, 1]^k}$.
+\medskip\newline
+What does this mean on a boundary point? The face $c_{(k, 0)}$ lies in $\partial M$, and is the only face with its interior points in $\partial M$. If $M$ is oriented, we say that $c$ is \textit{orientation preserving} if $\xi$ is orientation preserving.
+\begin{simplelemma}[Spivak 5-4]
+    Let $M$ be an oriented $k$-dimension manifold in $\RR^n$. Let $c_1, c_2 : [0, 1]^k \to M$ be two orientation preserving $k$-cubes in $M$. Let $\omega$ be a $k$-form that vanishes outside the intersection of the cubes, i.e., $\omega = 0$ on $c_1([0, 1]^k) \cap c_2([0, 1]^k)$. Then
+    \[ \int_{c_1} \omega = \int_{c_2} \omega. \]
+\end{simplelemma}
+\begin{proof}
+    Consider $c_1, c_2$ to be the restrictions of the coordinate charts $\xi_1, \xi_2$ onto $[0, 1]^k$. Directly write,
+    \[ \int_{c_1} \omega = \int_{[0, 1]^k} c_1^\ast \omega = \int_{[0, 1]^k} \xi_1^\ast \omega, \]
+    where $\xi_1 = (\xi_2 \circ \xi_2^{-1}) \circ \xi_1 = \xi_2 \circ (\xi_2^{-1} \circ \xi_1)$. We denote $\xi_2^{-1} \circ \xi_1$ to be the transition mapping $g$. In particular, this means we have
+    \[ \int_{[0, 1]^k} \xi_1^\ast \omega = \int_{[0, 1]^k} (\xi_2^{-1} \circ \xi_1)^\ast \xi_2^\ast \omega = \int_{[0, 1]^k} g^\ast (f \, dx_1 \wedge \dots \wedge dx_n), \]
+    where we let $\xi_2^\ast \omega = f(x) \, dx_1 \wedge \dots \wedge dx_n$. By Theorem 4-9 in Spivak, we have that
+    \begin{align*}
+        \int_{[0, 1]^k} g^\ast (f \, dx_1 \wedge \dots \wedge dx_n) &= \int_{[0, 1]^k} (f \circ g) \det g' \, dx_1 \wedge \dots \wedge dx_n \\
+        &= \int_{[0, 1]^k} (f \circ g) \abs{\det g'} \, dx_1 \wedge \dots \wedge dx_n,
+    \end{align*}
+    where we have that $\det g'$ is positive so $\det g' = \abs{\det g'}$, since $\xi_1, \xi_2$ are orientation preserving. Note that, by our assumption, $\xi_1^\ast \omega$ vanishes outside $\xi_1^{-1}(c_1([0, 1]^k)) \cap c_2([0, 1]^k)$. By the change of variable theorem, we may continue our derivations as follows,
+    \[ \int_{[0, 1]^k} (f \circ g) \abs{\det g'} \, dx_1 \wedge \dots \wedge dx_n = \int_{[0, 1]^k} f \, dx_1 \wedge \dots \wedge dx_n, \]
+    where by definition of $f$, we finally obtain that the above is equal to
+    \[ \int_{[0, 1]^k} \xi_2^\ast \omega = \int_{c_2} \omega. \qedhere \]
+\end{proof}
+\noindent We may now define integration on manifolds.
+\begin{definition}
+    Let $M$ be a compact oriented $k$-dimensional manifold and let $\omega$ be a $k$-form on $M$. There are a handful of cases to consider.
+    \begin{enumerate}[label=(\roman*)]
+        \item If there is an orientation preserving singular $k$-cube $c$ in $M$ such that $\omega = 0$ outside of $c([0, 1]^k)$, then we'll define
+        \[ \int_M \omega = \int_c \omega. \]
+        \item In general, there is an open cover $\SO$ of $M$ such that, for every $U \in \SO$, there is an orientation preserving singular $k$-cube $c$ such that $U \cap M \subset c([0, 1]^k)$. Let $\Phi$ be a partition of unity subordinate to $\SO$ that is $\SC^\infty$, or at least, $\SC^2$. Define
+        \[ \int_M \omega = \sum_{\varphi \in \Phi} \int_M \varphi \omega, \]
+        where the sum is finite if $M$ is compact. In general, this definition holds provided that the sum converges in the sense we've defined before.
+    \end{enumerate}
+\end{definition}
+\noindent Note that these definitions have that $\int_M \omega$ does not depend on the cover $\SO$ or on $\Phi$. This argument arises similarly to that of Theorem 3-12. We prove Stokes' Theorem next lecture.`'
