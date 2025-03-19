@@ -1,4 +1,4 @@
-\section{Day 7: ... (Feb. 26, 2025)}
+\section{Day 7: More Probabilistic Methods (Feb. 26, 2025)}
 Today, we will discuss more probabilistic methods. We start with an example problem. Let us pick $10$ numbers from $\{1, \dots, 100\}$. What is the probability that there exist distinct subsets $A, B$ such that the sum of the elements in $A$ is equal to the sum of the elements in $B$?
 \[ 17, 38, 9, 29, 95, 66, 31, 12, 91, 13 \tag{Example Set} \]
 Let us consider this in a pigeonhole fashion; for each subset $S$ (which we will denote as pigeons), we shall send them to their respective sums of elements (which we will denote as pigeonholes). To start, there are a total of $2^{10}$ pigeons (since each of the ten numbers may either be picked, or not picked, in forming a subset), and there are at most $1000$ pigeons. Thus, there always exists such subsets $A, B$ by the pigeonhole principle.

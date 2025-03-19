@@ -1,0 +1,17 @@
+\section{Day 10: Linear Algebraic Methods (Mar. 19, 2025)}
+We start with an example problem.
+\begin{simpleclaim}
+    Let a $1$-distance set be denoted as an \textit{equilateral set}; specifically, such a set has the property that, for $x_1, \dots, x_n \in S \subset \RR^d$, we have $\norm{x_i - x_j}_2 = 1$ for any two distinct $i, j$. We claim that $n := \abs{S} = d + 1$ is the largest possible size of such equilateral sets.
+\end{simpleclaim}
+\noindent Visually, we can picture this problem by considering the intersections between unit balls in $\RR^d$. If $d = 2$, then the optimal $n$ is $3$. If $d = 3$, we have $n = 4$. In general, for any given $d$, we have that $n = d + 1$. Let us try to prove this by inducting on $d$.
+\medskip\newline
+For any $d$ points, there is a $(d-1)$-dimensional plane $H$ containing them. Specifically, let these points be called $z_1, \dots, z_d$. We want an equation
+\[ \left<a, \vec{X}\right> = b \]
+defining $H$ such that $\left<a, z_i\right> = b$ for all $i = 1, \dots, d$. In particular, we want $\vec{a}, b$ such that
+\[ b = \left<\vec{a}, \vec{z}\right>, \]
+where $\vec{z} = (z_1, \dots, z_d)$. By observing the rank, there must exist such nonzero $\vec{a}$ and $b$. Let $H$ be a $(d-1)$-dimensional hyperplane containing $z_1, \dots, z_d$. We know, by definition, that no other $x_i$ is in $H$. Suppose $y, z \in \RR^t \setminus H$ such that $\norm{y - x_i} = 1$, $\norm{z - x_i} = 1$, and $\norm{y - z} = 1$ for all $i \leq d$. We want to use this to obtain a contradiction. By translating, assuime that the point is the origin. If $n \geq d + 1$, then we get $x_1, \dots, x_{d+1} \in \RR^d$ such that $\norm{x_i} = 1$ and $\norm{x_i - x_j} = 1$.
+\medskip\newline
+i don't particularly like this direction of proof... just take isometry to regular simplices.
+\begin{simpleclaim}
+    Let a $2$-distance set be a collection of points $x_1, \dots, x_n \in \RR^d$ with $A, B \in \RR$ such that, for all $i \neq j$, we have $\norm{x_i - x_j}$ is equal to $A$ or $B$.
+\end{simpleclaim}
