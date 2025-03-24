@@ -1,0 +1,51 @@
+\section{Day 58: Stokes' Theorem for Chains (Mar. 3, 2025)}
+\begin{simplethm}[Spivak 4-13: Stokes' Theorem]
+    Let $\omega$ be a $\SC^1$ $(k-1)$-form on an open $U \subset \RR^n$, and let $c$ be a $\SC^1$ $k$-chain in $U$. Then
+    \[ \int_c d\omega = \int_{\partial c} \omega. \]
+\end{simplethm}
+\noindent Note that if $k = 1$, $c = I^1$, then the above is simply given by the fundamental theorem of calculus. Recall that if $\omega$ is a continuous $k$-form, $c$ a $k$-cube, then
+\[ \int_c \omega = \int_{[0, 1]^k} c^\ast \omega. \]
+The integral of $\omega$ over the $k$-chain $c = \sum_i a_i c_i$ is defined as $\int_c \omega = \sum_i a_i \int_{c_i} \omega$. For example,
+\begin{align*}
+    \int_{I^k} f(x) \, dx_1 \wedge \dots \wedge dx_n &= \int_{[0, 1]^k} (I^k)^\ast \left(f(x) \, dx_1 \wedge \dots \wedge dx_k\right) \\
+    &= \int_{[0, 1]^k} f(x_1, \dots, x_k) \, dx_1 \dots dx_k.
+\end{align*}
+We now prove Stokes' theorem.
+\begin{enumerate}[label=(\roman*)]
+    \item Let $c = I^k$, and let $\omega$ be a $(k-1)$-form on $[0, 1]^k$, i.e. the sum of $(k-1)$-forms of the type
+    \[ f(x) \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_k. \]
+    Note that $\widehat{dx_i}$ means that $dx_i$ is deleted; it suffices to prove Stokes' theorem for each of the above forms. Directly write as follows,\footnote{ugh latex superscript pwp}
+    \begin{align*}
+        &\int_{[0, 1]^{k-1}} {I^k_{(j, \alpha)}}^\ast \left(f \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_k\right) \\
+        &= \begin{cases} 0 & \text{if } j \neq i, \\ \displaystyle \int_{[0, 1]^k} f(x_1, \dots, \alpha, \dots, x_k) \, dx_1 \dots dx_k & \text{if } j = i, \end{cases}
+    \end{align*}
+    which yields
+    \begin{align*}
+        \int_{I^k} d \left(f \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n \right) &= \int_{I^k} \frac{\partial f}{\partial x_i} dx_i \wedge dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n \\
+        &= (-1)^{i-1} \int_{[0, 1]^k} \frac{\partial f}{\partial x_i}.
+    \end{align*}
+    By Fubini's theorem and FTC in one dimension, we have that
+    \begin{align*}
+        & \int_{I^k} d \left(f \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n \right) \\
+        &= (-1)^{i-1} \int_0^1 \dots \left(\int_0^1 \frac{\partial f}{\partial x_i}(x_1, \dots, x_k) \, dx_i\right) dx_1 \dots \widehat{dx_i} \dots dx_k \\
+        &= (-1)^{i-1} \int_{[0, 1]^k} \left(f(x_1, \dots, 1, \dots, x_k) - f(x_1, \dots, 0, \dots, x_k) \right) \, dx_1 \dots \widehat{dx_i} \dots dx_k.
+    \end{align*}
+    Using the fact that
+    \[ \partial I^k = \sum_{j=1}^k \sum_{\alpha = 0, 1} (-1)^{j + \alpha} I^k_{(j, \alpha)}, \]
+    we can write
+    \begin{align*}
+        & \int_{\partial I^k} f \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_k \\
+        &= \sum_{j=1}^k \sum_{\alpha = 0, 1} (-1)^{j + \alpha} \int_{I^k_{(j, \alpha)}} f \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_k \\
+        &= \sum_{j=1}^k \sum_{\alpha = 0, 1} (-1)^{j + \alpha} \int_{[0, 1]^{k-1}} \left(I^k_{(j, \alpha)}\right)^\ast \left(f \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_k\right) \\
+        &= (-1)^{j+1} \int_{[0, 1]^{k-1}} f(x_1, \dots, 1, \dots, x_{k-1})\, dx_1 \dots dx_{k-1} \\
+        & \hspace{0.2in} + (-1)^j \int_{[0, 1]^{k-1}} f(x_1, \dots, 0, \dots, x_{k-1}) \, dx_1 \dots dx_{k-1}.
+    \end{align*}
+    We note that this equation is equivalent to what we obtained from evaluating the LHS, and so we are done for this case.
+    \item Let $c$ be a singular $k$-cube. Then
+    \[ \int_c d\omega = \int_{I^k} c^\ast (d\omega) = \int_{I^k} d(c^\ast \omega) = \int_{\partial I^k} c^\ast \omega, \]
+    and
+    \[ \int_{\partial c} \omega = \sum_{i=1}^k \sum_{\alpha = 0, 1} (-1)^{i+\alpha} \int_{c_{(i, \alpha)}} \omega = \sum_{i=1}^k \sum_{\alpha = 0, 1} (-1)^{i+\alpha} \int_{I^k_{(i, \alpha)}} c^\ast \omega = \int_{\partial I^k} c^\ast \omega, \]
+    meaning that Stokes' theorem holds for $k$-cubes.
+    \item Finally, we prove the theorem for $k$-chains. Let $c = \sum_i a_i c_i$, we have
+    \[ \int_c d\omega = \sum_i a_i \int_{c_i} d\omega = \sum_i a_i \int_{\partial c_i} \omega = \int_{\partial c} \omega. \]
+\end{enumerate}
