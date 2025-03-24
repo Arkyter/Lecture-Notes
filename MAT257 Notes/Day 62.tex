@@ -1,0 +1,19 @@
+\section{Day 62: Orientation and Boundary (Mar. 12, 2025)}
+A $k$-dimensional manifold $M \subset \RR^n$ is \textit{orientable} if we can choose an orientation $\mu_x$ for every $M_x$ in a consistent way. \textit{Consistent} means that, for every coordinate chart $\varphi : W \to \RR^n$ and any two points $a, b \in W$,
+\[ \mu_{\varphi(a)} = [\varphi_{a, \ast} e_{1,a}, \dots, \varphi_{a, \ast} e_{k,a}]  \iff \mu_{\varphi(b)} = [\varphi_{b, \ast} e_{1,b}, \dots, \varphi_{b, \ast} e_{k,b}], \]
+i.e. the implicated relation goes both ways. Suppose we can choose consistent orientations $\mu_x$. Then,
+\begin{enumerate}[label=(\roman*)]
+    \item If $\varphi : W \to \RR^n$ is a coordinate chart for $M$, then either $[\varphi_{a, \ast} e_{1, a}, \dots, \varphi_{a, \ast} e_{k, a}] = \mu_{\varphi(a)}$ for all $a \in W$, or $[\varphi_{a, \ast} e_{1, a}, \dots, \varphi_{a, \ast} e_{k, a}] = - \mu_{\varphi(u)}$ for all $a \in W$. We say that $\varphi$ is orientation preserving in the former case, and orientation reversing in the latter.
+    \item If $\varphi : W \to \RR^n$ is orientation reversing and $T : \RR^k \to \RR^k$ is linear with $\det T < 0$, then $\varphi \circ T$ is another coordinate chart that is orientation preserving.
+    \item We can cover $M$ by orientation preserving coordinate charts.
+    \item Given coordinate charts $\varphi : W \to \RR^n$ and $\psi : V \to \RR^n$, we have that $\det((\varphi \circ \psi)^{-1}) > 0$ if and only if $\varphi$ and $\psi$ are both orientation preserving, or both orientation reversing.
+\end{enumerate}
+If $M$ is orientable, then a choice of consistent orientations $\mu_x$ for every $M_x$ is called an orientation $\mu$ of $M$. An \textit{oriented manifold} is a manifold together with an orientation $\mu$. As an example, the M\"obius strip is not orientable.
+\medskip\newline
+We now discuss manifolds with boundary. Given a point $a$ of a $k$-dimensional manifold $M$ with boundary in $\RR^n$, there exists an open set $W$ in $\HH^k = \{ y \in \RR^k \mid y_k \geq 0 \}$ with the subspace topology and coordinate chart $\varphi : W \to \RR^n$ such that $\varphi$ is injective, $\varphi'$ has rank $k$ at every point in $W$, and $\varphi(W) = M \cap U$, where $U$ is open in $\RR^n$.\footnote{note to self; think more about this}
+\begin{definition}[Manifold with Boundary]
+    A $k$-dimensional manifold with boundary is a subset of $\RR^n$ such that each point has a neighborhood homeomorphic to a subset of $\RR^k$, or to an open subset of $\HH^k = \{ x \in \RR^k \mid x_k \geq 0 \}$. Specifically, for each $a \in M$, there is an open neighborhood $U \ni a$, $V \subset \RR^n$, and diffeomorphism $h : U \to V$ such that either
+    \[ h(M \cap U) = V \cap (\RR^k \times \{0\}) \]
+    or $h(a) = 0$ and $h(M \cap U) = V \cap (\HH^k \times \{0\})$.
+\end{definition}
+\noindent Note that both conditions cannot hold at $a$. If $h_1$ satisfies the first condition, $h_2$ satisfies the second condition, then $h_2 \circ h_1^{-1}$ would take an open set to $\HH^k$ intersected with an open set, contradicting the inverse function theorem.
