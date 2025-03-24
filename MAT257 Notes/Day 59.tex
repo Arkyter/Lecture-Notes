@@ -1,0 +1,40 @@
+\section{Day 59: Using Stokes' Theorem (Mar. 5, 2025)}
+How much differentiability do we need for Stokes' theorem? Recall that
+\[ df = \sum_i \frac{\partial f}{\partial x_i} \, dx_i, \]
+and if $f$ is $\SC^r$, we have that $df$ is $\SC^{r-1}$; if $\omega$ is a $\SC^r$ $k$-form, $d\omega$ is $\SC^{r-1}$. The integration of a $k$-form $\omega$ in $\RR^k$ over the standard $k$-cube $I^k$ is given by
+\[ \int_{I^k} \omega = \int_{[0, 1]^k} f, \]
+where $\omega = f(x) \, dx_1 \wedge \dots \wedge dx_n$; note that $\omega$ must be $\SC^0$; if $\omega$ is a $k$-cube in $\RR^n$ with $k < n$, though, we have that
+\[ \int_c \omega = \int_{[0, 1]^k} c^\ast \omega, \]
+and we need $\omega$ to be $\SC^0$, $c$ to be $\SC^1$, where $\omega = \sum \omega_{i_1, \dots, i_k} \, dx_{i_1} \wedge \dots \wedge dx_{i_k}$; if $c = (c_1, \dots, c_n)$, then $c^\ast \omega = (\omega_{i_1, \dots, i_k} \circ c) \, dc_{i_1} \wedge \dots \wedge dc_{i_k}$.
+\begin{simplethm}[Stokes' Theorem]
+    Let $\omega$ be a $\SC^1$ $(k-1)$-form on an open subset $U$ of $\RR^n$. Let $c$ be a $k$-chain on $U$ of class $\SC^2$. Then
+    \[ \int_c d\omega = \int_{\partial c} \omega. \]
+\end{simplethm}
+\noindent We may write
+\[ \int_c d\omega = \int_{[0, 1]^k} c^\ast(d \omega) = \int_{[0, 1]^k} d(c^\ast \omega) = \dots. \]
+The point is, we need $c^\ast \omega$ to be $\SC^1$, meaning we need $\omega$ to be $\SC^1$ and the derivatives of $c$ to be $\SC^1$, i.e. $c$ needs to be $\SC^2$. Thus, from now on, we suppose \textit{all} $k$-cubes are $\SC^2$. Using Stokes' theorem, let $c : [0, 1]^n \to \RR^n$ be an $n$-cube, and $\omega = f \, dx_1 \wedge \dots \wedge dx_n$ an $n$-form. How does $\int_c \omega$ compare with $\int_{c([0, 1]^n)} f$?
+\medskip\newline
+Assume that $f$ is injective on $(0, 1)^n$, and $\det c' \neq 0$ on $(0, 1)^n$. By change of variables, we may write
+\[ \int_{c([0, 1]^n)} f = \int_{[0, 1]^n} f \circ c \abs{\det c'}, \]
+which is equal if $\det c' > 0$, i.e. orientation-preserving. Then we may write
+\[ \int_c \omega = \int_{[0, 1]^n} c^\ast \omega = \int_{[0, 1]^n} (f \circ c) \cdot c^\ast \, dx_1 \wedge \dots \wedge dx_n = \int_{[0, 1]^n} (f \circ c) \det c' \, dx_1 \dots dx_n. \]
+We also have that
+\[ \int_c dx_1 \wedge \dots \wedge dx_n \]
+is the $n$-dimensional volume of $c([0, 1]^n)$.
+\begin{remark}
+    What happens if we reparameterize a singular $k$-cube? Let $c$ be a singular $\SC^1$ $k$-cube in $\RR^n$, and let
+    \[ p : [0, 1]^k \to [0, 1]^k \]
+    be bijective, with $\det p' > 0$ on $(0, 1)^k$, $\omega$ a $\SC^0$ $k$-form on $\RR^n$, then $\int_c \omega = \int_{c \circ p} \omega$. This is true because
+    \[ \int_{c \circ p} \omega = \int_{[0, 1]^k} (c \circ p)^\ast \omega = \int_{[0, 1]^k} p^\ast(c^\ast \omega), \]
+    where if we let $c^\ast \omega = h(x) \, dx_1 \wedge \dots \wedge dx_k$, we have that
+    \[ p^\ast (c^\ast \omega) = h \circ p \cdot \det p' \, dx_1 \wedge \dots dx_k, \]
+    and we may continue writing
+    \[ \int_{[0, 1]^k} p^\ast(c^\ast \omega) = \int_{[0, 1]^k} (h \circ p) \cdot \det p' = \int_{[0, 1]^k} h = \int_{[0, 1]^k} c^\ast \omega = \int_c \omega \]
+    by change of variables in the second equality.
+\end{remark}
+\noindent Thus, we have that the volume of a $k$-cube is invariant under orientation preserving reparameterizations. We present an example; consider the astroid $x^{2/3} + y^{2/3} = a^{2/3}$, with $a > 0$. We can compute the enclosed area in three different ways (which wasn't finished in class); the parametric representation of the astroid is given by
+\begin{align*}
+    x &= a \cos^3 \theta, \\
+    y &= a \sin^3 \theta,
+\end{align*}
+where $\theta \in [0, 2\pi]$; this area can be evaluated with first-year calculus, change of variables, or Stokes' theorem.
