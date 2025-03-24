@@ -1,7 +1,7 @@
 # lecture-notes
-### **Heads up!!** - I'm currently unable to walk to most of my lectures, *but* i'll try to keep updating this whenever I can. Sorry!! :c
-### Update (Feb. 23, 2025) - I'm cleared to walk again, but am currently busy re-learning how to... will return to lectures and catch up on notes now c: meowow
----
+[comment]: # ### **Heads up!!** - I'm currently unable to walk to most of my lectures, *but* i'll try to keep updating this whenever I can. Sorry!! :c
+[comment]: # ### Update (Feb. 23, 2025) - I'm cleared to walk again, but am currently busy re-learning how to... will return to lectures and catch up on notes now c: meowow
+[comment]: # ---
 
 Lecture notes from my classes at UofT; will be updated daily (hopefully).
 

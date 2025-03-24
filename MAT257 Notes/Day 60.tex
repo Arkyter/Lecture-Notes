@@ -1,0 +1,13 @@
+\section{Day 60: Astroid Reparameterization (Mar. 7, 2025)}
+We continue the example left off from last class.
+\begin{enumerate}[label=(\roman*)]
+    \item By first-year calculus, we may observe that an astroid admits two axes of symmetry, where by substituting $x = a \cos^3 \theta$, $y = a \sin^3 \theta$, we obtain the area is
+    \[ 4 \int_0^a y \, dx = -4 \int_0^{\pi/2} a \sin^3 \theta \, d(a \cos^3 \theta) = \frac{3\pi a^2}{32}. \]
+    \item By change of variables, the parametric region in the first quadrant is given by $x = p \cos^3 \theta$, $y = p \sin^3 \theta$ $(p, \theta) \in [0, a] \times [0, \pi/2]$. Then a quarter of the area of the astroid is given by
+    \[ \iint_{[0, a] \times [0, \pi/2]} \abs{\det \frac{\partial(x, y)}{\partial(p, \theta)}} \, dp \, d\theta = 3 \int_0^{\pi/2} \int_0^a p \cos^2 \theta \sin^2 \theta \, dp \, d\theta = \frac{3\pi a^2}{32}. \]
+    \item By Stokes' theorem, let $c$ be a $2$-cube parameterizing the astroid. We have that
+    \[ \int_c dx \wedge dy = \int_{\partial c} x \, dy = - \int_{\partial c} y \, dx, \]
+    since $d(y \, dx) = -dx \wedge dy$ and $d(x \, dy) = dx \wedge dy$. Thus, the above evaluates out to
+    \[ \int_0^a (a \cos^3 \theta) = d(a \sin^3 \theta), \]
+    which goes to (ii).
+\end{enumerate}
