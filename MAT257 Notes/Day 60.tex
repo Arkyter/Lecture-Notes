@@ -11,3 +11,15 @@ We continue the example left off from last class.
     \[ \int_0^a (a \cos^3 \theta) = d(a \sin^3 \theta), \]
     which goes to (ii).
 \end{enumerate}
+We now discuss integration of differential forms on manifolds. Let $M \subset \RR^n$ be a manifold of dimension $k$. Define the following,
+\begin{definition}
+    A $p$-form on $M$ is an alternating $p$-tensor $\omega : x \mapsto \omega(x) \in \Omega^p(M_x)$, where $M_x$ is the tangent space to $M$ at $x$.
+\end{definition}
+\begin{definition}
+    A vector field on $M$ is a function $F : x \mapsto F(x) \in M_x$ for each $x \in M$.
+\end{definition}
+\noindent We say that a $p$-form on $M$ is $\SC^r$ if $\varphi^\ast \omega$ is $\SC^r$ for any coordinate chart $\varphi : (W \subset \RR^k) \to (M \subset \RR^n)$. In particular,
+\[ (\varphi^\ast \omega)(x)(w_1, \dots, w_p) = \omega(\varphi(x))(\varphi_{\ast x} w_1, \dots, \varphi_{\ast x} w_p). \]
+This definition is independent of the choice of coordinate system at a given point of $M$, and we may write any $p$-form as
+\[ \omega = \sum_{i_1, \dots, i_p} \omega_{i_1, \dots, i_p} \, dx_{i_1} \wedge \dots \wedge dx_{i_p}, \]
+with $\omega_{i_1, \dots, i_p}$ being $\SC^r$.
