@@ -1,0 +1,17 @@
+\section{Day 63: Orientation of the Boundary (Mar. 14, 2025)}
+Let $M \subset \RR^n$ be a $k$-dimensional manifold with boundary. If, for all $a \in M$, there exists a neighborhood $U$ of $a$ in $\RR^n$, an open subset $V \subset \RR^n$, and a diffeomorphism $h : U \to V$ such that either
+\begin{enumerate}[label=(\roman*)]
+    \item $h(M \cap U) = V \cap (\RR^k \times \{0\})$, or
+    \item $h(M \cap U) = V \cap (\HH^k \times \{0\})$ where $h_k(a) = 0$ (i.e. the $k$th component).
+\end{enumerate}
+Note that (i) and (ii) do not both occur at any given point $a \in M$; with this in mind, we say that the set of points satisfying (ii) is the boundary of $M$, i.e. $\partial M$. It is important to not confuse $\partial M$ with the boundary of a set, e.g. $\{x \in \RR^2 \mid \abs{x} < 1 \text{ or } 1 < \abs{x} < 2 \} =: A$; then $A \cup \partial A$ is a manifold $M$ with boundary $\partial M$.
+\medskip\newline
+If $M$ is a $k$-dimensional manifold with boundary, then $M \setminus \partial M$ is a $k$-dimensional manifold \textit{without} boundary; similarly, $\partial M$ is a $k-1$ dimensional manifold without boundary. If $\varphi$ is a coordinate chart at a point $a$ and $\varphi(x) = a$, then the tangent space $M_a$ to $M$ at $a$ is given by $\varphi_{\ast x}(\RR_\ast^k)$; similarly, the tangent space $(\partial M)_a$ to $\partial M$ at $a$ is given by $\varphi_{\ast x}(\RR_\ast^{k-1})$.
+\medskip\newline
+Let $x$ be a point on $\partial M$. Since $M_x$ is a $k$-dimensional vector space and $(\partial M)_x$ is a $(k-1)$-dimensional subspace of $M_x$, there are exactly two unit vectors in $M_x$ that are perpendicular to $(\partial M)_x$, and one of these unit vectors is given by $\varphi_{\ast, x}(v)$ for some $v$ with $v_k < 0$. We denote this to be the outward pointing unit normal $n(x)$, and it is independent of coordinate chart.
+\medskip\newline
+Now, suppose that $M$ is a $k$-dimensional oriented manifold with boundary, where $\mu$ is an orientation for $M$. Given a point $a \in \partial M$, choose $v_1, \dots, v_{k-1} \in (\partial M)_a$ such that $[n(a), v_1, \dots, v_{k-1}] = \mu_a$. If we also have that $[n(a), w_1, \dots, w_{k-1}] = \mu_a$, then both $[v_1, \dots, v_{k-1}]$ and $[w_1, \dots, w_{k-1}]$ are the same orientation for $(\partial M)_a$, and this orientation is denoted $(\partial \mu)_a$; such orientations on the boundary of $M$ are consistent.
+\begin{simpleprop}
+    If $M$ is orientable, then $\partial M$ is also orientable, and an orientation $\mu$ on $M$ determines an orientation $\partial \mu$ of $\partial M$. We call $\partial \mu$ the \textit{induced orientation}.
+\end{simpleprop}
+\noindent As a clarifying example, let $M = \HH^k$ with the usual orientation $[e_1, \dots, e_k]$. Is the induced orientation of $\partial \HH^k = \RR^{k-1}$ the standard orientation $[e_1, \dots, e_{k-1}]$ of $\RR^{k-1}$? No; it is $(-1)^k$ times the standard orientation of $\RR^{k-1}$. This is discussed in Spivak, pg. 119-121.
