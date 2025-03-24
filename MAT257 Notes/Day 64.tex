@@ -1,0 +1,29 @@
+\section{Day 64: Orientation and Stokes' Theorem (Mar. 17, 2025)}
+Let $M$ be a $k$-dimensional manifold in $\RR^n$ with boundary and orientation $\mu$.
+\begin{definition}
+    The induced orientation of $\partial M$ is given, for all $a \in \partial M$, by $\partial \mu_a = [v_1, \dots, v_{k-1}]$, where $v_1, \dots, v_{k-1} \in (\partial M)_a$, where $[n(a), v_1, \dots, v_{k-1}] = \mu_a$. 
+\end{definition}
+\noindent We give a few examples.
+\begin{enumerate}[label=(\alph*)]
+    \item $\HH^k$ with the orientation $\mu$ of $\RR^k$ has induced orientation $\partial \mu$ of $\partial \HH^k$, given by $(-1)^k$ times the standard orientation of $\RR^{k-1}$.
+    \item Consider the standard $k$-cube $I^k : [0, 1]^k \xrightarrow[]{\id} [0, 1]^k \subset \RR^k$. Give $[0, 1]^k$ the standard orientation of $\RR^k$, and $\partial [0, 1]^k$ with induced orientation $\partial \mu$ on $(k-1)$-dual faces.
+\end{enumerate}
+\begin{simpleclaim}
+    $(-1)^{j + \alpha} I_{(j, \alpha)}^k$ is an orientation preserving mapping from $[0, 1]^{k-1}$ with the standard orientation of $\RR^{k-1}$ to the $(j, \alpha)$-face of $[0, 1]^k$ with induced orientation $\partial \mu$.
+\end{simpleclaim}
+\noindent Recall that
+\[ I^k_{(j, \alpha)} : (x_1, \dots, x_{k-1}) \mapsto (x_1, \dots, x_{j-1}, \alpha, x_{j+1}, \dots, x_{k-1}). \]
+The tangent map of $I^k_{(j, \alpha)}$ at a point $[0, 1]^{k-1}$ takes the standard basis $e_1, \dots, e_{k-1}$ to $e_1, \dots, e_{j-1}, e_{j+1}, \dots, e_{k-1}$. On the $(j, \alpha)$ face, the outer unit normal is $(-1)^{\alpha + 1} e_j$. Then we have that the standard orientation of $\RR^k$, $[e_1, \dots, e_k]$, is that
+\[ [e_1, \dots, e_k] = (-1)^{j+\alpha} \left[(-1)^{\alpha + 1}e_j, e_1, \dots, e_{j-1}, e_{j+1}, \dots, e_{k}\right]. \]
+\begin{remark}
+    If $M$ is an oriented $(n-1)$-dimensional manifold in $\RR^n$ then we can define an analogue of the outward normal $n$, even though $\mu$ is not necessarily the boundary of something. Choose $n(a) \in M_a$ such that if $[v_1, \dots, v_{n-1}] = \mu_a$ is an orientation of $M$ at $a$, then $[n(a), v_1, \dots, v_{n-1}]$ is the standard orientation of $\RR^n$. Note that $n(x)$ varies continuously on $M$.
+    \medskip\newline
+    Conversely, if $M$ is an $(n-1)$-dimensional manifold on $\RR^n$ with a certain normal vector $n(x)$, then we can use $n(x)$ to define an orientation.
+\end{remark}
+\begin{enumerate}[label=(\alph*)] \setcounter{enumi}{2}
+    \item Continuous choice of normal vector $n(x)$ is not possible on the M\"obius strip, since the closed M\"obius strip normal vector corresponds to a point on the boundary.
+\end{enumerate}
+\begin{simplethm}[Stokes' Theorem, Spivak 5-5]
+    Let $M$ be a compact, orientable $k$-dimensional manifold with boundary in $\RR^n$ (at least $\SC^2$), and let $\omega$ be a differential $(k-1)$-form on $M$, at least $\SC^1$. Then
+    \[ \int_M d\omega = \int_{\partial M} \omega. \]
+\end{simplethm}
