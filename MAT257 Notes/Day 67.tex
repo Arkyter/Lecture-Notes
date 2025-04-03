@@ -1,1 +1,32 @@
-\section{Day 67: (Mar. 24, 2025)}
+\section{Day 67: Integration with Respect to Volume (Mar. 24, 2025)}
+Recall the definition of volume element; let $M$ be a $k$-dimensional manifold in $\RR^n$ with an orientation; for all $x \in M$, the tangent space $M_x$ has orientation $\mu_x$ and inner product $T_x(v, w) = \left<v, w\right>_x$. Then there exists a unique $\omega(x) \in \Omega^k(M_x)$ such that $\omega(x)(v_1, \dots, v_k) = 1$ for $v_1, \dots, v_k$ an orthonormal basis of $M_x$ satisfying $[v_1, \dots, v_k] = \mu_x$.
+\medskip\newline
+If $v_1, \dots, v_k \in M_x$ are linearly independent, $[v_1, \dots, v_k] = \mu_x$, then $\omega(x)(v_1, \dots, v_k)$ is the $k$-dimensional volume of the parallelepiped determined by $v_1, \dots, v_k$. Thus, $\omega$ is a nowhere zero $k$-form on $M$ determined by orientation $\mu$; we call $\omega$ the volume form $dV$. With this, we have that the volume of $M$ is determined as
+\[ \int_M dV, \]
+provided that the integral exists (for example, if $M$ is compact). In particular, if $k = 1$, $dV$ is written as $ds$, i.e., the element of arc length, and if $k = 2$, then it is written as $dA$ or $dS$, i.e., the element of surface area. We give some examples.
+\begin{enumerate}[label=(\roman*)]
+    \item Let $M$ be an $n$-dimensional manifold in $\RR^n$ with the standard orientation. Then $dV = dx_1 \wedge \dots \wedge dx_n$, where we have that
+    \[ \int_M dV = \int_M 1. \]
+    \item Let $M$ be an oriented $1$-dimensional manifold given by the orientation presering $1$-cube $c : [0, 1] \to \RR^n$. Given $c(t) > 0$, we have that the length of $c$ is given by
+    \[ \int_c ds = \int_{[0, 1]} c^\ast(ds) = \int_0^1 \sqrt{c_1'(t)^2 + \dots + c_n'(t)^2} \, dt. \]
+    The above holds because $c^\ast ds = f(t) \, dt$, and we have that $f(\ell) = c^\ast(ds)(e_{1,t})$, where $e_{1,t} = \restr{\frac{d}{dt}}{\ell}$. Then $c^\ast(ds)(e_{1,t}) = ds(c(t))(c_{\ast t} e_{1,t})$. \textit{Note:} not really sure what is written here; can probably be deciphered later maybe.
+    \item Let $M$ be an oriented $k$-manifold on $\RR^n$, with $dV$ the volume element.
+    \begin{simplelemma}
+        If $M$ is $\SC^{r+1}$, then $dV$ is a nowhere vanishing $\SC^r$ $k$-form; if $\omega$ is a $\SC^r$ $k$-form, then $\omega = \lambda \, dV$, where $\lambda$ is a $\SC^r$ scalar valued function.\footnote{note: 36.2 in Munkres analysis on manifolds}
+    \end{simplelemma}
+    \begin{proof}
+        We can show this on an orientation preserving $\SC^{r+1}$ coordinate chart $\varphi : (W \subset \RR^n) \to (M \subset \RR^n)$. Let us start with the first part of the lemma; we have $\varphi^\ast dV = h(x) \, dx_1 \wedge \dots \wedge dx_k$, where
+        \[ h(x) = (\varphi^\ast dV) (x) (e_{1, x}, \dots, e_{k, x}) = (dV) (\varphi(x)) (\varphi_{\ast x} e_{1, x}, \dots, \varphi_{\ast x} e_{k, x}), \]
+        which is the volume of the $k$-dimensional parallelepiped determined by the columns $\frac{\partial \varphi}{\partial x_i}(\varphi(x))$ of $D\varphi(x)$.\footnote{bierstone wrote that we're evaluating the frame at $x$, but I think we need to pass $x$ through $\varphi$ first, since that's what the tangent space is about} This is equal to $\det (A^\top A)^{1/2}$, where $A = D\varphi(x)$. Clearly, this shows that $h(x)$ is $\SC^r$. In particular, we can write $h(x)$ as $V(D\varphi(x))$, so $\varphi^\ast dV = V(D\varphi(x)) \, dx_1 \wedge \dots \wedge dx_k$.
+        \medskip\newline
+        For the second part of the lemma, we have that $\varphi^\ast \omega = g(x) \, dx_1 \wedge \dots \wedge dx_k$, so you can let
+        \[ \lambda \circ \varphi = \frac{g(x)}{V(D\varphi(x))}, \]
+        which is clearly $\SC^r$. \textit{Note:} to expand a little bit from what was written in class, we are basically following the computation as done in the first part of this lemma, i.e.,
+        \[ g(x) = (\varphi^\ast \omega) (x) (e_{1, x}, \dots, e_{k, x}) = \omega(\varphi(x)) (\varphi_{\ast x} e_{1, x}, \dots, \varphi_{\ast x} e_{k, x}), \]
+        which is equivalent to the $k$-dimensional parallelepiped determined by the columns $\frac{d\varphi}{dx_i}(\varphi(x))$ of $D\varphi(x)$. This means we have $g(x) = V(D\varphi(x)) \lambda(\varphi(x))$; specifically, we obtain the expression for $\lambda \circ \varphi$ as above.
+    \end{proof}
+    If $c : [0, 1]^k \to M$ is an orientation preserving $k$-cube, we have that
+    \[ \int_{[0, 1]^k} c^\ast(dV) = \int_{[0, 1]^k} V(D\varphi(x)), \]
+    which is the volume of $c([0, 1]^k)$ if $\restr{c}{(0, 1)^k}$ is injective for each $k$. In particular, for small enough $S$, the image of a cube with side length $S$ is approximated by the $k$-dimensional parallelepiped at $c(x)$ with sides $\frac{\partial c}{\partial x}(x)$. Additional note (not discussed in class, but covered in Munkres); given a $k$-form $\omega$ defined in an open set about the compact oriented $k$-manifold $M$ in $\RR^n$, there exists a $\SC^\infty$ scalar function $\lambda$ such that $\int_M \omega = \int_M \lambda \, dV$.
+    \item We discuss the case when $M$ is an oriented surface in $\RR^3$. Next class, presumably.
+\end{enumerate}
