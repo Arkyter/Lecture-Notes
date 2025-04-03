@@ -13,7 +13,7 @@ Current list of classes:
 Audit list (notes may be kept, but sparsely):
 - None this semester (so far) :3c
 
-Archived class list!
+**Archived classes!**
 
 > Fall 2024
 - MAT327 (Intro to Topology); textbook link [here](https://people.math.ethz.ch/~dkosanovic/24-FS/Munkres-Topology.pdf)
