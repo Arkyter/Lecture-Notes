@@ -1,0 +1,35 @@
+\section{Day 12: Fourier Analysis on Finite Fields (Apr. 2, 2025)}
+For each $a \in \FF_2^n$, let $\psi_a : \FF_2^n \to \CC$, where $\psi_a(x) = (-1)^{\left<a, x\right>}$. Then we have the three following properties;
+\begin{enumerate}[label=(\roman*)]
+    \item The $\psi_a$ are a basis for $\SC^{(\FF_2^n)} = \{f : \FF_2^n \to \CC\}$,
+    \item We have the following sum,
+    \[ \sum_{x \in \FF_2^n} \psi_a(x) \psi_b(x) = \begin{cases} 0 & a \neq b, \\ 2^n & a = b. \end{cases} \]
+    \item For any $f : \FF_2^n \to \CC$, we can write $f = \sum_{a \in \FF_2^n} \hat{f}(a) \psi_a$, where $\hat{f}$ is given by
+    \[ \hat{f}(a) = \frac{1}{2^n} \sum_{x \in \FF_2^n} f(a) \psi_a(x). \]
+\end{enumerate}
+Now, let $S \subseteq \FF_2^n$, and consider the indicator $1_S : \FF_2^n \to \CC$, given by $1_S = \sum_a \hat{1}_S(a) \psi_a$. Consider the hypercube graph $V = \{0, 1\}^n$, and $E$ being the edge set, consisting of pairs of vertices that differ in $1$ coordinate. Then for any subset $S \subseteq \{0, 1\}^n$, we say that the edge neighborhood is the collection of edges between $S$ and $S^C$. How small can the edge neighborhood of $S$ be if $\abs{S} = \alpha 2^n$? It is easy to see that, for a random set of density $\alpha$, we can expect $n(1 - \alpha)(\alpha 2^n)$ edges to go from $S$ to $S^C$. This will be our trivial upper bound; we now check more details.
+\medskip\newline
+Consider the subcube of $\{0, 1\}^n$ given by the collection of all vertices $x \in \{0, 1\}^n$ such that their first $k$ components are $0$. Then we have that its size is $2^{n-k} = \alpha 2^n$, and its edge boundary is $k 2^{n-k} = \log (\alpha^{-1}) \alpha 2^n$, which is asymptotically smaller than our previous expected size.
+\medskip\newline
+The Hamming ball $\beta_r$ is defined as the collection of vertices on $x \in \{0, 1\}^n$ such that the number of $1$s in $x$ is less than or equal to $r$. Then the edge boundary has $\binom{n}{r} (n - r)$ elements, where
+\[ \abs{\beta_r} = \binom{n}{0} + \binom{n}{1} + \dots + \binom{n}{r}. \]
+What shuold $r$ be such that $\alpha 2^n = \abs{\beta_r}$? Set $n = \frac{n}{2} - c_\alpha \sqrt{n}$. Then we have that the number of elements in the edge boundary is given by
+\[ (n - r)\binom{n}{r} \approx n \left(\frac{1}{2} + \frac{c_\alpha}{\sqrt{n}}\right) \Theta\left(\frac{2^n}{\sqrt{n}}\right) = \Theta(\sqrt{n} 2^n), \]
+with the last equality being given when $\alpha = \Theta(1)$.
+\medskip\newline
+We can also describe the edge boundary of $S$ in terms of $\hat{1}_S$. In this manner, the number of elements in the edge boundary of $S$ is given by
+\[ \sum_{x \in \FF_2^n} 1_S(a) \left(\sum_{i=1}^n (1 - 1_S(x + e_i))\right). \]
+We may directly evaluate this expression.
+\begin{align*}
+    & \sum_{x \in \FF_2^n} 1_S(a) \left(\sum_{i=1}^n (1 - 1_S(x + e_i))\right) \\
+    &= \sum_{x \in \FF_2^n} \sum_i 1_S(x) - \sum_{x \in \FF_2^n} \sum_i 1_S(x) 1_S(x + e_i) \\
+    &= \alpha n 2^n - \sum_{x \in \FF_2^n} \sum_{i \in [n]} \left(\sum_a \hat{1}_S(a) \psi_a(x)\right) \left(\sum_b \hat{1}_S(b) \psi_b(x + e_i)\right) \\
+    &= \alpha n 2^n - \sum_{a, b} \hat{1}_S(a) \hat{1}_S(b) \left(\sum_x \psi_a(x) \psi_b(x) \left(\sum_i \psi_b(e_i\right)\right) \\
+    &= \alpha n 2^n - \sum_{a, b} \hat{1}_S(a) \hat{1}_S(b) 2^n 1_{a - b} \left(\sum_{i} \psi_b(e_i)\right) \\
+    &= \alpha n 2^n - \sum_a \hat{1}_S(a)^2 \cdot 2^n \cdot \sum_{i \in [n]} \psi_a(e_i) \\
+    &= \alpha n 2^n - \sum_a \hat{1}_S(a)^2 \cdot 2^n \cdot \left(n - 2 \mathrm{wt}(n)\right) \\
+    &= \alpha n 2^n - \left(\sum_a \hat{1}_S(a)^2 \cdot 2^n \cdot n\right) + \sum_a \hat{1}_S(a)^2 (n - 2 \mathrm{wt}(a)) 2^n \\
+    &= \sum_a \hat{1}_S(a)^2 \left(2 \mathrm{wt}(a)\right) 2^n \\
+    &\leq \sum_a \hat{1}_S(a)^2 (2n) 2^n < 2n (\alpha 2^n).
+\end{align*}
+We skip a few details from class, yadayada. Anyways. Let $S \subseteq \FF_2^n$> Let $\abs{S} = \alpha 2^n$. Let $\hat{1}_S(0) = \alpha$. Suppose $\abs{\hat{1}_S(a)} \leq \eps \alpha$ for all $a \neq 0$. What is the size of $\{(x, y, z) \in S \mid z = x + y\}$?
