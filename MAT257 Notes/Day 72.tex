@@ -1,0 +1,37 @@
+\section{Day 72: Final Exam Details (Apr. 4, 2025)}
+A list of some comments for the final:
+\begin{itemize}
+    \item The exam is designed so that everyone in the course is capable of doing well on it, and you should go into the exam with the attitude that ``if you look at the questions in a straightforward, simple minded way, you should be able to do them.''
+    \item There are $6$ questions; $2$ questions will be on material after TT3, and $4$ questions will cover material from the second semester (these may overlap). Material from the first term that is involved is mainly on stuff that is \textit{very relevant} to things that are important and used in the second term, i.e. stuff that goes on in the theory of manifolds and integration, so, mainly the implicit and inverse function theorems.
+    \item The second term included Fubini's, change of variable, and the ways how these were applied to integration on manifolds, and ultimately using these to prove various versions of Stokes' theorem.
+    \item The material doesn't go so much into how to prove the theorems, but mostly to understand the proofs themselves, and apply them. As an example with differential forms, we developed them starting from scratch, which required a lot of work from linear algebra and elementary calculus techniques such as the chain rule.
+    \item Some of them are going to be multipart questions ($3$ of them are, $3$ of them aren't). There are no questions which were direct repeats of what was on homework assignmemnts; however, the stuff on the homeworks are intentionally relevant, and most of the questions are somewhat similar to what was done in homeworks, or done in class.
+    \item The final is not harder than the term tests; they are, ``I think, rather easier''.
+    \item The homework assignments will be returned before the final; Prof Bierstone thought everything up to Homework 10 was already returned.
+\end{itemize}
+Let's do some questions now. Let us have a $k$-dimensional manifold $M \subset \RR^n$. Let $\omega = \sum \omega_{i_1, \dots, i_k} \, dx_{i_1} \wedge \dots \wedge dx_{i_k}$ be a differential form on $\RR^n$; we defined these as a $k$-form on $M$, but what does this really mean? If $k = 0$, then $\omega$ is a function $f$, and
+\[ \begin{tikzcd}
+    M \arrow[rd, "\restr{f}{M}"'] \arrow[r, hookrightarrow, "\iota"] & \RR^n \arrow[d, "f"] \\
+    & \RR
+\end{tikzcd} \]
+i.e., $\restr{f}{M} = f \circ \iota = \iota^\ast(f)$, where we can consider the form as the composition of the above maps. Specifically, breaking down the map, we have
+\[ \restr{\omega}{M} : \omega(x)(v_1, \dots, v_k), \]
+where $x \in M$, $v_1, \dots, v_k \in M_x \subset \RR^n_x$. Formally, we write $\restr{\omega}{M} = \iota^\ast \omega$, which is a differential form on $M$, i.e., for any $x$ in $(\iota^\ast \omega)(x)(v_1, \dots, v_k)$ with $x \in M$ and $v_1, \dots, v_k \in M_x$; by definition,
+\[ \iota^\ast \omega (x) (v_1, \dots, v_k) = \omega(\iota(x)) (\iota_{\ast x} v_1, \dots, \iota_{\ast x} v_k) = \omega(x)(v_1, \dots, v_k), \]
+since $\iota_\ast$ is a linear map from the tangent space $M_x$ to the tangent space $\RR^n_x$, and we have $\iota_{\ast x} v_i = v_i$ for each $i$. Why is $d(\restr{\omega}{M}) = \restr{(d\omega)}{M}$ (the same question holds for that with $d(\iota^\ast \omega) = \iota^\ast (d\omega)$)? Start by observing $dx_i$ as a differential form on $M$; how do we write $\iota^\ast (dx_i)$ in local coordinates on $M$? Take $\phi : (W \subset \RR^n) \to M$ as a coordinate chart for $M$, where we send coordinates of the form $(y_1, \dots, y_k)$ to $(x_1, \dots, x_n)$; then our answer would be $\phi^\ast(\iota^\ast(dx_i))$, where we may evaluate
+\[ \phi^\ast(\iota^\ast(dx_i)) = \varphi^\ast(d(\iota^\ast x_i)) = d(\varphi^\ast(\iota^\ast x_i)) = d\varphi_i = \sum_{j=1}^k \frac{\partial \varphi_i}{\partial y_j} dy_j, \]
+per the chain rule at the end. How we deal with these questions on proper definition is that we carefully examine them with fundamental calculus properties.
+\medskip\newline
+A second question; how does the divergence theorem work on the movement of a substance through some region in space? Let $\rho(x, t)$ be the density function w.r.t. the point and time, and let $v(x, t) \in \RR^n_x$ be the velocity vector.Then the flow $F(x, t)$ is given by $\rho(x, t) v(x, t)$.
+\medskip\newline
+Let's start by making some observations. $\int_M \rho(x, t) \, dV$ is simply the total amount of substance in the region $M$. Then the flux (i.e. change in flow) is the rate of change of the substance as we pass through the boundary of $M$. $\partial M_x$ has an outward pointing unit normal $n(x)$, and we see that the flux is given by
+\[ \int_{\partial M} \left<F(x), n(x)\right> dA. \]
+\begin{simpleprop}
+    The substance is conservative (smth smth conservation of quantity) if and only if
+    \[ \frac{\partial \rho}{\partial t} + \div F = 0. \]
+\end{simpleprop}
+\noindent Conservation needs that
+\[ \frac{d}{dt} \int_M \rho(x, t) \, dt = - \int_{\partial M} \left<F(x), n(x)\right> dA, \]
+since the integral on the right hand side represents the amount of stuff ``flowing out'', so its negation makes sense. In particular, we may rewrite both sides to obtain
+\[ \int_M \frac{\partial \rho}{\partial t} \, dt = - \int_M \div F \, dV, \]
+where the left hand side comes from differentiation under the integral and the right hand side comes from the divergence theorem. Dividing by the volume of a small ball of $M$ (where we take its radius to go to $0$), we have the mean value of $\frac{\partial \rho}{\partial t}$ is equal to the mean value of $-\div F$, and so we have $\frac{\partial \rho}{\partial t} = - \div F$. One last comment; if you are in a conservative system, then to say that the substance is incompressible means that the density is constant, and $\frac{\partial \rho}{\partial t} = 0$, which is why that implies $\div F = 0$.
