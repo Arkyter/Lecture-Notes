@@ -1,1 +1,35 @@
-\section{Day 66: (Mar. 21, 2025)}
+\section{Day 66: Stokes' Theorem, Pt. 2; Green's Theorem (Mar. 21, 2025)}
+Given a compact oriented $k$-dimensional manifold $M$ on $\RR^n$ with boundary $\SC^2$, along with a $(k-1)$-form $\omega$ on $M$ that is $\SC^1$, we have that
+\[ \int_{\partial M} \omega = \int_M d\omega, \]
+where $\partial M$ has the induced orientation. If $c : [0, 1]^k \to \RR^n$ is an orientation preserving singular $k$-cube in $M$, and $\omega = 0$ outside $c([0, 1]^k)$, then we have that $\int_M \omega = \int_c \omega$. Now, suppose that $c_{(k, 0)}$ lies in $\partial M$ and it is the only face with interior points in the boundary. Then $(-1)^k c_{(k, 0)}$ is an orientation preserving singular $(k-1)$-cube in $\partial M$ with the induced orientation, and we may write
+\[ \int_{c_{(k, 0)}} \omega = (-1)^k \int_{\partial M} \omega, \]
+so we have,
+\[ \int_{\partial c} \omega = \int_{(-1)^k c_{(k, 0)}} \omega = (-1)^k \int_{c_{(k, 0)}} \omega = \int_{\partial M} \omega, \]
+since $c_{(k, 0)}$ appears with the coefficient $(-1)^k$ in $\partial c$. We now prove Stokes' theorem.
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose first, that there is an orientation preserving singular $k$-cube $c$ in $M \setminus \partial M$ such that $\omega = 0$ outside the image $c([0, 1]^k)$. Then per Stokes' theorems on cubes, we have that
+    \[ \int_c d\omega = \int_{[0, 1]^k} c^\ast(d\omega) = \int_{[0, 1]^k} d(c^\ast \omega) = \int_{\partial I^k} c^\ast \omega = \int_{\partial c \omega} = 0, \]
+    where we have that $\int_M d\omega = \int_c d\omega = \int_{\partial c} \omega$ as well, arriving at the same result. Thus, we have that $\int_{\partial M} \omega = 0$.
+    \item Suppose now, that $c_{(k, 0)}$ lies in $\partial M$ and is the only face with interior points in $\partial M$ along with $\omega = 0$ outside of $c([0, 1]^k)$. Then we have that 
+    \[ \int_M d\omega = \int_c d\omega = \int_{\partial c} \omega = \int_{\partial M} \omega. \]
+    \item We now consider the general case. Let $\SO$ be an open cover of $M$, and let $\Phi$ be a $\SC^\infty$ partition of unity subordinate to $\SO$ such that $\varphi \in \Phi$ yields $\varphi \cdot \omega$ is in the cases (a) or (b). Then we have that
+    \[ \int_{\partial M} \omega = \sum_{\varphi \in \Phi} \int_{\partial M} \varphi \omega = \sum_{\varphi \in \Phi} \int_M d(\varphi \omega), \]
+    where we note that the sum is finite as $M$ is compact. Then we have that the above is equal to
+    \[ = \sum_{\varphi \in \Phi} \int_M d\varphi \wedge \omega + \varphi \, d\omega = \sum_{\varphi \in \Phi} \int_M d\varphi \wedge \omega + \sum_{\varphi \in \Phi} \int_M \varphi \, d\omega, \]
+    where the first summation vanishes, and the latter is simply equal to $\int_M d\omega$. To see that the first summation vanishes, we may evaluate as follows,
+    \[ \sum_{\varphi \in \Phi} \int_M d\varphi \wedge \omega = \int_M \sum_{\varphi \in \Phi} d\varphi \wedge \omega = \int_M \left(\sum_{\varphi \in \Phi} d\varphi\right) \wedge \omega = \sum_{\varphi \in \Phi} d\varphi = d\left(\sum_{\varphi \in \Phi} \varphi\right), \]
+    which is clearly the derivative of $1$, which vanishes. Thus, the proof of Stokes' theorem is complete. \qed
+\end{enumerate}
+We now cover a corollary of Stokes' theorem.
+\begin{simplethm}[Green's Theorem, Spivak 5-7]
+    Let $M$ be a compact $2$-dimensional manifold in $\RR^2$ with boundary. Let $\alpha, \beta$ be $\SC^1$ functions on $M$ into $\RR$. Then we have that
+    \[ \int_{\partial M} \alpha \, dx + \beta \, dy = \iint_M \left(\frac{\partial \beta}{\partial x} - \frac{\partial \alpha}{\partial y}\right) \, dx \, dy. \]
+    Here, $M$ is given the usual orientation and $\partial M$ is given the induced orientation; in this context, it is also known as the counterclockwise orientation.
+\end{simplethm}
+\noindent The proof is straightforward. Let $\omega = \alpha \, dx + \beta \, dy$. Then
+\[ d\omega = \left(\frac{\partial \beta}{\partial x} - \frac{\partial \alpha}{\partial y}\right) \, dx \wedge dy. \]
+For the classical versions, though, we need to consider how to take integrals with respect to volume. Let us define the volume element;
+\begin{definition}[Volume Element for a Manifold]
+    Let $M$ be a $k$-dimensional manifold in $\RR^n$ (with or without boundary), with orientation $\mu$. Let $x \in M$. Then $M_x$ has orientation $\mu_x$ and inner product $T_x(v, w) = \left<v, w\right>_x$, and the Euclidean inner product on $\RR_x^n$. These, together, determine the volume of a $k$-form $\omega(x) \in \Omega^k(M_x)$ uniquely, such that $\omega(x)(v_1, \dots, v_k) = 1$ if $v_1, \dots, v_k$ are an orthonormal basis of $\mu_x$ and $[v_1, \dots, v_k] = \mu_x$.
+\end{definition}
+\noindent We discuss more on this topic next class.
