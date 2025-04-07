@@ -1,0 +1,40 @@
+\section{Day 68: Element of Surface Area of Oriented Surface (Mar. 26, 2025)}
+We introduce the element of surface area of an oriented surface $M$, i.e., a $2$-manifold in $\RR^3$. The outward unit normal $n(x)$ of a point $x \in M$ is defined as satisfying $n(x) \perp M_x$, and $[n(x), v, w]$ is the standard orientation of $\RR^3$ if $v, w \in M_x$, with $[v, w] = \mu_x$. We have that
+\[ dA(x)(v, w) = \left<v \times w, n(x)\right> \]
+for $v, w \in M_x$; define an alternating $2$-tensor $\omega \in \omega^2(M_x)$, where $\omega(v, w)$ is the determininant of the $3 \times 3$ matrix with rows $v, w, n(x)$. Then this is equal to $\left<v \times w, n(x)\right>$, where $\omega(v, w) = 1$ if $v, w$ are an orthonormal basis of $M_x$ such that $[v, w] = \mu_x$; thus, $\omega = dA(x)$, and is the definition of the volume element. We conclude that $dA(x)(v, w) = \abs{v \times w}$ for $v, w \in M_x$ and $[v, w] = \mu_x$, because $v \times w \perp M_x$, so $v \times w = \alpha n(x)$; since $\alpha > 0$, we have $[v, w] = \mu_x$ indeed.
+\medskip\newline
+We may now proceed to compute the area of $M$. Consider an orientation preserving singular $2$-cube $c : [0, 1]^2 \to M \subset \RR^3$. Then we have
+\begin{align*}
+    \int_{[0, 1]^2} c^\ast(dA) &= \int_{[0, 1]^2} c^\ast(dA)(x)(e_{1,x}, e_{2,x}) \\
+    &= \int_{[0, 1]^2} dA(c(x)) (c_\ast e_{1,x}, c_\ast e_{2,x}) \\
+    &= \int_{[0, 1]^2} \abs{\frac{\partial c}{\partial x_1} \times \frac{\partial c}{\partial x_2}} \, dx_1 \, dx_2 \\
+    &= \int_{[0, 1]^2} \sqrt{EG - F^2} \, dx_1 \, dx_2,
+\end{align*}
+where
+\[ E(x) = \left<\frac{\partial c}{\partial x_1}, \frac{\partial c}{\partial x_1}\right>, \hspace{0.1in} F(x) = \left<\frac{\partial c}{\partial x_1}, \frac{\partial c}{\partial x_2}\right>, \hspace{0.1in} G(x) = \left<\frac{\partial c}{\partial x_2}, \frac{\partial c}{\partial x_2}\right>, \]
+since $\abs{v \times w} = \sqrt{\left<v, v\right> \left<w, w\right> - \left<v, w\right>^2}$. We now go over an example.
+\begin{enumerate}[label=(\alph*)]
+    \item Find the surface area of a sphere $x^2 + y^2 + z^2 = r^2$. We may parameterize such a sphere using spherical coordinates,
+    \begin{align*}
+        x &= r \cos \phi \sin \theta, \\
+        y &= r \sin \phi \sin \theta,  \\
+        z &= r \cos \theta,
+    \end{align*}
+    where $(\phi, \theta) \in [0, 2\pi] \times [0, \pi]$. Then the surface area is simply
+    \[ \int_{[0, 2\pi] \times [0, \pi]} \sqrt{EG - F^2} \, d\phi \, d\theta, \]
+    where
+    \[ E = \left<\frac{\partial c}{\partial \phi}, \frac{\partial c}{\partial \phi}\right> = r^2 \sin^2 \theta, \hspace{0.1in} F = \left<\frac{\partial c}{\partial \phi}, \frac{\partial c}{\partial \theta}\right> = 0, \hspace{0.1in} G = \left<\frac{\partial c}{\partial \theta}, \frac{\partial c}{\partial \theta}\right> = r^2. \]
+    With this, we have $\sqrt{EG - F^2} = r^2 \sin \theta$, and so the area is
+    \[ r^2 \int_0^{2\pi} \, d\phi \int_0^\pi \sin \theta \, d\theta = r^2 \cdot 2\pi \cdot 2 = 4\pi r^2. \]
+\end{enumerate}
+Now, let $M$ denote an oriented hypersurface in $\RR^n$ (i.e., $M$ is an $(n-1)$ dimensional manifold), with or without boundary. Then
+\[ dV(x)(v_1, \dots, v_{n-1}) = \det \begin{pmatrix} n(x) \\ v_1 \\ \dots \\ v_{n-1} \end{pmatrix} = (-1)^{n-1} \left<v_1 \times \dots \times v_{n-1}, n(x)\right>, \]
+where each $v_1, \dots, v_{n-1} \in M_x$. We say that $n(x)$ is the outward unit normal determined by the orientation $\mu$.
+\begin{simplelemma}
+    We have the following,
+    \begin{enumerate}[label=(\roman*)]
+        \item $dV = \sum_{i=1}^n (-1)^{i-1} \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n$,
+        \item $n_i \, dV = (-1)^{i-1} \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n$ for $i = 1, \dots, n$ on $M$, i.e., on $M_x$ for all $x \in M$.
+    \end{enumerate}
+    Note that we're not saying that $n_i$ times the right hand side of the first line is equal to the right hand side of the second line as differential forms on $\RR^n$.
+\end{simplelemma}
