@@ -1,0 +1,38 @@
+\section{Day 69: Divergence Theorem (Mar. 28, 2025)}
+Let $M$ denote a hypersurface (oriented) in $\RR^n$, i.e., an $(n-1)$-dimensional manifold with or without boundary. We may explicitly define the volume element as
+\[ dV(x) = (v_1, \dots, v_{n-1}) = \det \begin{pmatrix} n(x) \\ v_1 \\ \vdots \\ v_{n-1} \end{pmatrix} = (-1)^{n-1} \left<v_1 \times \dots \times \dots v_{n-1}, n(x)\right>, \]
+where $v_1, \dots, v_{n-1} \in M_x$, and $n(x)$ is the outward unit normal.
+\begin{simplelemma}
+    We have the two following properties of the volume element,
+    \begin{enumerate}[label=(\roman*)]
+        \item $dV = \sum_{i=1}^n (-1)^{i-1} n_i \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n$, where
+        \[ dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n(v_1, \dots, v_{n-1}) = \det \begin{pmatrix} v_{11} & \dots & \widehat{v_{1i}} & \dots & v_{1n} \\ \vdots & & \vdots & & \vdots \\ v_{n-1,1} & \dots & \widehat{v_{n-1,i}} & \dots & v_{n-1,n} \end{pmatrix}, \]
+        where $\widehat{\bullet}$ denotes a deleted element, so we are taking the determinant of a $(n-1) \times (n-1)$ matrix above.
+        \item $n_i \, dV = (-1)^{i-1} \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n$.
+    \end{enumerate}
+\end{simplelemma}
+\noindent To see the second part of the lemma, let $v_1, \dots, v_{n-1} \in M_x$, and write
+\[ (-1)^{n-1} v_1 \times \dots \times v_{n-1} = \alpha n(x), \]
+where $\alpha$ is some scalar. This means that $dV(x)(v_1, \dots, v_{n-1}) = \alpha$, and so
+\begin{align*}
+    n_i dV(x)(v_1, \dots, v_{n-1}) &= \alpha n_i \\
+    &= \pi_i \left((-1)^{n-1} v_1 \times \dots \times v_{n-1}\right) \\
+    &= (-1)^{i-1} \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n (v_1, \dots, v_{n-1}).
+\end{align*}
+Now, let $M$ be a compact $n$-manifold with boundary in $\RR^n$, and let $n$ be the outward unit normal on $\partial M$. Given a $\SC^1$ vector field $F$ on $M$, we have that
+\[ \int_M \div F = \int_{\partial M} \left<F, n\right> dV_{\partial M}, \]
+where we may note the left hand side is equal to $\int_M \div F \, dx_1 \wedge \dots \wedge dx_n$. We now prove this claim; let
+\[ \omega = \sum_{i=1}^n (-1)^{i-1} F_i \, dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n; \]
+since $dF_i = \sum_{j=1}^n \frac{\partial F_i}{\partial x_j} \, dx_j$, we have that $d\omega = \div F \, dx_1 \wedge \dots \wedge dx_n$. For the boundary, we have that
+\[ \left<F, n\right> dV_{\partial M} = F_1 n_1 \, dV + \dots + F_n n_n \, dV = \sum_{i=1}^n F_i (-1)^{i-1} dx_1 \wedge \dots \wedge \widehat{dx_i} \wedge \dots \wedge dx_n. \]
+We now show the left hand side from earlier matches this. Directly write,
+\[ \int_M \div F = \int_M \div F \, dx_1 \wedge \dots \wedge dx_n = \int_M d\omega = \int_{\partial M} \omega = \int_{\partial M}\left<F, n\right> dV_{\partial M}. \]
+
+\newpage
+\noindent We motivate this with an example; let $M$ be a compact $3$-manifold with boundary in $\RR^3$, and let $F(x)$ be the vector field of a fluid at a given time. Then $\int_{\partial M} \left<F, n\right> dA$ represents the rate at which fluid is leaving $M$; this quantity is equal to $0$ for all small enough balls $M$ if and only if $\div F = 0$, since fluid is incompressible.
+\medskip\newline
+We give another example.\footnote{this does not seem right at all. not sure what was written} Let $p = p(x, y, z)$ denote the distance from the centre of the ellipsoid
+\[ S = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1 \]
+to the tangent plane at $(x, y, z) \in S$. We may compute $\int_S p \, dA$ for this object; consider $p = \left<F, n\right>$ where $F(x, y, z) = (x, y, z)$. Then
+\[ \int_S p \, dA = \int_S \left<F, n\right> dA = \int_{\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} \leq 1} \div F, \]
+which is $3$ times the volume of a solid ellipsoid, and we obtain $4\pi abc$.
