@@ -1,1 +1,27 @@
-\section{Day 71: (Apr. 2, 2024)}
+\section{Day 71: Volume of Balls and Spheres (Apr. 2, 2024)}
+We continue our example from last time. Recall that $B^n(r) = \{x_1^2 + \dots + x_n^2 \leq r^2\}$, and $S^{n-1}(r) = \{x_1^2 + \dots + x_n^2 = r^2\}$. We wish to show the latter two of the following,
+\begin{align*}
+    \Vol B^n(r) &= \frac{2\pi r^2}{n} \Vol B^{n-2}(r), \tag{1} \\
+    \Vol B^n(r) &= \frac{r}{n} \Vol S^{n-1}(r), \tag{2} \\
+    \Vol S^{n-1}(r) &= \frac{d}{dr} \, \Vol B^n(r). \tag{3}
+\end{align*}
+\begin{enumerate}[label=(\roman*)] \setcounter{enumi}{1}
+    \item By the divergence theorem, we have that
+    \[ \int_{B^n(r)} \div F \, dV_{B^n(r)} = \int_{S^{n-1}(r)} \left<F, n\right> dV_{S^{n-1}(r)}. \]
+    The outward unit normal is then given by $n(x) = \frac{x}{r}$ for $x \in S^{n-1}(r)$. If we let $F(x) = x$, we obtain that $\left<F, n\right> = \frac{\norm{x}^2}{r} = r$ and $\div F = n$, and so
+    \[ n \int_{B^n(r)} dV_{B^n(r)} = r \int_{S^{n-1}(r)} dV_{S^{n-1}(r)}, \]
+    which implies (2).
+    \item By homogeneity, $\Vol B^n(r)$ is homogeneous of degree $n$, so $n \Vol B^n(r) = r \frac{d \Vol B^n(r)}{dr}$.
+\end{enumerate}
+\begin{simplethm}[Closed Stokes' Theorem (Spivak 5-9)]
+    Let $M \subset \RR^3$ be a compact oriented two-dimensional manifold with boundary, and let $n(x)$ be the outward unit normal on $M$ determined by the orientation of $M$; give $\partial M$ the induced orientation. Let $T$ be a vector field on $\partial M$ such that $ds(T) = 1$, i.e., $T$ is the positively oriented unit tangent vector to $\partial M$; alternatively, $c(t)$ is an orientation preserving $\SC^1$ parameterization of $\partial M$, i.e. injective and $c'(t) \neq 0$, then $ds(c'(t)) = \abs{c'(t)}$, and $T(t) = \frac{c'(t)}{\abs{c'(t)}}$.
+    \medskip\newline
+    Given a $\SC^1$ vector field $F$ on an open set containing $M$, we have
+    \[ \int_M \underbrace{\left<\curl F, n\right>}_{\nabla \times F} dA = \int_{\partial M} \left<F, T\right> ds. \]
+    where $\nabla = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$. If $e_1, e_2$ is a basis of $M_x$, then $[e_1, e_2] = \mu_x$ if and only if $[n(x), e_1, e_2]$ is the standard orientation of $\RR^3$.
+\end{simplethm}
+\noindent Write $F = (F_1, F_2, F_3)$; let $\omega = F_1 \, dx + F_2 \, dy + F_3 \, dz$; then
+\[ \left<\nabla \times F, n\right> dA = \left(\frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z}\right) \underbrace{n_1 \, dA}_{dy \wedge dz} + \left(\frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x}\right) \underbrace{n_2 \, dA}_{dz \wedge dx} + \left(\frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right) \underbrace{n_3 \, dA}_{dx \wedge dy}, \]
+which is equal to $d\omega$, and
+\[ \nabla \times F = \left(\frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z}, \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x}, \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right). \]
+On $\partial M$, we have that $\left<F, T\right> ds = F_1T_1 \, ds + F_2T_2 \, ds + F_3T_3 \, ds = F_1 \, dx + F_2 \, dy + F_3 \, dz = \omega$. We note that $T_1 \, ds = dx$ by applying both sides to $T_x$ for $x \in \partial M$, since $T_x$ is the basis of $(\partial M)_x$, and we get $T_1$ on both sides. Thus, we have the result by applying Stokes' theorem. The physical interpretation of this is that $F$ is the velocity vector field of a fluid, and if $M$ is a dish, then $\int_{\partial M} \left<F, T\right> ds$ measures the rate at which the field circulates (i.e., curls) around the center of the dish. Stokes' theorem says that the condition $\div F = 0$ expresses the fact that the fluid is incompressible.
