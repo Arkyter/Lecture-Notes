@@ -1,0 +1,47 @@
+\section{Day 70: Computation Examples (Mar. 31, 2024)}
+We give some computation examples.
+\begin{enumerate}[label=(\alph*)]
+    \item Compute $\int_S z \, dx \wedge dy$, where $S$ is the upper hemisphere $x^2 + y^2 + z^2 = r^2$, with $z \geq 0$, oriented with respect to the outward unit normal from the ball. We can use Stokes' theorem for upper half-ball $B^+ : x^2 + y^2 + z^2 \leq r^2$, with $z \geq 0$, and let $\omega = z \, dx \wedge dy$ be a form that vanishes on the lower disk. Then
+    \[ \int_S z \, dx \wedge dy = \int_{\partial B^+} z \, dx \wedge dy = \int_{B^+} dz \wedge dx \wedge dy = \int_{B^+} dx \wedge dy \wedge dz, \]
+    which is equal to the volume of $B^+$, i.e., $\frac{2}{3} \pi r^3$.
+
+    \item Compute
+    \[ \int_S x^2 \, dy \wedge dz + y^2 \, dz \wedge dx + z^2 \, dx \wedge dy, \]
+    for $S$ defined as the sphere $x^2 + y^2 + z^2 = r^2$, and for $S : (x-1)^2 + (y-2)^2 + (z-3)^2 = 25$; for both cases, we may orient $S$ by the outward unit normal, let $\omega$ be the integrand, and evaluate similarly to (a) using Stokes' theorem.
+    \begin{enumerate}[label=(\roman*)]
+        \item We have that $d\omega = 2(x + y + z) \, dx \wedge dy \wedge dz$, and so per Stokes' theorem,
+        \[ \int_S \omega = 2 \int_{B^3(r)} (x + y + z) \, dx \wedge dy \wedge dz = 0 \]
+        from symmetry.
+        \item For the second case, consider that we may apply a change of variables $(u, v, w) = (x-1, y-2, z-3)$ to obtain
+        \[ \int_S \omega = 2 \int_{\text{ball}} (x + y + z) \, dx \wedge dy \wedge dz = 2 \int_{u^2 + v^2 + w^2 \leq 25} (u + v + w + 6) \, du \, dv \, dw, \]
+        which evaluates out to $2000\pi$.
+    \end{enumerate}
+
+    \item \textit{(Volume of balls and spheres in any dimension)} Let us work in $\RR^n$; define as follows,
+    \begin{align*}
+        B^n(r) &= \{x_1^2 + \dots + x_n^2 \leq r^2\}, \\
+        S^{n-1}(r) &= \{x_1^2 + \dots + x_n^2 = r^2\},
+    \end{align*}
+    where we note a sphere is denoted $S^{n-1}$ because it is an $(n-1)$-dimensional manifold. We wish to show the following;
+    \begin{align*}
+        \Vol B^n(r) &= \frac{2\pi r^2}{n} \Vol B^{n-2}(r), \tag{1} \\
+        \Vol B^n(r) &= \frac{r}{n} \Vol S^{n-1}(r), \tag{2} \\
+        \Vol S^{n-1}(r) &= \frac{d}{dr} \, \Vol B^n(r). \tag{3}
+    \end{align*}
+    Note that, per homogeneity, we have $\Vol B^n(r) = \Vol B^n(1)$.
+    \begin{enumerate}[label=(\roman*)]
+        \item Start by observing that $(x_1, \dots, x_n) \in B^n(r)$ if and only if $(x_1, x_2) \in B^2(r)$, and $(x_3, \dots, x_n) \in B^{n-2}(\sqrt{r^2 - x_1^2 - x_2^2})$. Using Fubini's theorem, we have
+        \[ \Vol B^n(r) = \int_{B^2(r)} \Vol B^{n-2} \left(\sqrt{r^2 - \norm{y}}\right) \, dy_1 \, dy_2, \]
+        where $y = (y_1, y_2) = (p \cos \theta, p \sin \theta)$, with $(p, \theta) \in [0, r] \times [0, 2\pi]$. Then $dy_1 \, dy_2 = p \, dp \, d\theta$, and we may further evaluate
+        \[ = \int_0^{2\pi} \int_0^r \Vol B^{n-2} \left(\sqrt{r^2 - p^2}\right) p \, dp \, d\theta = 2\pi \int_0^r \Vol B^{n-2} \left(\sqrt{r^2 - p^2}\right) p \, dp, \]
+        where by homogeneity,
+        \begin{align*}
+            \Vol B^{n-2} \left(\sqrt{r^2 - p^2}\right) &= \frac{(r^2 - p^2)^{\frac{n-2}{2}}}{p^{n-2}} \Vol B^{n-2}(r) \\
+            &= \left(1 - \frac{p^2}{r^2}\right) \frac{n-2}{2} \Vol B^{n-2}(r) \\
+            &= 2\pi \Vol B^{n-2}(r) \int_0^r \left(1 - \frac{p^2}{r^2}\right)^{\frac{n-2}{2}} p \, dp.
+        \end{align*}
+        Substituting $t = 1 - \frac{p^2}{r^2}$ and $dt = - \frac{2}{r^2} p \, dp$, we get
+        \[ = 2\pi \Vol B^{n-2}(r) \underbrace{\left(-\frac{r^2}{2} \int_1^0 t^{\frac{n-2}{2}} \, dt\right)}_{\Eval{\frac{2}{n} t^{n/2}}{1}{0}}. \]
+    \end{enumerate}
+
+\end{enumerate}
