@@ -6,7 +6,7 @@
 \medskip\newline
 \noindent Let us have $X \times X \subset \RR^n \times \RR^n$. To start, the diagonal $\Delta = \{(x, x) \mid x \in X\}$ is compact, because $\Delta$ is the image of $X$ under the map $x \mapsto (x, x)$, which is a continuous function. Thus, we have that $g : X \times X \to \RR$ where $g(x, y) = \abs{f(x) - f(y)}$ is continuous, as per the composition of continuous functions.
 \medskip\newline
-Given $\eps > 0$, consider $g^{-1}((-\eps, \eps)) = (X \times X) \cup U$ where $U$ is an open set in $\RR^n \times \RR^n$; clearly, $\Delta \subset U$, since $\Delta$ is compact and $U$ is open. By the $\eps$-neighborhood theorem, there exists $\delta > 0$ such that the $\delta$-neighborhood of $\Delta$ is in $U$. Then consider $x, y$ such that $\abs{x - y} < \delta$, and observe we have
+Given $\eps > 0$, consider $g^{-1}((-\eps, \eps)) = (X \times X) \cap U$ where $U$ is an open set in $\RR^n \times \RR^n$; clearly, $\Delta \subset U$, since $\Delta$ is compact and $U$ is open. By the $\eps$-neighborhood theorem, there exists $\delta > 0$ such that the $\delta$-neighborhood of $\Delta$ is in $U$. Then consider $x, y$ such that $\abs{x - y} < \delta$, and observe we have
 \[ \abs{(x, x) - (x, y)} \leq \abs{x - y} + \abs{y - y} < \delta \]
 by the triangle inequality. This means $(x, y)$ is in a $\delta$-neighborhood of $\Delta$, and so is in $U$. By construction, we see that $(x, y) \in g^{-1}((-\eps, \eps))$, and we conclude $g((x, y)) = \abs{f(x) - f(y)} < \eps$. \qed
 
