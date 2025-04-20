@@ -17,7 +17,7 @@ Let $A$ be an open set on $\RR^n$, and let $f : A \to \RR^n$ be a $C^r$ map (whe
 We now present some examples.
 \begin{enumerate}[label=(\alph*)]
     \item Let $f : \RR^2 \to \RR^2$, $f(r, \theta) = (r \cos \theta, r \sin \theta)$. Then
-    \[ f'(r, \theta) = \begin{bmatrix} \cos theta & - r \sin \theta \\ \sin \theta & r \cos \theta \end{bmatrix} \implies det f'(r, \theta) = r, \]
+    \[ f'(r, \theta) = \begin{bmatrix} \cos \theta & - r \sin \theta \\ \sin \theta & r \cos \theta \end{bmatrix} \implies det f'(r, \theta) = r, \]
     which is obviously nonzero for $r \neq 0$. A typical restriction of $f$ is to $(0, \infty) \times (\theta_1, \theta_2)$ such that $0 < \theta_2 - \theta_1 \leq 2\pi$; for example, $(0, \infty) \times (-\pi, \pi)$ or $(0, \infty) \times (0, 2\pi)$ are both suitable.
     \medskip\newline
     Let $g : \RR^2 \to \RR$, $g(x, y) = \sqrt{x^2 + y^2}$. Then $(g \circ f)(r, \theta) = g(r \cos \theta, r \sin \theta) = \sqrt{r^2} = r$; i.e., changing coordinates (composing $f$ resp. $f^{-1}$) can simplify things greatly!
