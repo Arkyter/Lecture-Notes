@@ -5,8 +5,8 @@ However, even if $f$ is integrable on $A$, i.e., the set of discontinuities of $
 \[ h(x) = \int_c^d g(x) = \int_c^d f(x, y) \, dy, \]
 i.e. $g_x(y) = f(x, y)$ (as in, we're fixing $x$ and considering said cross section). If $f : A \to \RR$ is a bounded function on a closed rectangle $A \subset \RR^n$, then let us consider the lower and upper integrals of $f$ on $A$:
 \begin{align*}
-    L_A f &= \sup \text{ of all lower sums,} \\
-    U_A f &= \inf \text{ of all upper sums,}
+    L_A f &= \text{sup of all lower sums,} \\
+    U_A f &= \text{inf of all upper sums,}
 \end{align*}
 which always exist.
 \begin{simplethm}[Fubini's Theorem]
@@ -15,7 +15,7 @@ which always exist.
 \noindent Given $x \in A$, let $g_x : B \to \RR$ be given by $g_x(y) = f(x, y)$. Set
 \begin{align*}
     \mathcal{L}(x) &= L_B g_x = L \int_B f(x, y) \, dy, \\
-    \SU(x) &= U_B g_x U \int_B f(x, y) \, dy.
+    \SU(x) &= U_B g_x = U \int_B f(x, y) \, dy.
 \end{align*}
 Then $\SL, \SU$ are integrable on $A$, and
 \begin{align*}
