@@ -6,8 +6,8 @@ We give some examples of change of variables today.\footnote{good lord this is t
     and so
     \[ \iint_B f(x, y) \, dx \, dy = \iint_A f(r \cos \theta, r \sin \theta) r \, dr \, d\theta, \]
     where $B$ is the sector of the circle with radius $r$, angle measure $\theta$ obtained from the transformation above.
-    \item (\textit{Spherical Coordinates}) Let $(x, y, z) \mapsto (r \cos \theta \sin \varphi, r \sin \theta \cos \varphi, r \cos \theta)$, bounded by $(r, \theta, \varphi) \in [0, \infty) \times [0, \pi] \times [0, 2\pi]$. We then compute the Jacobian and find that $\det = r^2 \sin \theta$, as shown below,
-    \[ \frac{\partial(x, y, z)}{\partial(r, \theta, \varphi)} = \begin{pmatrix} \cos \varphi \sin \theta & r \cos \varphi \cos \theta & - r \sin \varphi \sin \theta \\ sin \varphi \sin \theta & r \sin \varphi \cos \theta & r \cos \varphi \sin \theta \\ \cos \theta & - r \sin \theta & 0 \end{pmatrix}, \]
+    \item (\textit{Spherical Coordinates}) Let $(x, y, z) \mapsto (r \sin \theta \sin \varphi, r \sin \theta \cos \varphi, r \cos \theta)$, bounded by $(r, \theta, \varphi) \in [0, \infty) \times [0, \pi] \times [0, 2\pi]$. We then compute the Jacobian and find that $\det = r^2 \sin \theta$, as shown below,
+    \[ \frac{\partial(x, y, z)}{\partial(r, \theta, \varphi)} = \begin{pmatrix} \cos \varphi \sin \theta & r \cos \varphi \cos \theta & - r \sin \varphi \sin \theta \\ \sin \varphi \sin \theta & r \sin \varphi \cos \theta & r \cos \varphi \sin \theta \\ \cos \theta & - r \sin \theta & 0 \end{pmatrix}, \]
     in which we may evaluate $\abs{\det \partial_{r, \theta, \varphi}(x, y, z)} = r^2 \sin \theta$ as desired through cofactor expansion. In particular, by the same construction as previous, we have
     \[ \iiint_B f(x, y, z) \, dx \, dy \, dz = \iiint_A f(r, \theta, \varphi) r^2 \sin \theta \, dr \, d\theta \, d\varphi. \]
     For example, the volume of a ball with radius $r$ is given by the above,
