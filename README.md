@@ -35,7 +35,6 @@ Audit list (notes may be kept, but sparsely):
 **Todo List**:
 - Rework style files system (like, 10% done or whatev...)
 - smth smth tutorial answers? idk if i *want* to do it tho hmm.
-- day 4-6 of 267, day 2-3 of apm461, one gajillion notes to catch up on. oopsies-
 
 Errata list (?):
 - none so far wawawawa
