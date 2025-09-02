@@ -27,10 +27,9 @@ Audit list (notes may be kept, but sparsely):
 - MAT1304 (Extremal Combinatorics); ended up not keeping notes for this.
 
 > Winter 2025
+- MAT257 (Analysis II) - complete set done.
 - MAT267 (Advanced ODEs) - yea no. i can't read anything on the board sorry
 - APM461 (Combinatorial Methods) - ankle fracture so i can't commute to this class unfortunately
-
-
 
 
 **Todo List**:
