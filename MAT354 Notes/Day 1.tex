@@ -1,0 +1,100 @@
+\section{Day 1: Recap of Preliminaries}
+We start by discussing the complex plane and complex numbers. Given $z \in \CC$, we say that $\Re(z)$ and $\Im(z)$ are the real and imaginary parts of $z$ respectively, i.e., $z = x + iy$. $\CC$ is the set of all complex numbers. In this manner, we may identify $z = x + iy$ with $(x, y) \in \RR^2$ using the standard complex plane.
+\begin{enumerate}[label=(\alph*)]
+    \item The complex \textit{conjugate} of $z$ is given by $\bar{z} = x - iy$, where we have that
+    \[ \Re(z) = \frac{z + \bar{z}}{2}, \qquad \Im(z) = \frac{z - \bar{z}}{2i}. \]
+
+    \item We now define addition and mlutiplication for the complex numbers. For all $z_1 = x_1 + i y_1$ and $z_2 = x_2 + i y_2$, we have that
+    \begin{align*}
+        z_1 + z_2 &= (x_1 + x_2) + i (y_1 + y_2), \\
+        z_1 z_2 &= (x_1 + iy_1) (x_2 + iy_2) \\
+        &= x_1x_2 + ix_1y_2 + iy_1x_2 + i^2 y_1y_2 = (x_1x_2 - y_1y_2) + i(x_1y_2 + y_1x_2).
+    \end{align*}
+    We have that $(\CC, +, \times)$ is a field, with $(\RR, +, \times)$ as a subfield. To verify this, we need to check that it indeed satisfies:
+    \begin{itemize}
+        \item Commutativity; for all $z_1, z_2 \in \CC$, we have that $z_1 + z_2 = z_2 + z_1$ and $z_1z_2 = z_2z_1$.
+        \item Associativity: for all $z_1, z_2, z_3 \in \CC$, we have that $(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3)$ and $(z_1z_2)z_3 = z_1(z_2z_3)$.
+        \item Distributivity: for all $z_1, z_2, z_3 \in \CC$, we have that $z_1(z_2 + z_3) = z_1z_2 + z_1z_3$.
+    \end{itemize}
+
+    \item The absolute value of a complex number $z = x + iy$ is given by $\abs{z} = \sqrt{x^2 + y^2}$. In particular, this yields the triangle inequality, where for any $z, w \in \CC$, we have that $\abs{z + w} \leq \abs{z} + \abs{w}$. The proof either comes visually or through explicit computation, both of which I will not write out here for brevity.\footnote{no full credit if you draw a picture on the exam lmao}
+    \\[8pt]
+    As an extension of the inequality, we also automatically have that
+    \[ \abs{\Re z} \leq \abs{z}, \qquad \abs{\Im z} \leq \abs{z}, \]
+    and that for all $z, w \in \CC$, we have
+    \[ \abs{\abs{z} - \abs{w}} \leq \abs{z - w}. \]
+    \begin{proof}
+        Using the triangle inequality, we have that
+        \begin{align*}
+            \abs{z} &= \abs{(z-w) + w} \leq \abs{z - w} + \abs{w}, \\
+            \abs{w} &= \abs{(w-z) + z} \leq \abs{z - w} + \abs{z},
+        \end{align*}
+        of which both imply that $\abs{z} - \abs{w} \leq \abs{z - w}$ and $\abs{w} - \abs{z} \leq \abs{z - w}$.
+    \end{proof}
+    For any $z \in \CC$, we have that $\abs{z}^2 = z \cdot \bar{z}$.
+    \begin{proof}
+        Write $z = x + iy$; then $\abs{z}^2 = x^2 + y^2$, where we may note that $z \cdot \bar{z} = (x + iy)(x - iy)$ which yields the right hand side of the earlier equation through expansion.
+    \end{proof}
+    Finally, for $z, w \in \CC$, we have that $\abs{zw} = \abs{z} \abs{w}$. This is left as an exercise to the student.
+
+    \item The polar form of a nonzero complex number $z \neq 0$ is given by $z = \gamma e^{i \theta}$, where $\gamma > 0$ and $\theta \in \RR$. Let us assume the Euler formula; for all $\theta \in \RR$, we have that
+    \[ e^{i \theta} = \cos \theta + i \sin \theta. \]
+    Let $r = \abs{z}$; we have that $\abs{z} = \abs{r e^{i \theta}} = \abs{r} \abs{e^{i \theta}} = r \cdot 1 = r$. $\theta$ is the angle between the positive real axis to the half-line starting from $0$ and passing through $z$. In this manner, $z = r e^{i \theta} = \abs{z} (\cos \theta + i \sin \theta) =  \abs{z} \cos \theta + i \abs{z} \sin \theta$, which means we have that
+    \[ \Re z = \abs{z} \cos \theta, \qquad \Im z = \abs{z} \sin \theta. \]
+    As an example, let us find all the complex numbers $z$ such that $z^4 = i$. Since $i = e^{i \frac{\pi}{2}}$, $z = \rho e^{i \theta}$ satisfying $z^4 = i$ becomes $\rho^4 e^{i \cdot 4 \theta} = e^{i \frac{\pi}{2}}$, meaning
+    \[ \begin{cases} \rho^4 = 1, \\ 4 \theta = \frac{\pi}{2} + 2k \pi, \quad k \in \ZZ. \end{cases} \]
+    This means $\rho = 1$ and $\theta = \frac{\pi}{8} + \frac{k\pi}{2}$, where $k \in \ZZ$. Considering the cases $k = 0, 1, 2, 3$ and observing that there are only $4$ equivalence classes modulo $4$ to consider, we have that
+    \[ z_0 = e^{i \frac{\pi}{8}}, \quad z_1 = e^{i \frac{5 \pi}{8}}, \quad z_2 = e^{i \frac{9 \pi}{8}}, \quad z_3 = e^{i \frac{13 \pi}{8}}. \]
+\end{enumerate}
+We now discuss convergence. We say that a set of complex numbers $\{z_n\}_{n \in \NN}$ converges to $w \in  \CC$ if $\lim_{n \to \infty} \abs{z_n - w} = 0$. We write it as $\lim_{n \to \infty} z_n = w$. In the complex plane, the convergence can be in any direction.
+\begin{simplelemma}
+    $\{z_n\}_{n \in \NN}$ converges to $w$ if and only if $\{\Re z_n\}_{n \in \NN}$ converges to $\Re w$ and $\{\Im z_n\}_{n \in \NN}$ converges to $\Im w$.
+\end{simplelemma}
+\begin{proof}
+    We have that
+    \begin{align*}
+        \abs{z_n - w} &= \abs{(\Re z_n - \Re w) + i (\Im z_n - \Im w)} \\
+        &\leq \abs{\Re z_n - \Re w} + \abs{\Im z_n - \Im w},
+    \end{align*}
+    where as $n \to \infty$, we have that the right hand side is given by $0 + 0$. For the opposite direction, we have that $\abs{z} \geq \abs{\Re z}$ or $\abs{\Im z}$, so we have that
+    \[ \abs{\Re z_n - \Re w} = \abs{\Re (z_n - w)} \leq \abs{z_n - w}, \]
+    which approaches $0$ as $n \to \infty$. The same argument goes for the imaginary portion.
+\end{proof}
+\noindent A sequence of complex numbers $\{z_n\}_{n \in \NN}$ is called \textit{Cauchy} if $\abs{z_n - z_m} \to 0$ as $n, m \to \infty$. In $\eps-\delta$, this means that for all $\eps > 0$, there exists $N \in \NN$ such that $\abs{z_n - z_m} < \eps$ for all $n, m > N$.
+\begin{simplethm}[Bolzano-Weierstrass Theorem]
+    $\RR$ is \textit{complete}, i.e., every Cauchy sequence of real numbers convergesto a real number.
+\end{simplethm}
+\begin{simplethm}
+    $\CC$ is complete.
+\end{simplethm}
+\begin{proof}
+    Take any Cauchy sequence of complex numbers $\{z_n\}$. Using the inequalities $\abs{\Re z} \leq \abs{z}$ and $\{\Im z\} \leq \abs{z}$, we have that $\{\Re z_n\}$ and $\{\Im z_n\}$ are Cauchy sequences of real numbers. By Bolzano-Weierstrass, we have that $\Re z_n \to x_0 \in \RR$ and $\Im z_n \to y_0 \in \RR$. By the previous lemma, we actually have $\lim_{n \to \infty} z_n = x_0 + i y_0$.
+\end{proof}
+\noindent We now move onto topology in the complex plane. Given $z_0 \in \CC$ and $r > 0$, we can form an open or closed disc centered at $z_0$ of radius $r$. We write both of these as
+\begin{align*}
+    D_r(z_0) &= \{z \in \CC \mid \abs{z - z_0} < r\}, \\
+    \bar{D_r}(z_0) &= \{z \in \CC \mid \abs{z - z_0} \leq r\},
+\end{align*}
+Given a set $\Omega \subseteq \CC$, a point $z_0$ is an interior point if there exists $r > 0$ such that $D_r(z) \subseteq \Omega$. The interior of $\Omega$ is given by the set of all such interior points. In particular, the interior of $\bar{D_r}(i)$ is $D_r(i)$.
+\\[8pt]
+A set $\Omega$ is called \textit{open} if every point in $\Omega$ is an interior point. $\Omega$ is called \textit{closed} if the complement of $\Omega$, $\Omega^c = \CC \setminus \Omega$, is open. As an example, the open right half-plane $\{z \in \CC \mid \Re z > 0\}$ is open.
+\begin{proof}
+    For any $z \in \Omega$, let $z = x + iy$, and take $r = \frac{x}{2} = \frac{\Re z}{2}$. Then we claim that $D_r(z) \subseteq \Omega$. For all $w \in D_r(z)$, we clearly have that
+    \[ \Re w = \Re z - (\Re z - \Re w) \geq \Re z - \abs{z - w} \geq \frac{\Re z}{2} > 0, \]
+    and so all such $w \in \Omega$, and we are done. 
+\end{proof}
+\noindent A point $z \in \CC$ is a \textit{limit point} of $\Omega$ if there exists a sequence $\{z_n\} \subset \Omega$  with $z_n \neq z$ such that $z_n \to z$.
+\\[8pt]
+As an example, we define $D$ to be the open unit disc centered at $0$. $0$ and $1$ are both limit points of $D$, but $1$ is not contained in $D$ itself.\footnote{hell is it disc or disk YKW LET'S COMPROMISE it's spelled disque actually (paint nails)} The \textit{closure} of $\Omega$, $\bar{\Omega}$, is given by $\Omega$ unioned with all its limit points. The \textit{boundary} of a set $\Omega$, wirtten $\partial \Omega$, is given by $\bar{\Omega} \setminus \mathrm{int} \, \Omega$. A set $\Omega \subseteq \CC$ is said to be compact if it is closed and bounded, i.e., there exists $M > 0$ such that $\abs{z} \leq M$ for all $z \in \Omega$.
+\begin{simplethm}
+    A set $\Omega \subseteq \CC$ is compact if and only if every sequence $\{z_n\} \subset \Omega$ has a subsequence that converges to a point in $\Omega$.
+\end{simplethm}
+\begin{simpleprop}
+    If $\Omega_1 \supset \Omega_2 \dots \supset \Omega_n \supset \dots$ is a sequence of nonempty compact sets in $\CC$, where $\diam(\Omega_n) = \sup_{z, w \in \Omega_n} \abs{z - w} \to 0$ as $n \to \infty$, then there exists a unique $w \in \CC$ such that $w \in \Omega_n$ for every $n \in \NN$.
+\end{simpleprop}
+\begin{proof}
+    For each $\Omega_n$, pick a point $z_n \in \Omega_n$. Then $\{z_n\}_{n \in \NN}$ is a Cauchy sequence because the diameter of $\Omega_n$ approaches $0$. By the Bolzano-Weierstrass theorem for complex numbers, this means that $\{z_n\}_{n \in \NN}$ indeed does converge to some $w \in \CC$. In particular, we have $w$ is the limit of the subsequence $\{z_m\}_{m \geq n} \subseteq \Omega_n$, where $\Omega_n$ is compact, meaning the limit $w$ should be in $\Omega_n$. This means there exists a unique $w \in \CC$ such that $w \in \Omega_n$ for every $n \in \NN$.
+    \\[8pt]
+    To show the uniqueness of $w$, we argue by contradiction; assume $w' \neq w$ satisfies the property. Then $\abs{w' - w} > 0$. Since $w, w' \in \Omega_n$ for all $n$, this contradicts that $\diam(\Omega_n) \to 0$.
+\end{proof}
+An open set $\Omega$ is called \textit{connected} if it is not possible to find two disjoint nonempty open sets $\Omega_1$ and $\Omega_2$ such that $\Omega = \Omega_1 \cup \Omega_2$. A connected open set in $\CC$ is called a \textit{region}.
