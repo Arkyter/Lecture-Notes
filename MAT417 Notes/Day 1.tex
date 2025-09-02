@@ -5,3 +5,49 @@ Course materials will be free and available online; here is a list of reference 
     \item Lecture notes by Noam Elkies (which will be posted on Quercus).
 \end{itemize}
 Homework will be posted every Thursday and due the following Thursday, and is worth \textbf{20\%} of the course grade.
+\\[8pt]
+The central question of number theory is about the structure of prime numbers, of which the main analytic tools used are the Riemann $\zeta$-functions and its relatives (the $L$-functions). We may discuss things like modular forms, Hecke operators and $L$-functions related to Galois representation later on.
+\\[8pt]
+Let us consider the following two questions;
+\begin{enumerate}[label=(\alph*)]
+    \item How many primes are there? There are infinitely many of them.
+    \item Can you say something about how the primes are distributed?
+\end{enumerate}
+Given $x > 0$, where $x$ may be a natural or a real, let us define
+\[ \pi(x) = \#\{p \text{ is prime} \mid p \leq x\}. \]
+Can we estimate how $\pi(x)$ grows? The prime number theorem states that the growth of $\pi(x)$ is proportional to $\frac{x}{\log x}$, i.e.,
+\[ \lim_{x \to \infty} \frac{\pi(x)}{x / \log x} = 1, \qquad \frac{\pi(x)}{x} \to 0 \text{ as } x \to \infty. \]
+As an exercise, show that the prime number theorem informally says that the $n$th prime $p_n$ is of the size $n \log n$.
+\begin{simplethm}[Dirichlet Theorem]
+    Let $a, d$ be coprime naturals where $a < d$. Consider all numbers of the form $a + kd$, where $k$ is also a natural; infinitely many of these numbers are prime.
+\end{simplethm}
+\begin{proof}
+    Done with $L$-functions. Check \href{https://math.stackexchange.com/a/4711381}{here}.
+\end{proof}
+\begin{simplethm}[Fundamental Theorem of Arithmetic]
+    Any nautral number $N$ can be written uniquely as $p_1^{a_1} \dots p_n^{a_n}$, where $p_i$ are primes and $a_i > 0$.
+\end{simplethm}
+\begin{simpleprop}[Euclid's Argument on the Infinitude of Primes]
+    Assume that $p_1 < p_2 < \dots < p_n$ constitute all the primes. Then it is clear that $p_1 \dots p_n + 1$ is coprime to any $p_i$. By the fundamental theorem of arithmetic, this means that $p_1 \dots p_n + 1$ is divisible by a prime less than $p_1 \dots p_n + 1$ not given by some $p_i$, which is a contradiction.
+\end{simpleprop}
+\noindent Can we use this to get an estimate on $\pi(x)$? We claim that $\pi(x) > \log_2 \log_2 x$. Let $p_n$ be the $n$th prime. Then
+\[ p_{n+1} < 1 + \prod_{i = 1}^n p_i < \prod_{i=1}^n p_n. \]
+If equality always held then we would have $p_n = 2^{2^{n-1}}$. However, in actuality, $p_n < 2^{2^{n-1}}$, so we must have that $\pi(x) > \log_2 \log_2 x$.
+\\[8pt]
+The Riemann-Zeta function is given by
+\[ \zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}. \]
+\begin{simpleclaim}
+    $\zeta$ is absolutely convergent for any $s > 1$.
+\end{simpleclaim}
+\begin{proof}
+    Will be given next class.
+\end{proof}
+\begin{simplelemma}
+    For $s > 1$, we have that
+    \[ \zeta(s) \leq \prod_{p \text{ is prime}} \frac{1}{1 - p^{-s}}. \]
+\end{simplelemma}
+\begin{proof}
+    This is given directly by geometric series, i.e.,
+    \[ \frac{1}{1 - p^{-s}} = \sum_{i=0}^\infty p^{-is} = \sum_{\substack{p_1 < \dots < p_n \\ a_1, \dots, a_n > 0}} p_1^{a_1} \dots p_n^{a_n}. \qedhere \]
+\end{proof}
+\noindent Moreover, if we had finitely many primes, we could apply this to $s = 1$ and obtain that the sum of $\frac{1}{n}$ is convergent, which is clearly false. This also implies that the sum of the reciprocals of primes is divergent, and you can't have $\pi(x)$ be bounded from above by $C x^D$, where $C > 0, D < 1$.
