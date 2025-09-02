@@ -8,9 +8,13 @@ This also means I will revise / change some details from class if I think it hel
 **Hyperlinks are disabled on Github PDFs...?** Download the raw file to get access to links, I guess. Oopsies.
 
 Current list of classes:
-- MAT257 (Analysis II)
+- MAT347 (Algebra)
+- MAT351 (Partial Differential Equations)
+- MAT354 (Complex Analysis)
+- MAT436 (Linear Operators)
 
 Audit list (notes may be kept, but sparsely):
+- MAT417 (Analytic NT)
 - None this semester (so far) :3c
 
 **Archived classes!**
@@ -25,6 +29,9 @@ Audit list (notes may be kept, but sparsely):
 > Winter 2025
 - MAT267 (Advanced ODEs) - yea no. i can't read anything on the board sorry
 - APM461 (Combinatorial Methods) - ankle fracture so i can't commute to this class unfortunately
+
+
+
 
 **Todo List**:
 - Rework style files system (like, 10% done or whatev...)
