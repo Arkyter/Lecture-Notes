@@ -1,7 +1,20 @@
 \ProvidesPackage{arky}
 
 \usepackage{amsmath, amssymb}
+\usepackage{amsthm, thmtools}
 \usepackage{paralist} % for the parlist command
+\usepackage{nicematrix} % for tabulars and whatever and matrices. cuz hell idk
+
+\usepackage[nameinlink]{cleveref} % reference to environments, SPECIFICALLY nameinlink
+
+\PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor}
+\usepackage{xcolor}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{urlcolor=RubineRed,linkcolor=RoyalBlue,citecolor=ForestGreen}
+
+\title{} % empty title to avoid crashes
+\author{Arky!! :3c}
+\date{\today} % default
 
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
@@ -23,24 +36,25 @@
 \DeclareMathOperator*{\argmin}{arg min}
 \DeclareMathOperator*{\argmax}{arg max}
 
-%Convenient Environments
 \newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
 \newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}} % as in, "in paragraph enumerate; it'll output as like (i) ... (ii) ... all in one line
-\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup}
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup} % i'm going to leave this in here to figure out for later.
 
-%Inequalities
-\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
-\newcommand{\symsum}{\sum_{\mathrm{sym}}}
-\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
-\newcommand{\symprod}{\prod_{\mathrm{sym}}}
-
-%From H113 "Introduction to Abstract Algebra" at UC Berkeley
+% Fields, etc.
 \newcommand{\CC}{\mathbb C}
 \newcommand{\FF}{\mathbb F}
 \newcommand{\NN}{\mathbb N}
 \newcommand{\QQ}{\mathbb Q}
 \newcommand{\RR}{\mathbb R}
 \newcommand{\ZZ}{\mathbb Z}
+
+% Inequalities
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+
+% Algebra
 \newcommand{\charin}{\text{ char }}
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\Aut}{Aut}
@@ -50,30 +64,16 @@
 \DeclareMathOperator{\GL}{GL} % General linear group
 \DeclareMathOperator{\SL}{SL} % Special linear group
 
-%From Kiran Kedlaya's "Geometry Unbound"
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\dang}{\measuredangle} %% Directed angle
-\newcommand{\ray}[1]{\overrightarrow{#1}} 
-\newcommand{\seg}[1]{\overline{#1}}
-\newcommand{\arc}[1]{\wideparen{#1}}
 
-%From M275 "Topology" at SJSU
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\taking}[1]{\xrightarrow{#1}}
-\newcommand{\inv}{^{-1}}
 
-%From M170 "Introduction to Graph Theory" at SJSU
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\ord}{ord}
 \newcommand{\defeq}{\overset{\mathrm{def}}{=}}
 
-%From the USAMO .tex files
-\newcommand{\ts}{\textsuperscript}
-\newcommand{\dg}{^\circ}
-\newcommand{\ii}{\item}
-
-% From Math 55 and Math 145 at Harvard
 \newenvironment{subproof}[1][Proof]{%
 \begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}}%
 {\end{proof}}
@@ -120,12 +120,6 @@
 \newcommand{\SC}{\mathcal C}
 \newcommand{\SD}{\mathcal D}
 \newcommand{\SE}{\mathcal E}
-\newcommand{\SF}{\mathcal F}
-\newcommand{\SG}{\mathcal G}
-\newcommand{\SH}{\mathcal H}
-\newcommand{\SI}{\mathcal I}
-\newcommand{\SJ}{\mathcal J}
-\newcommand{\SK}{\mathcal K}
 % \newcommand{\SL}{\mathcal L}
 \newcommand{\SM}{\mathcal M}
 \newcommand{\SN}{\mathcal N}
@@ -161,265 +155,39 @@
 \newcommand{\kp}{\mathfrak p}
 \newcommand{\kq}{\mathfrak q}
 
-%% Napkin commands
-\newcommand{\prototype}[1]{
-	\emph{{\color{red} Prototypical example for this section:} #1} \par\medskip
-}
-\newenvironment{moral}{%
-	\begin{mdframed}[linecolor=green!70!black]%
-	\bfseries\color{green!70!black}}%
-	{\end{mdframed}}
+% Environments
+\theoremstyle{definition}
 
-%%fakesection Asymptote setup
-\ifevanasy
-	\ifevanpatchasy
-		\usepackage{patch-asy}
-	\else
-		\usepackage{asymptote}
-	\fi
-	\begin{asydef}
-		defaultpen(fontsize(10pt));
-		size(8cm); // set a reasonable default
-		usepackage("amsmath");
-		usepackage("amssymb");
-		settings.tex="pdflatex";
-		settings.outformat="pdf";
-		// Replacement for olympiad+cse5 which is not standard
-		import geometry;
-		// recalibrate fill and filldraw for conics
-		void filldraw(picture pic = currentpicture, conic g, pen fillpen=defaultpen, pen drawpen=defaultpen)
-			{ filldraw(pic, (path) g, fillpen, drawpen); }
-		void fill(picture pic = currentpicture, conic g, pen p=defaultpen)
-			{ filldraw(pic, (path) g, p); }
-		// some geometry
-		pair foot(pair P, pair A, pair B) { return foot(triangle(A,B,P).VC); }
-		pair orthocenter(pair A, pair B, pair C) { return orthocentercenter(A,B,C); }
-		pair centroid(pair A, pair B, pair C) { return (A+B+C)/3; }
-		// cse5 abbrevations
-		path CP(pair P, pair A) { return circle(P, abs(A-P)); }
-		path CR(pair P, real r) { return circle(P, r); }
-		pair IP(path p, path q) { return intersectionpoints(p,q)[0]; }
-		pair OP(path p, path q) { return intersectionpoints(p,q)[1]; }
-		path Line(pair A, pair B, real a=0.6, real b=a) { return (a*(A-B)+A)--(b*(B-A)+B); }
-		// cse5 more useful functions
-		picture CC() {
-			picture p=rotate(0)*currentpicture;
-			currentpicture.erase();
-			return p;
-		}
-		pair MP(Label s, pair A, pair B = plain.S, pen p = defaultpen) {
-			Label L = s;
-			L.s = "$"+s.s+"$";
-			label(L, A, B, p);
-			return A;
-		}
-		pair Drawing(Label s = "", pair A, pair B = plain.S, pen p = defaultpen) {
-			dot(MP(s, A, B, p), p);
-			return A;
-		}
-		path Drawing(path g, pen p = defaultpen, arrowbar ar = None) {
-			draw(g, p, ar);
-			return g;
-		}
-	\end{asydef}
-\fi
+\declaretheorem[name=Theorem]{theorem}
+\declaretheorem[name=Lemma,sibling=theorem]{lemma}
+\declaretheorem[name=Proposition,sibling=theorem]{proposition}
+\declaretheorem[name=Corollary,sibling=theorem]{corollary}
+\declaretheorem[name=Remark,sibling=theorem]{remark}
+
+\declaretheorem[name=Theorem,numbered=no]{theorem*}
+\declaretheorem[name=Lemma,numbered=no]{lemma*}
+\declaretheorem[name=Proposition,numbered=no]{proposition*}
+\declaretheorem[name=Corollary,numbered=no]{corollary*}
+\declaretheorem[name=Remark,numbered=no]{remark*}
+
+\declaretheorem[name=Claim,sibling=theorem]{claim}
+\declaretheorem[name=Example,sibling=theorem]{example}
+\declaretheorem[name=Exercise,sibling=theorem]{exercise}
+\declaretheorem[name=Problem,sibling=theorem]{problem}
+
+\declaretheorem[name=Claim,numbered=no]{claim*}
+\declaretheorem[name=Example,numbered=no]{example*}
+\declaretheorem[name=Exercise,sibling=theorem]{exercise*}
+\declaretheorem[name=Problem,numbered=no]{problem*}
+
 %%fakesection BEGIN MAIN SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifevansetup
-	%%fakesection Set up author and date
-	\ifevanauthor
-		\title{} % empty title to avoid crashes
-		\author{Arky!! :3c} % AUTHOR NAME HERE!!! <---- !!
-		\date{\today}
-	\fi
-	%%fakesection Hyperref
-	\ifevanpkg
-		\PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor}
-		\usepackage{xcolor}
-		\ifevanhref
-			\usepackage[colorlinks=true]{hyperref}
-			\hypersetup{urlcolor=RubineRed,linkcolor=RoyalBlue,citecolor=ForestGreen}
-		\fi
-		\usepackage[nameinlink]{cleveref}
-	\fi
-	%%fakesection New Theorem Styles
-	\ifevanthm
-		\usepackage{amsthm}
-		\usepackage{thmtools}
-	\fi
-	\ifevanmdthm
-		\ifevanthm
-			%% theorem packages loaded already
-		\else
-			\usepackage{amsthm}
-			\usepackage{thmtools}
-		\fi
-		\usepackage[framemethod=TikZ]{mdframed}
-		\mdfdefinestyle{mdbluebox}{%
-			roundcorner = 10pt,
-			linewidth=1pt,
-			skipabove=12pt,
-			innerbottommargin=9pt,
-			skipbelow=2pt,
-			linecolor=blue,
-			nobreak=true,
-			backgroundcolor=TealBlue!5,
-		}
-		\declaretheoremstyle[
-			headfont=\sffamily\bfseries\color{MidnightBlue},
-			mdframed={style=mdbluebox},
-			headpunct={\\[3pt]},
-			postheadspace={0pt}
-		]{thmbluebox}
-		\mdfdefinestyle{mdredbox}{%
-			linewidth=0.5pt,
-			skipabove=12pt,
-			frametitleaboveskip=5pt,
-			frametitlebelowskip=0pt,
-			skipbelow=2pt,
-			frametitlefont=\bfseries,
-			innertopmargin=4pt,
-			innerbottommargin=8pt,
-			nobreak=true,
-			backgroundcolor=Salmon!5,
-			linecolor=RawSienna,
-		}
-		\declaretheoremstyle[
-			headfont=\bfseries\color{RawSienna},
-			mdframed={style=mdredbox},
-			headpunct={\\[3pt]},
-			postheadspace={0pt},
-		]{thmredbox}
-		\mdfdefinestyle{mdgreenbox}{%
-			skipabove=8pt,
-			linewidth=2pt,
-			rightline=false,
-			leftline=true,
-			topline=false,
-			bottomline=false,
-			linecolor=ForestGreen,
-			backgroundcolor=ForestGreen!5,
-		}
-		\declaretheoremstyle[
-			headfont=\bfseries\sffamily\color{ForestGreen!70!black},
-			bodyfont=\normalfont,
-			spaceabove=2pt,
-			spacebelow=1pt,
-			mdframed={style=mdgreenbox},
-			headpunct={ --- },
-		]{thmgreenbox}
-		\mdfdefinestyle{mdblackbox}{%
-			skipabove=8pt,
-			linewidth=3pt,
-			rightline=false,
-			leftline=true,
-			topline=false,
-			bottomline=false,
-			linecolor=black,
-			backgroundcolor=RedViolet!5!gray!5,
-		}
-		\declaretheoremstyle[
-			headfont=\bfseries,
-			bodyfont=\normalfont\small,
-			spaceabove=0pt,
-			spacebelow=0pt,
-			mdframed={style=mdblackbox}
-		]{thmblackbox}
-		\newcommand{\listhack}{$\empty$\vspace{-2em}}
-	\fi
 	%%fakesection Theorem setup
 	\ifevanthm
 		\theoremstyle{definition}
-		%Branching here: the option secthm changes theorems to be labelled by section
-		\ifevanmdthm
-			\ifevansecthm
-				\declaretheorem[%
-				style=thmbluebox,name=Theorem,numberwithin=section]{theorem}
-			\else
-				\declaretheorem[%
-				style=thmbluebox,name=Theorem]{theorem}
-			\fi
-			\declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
-			\declaretheorem[style=thmbluebox,name=Proposition,sibling=theorem]{proposition}
-			\declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}
-			\declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem*}
-			\declaretheorem[style=thmbluebox,name=Lemma,numbered=no]{lemma*}
-			\declaretheorem[style=thmbluebox,name=Proposition,numbered=no]{proposition*}
-			\declaretheorem[style=thmbluebox,name=Corollary,numbered=no]{corollary*}
-		\else
-			\ifevansecthm
-				\declaretheorem[name=Theorem,numberwithin=section]{theorem}
-			\else
-				\declaretheorem[name=Theorem]{theorem}
-			\fi
-			\declaretheorem[name=Lemma,sibling=theorem]{lemma}
-			\declaretheorem[name=Proposition,sibling=theorem]{proposition}
-			\declaretheorem[name=Corollary,sibling=theorem]{corollary}
-			\declaretheorem[name=Theorem,numbered=no]{theorem*}
-			\declaretheorem[name=Lemma,numbered=no]{lemma*}
-			\declaretheorem[name=Proposition,numbered=no]{proposition*}
-			\declaretheorem[name=Corollary,numbered=no]{corollary*}
-		\fi
-			
-		\ifevanmdthm
-			\declaretheorem[style=thmgreenbox,name=Algorithm,sibling=theorem]{algorithm}
-			\declaretheorem[style=thmgreenbox,name=Algorithm,numbered=no]{algorithm*}
-			\declaretheorem[style=thmgreenbox,name=Claim,sibling=theorem]{claim}
-			\declaretheorem[style=thmgreenbox,name=Claim,numbered=no]{claim*}
-		\else
-			\declaretheorem[name=Algorithm,sibling=theorem]{algorithm}
-			\declaretheorem[name=Algorithm,numbered=no]{algorithm*}
-			\declaretheorem[name=Claim,sibling=theorem]{claim}
-			\declaretheorem[name=Claim,numbered=no]{claim*}
-		\fi
-		\ifevanmdthm
-			\declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
-			\declaretheorem[style=thmredbox,name=Example,numbered=no]{example*}
-			\declaretheorem[style=thmredbox,name=Problem,sibling=theorem]{problembox}
-			\declaretheorem[style=thmredbox,name=Problem,numbered=no]{problembox*}
-		\else
-			\declaretheorem[name=Example,sibling=theorem]{example}
-			\declaretheorem[name=Example,numbered=no]{example*}
-		\fi
-		% Remark-style theorems
-		%\theoremstyle{remark}
-		\ifevanmdthm
-			\declaretheorem[style=thmblackbox,name=Remark,sibling=theorem]{remark}
-			\declaretheorem[style=thmblackbox,name=Remark,numbered=no]{remark*}
-		\else
-			\declaretheorem[name=Remark,sibling=theorem]{remark}
-			\declaretheorem[name=Remark,numbered=no]{remark*}
-		\fi
-		\declaretheorem[name=Conjecture,sibling=theorem]{conjecture}
-		\declaretheorem[name=Conjecture,numbered=no]{conjecture*}
-		\declaretheorem[name=Definition,sibling=theorem]{definition}
-		\declaretheorem[name=Definition,numbered=no]{definition*}
-        \declaretheorem[name=Theorem,sibling=theorem]{simplethm} % added in by arky
-		\declaretheorem[name=Theorem,numbered=no]{simplethm*}
-		\declaretheorem[name=Claim,sibling=theorem]{simpleclaim} % added in by arky
-		\declaretheorem[name=Claim,numbered=no]{simpleclaim*}
-        \declaretheorem[name=Lemma,sibling=theorem]{simplelemma} % added in by arky
-		\declaretheorem[name=Lemma,numbered=no]{simplelemma*}
-		\declaretheorem[name=Corollary,sibling=theorem]{simplecor} % added in by arky
-		\declaretheorem[name=Corollary,numbered=no]{simplecor*}
-		\declaretheorem[name=Proposition,sibling=theorem]{simpleprop} % added in by arky
-		\declaretheorem[name=Proposition,numbered=no]{simpleprop*}
-		\declaretheorem[name=Exercise,sibling=theorem]{exercise}
-		\declaretheorem[name=Exercise,numbered=no]{exercise*}
-		\declaretheorem[name=Fact,sibling=theorem]{fact}
-		\declaretheorem[name=Fact,numbered=no]{fact*}
-		\declaretheorem[name=Problem,sibling=theorem]{problem}
-		\declaretheorem[name=Problem,numbered=no]{problem*}
-		\declaretheorem[name=Question,sibling=theorem]{ques}
-		\declaretheorem[name=Question,numbered=no]{ques*}
-		\Crefname{claim}{Claim}{Claims}
-		\Crefname{conjecture}{Conjecture}{Conjectures}
-		\Crefname{exercise}{Exercise}{Exercises}
-		\Crefname{fact}{Fact}{Facts}
-		\Crefname{problem}{Problem}{Problems}
-		\Crefname{ques}{Question}{Questions}
-	\fi
+
 	%%fakesection Fancy section and chapter heads
 	\ifevancolorsec
 		\@ifundefined{KOMAClassName}{}{
@@ -445,9 +213,6 @@
 	\fi
 	%%fakesection Loads a bunch of useful packages (but allow disabling)
 	\ifevanpkg
-		\ifevanvonenabled
-			\IfFileExists{von.sty}{\usepackage{von}}{}
-		\fi
 		\usepackage{listings}
 		\usepackage{mathrsfs}
 		\usepackage{textcomp}
@@ -534,24 +299,6 @@
 			\ohead{\footnotesize\textbf{\thetitle}}
 			\cfoot{\pagemark}
 		}
-	\fi
-	%%fakesection Chinese support
-	\ifevanchinese
-		\usepackage[encapsulated]{CJK}
-		\usepackage{ucs}
-		\usepackage[utf8x]{inputenc}
-		\newenvironment{bsmi}{\begin{CJK}{UTF8}{bsmi}}{\end{CJK}}
-		\newcommand{\cn}[1]{\begin{bsmi}#1\end{bsmi}}
-		\AtBeginDocument{\begin{CJK}{UTF8}{bsmi}}
-		\AtEndDocument{\end{CJK}}
-	\fi
-	%%fakesection Hints
-	\ifevanhints
-		\usepackage{answers}
-		\Newassociation{hint}{hintitem}{hints}
-		\renewcommand{\solutionextension}{out}
-		\Opensolutionfile{hints}
-		\newcommand{\makehints}{\Closesolutionfile{hints}\input{hints.out}} % chktex 27
 	\fi
 %%fakesection END MAIN SETUP
 \fi
