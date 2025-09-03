@@ -1,16 +1,47 @@
 \ProvidesPackage{arky}
 
-\usepackage{amsmath, amssymb}
-\usepackage{amsthm, thmtools}
+\usepackage{amsmath, amssymb} % math stuff & symbols
+\usepackage{amsthm, thmtools} % theorem environments
 \usepackage{paralist} % for the parlist command
 \usepackage{nicematrix} % for tabulars and whatever and matrices. cuz hell idk
-
-\usepackage[nameinlink]{cleveref} % reference to environments, SPECIFICALLY nameinlink
 
 \PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor}
 \usepackage{xcolor}
 \usepackage[colorlinks=true]{hyperref}
 \hypersetup{urlcolor=RubineRed,linkcolor=RoyalBlue,citecolor=ForestGreen}
+\usepackage[nameinlink]{cleveref} % reference to environments, SPECIFICALLY nameinlink
+
+\usepackage[shortlabels]{enumitem}
+\usepackage[obeyFinal,textsize=scriptsize,shadow]{todonotes}
+\usepackage{textcomp}
+\usepackage{multirow}
+
+\usepackage{mathtools}
+\usepackage{microtype}
+
+\usepackage{listings}
+\usepackage{mathrsfs}
+\usepackage{textcomp}
+\lstset{basicstyle=\footnotesize\ttfamily,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny,
+	keywordstyle=\bfseries,
+	% title=\lstname,
+	showstringspaces=false,
+	tabsize=4,
+	frame=single,
+	keywordstyle=\bfseries\color{blue},
+	commentstyle=\color{green!70!black},
+	identifierstyle=\color{green!20!black},
+	stringstyle=\color{orange},
+	breaklines=true,
+	breakatwhitespace=true,
+	frame=none
+}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathmorphing}
 
 \title{} % empty title to avoid crashes
 \author{Arky!! :3c}
@@ -183,122 +214,71 @@
 %%fakesection BEGIN MAIN SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifevansetup
-	%%fakesection Theorem setup
-	\ifevanthm
-		\theoremstyle{definition}
+\@ifundefined{KOMAClassName}{}{
+	\@ifundefined{chapter}{}{
+		\addtokomafont{partprefix}{\rmfamily}
+		\renewcommand*{\partformat}{\color{purple}
+			\scalebox{2.5}{\thepart}\enlargethispage{2em}}
+		\addtokomafont{chapterprefix}{\raggedleft}
+		\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
+		\renewcommand*{\chapterformat}{\mbox{%
+			\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
+			\scalebox{2.718}{\color{purple}\thechapter}\enskip}}
+	}
+	\renewcommand*{\sectionformat}%
+		{\color{purple}\S\thesection\enskip}
+	\renewcommand*{\subsectionformat}%
+		{\color{purple}\S\thesubsection\enskip}
+	\renewcommand*{\subsubsectionformat}%
+		{\color{purple}\S\thesubsubsection\enskip}
+	\KOMAoptions{numbers=noenddot}
+	%\usetocstyle{KOMAlike}
+}
+\@ifundefined{KOMAClassName}%
+	{} % do nothing outside KOMA class
+	{% If KOMA exists. . .
+	\addtokomafont{subtitle}{\Large}
+	\setkomafont{author}{\Large\scshape}
+	\setkomafont{date}{\Large\normalsize}
+	}
+\providecommand{\thetitle}{\@title}
+\providecommand{\theauthor}{\@author}
+\providecommand{\thedate}{\@date}
 
-	%%fakesection Fancy section and chapter heads
-	\ifevancolorsec
-		\@ifundefined{KOMAClassName}{}{
-			\@ifundefined{chapter}{}{
-				\addtokomafont{partprefix}{\rmfamily}
-				\renewcommand*{\partformat}{\color{purple}
-					\scalebox{2.5}{\thepart}\enlargethispage{2em}}
-				\addtokomafont{chapterprefix}{\raggedleft}
-				\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
-				\renewcommand*{\chapterformat}{\mbox{%
-					\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
-					\scalebox{2.718}{\color{purple}\thechapter}\enskip}}
-			}
-			\renewcommand*{\sectionformat}%
-				{\color{purple}\S\thesection\enskip}
-			\renewcommand*{\subsectionformat}%
-				{\color{purple}\S\thesubsection\enskip}
-			\renewcommand*{\subsubsectionformat}%
-				{\color{purple}\S\thesubsubsection\enskip}
-			\KOMAoptions{numbers=noenddot}
-			%\usetocstyle{KOMAlike}
-		}
+\@ifundefined{KOMAClassName}
+{
+	\usepackage{fancyhdr}
+	\setlength{\headheight}{0.75in}
+	\setlength{\oddsidemargin}{0in}
+	\setlength{\evensidemargin}{0in}
+	\setlength{\voffset}{-1.0in}
+	\setlength{\headsep}{10pt}
+	\setlength{\textwidth}{6.5in}
+	\setlength{\headwidth}{6.5in}
+	\setlength{\textheight}{8.75in}
+	\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+	\setlength{\footskip}{0.3in}
+	\ifevanhdr
+		\renewcommand{\headrulewidth}{0.5pt}
+		\renewcommand{\footrulewidth}{0.0pt}
+		\pagestyle{fancy}
+		\lhead{Arky!! :3c}
+		\chead{}
+		\rhead{\nouppercase{\leftmark}}
+		\lfoot{}
+		\cfoot{\thepage}
+		\rfoot{}
 	\fi
-	%%fakesection Loads a bunch of useful packages (but allow disabling)
-	\ifevanpkg
-		\usepackage{listings}
-		\usepackage{mathrsfs}
-		\usepackage{textcomp}
-		\lstset{basicstyle=\footnotesize\ttfamily,
-			numbers=left,
-			numbersep=5pt,
-			numberstyle=\tiny,
-			keywordstyle=\bfseries,
-			% title=\lstname,
-			showstringspaces=false,
-			tabsize=4,
-			frame=single,
-			keywordstyle=\bfseries\color{blue},
-			commentstyle=\color{green!70!black},
-			identifierstyle=\color{green!20!black},
-			stringstyle=\color{orange},
-			breaklines=true,
-			breakatwhitespace=true,
-			frame=none
-		}
-		\usepackage[shortlabels]{enumitem}
-		% a list I like for walkthrough's --- Drew-style parts
-		\newlist{walk}{enumerate}{3}
-		\setlist[walk]{label=\bfseries (\alph*)}
-		\usepackage[obeyFinal,textsize=scriptsize,shadow]{todonotes}
-		\usepackage{textcomp}
-		\usepackage{multirow}
-		% Tiny tiny optimizations:
-		\usepackage{mathtools}
-		\usepackage{microtype}
-	\fi
-	%%fakesection \maketitle configuration
-	\@ifundefined{KOMAClassName}%
-		{} % do nothing outside KOMA class
-		{% If KOMA exists. . .
-		\addtokomafont{subtitle}{\Large}
-		\setkomafont{author}{\Large\scshape}
-		\setkomafont{date}{\Large\normalsize}
-		}
-	\providecommand{\thetitle}{\@title}
-	\providecommand{\theauthor}{\@author}
-	\providecommand{\thedate}{\@date}
-	%%fakesection Commutative diagrams support
-	\ifevandiagrams
-		\usepackage{tikz-cd}
-		\usetikzlibrary{decorations.pathmorphing}
-	\fi
-	%%fakesection Page Setup
-	\ifevanfancy
-		\@ifundefined{KOMAClassName}
-		{
-			\usepackage{fancyhdr}
-			\setlength{\headheight}{0.75in}
-			\setlength{\oddsidemargin}{0in}
-			\setlength{\evensidemargin}{0in}
-			\setlength{\voffset}{-1.0in}
-			\setlength{\headsep}{10pt}
-			\setlength{\textwidth}{6.5in}
-			\setlength{\headwidth}{6.5in}
-			\setlength{\textheight}{8.75in}
-			\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
-			\setlength{\footskip}{0.3in}
-			\ifevanhdr
-				\renewcommand{\headrulewidth}{0.5pt}
-				\renewcommand{\footrulewidth}{0.0pt}
-				\pagestyle{fancy}
-				\lhead{Evan Chen}
-				\chead{}
-				\rhead{\nouppercase{\leftmark}}
-				\lfoot{}
-				\cfoot{\thepage}
-				\rfoot{}
-			\fi
-		}
-		{
-			\usepackage[headsepline]{scrlayer-scrpage}
-			\renewcommand{\headfont}{}
-			\addtolength{\textheight}{3.14cm}
-			\setlength{\footskip}{0.5in}
-			\setlength{\headsep}{10pt}
-			\ihead{\footnotesize\textbf{\theauthor} (\thedate)}
-			\automark{section}
-			\chead{}
-			\ohead{\footnotesize\textbf{\thetitle}}
-			\cfoot{\pagemark}
-		}
-	\fi
-%%fakesection END MAIN SETUP
-\fi
+}
+{
+	\usepackage[headsepline]{scrlayer-scrpage}
+	\renewcommand{\headfont}{}
+	\addtolength{\textheight}{3.14cm}
+	\setlength{\footskip}{0.5in}
+	\setlength{\headsep}{10pt}
+	\ihead{\footnotesize\textbf{\theauthor} (\thedate)}
+	\automark{section}
+	\chead{}
+	\ohead{\footnotesize\textbf{\thetitle}}
+	\cfoot{\pagemark}
+}
