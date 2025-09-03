@@ -9,6 +9,11 @@
 
 \PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor} % apparently this is to stop like, beamer from acting up?
 \usepackage{xcolor}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{amber}{rgb}{1.0, 0.49, 0.0}
+\definecolor{crimson}{rgb}{0.86, 0.08, 0.24}
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+
 \usepackage[colorlinks=true]{hyperref}
 \hypersetup{urlcolor=RubineRed,linkcolor=RoyalBlue,citecolor=ForestGreen}
 \usepackage[nameinlink]{cleveref} % reference to environments, SPECIFICALLY nameinlink
@@ -61,12 +66,21 @@
 \newcommand{\catname}{\mathsf}
 
 % Fields, etc.
-\newcommand{\CC}{\mathbb C}
-\newcommand{\FF}{\mathbb F}
-\newcommand{\NN}{\mathbb N}
-\newcommand{\QQ}{\mathbb Q}
-\newcommand{\RR}{\mathbb R}
-\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\CC}{\mathbb C} % complex
+\newcommand{\FF}{\mathbb F} % field, or just F
+\newcommand{\NN}{\mathbb N} % naturals
+\newcommand{\QQ}{\mathbb Q} % rationals
+\newcommand{\RR}{\mathbb R} % reals
+\newcommand{\ZZ}{\mathbb Z} % integers
+
+% Probability
+\newcommand{\EE}{\mathbb E} % expectation
+\newcommand{\PP}{\mathbb P} % probability
+\DeclareMathOperator{\Var}{Var} % variance
+\DeclareMathOperator{\Cov}{Cov} % covariance
+
+% this goes somewhere
+\DeclareMathOperator{\grad}{grad} % gradient
 
 % Inequalities
 \newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
@@ -81,8 +95,8 @@
 \DeclareMathOperator{\Inn}{Inn}
 \DeclareMathOperator{\Syl}{Syl}
 \DeclareMathOperator{\Gal}{Gal}
-\DeclareMathOperator{\GL}{GL} % General linear group
-\DeclareMathOperator{\SL}{SL} % Special linear group
+\DeclareMathOperator{\GL}{GL} % general linear group
+\DeclareMathOperator{\SL}{SL} % special linear group
 
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
