@@ -1,0 +1,100 @@
+\section{Day 1: Course Administrative Details (Sep. 3, 2025)}
+[I'll put any of my own remarks in Square Brackets or in footnotes. I love making connections to other ideas, and it feels like killing my child to exclude them just because the prof didn't mention it explicitly.]
+
+Put ``MAT351'' in subject if you're emailing about the course. The syllabus tab will have the list of topics covered each week. Attendance is strongly encouraged.\footnote{I'm looking at you, Isaac.} 
+
+\begin{itemize}
+
+	\item Problems are in \textit{Partial Differential Equations: An Introduction} by Walter Strauss. 
+	\item Evans PDEs will cover the topics in more detail because it is a graduate textbook. 
+	\item PDEs in Action is more applied.
+
+\end{itemize}
+
+Midterm 2 will be \( \ge \)80\% problems from the Problem Sets. Final exam is gonna be 2 hours rather than 3 because 3 hours is too long.
+
+Topics:
+\begin{itemize}
+
+	\item Intro
+	\item Examples
+	\item General Concepts
+	\item Classify (There are many different kinds). By the end of the semester, when you see a PDE you should know what kind it is. Also, if you see some behavior in the wild, you can reach into your toolbox and think about which kind of PDE properly models the behavior.
+
+\end{itemize}
+
+We will go over all the main classes of PDEs
+\begin{itemize}
+
+	\item First order PDEs
+	\item Wave equation (Hyperbolic PDEs)
+	\item Heat equation/Diffusion (Parabolic PDEs)
+	\item Laplace/Harmonic Functions (Elliptic PDEs)
+	\item Boundary/Initial Value Problems (Fourier Series)
+	\item First Order Nonlinear PDEs (Shocks)
+	\item Eigenvalues (Hydrogen Atom) 
+	\item Schr\"odinger and Fourier Transform (If there's time)
+	\item Distributions and Weak Solutions\footnote{This is my favourite topic in PDEs.} (If there's time)
+	\item \ldots
+
+\end{itemize}
+
+PDE is a vast subject. It is one of the most connected fields of math, with connections to Analysis, Number Theory, Physics, Differential Geometry, Algebra, Numberical Analysis, Experiments, and so on. The first part of the class will be more computational, finding explicit solutions to our first four PDEs mentioned above, and the second part will be more theoretical.\pagebreak
+
+The rest of the lecture went over some examples of PDEs.
+\begin{example}
+	A simple possible PDE would be as follows: Let \( \mu = \mu(x, y) \) be a function of two variables. Then our PDE might be \[ \mu_{x} + \mu_{y} = 0. \]
+		\begin{remark}
+			\( \mu_{x} = \frac{\partial}{\partial x} \mu \).
+		\end{remark}
+		From here, a single solution would be \( x - y \). We have a solution \( \mu(x, y) = f(x - y) \) for any function \( f \).
+		\begin{remark}
+		For ODEs, first order has one degree of freedom, second order has two degrees of freedom, etc. For PDEs, this first order PDE has infinitely many degrees of freedom.
+		\end{remark}
+		We will also solve \( \mu_{x} + c(x, y) \mu_{y} = 0 \) next lecture (by method of characteristics).
+\end{example}
+
+\begin{example}[Burgers' Equation]
+	We will return to first order PDEs at some point to look at nonlinear cases. One such example is 
+	\[ \mu_{x} + \mu \mu_{y} = 0. \]
+	This is a simple example used for fluid dynamics and part of why fluid dynamics is hard.
+\end{example}
+\begin{example}[Wave Equation]
+		With the Wave Equation, there is one special coordinate, which is time.
+		Take \( \mu = \mu(t, x) \) with \( t \in I \subseteq \mathbb{R} \), \( x \in U \subseteq \mathbb{R}^{m} \), where \( I \) is an interval and \( U \) is an open set. Now, consider the \( m = 1 \) case. Then the wave equation is
+		\[ \mu_{tt} - \mu_{x x} = 0. \]
+		For a general \( m \), it's
+		\[ \mu_{tt} - \Delta_{x} \mu = 0  \]
+		\begin{remark}
+			If \( f : \mathbb{R^{m}} \to \mathbb{R} \), then \( \Delta f \) is the Laplacian of \( f \), \( \frac{\partial^{2}}{\partial x_{1}^{2}} f + \cdots + \frac{\partial^{2}}{\partial x_{m}^{2}} f \). When \( f \) has two different variables (\( f(t, x) \), then \( \Delta_{x} f \) is the Laplacian with respect to \( x \) only. [An efficient way to write it is as the divergence of the gradient of a function, which will come up a bit later.]
+		\end{remark}
+		We'll also look at
+		\[ \mu_{tt} - \Delta \mu = f(x, t), \]
+		which is the non-homogeneous case.
+\end{example}
+
+\begin{example}[Heat Equation]
+	The heat equation is
+		\[ \mu_{t} - \Delta \mu = 0. \]
+		The difference between this and the Wave Equation is that this is the first derivative, whereas the Wave Equation is the second derivative. Makes a huge difference.
+\end{example}
+
+\begin{example}[Laplace's Equation]
+	 The Laplacian (Laplace's equation) is 
+		\[ - \Delta \mu = 0. \]
+		[Functions satisfying Laplace's Equation are sometimes called harmonic.] In this sense, Laplace's equation is the steady-state solution to the heat equation and the wave equation. Laplace's equation is very important for other fields as well. [Dirichlet's problem in the circle is just a special case of an initial value problem for Laplace's equation. We will almost certainly see this in 354. In this case, Complex Analysis turns out to be a very efficient way to solve this IVP.]
+	\begin{remark}
+		Why do we have the minus in front? One justification could be that Laplace's equation is inspired by physics. For example, in Electrostatics, if \( V \) is the electrical potential, then the electric field is given by \( E = - \nabla V  \). But from here, the electric charge is \( \rho = \nabla \cdot E \) (up to a change in units), so it follows that \( \rho = - \Delta V \).\footnote{I \textit{told} you it would come up later.} It follows that in regions of space with no charge, the electrical potential should be a harmonic function.
+
+		Another more mathematical justification is that \( -\Delta \) is a non-negative operator. The professor kinda trailed off while talking about this and never finished the proof, but here's what I imagine he was trying to say:
+		\begin{align*}
+			\left\langle - \Delta g, g \right\rangle &= \int_{\mathbb{R}^{m}} - \Delta g \ g \\
+			&= \int_{\mathbb{R}^{m}} \operatorname{div} \left( - \nabla g(x) g(x) \right) + \int_{\mathbb{R}^{m}}  | \nabla g|^{2} dx
+		\end{align*}
+		from here, assuming that \( \nabla g \cdot g \to 0 \) sufficiently quickly, it would follow (by the divergence theorem) that 
+		\[ \int_{\mathbb{R}^{m}} \operatorname{div} \left( - \nabla g(x) g(x) \right) = 0, \]
+		and therefore that this inner product would be non-negative. That being said, he was not very precise here.
+		
+	\end{remark}
+\end{example}
+	Next time we start with the formal definition of a PDE and write out Navier-Stokes.
