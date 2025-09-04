@@ -1,2 +1,53 @@
 \section{Day 2: Functions on the Complex Plane (Sep. 4, 2025)}
-Let $f : \Omega \to \CC$, where $\Omega$ is an open subset of $\CC$. We say that $f$ is continuous if 
+Let $f : \Omega \to \CC$, where $\Omega$ is an open subset of $\CC$. We say that $f$ is continuous if at $z_0 \in \Omega$ if, for all $\eps > 0$, there exists an open disk $D_\gamma(z_0)$ such that $\abs{f(z) - f(z_0)} < \eps$ for all $z \in D_\gamma(z_0)$. In particular, $f$ is said to be continuous on $\Omega$ if it is continuous at every point in $\Omega$.
+\begin{example}
+    Consider $f : \CC \to \CC$ given by $f(z) = \bar{z}$. Show that $f$ is continuous.
+\end{example}
+\begin{solution}
+    For all complex $z, z_0$, we have that $\abs{f(z) - f(z_0)} = \abs{\bar{z} - \bar{z_0}} = \abs{z - z_0}$. Thus, we have that for any $\eps > 0$, we obtain\footnote{note to self: ol is better than bar for this stuff...}
+    \[ f(D_\eps(z_0)) = D_\eps(\ol{z_0}). \qedhere \]
+\end{solution}
+\noindent We now discuss holomorphic functions (i.e., complex differentiable functions). We say that $f : \Omega \to \CC$ is \textit{holomorphic} at $z_0 \in \Omega$ if
+\[ \frac{f(z_0 + h) - f(z_0)}{h}, \qquad h \in \CC \setminus \{0\}, \]
+converges as $h \to 0$. If the limit exists, we let
+\[ f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} \]
+be the derivative.
+\begin{example}
+    Consider the exact same function as in the previous example, $f(z) = \ol{z}$. Is $f$ holomorphic?
+\end{example}
+\begin{solution}
+    For all $z_0 \in \CC$ and $h \in \CC \setminus \{0\}$, we have that
+    \[ \frac{f(z_0 + h) - f(z_0)}{h} = \frac{\ol{z_0 + h} - \ol{z_0}}{h} = \frac{\ol{h}}{h} = \frac{\rho e^{-i \theta}}{\rho e^{i\theta}} = e^{-2 i \theta}. \]
+    If we take $h \to 0$ along the real line, we may let $h = \rho$, which means the fraction is equal to $1$ as $h \to 0$. If we take $\rho \to 0$ along the complex axis, however, then we have that $h = \rho e^{i \pi/2}$, where we obtain the fraction is equal to $-1$ as $\rho \to 0$. Thus, $f$ cannot be holomorphic.
+\end{solution}
+\begin{proposition}
+    Let $\Omega$ be open in $\CC$. If $f, g$ are holomorphic on $\Omega$, then
+    \begin{enumerate}[(i)]
+        \item $f + g$ is holomorphic on $\Omega$, and $(f + g)' = f' + g'$.
+        \item $fg$ is holomorphic on $\Omega$, and $(fg') = f'g + fg'$.
+        \item If $g(z_0) \neq 0$ where $z_0 \in \Omega$, then $\frac{f}{g}$ is also holomorphic at $z_0$, where
+        \[ \left(\frac{f}{g}\right)' = \frac{f'(z_0) g(z_0) - f(z_0) g'(z_0)}{g^2(z_0)}. \]
+        \item If $f : \Omega \to U$ and $g : U \to \CC$ are holomorphic, then $g \circ f$ is also holomorphic, and we obtain the chain rule
+        \[ (g \circ f)'(z) = g'(f(z)) f'(z). \]
+    \end{enumerate}
+\end{proposition}
+\noindent We now discuss complex differentiability versus real differentiability. A holomorphic function $f : \Omega \to \CC$ can be identified with a function $F : \Omega \to \RR^2$ given by $(x, y) \mapsto (u(x, y), v(x, y)) = (\Re f(x, y), \Im f(x, y))$. Consider the partial derviative of $F$ at $(x_0, y_0)$; these exist if there exists some linear transformation $J : \RR^2 \to \RR^2$ such that
+\[ \frac{\norm{F(P_0 + H) - F(P_0) - J(H)}}{\norm{H}} \to 0 \]
+as $H \to 0$. Or, we may define $\Psi(H)$ to take on the fraction above, and we see that $F$ is indeed differentiable at $P_0 = (x_0, y_0)$ if $\Psi(H) \to 0$ as $H \to 0$. We now deal with complex differentiability. Suppose $f : \Omega \to \CC$ is holomorphic at $z_0 = x_0 + i y_0$. Then we have partial derivatives
+\[ \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial v}{\partial x}, \frac{\partial v}{\partial y}. \]
+Naturally,
+\[ f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h - f(z_0)}{h} \]
+along any path; in particular, we take $h \in \RR \setminus \{0\}$ and observe that
+\begin{align*}
+    f'(z_0) &= \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} \\
+    &= \lim_{h \to 0} \frac{u(x_0 + h, y_0) + iv(x_0 + h, y_0) - u(x_0, y_0) - iv(x_0, y_0)}{h} \\
+    &= \frac{\partial u}{\partial x} (x_0, y_0) + i \frac{\partial v}{\partial x} (x_0, y_0),
+\end{align*}
+and so both exist, and they are $\Re f'(z_0)$ and $\Im f'(z_0)$ respectively. Similarly, we may take $h = ik$ where $k \in \RR \setminus \{0\}$ and obtain
+\begin{align*}
+    f'(z_0) &= \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} \\
+    &= \lim_{k \to 0} \frac{u(x_0, y_0 + k) + iv(x_0, y_0 + k) - u(x_0, y_0) - iv(x_0, y_0)}{ik} \\
+    &= \lim_{k \to 0} \frac{-i(u(x_0, y_0 + k) - u(x_0, y_0)) + v(x_0, y_0 + k) - v(x_0, y_0)}{k} \\
+    &= \frac{\partial v}{\partial y} (x_0, y_0) - i \frac{\partial u}{\partial y} (x_0, y_0),
+\end{align*}
+and so both partials also exist and they are $\Re f'(z_0)$ and $- \Im f'(z_0)$ respectively.

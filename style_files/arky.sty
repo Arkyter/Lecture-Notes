@@ -268,12 +268,13 @@
 % ----------------------------------------------------------------
 % Environments
 % ----------------------------------------------------------------
-\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}} % as in, "in paragraph enumerate; it'll output as like (i) ... (ii) ... all in one line
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup} % i'm going to leave this in here to figure out for later.
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 \newenvironment{subproof}[1][Subproof]{ % i mean. do i want it to say proof or subproof? hell, it's not even indented
 \begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}} 
 {\end{proof}}
-\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}} % as in, "in paragraph enumerate; it'll output as like (i) ... (ii) ... all in one line
-\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup} % i'm going to leave this in here to figure out for later.
 
 \theoremstyle{definition}
 
