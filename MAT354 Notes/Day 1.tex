@@ -1,4 +1,4 @@
-\section{Day 1: Recap of Preliminaries}
+\section{Day 1: Recap of Preliminaries (Sep. 2, 2025)}
 We start by discussing the complex plane and complex numbers. Given $z \in \CC$, we say that $\Re(z)$ and $\Im(z)$ are the real and imaginary parts of $z$ respectively, i.e., $z = x + iy$. $\CC$ is the set of all complex numbers. In this manner, we may identify $z = x + iy$ with $(x, y) \in \RR^2$ using the standard complex plane.
 \begin{enumerate}[label=(\alph*)]
     \item The complex \textit{conjugate} of $z$ is given by $\bar{z} = x - iy$, where we have that
@@ -47,9 +47,9 @@ We start by discussing the complex plane and complex numbers. Given $z \in \CC$,
     \[ z_0 = e^{i \frac{\pi}{8}}, \quad z_1 = e^{i \frac{5 \pi}{8}}, \quad z_2 = e^{i \frac{9 \pi}{8}}, \quad z_3 = e^{i \frac{13 \pi}{8}}. \]
 \end{enumerate}
 We now discuss convergence. We say that a set of complex numbers $\{z_n\}_{n \in \NN}$ converges to $w \in  \CC$ if $\lim_{n \to \infty} \abs{z_n - w} = 0$. We write it as $\lim_{n \to \infty} z_n = w$. In the complex plane, the convergence can be in any direction.
-\begin{simplelemma}
+\begin{lemma}
     $\{z_n\}_{n \in \NN}$ converges to $w$ if and only if $\{\Re z_n\}_{n \in \NN}$ converges to $\Re w$ and $\{\Im z_n\}_{n \in \NN}$ converges to $\Im w$.
-\end{simplelemma}
+\end{lemma}
 \begin{proof}
     We have that
     \begin{align*}
@@ -61,12 +61,12 @@ We now discuss convergence. We say that a set of complex numbers $\{z_n\}_{n \in
     which approaches $0$ as $n \to \infty$. The same argument goes for the imaginary portion.
 \end{proof}
 \noindent A sequence of complex numbers $\{z_n\}_{n \in \NN}$ is called \textit{Cauchy} if $\abs{z_n - z_m} \to 0$ as $n, m \to \infty$. In $\eps-\delta$, this means that for all $\eps > 0$, there exists $N \in \NN$ such that $\abs{z_n - z_m} < \eps$ for all $n, m > N$.
-\begin{simplethm}[Bolzano-Weierstrass Theorem]
+\begin{theorem}[Bolzano-Weierstrass Theorem]
     $\RR$ is \textit{complete}, i.e., every Cauchy sequence of real numbers convergesto a real number.
-\end{simplethm}
-\begin{simplethm}
+\end{theorem}
+\begin{theorem}
     $\CC$ is complete.
-\end{simplethm}
+\end{theorem}
 \begin{proof}
     Take any Cauchy sequence of complex numbers $\{z_n\}$. Using the inequalities $\abs{\Re z} \leq \abs{z}$ and $\{\Im z\} \leq \abs{z}$, we have that $\{\Re z_n\}$ and $\{\Im z_n\}$ are Cauchy sequences of real numbers. By Bolzano-Weierstrass, we have that $\Re z_n \to x_0 \in \RR$ and $\Im z_n \to y_0 \in \RR$. By the previous lemma, we actually have $\lim_{n \to \infty} z_n = x_0 + i y_0$.
 \end{proof}
@@ -86,12 +86,12 @@ A set $\Omega$ is called \textit{open} if every point in $\Omega$ is an interior
 \noindent A point $z \in \CC$ is a \textit{limit point} of $\Omega$ if there exists a sequence $\{z_n\} \subset \Omega$  with $z_n \neq z$ such that $z_n \to z$.
 \\[8pt]
 As an example, we define $D$ to be the open unit disc centered at $0$. $0$ and $1$ are both limit points of $D$, but $1$ is not contained in $D$ itself.\footnote{hell is it disc or disk YKW LET'S COMPROMISE it's spelled disque actually (paint nails)} The \textit{closure} of $\Omega$, $\bar{\Omega}$, is given by $\Omega$ unioned with all its limit points. The \textit{boundary} of a set $\Omega$, wirtten $\partial \Omega$, is given by $\bar{\Omega} \setminus \mathrm{int} \, \Omega$. A set $\Omega \subseteq \CC$ is said to be compact if it is closed and bounded, i.e., there exists $M > 0$ such that $\abs{z} \leq M$ for all $z \in \Omega$.
-\begin{simplethm}
+\begin{theorem}
     A set $\Omega \subseteq \CC$ is compact if and only if every sequence $\{z_n\} \subset \Omega$ has a subsequence that converges to a point in $\Omega$.
-\end{simplethm}
-\begin{simpleprop}
+\end{theorem}
+\begin{proposition}
     If $\Omega_1 \supset \Omega_2 \dots \supset \Omega_n \supset \dots$ is a sequence of nonempty compact sets in $\CC$, where $\diam(\Omega_n) = \sup_{z, w \in \Omega_n} \abs{z - w} \to 0$ as $n \to \infty$, then there exists a unique $w \in \CC$ such that $w \in \Omega_n$ for every $n \in \NN$.
-\end{simpleprop}
+\end{proposition}
 \begin{proof}
     For each $\Omega_n$, pick a point $z_n \in \Omega_n$. Then $\{z_n\}_{n \in \NN}$ is a Cauchy sequence because the diameter of $\Omega_n$ approaches $0$. By the Bolzano-Weierstrass theorem for complex numbers, this means that $\{z_n\}_{n \in \NN}$ indeed does converge to some $w \in \CC$. In particular, we have $w$ is the limit of the subsequence $\{z_m\}_{m \geq n} \subseteq \Omega_n$, where $\Omega_n$ is compact, meaning the limit $w$ should be in $\Omega_n$. This means there exists a unique $w \in \CC$ such that $w \in \Omega_n$ for every $n \in \NN$.
     \\[8pt]
