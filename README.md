@@ -1,15 +1,11 @@
 # lecture-notes
 Lecture notes from my classes at UofT; will be updated daily (hopefully).
 
-**Disclaimer:** This is updated as often as I want... which is most likely daily, unless I burn out or something. If a day is missing, or if some details are wrong, message me (@arkyter on Discord) so I can fix them :3
-
-This also means I will revise / change some details from class if I think it helps make the notes clearer / fix mistakes from lecture.
-
-**Hyperlinks are disabled on Github PDFs...?** Download the raw file to get access to links, I guess. Oopsies.
+**Disclaimer:** This is updated as often as I want... which is most likely daily, unless I get bored or something. If a day is missing, or if some details are wrong, message me (@arkyter on Discord) so I can fix them :3
 
 Current list of classes:
 - MAT347 (Algebra)
-- MAT351 (Partial Differential Equations)
+- MAT351 (Partial Differential Equations) -- maintained by [@evlasics](https://github.com/evlasics)
 - MAT354 (Complex Analysis)
 - MAT436 (Linear Operators)
 
@@ -35,7 +31,6 @@ Audit list (notes may be kept, but sparsely):
 **Todo List**:
 - Rework style files system (like, 10% done or whatev...)
 - smth smth tutorial answers? idk if i *want* to do it tho hmm.
-- day 4-6 of 267, day 2-3 of apm461, one gajillion notes to catch up on. oopsies-
 
 Errata list (?):
 - none so far wawawawa
