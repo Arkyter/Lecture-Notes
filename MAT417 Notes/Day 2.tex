@@ -1,0 +1,121 @@
+\section{Day 2: More accurate treatment of the Riemann-Zeta function (Sep. 4, 2025)}
+Note that I won't be here for the second hour of Thursday classes because I have complex analysis during that time. Isaac will be taking the full hour's worth of notes, though. \textit{i lied i'm staying for this lecture}
+\\[8pt]
+Today's lesson agenda is as follows,
+\begin{enumerate}[(i)]
+    \item More accurate treatment of $\zeta(s)$;
+    \item Prove that $\sum_{p \text{ is prime}} \frac{1}{p}$ is divergent (per Euler),
+    \item Start doing preaptory material for the Dirichlet theorem, and introduce the Dirichlet $L$-functions.
+\end{enumerate}
+\begin{lemma}
+    The Riemann-Zeta function is convergent for $s \in \RR$, $s > 1$; it is absolutely convergent for $s \in \CC$, $\Re s > 1$.
+\end{lemma}
+\noindent We will later prove that for $\Re s > 1$, $\zeta(s)$ is a holomorphic function. Let's start by comparing $\sum \frac{1}{n^s}$ to $\int_1^\infty x^{-s} \, dx$; observe that
+\[ \int_1^a x^{-s} \, dx = \Eval{\frac{x^{1-s}}{1-s}}{1}{a} = \frac{a^{1-s}}{1-s} - \frac{1}{1-s}, \]
+of which $a^{1-s}$ approaches $0$ as $a \to \infty$. Thus, we have that
+\[ \int_1^\infty x^{-s} = \frac{1}{s-1}. \]
+We also have that
+\[ \sum_{n=2}^\infty n^{-s} \leq \int_1^\infty x^{-s} \, dx = \frac{1}{s-1}, \]
+and
+\[ \sum_{n=2}^N n^{-s} \leq \int_1^N x^{-s} \, dx, \]
+which yields convergence. Thus, we have that inequality that $\zeta(s) \leq 1 + \frac{1}{s-1}$.
+\begin{exercise}
+    Run a very similar argument and prove that $\zeta(s) > \frac{1}{s-1}$. In particular,
+    \[ \frac{1}{s-1} < \zeta(s) < 1 + \frac{1}{s-1}. \]
+\end{exercise}
+\noindent In particular, the Riemann-Zeta function can also be written in the \textit{Euler product} form, given by
+\[ \zeta(s) = \prod_{p \text{ prime}} \left(\frac{1}{1 - p^{-s}}\right). \]
+Taking the log of both sides, we get that
+\[ \log \zeta(s) = -\sum_p \log(1 - p^{-s}). \]
+From here on, we simply write a subscript of $p$ on summations or products to indicate that they're prime (unless stated otherwise). Clearly, the above is divergent for $s = 1$.
+\begin{lemma}
+    \begin{enumerate}[(i)]
+        \item For all $s_0 > 1$, there exists some constant $M > 0$ such that 
+        \[ \log \abs{\sum_p p^{-s} - \log \frac{1}{s-1}} < M \text{ for all } 1 < s \leq s_0. \]
+        \item The sum of $\frac{1}{p}$ over all primes diverge.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We may rewrite the equation in the first line as follows,
+    \[ \sum_p p^{-s} = \log \frac{1}{s-1} + O(1) \text{ as } s \to 1, \]
+    where we may note $O(1)$ is some bounded function. Recall the following,
+    \begin{definition}
+        Let $f, g$ be functions on some space $X$, where $g \geq 0$. We say that $f = O(g)$ if $\abs{f} \leq M g$, where $M$ is some constant.
+    \end{definition}
+    \noindent In this manner, saying $f = O(1)$ is equivalent to saying that $\abs{f}$ is bounded. Now, let us take the log of the entire following inequality,
+    \begin{align*}
+        \frac{1}{s-1} &< \zeta(s) < 1 + \frac{1}{s-1} = \frac{s}{s-1}, \\
+        \log \left(\frac{1}{s-1}\right) &< - \sum_p \log(1 - p^{-s}) < \log \left(\frac{s}{s-1}\right), \tag{$\ast$}
+    \end{align*}
+    where the Taylor expansion of $\abs{- \log(1 - p^{-s}) - p^{-s}}$ is less than $p^{-2s}$.
+    \begin{exercise}
+        Check that $\abs{- \log(1 - y) - y} < y^2$ for $0 < y < 1$ for $y \in \RR$. This is left as homework.
+    \end{exercise}
+    \noindent Specifically, summing over all $p$ and applying the triangle inequality, the above tells us that
+    \[ \abs{\sum_p \left(p^{-s} + \log(1 - p^{-s})\right)} < \sum_p p^{-2s} < \zeta(2). \]
+    Using both inequalities together, we obtain
+    \begin{align*}
+        & \abs{\sum_p p^{-s} - \log \frac{1}{s-1}} \\
+        &= \abs{\left(\sum_p p^{-s} + \sum_p \log (1 - p^{-s})\right) - \left(\log \frac{1}{s-1} + \sum_p \log (1 - p^{-s})\right)} \\
+        &\leq \zeta(2) + \log s \leq \zeta(2) + s_0 - 1,
+    \end{align*}
+    if $1 < s \leq s_0$. Indeed, this shows that $M = s_0 - 1 + \zeta(2)$ for (i). The second part of the lemma is also left as homework.
+\end{proof}
+\noindent We now discuss Dirichlet series and Dirichlet $L$-functions. Let $m \in \NN$, and let $(\ZZ / m \ZZ)^\ast$ be the invertible elements in the ring $\ZZ / m \ZZ$. Specifically, these are the residues modulo $m$ which are prime to $m$. This forms an abelian group under multiplication, of which its size is given by the totient $\varphi(m)$.
+\begin{exercise}
+    If $m$ is prime, then $(\ZZ / m \ZZ)^\ast$ is the cyclic group of order $m - 1$.
+\end{exercise}
+\noindent Fix a character $\chi : (\ZZ / m \ZZ)^\ast \to \CC^\ast$, where $\CC^\ast$ are the nonzero complex numbers. Extend $\chi$ as a map $\ZZ \to \CC$ such that $\chi(n) \chi(m) = \chi(nm)$ as follows,
+\[ \chi(n) = \begin{cases} 0 & \text{if } \gcd(n, m) \neq 1, \\ \chi(n \mod m) & \text{if } \gcd(n, m) = 1. \end{cases} \]
+As an example, let $m = 3$, and consider $(\ZZ / 3 \ZZ)^\ast = \{\pm 1\}$. Then
+\[ \chi(n) = \begin{cases} 0 & \text{if } 3 \mid n, \\ 1 & \text{if } n \equiv 1 \pmod 3, \\ -1 & \text{if } n \equiv -1 \pmod 3. \end{cases} \]
+For all $m$, we have the trivial homomorphism $(\ZZ / m \ZZ)^\ast \to \CC^\ast$. Let $\chi : \ZZ \to \CC$ be the function
+\[ \chi(n) = \begin{cases} 1 & \text{if } \gcd(n, m) = 1, \\ 0 & \text{if } \gcd(n, m) \neq 1. \end{cases} \]
+Then we may define the $L$-function
+\[ L(\chi, s) = \sum_{n=1}^\infty \frac{\chi(n)}{n^s} = \prod_p \left(\frac{1}{1 - \frac{\chi(p)}{p^s}}\right). \]
+\\[-24pt]
+\begin{claim}
+    $L(\chi, x)$ is absolutely convergent for $\Re s > 1$.
+\end{claim}
+\begin{theorem}
+    \begin{parlist}
+        \item $L(\chi, s)$ is holomorphic for $\Re s > 1$.
+        \item Assume the extension of $\chi$ is not equal to $1$. Then $L(\chi, s)$ converges for $\Re s > 0$ and defines a holomorphic function there.
+        \item If the extension of $\chi$ is not equal to $1$, then $L(\chi, 1) \neq 0$.
+    \end{parlist}
+\end{theorem}
+\noindent Let $G$ be a finite abelian group. Consider all characters $\chi : G \to \CC^\ast$; they form a group $G^\vee$ under multiplication.
+\begin{claim}
+    \begin{parlist}
+        \item $G^\vee$ is (non-canonically) isomorphic to $G$, and $\# G^\vee = \# G$.
+        \item $(G^\vee)^\vee \cong G$ canonically.
+    \end{parlist}
+\end{claim}
+\begin{proof}
+    The claim lets us say that if $G$ is finite and abelian, then $G$ is isomorphic to a product of finite cyclic groups
+    \[ G \cong \prod_{i=1}^k (\ZZ / a_i \ZZ), \qquad a_i > 1. \]
+    Using the fact that $(G \times H)^\vee \cong G^\vee \times H^\vee$, we see that specifying $\chi : G \times H \to \CC^\times$ is equivalent to specifying characters $\chi_1, \chi_2$ on $G$ and $H$ respectively. Letting $a > 1$, we have that if $\chi : \ZZ / a \ZZ \to \CC^\times$ and $g^a = 1$, we have that $\chi(g) \in \CC^\ast$ and $\chi(g)^a = 1$. This means that $\chi(g)$ must be an $a$th root of unity. All the roots of $1$ of order $a$ form a cyclic group of order $a$.
+    \\[8pt]
+    For the second part of the claim, in the direction of $G \to (G^\vee)^\vee$, we have that for each $g \in G$, we obtain a canonical map $G^\vee \to \CC^\ast$ where all $x \in G^\vee \mapsto \chi(g)$.
+\end{proof}
+\begin{lemma}
+    This map is an isomorphism.
+\end{lemma}
+\begin{lemma}
+    \begin{parlist}
+        \item All $\chi \in G^\vee$ form a basis of $\CC(G)$, the complex valued functions on $G$.
+        \item This basis is orthonormal with respect to $\left<f_1, f_2\right> = \frac{1}{\# G} \sum_g f_1(g) \bar{f_2}(g)$.
+    \end{parlist}
+\end{lemma}
+\begin{proof}
+    We know that $\dim \CC(G) = \# G = \# G^\vee$. Recall that we have
+    \[ \left<\chi, \chi\right> = \frac{1}{\# G} \sum_g \chi(g) \bar{\chi}(g) = \frac{1}{\# G} \sum_g \chi(g) \chi_g^{-1} = \frac{1}{\# G} \sum_g \chi(gg^{-1}) = 1, \]
+    since $\chi(1) = 1$. Now, let us evaluate $\# G \left<\chi, 1\right> = \sum_g \chi(g)$. We have that since $\chi$ is not uniformly $1$, there must exist some $h \in G$ such that $\chi(h) \neq 1$; and so
+    \[ \chi(h) \sum_g \chi(g) = \sum_g \chi(hg) = \sum_g \chi(g), \]
+    meaning $\sum_g \chi(g) = 0$, as $\chi(h)$ is nonzero as well. Thus, we obtain that
+    \[ \# g \left<chi_1, \chi_2\right> = \sum_g \chi_1(g) \bar{\chi_2}(g) = \sum_g \chi_1(g) \chi_2^{-1}(g), \]
+    meaning that $\# G = \left<\chi_1 \chi_2^{-1}, 1\right>$. If $\chi_1 \chi_2^{-1} \neq 1$ (i.e., if $\chi_1 \neq \chi_2$), then this is $0$.
+\end{proof}
+\noindent Let $x_n$ be a sequence of elements of $\RR_{> 0}$ such that $\lim_{n \to \infty} \lambda_n = \infty$. The main example we will be looking at is $\lambda_n = \log n$ (or $\lambda_n = n$), and the Dirichlet series $\sum_n a_n e^{-\lambda_n z}$ where $a_n \in \CC$.
+\\[8pt]
+Next lecture, we will do some general analysis of convergence and analytic properties of such series. We will apply this to $L(\chi, s)$.

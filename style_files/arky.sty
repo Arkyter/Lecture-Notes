@@ -33,229 +33,15 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{decorations.pathmorphing}
 
-% ----------------------------------------------------------------
-% Macros & Document Setup
-% ----------------------------------------------------------------
-\title{} % empty title to avoid crashes
-\author{Arky!! :3c}
-\date{\today} % default
-
-% paragraph styling
-\newcommand{\hrulebar}{
-  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
-  \par\nointerlineskip \vspace{\baselineskip}
-}
-
-% general 
-\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
-\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
-\newcommand{\ol}{\overline}
-\newcommand{\ul}{\underline}
-\newcommand{\wt}{\widetilde}
-\newcommand{\wh}{\widehat}
-
-\DeclareMathOperator{\cis}{cis}
-\DeclareMathOperator*{\lcm}{lcm}
-\DeclareMathOperator*{\argmin}{arg min}
-\DeclareMathOperator*{\argmax}{arg max}
-
-% symbols
-\newcommand{\eps}{\varepsilon}
-\newcommand{\catname}{\mathsf}
-
-% Fields, etc.
-\newcommand{\CC}{\mathbb C} % complex
-\newcommand{\FF}{\mathbb F} % field, or just F
-\newcommand{\NN}{\mathbb N} % naturals
-\newcommand{\QQ}{\mathbb Q} % rationals
-\newcommand{\RR}{\mathbb R} % reals
-\newcommand{\ZZ}{\mathbb Z} % integers
-
-% Probability
-\newcommand{\EE}{\mathbb E} % expectation
-\newcommand{\PP}{\mathbb P} % probability
-\DeclareMathOperator{\Var}{Var} % variance
-\DeclareMathOperator{\Cov}{Cov} % covariance
-
-% this goes somewhere
-\DeclareMathOperator{\grad}{grad} % gradient
-
-% Inequalities
-\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
-\newcommand{\symsum}{\sum_{\mathrm{sym}}}
-\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
-\newcommand{\symprod}{\prod_{\mathrm{sym}}}
-
-% Algebra
-\newcommand{\charin}{\text{ char }}
-\DeclareMathOperator{\sign}{sign}
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\Inn}{Inn}
-\DeclareMathOperator{\Syl}{Syl}
-\DeclareMathOperator{\Gal}{Gal}
-\DeclareMathOperator{\GL}{GL} % general linear group
-\DeclareMathOperator{\SL}{SL} % special linear group
-
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\taking}[1]{\xrightarrow{#1}}
-
-\DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\ord}{ord}
-\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
-
-\newenvironment{subproof}[1][Proof]{%
-\begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}}%
-{\end{proof}}
-
-\newcommand{\liff}{\leftrightarrow}
-\newcommand{\lthen}{\rightarrow}
-\newcommand{\opname}{\operatorname}
-\newcommand{\surjto}{\twoheadrightarrow}
-\newcommand{\injto}{\hookrightarrow}
-\newcommand{\On}{\mathrm{On}} % ordinals
-\DeclareMathOperator{\img}{im} % Image
-\DeclareMathOperator{\Img}{Im} % Image
-\DeclareMathOperator{\coker}{coker} % Cokernel
-\DeclareMathOperator{\Coker}{Coker} % Cokernel
-\DeclareMathOperator{\Ker}{Ker} % Kernel
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\Spec}{Spec} % spectrum
-\DeclareMathOperator{\Tr}{Tr} % trace
-\DeclareMathOperator{\pr}{pr} % projection
-\DeclareMathOperator{\ext}{ext} % extension
-\DeclareMathOperator{\pred}{pred} % predecessor
-\DeclareMathOperator{\dom}{dom} % domain
-\DeclareMathOperator{\ran}{ran} % range
-\DeclareMathOperator{\Hom}{Hom} % homomorphism
-\DeclareMathOperator{\Mor}{Mor} % morphisms
-\DeclareMathOperator{\End}{End} % endomorphism
-
-% Things Lie
-\newcommand{\kb}{\mathfrak b}
-\newcommand{\kg}{\mathfrak g}
-\newcommand{\kh}{\mathfrak h}
-\newcommand{\kn}{\mathfrak n}
-\newcommand{\ku}{\mathfrak u}
-\newcommand{\kz}{\mathfrak z}
-\DeclareMathOperator{\Ext}{Ext} % Ext functor
-\DeclareMathOperator{\Tor}{Tor} % Tor functor
-\newcommand{\GF}{\opname{GF}}
-\newcommand{\gl}{\opname{\mathfrak{gl}}} % frak gl group
-%\newcommand{\sl}{\opname{\mathfrak{sl}}} % frak sl group chktex 6
-
-% More script letters etc.
-\newcommand{\SA}{\mathcal A}
-\newcommand{\SB}{\mathcal B}
-\newcommand{\SC}{\mathcal C}
-\newcommand{\SD}{\mathcal D}
-\newcommand{\SE}{\mathcal E}
-% \newcommand{\SL}{\mathcal L}
-\newcommand{\SM}{\mathcal M}
-\newcommand{\SN}{\mathcal N}
-\newcommand{\SO}{\mathcal O}
-\newcommand{\SP}{\mathcal P}
-\newcommand{\SQ}{\mathcal Q}
-\newcommand{\SR}{\mathcal R}
-% \newcommand{\SS}{\mathcal S}
-\newcommand{\ST}{\mathcal T}
-\newcommand{\SU}{\mathcal U}
-\newcommand{\SV}{\mathcal V}
-\newcommand{\SW}{\mathcal W}
-\newcommand{\SX}{\mathcal X}
-\newcommand{\SY}{\mathcal Y}
-\newcommand{\SZ}{\mathcal Z}
-
-\newcommand{\OO}{\mathcal O}
-
-\newcommand{\SCA}{\mathscr A}
-\newcommand{\SCB}{\mathscr B}
-\newcommand{\SCC}{\mathscr C}
-\newcommand{\SCD}{\mathscr D}
-\newcommand{\SCE}{\mathscr E}
-\newcommand{\SCF}{\mathscr F}
-\newcommand{\SCG}{\mathscr G}
-\newcommand{\SCH}{\mathscr H}
-
-% symm group - arky
-\newcommand{\KS}{\mathfrak S}
-
-% Mathfrak primes
-\newcommand{\km}{\mathfrak m}
-\newcommand{\kp}{\mathfrak p}
-\newcommand{\kq}{\mathfrak q}
+\usepackage[xcolor,leftbars]{changebar} % experimental red bar on the side
+\setlength{\changebarsep}{0.2in}
+%\usepackage{standalone}
+%\usepackage{import}
 
 % ----------------------------------------------------------------
-% Environments
+% Document Style Setup (first part is article, second is scrartcl)
 % ----------------------------------------------------------------
-\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
-\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}} % as in, "in paragraph enumerate; it'll output as like (i) ... (ii) ... all in one line
-\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup} % i'm going to leave this in here to figure out for later.
-
-\theoremstyle{definition}
-
-\declaretheorem[name=Theorem]{theorem}
-\declaretheorem[name=Lemma,sibling=theorem]{lemma}
-\declaretheorem[name=Proposition,sibling=theorem]{proposition}
-\declaretheorem[name=Corollary,sibling=theorem]{corollary}
-\declaretheorem[name=Remark,sibling=theorem]{remark}
-
-\declaretheorem[name=Theorem,numbered=no]{theorem*}
-\declaretheorem[name=Lemma,numbered=no]{lemma*}
-\declaretheorem[name=Proposition,numbered=no]{proposition*}
-\declaretheorem[name=Corollary,numbered=no]{corollary*}
-\declaretheorem[name=Remark,numbered=no]{remark*}
-
-\declaretheorem[name=Claim,sibling=theorem]{claim}
-\declaretheorem[name=Example,sibling=theorem]{example}
-\declaretheorem[name=Exercise,sibling=theorem]{exercise}
-\declaretheorem[name=Problem,sibling=theorem]{problem}
-
-\declaretheorem[name=Claim,numbered=no]{claim*}
-\declaretheorem[name=Example,numbered=no]{example*}
-\declaretheorem[name=Exercise,sibling=theorem]{exercise*}
-\declaretheorem[name=Problem,numbered=no]{problem*}
-
-% ----------------------------------------------------------------
-% KOMA Setup
-% ----------------------------------------------------------------
-\@ifundefined{KOMAClassName}{}{
-	\@ifundefined{chapter}{}{
-		\addtokomafont{partprefix}{\rmfamily}
-		\renewcommand*{\partformat}{\color{purple}
-			\scalebox{2.5}{\thepart}\enlargethispage{2em}}
-		\addtokomafont{chapterprefix}{\raggedleft}
-		\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
-		\renewcommand*{\chapterformat}{\mbox{%
-			\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
-			\scalebox{2.718}{\color{purple}\thechapter}\enskip}}
-	}
-	\renewcommand*{\sectionformat}%
-		{\color{purple}\S\thesection\enskip}
-	\renewcommand*{\subsectionformat}%
-		{\color{purple}\S\thesubsection\enskip}
-	\renewcommand*{\subsubsectionformat}%
-		{\color{purple}\S\thesubsubsection\enskip}
-	\KOMAoptions{numbers=noenddot}
-	%\usetocstyle{KOMAlike}
-}
-\@ifundefined{KOMAClassName}%
-	{} % do nothing outside KOMA class
-	{% If KOMA exists. . .
-	\addtokomafont{subtitle}{\Large}
-	\setkomafont{author}{\Large\scshape}
-	\setkomafont{date}{\Large\normalsize}
-	}
-\providecommand{\thetitle}{\@title}
-\providecommand{\theauthor}{\@author}
-\providecommand{\thedate}{\@date}
-
-\@ifundefined{KOMAClassName}
-{
+\@ifundefined{KOMAClassName}{ % if no koma (scrartcl)
 	\usepackage{fancyhdr}
 	\setlength{\headheight}{0.75in}
 	\setlength{\oddsidemargin}{0in}
@@ -278,16 +64,236 @@
 		\cfoot{\thepage}
 		\rfoot{}
 	\fi
-}
-{
+}{ % if koma is used, ...
+	\@ifundefined{chapter}{}{
+		\addtokomafont{partprefix}{\rmfamily}
+		\renewcommand*{\partformat}{\color{purple}
+			\scalebox{2.5}{\thepart}\enlargethispage{2em}}
+		\addtokomafont{chapterprefix}{\raggedleft}
+		\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
+		\renewcommand*{\chapterformat}{\mbox{%
+			\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
+			\scalebox{2.718}{\color{purple}\thechapter}\enskip}}
+	}
+	\renewcommand*{\sectionformat}%
+		{\color{purple}\S\thesection\enskip}
+	\renewcommand*{\subsectionformat}%
+		{\color{purple}\S\thesubsection\enskip}
+	\renewcommand*{\subsubsectionformat}%
+		{\color{purple}\S\thesubsubsection\enskip}
+	\KOMAoptions{numbers=noenddot}
+	%\usetocstyle{KOMAlike}
+
+	\addtokomafont{subtitle}{\Large}
+	\setkomafont{author}{\Large\scshape}
+	\setkomafont{date}{\Large\normalsize}
+
 	\usepackage[headsepline]{scrlayer-scrpage}
 	\renewcommand{\headfont}{}
 	\addtolength{\textheight}{3.14cm}
 	\setlength{\footskip}{0.5in}
 	\setlength{\headsep}{10pt}
-	\ihead{\footnotesize\textbf{\theauthor} (\thedate)}
 	\automark{section}
+	
+	\ihead{\footnotesize\textbf{\theauthor} (\thedate)}
 	\chead{}
 	\ohead{\footnotesize\textbf{\thetitle}}
 	\cfoot{\pagemark}
 }
+
+% ----------------------------------------------------------------
+% Macros & Document Setup
+% ----------------------------------------------------------------
+\title{} % empty title to avoid crashes
+\author{Arky!! :3c}
+\date{\today} % default
+\providecommand{\thetitle}{\@title}
+\providecommand{\theauthor}{\@author}
+\providecommand{\thedate}{\@date}
+
+% paragraph styling
+\newcommand{\hrulebar}{
+  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  \par\nointerlineskip \vspace{\baselineskip}
+}
+\newcommand{\confusion}[1]{
+  \cbcolor{crimson}
+  \begin{changebar}
+    #1
+  \end{changebar}
+}
+
+% general 
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator*{\lcm}{lcm}
+\DeclareMathOperator*{\argmin}{arg min}
+\DeclareMathOperator*{\argmax}{arg max}
+
+\newcommand\restr[2]{{ % restriction
+	\left.\kern-\nulldelimiterspace #1 \littletaller\right|_{#2}
+}}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}} % evaluating integral stuff
+
+% symbols
+\newcommand{\eps}{\varepsilon}
+\newcommand{\catname}{\mathsf}
+
+% fields, etc.
+\newcommand{\CC}{\mathbb C} % complex
+\newcommand{\FF}{\mathbb F} % field, or just F
+\newcommand{\HH}{\mathbb H} % half space? quaternion? what?
+\newcommand{\NN}{\mathbb N} % naturals
+\newcommand{\QQ}{\mathbb Q} % rationals
+\newcommand{\RR}{\mathbb R} % reals
+\newcommand{\ZZ}{\mathbb Z} % integers
+
+% probability
+\newcommand{\EE}{\mathbb E} % expectation
+\newcommand{\PP}{\mathbb P} % probability
+\DeclareMathOperator{\Var}{Var} % variance
+\DeclareMathOperator{\Cov}{Cov} % covariance
+
+% multivar calculus
+\DeclareMathOperator{\grad}{grad} % gradient
+\let\div\relax
+\DeclareMathOperator{\div}{div} % original is literally a division symbol
+\DeclareMathOperator{\curl}{curl}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\taking}[1]{\xrightarrow{#1}}
+
+% inequalities
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+
+% algebra
+\let\mod\relax
+\DeclareMathOperator{\mod}{mod} % yeah, fuck that space in front of the usual ams package's mod or something. go away.
+\newcommand{\charin}{\text{ char }}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\GL}{GL} % general linear group
+\DeclareMathOperator{\SL}{SL} % special linear group
+\newcommand{\inv}{^{-1}} % inverses
+
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+
+\newcommand{\liff}{\leftrightarrow}
+\newcommand{\lthen}{\rightarrow}
+\newcommand{\opname}{\operatorname}
+\newcommand{\surjto}{\twoheadrightarrow}
+\newcommand{\injto}{\hookrightarrow}
+\newcommand{\On}{\mathrm{On}} % ordinals
+\DeclareMathOperator{\img}{im} % Image
+\DeclareMathOperator{\Img}{Im} % Image
+\DeclareMathOperator{\coker}{coker} % Cokernel
+\DeclareMathOperator{\Coker}{Coker} % Cokernel
+\DeclareMathOperator{\Ker}{Ker} % Kernel
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Spec}{Spec} % spectrum
+\DeclareMathOperator{\Tr}{Tr} % trace
+\DeclareMathOperator{\pr}{pr} % projection, other than \pi
+\DeclareMathOperator{\ext}{ext} % extension
+\DeclareMathOperator{\pred}{pred} % predecessor
+\DeclareMathOperator{\dom}{dom} % domain
+\DeclareMathOperator{\ran}{ran} % range
+\DeclareMathOperator{\Hom}{Hom} % homomorphism
+\DeclareMathOperator{\Mor}{Mor} % morphisms
+\DeclareMathOperator{\End}{End} % endomorphism
+
+% lie and primes
+\newcommand{\kb}{\mathfrak b}
+\newcommand{\kg}{\mathfrak g}
+\newcommand{\kh}{\mathfrak h}
+\newcommand{\kn}{\mathfrak n}
+\newcommand{\ku}{\mathfrak u}
+\newcommand{\kz}{\mathfrak z}
+\newcommand{\km}{\mathfrak m}
+\newcommand{\kp}{\mathfrak p}
+\newcommand{\kq}{\mathfrak q}
+\DeclareMathOperator{\Ext}{Ext} % Ext functor
+\DeclareMathOperator{\Tor}{Tor} % Tor functor
+\newcommand{\GF}{\opname{GF}}
+\newcommand{\gl}{\opname{\mathfrak{gl}}} % frak gl group
+%\newcommand{\sl}{\opname{\mathfrak{sl}}} % frak sl group chktex 6
+
+% script letters
+\newcommand{\SA}{\mathcal A}
+\newcommand{\SB}{\mathcal B}
+\newcommand{\SC}{\mathcal C}
+\newcommand{\SD}{\mathcal D}
+\newcommand{\SE}{\mathcal E}
+% \newcommand{\SL}{\mathcal L} % what do i even use to replace this
+\newcommand{\SM}{\mathcal M}
+\newcommand{\SN}{\mathcal N}
+\newcommand{\SO}{\mathcal O}
+\newcommand{\SP}{\mathcal P}
+\newcommand{\SQ}{\mathcal Q}
+\newcommand{\SR}{\mathcal R}
+% \newcommand{\SS}{\mathcal S}
+\newcommand{\ST}{\mathcal T}
+
+\newcommand{\SCA}{\mathscr A}
+\newcommand{\SCB}{\mathscr B}
+\newcommand{\SCC}{\mathscr C}
+\newcommand{\SCD}{\mathscr D}
+\newcommand{\SCE}{\mathscr E}
+\newcommand{\SCF}{\mathscr F}
+\newcommand{\SCG}{\mathscr G}
+\newcommand{\SCH}{\mathscr H}
+
+% ----------------------------------------------------------------
+% Environments
+% ----------------------------------------------------------------
+\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{subproof}[1][Subproof]{ % i mean. do i want it to say proof or subproof? hell, it's not even indented
+\begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}} 
+{\end{proof}}
+\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}} % as in, "in paragraph enumerate; it'll output as like (i) ... (ii) ... all in one line
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup} % i'm going to leave this in here to figure out for later.
+
+\theoremstyle{definition}
+
+% use numberwithin for where you want the counter to start
+% sibling = count together
+\declaretheorem[name=Theorem,numberwithin=section]{theorem} 
+\declaretheorem[name=Lemma,sibling=theorem]{lemma}
+\declaretheorem[name=Definition,sibling=theorem]{definition}
+\declaretheorem[name=Proposition,sibling=theorem]{proposition}
+\declaretheorem[name=Corollary,sibling=theorem]{corollary}
+\declaretheorem[name=Remark,sibling=theorem]{remark}
+
+\declaretheorem[name=Theorem,numbered=no]{theorem*}
+\declaretheorem[name=Lemma,numbered=no]{lemma*}
+\declaretheorem[name=Definition,numbered=no]{definition*}
+\declaretheorem[name=Proposition,numbered=no]{proposition*}
+\declaretheorem[name=Corollary,numbered=no]{corollary*}
+\declaretheorem[name=Remark,numbered=no]{remark*}
+
+\declaretheorem[name=Claim,sibling=theorem]{claim}
+\declaretheorem[name=Example,sibling=theorem]{example}
+\declaretheorem[name=Exercise,sibling=theorem]{exercise}
+\declaretheorem[name=Problem,sibling=theorem]{problem}
+
+\declaretheorem[name=Claim,numbered=no]{claim*}
+\declaretheorem[name=Example,numbered=no]{example*}
+\declaretheorem[name=Exercise,numbered=no]{exercise*}
+\declaretheorem[name=Problem,numbered=no]{problem*}
