@@ -45,11 +45,12 @@ From here on, we simply write a subscript of $p$ on summations or products to in
     \noindent In this manner, saying $f = O(1)$ is equivalent to saying that $\abs{f}$ is bounded. Now, let us take the log of the entire following inequality,
     \begin{align*}
         \frac{1}{s-1} &< \zeta(s) < 1 + \frac{1}{s-1} = \frac{s}{s-1}, \\
-        \log \left(\frac{1}{s-1}\right) &< - \sum_p \log(1 - p^{-s}) < \log \left(\frac{s}{s-1}\right), \tag{$\ast$}
+        \log \left(\frac{1}{s-1}\right) &< - \sum_p \log(1 - p^{-s}) < \log \left(\frac{s}{s-1}\right), \tag{$\ast$} \\
+        0 &< - \left(\log(s-1) + \sum_p \log(1 - p^{-s})\right) < \log s
     \end{align*}
     where the Taylor expansion of $\abs{- \log(1 - p^{-s}) - p^{-s}}$ is less than $p^{-2s}$.
     \begin{exercise}
-        Check that $\abs{- \log(1 - y) - y} < y^2$ for $0 < y < 1$ for $y \in \RR$. This is left as homework.
+        Check that $\abs{- \log(1 - y) - y} < y^2$ for $0 < y < 1$ for $y \in \RR$. This is done by expanding $\log(1 + x)$ around $x = 0$.
     \end{exercise}
     \noindent Specifically, summing over all $p$ and applying the triangle inequality, the above tells us that
     \[ \abs{\sum_p \left(p^{-s} + \log(1 - p^{-s})\right)} < \sum_p p^{-2s} < \zeta(2). \]
