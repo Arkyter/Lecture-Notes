@@ -10,7 +10,7 @@ We proceed to ``feed $g_1, \dots, g_\alpha$'' in order; to feed a non-identity $
 \begin{claim}
     This process stops in $O(n^6)$ time; call the resulting table $T$.
 \end{claim}
-\noindent We obtain $n^6$ from observing that there is approximately $n$ operations per permutation, and $n$ per inverse permutation, meaning there are $n^2$ operations per piece of food, and $n^4$ total number of feeds, meaning we have $n^6$, which is much less than $n!$.
+\noindent We obtain $n^6$ from observing that there is approximately $n$ operations per permutation, and hence $n$ per inverse permutation; since computing $\sigma' = \sigma_{i,j}^{-1} \sigma$ potentially requires $n$ inverses, we note that each feeding operation takes at worst $n^2$ operations. For the $(i, j)$, $(k, l)$ pairs, the table is of $O(n^2)$ size, meaning there are a total of $O(n^4)$ possible foods. Combining these figures we have $O(n^6)$, which is much less than $O(n!)$.
 \begin{claim}
     Every $\sigma_{i, j} \in T$ is indeed in $G$.
 \end{claim}
