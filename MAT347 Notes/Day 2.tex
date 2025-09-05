@@ -1,0 +1,16 @@
+\section{Day 2: More Non-commutative Gaussian Elimination (Sep. 5, 2025)}
+The syllabus is not yet public, but you should check this \href{https://drorbn.net/25-347}{link} next Wednesday for more information. Our TAs are Jacob and Matt. The course code for this class is ``MAT347'', and it carries the iconic `7', meaning this class will be ``hard as shit''.
+\\[8pt]
+The permutation product is the usual composition $\sigma \cdot \tau = \sigma \circ \tau$.\footnote{so we're going to be changing the notation conventions every lecture from now on.} %We return to \href{https://osu.ppy.sh/beatmapsets/837869#osu/1754266}{Nanahoshi Kangengakudan}.\footnote{boy am i feeling sarcastic as shit today}
+Today's goal is to understand $G = \left<g_1, \dots, g_\alpha\right> \in S_n$, where we wish to answer the questions: \begin{parlist} \item what size is $\abs{G}$? \item what does it mean to say $\sigma \in G$? \item if $\sigma \in G$, how do we write it in terms of the $g_i$'s? \item what does a random $\sigma \in G$ look like? \end{parlist}
+\\[8pt]
+\noindent Let us construct a lower-triangular table of size $n \times n$, where each box $(i, j)$ describes an operation on how to move the $i$th sticker to the $j$th sticker. In particular, we have that if $i = j$, the operation is simply the identity. We start with an empty such table, and we will proceed to fill it in with permutations. For any $\sigma \in S_n$, we have that $\sigma$ can be represented as a permutation of the form $[1, 2, \dots, i-1, j, \ast, \dots, \ast]$, i.e., $\sigma$ fixes the first $i-1$ entries, and the $i$th entry contains $j$. We label such a permutation as $\sigma_{i, j} \in S_n$, and we call $i$ the \textit{pivot}.
+\\[8pt]
+We proceed to ``feed $g_1, \dots, g_\alpha$'' in order; to feed a non-identity $\sigma$, let the pivotal position be $i$ and let $j$ be given by $\sigma(i)$. If the box $(i, j)$ is empty, let us place $\sigma$ there; otherwise, if it already contains some $\sigma_{i, j}$, let us place $\sigma' := \sigma_{i, j}^{-1} \sigma$ in there instead. Notice that this makes it so that $\sigma'$ is indeed the identity for the first $i$ entries, instead of the first $i-1$ entries, meaning we have fixed an additional sticker. After this step, for each pair of occupied boxes $(i, j)$ and $(k, l)$, let us feed $\sigma_{i, j} \sigma_{k, l}$ and perform the steps above again, until the table no longer changes for any such pair of $(i, j), (k, l)$.
+\begin{claim}
+    This process stops in $O(n^6)$ time; call the resulting table $T$.
+\end{claim}
+\noindent We obtain $n^6$ from observing that there is approximately $n$ operations per permutation, and $n$ per inverse permutation, meaning there are $n^2$ operations per piece of food, and $n^4$ total number of feeds, meaning we have $n^6$, which is much less than $n!$.
+\begin{claim}
+    Every $\sigma_{i, j} \in T$ is indeed in $G$.
+\end{claim}
