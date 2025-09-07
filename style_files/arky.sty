@@ -12,7 +12,8 @@
 \usepackage{amsthm, thmtools} % theorem environments
 \usepackage{paralist} % for the parlist command
 
-\PassOptionsToPackage{usenames,svgnames,dvipsnames,table}{xcolor} % apparently this is to stop like, beamer from acting up?
+\PassOptionsToPackage{svgnames,dvipsnames,table}{xcolor} % apparently this is to stop like, beamer from acting up?
+														 % usenames is also obsolete
 \usepackage{xcolor}
 \definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
 \definecolor{amber}{rgb}{1.0, 0.49, 0.0}
@@ -30,7 +31,7 @@
 \usepackage{nicematrix} % for tabulars and whatever and matrices. cuz hell idk
 
 \usepackage{mathtools} % https://texdoc.org/serve/mathtools/0 tl;dr extra things
-\usepackage{microtype} % reduced underfull overfull hbox warnings
+\usepackage[nopatch=footnote]{microtype} % reduced underfull overfull hbox warnings; "unable to apply patch 'footnote' -> nopatch it.
 \usepackage{mathrsfs} % mathscr
 \usepackage{textcomp} % in-text symbols
 
@@ -40,6 +41,8 @@
 
 \usepackage[xcolor,leftbars]{changebar} % experimental red bar on the side
 \setlength{\changebarsep}{0.2in}
+
+% generally don't need these, document-by-document inclusion basis.
 %\usepackage{standalone}
 %\usepackage{import}
 
@@ -70,6 +73,8 @@
 		\rfoot{}
 	\fi
 }{ % if koma is used, ...
+	
+	
 	\@ifundefined{chapter}{}{
 		\addtokomafont{partprefix}{\rmfamily}
 		\renewcommand*{\partformat}{\color{purple}
@@ -98,22 +103,20 @@
 	\addtolength{\textheight}{3.14cm}
 	\setlength{\footskip}{0.5in}
 	\setlength{\headsep}{10pt}
+	%\setlength{\parskip}{8pt plus 1pt minus 1pt}
 	\automark{section}
 	
 	\ihead{\footnotesize\textbf{\theauthor} (\thedate)}
 	\chead{}
 	\ohead{\footnotesize\textbf{\thetitle}}
-	\cfoot{\pagemark}
-
-	
-	%\setlength{\parskip}{8pt plus 1pt minus 1pt}
+	\cfoot{\pagemark}	
 }
 
 % ----------------------------------------------------------------
 % Macros & Document Setup
 % ----------------------------------------------------------------
 \title{} % empty title to avoid crashes
-\author{Arky!! :3c}
+\author{Arky!! :3c} % author can and should be changed if you're working in a different environment and ur not arky
 \date{\today} % default
 \providecommand{\thetitle}{\@title}
 \providecommand{\theauthor}{\@author}
@@ -131,21 +134,32 @@
   \end{changebar}
 }
 
-% general 
+% general - action on inputs
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
-\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\taking}[1]{\xrightarrow{#1}}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+\newcommand{\id}{\mathrm{id}}
 \newcommand{\ol}{\overline}
 \newcommand{\ul}{\underline}
 \newcommand{\wt}{\widetilde}
 \newcommand{\wh}{\widehat}
-
 \DeclareMathOperator{\cis}{cis}
 \DeclareMathOperator*{\lcm}{lcm}
 \DeclareMathOperator*{\argmin}{arg min}
 \DeclareMathOperator*{\argmax}{arg max}
 
+% general - inaction
+\newcommand{\liff}{\leftrightarrow}
+\newcommand{\lthen}{\rightarrow}
+\newcommand{\opname}{\operatorname}
+\newcommand{\surjto}{\twoheadrightarrow}
+\newcommand{\injto}{\hookrightarrow}
+
+% general - miscellaneous
 \newcommand\restr[2]{{ % restriction
 	\left.\kern-\nulldelimiterspace #1 \littletaller\right|_{#2}
 }}
@@ -176,11 +190,6 @@
 \DeclareMathOperator{\div}{div} % original is literally a division symbol
 \DeclareMathOperator{\curl}{curl}
 
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\taking}[1]{\xrightarrow{#1}}
-
 % inequalities
 \newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
 \newcommand{\symsum}{\sum_{\mathrm{sym}}}
@@ -190,6 +199,7 @@
 % algebra
 \let\mod\relax
 \DeclareMathOperator{\mod}{mod} % yeah, fuck that space in front of the usual ams package's mod or something. go away.
+\DeclareMathOperator{\ord}{ord}
 \newcommand{\charin}{\text{ char }}
 \DeclareMathOperator{\spn}{span} % because span is a command already
 \DeclareMathOperator{\sign}{sign}
@@ -201,16 +211,10 @@
 \DeclareMathOperator{\SL}{SL} % special linear group
 \newcommand{\inv}{^{-1}} % inverses
 
+% topology
 \DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\ord}{ord}
-\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
 
-\newcommand{\liff}{\leftrightarrow}
-\newcommand{\lthen}{\rightarrow}
-\newcommand{\opname}{\operatorname}
-\newcommand{\surjto}{\twoheadrightarrow}
-\newcommand{\injto}{\hookrightarrow}
-\newcommand{\On}{\mathrm{On}} % ordinals
+% operators
 \DeclareMathOperator{\img}{im} % Image
 \DeclareMathOperator{\Img}{Im} % Image
 \DeclareMathOperator{\coker}{coker} % Cokernel
@@ -228,7 +232,7 @@
 \DeclareMathOperator{\Mor}{Mor} % morphisms
 \DeclareMathOperator{\End}{End} % endomorphism
 
-% lie and primes
+% lie and primes - frakturs
 \newcommand{\kb}{\mathfrak b}
 \newcommand{\kg}{\mathfrak g}
 \newcommand{\kh}{\mathfrak h}
@@ -244,10 +248,10 @@
 \newcommand{\gl}{\opname{\mathfrak{gl}}} % frak gl group
 \newcommand{\sl}{\opname{\mathfrak{sl}}} % frak sl group
 
-% script letters
+% calligraphy letters
 \newcommand{\SA}{\mathcal A}
 \newcommand{\SB}{\mathcal B}
-\newcommand{\SC}{\mathcal C}
+\newcommand{\SC}{\mathcal C} % C^r spaces
 \newcommand{\SD}{\mathcal D}
 \newcommand{\SE}{\mathcal E}
 % \newcommand{\SL}{\mathcal L} % what do i even use to replace this
@@ -260,6 +264,7 @@
 % \newcommand{\SS}{\mathcal S}
 \newcommand{\ST}{\mathcal T}
 
+% script letters
 \newcommand{\SCA}{\mathscr A}
 \newcommand{\SCB}{\mathscr B}
 \newcommand{\SCC}{\mathscr C}
@@ -268,6 +273,9 @@
 \newcommand{\SCF}{\mathscr F}
 \newcommand{\SCG}{\mathscr G}
 \newcommand{\SCH}{\mathscr H}
+
+% non-math
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
 
 % ----------------------------------------------------------------
 % Environments
@@ -302,8 +310,10 @@
 \declaretheorem[name=Example,sibling=theorem]{example}
 \declaretheorem[name=Exercise,sibling=theorem]{exercise}
 \declaretheorem[name=Problem,sibling=theorem]{problem}
+\declaretheorem[name=Problem]{hwproblem}
 
 \declaretheorem[name=Claim,numbered=no]{claim*}
 \declaretheorem[name=Example,numbered=no]{example*}
 \declaretheorem[name=Exercise,numbered=no]{exercise*}
 \declaretheorem[name=Problem,numbered=no]{problem*}
+\declaretheorem[name=Problem,numbered=no]{hwproblem*}
