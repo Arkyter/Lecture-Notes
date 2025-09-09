@@ -1,1 +1,47 @@
-\section{Day 3:  (Sep. 9, 2025)}
+\section{Day 3: Characters (Sep. 9, 2025)}
+Recall that given $m \in \ZZ_{\geq n}$, we have $\chi : (\ZZ / m\ZZ)^\ast \to \CC^\ast$ and $\tilde{\chi} : \ZZ \to \CC$ satisfies
+\[ \tilde{\chi}(n) = \begin{cases} 0 & n \text{ is not prime to } m, \\ \chi(n, \mod m) & \text{if } \gcd(n, m) = 1. \end{cases} \]
+Also, we ask that $\abs{\chi(n)} \leq 1$ for all $n$ (so the magnetude does not spiral off to infinity). Recall that the $L$-function is defined as
+\[ L(\chi, s) = \sum_{n=1}^\infty \frac{\chi(n)}{n^s}, \]
+which converges absolutely for $\Re s > 1$. Then we have the following theorem,
+\begin{theorem}
+    $L(\chi, s)$ is holomorphic in $s$ for $\Re s \geq 1$, and it extends meromorphically to $\Re s > 0$. If $\chi \neq 1$, then $L(\chi, s)$ is holomorphic for $\Re s > 0$ and the series $\sum \frac{\chi(n)}{n^s}$ is convergent for $\Re s > 0$. Moreover, if $\chi = 1$, then $L(\chi, s)$ has a simple pole at $s = 1$ and has no other poles.
+\end{theorem}
+\noindent In fact, $L(\chi, s)$ is meromorphic for all $s \in \CC$. 
+\begin{theorem}
+    If $\chi \neq 1$, then $L(\chi, 1) \neq 0$.
+\end{theorem}
+\noindent We plan to prove theorem 3.1, then, assuming theorem 3.2, we will deduce the Dirichlet theorem about primes in an arithmetic progression. We will follow Serre's book \href{https://www.math.purdue.edu/~jlipman/MA598/Serre-Course%20in%20Arithmetic.pdf}{here} (section 2.2, Dirichlet series).
+\\[8pt]
+Let $x_n$ be a seqeucne of positive real numbers tending to infinity, i.e., $\lim_{n \to \infty} \lambda_n = \infty$. A \textit{Dirichlet series} is a series, where, given $\{a_n\}$ a sequence of complex numbers, we write
+\[ \sum_{n=1}^\infty a_n e^{-\lambda_n z}, \qquad (a_n \in \CC, z \in \CC). \]
+Two such examples of Dirichlet series are given by setting $\lambda_n = \log n$ (the ordinary Dirichlet series), where such a series is written $\sum \frac{a_n}{n^s}$, and $\lambda_n = n$ where by setting $t = e^{-z}$, the series turns into a power series in $t$ as follows,
+\[ \sum_{n=1}^\infty a_n e^{-nz} = \sum_{n=0}^\infty a_n t^a. \]
+\\[-28pt]
+\begin{theorem}
+    Assume that $f(z) = \sum_{n=0}^\infty a_n e^{-\lambda_n z}$ is convergent for $z = z_0$. Then it is convergent uniformly on every set of the form $\Re(z - z_0) \geq 0$, where $\arg(z - z_0) \leq \alpha$ with $\alpha < \frac{\pi}{2}$.
+\end{theorem}
+\begin{exercise}
+    Analyze what this means for $\lambda_n = n$ and realize that you know this statement.
+\end{exercise}
+\begin{lemma}
+    Suppose $\{f_n(z)\}$ is a sequence of holomorphic functions on some domain $U \subset \CC$. Assume there exists $f(z) = \lim_{n \to \infty} f_n(z)$ for all $z \in U$ such that the convergence is uniform on every compact subset of $U$. Then $f(z)$ is holomorphic, and moreover, $f'(z) =  \lim_{n \to \infty} f_n'(z)$.
+\end{lemma}
+\noindent In particular, if we let $U = \{ z \mid \Re(z) > \Re(z_0) \}$, then every compact set can be covered by finitely many sectors, meaning there exists a uniform convergence no every compact set.
+\begin{corollary}
+    Let $L(\chi, s)$ be holomorphic for $\Re s > 1$.
+\end{corollary}
+\noindent The following lemma is necessary to study series with summands of the form $a_n b_n$.
+\begin{lemma}[Abel's lemma]
+    Let $A_{m,p} = \sum_{n=m}^p a_n$ and let $B_{m, m'} = \sum_{n=m}^{m'} a_n b_n$. Then we have
+    \[ S_{m, m'} = \sum_{n=m}^{m' - 1} A_{m,n}(b_n - b_{n+1}) + A_{m,m'} b_m'. \]
+\end{lemma}
+\begin{lemma}
+    Let $\alpha, \beta \in \RR$, and let $0 < \alpha < \beta$. Then $z = x + iy$ with $x > 0$; then
+    \[ \abs{e^{-\alpha z} - e^{-\beta z}} \leq \abs{\frac{z}{x}} (e^{-\alpha x} - e^{-\beta x}). \]
+\end{lemma}
+\noindent For $z = z_0$, $f(z_0)$ converges and $\sum a_n$ convegres, meaning that for all $\eps$, there exists $N$ such that for all $m, m' \geq N$, we have that $\abs{A_{m, m'}} < \eps$. Applying the lemma with $b_n = e^{-\lambda_n z}$, we have that
+\[ S_{m, m'} = \sum_{n=m}^{m'-1} A_{m,n} (e^{-\lambda_n z} - e^{-\lambda_{n+1} z}) + A_{m,m'} e^{-\lambda_{m'} z}, \]
+and putting $z = x + iy$ and applying lemma 3.8, we have that 
+\[ \abs{S_{m, m'}} \leq \eps \left(1 + \frac{\abs{z}}{x} \sum_{n=m}^{m'-1} \left(e^{-\lambda_n x} - e^{-\lambda_{n+1} x}\right)\right) \leq \eps(1 + k(e^{-\lambda_m x} - e^{\lambda_{m'} x})) \leq e(1 + k), \]
+and so uniform convergence is clear. Note that I am not entirely confident about this argument, so re-check the proof of proposition $6$ in Serre's book if confused.
