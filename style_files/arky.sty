@@ -4,6 +4,8 @@
 % - table of contents rework
 % - probably clean up symbols and whatever. add in ones i need
 % - tabular system?
+% - reduce space in maketitle macro
+% - reduce margins, i think, i need more space here :(
 
 % ----------------------------------------------------------------
 % Packages
@@ -12,8 +14,7 @@
 \usepackage{amsthm, thmtools} % theorem environments
 \usepackage{paralist} % for the parlist command
 
-\PassOptionsToPackage{svgnames,dvipsnames,table}{xcolor} % apparently this is to stop like, beamer from acting up?
-														 % usenames is also obsolete
+\PassOptionsToPackage{svgnames,dvipsnames,table}{xcolor} % apparently this is to stop like, beamer from acting up? usenames is also obsolete
 \usepackage{xcolor}
 \definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
 \definecolor{amber}{rgb}{1.0, 0.49, 0.0}
@@ -73,8 +74,6 @@
 		\rfoot{}
 	\fi
 }{ % if koma is used, ...
-	
-	
 	\@ifundefined{chapter}{}{
 		\addtokomafont{partprefix}{\rmfamily}
 		\renewcommand*{\partformat}{\color{purple}
@@ -189,6 +188,7 @@
 \let\div\relax
 \DeclareMathOperator{\div}{div} % original is literally a division symbol
 \DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Vol}{Vol} % as in volume
 
 % inequalities
 \newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
