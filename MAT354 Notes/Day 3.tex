@@ -1,0 +1,95 @@
+\section{Day 3: Holomorphic Functions and Power Series (Sep. 9, 2025)}
+Let $f : \Omega \to \CC$ (where $\Omega$ is an open set in $\CC$). We say that $f$ is holomorphic at $z_0$ if
+\[ \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}, \quad h \in \CC \setminus \{0\} \]
+exists. Recall that $\CC$ can be identified with $\RR^2$ by considering any $z = x + iy \in \CC$ as a tuple $(x, y) \in \RR^2$. In this way, given a function $f : \Omega \to \CC$, we can define $F : \Omega \to \RR^2$, where $F : (x, y) \mapsto (u(x, y), v(x, y))$, given by $u = \Re f$ and $v = \Im f$.
+\begin{proposition}
+    If $f = u + iv$ is holomorphic at $z_0 = x_0 + iy_0$, then we have that all four partial derivatives
+    \[ \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial v}{\partial x}, \frac{\partial v}{\partial y} \]
+    exist and they satisfy the Cauchy-Riemann equations
+    \[ \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} = \Re f(z_0), \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} = \Im f(z_0). \]
+    We also have that $F$ is differentiable at $P_0 = (x_0, y_0)$.
+\end{proposition}
+\begin{definition}
+    We say that $F$ is differentiable at $P_0$ if there exists a linear transforamtion (the derivative) $J = J_F(x_0, y_0) : \RR^2 \to \RR^2$ such that
+    \[ \lim_{H \to 0} \frac{\norm{F(P_0 + H) - F(P_0) - J(H)}}{\norm{H}} = 0. \]
+\end{definition}
+\noindent Before we discuss the complex definition, let us recall another property of real differentiability; if $F$ is differentiable at $P_0 = (x_0, y_0)$, then all four partial derivatives exist, and
+\[ J = \begin{pmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{pmatrix} \]
+is called the Jacobian matrix of $F$ at $(x_0, y_0)$. To see this, consider the association $P_0 = (x_0, y_0)$ with $z_0 = x_0 + iy_0$, and $H = (h_1, h_2)$ with $h = h_1 + ih_2$; then we have that
+\[ \begin{pmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{pmatrix} \begin{pmatrix} h_1 \\ h_2 \end{pmatrix} = \begin{pmatrix} \frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y} h_2 \\ \frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2 \end{pmatrix}. \]
+This is a vector in $\RR^2$, which we may associate with the complex number
+\[ \left(\frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y} h_2\right) + i \left(\frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2\right) = \left(\frac{\partial u}{\partial x} + i \frac{\partial y}{\partial x}\right) h_1 + \left(\frac{\partial u}{\partial y} + i \frac{\partial v}{\partial y}\right) h_2, \]
+which, by the Cauchy-Riemann equations, we obtain
+\[ \left(\frac{\partial u}{\partial x} - i \frac{\partial u}{\partial y}\right) h_1 + i \left(\frac{\partial u}{\partial y} + \frac{\partial u}{\partial x}\right) h_2 = \left(\frac{\partial u}{\partial x} - i \frac{\partial u}{\partial y}\right)(h_1 + ih_2), \]
+which is precisely equal to $f(z_0 + h) - f(z_0) - f(z_0) h$. In particular,
+\[ \lim_{h \to 0} \abs{\frac{f(z_0 + h) - f(z_0) - f(z_0)h}{h}} = \lim_{h \to 0} \abs{\frac{f(z_0 + h) - f(z_0)}{h} - f(z_0)} = 0. \]
+Similarly, per the definition of the Jacobian, we must have
+\[ \lim_{H \to 0} \frac{\norm{F(P_0 + H) - F(P_0) - J(H)}}{\norm{H}} = 0, \]
+and this concludes the proof of proposition 3.1. \qed
+\newpage
+\begin{theorem}
+    Suppose $f = u + iv$ is a complex-valued function defined on an open set $\Omega \subset \CC$. If $u, v : \Omega \to \RR$, are continuously differentiable and satisfy the Cauchy-Riemann equations, then $f$ is holomorphic on $\Omega$ and $f'(z) = \frac{1}{2} \left(\frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y}\right)$.
+\end{theorem}
+\begin{proof}
+    Since $u$ is continuously differentiable at the point $(x, y) \in \Omega$, there exists a linear transformation $J_u : \RR^2 \to \RR$ where
+    \[ \frac{\abs{u(x+h_1, y+h_2) - u(x, y) - J_0(h_1, h_2)}}{\norm{(h_1, h_2)}}  \to 0, \quad (h_1, h_2) \to 0. \]
+    In particular, $J_u = (\frac{\partial u}{\partial x}, \frac{\partial u}{\partial y})$. The above fraction is equivalent to
+    \[ u(x + h_1, y + h_2) - u(x, y) = \frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y} h_2 + \norm{h} \psi_1(h), \]
+    where $\psi_1 : U \to \RR$, where $U$ is some open neighborhood of $0 \in \RR^2$, with $\psi_1(h) \to 0$ as $h \to 0$. Similarly, we have that
+    \[ v(x + h_1, y + h_2) - v(x, y) = \frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2 + \norm{h} \psi_2(h) \]
+    with $\psi_2(h) \to 0$ as $h \to 0$. We want to show that $f$ is holomorphic at $z = x + iy$. We have that
+    \begin{align*}
+        f(z + h) - f(z) &= (u(x + h_1, y + h_2) - u(x, y)) + i(v(x + h_1, y + h_2) - v(x, y)) \\
+        &= \left(\frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial h_y} h_2\right) + \norm{h} \psi_1(h) + i\left(\frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2\right) + i \norm{h} \psi_2(h) \\
+        &= \left(\frac{\partial u}{\partial x} - i \frac{\partial u}{\partial y}\right) (h_1 + ih_2) + \norm{h} \psi_1(h) + i \norm{h} \psi_2(h)
+    \end{align*}
+    from Cauchy-Riemann. Thus, we have that\footnote{i swear wenyu has an invisible key wired into her back like nano from nichijou and it's permanently cranked on}
+    \begin{align*}
+        \lim_{h \to 0} \frac{f(z+h) - f(z)}{h} &= \lim_{h \to 0} \frac{\partial u}{\partial x} + i \frac{\partial u}{\partial y} + \frac{\norm{h}}{h} (\psi_1(h) + i \psi_2(h)) \\
+        &= \frac{\partial u}{\partial x} + i \frac{\partial u}{\partial y} = \frac{1}{2} \left(\frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y}\right). \qedhere
+    \end{align*}
+\end{proof}
+\noindent We now discuss complex power series.
+\begin{definition}
+    A complex power series is an infinite sum of the form
+    \[ \sum_{n=0}^\infty a_n z^n, \]
+    with $a_n \in \CC$ and $z$ a complex variable. We say that $\sum_{n=0}^\infty a_n z^n$ converges at $z_0 \in \CC$ if there exists some $w \in \CC$ such that, for all $\eps > 0$, there exists $N_0 \in \NN$ such that $N \geq N_0$ satisfies
+    \[ \abs{\sum_{n=0}^N a_0 z^n - w} < \eps. \]
+    The series converges \textit{absolutely} at $z_0$ if there exists $w \in \RR$ such that
+    \[ \abs{\sum_{n=0}^N \abs{a_n} \abs{z_0}^n - w} < \eps. \]
+\end{definition}
+\newpage
+\begin{proposition}
+    If $\sum_{n=0}^\infty a_nz^n$ converges absolutely at $z_0 \in \CC$, then $\sum_{n=0}^\infty a_nz^n$ converges at $z_1 \in \CC$ with $\abs{z_1} \leq \abs{z_0}$.
+\end{proposition}
+\begin{proof}
+    For all $z_1 \in \CC$ with $\abs{z_1} \leq \abs{z_0}$, consider the sequence of partial sums $\{S_m(z_1)\}_{m \in \NN}$ given by
+    \[ S_m(z_1) = \sum_{n=0}^m a_n z_1^n. \]
+    We want to show that such a sequence converges. Since $\CC$ is complete, it suffices to show that said sequence is Cauchy. For all $m < k \in \NN$, we have that
+    \[ \abs{S_k(z_1) - S_m(z_1)} = \abs{\sum_{n=m+1}^k a_n z_1^n} \leq \sum_{n=m+1}^k \abs{a_n} \abs{z_1}^n \leq \sum_{n=m+1}^k \abs{a_n} \abs{z_0}^k. \]
+\end{proof}
+\noindent We now provide a few examples.
+\begin{enumerate}[(i)]
+    \item The complex exponential function for all $z \in \CC$, given by
+    \[ e^z := \sum_{n=0}^\infty = \frac{z^n}{n!}. \]
+    For all $z \in \CC$, this sum converges because it converges absolutely (consider $e^{\abs{z}}$).
+    \item The geometric series $\sum_{n=0}^\infty z^n$, where $\abs{z} < 1$, converges; otherwise, is $\abs{z} \geq 1$, it diverges. In particular, if $\sum_{n=0}^\infty z^n$ converges, then $\abs{z^n} \to 0$ as $n \to \infty$.
+\end{enumerate}
+\begin{theorem}[Shakarchi, Thm. 2.5]
+    Given a power series $\sum_{n=0}^\infty a_n z^n$, there exists $R \in [0, \infty)$ such that \begin{parlist}
+        \item if $\abs{z} < R$, the series converges, and
+        \item if $\abs{z} > R$, the series diverges.
+    \end{parlist} We call $R$ the \textit{radius of convergence} of $\sum_{n=0}^\infty a_n z^n$, and $\{z \in \CC \mid \abs{z} < R\}$ the disc\footnote{disque. ok i'll stop} of convergence. Moreover, $R$ is given by Hadamard's formula,
+    \[ \frac{1}{R} = \limsup_{n \to \infty} \abs{a_n}^{1/n} =: L, \]
+    where we use the convention that $\frac{1}{0} = \infty$ and $\frac{1}{\infty} = 0$.
+\end{theorem}
+\begin{proof}
+    For all $z \in \CC$ with $\abs{z} < r < R$, there exists some $\eps > 0$ such that
+    \[ (L + \eps)\abs{z} = r < 1. \]
+    By definition of $L$, we have $\abs{a_n}^{1/n} \leq L + \eps$ for all large $n$, meaning that
+    \[ \abs{a_n} \abs{z}^n = \left(\abs{a_n}^{1/n} \abs{z}\right)^n \leq \left((L + \eps) \abs{z}\right)^n = r^n, \quad r \in (0, 1), \]
+    whereby comparison with the geometric series $\sum r^n$, we see that $\sum \abs{a_n} \abs{z}^n$ converges. Similarly, if $\abs{z} > R$, we have that
+    \[ \left(\frac{1}{r} - \eps\right) \abs{z} > 1, \]
+    where, using the definitoin of $R$, there exists an infinite subsequence $a_{n_k}$ such that $\abs{a_{n_k}}^{1/n_k} \geq \frac{1}{R} - \eps$. We have that
+    \[ \abs{a_{n_k} z^{n_k}} - \left(\abs{a_{n_k}}^{1/n_k} \abs{z}\right)^{n_k} \geq \left[ \left(\frac{1}{R} - \eps\right) \abs{z}\right]^{n_k} > 1. \qedhere \]
+\end{proof}
