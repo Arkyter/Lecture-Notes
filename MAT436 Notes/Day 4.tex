@@ -2,3 +2,52 @@
 Actually nevermind even though he has a microphone he walks so far away from it every single time that his voice is magnified like only twenty percent of the time...
 \\[8pt]
 Something something, discussion that all bounded operators are adjoinable?
+\hrulebar
+\noindent Tutorial notes! Josh won't email you feedback about the homework, but you can always ask and know what your grade is for the class so far. Tutorial class participation is like, recorded on a piece of paper so they know who comes. There aren't really any hard deadlines for the class. Homework is graded largely on how much effort you put into it, not one million percent correctness (quite literally, ``you tried''... he won't check details for the homework. He will know if you bullshit it though).
+\\[8pt]
+There will be an email saying the final date to submit all the homework (like at the end of the class in December). You should not worry about the homework grade as long as you're submitting your homework.
+\\[8pt]
+There are two essays. George will have ``rough deadlines'' for these, and there will be like a list of topics sent out for them. Examples are very nice in essays, because they showed you thought about the concept. If it's just an overview, it's not really... that good of an idea.
+\\[8pt]
+Get George to learn who you are and your name by the end of your class.
+\\[8pt]
+George will talk about two major things: spectrum and index. This is quite literally the entire syllabus.
+\begin{definition}
+    When it is defined for the operator $P$, we have that $\ind(P) = \dim \ker P - \dim \coker P \in \ZZ$. $\ind P$ is said to be the \textit{index} of $P$.
+\end{definition}
+\noindent What sucks is, per the rank-nullity theorem, the index of $P : V \to V$ is always zero if $V$ is finite dimensional; this is the \textit{index theorem} for finite-dimensional vector spaces. In a way, this means we only really care about the index when we're talking about infinite dimensional vector spaces $V$, i.e., if $\dim V = \infty$, then it can happen that $\ind(P) \neq 0$.
+\\[8pt]
+As an example, consider the space $V = \ell^2(\NN)$, and consider $P$ to be the operator,
+\[ P : (x_0, x_1, z_2, \dots) \mapsto (x_1, x_2, x_3, \dots); \]
+clearly, we have that $\ind P = 1 - 0 = 1$. In particular, this operator $P$ is commonly written $S^\ast$, which is the adjoint of the unilateral shift operator,
+\[ S : (x_0, x_1, x_2, \dots) \mapsto (0, x_0, x_1, \dots), \]
+where $\ind S = -1$.
+\begin{exercise}
+    Show that, if $P$ is an operator, then $\dim \coker P = \dim \ker P^\ast$.
+\end{exercise}
+\noindent We now move on; let $P$ be a bounded operator on a Hilbert space. We say that $P$ is nilpotent if the spectrum of $P$ is $\{0\}$, unitary if $P^\ast P = P P^\ast = \id$, isometry if $P^\ast P = \id$ (co-isometry if $P P^\ast = \id$), Hermitian (self-adjoint) if $P = P^\ast$, normal if $P P^\ast = P^\ast P$, and finally, a projection if $PP = P = P^\ast$.
+\begin{exercise}
+    Unitary operators are isometries, and vice versa, in finite-dimensional vector spaces.
+\end{exercise}
+\noindent Hermitian and normal operators are particularly relevant to spectral theory. As an example, the operators $S, S^\ast$ from earlier satisfy $S^\ast S = \id$, and $S S^\ast : (x_0, x_1, \dots) \mapsto (0, x_1, \dots)$, i.e., unilateral shift is an isometry.
+\begin{lemma}
+    The parallelogram law states that operators that preserve the norm also preserve inner products, and vice versa.
+\end{lemma}
+\begin{lemma}[Wold Decomposition]
+    \href{https://en.wikipedia.org/wiki/Wold%27s_decomposition}{here}, i don't even know what to be saying.
+\end{lemma}
+\noindent If $\ind P$ exists, at least one of the dimensions of the kernel or the cokernel is finite. Such an operator is called \textit{Fredholm} (relevant to Calkin algebra).
+\begin{theorem}
+    Let $F_t : [0, 1] \to \mathrm{Fred}(H)$ be a path in the subset of Fredholm operators in the space of bounded operators on $H$, $B(H)$, we have that $\ind(F_0) = \ind(F_1)$.
+\end{theorem}
+\noindent This means the index is a topological invariant (???), but the dimension of the kernel and the cokernel themselves \textit{aren't} topological invariants; it's just that the amount that they change by is the same. The map of fredholm operators $\Fred(H) \taking{\ind} \ZZ$ forms a stratification of
+\[ \bigsqcup_{n \in \ZZ} \ind^{-1}(n). \]
+Let $(H, \left<\cdot,\cdot\right>)$ be a vector space over $(\CC, \tau)$ (the real structure on $\CC$), where $\tau z \mapsto \bar{z}$. The ``real structure'' is $\Fix(\tau) = \RR$; in particular, $\left<a, b\right> = \ol{\left<b, a\right>} = \tau\left<b, a\right>$, and we have
+\[ \left<Pv, w\right> = \ol{\left<w, Pv\right>} = \tau \left<w, Pv\right>. \]
+$\tau$ induces a real structured on $B(H)$, i.e., taking $P \mapsto P^\ast$. We have that $\Fix(\ast)$ are the self-adjoint operators.
+\\[8pt]
+The spectrum of an operator in infinite dimensions should be thought of the set $\{\lambda \in \CC \mid P - \lambda \text{ is not invertible}\}$. Since the set of invertible operators is open, this tells us that the spectrum is a closet set; in particular, it is compact.
+\begin{theorem}
+    The spectrum of any bounded operator is always nonempty.
+\end{theorem}
+\noindent This theorem is hard to prove.
