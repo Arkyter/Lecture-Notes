@@ -1,4 +1,4 @@
-\section{Day 3: Rubik's Cube, Pt. 3 (Sep. 10, 2025)}
+\section{Day 3: NCGE, Pt. 3 (Sep. 10, 2025)}
 Before we return to the discussion on the Rubik's cube, we have another property of inverses to discuss;
 \begin{theorem}
     Let $a \in G$. Then $(a\inv)\inv = a$.
@@ -8,10 +8,10 @@ Before we return to the discussion on the Rubik's cube, we have another property
 \end{proof}
 \noindent The point of the twist is that we want to fill every box of our table that can be filled by the group; assuming that the twist hits everything, we would be able to work nicely with the group by just unfurling each permutation progressively. As an example, given $(\dot{z_1}, \dot{z_2}, \dots)$, we wish to find the index $k$ such that $\dot{z_k} = 1$. We may then apply $\sigma_{1,k}^{-1}$ to $(\dot{z_1}, \dot{z_2}, \dots)$ to obtain $(1, \dots)$, on which we may then recursively proceed. Inventing this gives us $(\dot{z_1}, \dot{z_2}, \dots)$ in terms of the generators.
 \begin{lemma}
-    Every $\sigma_{i, j} \in G$.
+    Every box $(i, j)$ of the table $T$ is in $G$.
 \end{lemma}
 \begin{proof}
-    We fed generators or elements of the table into the table, but each feed only performs group opreations, which means inductively, we are done here.
+    We fed generators or elements of the table into the table, but each feed only performs group operations, which means inductively, we are done here.
 \end{proof}
 \begin{lemma}
     Any $\sigma \in S_n$ fed into the table is a monotone product of elements of $T$. We have that $\sigma = \sigma_{1, j_1} \cdot \sigma_{2, \cdot{j_2}} \cdot \dots \cdot \sigma_{n, j_n}$, where our $\sigma_{i, j_i}$s are drawn from the table, and the box in the index $(i, j_i)$ is nonempty.
@@ -21,17 +21,38 @@ Before we return to the discussion on the Rubik's cube, we have another property
     \begin{enumerate}[(i)]
         \item If $\sigma = e$, then it's just $\sigma_{1,1} \sigma_{2,2} \sigma_{3,3} \dots$.
         \item If $\sigma$ is in the table, suppose its $\sigma_{i,j}$; then $\sigma = \sigma_{1,1} \dots \sigma_{i,j} \dots \sigma_{n,n}$. 
-        \item If $\sigma$ is neither of these, then suppose $\sigma$ has pivot $i$, $\sigma(i) = j$, and $\sigma_{i,j}$ is full; then we just feed $\sigma' = \sigma_{i,j}\inv \sigma$. In other words, $\sigma = \sigma_{i,j} \sigma'$, and since you can only repeat this finitely many times, this is eventually $\sigma e \sigma_{1,1} \dots \sigma_{i,j} \dots \sigma_{n,j_n}$. \qedhere
+        \item If $\sigma$ is neither of these, then suppose $\sigma$ has pivot $i$, $\sigma(i) = j$, and $\sigma_{i,j}$ is full; then we just feed $\sigma' = \sigma_{i,j}\inv \sigma$. In other words, $\sigma = \sigma_{i,j} \sigma'$, and since you can only repeat this finitely many times, this is eventually $\sigma = \sigma_{1,1} \dots \sigma_{i,j} \dots \sigma_{n,j_n}$. \qedhere
     \end{enumerate}
 \end{proof}
-\noindent The before holds for $\sigma \in S_n$ fed into the table, but we don't necessarily have that the table $T$ generates the group just yet. If we feed in a generator $g_i$, we have that $g_i$ is in $\left<T\right>$, meaning that by feeding our generators, we indeed have that $\left<T\right> = G$. Therefore, feeding products of elements is to get everything in $G$ as a monotone product.
+\noindent The before holds for $\sigma \in S_n$ fed into the table, but we don't necessarily have that the table $T$ generates the group just yet\footnote{if we feed $\sigma \in G$, then we are essentially going to apply \#2 until we reach the identity permutation; if we feed in $\sigma \not\in G$, then we will arrive at an empty square in the table $T$}. If we feed in a generator $g_i$, we have that $g_i$ is in $\left<T\right>$, meaning that by feeding our generators, we indeed have that $\left<T\right> = G$. Therefore, feeding products of elements is to get everything in $G$ as a monotone product.
 \begin{lemma}
     Two monotone products are equal if and only if they are the same.
 \end{lemma}
 \begin{proof}
-    If they are the same, they are equal. Suppose that $\sigma_{1,j_1} \dots \sigma_{n,j_n} = \sigma_{1,j_1'} \dots \sigma_{n,j_n'}$. Then
+    If they are the same, they are equal, so it suffices to check that if two monotone products are equal, they are the same. Suppose that $\sigma_{1,j_1} \dots \sigma_{n,j_n} = \sigma_{1,j_1'} \dots \sigma_{n,j_n'}$. Then
     \[ \sigma_{i,j_1} \dots \sigma_{n,j_n} = (\sigma_{i,j_1}\inv \sigma_{1,j_1'}) \sigma_{2,j_2'} \dots \sigma_{n,j_n'}, \]
     meaning that
     \[ \sigma = \sigma_{n,j_n}\inv (\sigma_{n-1,j_{n-1}}\inv (\dots(\sigma_{1,j_1}\inv \sigma_{1,j_1})\dots)\sigma_{n-1,j_{n-1}'})\sigma_{n,j_n'} = e, \]
-    but then we have
+    but then we have $\sigma(1) = 1$, so, since all but the middle are the identity on $1$, we have that $\sigma(1) = \sigma_{1,j_1}^{-1} \sigma_{i,j_i}(1)$, meaning $j_1 = j_1'$, and so
+    \[ \sigma = \sigma_{n,j_n}\inv ( \dots (\sigma_{2,j_2}\inv \sigma_{2,j_2}) \dots) \sigma_{n,j_n'} = e, \]
+    and so by an inductive process, we are done.
 \end{proof}
+\begin{lemma}
+    $M = \{\sigma_{1,j_1,} \dots \sigma_{n,j_n} \mid j_i \in [n]; \sigma_{i,j_i} \in T \}$ is a group.
+\end{lemma}
+\begin{lemma}
+    $M_k = \{\sigma_{k,j_k} \dots \sigma_{n,j_n} \mid j_i \in [n]; \sigma_{i,j_i} \in T\}$ is a group.
+\end{lemma}
+\begin{proof}
+    $M_n$ is a group, because $M_n$ is just the identity. The proof is to be continued.
+\end{proof}
+\noindent Personal note; claims $3$ and $4$ from Dror's handout is used to establish a bijection between valid Rubik's cubes moves (i.e., elements of $G$), and elements in $M$ (monotone products of red boxes in $T$).
+\\[8pt]
+\noindent If we have $M_1 = G$, then we can solve the questions set out at the beginning of our course, namely,
+\begin{enumerate}[(i)]
+    \item Compute $\abs{G}$; we have that $\abs{G} = \abs{M_1}$.
+    \item Given $\sigma \in S_n$, decide if $\sigma \in G$; suppose we feed $\sigma$ into $T$. If it would change the table, then $\sigma$ is not in $G$.
+    \item Write a $\sigma \in G$ in terms of the generators $g_i$; by keeping track of the elements we feed in, we can find each of the boxes of $T$ in terms of the generators, so we can write each element as a monotone product in terms of the generators.
+    \item Product random elements $\sigma \in G$; for each $i \in [n]$, pick some $j_i$ randomly such that $\sigma_{i, j_i} \in T$. Then we may take the product of all such $\sigma_{i, j_i}$ to produce a random element of $G$.
+\end{enumerate}
+In a random tangent, we now proceed to define cycle notation. Suppose $G = \left<(1 \, 2 \, 3), (1 \, 2) (3 \, 4)\right>$; we now proceed to fill in a $4 \times 4$ lower-triangular $T$, which Dror spent a lot of time trying to do. It also taught me that I am never going to even bother solving a Rubik's cube with this algorithm; this goes without saying but there is no chance in hell I'm typing all that shit down.
