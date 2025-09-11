@@ -1,0 +1,52 @@
+\section{Day 4: Complex Power Series (Sep. 11, 2025)}
+As per given in the previous lecture, recall that the complex power series is defined as an infinite sum of the form
+\[ \sum+{n=0}^\infty a_n z^n, \quad a_n \in \CC, z \in \CC, \]
+i.e., $z$ as a complex variable.
+\begin{theorem}
+    The power series $f(z) = \sum_{n=0}^\infty a_nz^n$ defines a holomorphic function on its disc of convergence. The derivative of $f$ is given by
+    \[ f'(z) = \sum_{n=1}^\infty n a_n z^{n-1}. \]
+    Moreover, $f'$ has the same radius of convergence as $f$.
+\end{theorem}
+\begin{proof}
+    Let $g$ be the power series defining $f'$, and let $R \geq 0$ be the radius of convergence of $f$. The radius of convergence of $g$ is also $R$, per Hadamard's formula,
+    \[ \limsup_{n \to \infty} \abs{n a_n}^{\frac{1}{n-1}} \stackrel{(\ast)}{=} \limsup_{n \to \infty} \abs{a_n}^{\frac{1}{n} \cdot \frac{n}{n-1}} = \limsup_{n \to \infty} \abs{a_n}^{\frac{1}{n}} = \frac{1}{R}, \]
+    since
+    \[ n^{\frac{1}{n-1}} = e^{\frac{\log n}{n-1}} \taking{n \to \infty} e^0 = 1. \tag{$\ast$} \]
+    For all $z_0 \in \CC$ with $\abs{z_0} < r < R$ and $h \in \CC \setminus \{0\}$ with $\abs{z_0 + h} < r$, let us compute the following,
+    \[ \abs{\frac{f(z_0 + h) - f(z_0)}{h} - g(z_0)}; \]
+    to start,
+    \[ f(z) = \underbrace{\sum_{n=0}^N a_nz^n}_{S_N(z)} + \underbrace{\sum_{n=N+1}^\infty a_nz^n}_{E_N(z)}, \]
+    where $N \in \NN$ is to be determined; we have that
+    \begin{align*}
+        \frac{f(z_0 + h) - f(z_0)}{h} - g(z_0) &= \left(\frac{S_N(z_0 + h) - S_N(z_0)}{h} - S_N'(z_0)\right) + \\
+        & \qquad \left(S_N'(z_0) - g(z_0)\right) + \left(\frac{E_N(z_0 + h) - E_N(z_0)}{h}\right).
+    \end{align*}
+    We compute each part individually.
+    \begin{align*}
+        \abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} &= \abs{\frac{\sum_{n={N+1}}^\infty a_n(z_0 + h)^n - \sum_{n=N+1}^\infty a_n z_0^n}{h}} \\
+        &\leq \sum_{n=N+1}^\infty \frac{\abs{a_n}}{h} \abs{(z_0 + h)^n - z_0^n} \\
+        &\leq \sum_{n=N+1}^\infty \abs{a_n} \abs{(z_0 + h)^{n-1} + (z_0 + h)^{n-2} + \dots + z_0^{n-1}} \\
+        &\leq \sum_{n=N+1}^\infty \abs{a_n} \gamma^{n-1} \cdot n \taking{n \to \infty} 0,
+    \end{align*}
+    as $y$ has the radius of convergence of $R > r$. Next,
+    \[ \abs{S_N'(z_0) - g(z_0)} \taking{N \to \infty} 0, \]
+    since $S_N'(z_0) = \sum_{n=1}^N n a_n z_0^{n-1}$ and $g(z_0) = \sum_{n=1}^\infty n a_n z_0^{n-1}$. Given any $\eps > 0$, we may choose a sufficiently large $N$ such that
+    \[ \abs{S_N'(z_0) - g(z_0)} < \eps, \quad \abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} < \eps, \]
+    per our two computations above. Since $S_N(z)$ is a finite polynomial, $S_N'(z_0)$ is the derivative of $S_N(z)$ at $z_0$, and so there exists $\delta > 0$ such that, for all $0 \leq \abs{h} < \delta$, we have
+    \[ \abs{\frac{S_N(z_0 + h) - S_N(z_0){h}}{h} - S_N'(z_0)} < \eps, \]
+    which resolves all three parts of our expansion, and so we are done.
+\end{proof}
+\begin{corollary}
+    The power series $f(z) = \sum_{n=0}^\infty a_n z^n$ is infinitely complex differentiable on its disc of convergence. For $k \in \NN$, its $k$th derivative $f^{(k)}$ is given by
+    \[ f^{(k)}(z) = \sum_{n=0}^\infty (a_n z^n)^k. \]
+\end{corollary}
+\begin{definition}
+    A function $f : \Omega \to \CC$ is said to be \textit{analytic} at $z_0 \in \Omega$ if there exists a power series $\sum_{n=0}^\infty a_n (z - z_0)^n$ with positive radius of convergence such that
+    \[ f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n \]
+    on a neighborhood of $z_0 \in \Omega$.
+\end{definition}
+\noindent In particular, this means that if $f : \Omega \to \CC$ is holomorphic, we have that $f$ is holomorphic at $z_0 \in \Omega$, and so $f$ is analytic at $z_0 \in \Omega$ as well. The implication that analytic implies holomorphic was given by our earlier theorem; the direction that holomorphic implies analytic is given by Cauchy's integral formula, but we need to first define integration along curves.
+\begin{enumerate}[(i)]
+    \item A parameterized curve is a function $z : [a, b] \to \CC$, where $t \mapsto z(t)$. This gives the orientation from $z(a)$ to $z(b)$.
+    \item (\textit{Regularity conditions on curves}). We say that the parameterized curve is smooth if $z'(t)$ exists, is continuous on $[a, b]$, and $z'(t) \neq 0$ for $t \in [a, b]$. We say that the parameterized curve $z$ is piecewise smooth if $z$ is continuous on $[a, b]$ and there exists a partition of $[a, b]$ with $a = a_0 < \dots < a_n = b$ such that $z(t)$ is smooth on each $[a_r, a_{r+1}]$.
+\end{enumerate}
