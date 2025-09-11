@@ -43,45 +43,45 @@ PDE is a vast subject. It is one of the most connected fields of math, with conn
 
 The rest of the lecture went over some examples of PDEs.
 \begin{example}
-	A simple possible PDE would be as follows: Let \( \mu = \mu(x, y) \) be a function of two variables. Then our PDE might be \[ \mu_{x} + \mu_{y} = 0. \]
+	A simple possible PDE would be as follows: Let \( u = u(x, y) \) be a function of two variables. Then our PDE might be \[ u_{x} + u_{y} = 0. \]
 		\begin{remark}
-			\( \mu_{x} = \frac{\partial}{\partial x} \mu \).
+			\( u_{x} = \frac{\partial}{\partial x} u \).
 		\end{remark}
-		From here, a single solution would be \( x - y \). We have a solution \( \mu(x, y) = f(x - y) \) for any function \( f \).
+		From here, a single solution would be \( x - y \). We have a solution \( u(x, y) = f(x - y) \) for any function \( f \).
 		\begin{remark}
 		For ODEs, first order has one degree of freedom, second order has two degrees of freedom, etc. For PDEs, this first order PDE has infinitely many degrees of freedom.
 		\end{remark}
-		We will also solve \( \mu_{x} + c(x, y) \mu_{y} = 0 \) next lecture (by method of characteristics).
+		We will also solve \( u_{x} + c(x, y) u_{y} = 0 \) next lecture (by method of characteristics).
 \end{example}
 
 \begin{example}[Burgers' Equation]
 	We will return to first order PDEs at some point to look at nonlinear cases. One such example is 
-	\[ \mu_{x} + \mu \mu_{y} = 0. \]
+	\[ u_{x} + u u_{y} = 0. \]
 	This is a simple example used for fluid dynamics and part of why fluid dynamics is hard.
 \end{example}
 \begin{example}[Wave Equation]
 		With the Wave Equation, there is one special coordinate, which is time.
-		Take \( \mu = \mu(t, x) \) with \( t \in I \subseteq \mathbb{R} \), \( x \in U \subseteq \mathbb{R}^{m} \), where \( I \) is an interval and \( U \) is an open set. Now, consider the \( m = 1 \) case. Then the wave equation is
-		\[ \mu_{tt} - \mu_{x x} = 0. \]
+		Take \( u = u(t, x) \) with \( t \in I \subseteq \mathbb{R} \), \( x \in U \subseteq \mathbb{R}^{m} \), where \( I \) is an interval and \( U \) is an open set. Now, consider the \( m = 1 \) case. Then the wave equation is
+		\[ u_{tt} - u_{x x} = 0. \]
 		For a general \( m \), it's
-		\[ \mu_{tt} - \Delta_{x} \mu = 0  \]
+		\[ u_{tt} - \Delta_{x} u = 0  \]
 		\begin{remark}
 			If \( f : \mathbb{R}^{m} \to \mathbb{R} \), then \( \Delta f \) is the Laplacian of \( f \), \( \frac{\partial^{2}}{\partial x_{1}^{2}} f + \cdots + \frac{\partial^{2}}{\partial x_{m}^{2}} f \). When \( f \) has two different variables (\( f(t, x) \), then \( \Delta_{x} f \) is the Laplacian with respect to \( x \) only. [An efficient way to write it is as the divergence of the gradient of a function, which will come up a bit later.]
 		\end{remark}
 		We'll also look at
-		\[ \mu_{tt} - \Delta \mu = f(x, t), \]
+		\[ u_{tt} - \Delta u = f(x, t), \]
 		which is the non-homogeneous case.
 \end{example}
 
 \begin{example}[Heat Equation]
 	The heat equation is
-		\[ \mu_{t} - \Delta \mu = 0. \]
+		\[ u_{t} - \Delta u = 0. \]
 		The difference between this and the Wave Equation is that this is the first derivative, whereas the Wave Equation is the second derivative. Makes a huge difference.
 \end{example}
 
 \begin{example}[Laplace's Equation]
 	 The Laplacian (Laplace's equation) is 
-		\[ - \Delta \mu = 0. \]
+		\[ - \Delta u = 0. \]
 		[Functions satisfying Laplace's Equation are sometimes called harmonic.] In this sense, Laplace's equation is the steady-state solution to the heat equation and the wave equation. Laplace's equation is very important for other fields as well. [Dirichlet's problem in the circle is just a special case of an initial value problem for Laplace's equation. We will almost certainly see this in 354. In this case, Complex Analysis turns out to be a very efficient way to solve this IVP.]
 	\begin{remark}
 		Why do we have the minus in front? One justification could be that Laplace's equation is inspired by physics. For example, in Electrostatics, if \( V \) is the electrical potential, then the electric field is given by \( E = - \nabla V  \). But from here, the electric charge is \( \rho = \nabla \cdot E \) (up to a change in units), so it follows that \( \rho = - \Delta V \).\footnote{I \textit{told} you it would come up later.} It follows that in regions of space with no charge, the electrical potential should be a harmonic function.

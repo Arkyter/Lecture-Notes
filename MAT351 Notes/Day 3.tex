@@ -1,0 +1,148 @@
+\section{Day 3: I'm kind of getting sick of only doing examples (Sep. 10, 2025)}
+\begin{definition}
+	A PDE is fully nonlinear if it is nonlinear in the highest order derivative. This is, if the PDE is of the form
+	\[ F(D^{k}u, D^{k-1}u, \ldots, u, x) = 0, \]
+	where \( F \) is nonlinear in the \( D^{k}u \) component.
+\end{definition}
+
+\begin{example}
+	\begin{align}
+		u_{t} + u u_{x} &= 0 \\
+		u_{tt} + u_{x} u_{x x} &= 0 \\
+		u_{t} + u_{x} &= u^{2} \\
+		u_{t}^{2} + u_{x} &= 0 \\
+		u_{t}u_{x} + u &= 0
+	\end{align}
+	We see that (1) is not fully nonlinear, likewise with (2), and (3). On the other hand, (4) and (5) are fully nonlinear, because they are nonlinear in \( Du \), and their order is \( 1 \). Finally, m
+\end{example}
+
+\begin{example}[Mean Curvature]
+	This is from Differential Geometry.
+	\[ \nabla \cdot \left( \frac{\nabla u}{\sqrt{1 + | \nabla u|^{2}}} \right) = 0. \]
+	It is fully nonlinear as well.
+\end{example}
+
+\noindent We will now solve some equations ``by hand''.
+\begin{example}
+	Let \( u = u(x, y), (x, y) \in \mathbb{R}^{2}, \) with
+	\[ u_{x x} = 0. \]
+	We can just integrate twice to get the general solution here.
+	\begin{align*}
+		u_{x x} &= 0 \\
+		u_{x} &= f(y) \\
+		u &= x f(y) + g(y).
+	\end{align*}
+	This is clearly the general solution as we just integrated twice. Now, the question is how much information do we need to provide for there to be only one solution to the IVP? For this, if we specify
+	\[ u(0, y) = H(y) \qquad \text{and} \qquad u_{x}(0, y) = L(y),\]
+	then this would give that
+	\[ u(x, y) = L(y) x + H(y), \]
+	which is sufficient.
+\end{example}
+
+\begin{example}[267 Exposure Therapy] 
+	``I just want to test your ODE knowledge.''
+	\[ u_{x x} + u = 0. \]
+	Solutions are
+	\[ u = a(y) \sin x + b(y) \cos x, \]
+	He then started talking about like factoring polynomials and exponentials to find the solution to the ODE but I fainted from the experience, so I'm not sure what he did.
+\end{example}
+
+\begin{remark}
+	When drawing, functions of \( t \) and \( x \), make \( t \) the vertical axis, and \( x \) the horizontal axis. I don't know why. Also, he writes \( u(t, x) \) but the book writes \( u(x, t) \). I personally prefer \( u(t, x) \), but I might end up using both accidentally.
+\end{remark}
+
+\begin{example}
+	Let \( u = u(t, x) \) with
+	\[ \tag{w}u_{tt} - u_{x x} = 0. \]
+	Then we can write this as
+	\[ (\partial_{t} - \partial_{x}) (\partial_{t} + \partial_{x})u = 0. \]
+	If we know \( (\partial_{t} + \partial_{x})u = 0 \), then \( u \) is a solution of (w), but this can be solved by \( F(t - x) \), for all function \( F \). Similarly, if \( (\partial_{t} - \partial_{x})u = 0 \), then \( u \) solves \( (w) \), which would yield solutions \( G(t + x) \) of (w), for all functions \( G \).
+
+	It turns out that
+	\[ u(t, x) = F(t-x) + G(t+x) \]
+	is actually the general solution---we will prove this later.
+\end{example}
+
+We saw that solving a PDE gives infinitely many degrees of freedom. So how do we pose a PDE so that we can identify a specific solution? Answer: Give additional info in the form of (A) initial conditions, (B) boundary conditions. This motivates the following definition:
+\begin{definition}[Well-Posed Problem]
+	We say that a Well-Posed Problem is a PDE along with Boundary Conditions and Initial Conditions such that the solutions have
+	\begin{enumerate}
+	
+		\item Existence of Solutions
+		\item Uniqueness of Solutions
+		\item Continuous dependence\footnote{I felt a visceral sense of dread typing this.} on this additional data.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}[Poisson's Equation]
+	Let \( u \) be the unknown, and let our equation be
+	\[ - \Delta u = f. \]
+	Then there's two ways to make it well-posed. If we say that \( u = u(x) \), and \( x \in D \subseteq \mathbb{R}^{m} \), and \( g : \partial D \to \mathbb{R} \), then we can either do
+	\begin{enumerate}
+	
+		\item Let \( u = g \), \( x \in \partial D \). These are the Dirichlet Boundary Conditions [a.k.a. The Dirichlet Circle Problem]
+		\item Let
+			\[ \frac{\partial u}{\partial \hat n} = \nabla u \cdot \hat n, \]
+			where \( \hat n \) is the unit outward normal of \( \partial D \). Then the Neumann boundary conditions are
+			\[ \frac{\partial u}{\partial \hat n} = g, \]
+			where \( x \in \partial D \)
+		\item The Robin boundary conditions are
+			\[ \frac{\partial u}{\partial \hat n} + Qu = g \]
+			where \( x \in \partial D \).
+	\end{enumerate}
+	For the Neumann boundary conditions we need some care to prove this is well-posed, which will appear in the homework. Giving both the Dirichlet and Neumann boundary data is not a good idea. One might remark that this seems strange---after all, it's a second-order PDE, so it might look like (as with a second-order ODE) we'd have to specify stuff about both the function and the derivatives. But we will see this is not the case.
+\end{example}
+
+\begin{example}[Dirichlet's Boundary Conditions]
+	Consider Poisson's equation along with the Dirichlet boundary conditions:
+	\begin{align*}
+		\tag{\( x \in D \)} - \Delta u &= f \\
+		\tag{\( x \in \partial D \)}u &= g
+	\end{align*}
+	Are solutions of this problem unique? Assume there exist \( u_{1}, u_{2} \) solutions, then look at \( v = u_{1} - u_{2} \).
+	Then this yields
+	\begin{align*}
+		\tag{\( x \in D \)}- \Delta v &= 0 \\
+		\tag{\( x \in \partial D \)}v &= 0
+	\end{align*}
+	The idea is to integrate our PDE against \( v \). First, notice that
+	\begin{align*}
+		\int_{D}  \Delta v \cdot v \, dx &= \int_{D}  \sum_{i=1}^{m} v \, \partial_{x_{i}}^{2} v \, dx \\
+																	&= \int_{D}  \sum_{i=1}^{m} \partial_{x_{i}} \left( v\, \partial_{x_{i}} v \right) dx - \int_{D} \sum_{i=1}^{m} \partial_{x_{i}} v \cdot \partial_{x_{i}} v dx.
+	\end{align*}
+	\begin{align*}
+		0 &= \int_{D} v \Delta v \, dx \\
+			&= \int_{D} \nabla \cdot (\nabla v) \,  v\, dx \\
+		\tag{1}&= \int_{D} \nabla \cdot (\nabla v \, v) \, dx - \int_{D}  \nabla v \cdot \nabla v \, dx \\
+			&= \int_{\partial D}  \Delta v \cdot v \cdot \hat n \, dx - \int_{D} |\partial v|^{2} dx \\
+	\end{align*}
+	Since \( v \equiv 0 \) on the boundary, \( \Delta v \cdot v \cdot \hat n \equiv 0 \) on the boundary, so it follows that \( \int_{D} | \nabla v|^{2} dx = 0 \). It follows that \( \nabla v \equiv 0 \) on \( D \), thus \( v \) is constant. But we know \( v \equiv 0 \) on \( \partial D \) so \( v \equiv 0 \) on the whole domain. This proves uniqueness.
+\end{example}
+
+\begin{example}[Vibrating String]
+	Let \( D = [0, \infty) \times [0, L] \). A vibrating string can be modelled by the laws
+	\begin{align*}
+		u_{tt} - c^{2} u_{x x} &= 0 \\
+		u(t, 0) &= w_{1}(t) \\
+		u(t, L) &= w_{2}(t)
+	\end{align*}
+	where \( u : D \to \mathbb{R} \) [a longer derivation of these laws can be found in Stein and Shakarchi Book 1], where \( w_{1}, w_{2} : [0, \infty) \to \mathbb{R} \) are how the end-points of the string move. It turns out this is not enough to get a unique solution. We also need
+	\[ u(0, x) = f(x), \qquad u_{t}(0, x) = g(x). \]
+	He did not show this, but he showed show in the case of Laplace's equation, these boundary conditions don't yield a well-posed problem.
+\end{example}
+
+\begin{example}[Laplace's Equation]
+	Suppose we have \( u : \mathbb{H}^{n} \to \mathbb{R} \). Then impose the initial conditions
+	\begin{align*}
+		u_{x x} + u_{y y} &= 0 \\
+		u(x, 0) &= 0 \\
+		u_{y}(x, 0) &= \frac{1}{m} \sin(mx).
+	\end{align*}
+	Notice that this is analogous to providing both the Dirichlet and Neumann boundary conditions for Poisson's equations above (but it's not, because it's not bounded). This is a sequence of PDEs, which we'll call \( u^{(m)} \) the solution. 
+
+	As \( m \to \infty \) the boundary conditions go to \( 0 \), so they roughly go to the solution \( u \equiv 0 \). If we solve for \( m \) large, then our solution should be close to \( 0 \) to get continuous dependence. But is this the case?
+
+	We can solve this by ODEs like we did earlier (rewriting as \( (\partial_{t} - i \partial_{x})(\partial_{t} + i \partial_{x}) u = 0 \) then solving each root individually---he left actually doing this as an exercise). This gives solutions of 
+	\[ u^{(m)} = \frac{e^{- \sqrt{ m}}}{m^{2}} \sin(mx) \sinh(m y). \]
+	The question is whether this goes to \( 0 \) as \( m \to \infty \). But notice that \( \sinh \) is basically exponential, so this is going to go to infinity everywhere. Thus, in this case, continuous dependence on boundary conditions doesn't hold, so this isn't a well-posed problem.
+\end{example}

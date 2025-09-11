@@ -1,0 +1,83 @@
+\section{Day 2: Definitions, Examples, Solutions, Oh My! (Sep. 8, 2025)}
+\begin{definition}[Partial Differential Equation]
+A Partial Differential Equation is an equation for an unknown function \( u \) of more variables involving its partial derivatives, in general written as
+\[\tag{\( * \)} F \left( D^{k} u, D^{k-1} u, \ldots, D u, u, x \right) = 0. \]
+The convention is that \( D^{k} u \) is the \( k \)th partial derivatives of \( u \).\footnote{I imagine something like \( D^{k} \) is a \( k \)-tensor analogous to---in the case of \( k = 2 \)---the Hessian matrix. Such formalism is pointless, however.} 
+\end{definition}
+We'll  generally look for \( u : x \in U \subseteq \mathbb{R}^{m} \to X \), where \( X \) is typically \( \mathbb{R}, \mathbb{C}, \mathbb{R}^{m} \). We also want \( u \in C^{k}(U) \) (although, there are more general setups).\footnote{Much of 457/8 is dedicated to things that make PDEs more general} For the PDE \( (*) \), we say the order is \( k \) (order will mainly be \( 1 \) or \( 2 \) in this class.) If \( (*) \) can be written as
+\[ \mathcal{L}[u] = 0, \]
+where \( \mathcal{L}[u + v] = \mathcal{L}[u] + \mathcal{L}[v] \), then we call it linear. We also can include \( \mathcal{L}[cu] = c\mathcal{L}[u] \), but this is usually redundant. Otherwise it's nonlinear. If \( (*) \) has the form \( \mathcal{L}[u] = f \) it's called (linear) non-homogeneous. 
+\begin{example}
+The general second order pde linear: \( u : (x, y) \in U \subseteq \mathbb{R}^{2} \to \mathbb{R} \)
+\[ Q_{11}(x, y) u_{x x} + Q_{12}(x, y) u_{xy} + Q_{22}(x, y) u_{yy} + b_{1}(x, y) u_{x} + b_{2}(x, y) u_{y} + c(x, y) u = 0. \]
+We say it's constant coefficient if \( Q_{ij}, b_{k}, c  \) are constant.
+\end{example} 
+
+\noindent Some examples from last class were constant coefficient
+\begin{example}[Wave Equation]
+\[ u_{tt} - u_{x x} = 0 \]
+\end{example}
+
+\begin{example}[Heat Equation]
+\[ u_{t} - u_{x x} = 0 \]
+	
+\end{example}
+
+\begin{example}[Laplace's Equation]
+\[ u_{x x} + u_{y y} = 0 \]
+	
+\end{example}
+
+\begin{example}
+\[ u_{x} + Q(x, y) u_{y} = 0 \]
+\end{example}
+
+\noindent Some more examples of linear PDEs:
+\begin{example}[Schr\"odinger Equation]
+\[ u : (t, x) \subseteq  I \times \mathbb{R}^{m} \to \mathbb{C} \]
+where \( I \subseteq \mathbb{R} \)
+\[ i u_{t} - \Delta_{x} u = 0 \]
+We'll also look at \( i u_{t} + (- \Delta + V(x)) u = 0 \).
+\end{example}
+
+\noindent On the other hand, here are some nonlinear PDEs:
+\begin{example}[Burgers' Type]
+\[ u_{t} + Q(u) u_{x} = 0 \]
+\end{example}
+\begin{example}
+\[ u_{t} + u_{x} = u^{2}. \]
+Since the right is in terms of \( u \) and nonlinear, it's a nonlinear PDE. 
+\end{example}
+These are the only two types of nonlinear PDEs we'll solve. In some sense, the first one is ``more'' nonlinear because we're multiplying the partial derivative by something nonlinear, whereas the second is only multiplying \( u \) by something.
+
+\begin{example}[Nonlinear Wave Equation]
+\[ u_{tt} - u_{x x} = u^{p}, \]
+This might be a good model for general relativity, as general relativity is all about the nonlinear wave equation.
+\end{example}
+
+\begin{example}[Maxwell's Equations]
+	Maxwell's Equations are an example of a linear system of PDEs.\footnote{``Emily gave a FANTASTIC example here. Kudos to her.'' -- Isaac}
+\begin{align*}
+	\frac{1}{c} \vec E_{t} &= \nabla \times \vec B \\
+	\frac{1}{c} \vec B_{t} &= - \nabla \times \vec E.
+\end{align*}
+Here, we take
+\[ \vec E, \vec B : (t, x) \in \mathbb{R} \times \mathbb{R}^{3} \to \mathbb{R}^{3}, \]
+and \( c \) is the speed of light. We also have some constraints that
+\begin{align*}
+	\nabla_{x} \cdot \vec E &= 0 \\
+	\nabla_{x} \cdot \vec B &= 0,
+\end{align*}
+and these are added for physical reasons and also to make the ODE solvable---in real life we indeed observe that the Electric field and the Magnetic field are conservative, so adding these requirements doesn't cause problems. If we don't have these, then there's too many degrees of freedom to solve. [Cf. Helmholtz Theorem]
+\end{example}
+
+\begin{example}[Navier-Stokes' Equations]
+	These are a nonlinear system of PDEs.
+	\[ \vec u_{t} + \vec u \cdot \nabla_{x} \vec u = - \nabla p + \nu \Delta_{x} \vec u. \]
+	Here, we have that \( \vec u : (t, x) \in [0, \infty) \times \mathbb{R}^{3} \to \mathbb{R}^{3} \) is the velocity field, \( \nu > 0 \) is a constant which represents viscosity, we have that \( p : (t, x) \to \mathbb{R} \) is pressure.
+	We say also that
+	\[ (\vec u \cdot \nabla \vec u)_{k} = \sum_{j=1}^{3}  \vec u_{j} \partial_{j} \vec u_{k} \]
+	and then we have
+	\[ \nabla \cdot \vec u = 0 \]
+	because otherwise there would be too many unknowns to solve it. [Another way to think about this term is that it represents consetvation of mass, so this boundary condition makes the fluid incompressible---so water, rather than air].
+\end{example}
