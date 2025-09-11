@@ -1,0 +1,89 @@
+\section{Day 4:  (Sep. 11, 2025)}
+Last time, we proved that $L(\chi, s)$ are holomorphic for $\Re s > 1$, up to some lemma; next, we are going to show that all $L(s, \chi)$ are in fact, meromorphic, for $\Re s > 0$.
+\begin{enumerate}
+    \item (Page 71, Prop. 11) If $\chi = 1$, then $\zeta(s)$ is meromorphic for $\Re s > 0$ and has a unique simple pole for $s = 1$.
+    \item (Prop. 12) If $\chi \neq 1$, then $L(s, \chi)$ is holomorphic for $\Re s > 0$.
+\end{enumerate}
+Later today, we will show that (prop. 13)
+\[ \zeta_m(s) = \prod_\chi L(s, \chi) \iff \forall x, x \neq 1, L(1, \chi) \neq 0. \]
+We note that $\zeta_m$ has a simple pole at $s = 1$. W ealso have the unproved lemma from last time, where if $0 < \alpha < \beta$, then for $z \in \CC$ with $\Re z > 0$, written $z = x + iy$, we have that
+\[ \abs{e^{-\alpha z} - e^{-\beta z}} \leq \frac{\abs{z}}{x} \left(e^{-\alpha x} - e^{-\beta x}\right). \]
+This is true by writing
+\[ z\int_\alpha^\beta e^{-tz} \, dt = e^{-\alpha z} - e^{-\beta z} \implies \abs{e^{-\alpha x} - e^{-\beta x}} \leq \abs{z} \int_\alpha^\beta e^{-tx} \, dt = \frac{\abs{z}}{x} \left(e^{-\alpha x} - e^{-\beta x}\right). \]
+\hrulebar
+\noindent We now discuss proposition 10. In the case $\chi = 1$, we claim the following,
+\begin{claim}[Prop. 10]
+    $\zeta(s) = \frac{1}{s-1} + \varphi(s)$, where $\varphi(s)$ is holomorphic in $\Re s > 0$.
+\end{claim}
+\begin{proof}
+    %Given a character $\chi : (\ZZ/m\ZZ)^\ast \to \CC^\ast$ where $\chi = 1$, we have that
+    %\[ L(s, 1) = \zeta(s) \prod_{p \mid m} \left(1 - p^{-s}\right). \]
+    We have that
+    \[ \frac{1}{s-1} = \int_1^\infty t^{-s} \, dt = \sum_{n=1}^\infty \int_{n}^{n+1} t^{-s} \, dt, \]
+    meaning we may write
+    \[ \zeta(s) = \frac{1}{s-1} + \sum_{n=1}^\infty \int_n^{n+1} \left(n^{-s} - t^{-s}\right) \, dt. \]
+    With this, we may construct a sequence of $\varphi_n$,
+    \[ \varphi_n(s) = \int_n^{n+1} \left(n^{-s} - t^{-s}\right) \, dt, \quad \varphi(s) = \sum_{n=1}^\infty \varphi_n(s), \]
+    where each $\varphi_n(s)$ is holomorphic for $\Re s > 0$. Since each $\varphi_n(s)$ holds this property, it suffices to check that the series converges normally, of which we have that $\sum_{n=1}^\infty \norm{\varphi_n}$ converges, where $\norm{\varphi_n} = \sup_{s \in S} \abs{\varphi_n(s)}$. We claim that normal convergence implies uniform absolute convergence, i.e., for all $\eps > 0$, the series of $\varphi_n(s)$ is normally convergent in $\Re s \geq \eps$.
+    \begin{subproof}
+        To start, let us make the naive bound
+        \[ \norm{\varphi_n(s)} \leq \sup_{n \leq t \leq n + 1} \abs{n^{-s} - t^{-s}} \leq \sup_{n \leq t \leq n + 1} \abs{\frac{dt^{-s}}{dt}}, \]
+        which we have from the lemma that if $f$ is a continuously differentiable function, we have that
+        \[ \abs{f(a) - f(b)} \leq \sup_{a \leq x \leq b} \abs{f'(x)} (b - a). \]
+        In this manner, we also have that
+        \[ \sup_{n \leq t \leq n + 1} \abs{\frac{dt^{-s}}{dt}} = \sup_{n \leq t \leq n+1} \abs{\frac{s}{t^{s+1}}} = \frac{\abs{s}}{n^{x+1}}, \]
+        where we have that on $\Re s \geq \eps$, $\sum_n \frac{\abs{s}}{n^{s+1}}$ is convergent.
+    \end{subproof}
+    \begin{claim}
+        $L(s, \chi)$ converges for $\Re s > 0$.
+    \end{claim}
+    \noindent By what we did last time, this implies that $L(s, \chi)$ is holomorphic in $\Re s > 0$.
+\end{proof}
+\begin{conjecture}[Riemann Hypothesis]
+    For $\Re s > 0$, the only zeros of $\zeta(s)$ have $\Re = \frac{1}{2}$.
+\end{conjecture}
+\noindent We will discuss the motivations and applications for this later. We start by considering the section post-proposition 12, 
+\begin{lemma}[Proposition 9]
+    Suppose we have a series $\sum a_n n^{-s}$. Assume that all partial sums of $\{a_n\}$ are bounded; if all $A_{m,m'}$, given by
+    \[ A_{k,k'} = \sum_{n=k}^{k'} a_n, \]
+    are bounded, then $\sum a_n n^{-s}$ is convergent for $\Re s > 0$.
+\end{lemma}
+\noindent Consider the function,
+\[ \tilde{\chi}(n) = \begin{cases} 0 & \gcd(n, m) \neq 1, \\ \chi(n \mod m) & \gcd(n, m) = 1; \end{cases} \]
+if we let $a_n = \tilde{\chi_n}$, then for all $k$, we have that
+\[ \sum_{n=k}^{k+m-1} \tilde{\chi}(n) = 0. \]
+\begin{proof}
+    Assume all $\abs{A_{k,k'}} \leq K$; by applying Abel's lemma, we have that
+    \[ \abs{S_{k,k'}} = \abs{\sum_{n=k}^{k'} a_n \underbrace{n^{-s}}_{b_n}} \leq K \left(\sum_{n=k}^{k'} \abs{\frac{1}{n^s} - \frac{1}{(n + 1)^s}} + \abs{\frac{1}{(k')^s}}\right). \]
+    If $\Re s > 0$, then the right hand side is simply equal to $\frac{K}{k^s}$, andfor all $\eps > 0$, there exists $N$ such that if $k \geq N$, then the $\frac{K}{k^s} \leq \eps$.
+\end{proof}
+\noindent So far, we've proven that
+\begin{enumerate}[(i)]
+    \item For all $\chi$, $L(s, \chi)$ is meromorphic for $\Re s > 0$.
+    \item If $x = 1$, there is a unique simple pole at $s = 1$.
+    \item If $x \neq 1$, there are no poles.
+\end{enumerate}
+Finally, we need that $L(1, \chi) \neq 0$ if $\chi \neq 1$ (p.73, thm. 1). Define
+\[ \zeta_m(s) = \prod_x L(s, \chi), \]
+which we already know to be meromorphic for $\Re s > 0$. We want to show that $\zeta_m(s)$ has a unique simple pole at $s = 1$. As a quick digression, consider $\QQ \subset K \subset \CC$, where $K$ is a finite extension of $\QQ$ (equivalently, $\dim_\QQ(K) < \infty$). There exists a notion that $\zeta_K(s)$, which is a $\zeta$ function of a number field $K$. All of those have analytic properties similar to $\zeta(s)$. We have that $\zeta(s) = \zeta_\QQ(s)$ has a unique simple pole at $s = 1$; if we fix $m \geq 1$, then the cyclotomic field of order $m$, $K_m$, is given by $K_m = \QQ(\mu_m) = K(e^{2\pi \frac{t}{m}})$, where $\mu_m$ are the roots of $1$ of order $m$. Secretly, we have that $\zeta_m(s) = \zeta_{K_m}(s)$.
+\\[8pt]
+We write out the explicit Dirichlet series for $\zeta_m(s)$. Let $p$ be a prime that does not divide into $m$, i.e., $\ol p = (\ZZ/m\ZZ)^\ast = G(m)$. Let $f(p)$ be the order of $\ol p$ in $G(m)$, and let $g(p) = \frac{f(m)}{f(p)}$, which is the order of $G(m)$ quotiented by the subgroup generated by $\ol p$.
+\begin{claim}[Proposition 13]
+    We have that
+    \[ \zeta_m(s) = \prod_{p \nmid m} \left(\frac{1}{1 - p^{-f(p)s}}\right)^{g(p)}. \]
+\end{claim}
+\begin{proof}
+    Let $T$ be a variable. Fix $p$ where $p \nmid m$; then we have
+    \[ \prod_\chi \left(1 - \chi(\ol p) T\right) = (1 - T^{f(p)})^{g(p)}, \]
+    which follows from
+    \[ \prod_w (1 - w T) = 1 - T^{f(p)}, \]
+    and the product is taken over all $w$ where $w^{f(p)} = 1$, i.e., the $f(p)$-th roots of unity (we note that $f(p)$ can be any element of $\NN$). For all such $w$, there exist $g(p)$ characters $\chi$ such that $\chi(\ol p) = w$, which implies our result. To see why this is true, let $A$ be a finite abelian group, $B \subset A$ a subgroup, and let $\chi_B : B \to \CC^\ast$. Then there exists exactly $\#(A/B)$ extensions of $\chi_B$ to $A$.
+    \\[8pt]
+    In our case, let $A = (\ZZ/m\ZZ)^\ast$, $B$ be the subgroup generated by $\ol p$, and fix $w$ such that $w^{f(p)} = 1$. There exists a unique character $\chi_B$ of $B$ such that $\chi_B(\ol p) = w$. An extension to $A$ is a character $\chi : (\ZZ/m\ZZ)^\ast \to \CC^\ast$ such that $\chi(\ol p) = w$, and so
+    \[ g(p) = \# \frac{(\ZZ/m\ZZ)^\ast}{B}, \]
+    meaning that for all $w$ with $w^{f(p)} = 1$, there exist $g(p)$ characters $\chi$ such that $\chi(\ol p) = w$. Consider the chain
+    \[ 0 \to B \to A \to A/B \to 0. \]
+    If we let $\wh \cdot$ denote the dual groups,
+    \[ 0 \to \wh{A/B} \taking{\alpha} \wh A \taking{\beta} \wh B \to 0, \]
+    then we claim that $\wh{A/B} \to \wh{A}$ is injective, and $\ker \beta = \img \alpha$, which is obvious; since $\# A = \# \wh A$, we have that $\wh A \taking{\beta} \wh B$ is onto, and we are done.
+\end{proof}
