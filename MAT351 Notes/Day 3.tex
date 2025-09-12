@@ -105,11 +105,13 @@ We saw that solving a PDE gives infinitely many degrees of freedom. So how do we
 		\tag{\( x \in D \)}- \Delta v &= 0 \\
 		\tag{\( x \in \partial D \)}v &= 0
 	\end{align*}
-	The idea is to integrate our PDE against \( v \). First, notice that
+	The idea is to integrate our PDE against \( v \). First, notice the identity that 
 	\begin{align*}
 		\int_{D}  \Delta v \cdot v \, dx &= \int_{D}  \sum_{i=1}^{m} v \, \partial_{x_{i}}^{2} v \, dx \\
-																	&= \int_{D}  \sum_{i=1}^{m} \partial_{x_{i}} \left( v\, \partial_{x_{i}} v \right) dx - \int_{D} \sum_{i=1}^{m} \partial_{x_{i}} v \cdot \partial_{x_{i}} v dx.
+																	&= \int_{D}  \sum_{i=1}^{m} \partial_{x_{i}} \left( v\, \partial_{x_{i}} v \right) dx - \int_{D} \sum_{i=1}^{m} \partial_{x_{i}} v \cdot \partial_{x_{i}} v dx. \\
+																	&= \int_{D}  \nabla \cdot (v \, \nabla v)  - \int_{D} \nabla v \cdot \nabla v \, dx.
 	\end{align*}
+	Using this, we can derive
 	\begin{align*}
 		0 &= \int_{D} v \Delta v \, dx \\
 			&= \int_{D} \nabla \cdot (\nabla v) \,  v\, dx \\
