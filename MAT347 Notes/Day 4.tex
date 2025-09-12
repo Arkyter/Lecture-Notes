@@ -1,0 +1,39 @@
+\section{Day 4: NCGE, Pt. 4 (Sep. 12, 2025)}
+We do a review of the non-commutative Gaussian elimination process.
+\begin{enumerate}[(i)]
+    \item We have that $T \subset G$. Recall the definition that
+    \[ M_k = \{ \sigma_{k, j_k} \dots \sigma_{n, j_n} \mid \sigma_{i, j_i} \in T \}. \]
+    \item Anything fed into the table is in $M_1$.
+    \item If two monotone products are equal as elements of $S_n$, then they are the same.
+\end{enumerate}
+\begin{theorem}
+    For all $k$, $M_k \cdot M_k \subset M_k$; we note that in general, $A \cdot B = \{ab \mid a \in A, b \in B\}$.
+\end{theorem}
+\begin{corollary}
+    $M_1 \cdot M_1 \subset M_1$, meaning that $M_1 = G$.
+\end{corollary}
+\begin{proof}
+    To see this, $M_1 \subset G$ per its construction, as all the generators of $G$, $g_1, \dots, g_\alpha$, have been fed into $M_1$. Observe that by our previous claims, we have that products of elements in $M_1$ are in $M_1$. To check that $M_1$ is in fact a group (which requires $M_1$ to be closed under inverses and the group operation), we may first note that it is closed under multiplication, and observe the following;
+    \[ e = g^0, g = g^1, g^2, g^3, \dots \]
+    is an infinite sequence, where each of the elements in said sequence are in $G$. However, $G$ is a finite group, meaning that there must be some sort of periodicity in the sequence. Without loss of generality, for all $n < m$ such that $g^n = g^m$, let us write $m = n + k$, where $k > 0$. Since $g^n = g^n g^k$, we must have that $e = g^k$, meaning that $g^{k-1}$ is indeed the inverse of $g$. Thus, we establish that if $G$ is finite and $M_1$ is a subset closed under multiplication, then $M_1$ is a subgroup of $G$. Thus, we conclude that $G = M_1$ by double inclusion.
+\end{proof}
+\begin{definition}
+    We define the \textit{order} of $g \in G$ to be $\ord_G(g) = \abs{g}$, i.e., the smallest possible $k$ such that $g^k = e$.
+\end{definition}
+\noindent We now prove the theorem with backwards induction (from the maximum value of $k$ to the minimum value, i.e., $k = n$ to $k = 1$).
+\begin{proof}
+    We start with the base case; $M_n \cdot M_n \subset M_n$ is trivially true, because $M_n$ contains only the identity, so $\{\id\} \{\id\} \subset \{\id\}$ is obviously true.
+    \\[8pt]
+    Since Dror doesn't want to work with some random $k$, we're going to assume $M_5 \cdot M_5 \subset M_5$, and show that $M_4 \cdot M_4 \subset M_4$ as a consequence.\footnote{damn!!!! i hate indices!!!! rah!!!! grrr snarll growllll.... (bongos) \href{https://osu.ppy.sh/beatmapsets/1981082\#osu/4113668}{BOMBS OVER BAGHDADDDdddd}} Again, Dror doesn't like indices, so he's going to start by showing that $\sigma_{8, j} \cdot M_4 \subset M_4$. Observe that the set of all $\sigma_{8, j} M_4 \subset \bigcup_{j_4 \geq 4} \sigma_{8, j} \left(\sigma_{4, j_4} \cdot M_5\right)$; by associativity, we have that
+    \[ \bigcup_{j_4 \geq 4} \sigma_{8, j} \left(\sigma_{4, j_4} \cdot M_5\right) = \bigcup_{j_4 \geq 4} \left(\sigma_{8,j} \sigma_{4,j_4}\right) M_5. \]
+    We have that $\sigma_{8,j} \sigma_{4,j_4}$ is a monotone product in $M_4$, meaning that the above is a subset of $M_4 \cdot M_5$, which is equal to $\bigcup_j \sigma_{4,j} (M_5 \cdot M_5)$, which, by our inductive hypothesis, we have that
+    \[ \bigcup_j \sigma_{4,j} (M_5 \cdot M_5) \subset \bigcup_j \sigma_{4,j} M_5 \subset M_4, \]
+    since all $\sigma_{4,j} M_5$ is a monotone product in $M_4$. Moreover, observe that using our process above, we obtain
+    \[ \sigma_{4,j_4} \dots \sigma_{n,j_n} M_4 \subset \sigma_{4,j_4} \dots \sigma_{n-1,j_{n-1}} M_4, \]
+    and so on, since we may note that $\sigma_{i,j_i}$ for $i \geq 4$ still fixes the pivot at $4$. In the end, we have that any $\sigma \in M_4$ must satisfy $\sigma M_4 \subset M_4$, and so we are done with the inductive step.
+\end{proof}
+\hrulebar
+\noindent Recall that in math so far, we've seen linear functions $L : V \to W$ and continuous functions $F : X \to Y$ . We now discuss maps between groups.
+\begin{definition}
+    Let $G, H$ be groups. $\varphi : G \to H$ is called a \textit{group homomorphism} (morphism) if its a set map and $\varphi(xy) = \varphi(x) \varphi(y)$, $\varphi(e_G) = e_H$, and $\varphi(x\inv) = \varphi(x)\inv$.
+\end{definition}
