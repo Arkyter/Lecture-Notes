@@ -116,7 +116,7 @@ We saw that solving a PDE gives infinitely many degrees of freedom. So how do we
 		0 &= \int_{D} v \Delta v \, dx \\
 			&= \int_{D} \nabla \cdot (\nabla v) \,  v\, dx \\
 		\tag{1}&= \int_{D} \nabla \cdot (\nabla v \, v) \, dx - \int_{D}  \nabla v \cdot \nabla v \, dx \\
-			&= \int_{\partial D}  \Delta v \cdot v \cdot \hat n \, dx - \int_{D} |\partial v|^{2} dx \\
+			&= \int_{\partial D}  \Delta v \cdot v \cdot \hat n \, dx - \int_{D} | \nabla v|^{2} dx \\
 	\end{align*}
 	Since \( v \equiv 0 \) on the boundary, \( \Delta v \cdot v \cdot \hat n \equiv 0 \) on the boundary, so it follows that \( \int_{D} | \nabla v|^{2} dx = 0 \). It follows that \( \nabla v \equiv 0 \) on \( D \), thus \( v \) is constant. But we know \( v \equiv 0 \) on \( \partial D \) so \( v \equiv 0 \) on the whole domain. This proves uniqueness.
 \end{example}
