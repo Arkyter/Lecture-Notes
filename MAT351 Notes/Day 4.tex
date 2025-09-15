@@ -1,0 +1,57 @@
+\section{Day 4: Solving some linear PDEs (Sep. 15, 2025)}
+Well-Posed Problems have three parts
+\begin{itemize}
+
+	\item Existence, which we discussed in the last class, and non-existence, which we saw in the homework
+	\item Uniqueness, which we saw examples and a proof of last class
+	\item Continuous dependence on boundary data, which we saw a counterexample of last week for the Laplace problem.
+	
+
+\end{itemize}
+We will mostly study well-posed problems almost all the time. We'll have to prove that we have well-posedness for a given problem (but we might have to leave this for another class if it's too hard). [Also, one can ask what's called a regularity question---this won't come up in this class, but it's about when we can prove a weak solution is continuous or differentiable or smooth or etc. This can be defined precisely using methods of 436/457/458.]
+
+First order PDEs (we are doing \( \mathbb{R}^{2} \) for now) can be classified in a couple different ways.
+\begin{enumerate}
+
+	\item Linear homogeneous, with constant coefficients, which is of the form
+		\[ Qu_{x} + bu_{y} + cu = 0, \]
+	\item Linear homogeneous with non-constant coefficients, which is of the form
+		\[ Q(x, y) u_{x} + b(x, y)u_{y} + c(x, y)u = 0 \]
+	\item Linear non-homogeneous, which is of the form
+		\[ Q(x, y) u_{x} + b(x, y)u_{y} = f(x, y) \]
+	\item Semilinear, of the form
+		\[ Q u_{x} + b u_{y} = f(u), \]
+		where \( f \) is nonlinear.
+	\item Quasilinear, which we will study rigorously later. An example is
+		\[ u_{x} + u u_{y} = 0. \]
+		[This is where the regularity problem I discussed above can pop up.] 
+\end{enumerate}
+
+We will now solve these.
+\begin{enumerate}
+
+	\item Previously, we mentioned that the solutions to \( Qu_{x} + bu_{y} = 0 \) are of the form
+		\[ u(x, y) = F(bx - Qy). \]
+		However, we will do this more rigorously now. We will add additional data (boundary/initial conditions) later---working backwards in some sense. There are three methods we can employ to solve this problem.
+		\begin{enumerate}
+		
+			\item The geometric approach. This PDE says \( \nabla u \cdot (Q, b) = 0 \). In other words, \( \nabla u \perp (Q, b) \). It follows that starting at any point, our function must be constant in the direction of \( (Q, b) \). As such, to make the problem well posed, we just need to provide initial conditions along any (smooth) curve which is never tangent to the level sets. These level sets are called coordinate curves.
+
+				One can deduce that \( u(x, y) = F(bx - Qy) \) is the general solution from this reasoning, but he did not do this explicitly.
+				\begin{example}
+					\[ \left\{ 
+							\begin{array}{c}
+						Q u_{x} + b u_{y} = 0 \\
+						u(x, 0) = g(x)
+					\end{array}\right. \]
+					We know \( u(x, y) = F(bx - Qy) \), so
+					\[ g(x) = u(x, 0) = F(bx), \]
+					thus we have \( F(x) = g \left( \frac{x}{b} \right) \), so
+					\[ u(x, y) = g \left( x - \frac{Q}{b} y \right). \]
+				\end{example}
+			\item Change coordinates---this method is very important in any PDE, as you might be able to reduce the dimensionality of your problem if you are clever. We will do this next time.
+			\item The general approach is the method of characteristics, which we will use later for semilinear, quasilinear, etc. We will also do this next time.
+		
+		\end{enumerate}
+
+\end{enumerate}
