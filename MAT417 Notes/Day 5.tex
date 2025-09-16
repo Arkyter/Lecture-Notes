@@ -41,7 +41,7 @@ To fill in the gaps in the above proof outline, observe that
 More generally, for $G$-finite abelian groups, we have that
 \[ \sum_{x \in \wh G} \chi(g) = \begin{cases} \# G & g = 1, \\ 0 & g \neq 1. \end{cases} \]
 Moreover, $f_\chi(s) = \sum_{p \nmid m} \frac{\chi(p)}{p^s}$ remains bounded as $s \to 1$, and for $\log L(\chi, s)$, we have that
-\[ \log \prod_{p \nmid m} \left(1 - \chi(p) p^{-s}\right)\inv = \sum_{p \nmid m} \sum_{k=1}^\infty \frac{\chi(p)^k}{k p^{ks}} = f_\chi(s) \sum_{p,k \geq 2} \frac{\chi(p)^k}{k p^{ks}}. \]
-In this way, (i'm not sure what $B$ is, but i'm just going to copy the board)
+\[ \log \prod_{p \nmid m} \left(1 - \chi(p) p^{-s}\right)\inv = \sum_{p \nmid m} \sum_{k=1}^\infty \frac{\chi(p)^k}{k p^{ks}} = f_\chi(s) \underbrace{\sum_{p,k \geq 2} \frac{\chi(p)^k}{k p^{ks}}}_{=: B(s)}. \]
+In this way,
 \[ \abs{B(s)} = \sum_{p,k \geq 2} \frac{1}{kp^{ks}}, \]
 which is bounded above as $s \to 1$, so $B(s)$ itself is bounded.
