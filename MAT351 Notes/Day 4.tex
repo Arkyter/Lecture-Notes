@@ -14,13 +14,13 @@ First order PDEs (we are doing \( \mathbb{R}^{2} \) for now) can be classified i
 \begin{enumerate}
 
 	\item Linear homogeneous, with constant coefficients, which is of the form
-		\[ Qu_{x} + bu_{y} + cu = 0, \]
+		\[ au_{x} + bu_{y} + cu = 0, \]
 	\item Linear homogeneous with non-constant coefficients, which is of the form
-		\[ Q(x, y) u_{x} + b(x, y)u_{y} + c(x, y)u = 0 \]
+		\[ a(x, y) u_{x} + b(x, y)u_{y} + c(x, y)u = 0 \]
 	\item Linear non-homogeneous, which is of the form
-		\[ Q(x, y) u_{x} + b(x, y)u_{y} = f(x, y) \]
+		\[ a(x, y) u_{x} + b(x, y)u_{y} = f(x, y) \]
 	\item Semilinear, of the form
-		\[ Q u_{x} + b u_{y} = f(u), \]
+		\[ a u_{x} + b u_{y} = f(u), \]
 		where \( f \) is nonlinear.
 	\item Quasilinear, which we will study rigorously later. An example is
 		\[ u_{x} + u u_{y} = 0. \]
@@ -30,24 +30,24 @@ First order PDEs (we are doing \( \mathbb{R}^{2} \) for now) can be classified i
 We will now solve these.
 \begin{enumerate}
 
-	\item Previously, we mentioned that the solutions to \( Qu_{x} + bu_{y} = 0 \) are of the form
-		\[ u(x, y) = F(bx - Qy). \]
+	\item Previously, we mentioned that the solutions to \( au_{x} + bu_{y} = 0 \) are of the form
+		\[ u(x, y) = F(bx - ay). \]
 		However, we will do this more rigorously now. We will add additional data (boundary/initial conditions) later---working backwards in some sense. There are three methods we can employ to solve this problem.
 		\begin{enumerate}
 		
-			\item The geometric approach. This PDE says \( \nabla u \cdot (Q, b) = 0 \). In other words, \( \nabla u \perp (Q, b) \). It follows that starting at any point, our function must be constant in the direction of \( (Q, b) \). As such, to make the problem well posed, we just need to provide initial conditions along any (smooth) curve which is never tangent to the level sets. These level sets are called coordinate curves.
+			\item The geometric approach. This PDE says \( \nabla u \cdot (a, b) = 0 \). In other words, \( \nabla u \perp (a, b) \). It follows that starting at any point, our function must be constant in the direction of \( (a, b) \). As such, to make the problem well posed, we just need to provide initial conditions along any (smooth) curve which is never tangent to the level sets. These level sets are called coordinate curves.
 
-				One can deduce that \( u(x, y) = F(bx - Qy) \) is the general solution from this reasoning, but he did not do this explicitly.
+				One can deduce that \( u(x, y) = F(bx - ay) \) is the general solution from this reasoning, but he did not do this explicitly.
 				\begin{example}
 					\[ \left\{ 
 							\begin{array}{c}
-						Q u_{x} + b u_{y} = 0 \\
+						a u_{x} + b u_{y} = 0 \\
 						u(x, 0) = g(x)
 					\end{array}\right. \]
-					We know \( u(x, y) = F(bx - Qy) \), so
+					We know \( u(x, y) = F(bx - ay) \), so
 					\[ g(x) = u(x, 0) = F(bx), \]
 					thus we have \( F(x) = g \left( \frac{x}{b} \right) \), so
-					\[ u(x, y) = g \left( x - \frac{Q}{b} y \right). \]
+					\[ u(x, y) = g \left( x - \frac{a}{b} y \right). \]
 				\end{example}
 			\item Change coordinates---this method is very important in any PDE, as you might be able to reduce the dimensionality of your problem if you are clever. We will do this next time.
 			\item The general approach is the method of characteristics, which we will use later for semilinear, quasilinear, etc. We will also do this next time.
