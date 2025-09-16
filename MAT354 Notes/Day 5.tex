@@ -1,0 +1,81 @@
+\section{Day 5: Curves in the Complex Plane (Sep. 16, 2025)}
+We say that a parameterized curve is a function $z : [a, b] \to \CC$ where $t \mapsto z(t)$; in particular, $z$ gives the orientation from $z(a)$ to $z(b)$.We say that $z$ is \textit{smooth} if $z'(t)$ exists and is continuous on $[a, b]$, where $z'(t) \neq 0$ for $t \in [a, b]$. We say it's \textit{piecewise smooth} if $z$ is continuous on $[a, b]$ and we have a partition $a = a_0 < \dots < a_n = b$ such that $z(t)$ is smooth on each $[a_k, a_{k+1}]$.
+\begin{example}
+    Let $z : [0, 2\pi] \to \CC$, where $t \mapsto z_0 + Re^{it}$, and $z_1 : [0, \frac{\pi}{2}] \to \CC$, where $t_0 \mapsto z_0 = Re^{i4t}$.
+\end{example}
+\noindent We say that two smooth parameterizations, $z : [a, b] \to \CC$ and $\wt z : [c, d] \to \CC$, are \textit{equivalent} if they have the same image and orientation; i.e., if there exists a continuously differentiable bijection $s \mapsto t(s)$ from $[c, d]$ to $[a, b]$ such that $t'(s) > 0$ (read: same orientation) and $\wt z = z \circ t$. In this way, all equivalent smooth parameterizations of $z : [a, b] \to \CC$ can be written as a smooth curve $\gamma$ with image $z([a, b])$ and orientation from $z(a)$ to $z(b)$. In addition, we denote $\gamma^-$ as said smooth curve, but with reversed orientation.
+\\[8pt]
+A smooth or piecewise smooth curve given by $z : [a, b] \to \CC$ is said to be \textit{closed} if $z(a) = z(b)$, and \textit{simple} if $z(t) \neq z(s)$ for all $t \neq s$ in the time interval (note that if the curve is closed, we allow $s = a$, $t = b$ to satisfy $z(s) = z(t)$). We now define integration along curves.
+\begin{definition}
+    Let $f : \Omega \to \CC$ be a continuous function, and let $\gamma$ be a smooth curve in $\Omega$ parameterized by $z : [a, b] \to \CC$. Then
+    \[ \int_\gamma f(z) \, dz = \int_a^b f(z(t)) z'(t) \, dt, \]
+    where we may realize $f \circ z : [a, b] \to \CC$. The length of $\gamma$ is defined as $\length(\gamma) = \int_a^b \abs{z'(t)} \, dt$.
+\end{definition}
+\begin{example}
+    Consider the function $f(z) = z\inv$ on $\CC^\ast = \CC \setminus \{0\}$.\footnote{417 notation seeping into my 354 work} Let $C$ be a circle in $\CC^\ast$ centered at $z_0$ with radius $R > 0$, equipped with an anticlockwise orientation. Compute $\int_C f(z) \, dz$.
+\end{example}
+\noindent While this example seems trivial, there is a lot of casework to work through, and we don't have the prerequisite knowledge for it yet.
+\begin{proposition}
+    Integration of continuous functions along smooth (or piecewise smooth) curves satisfy the following properties,
+    \begin{enumerate}[(i)]
+        \item (\textit{Linearity}) For all $\alpha, \beta \in \CC$, we have that
+        \[ \int_\gamma  (\alpha f + \beta g)(z) = \alpha \int_\gamma f(z) \, dz + \beta \int_\gamma g(z) \, dz\]
+        \item If $\gamma^-$ is $\gamma$ with reversed orientation, then
+        \[ \int_{\gamma^-} f(z) \, dz = -\int_\gamma f(z) \, dz. \]
+        \item We have the following inequality,
+        \[ \abs{\int_\gamma f(z) \, dz} \leq \left(\sup_{z \in \gamma} \abs{f(z)}\right) \cdot \length(\gamma). \]
+    \end{enumerate}
+\end{proposition}
+\begin{exercise}
+    Check that the definition of integration is well-defined.
+\end{exercise}
+\noindent We now prove the above proposition.
+\begin{proof}
+    Assume $\gamma$ is smooth and parameterized by $z : [a, b] \to \CC$. Then
+    \[ \abs{\int_\gamma f(z) \, dz} = \abs{\int_a^b f(z(t)) \cdot z'(t) \, dt} \leq \int_a^b \abs{f(z(t)) \cdot z'(t)} \, dt, \]
+    which we note is true by considering
+    \[ \abs{\sum_i u(t_i) + i v(t_i) \Delta t} \leq \sum_i \abs{u(t_i) + iv(t_i)} \Delta t, \]
+    so we indeed have that
+    \[ \int_a^b \abs{f(z(t)) \cdot z'(t)} \, dt \leq \left(\sup_{z \in [a, b]} \abs{f(z)}\right) \cdot \int_a^b \abs{z'(t)} \, dt = \left(\sup_{z \in [a, b]} \abs{f(z)}\right) \cdot \length(\gamma) \qedhere \]
+\end{proof}
+\noindent Suppose $f : \Omega \to \CC$. A \textit{primitive} for $f$ on $\Omega$ is a holomorphic function $F : \Omega \to \CC$ such that $F'(z) = f(z)$ for all $z \in \Omega$. 
+\begin{theorem}[Complex Fundamental Theorem of Calculus]
+    If a continuous function $f$ has a primitive $F$ on $\Omega$, and $\gamma$ is a curve that begins at $w_1$ and ends at $w_2$, then
+    \[ \int_\gamma f(z) \, dz = F(w_2) - F(w_1). \]
+\end{theorem}
+\begin{proof}
+    Suppose $\gamma$ is smooth and parameterized by $z : [a, b] \to \CC$ with $z(a) = w_1$ and $z(b) = w_2$. Then
+    \[ \int_\gamma f(z) \, dz = \int_a^b f(z(t)) z'(t) \, dt = \int_a^b (F(z(t)))' \, dt, \]
+    since we may note that $(F \circ z)' = (F' \circ z) \cdot z' = (f \circ z) \cdot z'$, whereby we note that the above integral evaluates to $F(z(b)) - F(z(a)) = F(w_2) - F(w_1)$.
+\end{proof}
+\begin{corollary}
+    If $f$ is holomorphic on a region $\Omega$ and $f' = 0$, then $f$ is constant.
+\end{corollary}
+\noindent Recall that $\Omega$ is called a region if it is an open connected set. Alternatively, connectedness is equivalent to path connectedness here, since if $\Omega$ is path connected, it is connected (by Medusa), and if it is connected, then it is locally path connected, and through a partition, local path connectedness implies path connectedness.
+\begin{proof}
+    Note that $\Omega$ is path connected per our earlier digerssion; fix $z_0 \in \Omega$. We will show that $f(z) = f(z_0)$ for all $z \in \Omega$; let $z, z_0$ be joined by a piecewise smooth curve $\gamma$. Then we have
+    \[ 0 = \int_\gamma f'(z) \, dz = f(z) - f(z_0), \]
+    and so $f$ is constant on $\Omega$.
+\end{proof}
+\newpage
+\begin{theorem}[Goursat's Theorem]
+    If $\Omega$ is an open set in $\CC$ and $T \subset \Omega$ is a triangle whose interior is also in $\Omega$, then for any holomorphic function $f$ on $\Omega$, we have $\int_T f(z) \, dz = 0$.
+\end{theorem}
+\begin{proof}
+    Let $T^{(0)}$ be the original triangle. Let $d^{(0)}, p^{(0)}$ be the diameter and perimeter of $T^{(0)}$ respectively. Take the midpoints of each side of $T^{(0)}$, and form $4$ smaller triangles with orientation consistent to the orientation of $T^{(0)}$; we will call these triangles $T_1^{(1)}, \dots, T_4^{(1)}$. Clearly,
+    \[ \int_{T^{(0)}} f(z) \, dz = \sum_{k=1}^4 \int_{T_k^(1)} f(z) \, dz, \]
+    along with
+    \[ \abs{\int_{T^{(0)}} f(z) \, dz} = \sum_{k=1}^4 \abs{\int_{T_k^(1)} f(z) \, dz}. \]
+    Let $T_j^{(1)}$ be chosen to be such that $\abs{\int_{T_k^{(1)}} f(z) \, dz}$ is maximal among $k \in \{1, \dots, 4\}$; we will write $T^{(1)} = T_j^{(1)}$, and iterate this process to obtain a sequence of triangles $\{T_0, T_1, \dots\}$, where
+    \[ \abs{\int_{T^{(0)}} f(z) \, dz} \leq 4^n \abs{\int_{T^{(n)}} f(z) \, dz}. \]
+    $d^{(k)}, p^{(k)}$ are defined analogously, where
+    \[ d^{(k)} = \frac{1}{2^k} d^{(0)}, \quad p^{(k)} = \frac{1}{2^k} p^{(0)}. \]
+    Let $\ST^{(n)}$ be the solid triangle enclosed by $T^{(n)}$. Clearly, $\ST^{(0)} \supset \ST^{(1)} \supset \dots \supset \ST^{(n)}$, and there exists a unique $z_0 \in \CC$ such that $z_0 \in \ST^{(n)}$ for every $n$; since $f$ is holomorphic at $z_0$, we have that
+    \[ f(z) = f(z_0) + f'(z_0)(z - z_0) + \psi(z)(z - z_0) \]
+    with $\psi(z) \to 0$ as $z \to z_0$. We may write,
+    \[ \int_{T^{(n)}} f(z) \, dz = \int_{T^{(0)}} f(z_0) \, dz + \int_{T^{(n)}} f'(z_0) (z - z_0) \, dz + \int_{T^{(0)}} \psi(z) (z - z_0) \, dz. \]
+    The first two terms vanish, since $f(z)$, $f'(z_0)(z - z_0)$ have primitives $f(z_0) z$ and $\frac{1}{2} f(z_0) (z - z_0)^2$ respectively. It remains to compute the last term; we have that
+    \[ \abs{\int_{T^{(n)}} \psi(z) (z - z_0) \, dz} \leq \left(\sup_{z \in T^{(n)}} \abs{\psi(z)}\right) \left(\sup_{z \in T^{(n)}} \abs{z - z_0}\right) \length T^{(n)} \]
+    where we note the first term approaches $0$ as $n \to 0$, the second term is bounded above by $2^{-n} d^{(0)}$, and the third term is bounded above by $2^{-n} p^{(n)}$. We may combine everything to obtain
+    \[ \abs{\int_{T^{(0)}} f(z) \, dz} \leq 4^n \abs{\int_{T^{(n)}} f(z) \, dz} \leq d^{(0)} p^{(0)} \left(\sup_{z \in T^{(n)}} \abs{\psi(z)}\right) \taking{n \to \infty} 0. \qedhere \]
+\end{proof}

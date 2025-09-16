@@ -2,18 +2,13 @@
 
 \usepackage{silence}
 \WarningFilter{latex}{You have requested package}
-\WarningFilter{xcolor}{Package option} % `usenames' is obsolete and ignored. yea ik idgaf
-\WarningFilter{microtype}{Unable to apply patch} % fuck off footnotes are working
 
 \usepackage{{style_files/arky}}
-%\usepackage[sexy]{{style_files/evan}}
-%\usepackage{{style_files/NMC}}
 \usepackage{standalone}
 \usepackage{import}
 
 % extra stuff
-\usepackage{quiver}
-\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} % tikz is a finicky annoying thing
+\DeclareMathOperator{\length}{length}
 
 \begin{document}
 \title{MAT354 Lecture Notes}
@@ -28,8 +23,6 @@
 \include{MAT354 Notes/Day 2} 
 \include{MAT354 Notes/Day 3} 
 \include{MAT354 Notes/Day 4}
-
-
-
+\include{MAT354 Notes/Day 5}
 
 \end{document}
