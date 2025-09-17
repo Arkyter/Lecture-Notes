@@ -1,0 +1,60 @@
+\section{Day 5: (Sep. 17, 2025)}
+Recall the definition of a group homomorphism,
+\begin{definition}
+    $\varphi : G \to H$ is said to be a group homomorphism (where $G, H$ are groups) if it is a structure-perserving group transformation, i.e.,
+    \begin{enumerate}[(i)]
+        \item $\varphi(xy) = \varphi(x) \varphi(y)$,
+        \item $\varphi(e_G) = e_H$,
+        \item $\varphi(x \inv) = \varphi(x) \inv$
+    \end{enumerate}
+    for all $x, y \in G$.
+\end{definition}
+\noindent In particular, the three properties above are equivalent to $\varphi(xy \inv) = \varphi(x) \varphi(y) \inv$; they are also equivalent to the implication that (i) implies (ii), (iii). Below are some examples of group homomorphisms,
+\begin{enumerate}[(a)]
+    \item Let $\ZZ, \RR$ both be equipped with addition; then the inclusion map $\ZZ \to \RR$ is a group homomorphism.
+    \item The function $\exp : (\RR, +) \to (\RR_{>0}, x)$ is a group homomorphism ($e^{x+y} = e^x e^y$).
+    \item $\RR \ni t \mapsto e^{2\pi i t} \in \{z \in \CC \mid \abs{z} = 1\} = S^1 \subset \CC$ is a group homomorphism.
+    \item $\varphi : S_4 \to S_3$ given by mapping the faces of a tetrahedron to the three pairs arising from identifying its opposite edges is also a homomorphism. 
+\end{enumerate}
+\noindent As an aside, groups, together with their homomorphisms, form a category. In category theory terms, objects (groups) and maps (group homomorphisms) are seen as points and morphisms.
+\begin{enumerate}[(i)]
+    \item The identity map $I : G \to G$ is a homomorphism.
+    \item If $\phi : G \to H$ and $\psi : H \to K$ are homomorphisms, then $\psi \circ \phi$ is a homomorphism.
+\end{enumerate}
+A morphism is called an \textit{isomorphism} if it has an inverse that is also a morphism, i.e., $\varphi : G \to H$ is an isomorphism if and only if it is bijective with $\varphi \inv : H \to G$ being a group homomorphism.
+\begin{definition}
+    $\Aut G = \{\varphi : G \to G \mid G \text{ is an isomorphism}\}$; i.e., $\Aut G$ is the set of all group isomorphisms.
+\end{definition}
+\noindent As an example, $\Aut \ZZ$ consists of the identity morphism and the ``multiplication by $-1$'' morphism, both of which we may readily check to satisfy isomorphism properties.
+\begin{claim}
+    $\Aut G$ is a group under composition.
+\end{claim}
+\noindent Given any group $G$, there is a map $C : G \to \Aut G$ called ``conjugation'', where $G \ni h \mapsto C_h \in \Aut G$; we have that $C_h(g) := h\inv g h = g^h$, i.e., ``conjugation of $g$ by $h$'', where $C_h : G \to G$.
+\begin{enumerate}[(i)]
+    \item $C_h$ is a morphism, since $C_h(g_1 \cdot g_2) = C_h (g_1) \cdot C_h(g_2)$, since $(g_1 \cdot g_2)^h = g_1^h \cdot g_2^h$, i.e.,
+    \[ g_1^h g_2^h = h \inv g_1 h h \inv g_2 h = h \inv g_2 g_2 h = (g_1 g_2)^h. \]
+    \item $C_h$ is an invertible map; in fact, $C_h \circ C_h \inv = I$. We see this by considering that $(g^{h_1})^{h_2} = g^{h_1 \circ h_2}$. In this way, $g \mapsto (g^{h \inv})^h = g^{h\inv h} = g^e = g$, and the same holds when we consider $g \mapsto (g^h)^{h \inv}$.
+\end{enumerate}
+\begin{claim}
+    $C$ is an anti-homomorphism, i.e. $\varphi(ab) = \varphi(b) \varphi(a)$. Specifically, $C_{h_1 \circ h_2}(g) = C_{h_2} \circ C_{h_1}(g)$, which we see from expanding both sides to obtain $g^{h_1 \cdot h_2} = (g^{h_1})^{h_2}$.
+\end{claim}
+\begin{claim}
+    Let $\varphi : G \to H$ is a morphism. Then $\ker \varphi = \{g \in G \mid \varphi(g) = e_H\}$ is a subgroup of $G$. We write $\ker \varphi < G$. Also, $\img \varphi = \{\varphi(g) \mid g \in G\} < H$, meaning that $\img \varphi$ is a subgroup too.
+\end{claim}
+\noindent As an example, let $t \mapsto e^{2\pi i t}$ from $\RR \to S^1$; we have that
+\[ \ker t = \{t \mid e^{2 \pi i t} = 1\} = \{t \mid \cos 2\pi t + i \sin 2\pi t = 1\} = \ZZ. \]
+We also have that if $\varphi : S_4 \to S_3$, then $\ker \varphi = \{I, (1 2)(3 4), (1 4)(2 3), (1 3)(2 4)\}$, and $\img \varphi = S_3$. In general, if $H < G$, then $H$ is always in the image of $\varphi$ for some $\varphi$; we may immediately see this to be true by considering the inclusion $H \xhookrightarrow{} G$.
+\begin{claim}
+    If $\varphi : G \to S^1$ and $g \in \ker \varphi$, then for any $h \in G$, $g^h \in \ker \varphi$.
+\end{claim}
+\begin{proof}
+    $\varphi(g^h) = \varphi(h\inv g h) = \varphi(h \inv) \varphi(g) \varphi(h) = \varphi(h \inv) \varphi(h) = e$, meaning that $g^h \in \ker \varphi$.
+\end{proof}
+\noindent Yet, if we consider the example where $S_3 < S_4$, is there $\varphi : S_3 \to S_n$ such that $\ker \varphi = S_3$? We observe that $(2 3) \in S_3$, and $(2 3)^{3 \, 4} = (3 4)(2 3)(3 4) = [1 4 3 2] \not\in S_3$, meaning that $S_3$ is not a kernel in $S_n$.
+\begin{definition}
+    $N < G$ is called \textit{normal} in $G$ and denoted $N \lhd G$ if $n \in N$, $h \in G$, then $n^h \in N$ if and only if $h \inv N h \subset N$.\footnote{we're going to use lhd for normal subgroup and see if it works, like ``left hand delta'' ig}
+\end{definition}
+\begin{claim}
+    $\varphi : G \to H$ has $\ker \varphi \lhd G$.
+\end{claim}
+\noindent Suppose $N \lhd G$. Is there a morphism $\varphi : G \to H$ such that $N = \ker \varphi$?
