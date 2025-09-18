@@ -22,13 +22,22 @@ We introduce a follow-up to this thoerem.
 \end{proof}
 
 \newpage
-\noindent We now give some examples.
-\begin{enumerate}[(i)]
-    \item For all $\xi \in \RR$, let $\SF$ denote the Fourier transform, and let
+\noindent We now give an example.
+\begin{problem}
+    For all $\xi \in \RR$, let $\SF$ denote the Fourier transform, and let
     \[ (\SF f)(\xi) = \int_{-\infty}^\infty f(x) e^{-2\pi i x \xi} \, dx. \]
     Show that if $f(x) = e^{-\pi x^2}$, we have that $(\SF f)(\xi) = f(\xi) = e^{-\pi \xi^2}$.
-    \begin{solution}
-        
-    \end{solution}
-
-\end{enumerate}
+\end{problem}
+\begin{solution}
+    In the $\xi = 0$ case, we immediately have that
+    \[ (\SF f)(0) = \int_{-\infty}^\infty f(x) \, dx = \int_{-\infty}^\infty e^{-\pi x^2} = 1, \]
+    from computation through the Gaussian integral (polar coordinate transform). If $\xi > 0$ (we note that $\xi < 0$ follows analogously), let $f : \CC \to \CC$ be given by $f(z) = e^{-\pi z^2}$. Then, for $R > 0$, let us integrate on the rectangle from $-R$ to $R$, $R$ to $R + i\xi$, $R + i\xi$ to $-R + i\xi$, and $-R + i\xi$ to $-R$, where the latter three paths are denoted $I_1, I_3, I_2$ respectively (we intentionally number this way because the two opposing sides $I_1, I_2$ can be tackled together at once). We have that
+    \[ 0 = \int_{\gamma_R} f(z) \, dz = \int_{-R}^R f(x) \, dx + \int_{I_1} f(z) \, dz + \int_{I_2} f(z) \, dz + \int_{I_3} f(z) \, dz. \]
+    Let us consider the integral $\abs{\int_{I_1} f(z) \, dz}$, with parameter $I_1 : [0, \xi] \to \CC$, given by $t \mapsto R + it$; we have that
+    \[ \abs{\int_{I_1} f(z) \, dz} = \abs{\int_0^\xi f(R + it) i \, dt} = \abs{\int_0^\xi e^{-\pi(R + it)^2} i \, dt}, \]
+    for which we observe that the integrand
+    \[ e^{-\pi(R+it)^2} i = e^{-\pi(R^2 - t^2)} e^{i \pi 2 Rt} \leq e^{-\pi(R^2 - \xi^2)} \to 0, \quad R \to +\infty, \]
+    so the integrals on $I_1, I_2 \to 0$ for large enough $R$ (we note that the same conclusion held for $I_2$ because the computation follows analogously). For the last part, consider that
+    \[ \int_{I_3} f(z) \, dz = \int_{-R}^R f(t + i\xi) \, dt = \int_{-R}^R e^{-\pi(t + i\xi)^2} \, dt = e^{\pi \xi^2} \int_{-R}^R e^{-\pi t^2} e^{-2 \pi i \xi t} \, dt, \]
+    upon which we obtain $e^{\pi \xi^2} (\SF f)(\xi)$ as $R \to \infty$. This means we have that $0 = -e^{\pi \xi^2} (\SF f)(\xi)$, where the minus sign is from the orientation of $I_3$. This means we may conclude that $(\SF f)(\xi) = e^{-\pi \xi^2} = f(\xi)$.
+\end{solution}
