@@ -6,6 +6,7 @@
 % - tabular system?
 % - reduce space in maketitle macro
 % - reduce margins, i think, i need more space here :(
+% - package options: include algebra symbols, topo. symbols only, etc... or "all"
 
 % ----------------------------------------------------------------
 % Packages
@@ -62,18 +63,8 @@
 	\setlength{\textheight}{8.75in}
 	\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 	\setlength{\footskip}{0.3in}
-	\ifevanhdr
-		\renewcommand{\headrulewidth}{0.5pt}
-		\renewcommand{\footrulewidth}{0.0pt}
-		\pagestyle{fancy}
-		\lhead{Arky!! :3c}
-		\chead{}
-		\rhead{\nouppercase{\leftmark}}
-		\lfoot{}
-		\cfoot{\thepage}
-		\rfoot{}
-	\fi
-}{ % if koma is used, ...
+}
+{ % if koma is used, ...
 	\@ifundefined{chapter}{}{
 		\addtokomafont{partprefix}{\rmfamily}
 		\renewcommand*{\partformat}{\color{purple}
@@ -91,7 +82,6 @@
 	\renewcommand*{\subsubsectionformat}%
 		{\color{purple}\S\thesubsubsection\enskip}
 	\KOMAoptions{numbers=noenddot}
-	%\usetocstyle{KOMAlike}
 
 	\addtokomafont{subtitle}{\Large}
 	\setkomafont{author}{\Large\scshape}
