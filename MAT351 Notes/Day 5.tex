@@ -1,0 +1,97 @@
+\section{Day 5: More on First-Order Equations (Sep. 17, 2025)}
+Problem set 2 due next Thursday, as the TAs are going to have office hours on Wednesday.
+
+\begin{enumerate}[(1)]
+
+	\item We solved \( au_{x} + b u_{y} = 0 \) for \( u = u(x, y) \), \( a, b \) constants by the geometric method last time.
+	\item Let's use change of variables. Set \( u = u(x, y) \) and set \( v(x', y') = u(x, y) \), where \( x', y' \) represent a change of coordinates from \( x, y \). Differentiating \( u(x, y) \) yields
+		\begin{align*}
+		u_{x} &= v_{x'} \frac{d x'}{dx} + v_{y' } \frac{dy' }{dx} \\
+		u_{y} &= v_{x'} \frac{d x'}{dy} + v_{y' } \frac{dy' }{dy}.
+		\end{align*}
+		From here,  set
+		\[ \left\{ \begin{NiceMatrix}x' = ax + by \\ y' = bx - ay\end{NiceMatrix}  \right. \]
+		Then we have that
+		\[\left\{ \begin{NiceMatrix}
+		u_{x} = a v_{x'} + b v_{y'} \\
+		u_{y} = b v_{x'} - a v_{y' }
+	\end{NiceMatrix}  \right.\]
+	so plugging into our PDE yields
+	\[ a(a v_{x'} + bv_{y' }) + b(bv_{x' } - av_{y' }) = 0, \]
+	and then simplifying,
+	\[ a^{2} v_{x' } + b^{2} v_{x' } = 0. \]
+	But if \( a^{2} + b^{2} = 0 \), then our PDE is quite boring, so assuming it is positive, this implies \( v_{x' } = 0 \). From here, we get that \( v \) is constant with respect to \( x' \), so
+	\[ v = f(y') = f(bx-ay) = u(x, y), \]
+	which solves the PDE.
+\item The book \textit{mentions} this method, but not really systematically, only briefly.\footnote{See Evans 3.2 if you want the systematic development. Fair warning, Evans is not for the faint of heart.} It's a more general method.
+	Let's look at curves in the plane \( \gamma(s) = (x(s), y(s)) \) in parametric form.\footnote{It gets a bit hard to follow, because he switches between \( x \) and \( y \) being functions, and being independent variables at times.} Look at \( u \) along this curve. We define
+	\[ z(s) = u(x(s), y(s)), \]
+	then differentiate along this curve
+	\[ \dot z(s) = \dot x (s) u_{x}(x(s), y(s)) + \dot y(s) u_{y}(x(y), y(s)). \]
+	Using the original ODE, we can get \( \dot z \equiv 0 \) if \( \dot x \equiv a \) and \( \dot y \equiv b \).
+	If we can merely deduce what all the curves satisfying the system
+	\[ \left\{\begin{NiceMatrix}\dot x \equiv a \\ \dot y \equiv b\end{NiceMatrix}\right., \]
+	then we will have curves along which \( \dot z \equiv 0 \), so \( u \) is constant along these curves. We call these curves the characteristic curves of our PDE, and these equations are the characteristic ODEs. The solutions to these ODEs are
+	\[ (x(s), y(s)) = (as + x(0), bs + y(0)), \]
+	which implies that the solution can be determined by values along all curves of this form. This is equivalent to the general solution provided by the other two methods.
+
+	Now, let's suppose that we have data on the \( x \)-axis. Suppose \( y(0) = 0 \). Then we have that
+	\[ u(as + x(0), bs) = u(x(0), 0), \quad s \in \mathbb{R}, \] 
+	so it follows that \( u(x, y) = u(x - \frac{b}{a} y, 0) \). This gives us a unique solution for any [sufficiently regular] data on the \( x \)-axis.
+
+\end{enumerate}
+
+\begin{example}
+	Suppose we are given
+	\[ \left\{\begin{NiceMatrix}u_{x} + y u_{y} = 0 \\ u(0, y) = y^{2}\end{NiceMatrix}\right.  \]
+	Of the three methods, try to do the first two as an exercise. But we will use the method of characteristics once again. Set \( z(s) = u(x(s), y(s)) \). Then once again we have \( \dot z = u_{x} \dot x + u_{y} \dot y \), so set
+	\[ \left\{\begin{NiceMatrix}\dot x(s) = 1 \\ \dot y(s) = y(s)\end{NiceMatrix}\right. \]
+	to get \( \dot z(s) = 0 \). These yield curves of the form
+	\[ x(s) = s + x_{0}, \quad y(s) = y_{0}e^{s}. \]
+	Rearranging, we can get that
+	\[ y(x) = y_{0}e^{x-x_{0}}, \]
+	which makes things slightly nicer. From here, to solve the ODE, notice that \( u(x, Ce^{x}) = u(0, C) \) and so \( u(x, y) = f(ye^{-x}) \). To solve \( f \) given our constraints, notice that
+	\[ f(y e^{0}) = u(0, y) = y^{2}, \]
+	so our solutions are
+	\[ u(x, y) = \left( ye^{-x} \right)^{2} = y^{2} e^{-2x}. \]
+\end{example}
+
+This is the outline of the general method. Find some way to make the function nice along curves \( z \) [they need not be constant, just solvable---if we had \( \dot z(s) = s^{2} \) we could solve something like this], then determine what data is required to specify the characteristic curves (in the above, \( y_{0} \) uniquely determined the curve), then find the curve that intersects \( (x, y) \) in terms of this data, and this will yield the value of \( u \) at this point.
+
+\begin{example}
+	\[ u_{x} + 2xy^{2} u_{y} = 0, \]
+	then we have that
+	\[ \dot x = 1, \dot y = 2xy^{2}, \]
+	so we can get that
+	\[ \frac{dy}{dx} = 2xy^{2}. \]
+	From here, we need to use our ODE knowledge to solve this (it's separable).
+	\begin{align*}
+		\int \frac{1}{y^{2}} \, dy &= \int 2x \, dx \\
+		\frac{-1}{y} &= x^{2} + C \\
+		y &= \left( - x^{2} + C \right)^{-1},
+	\end{align*}
+	and thus these are our characteristic curves, so \( u \) is constant along them. He then graphed these functions as \( C \) varied. You can do this on desmos if you want. Notably, its asymptotes are at \( \pm \sqrt{C} \) and its \( y \)-intercept is \( \frac{1}{C} \). 
+	It follows that \( u(0, \frac{1}{C}) = f(C) = f_{0}(\frac{1}{y} + x^{2}) \)
+\end{example}
+
+\begin{remark}
+	Let \( u = u(t, x) \), \( t \in \mathbb{R} \), \( x \in \mathbb{R}^{m} \). In general, we can solve first order equations like
+	\[ \tag{\( * \)} u_{t} + a(t, x) u_{x} + b(t, x) u_{y} = f(t, x). \]
+	By the same method as before, we want to reduce this into a system of ODEs. Set \( z(s) = u(t(s), x(s)) \). For \( (*) \), the system of characteristics is
+	\[ \left\{\begin{NiceMatrix}\dot t = 1 \\ \dot x = a(t, x) \\ \dot z = f(t, x) - b(t, x) z \end{NiceMatrix}\right. \]
+	This is a nonlinear system of ODEs, but it works.
+\end{remark}
+
+\begin{example}[Semilinear]
+	Find characteristics for
+	\[ \left\{\begin{NiceMatrix}u_{t} + 2t u_{x} = u^{2} \\ u(0, x) = g(x)\end{NiceMatrix}\right. \]
+	To do this, we have that the system of ODEs is
+	\[ \left\{\begin{NiceMatrix}\dot t = 1 \\ \dot x = 2t \\ \dot z = z^{2}\end{NiceMatrix}\right.,\]
+	so if we let our initial data be \( t(0) = 0 \), \( x(0) = x_{0} \), \( z(0) = g(x_{0}) \), then solving yields
+	\[ \left\{\begin{NiceMatrix}t = s \\ x = t^{2} + x_{0} \\ z = \frac{g(x_{0})}{1 - s g(x_{0})}\end{NiceMatrix}\right..\]
+	Rearranging, we have that
+	\[ \left\{\begin{NiceMatrix}s = t \\ x_{0} = x - t^{2} \\ u(t(s), x(s)) = \frac{g(x_{0})}{1- sg(x_{0})}\end{NiceMatrix}\right.,\]
+	so therefore
+	\[ u(t, x) = \frac{g(x-t^{2})}{1-tg(x-t^{2})}.\]
+	This solution could blow up depending on the values of \( g \), so just like nonlinear ODEs (\( x' = 1 + x^{2} \)), we have less assurances of nice properties when we don't have linearity.
+\end{example}
