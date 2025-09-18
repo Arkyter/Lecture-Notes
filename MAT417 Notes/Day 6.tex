@@ -1,3 +1,91 @@
-\section{Day 6: (Sep. 18, 2025)}
+\section{Day 6: Quadratic Reciprocity (Sep. 18, 2025)}
 Our plan for today is to finish the proof that $L(\chi, 1) \neq 0$ for all $\chi \neq 1$, and find an example of explicit number theoretic applications. This example will require the law of quadratic reciprocity, which we wlil discuss (in chapter 1 of Serre's book).
 \\[8pt]
+Let $\zeta_m(s) = \prod L(\chi, s)$, taken over the characters of $(\ZZ/m\ZZ)^\ast$. We want to show that $\zeta_m$ has a pole at $s=1$.
+\[ \zeta_m(s) = \prod_{p \nmid m} \left(1 - \frac{1}{p^{-f(p)s}}\right)^{-g(p)}, \]
+where $f(p)$ is the order of $\ol p$, i.e., the image of $p$ in $(\ZZ/m\ZZ)^\ast$, and $g(p) = \frac{\#\varphi(m)}{f(p)}$. With this, we see that $\zeta_m(s)$ further equals
+\[ \prod_{p \nmid m} \left(\sum_{k=0}^\infty p^{-k f(p) s}\right)^{g(p)}. \]
+If we expand $\prod_{p \nmid m}$, we get $\sum a_n n^{-s}$, where $a_n \geq 0$.
+\begin{lemma}
+Let $f = \sum a_n e^{- \lambda_n z}$ be a Dirichlet series such that $a_n \in \RR_{\geq 0}$ and $\{\lambda_n\}$ is an increasing sequence of real numbers with $\lambda_n \to +\infty$, there exists $\rho \in \RR$ such that $f(z)$ is convergent for $\Re z > \rho$, and assume that $f$ analytically continues to a neighborhood of $\rho$. Then there exists $\eps > 0$ such that $f(z)$ is convergent for $\Re z > \rho - \eps$.
+\end{lemma}
+\noindent A similar statement states that if $f(z) = \sum_{n=0}^\infty a_n (z - \alpha)^n$ converges absolutely for $\abs{z - \alpha} < r$ and extends analytically to $\abs{z - \alpha} < R$, then $\sum a_n (z - \alpha)^n$ converges absolutely for $\abs{z - \alpha} < R$.
+\\[8pt]
+We will not prove our lemma here; said lemma implies that if $\zeta_m(s)$ has no pole at $s = 1$, then its Dirichlet series is convergent for $\Re s > 0$. If
+\[ \zeta_m(s) = \prod_{p \nmid m} \left(1 + p^{-f(p)s} + p^{-2f(p)s} + \dots\right) \]
+is convergent for $s \in \RR$, then
+\[ \prod_{p \nmid m} \left(1 + p^{-\varphi(m)s} + p^{-2 \varphi(m)s} + \dots\right) \]
+is convergent, meaning that the above is equal to $\sum_{n=1}^\infty n^{-\varphi(m) s}$, which we know is divergent for $s = \frac{1}{\varphi(m)}$, yielding a contradiction. This concludes our work with this section of Serre's textbook.
+\hrulebar
+\noindent We now move onto quadratic reciprocity (chapter 1 in Serre).
+\begin{claim}
+    Let $a \in \ZZ$. If the equation $x^2 = a$ has a solution mod $p$ (i.e., in $\ZZ/p\ZZ$) for almost all $p$ (all but finitely many), then $m$ is a square ($x^2 = a$ has a solution in $\ZZ$).
+\end{claim}
+\begin{definition}[Legendre Symbol]
+    Let $p$ be prime, $a \in \ZZ$, and write
+    \[ \left(\frac{a}{p}\right) = \begin{cases} 0 & \text{if } p \mid a, \\ 1 & \text{if } p \nmid a \text{ and } a \text{ is a square mod } p, \\ -1 & \text{if } p \nmid a \text{ and } a \text{ is not a square mod } p. \end{cases} \]
+    In particular, for fixed $p$, we have that $\left(\frac{a}{p}\right)\left(\frac{b}{p}\right) = \left(\frac{ab}{p}\right)$.
+\end{definition}
+\begin{proposition}
+    Let $a \neq 0$ be a squarefree integer. Let $m = 4 \abs{a}$. Then there exists a unique  character $\chi_a$ of $(\ZZ/m\ZZ)^\ast$ such that $\chi_a(p) = (\frac{a}{p})$ for all $p \nmid m$. We have that $\chi_a^2 = 1$.
+\end{proposition}
+\noindent This proposition requires quadratic reciprocity.
+\begin{corollary}
+    Let $a \in \ZZ$ not be a square. Then the set of all $p$ such that $(\frac{a}{p}) = 1$ has density $\frac{1}{2}$ (Dirichlet density).
+\end{corollary}
+\noindent The corollary follows from the proposition and the Dirichlet theorem. We can assume that $a$ is square by taking $m = 4 \abs{a}$. Let $H \subset (\ZZ/m\ZZ)^\ast$ be the kernel of $\chi_a$, and let $p \nmid m$; let $\ol p \in (\ZZ/m\ZZ)^\ast$. Then $\chi_a(p) = 1$ if and only if $p \in H$. We have that
+\[ \abs{H} = \frac{\varphi(m)}{2} = \frac{\#(\ZZ/m\ZZ)^\ast}{2}. \]
+For all $x \in (\ZZ/m\ZZ)^\ast$, the density of primes $p$ such that $\ol p = x$ is $\frac{1}{\varphi(m)}$, which implies that the density of $p$ such that $\ol p \in H$ is exactly $\frac{1}{2}$. In the claim, the density of $p$ such that $(\frac{a}{p}) = 1$ is assumed to be $1$, we have that $a$ has to be a square.
+\\[8pt]
+Quadratic reciprocity compares $(\frac{p}{q})$ with $(\frac{q}{p})$ where $p, q$ are primes. Let $n$ be an odd integer. Then define $\eps(n) = \pm 1$, given by $\frac{n-1}{2} \mod 2$.
+\begin{theorem}[Quadratic Reciprocity]
+    Using $\eps$ as defined above, we have that
+    \[ \left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\eps(p) \eps(q)} = (-1)^{\frac{p-1}{2} \frac{q-1}{2}}. \]
+\end{theorem}
+\noindent The law of quadratic reciprocity is a special case of a much more general series of reciprocity laws in class field theory (this is a baby case of Langlands identity).
+\\[8pt]
+Let $p$ be a prime, and consider $\FF_p = \ZZ/p\ZZ$ (this is a field).
+\begin{lemma}
+    $\FF_p^\ast = (\ZZ/p\ZZ)^\ast$ is a cyclic group of order $p - 1$.
+\end{lemma}
+\begin{corollary}
+    If $p \nmid a$ and $p \neq 2$, then $(\frac{a}{p}) = a^{\frac{p-1}{2}} \mod p$.
+\end{corollary}
+\noindent We see this from $a^{p-1} \equiv 1 \mod p$, so $a^{\frac{p-1}{2}} \equiv \pm 1 \mod p$, which is given by the Legendre symbol $(\frac{a}{p})$. If we write $\ol a = \ol b^2$, then $\ol a^{\frac{p-1}{2}} = \ol b^{p - 1} = 1$ in $\FF_p^\ast$.
+\begin{exercise}
+    If we know that $\FF_p^\ast$ is cyclic, then the converse of this is true.
+\end{exercise}
+\begin{lemma}
+    Let $G$ be a cyclic group of order $2n$. $g \in G$ is a square if and only if $g^n = 1$.
+\end{lemma}
+\noindent Let $K$ be any field. Then either $n \cdot 1_K \neq 0$ for all nonzero integers $n$ (and in this case $K \supset \QQ$ and is said to have characteristic $\QQ$), or $p$ is prime and $\{n \in \ZZ \mid n \cdot 1_K = 0\} = \{pk \mid k \in \ZZ\}$. Here, $p$ is called the characteristic of $K$, and in this case, $K \supset \FF_p$, which is the finite field with $p$ elements. If $K$ is finite, then $\charin K = p > 0$, and $\ZZ \to K$ given by $n \mapsto n \cdot 1_K$ cannot be injective. We have that $K \supset \FF_p$ for some $p$, and $K$ is a finite dimensional vector space over $\FF_p$. This means $K \cong \FF_p^n \implies \#K = p^n = q$.
+\\[8pt]
+For all $p, n$, there exists a unique (up to isomorphism) field $\FF_q$ such that $\# \FF_q = q = p^n$. Let $K$ be the algebraic closure of $\FF_p$ (unique up to isomorphism). If $K$ is any field of characteristic $p$, then $x \mapsto x^p$ is an automorphism of $K$, which we may readily check
+\[ (xy)^p = x^py^p, \quad (x + y)^p = x^p + y^p, \]
+and the same is true for $x \mapsto x^q = x^{p^n}$. Let $\{x \in K \mid x^q = x\}$ be a subfield. Its size is the number of roots of $x^q - x$; we see that $(x^q - x)' = qx^{q-1} - 1 = -1$, where $x^q - x \in K[x]$.  Since $\gcd(x^q - x, (x^q - x)') = 1$, we see that there are no multiple roots, and so said subfield is given by $\FF_q$ and has $q$ elements.
+\\[8pt]
+If $L$ has $q$ elements, then for all $x \in L$, $x^q = x$, i.e., for $x \neq 0$, we have $x^{q-1} = 1$, and $L^\ast = L \setminus \{0\}$ is a group under multiplication, where $\# L^\ast = q - 1$, and $x^{q-1} = 1$ for all $x \in L^\ast$.
+\begin{lemma}
+    For all $q = p^n$, the group $\FF_q^\ast$ is cyclic of order $q - 1$.
+\end{lemma}
+\begin{lemma}
+    For $n \geq 1$, $n = \sum_{d \mid n} \varphi(d)$.
+\end{lemma}
+\begin{lemma}
+    Let $H$ be a finite group of order $n$. Assume that, for all $d \mid n$, $\# \{x \in H \mid x^d = 1\} \leq d$. Then $H$ is cyclic of order $n$.
+\end{lemma}
+\noindent We prove the last two lemmas, since the first follows from our earlier discussion. We start with lemma $6.13$.
+\begin{proof}
+    If there exists $x \in H$ of order $d$, then $\#\{1, x, x^2, \dots, x^{d-1}\} = d$. This means for all $g \in H$, $g^d = 1$, then $y = x^i$, where $i \in [d]$. This means $\#\{x \in H \mid \ord x = d\} = \varphi(d)$. Lemma 6.12 implies that $\{x \mid \ord x = d\}$ is nonempty, and so
+    \[ \#H = n = \sum_{d \mid n} \#\{x \in H \mid \ord x = d \}, \]
+    and we know that it is given by either $\varphi(d) = 0$. Lemma 6.12 states that it is $\varphi(d)$ for all $d$. In this way, we can take $n = d$ to see that $\{x \in H \mid \ord x = n\}$ is nonempty, and we conclude.
+\end{proof}
+\noindent Take $H = \FF_q^\ast$, where $q = p^n$. We have that $\# \FF_q^\ast = p^n = 1$, and let $d$ be a divisor of $q - 1$. Then $\{x \mid x^d = 1\} \leq d$, i.e., the set of roots of $x^d - 1$, which has at most $d$ roots.
+\begin{lemma}
+    \begin{parlist}
+        \item $(\frac{1}{p}) = 1$,
+        \item $(\frac{-1}{p}) = (-1)^{\eps (p)}$,
+        \item $(\frac{2}{p}) = (-1)^{\omega (p)}$, where $\omega(n) = \frac{n^2 - 1}{8} \mod 2$ for odd integers $n$. 
+    \end{parlist}
+\end{lemma}
+\noindent Let $K$ be the algebraic closure of $\FF_p$. Let $\alpha$ be the primitive $8$th root of $1$, where $\alpha^8 = 1$, $\alpha^i \neq 1$ for $1 \leq i \leq 8$. We have that $y = \alpha + \alpha\inv$ and $y^p = \alpha^p + \alpha^{-p}$ in general, where $\alpha^4 = -1$, $\alpha^2 + \alpha^{-2} = 0$, so $y^2 = \alpha^2 + \alpha^{-2} + 2 = 2$. This means that if $p$ satisfies $y^p = -y$, we have $y \not\in \FF_p$. This means if $p \equiv \pm 1 \mod 8$, then $y^p = y$ implies $y \in \FF_p = \ZZ/p\ZZ$; specifically, $y^2 = 2$ means $2$ is a square modulo $p$, and if $p \equiv \pm 5 \mod 8$, we have a similar argument to follow.
