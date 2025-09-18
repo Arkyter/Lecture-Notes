@@ -1,0 +1,34 @@
+\section{Day 6: Cauchy's Theorem on a Disc (Sep. 18, 2025)}
+Recall Goursat's theorem from last class, where if $\Omega \subset \CC$ is open and $T \subset \Omega$ is a triangle whose interior is contained in $\Omega$, then for any holomorphic function $f$ on $\Omega$, we have that
+\[ \int_T f(z) \, dz = 0. \]
+We introduce a follow-up to this thoerem.
+\begin{theorem}
+    If $f$ is holomorphic on a disc, then $\int_\gamma f(z) \, dz = 0$ for any closed curve $\gamma$ in that disc.
+\end{theorem}
+\noindent To prove this, we start by using Goursat's theorem to show $f$ has a primitive, and then we complete the proof using the complex FTC, i.e., if $f$ is holomorphic on a disc, then $f$ has a primitive on that disc.
+\begin{proof}
+    After a translation, we may assume that the center of the disc is $0$. Define $F : D \to \CC$, given by $z \mapsto \int_{\gamma_z} f(u) \, du$. To show that $F$ is holomorphic and $F'(z) = f(z)$, fix $z \in D$, and observe that for any $h \in \CC \setminus \{0\}$ with $z + h \in D$, we have that
+    \[ F(z+h) - F(z) = \int_{\gamma_{z+h}} f(u + h) \, du - \int_{\gamma_z} f(u) \, du. \]
+    Regard this as the path from $z$ to $0$ to $z+h$. Let us add to the expression the integrals over two paths, going both directions so that we do not change the value of $F(z+h) - F(z)$, one between $z$ and $\Re(z+h) + i \Im(z)$, and one between $z$ and $z+h$ directly. In this manner, we've created a rectangular region and a triangular region on which we have path integrals over, and per Goursat's theorem, they all vanish, and we are left with the integral on the path $\eta$ from $z$ to $z+h$. This means all that remains is to compute\footnote{GOD KNOWS if this is a $w$ or an $\omega$, i'm just going to use $w$ for now. forensic analysis on yalls handwriting holy shit}
+    \[ F(z + h) - F(z) = \int_{\eta} f(w) \, dw \]
+    Since $f$ is continuous at $z$, we may write $f(w) = f(z) + \psi(w)$, where $\psi(w) \to 0$ as $w \to z$. This means we may write
+    \[ \int_\eta f(w) \, dw = \int_\eta f(z) \, dw + \int_\eta \psi(w) \, dw = f(z)(z+h - z) + \int_\eta \psi(w) \, dw, \]
+    upon which we may rearrange and rewrite the above RHS to obtain
+    \begin{align*}
+        \abs{\frac{F(z+h) - F(z)}{h} - f(z)} &= \abs{\frac{1}{h} \int_\eta \psi(w) \, dw} \\
+        &\leq \frac{1}{\abs{h}} \sup_{w \in \eta} \abs{\psi(w)} \underbrace{\length(\eta)}_{=\abs{h}} = \sup_{w \in \eta} \abs{\psi(w)} \taking{h \to 0} 0.
+    \end{align*}
+    This concludes the hard part of the proof in showing that $f$ has a primitive; by complex FTC, we immediately see that $\int_\gamma f(z) \, dz = 0$, since $\gamma$ is a closed curve and its endpoints are equal to each other.
+\end{proof}
+
+\newpage
+\noindent We now give some examples.
+\begin{enumerate}[(i)]
+    \item For all $\xi \in \RR$, let $\SF$ denote the Fourier transform, and let
+    \[ (\SF f)(\xi) = \int_{-\infty}^\infty f(x) e^{-2\pi i x \xi} \, dx. \]
+    Show that if $f(x) = e^{-\pi x^2}$, we have that $(\SF f)(\xi) = f(\xi) = e^{-\pi \xi^2}$.
+    \begin{solution}
+        
+    \end{solution}
+
+\end{enumerate}

@@ -147,10 +147,7 @@
 \newcommand{\wt}{\widetilde}
 \newcommand{\wh}{\widehat}
 %\newcommand{\th}{^{\text{th}}} % broken don't use
-\DeclareMathOperator{\cis}{cis}
-\DeclareMathOperator*{\lcm}{lcm}
-\DeclareMathOperator*{\argmin}{arg min}
-\DeclareMathOperator*{\argmax}{arg max}
+\DeclareMathOperator*{\lcm}{lcm} % lowest common multiple (i thought this was alr defined)
 
 % general - inaction
 \newcommand{\liff}{\leftrightarrow}
@@ -189,14 +186,14 @@
 \DeclareMathOperator{\grad}{grad} % gradient
 \let\div\relax
 \DeclareMathOperator{\div}{div} % original is literally a division symbol
-\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\curl}{curl} % curl
 \DeclareMathOperator{\Vol}{Vol} % as in volume
 
 % inequalities
-\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
-\newcommand{\symsum}{\sum_{\mathrm{sym}}}
-\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
-\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}} % cyclic sum
+\newcommand{\symsum}{\sum_{\mathrm{sym}}} % symmetric sum
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}} % cyclic product
+\newcommand{\symprod}{\prod_{\mathrm{sym}}} % symmetric product
 
 % algebra
 \let\mod\relax
@@ -206,30 +203,41 @@
 \DeclareMathOperator{\spn}{span} % because span is a command already
 \DeclareMathOperator{\sign}{sign} % sign
 \DeclareMathOperator{\Aut}{Aut} % automorphism
-\DeclareMathOperator{\Inn}{Inn} 
+\DeclareMathOperator{\Inn}{Inn} % inner automorphism
 \DeclareMathOperator{\Syl}{Syl} % sylow
 \DeclareMathOperator{\Gal}{Gal} % galois
 \DeclareMathOperator{\GL}{GL} % general linear group
 \DeclareMathOperator{\SL}{SL} % special linear group
 \newcommand{\inv}{^{-1}} % inverses
 
+% complex analysis
+\DeclareMathOperator{\cis}{cis} % cis x + i sin x: shorthand
+\DeclareMathOperator*{\argmin}{arg min} % complex; argument min
+\DeclareMathOperator*{\argmax}{arg max} % complex; argument max
+
+% real analysis
+% tbd
+
+% functional analysis
+% tbd - fredholm, etc., calkin algebras
+
 % topology
 \DeclareMathOperator{\diam}{diam}
 
 % operators
-\DeclareMathOperator{\img}{im} % Image
-\DeclareMathOperator{\Img}{Im} % Image
-\DeclareMathOperator{\coker}{coker} % Cokernel
-\DeclareMathOperator{\Coker}{Coker} % Cokernel
-\DeclareMathOperator{\Ker}{Ker} % Kernel
-\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\img}{im} % image
+\DeclareMathOperator{\Img}{Im} % image (i feel like this is the categorical sense tho)
+\DeclareMathOperator{\coker}{coker} % cokernel
+\DeclareMathOperator{\Coker}{Coker} % cokernel
+\DeclareMathOperator{\Ker}{Ker} % kernel (note that \ker is already defined)
+\DeclareMathOperator{\rank}{rank} % rank
 \DeclareMathOperator{\Spec}{Spec} % spectrum
 \DeclareMathOperator{\Tr}{Tr} % trace
 \DeclareMathOperator{\pr}{pr} % projection, other than \pi
 \DeclareMathOperator{\ext}{ext} % extension
 \DeclareMathOperator{\pred}{pred} % predecessor
-\DeclareMathOperator{\dom}{dom} % domain
-\DeclareMathOperator{\ran}{ran} % range
+\DeclareMathOperator{\dom}{dom} % domain (rarely used)
+\DeclareMathOperator{\ran}{ran} % range (rarely used)
 \DeclareMathOperator{\Hom}{Hom} % homomorphism
 \DeclareMathOperator{\Mor}{Mor} % morphisms
 \DeclareMathOperator{\End}{End} % endomorphism
@@ -242,8 +250,8 @@
 \newcommand{\ku}{\mathfrak u}
 \newcommand{\kz}{\mathfrak z}
 \newcommand{\km}{\mathfrak m}
-\newcommand{\kp}{\mathfrak p}
-\newcommand{\kq}{\mathfrak q}
+\newcommand{\kp}{\mathfrak p} % primes
+\newcommand{\kq}{\mathfrak q} % primes
 \DeclareMathOperator{\Ext}{Ext} % Ext functor
 \DeclareMathOperator{\Tor}{Tor} % Tor functor
 \newcommand{\GF}{\opname{GF}}
@@ -256,15 +264,16 @@
 \newcommand{\SC}{\mathcal C} % C^r spaces
 \newcommand{\SD}{\mathcal D}
 \newcommand{\SE}{\mathcal E}
+\newcommand{\SF}{\mathcal F} % Fourier transform
 % \newcommand{\SL}{\mathcal L} % what do i even use to replace this
 \newcommand{\SM}{\mathcal M}
 \newcommand{\SN}{\mathcal N}
-\newcommand{\SO}{\mathcal O}
+\newcommand{\SO}{\mathcal O} % open cover
 \newcommand{\SP}{\mathcal P}
 \newcommand{\SQ}{\mathcal Q}
 \newcommand{\SR}{\mathcal R}
 % \newcommand{\SS}{\mathcal S}
-\newcommand{\ST}{\mathcal T}
+\newcommand{\ST}{\mathcal T} % topology
 
 % script letters
 \newcommand{\SCA}{\mathscr A}
