@@ -66,6 +66,7 @@
 	\setlength{\footskip}{0.3in}
 }
 { % if koma is used, ...
+	\usepackage[headsepline]{scrlayer-scrpage}
 	\@ifundefined{chapter}{}{
 		\addtokomafont{partprefix}{\rmfamily}
 		\renewcommand*{\partformat}{\color{purple}
@@ -88,7 +89,6 @@
 	\setkomafont{author}{\Large\scshape}
 	\setkomafont{date}{\Large\normalsize}
 
-	\usepackage[headsepline]{scrlayer-scrpage}
 	\renewcommand{\headfont}{}
 	\addtolength{\textheight}{3.14cm}
 	\setlength{\footskip}{0.5in}
@@ -206,14 +206,19 @@
 \DeclareMathOperator*{\argmin}{arg min} % complex; argument min
 \DeclareMathOperator*{\argmax}{arg max} % complex; argument max
 
-% real analysis
+% real analysis - import from 357/457-1000 probably
 % tbd
 
-% functional analysis
+% functional analysis - import from joshua lau from MAT436
 % tbd - fredholm, etc., calkin algebras
+%\newcommand{\indx}{\operatorname{index}}
+%\DeclareMathOperator{\indx}{indx}
 
 % topology
 \DeclareMathOperator{\diam}{diam} % diameter of a set, metric
+\DeclareMathOperator{\bdry}{bdry} % boundary
+\DeclareMathOperator{\Bdry}{Bdry} % boundary alternative
+\DeclareMathOperator{\diag}{diag} % diagonal
 
 % operators
 \DeclareMathOperator{\img}{im} % image
