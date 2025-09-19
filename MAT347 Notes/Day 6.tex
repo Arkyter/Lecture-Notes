@@ -1,0 +1,42 @@
+\section{Day 6: Normal Subgroup as Kernel of Homomorphism (Sep. 19, 2025)}
+Term test $1$ has been moved a week earlier to Nov. 4; homework $1$ is due at 11:59pm today, and homework $2$ is online now.
+\\[8pt]
+We now recap last class' definitions,
+\begin{definition}
+    We say that $N \lhd G$ if $N < G$ and for all $h \in G$, we have that $N^h = h \inv N h = N$. We say that $N$ is \textit{normal.}
+\end{definition}
+\begin{claim}
+    If $\varphi : G \to H$, then $\ker \varphi \lhd G$.
+\end{claim}
+\noindent Given $N \lhd G$, there exists a unique $\varphi : G \surjto H$ (we denote surjections with double headed arrows, $\surjto$) with $\ker \varphi = N$. As an aside, surjections are the same as equivalence relations. This is a general set theoretic fact, and we should be aware of it.
+\\[8pt]
+Let us discuss in terms of sets, for now. We say that a relation $\sim : X \times X \to \{T, F\}$ (i.e., true or false) on a set $X$ is called an \textit{equivalence relation}, where $a \sim b$ if $\sim(a, b) = T$, if it satisfies the following axioms,
+\begin{enumerate}[(i)]
+    \item (\textit{Reflexivity}) For all $x \in X$, we have that $x \sim x$.
+    \item (\textit{Symmetry}) For all $x, y \in X$, we have that $x \sim y$ if and only if $y \sim x$.
+    \item (\textit{Transitivity}) For all $x, y, z \in X$, if $x \sim y$ and $y \sim z$, then $x \sim z$.
+\end{enumerate}
+\noindent As an example of an equivalence relation, let $f : X \to Y$ be a function, and define $a \sim b$ for $a, b \in X$ if $f(a) = f(b)$.
+\begin{definition}
+    Let $(X, \sim)$ be a set equipped with an equivalence relation $\sim$; given some $x \in X$, we say $[x]_\sim  = \{y \in X \mid x \sim y\}$. The subscript $\sim$ denoting which equivalence class it belongs to is dropped if it is evident from context.
+\end{definition}
+\begin{claim}
+    Equivalence classes are either equal or disjoint, i.e., let $[x], [y]$ be equivalence classes; we have that $[x] \cap [y]$ is either $\emptyset$ or $[x] = [y]$. The former occurs if $x \not\sim y$, and the latter occurs if $x \sim y$.
+\end{claim}
+\begin{definition}
+    We say that $X / \sim = \{[x] \mid x \in X\}$ is the set of equivalence classes on $X$.
+\end{definition}
+\begin{definition}
+    $\phi : X \to X / \sim$ is the quotient map $\phi : X \ni x \mapsto [x]$. We have that $\phi$ is surjective. Specifically, $\phi : X \surjto Y \implies a \sim b$ if $\phi(a) = \phi(b)$, and $\sim$ induces the $\phi : X \to X/\sim$ map.
+\end{definition}
+\noindent We now look to construct the surjection $\varphi : G \surjto H$ with $\ker \varphi = N \lhd G$. Given $N \lhd G$, we define $g_1 \sim g_2$ if and only if $g_1\inv g_2 \in N$. This comes from the train of thought where we want $\varphi(g_1) = \varphi(g_2) \implies \varphi(g_1)\inv \varphi(g_2) = \varphi(g_1 \inv g_2) = e$, i.e., we're constructing $\varphi$ such that $N$ is the kernel of $\varphi$. Clearly, we can see that $\sim$ is an equivalence relation when defined as earlier; reflexivity and symmetry are immediate, and for transitivity, we see that if $a, b, c \in G$ are such that $a \inv b, b \inv c \in N$, then $a \inv c = (a \inv b) (b \inv c) \in N$, since $N$ is a subgroup and is closed.
+\\[8pt]
+In this manner, let us write $G/\sim = \{[g] \mid g \in G\}$. We write this group as $G/N = \{gN \mid g \in G\}$, and $[g] = g \cdot N = \{g \cdot n \mid n \in N\}$. Indeed, we have that $\phi : G \to G/N$ by $\varphi(g) = g \cdot N$. It remains to check that $\phi$ is a group homomorphism and $\ker \phi = N$. Let us define a group structure on $G/N$ by including the operation $[g_1] \cdot [g_2] = [g_1 g_2]$. To check that $\cdot$ is well-defined, observe that for any $g_1 \sim g_1'$ and $g_2 \sim g_2'$, we have that $g_1g_2 \sim g_1'g_2'$, since by definition, there exists $n_1, n_2 \in N$ where $g_1' = g_1 \cdot n_1$, and $g_2' = g_2 \cdot n_2$, so
+\[ g_1'g_2' = g_1n_1g_2n_2 = g_1g_2g_2\inv n_1 g_2 n_2 = g_1 g_2 n_1^{g_2} n_2 \in g_1g_2 N, \]
+where we use the fact that $N$ is normal to see that $n_1^{g_2} \in N$. We note that this is the only place that we've used the fact that $N$ is normal.
+\begin{theorem}
+    Let $G/N$ be a group, and let $\phi : G \to G/N$ be a morphism (recall that we let $g \mapsto g N$). Then $\ker \phi = N$.\footnote{we call this the natural homomorphism iirc? and its surj}
+\end{theorem}
+\begin{proof}
+    Since we already established that $\phi$ is a well-defined morphism, we have that $\ker \phi = \{g \in G \mid \phi(g) = gN = N\} = N$, since $gN = N$ if and only if $g \in N$ (which is true in general for any subgroup, not just normal $N$).
+\end{proof}

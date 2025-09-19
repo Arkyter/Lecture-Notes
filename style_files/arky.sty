@@ -7,6 +7,7 @@
 % - reduce space in maketitle macro
 % - reduce margins, i think, i need more space here :(
 % - package options: include algebra symbols, topo. symbols only, etc... or "all"
+% - hrulebar fix
 
 % ----------------------------------------------------------------
 % Packages
@@ -115,7 +116,7 @@
 \newcommand{\hrulebar}{
   \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
   \par\nointerlineskip \vspace{\baselineskip}
-}
+} % this needs to be fixed.
 \newcommand{\confusion}[1]{
   \cbcolor{crimson}
   \begin{changebar}
@@ -124,36 +125,35 @@
 }
 
 % general - action on inputs
-\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\taking}[1]{\xrightarrow{#1}}
-\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\ol}{\overline}
-\newcommand{\ul}{\underline}
-\newcommand{\wt}{\widetilde}
-\newcommand{\wh}{\widehat}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}} % cube root
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} % floor
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil} % ceiling
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert} % absolute value
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert} % norm
+\newcommand{\taking}[1]{\xrightarrow{#1}} % limit
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}} % definition in equation
+\newcommand{\id}{\mathrm{id}} % identity
+\newcommand{\ol}{\overline} % bar --- these four are just there to fix typeset
+\newcommand{\ul}{\underline} % underline
+\newcommand{\wt}{\widetilde} % tilde
+\newcommand{\wh}{\widehat} % hat
 %\newcommand{\th}{^{\text{th}}} % broken don't use
 \DeclareMathOperator*{\lcm}{lcm} % lowest common multiple (i thought this was alr defined)
 
-% general - inaction
-\newcommand{\liff}{\leftrightarrow}
-\newcommand{\lthen}{\rightarrow}
+% general - action between objects
+\newcommand{\liff}{\leftrightarrow} % rarely used
+\newcommand{\lthen}{\rightarrow} % rarely used
 \newcommand{\opname}{\operatorname}
-\newcommand{\surjto}{\twoheadrightarrow}
-\newcommand{\injto}{\hookrightarrow}
+\newcommand{\surjto}{\twoheadrightarrow} % surjection map
+\newcommand{\injto}{\hookrightarrow} % injective map
 
 % general - miscellaneous
 \newcommand\restr[2]{{ % restriction
 	\left.\kern-\nulldelimiterspace #1 \littletaller\right|_{#2}
 }}
-\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}} % evaluating integral stuff
 
 % symbols
-\newcommand{\eps}{\varepsilon}
+\newcommand{\eps}{\varepsilon} % epsilon. duh
 \newcommand{\catname}{\mathsf}
 
 % fields, etc.
@@ -173,6 +173,7 @@
 \DeclareMathOperator{\Cov}{Cov} % covariance
 
 % multivar calculus
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}} % evaluating integral stuff
 \DeclareMathOperator{\grad}{grad} % gradient
 \let\div\relax
 \DeclareMathOperator{\div}{div} % original is literally a division symbol
@@ -212,7 +213,7 @@
 % tbd - fredholm, etc., calkin algebras
 
 % topology
-\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\diam}{diam} % diameter of a set, metric
 
 % operators
 \DeclareMathOperator{\img}{im} % image
