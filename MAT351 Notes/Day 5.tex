@@ -76,10 +76,16 @@ This is the outline of the general method. Find some way to make the function ni
 
 \begin{remark}
 	Let \( u = u(t, x) \), \( t \in \mathbb{R} \), \( x \in \mathbb{R}^{m} \). In general, we can solve first order equations like
-	\[ \tag{\( * \)} u_{t} + a(t, x) u_{x} + b(t, x) u_{y} = f(t, x). \]
-	By the same method as before, we want to reduce this into a system of ODEs. Set \( z(s) = u(t(s), x(s)) \). For \( (*) \), the system of characteristics is
+	\[ \tag{\( * \)} u_{t} + a(t, x) u_{x} + b(t, x) u = f(t, x). \]
+	By the same method as before, we want to reduce this into a system of ODEs. Set \( z(s) = u(t(s), x(s)) \). Then we have that
+	\begin{align*}
+		z'(s) &= t'(s) u_{t}(t(s), x(s)) + x'(s) u_{x}(t(s), x(s)) \\
+		\tag{plugging into \( (*) \)}&= f(t(s), x(s)) - b(t(s), x(s)) u(t(s) x(s)) \\
+					&= f(t(s), x(s)) - b(t(s), x(s)) z(s).
+	\end{align*}
+	Thus for \( (*) \), we say that the system of characteristics is
 	\[ \left\{\begin{NiceMatrix}\dot t = 1 \\ \dot x = a(t, x) \\ \dot z = f(t, x) - b(t, x) z \end{NiceMatrix}\right. \]
-	This is a nonlinear system of ODEs, but it works.
+	We set \( \dot t = 1 \) because the parameterization of the path doesn't matter. This is a nonlinear system of ODEs, but it works.
 \end{remark}
 
 \begin{example}[Semilinear]
