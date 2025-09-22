@@ -151,12 +151,13 @@
 \newcommand\restr[2]{{ % restriction
 	\left.\kern-\nulldelimiterspace #1 \littletaller\right|_{#2}
 }}
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}} % for restriction
 
 % symbols
 \newcommand{\eps}{\varepsilon} % epsilon. duh
 \newcommand{\catname}{\mathsf}
 
-% fields, etc.
+% fields, etc. (repurposed to be mathbb commands tbh)
 \newcommand{\CC}{\mathbb C} % complex
 \newcommand{\FF}{\mathbb F} % field, or just F
 \newcommand{\HH}{\mathbb H} % half space? quaternion? what?
@@ -165,6 +166,7 @@
 \newcommand{\RR}{\mathbb R} % reals
 \newcommand{\ZZ}{\mathbb Z} % integers
 \newcommand{\TT}{\mathbb T} % sometimes called the unit circle in linear ops
+\newcommand{\DD}{\mathbb D} % disc... sometimes... 354...
 
 % probability
 \newcommand{\EE}{\mathbb E} % expectation
@@ -212,7 +214,7 @@
 % functional analysis - import from joshua lau from MAT436
 % tbd - fredholm, etc., calkin algebras
 %\newcommand{\indx}{\operatorname{index}}
-%\DeclareMathOperator{\indx}{indx}
+%\DeclareMathOperator{\indx}{index} ? or ind
 
 % topology
 \DeclareMathOperator{\diam}{diam} % diameter of a set, metric
