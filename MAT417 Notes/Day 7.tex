@@ -1,0 +1,40 @@
+\section{Day 7: Law of Quadratic Reciprocity (Sep. 23, 2025)}
+Today, our main objective is to prove the law of quadratic reciprocity, and discuss an application from last lecture. Let $p, \ell$ be distinct odd primes; then recall that we have
+\[ \left(\frac{p}{\ell}\right) \left(\frac{\ell}{p}\right) = (-1)^{\eps(p) \eps(\ell)}, \]
+where $\eps(p) = \frac{p-1}{2} \mod 2$, which is given by $0$ if $p \equiv 1$ modulo $4$, and $1$ if $p \equiv 3$ modulo $4$. In this manner, we have that
+\[ \left(\frac{-1}{p}\right) = (-1)^{\eps(p)}, \]
+which was discussed last time. The trick is to use a Gauss sum in a $K$-algebraically closed field (later, we'll assume that $\charin K = p > 0$). Let $w$ be a primitive $\ell$-th root of $1$> As an example, if we take $K = \CC$, we may take $w = e^{2\pi i/\ell}$, and the Gauss sum
+\[ \sum_{x \in \FF} \left(\frac{x}{\ell}\right) w^x = y \in K \]
+makes sense.
+\begin{lemma}
+    $y^2 = (-1)^{\eps(\ell)} \ell$.
+\end{lemma}
+\begin{lemma}
+    $y^{p-1} = (\frac{p}{\ell})$ if $\charin K = p$.
+\end{lemma}
+\noindent Taking both lemmas together, we have the theorem of quadratic reciprocity, where in particular, in $\FF_p$, we have that $(\frac{n}{p}) = n^{\frac{p-1}{2}}$. For all $K$, we have a map $\ZZ \to K$ where $n \mapsto n \cdot 1_K$, and so
+\[ \left(\frac{(-1)^{\eps(\ell)} \ell}{p}\right) = y^{p - 1} = \left(\frac{p}{\ell}\right), \]
+where the first lemma yields the first equality, and the second lemma the second. We start by proving lemma $2$.
+\begin{proof}
+    We want $y^p = (\frac{p}{2}) y$, for which we need to know the $y \neq 0$ case which will follow from lemma $1$. We may write,
+    \[ y^p = \sum_{x \in \FF_\ell} \left(\frac{x}{\ell}\right) w^{xp} = \sum_{x \in \FF_\ell} \left(\frac{p\inv z}{\ell}\right) w^z = \left(\frac{p\inv}{\ell}\right) y, \]
+    since
+    \[ \left(\frac{p\inv z}{\ell}\right) = \left(\frac{p\inv}{\ell}\right)\left(\frac{z}{\ell}\right), \quad \sum_{x \in \FF_\ell} \left(\frac{p\inv z}{\ell}\right) w^z = \left(\frac{p\inv}{z}\right) \sum_{z \in \FF_\ell} w^z. \]
+\end{proof}
+\noindent In particular, the lemma says that
+\[ \left(\sum_{x \in \FF_\ell} \left(\frac{x}{\ell}\right) e^{2 \pi i x / \ell}\right)^2 = (-1)^{\eps(\ell)} \ell. \]
+We now work through lemma $1$.
+\begin{proof}
+    Let $y = \sum_{x \in \FF_\ell} (\frac{x}{\ell}) w^x$, and consider that
+    \[ \sum_{x, z \in \FF_\ell} \left(\frac{xz}{\ell}\right) w^{x + z} = \sum_{u \in \FF_\ell} w^u \left(\sum_{t \in \FF_\ell} \left(\frac{t(u-t)}{\ell}\right)\right), \]
+    for which we note $t(u - t) = tu - t^2$, so
+    \[ \left(\frac{t(u-t)}{\ell}\right) = \left(\frac{-t^2}{\ell}\right)\left(\frac{1-ut\inv}{\ell}\right) = (-1)^{\eps(\ell)} \left(\frac{1-ut\inv}{\ell}\right), \]
+    and
+    \[ (-1)^{\eps(\ell)} y^2 = \sum_{u \in \FF_\ell} C_u w^u, \]
+    where $C_u = \sum_{t \in \FF_\ell^\ast} \left(\frac{1 - ut\inv}{\ell}\right)$, for which we may note that for $u = 0$, we have $C_u = \ell$, and for nonzero $u$, we have $s = 1 - ut\inv$, and so the sums over $\FF_\ell \setminus \{1\}$ are given by
+    \[ C_u = \sum_{s \in \FF_\ell} \left(\frac{s}{\ell}\right) - \left(\frac{1}{\ell}\right) = -1. \]
+    In this manner, we may continue our computation from earlier and obtain
+    \[ \sum C_u w^u = (\ell - 1) - \sum_{u \in \FF_\ell^\ast} w^u = \ell, \]
+    where the latter summation is equal to $-1$ because $\sum_{u \in \FF_\ell} w^u = 0$.
+\end{proof}
+\noindent We now discuss applications. Let $a \in \ZZ$, and let $m = 4 \abs{a}$; then there exists a unique character modulo $m$ such that, for all $p \nmid m$, $\chi_a(p) = \left(\frac{a}{p}\right)$. Uniqueness is obvious; next time, we will show existence from quadratic reciprocity.
