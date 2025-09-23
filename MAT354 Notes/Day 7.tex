@@ -9,7 +9,7 @@ We start with an example.
     \[ e^{-(\rho e^{i \pi/4})^2} = e^{-\rho^2 \left(\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}\right)^2} = e^{-\frac{\rho^2}{2} (1 + i)^2} = e^{-\rho^2 i} = \cos(\rho^2) + i \sin(\rho^2). \]
     Let the three paths in the contour (which we will call $\gamma_R$) be given by $I_1, I_2, I_3$ in order; we have that, by Cauchy's theorem,
     \[ 0 = \int_{\gamma_R} f(z) \, dz = \int_{I_1} f(z) \, dz + \int_{I_2} f(z) \, dz + \int_{I_3} f(z) \, dz. \]
-    Directly compute as follows, where $f(z) = e^{z^2}$,
+    Directly compute as follows, where $f(z) = e^{-z^2}$,
     \[ \int_{I_1} f(z) \, dz = \int_0^R e^{-x^2} \, dx \taking{R \to \infty} \frac{\sqrt{\pi}}{2}, \]
     Let $-I_3 : [0, R] \to \CC$ be given by $t \mapsto t e^{i\pi/4}$; we have,
     \begin{align*}
