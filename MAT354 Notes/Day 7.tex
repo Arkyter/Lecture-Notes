@@ -1,0 +1,139 @@
+\section{Day 7: Cauchy's Integral Formula and Corollaries (Sep. 23, 2025)}
+We start with an example.
+\begin{example}[Fresnel Integrals]
+    Prove that
+    \[ \int_0^\infty (\sin x^2) \, dx = \int_0^\infty \cos(x^2) \, dx = \frac{\sqrt{2\pi}}{4}. \]
+\end{example}
+\begin{solution}
+    To do this, we proceed by Cauchy's theorem, i.e., using functions of complex variables. Let $e^{ix^2}$, which, per Euler's formula, is equal to $\cos(x^2) + i \sin(x^2)$ for $x \in \RR$. Let us reframe the question by integrating $e^{z^2}$, where $z \in \CC$, over the contour (closed curve) given by a $\frac{\pi}{4}$ radian sector of the circle of radius $R > 0$ centered at $0$; specifically, the contour is given by $0 \to R$, $R \to R e^{i \pi/4}$ along the arc, and $R e^{i \pi/4} \to 0$. In this manner, let $z = \rho e^{i \pi/4}$, where $\rho \in (0, R)$, we have that
+    \[ e^{-(\rho e^{i \pi/4})^2} = e^{-\rho^2 \left(\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}\right)^2} = e^{-\frac{\rho^2}{2} (1 + i)^2} = e^{-\rho^2 i} = \cos(\rho^2) + i \sin(\rho^2). \]
+    Let the three paths in the contour (which we will call $\gamma_R$) be given by $I_1, I_2, I_3$ in order; we have that, by Cauchy's theorem,
+    \[ 0 = \int_{\gamma_R} f(z) \, dz = \int_{I_1} f(z) \, dz + \int_{I_2} f(z) \, dz + \int_{I_3} f(z) \, dz. \]
+    Directly compute as follows, where $f(z) = e^{z^2}$,
+    \[ \int_{I_1} f(z) \, dz = \int_0^R e^{-x^2} \, dx \taking{R \to \infty} \frac{\sqrt{\pi}}{2}, \]
+    Let $-I_3 : [0, R] \to \CC$ be given by $t \mapsto t e^{i\pi/4}$; we have,
+    \begin{align*}
+        \int_{-I_3} f(z) \, dz &= \int_0^R f\left(te^{i \pi/4}\right) e^{i\pi/4} \, dt \\
+        &= e^{i\pi/4} \int_0^R e^{-(te^{i\pi/4})^2} \, dt \\
+        &= e^{i\pi/4} \left[\int_0^R \cos t^2 \, dt - i \int_0^R \sin(t^2) \, dt \right],
+    \end{align*}
+    and finally, for the integral on $I_2$ (where $I_2 : [0, \frac{\pi}{4}]^2 \to \CC$ and $t \mapsto Re^{it}$), we have that
+    \[ \int_{I_2} f(z) \, dz = \int_0^{\pi/4} e^{-(Re^{it})^2} i Re^{it} \, dt, \]
+    for which we may bound the integrand as follows,
+    \[ \abs{e^{-(Re^{it})^2} i Re^{it}} \leq R \abs{e^{-(Re^{it})^2}} = R \abs{e^{-R^2(\cos (2t) + i \sin(2t))}} = Re^{-R^2(\cos 2t)}. \]
+    This means we may write
+    \[ \abs{\int_{I_2} f(z) \, dz} \leq \int_0^{\pi/4} \abs{e^{-(Re^{it})^2} i Re^{it}} \, dt = \int_0^{\pi/4} Re^{-R^2(\cos 2t)} \, dt. \]
+    Let us compute $\cos(2t)$; we have that $2t \in [0, \frac{\pi}{2}]$, so $\cos(2t) = \sin(\frac{\pi}{2} - 2t)$, and $\sin(\theta) \geq \frac{2}{\pi} \theta$ by appealing to geometric intuition; this means
+    \begin{align*}
+        \int_0^{\pi/4} Re^{-R^2(\cos 2t)} \, dt &\leq \int_0^{\pi/4} Re^{-R^2 \frac{2}{\pi} \left(\frac{pi}{2}  - 2t\right)} \, dt \tag{Let $s = \frac{\pi}{2} - 2t$}\\
+        &= \frac{1}{2} \int_0^{\pi/2} Re^{-R^2 \frac{2}{\pi} s} \, ds \\
+        &= \frac{1}{2} \int_0^{\pi/2} R d\left(\frac{e^{-R^2 \frac{2}{\pi} s}}{-R^2 \frac{2}{\pi}}\right) \\
+        &= \frac{1}{2} \cdot \frac{1}{R \frac{2}{\pi}} \left(e^{-R^2} - 1\right) \taking{R \to \infty} 0.
+    \end{align*}
+    Having established computations for $I_1, I_2, I_3$, we may now write
+    \[ 0 = \frac{\sqrt{\pi}}{2} - e^{i \pi/4} \left[\int_0^\infty \cos(x^2) \, dx - i \int_0^\infty \sin(x^2) \, dx \right] \]
+    This means we have
+    \begin{align*}
+        \int_0^\infty \cos(x^2) \, dx - i \int_0^\infty \sin(x^2) \, dx &= e^{-i \pi/4} \frac{\sqrt{\pi}}{2} \\
+        &= \frac{\sqrt{\pi}}{2} \left(\frac{\sqrt{\pi}}{2} - i \frac{\sqrt{\pi}}{2}\right) \\
+        &= \frac{\sqrt{2\pi}}{4} - i \frac{\sqrt{2\pi}}{4}. \qedhere
+    \end{align*}
+\end{solution}
+\noindent We now discuss Cauchy's integral formula. As another example, let $D$ be a disc centered at $z$, and let $f$ be a holomorphic function; we may express $f(z)$ using the values of $f$ on $\partial D$.
+\begin{example}[Steady-State Heat Equation]
+    Let $g(x, y)$ be continuous on $\RR^2$. Find $u(x, y)$ satisfying
+    \[ \begin{cases} \Delta u = 0 & \text{ on } D, \\ u = g & \text{ on } \partial D, \end{cases} \]
+    where $\Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}$ is the Laplacian operator. The solution is given by considering $(x, y) = (r \cos \theta, r \sin \theta)$, where
+    \[ u(r, \theta) = \int P_r(\theta, \varphi) g(\cos \varphi, \sin \varphi) \, d\varphi, \quad P_r(\theta, \varphi) = \frac{1 - r^2}{1 - 2 r \cos(\theta - \varphi) + r^2} \]
+    where $P_r$ is called the \textit{Poisson kernel}.
+\end{example}
+\begin{theorem}[Cauchy's Integral Formula]
+    Suppose $f$ is holomorphic in an open set $\Omega$ that contains the closure of a disc $D$. Let $C = \partial D$ equipped with the anticlockwise orientation. Then for any $z \in D$,
+    \[ f(z) = \frac{1}{2\pi i} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \]
+\end{theorem}
+\begin{proof}
+    We start by constructing a ``keyhole contour'' on $D$, where $\delta$ is the width of the corridor, and $\eps$ is the radius of the circle centered at $z$. The contour can be thought of as picking a point in $C$ and connecting it to the $\eps$-circle about $z$ with a $\delta$-wide corridor. Let the contour be called $\Gamma_{\delta,\eps}$. Let $F(\zeta) = \frac{f(\zeta)}{\zeta - z}$; clearly, it is holomorphic on $\Omega \setminus \{z\}$. By Cauchy's theorem,
+    \[ 0 = \int_{\Gamma_{\delta,\eps}} F(\zeta) \, d\zeta = \int_{I_1} F(\zeta) \, d\zeta + \int_{I_2} F(\zeta) \, d\zeta + \int_{I_3} F(\zeta) \, d\zeta + \int_{I_4} F(\zeta) \, d\zeta, \]
+    where $I_1, I_3$ represent the paths on $C$ and the $\eps$-circle about $z$ respectively, and $I_2, I_4$ the ``walls of the corridor''. We start with some basic observations;
+    \begin{enumerate}[(i)]
+        \item If we let $\delta \to 0^+$, then
+        \[ \int_{I_1} F(\zeta) \, d\zeta = \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \]
+        \item Again, if we let $\delta \to 0^+$, we have that
+        \[ \int_{I_2} F(\zeta) \, d\zeta = -\int_{I_4} F(\zeta) \, d\zeta, \]
+        since they are simply two path integrals of the opposite orientation.
+        \item For $I_3$, we may first write
+        \[ \int_{I_3} F(\zeta) \, d\zeta = \int_{I_3} \frac{f(\zeta)}{\zeta - z} \, d\zeta; \]
+        if we let $\eps \to 0^+$, we see that this is problematic, since we have a singularity at $z$. However, we notice that the integrand resembles the definition of the derivative, i.e., we may write
+        \[ \frac{f(\zeta)}{\zeta - z} = \frac{f(\zeta) - f(z)}{\zeta - z} + \frac{f(z)}{\zeta - z}, \]
+        so we obtain
+        \[ \int_{I_3} \frac{f(\zeta)}{\zeta - z} \, d\zeta = \int_{I_3} \frac{f(\zeta) - f(z)}{\zeta - z} \, d\zeta + f(z) \int_{I_3} \frac{1}{\zeta - z} \, d\zeta, \]
+        where the latter term is equal to $-2\pi i f(z)$, per (p.47 in Shakarchi)
+        \[ \int_{I_3} \frac{f(z)}{\zeta - z} \, d\zeta = f(z) \int_{I_3} \frac{d\zeta}{\zeta - z} = -f(z) \int_0^{2\pi} \frac{\eps ie^{-it}}{\eps e^{-it}} \, dt = -f(z) 2\pi i. \]
+        For the former term, there exists $e_0 > 0$ such that for all $\zeta \in D_{\eps_0}(z)$, we have that
+        \[ \abs{\frac{f(\zeta) - f(z)}{\zeta - z}} \leq \abs{f'(z)} + 2. \]
+        We obtain
+        \[ \abs{\int_{I_3} \frac{f(\zeta) - f(z)}{\zeta - z} \, d\zeta} \leq (\abs{f'(z)} + 2) \cdot 2\pi \eps \taking{\eps \to 0} 0. \]
+    \end{enumerate}
+    Combining all these observations, we obtain
+    \[ 0 = \int_{\Gamma_{\delta,\eps}} \frac{f(\zeta)}{\zeta - z} \, d\zeta \taking{\delta,\eps \to 0^+} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta - 2\pi i f(z), \]
+    from which we conclude Cauchy's integral formula.\footnote{reference: p.45-47 Shakarchi}
+\end{proof}
+
+\newpage
+\begin{theorem}[Cor. 4.2, Shakarchi]
+    ``A holomorphic function is infinitely complex differentiable.''\footnote{hell, i need to run a marathon with 20mg of thc in my system. props wenyu} Suppose $f$ is holomorphic in an open set $\Omega$. Then $f$ has infinitely many complex derivatives in $\Omega$. Moreover, for any $z \in \Omega$ and $n \in \ZZ_{\geq 0}$, we have that
+    \[ f^{(n)}(z) = \frac{n!}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, d\zeta. \]
+\end{theorem}
+\begin{proof}
+    We proceed by induction on $n$. The base case $n = 0$ is immediately given by Cauchy's integral formula; assuming that the statement is true for $n - 1$, for any $h \in \CC \setminus \{0\}$ such that $z + h \in D$, we have that
+    \begin{align*}
+        \frac{f^{(n-1)}(z+h) - f^{(n-1)}(z)}{h} &= \frac{(n-1)!}{2 \pi i h} \int_C \left[\frac{f(\zeta)}{(\zeta - z - h)^n} - \frac{f(\zeta)}{(\zeta - z)^n}\right] \, d\zeta \\
+        &= \frac{(n-1)!}{2 \pi i h} \int_C f(\zeta) \left[\frac{1}{(\zeta - z - h)^n} - \frac{1}{(\zeta - z)^n}\right] \, d\zeta.
+    \end{align*}
+    By binomial expansion, we have that
+    \begin{align*}
+        &\frac{1}{(\zeta - z - h)^n} - \frac{1}{(\zeta - z)^n} \\
+        &= \frac{1}{(\zeta - z - h)^n (\zeta - z)^n} \left[(\zeta - z)^n - (\zeta - z - h)^n\right] \\
+        &= \frac{h}{(\zeta - z - h)^n (\zeta - z)^n} \left[(\zeta - z)^{n-1} + (\zeta - z)^{n-2}(\zeta - z - h) + \dots + (\zeta - z - h)^{n-1}\right].
+    \end{align*}
+    By taking $h$ sufficiently small, we obtain
+    \[ \frac{(n - 1)!}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z)^{2n}} n(\zeta - z)^{n-1} \, d\zeta = \frac{n!}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, d\zeta. \qedhere \]
+\end{proof}
+\begin{theorem}[Thm. 4.4, Shakarchi]
+    ``A holomorphic functoin is locally a power series''. Suppose $f$ is holomorphic in an open set $\Omega$. If $D$ is a disc centered at $z_0$ whose closure is contained in $\Omega$, then $f$ has a power series expansion at $z_0$
+    \[ f(z) = \sum_{n = 0}^\infty a_n (z - z_0)^n \]
+    for $z \in D$, and the coefficients are given by
+    \[ a_n = \frac{f^{(n)}(z_0)}{n!}, \quad n \geq 0. \]
+\end{theorem}
+\begin{proof}
+    Fix any $z \in D$; by Cauchy's integral formula, we have that
+    \[ f(z) = \frac{1}{2\pi i} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \]
+    Note that per our previous corollary. The idea is to write
+    \[ \frac{1}{\zeta - z} = \frac{1}{\zeta - z_0 + z_0 - z} = \frac{1}{(\zeta - z_0)}\frac{1}{\left(1 - \frac{z - z_0}{\zeta - z_0}\right)}, \]
+    where we observe that since $z \in D$ is fixed and $\zeta \in C$, we know that there exists some $r \in (0, 1)$ such that
+    \[ \abs{\frac{z - z_0}{\zeta - z_0}} < r, \]
+    so we may regard the geometric series representation
+    \[ \frac{1}{1 - \frac{z - z_0}{\zeta - z_0}} = \sum_{n=0}^\infty \left(\frac{z - z_0}{\zeta - z_0}\right)^n, \]
+    for which the series converges uniformly for any $\zeta \in C$. This means we may interchange the integral and the sum to obtain
+    \[ f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n = \sum_{n=0}^\infty \left(\frac{1}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} \, d\zeta\right) (z - z_0^n). \qedhere \]
+\end{proof}
+\begin{corollary}[Liouville's Theorem: Thm. 4.5, Shakarchi]
+    If $f$ is entire and bounded, then $f$ is constant. We say that $f$ is \textit{entire} if it is holomorphic on the whole of $\CC$.
+\end{corollary}
+\begin{proof}
+    We will prove this later on. Though, it is done by observing that $\CC$ is connected (hence a region, i.e., open connected set), then checking $f' = 0$, and so $f$ is constant.
+\end{proof}
+\begin{corollary}[Cauchy's Inequality]
+    If $f$ is holomorphic in an open set that contains the closure of a disc $D$ centered at $z_0$ with radius $r$, then
+    \[ \abs{f^{(n)}(z_0)} \leq \frac{n! \norm{f}_C}{R^n}, \]
+    where $\norm{f}_C = \sup_{z \in C} \abs{f(z)}$ (and $C$ is the boundary of $D$.)
+\end{corollary}
+\begin{proof}
+    We have that
+    \[ f^{(n)}(z_0) = \frac{n!}{2\pi i} \int_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} \, d\zeta; \]
+    if we let $C : [0, 2\pi] \to \CC$ be given by $t \mapsto z_0 + Re^{it}$, then the above is equal to
+    \[ \frac{n!}{2 \pi i} \int_0^{2\pi} \frac{f(z_0 + Re^{it})}{R^{n+1} e^{i(n+1)t}} i Re^{it} \, dt, \]
+    for which we may write
+    \[ \abs{\frac{n!}{2 \pi i} \int_0^{2\pi} \frac{f(z_0 + Re^{it})}{R^{n+1} e^{i(n+1)t}} i Re^{it} \, dt} \leq \frac{n!}{2\pi} \cdot \frac{\norm{f}_C}{R^n} \cdot 2\pi = \frac{n! \norm{f}_C}{R^n}, \]
+    which finishes the proof.
+\end{proof}
