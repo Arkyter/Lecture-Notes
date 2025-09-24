@@ -1,0 +1,62 @@
+\section{Day 7: (Sep. 24, 2025)}
+Recall from last lecture that we define $G/N := \{gN \mid g \in G\}$, where if $N \lhd G$, then $(g_1N)(g_2N) = g_1g_2N$, making it a group.
+\begin{example}
+    Let $N = n\ZZ = \ZZ = G$ (where $n \in \ZZ$, and we regard $n\ZZ$ as the group of all integers divisible by $n$). We write the ``lazy notation'' $\ZZ/n$ for $\ZZ/n\ZZ$,\footnote{i am one million trillion percent he will backtrack this notation after backlash} which is a group as $n\ZZ$ is normal as $\ZZ$ is abelian. We have that $\ZZ/n\ZZ = \{[0], [1], \dots, [n-1]\}$, i.e., the equivalence classes of integers modulo $n$, where $[a] + [b] = [a + b]$.
+\end{example}
+\noindent As an aside, $H < G$ implies that $\abs{G} = \abs{H} \cdot \abs{G/H}$, which should be regarded as the statement that ``every coset has size $H$'', and that there are $\abs{G/H}$ cosets (given by the equivalence classes). In turn, we obtain
+\begin{theorem}[Lagrange's Theorem]
+    If $H < G$, then $\abs{H}$ divides into $\abs{G}$.
+\end{theorem}
+\noindent As a quick check, take $\abs{S_4} = 24$, and $\abs{S_3} = 6$. Clearly, $6 \mid 24$.
+\\[8pt]
+We now proceed to introduce the isomorphism theorems. Recall the rank-nullity theorem; let $L : V \to W$ be a linear map between vector spaces. Then
+\[ \dim L = \dim \ker L + \dim \img L. \]
+Specifically, we have that $V/\ker L \cong \img L$. We may generalize this notion to groups as well.
+\begin{theorem}[First Isomorphism Theorem]
+    Given a morphism $\phi : G \to H$, then $G/\ker \phi \cong \img \phi$.
+\end{theorem}
+\begin{proof}
+    The proof of this theorem is you ``read the definition and do the only reasonable thing''. Let $R : [g]_{\ker \phi} \mapsto \phi(g)$; we wish to show that $R$ is well-defined and multiplicative. Let $L : \phi(g) \mapsto [g]$; clearly, we have that $L \circ R$ and $R \circ L$ are both the identity, so it remains to check that both maps are well-defined (we skip the proof of multiplicativity).
+    \\[8pt]
+    If $g, g'$ are such that $[g] = [g']$, then $g \inv g' \in \ker \phi$, meaning that $\phi(g \inv) \phi(g') = e$, i.e., $\phi(g) = \phi(g')$. In the other direction, let $h \in \img \phi$ be such that $\phi(g) = h = \phi(g')$; we check that $[g] = [g']$. We have that $\phi(g\inv g') = \phi(g)\inv \phi(g') = h \inv h = e$, and so $g, g'$ belong to the same equivalence class.
+    \\[8pt]
+    A personal note; this proof is better seen by considering
+    \[ \begin{tikzcd} G \arrow[r,"\phi"] \arrow[d,"\pi"'] & H \\ G/\ker\phi \arrow[ru,"R"] \end{tikzcd} \]
+    and that we are checking $R$ is a well-defined map. Note that even though $\pi$ wasn't defined in the proof, just see it as part of the factorization sending to cosets.
+\end{proof}
+\noindent We now give a preview of the second isomorphism theorem; let $H, K < G$ be such that $H \cap K$ is a subgroup of both $H$ and $K$. Then $H / (H \cap K) \cong HK / K$.
+\\[8pt]
+We start with some intuition. In terms of vector spaces, if we let $V, U \subset W$, then $V/(V \cap U) \cong (V + U)/U$, which we may quickly verify by checking dimensions as follows;
+\[ \dim \frac{V}{V \cap U} = \dim V - \dim V \cap U = \dim (V + U) - \dim U = \dim \frac{V + U}{U}, \]
+since
+\[ \dim U + \dim V = \dim (U+V) + \dim (U \cap V). \]
+We now discuss the group analogue of this fact. The intersection of two groups is a group, so we see that $H \cap K$ is a group; moreover,
+\begin{claim}
+    Given $H, K < G$, we have that $HK = \{hk \mid h \in H, k \in K\} < G$ if and only if $HK = KH$.
+\end{claim}
+\begin{proof}
+    We check the reverse implication first, i.e., we want to show that $HK$ is a group. For any $(h_1, k_!), (h_2, k_2) \in HK$, we have that $(h_1, k_1) \cdot (h_2 k_2) = h_1 (k_1 h_2) k_2$; we may let $k_1h_1 = h'k'$ since $KH = HK$, so we obtain $h_1 h' k' k_2 = (h_1 h') (k' k_2) \in HK$. Clearly, the identity is in $HK$ since $e_{HK} = e_H e_K \in HK$, and $HK$ admits inverses since $(hk) \inv = k \inv h \inv = h' k' \in HK$ for some $h', k'$.
+    \\[8pt]
+    For the forwards direction, assume that $HK < G$; to see $KH \subset HK$, observe that $(kh) \inv = h \inv k \inv \in HK$; so $((kh)\inv)\inv = kh \in HK$. To see $HK \subset KH$, observe that for any $hk \in HK$, we have that $(hk)\inv = k\inv h\inv \in KH$, and so by the same process, $((hk)\inv)\inv = hk \in KH$.
+\end{proof}
+\begin{definition}
+    Let $X \subset G$ be a subset of a group. Then
+    \begin{enumerate}[(i)]
+        \item $N_G(X) = \{g \in G \mid X^g = X\}$ is called the \textit{normalizer} of $X$ in $G$. In the case $X = G$, we have that $N_G(G) = G$.
+        \item $C_G(X) = \{g \in G \mid x^g = x \text{ for all } x \in X\}$ is called the \textit{centralizer} of $X$ in $G$.
+        \item $z(G) = C_G(G) = \{g \in G \mid gx = xg \text{ for all } x \in G\}$ is called the \textit{center} of $G$.
+    \end{enumerate}
+    In particular, we may check that all three are groups, and we have $z(G) < C_G(X) < N_G(X) < G$.
+\end{definition}
+\begin{example}
+    Let $G_0 = \{\pm 1, \pm i\} \subset \CC$ where $G_0 \cong \ZZ/4\ZZ$, induced by mapping $G_0 \ni i \mapsto [1] \in \ZZ/4\ZZ$ and $1 \mapsto [0]$. In this manner, we may define $G = \{\pm 1, \pm i, \pm j, \pm k\} \subset \HH$ (where we regard $\HH$ as the quaternions). Clearly, $\abs{G} = 8$, and $i, j, k$ are defined to satisfy $i^2 = j^2 = k^2 = -1$. By definition of the quaternions, $ij = k$, $jk = i$, $ki = j$, with $ji = -k$, $kj = -i$, $ik = -j$, so we see $z(G) = \{1, -1\}$ and the centralizer of $G_0$ in $G$ is given by $C_G(G_0) = G_0$. To compute the normalizer of $G_0$ in $G$, observe that
+    \[ j \inv G_0 j = G_0, \quad (-j) G_0 j  = G_0, \quad (-j) i j = -i \in G_0, \]
+    showing that $N_G(G_0) = \{\pm 1, \pm i, \pm j\}$.
+\end{example}
+\begin{theorem}[Second Isomorphism Theorem]
+    Let $H, K < G$ and $H < N_G(K)$. Then $HK = KH$, $H \cap K \lhd H$, $K \lhd KH$ and
+    \[ \frac{H}{H \cap K} \cong \frac{HK}{K}. \]
+\end{theorem}
+\begin{proof}
+    $H < N_G(K)$, so for all $h \in H$, we have $hK = kH$, i.e., $HK = KH$ and $HK$ is a group as seen previously. We continue the proof next lecture.
+\end{proof}
