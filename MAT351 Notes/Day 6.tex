@@ -1,0 +1,43 @@
+\section{Day 6: Method of Characteristics (Sep. 22, 2025)}
+\begin{theorem}[Non-Homogeneous 1st Order] 
+	Non-homogeneous 1st-order PDEs are of the form
+	\[ u_{t} + b \nabla u = f(t, x), \]
+	where \( b \in \mathbb{R}^{m} \) (constant), \( u : (t, x) \in \mathbb{R} \times \mathbb{R}^{m} \to \mathbb{R} \), and \( f : (t, x) \in \mathbb{R} \times \mathbb{R}^{m} \to \mathbb{R} \). Given the homogeneous case
+	\[ v_{t} + b \nabla v = 0, \]
+	we have that the general solution is \( F(x - bt) \). 
+
+	We'll solve the transport equation with forcing. First, we will apply the method of characteristics. Let \( (t(s), x(s), z(s)) \) be the characteristic curves. Then we have that our system of ODEs is
+	\[ \left\{\begin{NiceMatrix}\dot{t}(s) = 1  & t(0) = 0\\ \dot{x}(s) = b & x(0) = x_{0} \\ \dot{z}(s) = f(t, x) & z(0) = g(x_{0})\end{NiceMatrix}\right.  \]
+	where the right side gives some additional data with which we can hopefully have a unique solution. It follows that \( t(s) = s \) and \( x(s) = x_{0} +bs \). From here,
+	\[ \dot{z}(s) = \frac{d}{ds} u(s, x_{0}+bs) = f(x_{0}+bs), \]
+	so it follows that
+	\[ z(t) = \int_{0}^{t} f(s, x_{0}+bs) \,ds = \mu(t, x_{0}+bt) - \mu(0, x_{0}).  \]
+	Rearranging gives
+	\[ \mu(t, x_{0}+bt) = \mu(0, x_{0}) + \int_{0}^{t} f(s, x_{0}+bs) \,ds \]
+	thus we have that (\( x = x_{0} + bt \))
+	\[ \mu(t, x) = g(x-bt) + \int_{0}^{t} f(s, x - b(t - s)) ds. \]
+\end{theorem}
+\begin{remark}
+	Solution of non-homogeneous is the superposition of solution of homogeneous problem and the solution of the non-homogeneous problem without any data. Namely, the \( g(x - bt) \) is the homogeneous solution, and the integral is the solution of the non-homogeneous without any data.
+\end{remark}
+\begin{remark}
+	This is an example of Duhamel's principle. 
+	\[ u(t, x) = u_{0} + \int_{0}^{t} v, \]
+	where \( u_{0} \) solves the homogeneous problem, and \( v \) solves
+	\[ \left\{\begin{NiceMatrix}v_{t} + b \cdot \nabla v = 0 \\ v(t) = v(s) = f(s, x)\end{NiceMatrix}\right..  \]
+\end{remark}
+
+\begin{example}
+	We will tackle
+	\[ \left\{\begin{NiceMatrix}u_{t} + u u_{x} = 0 \\ u(0, x) = x^{2}\end{NiceMatrix}\right.  \]
+	\[  \]
+	If we have constant coefficients, (constant \( c \) instead of \( u \)) then \( c \) would be the speed of transport. As such, this is a model for shocks/explosions. Compressible fluids and the like.
+
+	We will try the method of characteristics. Our system with data is
+	\[ \left\{\begin{NiceMatrix}\dot{t} = 1 & t(0) = 0 \\ \dot{x} = z & x(0) = x_{0} \\ \dot{z} = 0 & z(0) = x_{0}^{2}\end{NiceMatrix}\right.  \]
+	so it has turned this Quasilinear first order PDE into a system of ODEs. This yields the solution
+	\[ \left\{\begin{NiceMatrix}t = s \\ x = sx_{0}^{2} + x_{0} \\ z = x_{0}^{2}\end{NiceMatrix}\right.  \]
+	From here we have to invert the relation. The above tells us that
+	\[ u(s, sx_{0}^{2} + x_{0}) = z(s) = x_{0}^{2}, \]
+	so we just need to find \( x_{0} \) as a function of \( t \) and \( x \). On Wednesday he is going to ask us for the answer, so be prepared (jk I know most of you will not be there).
+\end{example}
