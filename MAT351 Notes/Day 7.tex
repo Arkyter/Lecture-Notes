@@ -1,0 +1,154 @@
+\section{Day 7: Lots of Calculations (Sep. 22, 2025)}
+\begin{remark}[Method of Characteristics]
+	For the PDE 
+	\[ P(t, x, u) u_{t} + Q(t, x, y) u_{x} = f(t, x, u) \]
+	the characteristic curves \( (t(s), x(s)) \) are given as solutions of
+	\[ \left\{\begin{NiceMatrix}\dot{t} = P(t, x, z) \\ \dot{x} = Q(t, x, z) \\ \dot{z} = f(t, x, z).\end{NiceMatrix}\right.  \]
+	These are not necessarily level curves.
+\end{remark}
+
+We will do second-order PDEs now. We start with the 2D case, for linear 2nd order. The general case is
+\begin{align*}
+	a_{11}(x, y) u_{x x} + 2 a_{1 2}(x, y) u_{xy} + a_{22}(x, y) u_{y y} \\
+	\tag{lower order terms} + a_{1}(x, y) u_{x} + a_{2}(x, y) u_{y} + c(x, y) u = 0.
+\end{align*}
+The PDE can have very different behavior depending on the coefficients \( a_{11} \), \( a_{12} \), and \( a_{22} \). So first we will start with the constant coefficient case.
+
+Let our \( a \) all be real values, and likewise \( u \). Then our constant coefficient case is given by
+\[ \tag{\( * \)}a_{11} u_{x x} + 2a_{12} u_{x y} + a_{22}u_{yy} + \text{lower order} = 0. \]
+	We will classify it based on the discriminant of the polynomial \( a_{11} \lambda^{2} + 2a_{12} \lambda + a_{22} \).
+
+\begin{theorem}
+	By a linear change of independent variables, the equation \( (*) \) can be writen in one of the 3 forms below:
+	\begin{enumerate}
+	
+		\item If \( a_{12}^{2} - a_{11} a_{22} < 0 \), then it's 
+		\[ u_{xx} + u_{yy} + \text{lower order} = 0. \]
+		\item If \( a_{12}^{2} - a_{11}a_{22} = 0 \) then it's,
+		\[ u_{xx} + \text{lower order} = 0. \]
+		\item If \( a_{12}^{2} - a_{11}a_{22} > 0 \) then it's,
+			\[ u_{xx} - u_{yy} + \text{lower order} = 0. \]
+	
+	\end{enumerate}
+	Zander pointed out that this is naturally motivated by algebraic properties of quadratic forms. He then said the word ``sheaf'' and I ran away to hide.
+\end{theorem}
+\begin{proof}
+	We will automatically disregard any lower order terms. We can rescale \( a_{1 1} = 1 \) without loss of generality (unless \( a_{1 1} = a_{2 2} = 0 \)). Then we have
+	\[ u_{x x} + 2 a_{12}u_{xy} + a_{22}u_{y y} = 0. \] 
+	We can therefore rewrite this as
+	\[ (\partial_{x} + a_{12}\partial_{y})^{2} + (a_{22} - a_{12}^{2}) u_{yy} = 0. \]
+	From here, we're going to use a change of variables 
+	\[ \left\{\begin{NiceMatrix}x = \xi \\ y = a_{12} \xi + \eta\end{NiceMatrix}\right.  \]
+	which yields
+	\[ \left\{\begin{NiceMatrix}\partial_{\xi} = \partial_{x} + a_{12} \partial_{y} \\ \partial_{\eta} = \partial_{y}.\end{NiceMatrix}\right.,  \]
+	so we get that
+	\[ \partial_{\xi}^{2} u + b^{2} \partial_{\eta} u = 0, \]
+	where \( b^{2} = (a_{22} - a^{2}_{12}) \). This gives us \( 1 \) and \( 2 \). For \( 3 \), set \( b^{2} = a_{12}^{2} - a_{22} > 0. \) PDE is
+	\[ (\partial_{x} + a_{12}\partial_{y})^{2} u - b^{2} u_{yy} = 0. \]
+\end{proof}
+
+In HW 3 we will see problems on classification of PDEs and the relation to the characteristic polynomial \( a_{11} \lambda^{2} + 2 a_{12} \lambda + a_{22} \).
+
+For the general case of dimensions higher than 2, we look at the linear PDE
+\[ \sum_{i,j=1}^{m} a_{ij}(x) \partial_{x_{i}x_{j}}^{2} u + b(x) \nabla u + c(x) u = 0,  \]
+where \( x \in \mathbb{R}^{m} \). From here we look at the Eigenvalues and all that stuff.
+\begin{theorem}
+	We can classify according to the signature of the matrix \( A = (a_{i,j})^{m}_{i,j=1} \). Notice that it is real symmetric, so\footnote{by spectral theorem :-)} it's diagonalizable.
+	\begin{enumerate}
+	
+		\item If all the eigenvalues have the same sign (nonzero), then the PDE is elliptic.
+		\item If all the eigenvalues have the same sign except one is zero, it's parabolic.
+		\item If all the eigenvalues have one sign, except one with the opposite sign, it's hyperbolic.
+	
+	\end{enumerate}
+	We don't classify all the possible cases, but these are the main things we see anyways. If we restrict it to 2 dimensions.
+\end{theorem}
+
+We'll start with the wave equation. Surely this won't be so hard.
+This is just the equation
+	\[ u_{t t} - c^{2} u_{x x} = 0. \]
+	We will
+\begin{enumerate}
+
+	\item Find the general solution rigorously (\( f(x + ct) + g(x - ct) \)),
+	\item Find the solution to the IVP (D'Alembert's Equation)
+	\item Look at physical consequences (e.g. finite speed)
+	\item Look at a derivation of equation
+
+\end{enumerate}
+
+\begin{proposition}
+	The general solution to the 1d wave equation is \( u(x, t) = f(x+ct) + g(x-ct).\)
+	
+\end{proposition}
+\begin{proof}
+	We have shown that this is a collection of possible solutions, but we haven't shown it's the general solution. To do this, there' a bunch of possible ways to do it, but we'll do it rigorously. There's two possible ways to go about this,
+	\begin{enumerate}
+	
+		\item Using the method of change of variables, set
+	\[ \left\{\begin{NiceMatrix} \phi = x - ct \\ \psi = x + ct.\end{NiceMatrix}\right.  \]
+	which yields
+	\[ \left\{\begin{NiceMatrix}\partial_{\varphi} =  \frac{1}{2} \partial_{x} - \frac{1}{2c} \partial_{t} \\ \partial_{\psi} = \frac{1}{2} \partial_{x} + \frac{1}{2c} \partial_{t}.\end{NiceMatrix}\right.  \]
+	``Why did I choose this? Good question. Anyways, [\ldots]'' - Fabio. We can rewrite this as
+	\[ \left\{\begin{NiceMatrix}2c \partial_{\psi} = c \partial_{x} - \partial_{t} \\ 2c \partial_{\psi} = c \partial_{x} + \partial_{t}.\end{NiceMatrix}\right.  \]
+	From here, it follows that our PDE is just
+	\[ \partial_{\phi} \partial_{\psi}v = 0, \]
+	so it turns out that
+	\[ \partial_{\psi} v = F(\psi), \]
+	and thus
+	\[ v = f(\psi) + g(\phi), \]
+	which is exactly what we want.
+
+		\item For the method of characteristics, we are going to use the following trick:
+			\begin{align*}
+				u_{tt} - c^{2} u_{x x} = 0 \\
+				\partial_{t}^{2} u - c^{2} \partial_{x}^{2} u = 0 \\
+				\tag{Dividing by \( \partial_{x}^{2} \)}\frac{\partial_{t}^{2}}{\partial_{x}^{2}} u - c^{2} u = 0 \\
+				\tag{\( \lambda = \frac{\partial_{t}}{\partial_{x}} \)}\lambda^{2} u - c^{2} u = 0 \\
+				\tag{Dividing by \( u \). Wait, huh?}\lambda^{2} = c^{2} \implies \lambda = \pm c.
+			\end{align*}
+			This \textit{does} work formally, although not for the (tongue-in-cheek) reasons I wrote. Fabio didn't formalize it himself, but my best guess is that the third line is using the chain rule, then the fifth line just uses the fact that if \( \lambda^{2} \) and \( c^{2} \) agree on every function, then they must be the same operator.
+	\end{enumerate}
+	
+\end{proof}
+
+\begin{theorem}[D'Alembert's Formula]
+	Consider the IVP for the wave equation.
+	\[ \left\{\begin{NiceMatrix}u_{tt} - c^{2} u_{x x} = 0 \\
+	u(0, x) = \phi(x) \\
+	u_{t}(0, x) = \psi(x). \end{NiceMatrix}\right. \]
+	Then
+	\[ u(t, x) = \frac{1}{2} \left( \phi(x + ct) + \phi(x - ct) \right) + \frac{1}{2c} \int_{x-ct}^{x+ct}  \psi(s) ds. \]
+	[Fabio didn't write the formula until the end of the proof. I only wrote it earlier than he did for completeness.]
+\end{theorem}
+\begin{proof}
+	We know \( u(t, x) = F(x + ct) + G(x - ct) \). From here, we will impose the initial conditions.
+	\[ \left\{\begin{NiceMatrix}u(0, x) = F(x) + G(x) = \phi(x) \\ u_{t}(0, x) = c F'(x) - c G'(x) = \psi(x),\end{NiceMatrix}\right.  \]
+	so we have the equation
+	\[ \left\{\begin{NiceMatrix}F' + G' = \phi \\ F' - G' = \frac{1}{c} \psi\end{NiceMatrix}\right.  \]
+	thus solving this yields
+	\[ 2F' = \phi' + \frac{1}{c} \psi \qquad 2G' = \phi' - \frac{1}{c} \psi. \]
+	From here, we can determine that
+	\[ \left\{\begin{NiceMatrix}F = \frac{1}{2} \phi + \frac{1}{2c} \int_{0}^{x} \psi(s) ds + A \\ G = \frac{1}{2} \phi - \frac{1}{2c} \int_{0}^{x} \psi(s) ds + B.  \end{NiceMatrix}\right.  \]
+	Since we need \( F + G = \phi \), it follows that \( A + B = 0 \). We can therefore do
+	\[ u(t,x) = \frac{1}{2} \phi(x + ct) + \frac{1}{2c} \int_{0}^{x+ct}  \psi(s) ds + \frac{1}{2} \phi(x - ct) - \frac{1}{2c} \int_{0}^{x - ct} \psi(s) ds, \]
+	which yields a final formula of
+	\[ u(t, x) = \frac{1}{2} \left( \phi(x + ct) + \phi(x - ct) \right) + \frac{1}{2c} \int_{x-ct}^{x+ct}  \psi(s) ds. \]
+	Notice that this proof simultaneously shows uniqueness, because at each step of the proof, our hand was forced. There was no step along the way at which we could've deviated and gotten a different final solution, so it must be the unique solution. We can show uniqueness independently as well, of course, this is just a quick way to verify it.
+\end{proof}
+We can deduce many properties of the solution of the wave equation from this formula. We can also deduce some abstractly.
+\begin{example}
+	Consider the system
+	\[ \left\{\begin{NiceMatrix}u_{tt} - c^{2} u_{x x} = 0 \\ u(0, x) = e^{-x^{2}} \\ u_{t}(0, x) = 0.\end{NiceMatrix}\right..  \]
+	Then this is just solved by
+	\[ u(t, x) = \frac{e^{-(x+ct)^{2}} + e^{-(x-ct)^{2}}}{2}. \]
+\end{example}
+\begin{example}
+	Consider the system
+	\[ \left\{\begin{NiceMatrix}u_{t t} - c^{2} u_{x x} = 0 \\ u(0, x) = \chi_{[-1, 1]}(x) \\ u_{t}(0, x) = 0\end{NiceMatrix}\right..  \]
+	By D'Alembert, this is just
+	\[ u(t, x) = \frac{1}{2} \chi_{[-1, 1]}(x + ct) + \frac{1}{2} \chi_{[-1, 1]}(x - ct). \]
+	He then graphed out how this would look as time evolved. 
+\end{example}
+
+	This models the propagation of signals, or spacetime. If we look at the supports of a function subject to the wave equation over time, it will resemble this graph, which is why we can use it to model the above. A plot of it reveals that after a finite time, the signal will leave where it originated (\( \frac{1}{c} \) seconds). We see that the edges of where the signal have propagated to form a sort of ``light cone,'' which represents all the points in spacetime that the signal could have reached after the initial transmission. This is because there's a finite speed of propagation. Given the initial conditions, nothing can move faster than \( c \), so we can call \( c \) the speed of light, or something like that. It's interesting stuff, but probably not required for the class lol.
