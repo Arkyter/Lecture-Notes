@@ -1,0 +1,75 @@
+\section{Day 8: (Sep. 25, 2025)}
+Today, we will talk about analytic continuations and an analytic function for $\zeta$.
+\begin{theorem}
+    $\zeta(s)$ is meromorphic on all of $\CC$, with the only pole being at $s = 1$ (we already know that $\zeta$ is meromorphic for $\Re s > 0$).
+\end{theorem}
+\begin{theorem}[Approximate Formulation]
+    We have that $\zeta(s) = \zeta(1 - s)$ up to some simple factor for $0 < \Re s < 1$.
+\end{theorem}
+\noindent We have that the second theorem implies the first. If $\zeta(s)$ were just equal to $\zeta(1-s)$ for $0 < \Re s < 1$, we could define $\zeta(s)$ for $\Re(s) < 1$ as $\zeta(1 - s)$.
+\\[8pt]
+Recall the Gamma function,
+\[ \Gamma(s) = \int_0^\infty t^{s-1} e^{-t} \, dt, \]
+which converges absolutely for $\Re s > 0$. We can check that integrating on $\Re s > 0$ causes no problems, since
+\[ \int_\eps^1 t^{s-1} \, dt = \Eval{\frac{t^s}{s}}{\eps}{t} = \frac{1}{s} - \frac{\eps^s}{s}. \] \vspace{-12pt}
+\begin{lemma}
+    $\Gamma(s)$ is absolutely convergent for $\Re s > 0$ and defines an analytic function. $\Gamma(s)$ is a continuous version of $n!$.
+\end{lemma}
+\noindent To do this, we have to show uniform convergence on a compact set.
+\begin{claim}
+    \begin{parlist} \item $\Gamma(s + 1) = s \Gamma(s)$, \item $\Gamma(1) = 1$, \item $\Gamma(s)$ is meromorphic on all of $\CC$ with simple poles at $0, -1, -2, \dots$. \end{parlist}
+\end{claim}
+\noindent Together, we get $\Gamma(n) = (n - 1)!$ for $n \in \NN$, and observe that $\Gamma(s) = \frac{1}{s} \Gamma(s + 1)$, which is meromorphic for $\Re s > -1$, with a simple pole at $s = 0$ (residue $1$). In this manner, near $s = -1$, $\frac{\Gamma(s+1)}{s}$ has a simple pole at $s = -1$. We may proceed inductively to conclude the third part of the claim. We now check the first and second parts of the claim, where we first integrate by parts to get
+\[ \int_0^\infty t^{s-1} e^{-t} \, dt = \int_0^\infty \left(\frac{t^s}{s}\right)' e^{-t} \, dt - \int_0^\infty \frac{t^s}{s} (e^{-t})' \, dt = \int_0^\infty \frac{t^s}{s} e^{-t} \, dt = \frac{\Gamma(s+1)}{s}. \]
+Also,
+\[ \Gamma(1) = \int_0^\infty e^{-t} \, dt = \Eval{-e^{-s}}{0}{\infty} = 1. \]
+As a fun fact, if we pick $s, s'$, then we have that
+\[ \Gamma(s + s') B(s, s') = \Gamma(s) \Gamma(s'), \quad B(s, s') = \int_0^1 x^{s-1} (1 - x)^{s' - 1} \, dx. \]
+With the above established (minus the part about $B$ functions, that was just for fun), we have that $\xi(s) = \zeta(s) \pi^{-\frac{s}{2}} \Gamma(\frac{s}{2})$.
+\begin{theorem}
+    $\xi(s) = \xi(1 - s)$.
+\end{theorem}
+\begin{proof}
+    We check that
+    \[ \zeta(s) \pi^{-\frac{s}{2}} \Gamma\left(\frac{s}{2}\right) = \zeta(1 - s) \pi^{\frac{s-1}{2}} \Gamma\left(\frac{1-s}{2}\right). \]
+    Near $s = 0$, we have that $\zeta(s)$ is non-singular at $s = 0$, $\Gamma(\frac{s}{2})$ has a first order pole, $\zeta(1 - s)$ has a first order pole at $s = 0$, and $\Gamma(\frac{1-s}{2})$ is non-singular. 
+    \\[8pt]
+    As an example, if we let $s = -2$, $\zeta(s)$ will have a zero of first order, and $\zeta(s)$ will have simple zeros at even negative integers (i.e., the ``trivial'' zeros). This laeds into the Riemann hypothesis, i.e. that the only other zeros of $\zeta$ are on the line $\Re s = \frac{1}{2}$, which we call the ``critical line''. There is an axis of symmetry for $s \mapsto 1 - s$.
+\end{proof}
+\noindent Let $\theta(u)$ be the series,
+\[ \theta(u) = \sum_{n=-\infty}^\infty e^{-\pi n^2 u} = 1 + 2(e^{-\pi n} + e^{-4\pi u} + e^{-9\pi u} + \dots). \]
+We want to show that $\theta$ is absolutely convergent for $\Re u > 0$.
+\begin{claim}
+    $\theta(\frac{1}{u}) = u^\frac{1}{2} \theta(u)$.
+\end{claim}
+\noindent Our goal is to first formulate the Poisson summation formula and deduce the claim from it, then show that the claim demonstrats $\zeta(s) = \zeta(1-s)$. We start with the summation formula. Let $f : \RR \to \CC$ be a ``nice function'', i.e., $f$ is infinitely differentiable and for all polynomials $p(x)$, we have that
+\[ \lim_{\abs{x} \to \infty} \abs{f(x) p^{(n)}(x)} = 0, \]
+i.e., it is rapidly decreasing with all its derivatives. In fact, it is enough to require that $f$ is $C^2$ with the rapidly decreasing condition up to its second derivative. As an example, take $f(x) = e^{-\pi u x^2}$ for $\Re u > 0$.
+\begin{definition}[Fourier Transform]
+    $\hat f(y) = \int_{-\infty}^\infty e^{2 \pi i x y} f(x) \, dx$.
+\end{definition}
+\noindent In particular, the Poisson summation formula is given by
+\[ \sum_{n = -\infty}^\infty f(n) = \sum_{n=-\infty}^\infty \hat{f}(n). \]
+This means that we obtain $\theta(\frac{1}{u}) = n^{\frac{1}{2}} \theta(u)$, and by applying Poisson summation to $f(x) = e^{-\pi u x^2}$, we have $\hat f(y) = ^{-\frac{1}{2}} e^{-\pi u^{-1} y^2}$, which follows from
+\[ \int_{-\infty}^\infty e^{- \pi u x^2} \, dx = u^{-\frac{1}{2}}, \]
+and
+\[ u^{-\frac{1}{2}} \theta\left(\frac{1}{2}\right) = u^{-\frac{1}{2}} \sum_{n=-\infty}^\infty e^{-\pi n^2 u \inv} = \sum_{n = -\infty}^\infty \hat f(n) = \sum_{n=-\infty}^\infty f(n) = \theta(u). \]
+The Mellin transform also gives
+\[ 2 \xi(s) = \int_0^\infty (\theta(u) - 1) u^{\frac{s}{2}} \frac{du}{u}, \]
+and
+\[ \frac{\theta(u) - 1}{2} = \sum_{n=1}^\infty e^{-\pi^2 n u}, \]
+where we may let $t = \pi n^2 u$ and $u^{\frac{s}{2} - 1} = \frac{t^{\frac{s}{2} - 1}}{(\pi n^2)^{\frac{s}{2} - 1}}$. This means we obtain
+\[ \int_0^\infty e^{-\pi n^2 u} u^{\frac{s}{2} - 1} \, du = \left(\int e^{-t} t^{\frac{s}{2} - 1} \, dt \right) = \frac{1}{(\pi n^2)^{\frac{s}{2}}} = \frac{1}{\pi^{\frac{s}{2}} n^s}. \]
+Summing over all $n$, we have
+\[ \zeta(s) = \int_0^\infty \left(\frac{\theta(u) - 1}{2}\right) u^{\frac{s}{2}} \, \frac{du}{u}, \]
+meaning we may identify $\xi$ with $\zeta$ on its domain. We may further write
+\[  \int_0^\infty (\theta(u) - 1) u^{\frac{s}{2}} \, \frac{du}{u} = \int_0^1 + \int_1^\infty = -\frac{2}{s} + \int_0^1 \theta(u) u^{\frac{s}{2}} \, \frac{du}{u} + \int_1^\infty (\theta(u) - 1) u^{\frac{s}{2}} \, \frac{du}{u}. \]
+Using
+\begin{align*}
+    \int_0^1 \theta(u) u^{\frac{s}{2}} \, \frac{du}{u} &= \int_1^\infty \theta(u \inv) u^{-\frac{s}{2}} \, \frac{du}{u} \\
+    &= \int_1^\infty \theta(u) u^{\frac{1-s}{2}} \, \frac{du}{u} \\
+    &= \frac{2}{s-1} + \int_1^\infty (\theta(u) - 1) u^{\frac{1-s}{2}} \, \frac{du}{u},
+\end{align*}
+we get that
+\[ \xi(s) + \frac{1}{s} + \frac{1}{1-s} = \frac{1}{2} \int_1^\infty (\theta(u) - 1) u^{\frac{s}{2}} \, \frac{du}{u} + \frac{1}{2} \int_1^\infty (\theta(u) - 1) u^{\frac{1-s}{2}} \, \frac{du}{u}, \]
+which is symmetric under $s \mapsto 1 - s$, since $\xi$ itself is symmetric as well.
