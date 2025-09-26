@@ -1,0 +1,24 @@
+\section{Day 8: Third Isomorphism Theorem (Sep. 26, 2025)}
+Dror strongly suggests starting problem set 3 early. Recall the second isomorphism theorem from last class; if $H, K < G$ and $H < N_G(K)$, then $HK = KH$, $K \lhd HK$, $H \cap K \lhd H$, and $HK/K \cong H/(H \cap K)$.
+\begin{proof}
+    We prove each property one by one.
+    \begin{enumerate}[(i)]
+        \item $HK = KH$ because $hK = Kh$, as $K = h \inv K h$ as $h \in N_G(k)$.
+        \item $K \lhd HK$ by construction, i.e., $K^{hk} = (K^h)^k = K^k = K$.
+        \item $H \cap K \lhd H$; we want to show that if $g \in H \cap K$ and $h \in H$, then $g^h \in H \cap K$. This is true from observing $g^h \in H$ as both $g, h \in H$, and $g^h \in K$ as $g \in K$ and $h \in N_G(K)$.
+        \item To see the isomorphism, let $R : HK/K \to H/(H \cap K)$, and $L : H/(H \cap K) \to HK/K$. $R$ maps $hk K \mapsto h(H \cap K)$, and $L$ maps $[hk]_k \mapsto [h]_{H \cap K}$; clearly, $L$ is well-defined from observing $[h]_{H \cap K} = [h]_K$, since if
+        \[ [h_1]_{H \cap K} = [h_2]_{H \cap K}, \]
+        then $h_1 \inv h_2 \in H \cap K \subset K$ and so $[h_1]_K = [h_2]_K$. We also see that $R$ is well-defined by taking $[h_1k_1]_K = [h_2k_2]_K$, for which we want to show that $[h_1]_{H \cap K} = [h_2]_{K \cap K}$. We may observe that
+        \[ (h_1k_1)\inv (h_2k_2) = k_1\inv h_1\inv h_2 k_2 = k' \in K, \]
+        meaning $h_1\inv h_2 \in H \cap K$, since $h_1\inv h_2 \in H$ trivially and
+        \[ k_1 (k_1\inv h_1\inv h_2 k_2) k_2\inv = k_1 k' k_2' \in K. \qedhere \]
+    \end{enumerate}
+\end{proof}
+\begin{theorem}[Third Isomorphism Theorem]
+    If $K, H \lhd G$ with $K < H$ ($K$ is a normal subgroup of $H$ per $K \lhd G$), then $\frac{G/K}{H/K} = G/H$.
+\end{theorem}
+\begin{proof}
+    Let $R : [[g]_K]_{H/K} \mapsto [g]_H$ and $L : [g]_H \mapsto [[g]_K]_{H/K}$. We check that $R$ is well-defined. For $R$, observe that if $g_1, g_2$ are such that
+    \[ [[g_1]_K]_{H/K} = [[g_2]_K]_{H/K}, \]
+    then $[g_1]_K\inv [g_2]_K = [h]_K$ for some $h$, i.e., $g\inv g_2 = hk$ for some $k \in K$. We want to show that $[g_1]_H = [g_2]_H$, namely, $g_1, g_2 \in H$; but this is already true because $g_1\inv g_2 = hk \in HK \subset H$.
+\end{proof}
