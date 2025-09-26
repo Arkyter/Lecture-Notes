@@ -1,0 +1,19 @@
+\section{Day 8: (Sep. 26, 2025)}
+Recall Cauchy's integral formula, where if $f$ is holomorphic on an open set $\Omega$ containing the closure of disc $D$, then let $C = \partial D$; we have
+\begin{align*}
+    f(z) &= \frac{1}{2\pi i} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta \\
+    f^{(n)}(z) &= \frac{n!}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, d\zeta, \quad n \in \NN,
+\end{align*}
+i.e., $f$ is infinitely complex differentiable. Recall that we also have that if $\gamma$ is a closed curve with interior in $\Omega$, then $0 = \int_\gamma f$.
+\begin{theorem}[Morera's Theorem]
+    Suppose $f$ is continuous on an open disc $D$ such that for any triangle $T$ contained in $D$, we have $\int_T f(z) \, dz = 0$. Then $f$ is holomorphic.
+\end{theorem}
+\begin{proof}
+    Recall our earlier proof of Cauchy's theorem on a disc, where we first used Goursat's theorem, then $f$ has a primitive on $D$. In the second step, we only used that $\int_T f(z) \, dz = 0$, so $f$ has a primitive on the disc, and we may apply the proof to our new $f$ to find $F$ with $F' = f$. Since $F$ is holomorphic, it is infinitely complex differentiable, so we conclude that $f$ is holomorphic as desired.
+\end{proof}
+\begin{theorem}[Distribution of zeros of holomorphic functions]
+    Suppose $f$ is holomorphic in a region $\Omega$ that vanishes on a sequence of distinct points with a limit point in $\Omega$ itself. Then $f = 0$ on $\Omega$ (i.e., the zeros are isolated).
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
