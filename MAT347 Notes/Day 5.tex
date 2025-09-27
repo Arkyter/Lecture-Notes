@@ -33,7 +33,7 @@ A morphism is called an \textit{isomorphism} if it has an inverse that is also a
 \begin{enumerate}[(i)]
     \item $C_h$ is a morphism, since $C_h(g_1 \cdot g_2) = C_h (g_1) \cdot C_h(g_2)$, since $(g_1 \cdot g_2)^h = g_1^h \cdot g_2^h$, i.e.,
     \[ g_1^h g_2^h = h \inv g_1 h h \inv g_2 h = h \inv g_2 g_2 h = (g_1 g_2)^h. \]
-    \item $C_h$ is an invertible map; in fact, $C_h \circ C_h \inv = I$. We see this by considering that $(g^{h_1})^{h_2} = g^{h_1 \circ h_2}$. In this way, $g \mapsto (g^{h \inv})^h = g^{h\inv h} = g^e = g$, and the same holds when we consider $g \mapsto (g^h)^{h \inv}$.
+    \item $C_h$ is an invertible map; in fact, $C_h \circ C_{h \inv} = I$. We see this by considering that $(g^{h_1})^{h_2} = g^{h_1 \circ h_2}$. In this way, $g \mapsto (g^{h \inv})^h = g^{h\inv h} = g^e = g$, and the same holds when we consider $g \mapsto (g^h)^{h \inv}$.
 \end{enumerate}
 \begin{claim}
     $C$ is an anti-homomorphism, i.e. $\varphi(ab) = \varphi(b) \varphi(a)$. Specifically, $C_{h_1 \circ h_2}(g) = C_{h_2} \circ C_{h_1}(g)$, which we see from expanding both sides to obtain $g^{h_1 \cdot h_2} = (g^{h_1})^{h_2}$.
