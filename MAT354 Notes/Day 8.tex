@@ -1,4 +1,4 @@
-\section{Day 8: (Sep. 26, 2025)}
+\section{Day 8: Morera's Theorem and Distribution of Zeros of Holomorphic Functions (Sep. 26, 2025)}
 Recall Cauchy's integral formula, where if $f$ is holomorphic on an open set $\Omega$ containing the closure of disc $D$, then let $C = \partial D$; we have
 \begin{align*}
     f(z) &= \frac{1}{2\pi i} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta \\
@@ -15,5 +15,23 @@ i.e., $f$ is infinitely complex differentiable. Recall that we also have that if
     Suppose $f$ is holomorphic in a region $\Omega$ that vanishes on a sequence of distinct points with a limit point in $\Omega$ itself. Then $f = 0$ on $\Omega$ (i.e., the zeros are isolated).
 \end{theorem}
 \begin{proof}
-    
+    We start by showing that $f = 0$ on a neighborhood of the limit point $z_0$. Let $D$ be a disc centered at $z_0$ in $\Omega$; we have that $f$ coincides with a power series on $D$,
+    \[ f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n \]
+    (where we assume $f \neq 0$). Then there exists some non-negative $a_n$, per our assumption. Let $m$ be the smallest index such that $a_m \neq 0$, and write
+    \[ f(z) = a_m(z - z_0)^m \left[1 + \frac{1}{a_m} \sum_{n > m} a_n(z - z_0)^{n-m}\right], \]
+    where we let $g(z)$ be given by $f(z) = a_m(z - z_0)^m(1 + g(z))$. Clearly, $g(z)$ converges on $D$, since
+    \[ \abs{a_n}^{\frac{1}{n-m}} = \abs{a_n}^{\frac{1}{n}\frac{n}{n-m}} \taking{n \to \infty} \abs{a_n}^{\frac{1}{n}}, \]
+    so by Hadamard's formula, $g(z)$ has some radius of convergence, as $f(z), g(z) \to 0$ with $z \to z_0$.
+    \\[8pt]
+    Set $z = w_k \neq z_0$ in $D$, where $w_k$ is some element of the sequence of distinct points. Then we have
+    \[ 0 = f(w_k) = a_m (w_k - z_0)^m (1 + g(w_k)), \]
+    for which all three terms are nonzero (the third can be made to be nonzero by picking $k$ large enough such that $\abs{g(w_k)} < 1$). This means that for a sufficiently large $k$, we get a contradiction, and so $a_m = 0$ and $f = 0$ on $D$. This establishes that $f$ vanishes on a local disc about $z_0$.
+    \\[8pt]
+    We now check that $f = 0$ on the entire of $\Omega$ by using the connectedness of $\Omega$. Let $U$ be the interior of $\{z \in \Omega \mid f(z) = 0\}$, and observe that $U \neq \emptyset$ as $D \subset U$ and $U$ is open. It suffices to check that $U$ is closed; let $\{z_n\} \subset U$ be any sequence such that $z_n \to z$ for some $z \in \Omega$. Since $f$ is continuous, we have that $f(z) = 0$. By our previous argument, $f$ is zero on an open neighborhood of $z$, and so $z \in U$, meaning $U$ contains all its limit points, and is therefore closed. We conclude that $U$ is clopen in $\Omega$, so $U = \Omega$ as desired.
 \end{proof}
+\begin{corollary}
+    Suppose $f, g$ are holomorphic in a region $\Omega$, and $f(z) = g(z)$ on a nonempty open subset of $\Omega$. Then $f(z) = g(z)$ on all of $\Omega$.
+\end{corollary}
+\begin{remark}
+    Given $f, F$ analytic in regions $\Omega, \Omega'$ respectively with $\Omega \subset \Omega'$, if $f$ and $F$ agree on $\Omega$ we say that $F$ is an analytic continuation of $f$ into $\Omega'$. Such analytic continuations are always unique.
+\end{remark}
