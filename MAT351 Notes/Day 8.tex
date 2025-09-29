@@ -1,0 +1,66 @@
+\section{Day 8: Wave Equation (Sep. 29, 2025)}
+
+The wave equation is time-reversible.
+\begin{theorem}[D'Alembert's Equation]
+	The unique solution to the system
+	\[ \left\{\begin{NiceMatrix}
+		u_{tt} - c^{2} u_{x x} = 0 \\
+		u(x, 0) = \phi(x) \\
+		u_{t}(x, 0) = \psi(x) 
+	\end{NiceMatrix}\right. \]
+	is given by
+	\[ u(x, t) = \frac{1}{2} \left[ \phi(x + ct) + \phi(x - ct) \right] + \frac{1}{2c} \int_{x-ct}^{x+ct} \psi(s) \, ds. \]
+\end{theorem}
+
+\begin{remark}
+	We assumed some regularity for the data \( \phi \), \( \psi \) (for example, \( \phi \in C^{1} \). Nevertheless, the formula makes sense for rougher \( \phi \) and \( \psi \).
+\end{remark}
+
+\begin{remark}[Trust me on this]
+
+	\begin{enumerate}
+	
+		\item When deriving identities or inequalities, we are allowed to think our functions are very nice. This is because reasonable functions can approximate most functions we care about, and then we can take the limit. Usually this works. [The Stone-Weierstrass approximation theorem tells us that actually almost any collection of functions you can think of that's closed under pointwise addition and multiplication will be dense in this sense.]
+
+		\item If \( \phi \in C^{2} \) and \( \psi \in C^{1} \), then \( u \in C^{2} \), which makes it a perfectly valid solution of our function. We call this a classical solution. But, there are ways to say that rougher functions solve the PDE\@. Not in the classical sense, in some other sense. Most things in the world aren't necessarily smooth. So for the Burgers' equation and such we will see solutions in some other sense.
+	
+	\end{enumerate}
+	
+\end{remark}
+
+\begin{remark}[Finite Speed]	
+	If the data \( \phi, \psi \) vanishes in \( |x| > R \) (for some \( R \in \mathbb{R} \)), then \( u(x, t) \) vanishes on the set
+	\[ S = \left\{ (t, x) : |x| > R + |ct| \right\}. \]
+	We can imagine this as drawing cones over every point in our initial data whose slope is \( \frac{1}{c} \) along the boundary.
+
+	Let's choose a point \( (x_{0}, t_{0}) \). Which points in the plane ``care'' about the value of \( u \) at this point? We call this the domain of influence of \( (x_{0}, t_{0}) \). We also say this is the light cone of this region. It consists precisely of a (two-sided) cone centered around our point, with slope \( \frac{1}{c} \). The one in the positive \( t \) direction is the forward light cone, and the one in the negative \( t \) direction is the backwards light cone.
+
+	We call the points on our initial data within the light cone of our point the domain of dependence, because outside of this region, the data would not have enough time to reach our point, and so the value of our point depends exclusively on the value of our function at this point.
+\end{remark}
+
+\begin{claim}
+	The finite speed can be seen from the PDE alone without the explicit formula for the solution using ``energy''.\footnote{Isaac losing his mind rn}
+\end{claim}
+\begin{definition}
+	The energy density is given by \[ \sigma(x, t) = \frac{1}{2} (u_{t}^{2} + c^{2} | \nabla u|^{2}(x, t), \]
+	so we have that the total energy of \( u \) at a time \( t \) is just integrating \( \sigma \) over \( \mathbb{R}^{d} \). This gives
+	\[ E(t) = \int_{\mathbb{R}^{d}}  \frac{1}{2} (u_{t}^{2} + c^{2} | \nabla u|^{2}) \, dx, \]
+	where we have that our wave is in \( \mathbb{R} \times \mathbb{R}^{d} \). We say that \( u_{t}^{2} \) is the kinetic energy, and \( c^{2} | \nabla u|^{2} \) is the potential energy.
+\end{definition}
+\begin{claim}
+	\( \dot{E}(t) \equiv 0. \)
+\end{claim}
+\begin{proof}
+	\begin{align*}
+		\frac{d}{dt} E(t) &= \int_{\mathbb{R}^{d}}  \frac{d}{dt} \frac{1}{2} \left( u_{t}^{2} + c^{2} | \nabla u|^{2} \right) dx \\
+		\intertext{Notice that the interchange of the limit and derivative imposes some requirements. Both because we need some sort of smoothness of the integrand, but also because of problems with our integral diverging. To solve this, we can assume that the data of our PDE has compact support---call it \( P \).}
+											&= \int_{\mathbb{R}^{d}} u_{t} u_{tt} + c^{2} \nabla u \nabla u_{t} dx \\
+		\tag{Gauss}&=  \int_{\mathbb{R}^{d}} u_{t} u_{tt} - c^{2} \Delta u u_{t} dx \\
+																					 &= \int_{\mathbb{R}^{d}} u_{t}(u_{tt} - c^{2} \Delta u) dx \\
+		\tag{Plug in Wave Equation}&= 0.
+	\end{align*}
+	Recall that the multi-variable wave equation is
+	\[ u_{tt} - c^{2} \Delta u = 0, \]
+	which is where this last line derives. For the application of Gauss to get this last part, we need some domain for which our functions are identically \( 0 \) over the boundary. Fortunately, since we assumed our support is compact\footnote{Fabio called it finite support, which I figure just means bounded. Of course this means its closure is compact, so it still works the same.} we can find a region for which this works. He remarked that we will need this type of argument a lot, especially for Elliptic PDEs, so we should make sure we are very comfortable with it.
+\end{proof}
+
