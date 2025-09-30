@@ -1,0 +1,86 @@
+\section{Day 9: Applications of Cauchy's Integral Formula (Sep. 30, 2025)}
+Recall Liouville's theorem that if $f$ is an entire (holomorphic on the whole complex plane) bounded function, then $f$ is constant.
+\begin{corollary}[Fundamental Theorem of Algebra]
+    Every nonconstant polynomial $P(z) = a_nz^n + \dots + a_1z + a_0$ with complex coefficients has a root in $\CC$.
+\end{corollary}
+\begin{proof}
+    Proceed by contradiction by means of Liouville's theorem. Suppose $P(z)$ is nonconstant and admits no roots in $\CC$; then $P(z)\inv$ is entire, and it remains to check that it is bounded. It is enough to get a lower bound for $a_nz^n$, since the dominating term of $P(z)$ is $a_nz^n$; supposing $a_n \neq 0$, we have that
+    \[ \frac{P(z)}{z^n} = a_n + \left(\frac{a_{n-1}}{z} + \dots + \frac{a_n}{z^n}\right), \]
+    of which we know is defined on $\CC \setminus \{0\}$; taking $\abs{z} \to +\infty$, we have that $\frac{P(z)}{z^n} \to a_n$, so there exists $R > 0$ such that
+    \[ \abs{P(z)} \geq \frac{\abs{a_n}}{2} \abs{z}^n \]
+    for all $\abs{z} > R$. This means
+    \[ \frac{1}{\abs{P(z)}} \leq \frac{1}{\frac{\abs{a_n}}{2} \abs{z}^n} \leq \frac{1}{\frac{\abs{a_n}}{2} R^n}, \quad \text{for } \abs{z} > R. \]
+    For any $z \in \ol{D_R(0)}$, we have that $P(z) \neq 0$. Since $P$ is continuous, there exists an open neighborhood $D_z$ of $z$ and $c_z > 0$ such that $\abs{P(z')} \geq c_z > 0$ for any $z' \in D_z$. Since $\ol{D_R(0)}$ is compact, there exists finitely many $D_{z_1}, \dots, D_{z_k}$ such that $\ol D_R(0) \subset \bigcup_{i=1}^k D_{z_i}$. Then $\abs{P(z)} \geq \min\{C_{z_1}, \dots, C_{z_k}\} > 0$ on $\ol{D_R(0)}$. Since we have a lower bound for $P(z)$ on the compact set $\ol{D_R(0)}$ and outside of it, we see that $P(z)\inv$ is bounded on $\CC$, and so per Liouville's theorem, $P(z)\inv$ is constant, yielding that $P(z)$ is constant, contradicting the assumption.
+\end{proof}
+\begin{corollary}
+    Every polynomial $P(z) = a_nz^n + \dots + a_1z + a_0$ of degree $n \geq 1$ has precisely $n$ roots in $\CC$.
+\end{corollary}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+\noindent We now discuss the applications of Cauchy's integral formula. Let $\{f_n\}_{n=1}^\infty$ be a sequence of holomorphic functions.
+\begin{theorem}
+    Let $\Omega$ be an open subset of $\CC$, and let $\{f_n\}_{n=1}^\infty$ be a sequence of holomorphic functions that converge uniformly to a function $f$ on every compact subest of $\Omega$. Then
+    \begin{parlist}
+        \item $f$ is holomorphic on $\Omega$,
+        \item $\{f_n'\}_{n=1}^\infty$ converges uniformly to $f'$ on every compact subset of $\Omega$.
+    \end{parlist}
+\end{theorem}
+\noindent We give some examples of such sequences.
+\begin{enumerate}[(i)]
+    \item Let $f_n(x) = \sqrt{x^2 + \frac{1}{n}}$ on $\RR$; we have that each $f_n$ is differentiable and $f_n(x) \to f(x) = \abs{x}$ as $n \to \infty$ on compact intervals, but $f(x)$ itself is not differentiable at $0$.
+    \item (\textit{Weierstrass approximation theorem}) Every continuous function on a closed bounded interval $[a, b]$ can be uniformly approximate by a polynomial. Specifically, for every $\eps > 0$, there exists a polynomial $P(x)$ such that $\sup_{x \in [a, b]} \abs{f(x) - P(x)} < \eps$.
+    \\[8pt]
+    An additional side remark; $C([a, b])$, i.e., the set of all continuous functions on $[a, b]$, equipped with the uniform norm, has the set of polynomials dense in itself. 
+\end{enumerate}
+\begin{proof}
+    We now prove the theorem. Let us start by showing that $\{f_n\}$ converges uniformly to $f$ on every compact subset of $\Omega$ and show that $f$ is holomorphic. The proof idea here is to use Morera's theorem to show that $f$ is continuous on a disc $D$, and so for every triangle $T \subset D$, we have that $\int_T f = 0$, meaning that $f$ is holomorphic. We may use Cauchy's theorem to see that each $\int_T f_n$ is equal to $0$, so $\int_T f = 0$, since
+    \[ \abs{\int_T f_n - \int_T f} = \abs{\int_T f_n - f} \leq \sup_T \abs{f_n - f} \length(T) \taking{n \to \infty} 0. \]
+    For the second part, we wish to show that $\{f_n'\}$ converges uniformly to $f'$ on every compact subset of $\Omega$. For $\delta > 0$, define $\Omega_\delta = \{z \in \Omega \mid \ol{D_\delta(z)} \subset \Omega\}$. Any compact subset of $\Omega$ is contained in some $\Omega_\delta$, so it suffces to show that $\{f_n'\}$ converges uniformly to $f'$ on $\Omega_\delta$ for each $\delta > 0$. We claim that if $F$ is holomorphic on $\Omega$, then
+    \[ \sup_{z \in \Omega_\delta} \abs{F'} \leq \frac{1}{\delta} \sup_{z \in \Omega} \abs{F}. \]
+    Applying the claim to $f_n - f$, we see that
+    \[ \sup_{\Omega_\delta} \abs{f_n' - f'} \leq \frac{1}{\delta} \sup_\Omega \abs{f_n - f} \taking{n \to \infty} 0, \]
+    so it remains to prove the claim itself. For all $z \in \Omega_\delta$, by Cauchy's integral formula for the derivative, we have that
+    \[ F'(z) = \frac{1}{2\pi i} \int_{C_\delta(z)} \frac{F(\zeta)}{(\zeta - z)^2} d\zeta, \]
+    where $C_\delta(z) = \{w \mid \abs{w-z}=\delta\}$, so for all $z \in \Omega_\delta$ we have,
+    \[ \abs{F'(z)} \leq \frac{1}{2\pi} \sup_{\zeta \in C_\delta(z)} \abs{\frac{F(\zeta)}{(\zeta - z)^2}} \cdot 2\pi \delta = \frac{1}{\delta} \sup_{\zeta \in C_\delta(z)} \abs{F(\zeta)}, \]
+    meaning we make take the supremum over $\Omega_\delta$ to get\footnote{page 54-55, shakarchi}
+    \begin{align*}
+        \sup_{z \in \Omega_\delta} \abs{F'(z)} &\leq \sup_{z \in \Omega_\delta} \left(\frac{1}{2\pi} \sup_{\zeta \in C_\delta(z)} \abs{\frac{F(\zeta)}{(\zeta - z)^2}} 2 \pi \delta\right) \\
+        &\leq \sup_{z \in \Omega_\delta} \left(\frac{1}{\delta} \sup_{\zeta \in C_\delta(z)} \abs{F(\zeta)} \right) \\
+        &\leq \frac{1}{\delta} \sup_{z \in \Omega} \abs{F(z)}. \qedhere
+    \end{align*}
+\end{proof}
+\noindent The term test will be next Tuesday in class. It will be three problems; the first is to prove a theorem discussed in class, the second is a variation of a homework problem, and the third is a choice between another variation of a homework problem or a problem not in the homework, of which has higher marks (what?).
+\newpage
+\noindent We now discuss another application of Cauchy's integral formula; specifically, the Schwartz' reflection principle (Theorem 5.6 in Shakarchi, p. 60), which extends a holomorphic function analytically to a larger set. We start by presenting a counterexample.
+\begin{theorem}[Fabry (Gap) Theorem]
+    Consider a power series $f(z) = \sum_{k=0}^\infty a_{n_k} z^{n_k}$, where $\{n_k\}$ is a strictly increasing sequence of positive integers. Reference \href{https://en.wikipedia.org/wiki/Fabry_gap_theorem}{here}.
+\end{theorem}
+\noindent Suppose that $\frac{n_k}{k} \to \infty$ as $n \to \infty$, and the radius of convergence of the power series is $1$. Then $f$ cannot be analytically extended beyond any point of the unit circle. Let $z \in \partial \DD$; we want to show that we cannot find a holomorphic function $\tilde{f}$ defined on an open subset $U$ of $z$ such that
+\[ \restr{\tilde f}{U \cap \DD} = \restr{f}{U \cap \DD}. \]
+As an example, pick
+\[ f(z) = \sum_{n=1}^\infty \frac{z^{n^2}}{n^2}, \]
+for which $\frac{n^2}{n} = n \to \infty$ as $n \to \infty$. By Hadamard's formula, we have that the radius of convergence is indeed $1$. The computation showing that the analytic extension does not extend beyond the unit circle is left as an exercise.
+\begin{theorem}[Schwartz reflection principle (Shakarchi 5.6)]
+    Let $\Omega$ be an open subset of $\CC$ that is symmetric with respect to the real line, i.e., $z \in \Omega$ if and only if $\ol z \in \Omega$. Define $\Omega^+, \Omega^-$ to be subsets of $\Omega$ with positive and negative imaginary part respectively, and let $I = \Omega \cap \RR$. Let $f$ be a holomorphic function on $\Omega^+$ that extends continuously to $I$ and such that $f$ is real-valued on $I$. Then there exists $F$ holomorphic on all of $\Omega$ with $\restr{F}{\Omega^+ \sqcup I} = f$.
+\end{theorem}
+\noindent To do this, we start by defining a holomorphic function $F$ on $\Omega^-$, then we prove that $F$ is holomorphic on $\Omega$ (and $F$ is holomorphic on $I$).
+\begin{theorem}[Symmetric principle]
+    Let $f^+, f^-$ be holomorphic functions on $\Omega^+, \Omega^-$ respectively that extend continuously on $I$ such that they agree on $I$. Then the function $f$ on $\Omega$ defined by
+    \[ f(z) = \begin{cases} f^+(z) &z \in \Omega^+, \\ f^+(z) = f^-(z) &z \in I, \\ f^-(z) &z \in \Omega^- \end{cases} \]
+    is holomorphic on $\Omega$.
+\end{theorem}
+\noindent To see that $f$ is holomorphic on $I$, we may use Morera's theorem; pick any open disc $D$ centered at a point $z \in I$ which is entirely contained in $\Omega$. We will show that $f$ is holomorphic on $D$. Observe that any $T \subset D$ is of four types; either it \begin{parlist} \item does not intersect $I$, \item aligns with $I$ with one of its sides, \item intersects with $I$ at exactly one vertex, \item or intersects with $I$ at two points. \end{parlist} \\[8pt]
+For case (i), we have that Cauchy's theorem immediately shows that $\int_T f(z) \, dz = 0$. For cases (ii) and (iii), we may let $T_\eps$ (i.e., moved upwards or downwards by $\eps$ so it is of case (i)) be an affine shift of $T$; then
+\[ \int_{T_\eps} f(z) \, dz \taking{\eps \to 0} \int_T f(z) \, dz = 0. \]
+For case (iv), we can partition the triangle into subtriangles satisfying case (ii) or (iii), and so we immediately have that the integral vanishes too.
+\newpage
+\noindent With this, we may now prove the Schwartz reflection principle.
+\begin{proof}
+    Let $f$ be holomorphic on $\Omega^+$ and let it extend continuously to $I$ such that it is real-valued on $I$. We claim that there exists $F$ on $\Omega$ such that the restrction of $F$ onto $\Omega^+$ is equal to $f$ on $\Omega^+$. We may construct such $F$ by having $f^-(z) = \ol{f(z)}$ for $z \in \Omega^-$. It suffices to check that $f^-$ is holomorphic on $\Omega^-$; for all $z, z_0 \in \Omega^-$, we have that $\ol z, \ol{z_0} \in \Omega^+$. Since $f$ is holomorphic at $\ol{z_0}$, $f$ admits a power series
+    \[ f(\ol{z_0}) = \sum_{n=0}^\infty a_n(\ol z - \ol{z_0}), \]
+    which converges on some $D_r(\ol{z_0})$ with $r > 0$. In particular,
+    \[ f^-(z) = \ol{f(\ol z)} = \sum_{n=0}^\infty \ol{a_n} (z-z_0)^n, \]
+    which converges on $D_r(z_0)$, which by Hadamard's formula, admits the same radius of convergence as the power series about $f(\ol{z_0})$, i.e., the power series for $f^-(z)$ converges on $D_r(z_0)$. Hence, $f^-$ is holomorphic at $z_0$, and since $f$ extends continuous to $I$ and is real valued on $I$, we have that $\ol{f(\ol x)} = f(x)$ for all $x \in I$, and so $f^-$ can be extended continuously to $I$ such that $f^- = f^+$ on $I$. In this manner, we may apply the symmetric principle from earlier to obtain $F$ satisfying the Schwartz reflection principle.\footnote{ref: p.60 shakarchi}
+\end{proof}
