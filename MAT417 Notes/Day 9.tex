@@ -1,0 +1,36 @@
+\section{Day 9: Fourier Transform (Sep. 30, 2025)}
+Last time, we had
+\[ \xi(s) = \zeta(S) \pi^{-\frac{s}{2}} \Gamma\left(\frac{s}{2}\right), \quad \xi(s) = \xi(1 - s),\]
+and
+\[ f(x) = e^{-\pi u x^2} \implies \hat f(y) = u^{-\frac{1}{2}} e^{-\pi u\inv y^2} \]
+from the Poisson summation formula, where if $f(x)$ is a ``nice'' function on $\RR$, then
+\[ \hat f(y) = \int_{-\infty}^\infty e^{2\pi i x y} f(x) \, dx. \]
+We expect that the more rapidly decreasing $f$ is, the smoother $\hat f$ is, and vice versa. We have that $S(\RR) \subset C^\infty(\RR)$; for every $f \in C^\infty(\RR)$, we have that $f \in S(\RR)$ as well if $(1 + \abs{x}^r)\abs{f^{(i)}(x)}$ is bounded for all $r > 1$, $i \geq 0$; we note that $1 + \abs{x}^r$ can be replaced by any polynomial.
+\begin{theorem}
+    $f \mapsto \hat f$ is an isomorphism from $S(\RR)$ to $S(\RR)$, where $\hat{f}(x) = f(-x)$.
+\end{theorem}
+\noindent Recall the Poisson summation; for all $f \in S(\RR)$, we have that
+\[ \sum_{n \in \ZZ} f(n) = \sum_{n \in \ZZ} \hat{f}(n). \]
+Consider a function on $\RR/\ZZ$ (i.e., $\ZZ$-periodic function on $\RR$), where $f$ is any ``nice'' function (such as continuous); then its Fourier series coefficients is given by
+\[ a_n = \int_0^1 f(x) e^{-2\pi i n x} \, dx = \int_{\RR/\ZZ} \dots, \]
+and the series itself is $\sum a_n e^{2\pi i n x}$. If $f$ is ``nice'', the Fourier series converges in the original function. Said ``nice'' functions define the inner product
+\[ \left<f, g\right> = \int_0^1 f(x) \ol{g(x)} \, dx, \]
+where $\{e^{2\pi i n x}\}$ is an orthonormal basis.
+\begin{theorem}
+    If $f$ is $C^2$ and $\ZZ$-periodic, then $f(x) = \sum_{n \in \ZZ} a_n e^{2\pi i n x}$ is absolutely convergent.
+\end{theorem}
+\noindent Let $f \in S(\RR)$; we have that $F(x) = \sum_{n \in \ZZ} f(x + n)$ is a $C^\infty$ function on $\RR/\ZZ$, so $F(0) = \sum_{n \in \ZZ} f(n)$ is just the sum of Fourier coefficients $\sum_{n \in \ZZ} a_n = \sum_{n=-\infty}^{\infty} \int_0^1 e^{2\pi i n x} F(x) \, dx$. This yields
+\[\sum_{n, m \in \ZZ} \int_0^1 e^{2\pi i n x} f(x+m) \, dx, \]
+so if we fix $n$, we have that
+\[ \sum_{m \in \ZZ} \int_0^1 e^{2\pi i n x} f(x+m) \, dx = \sum_{m \in \ZZ} \int_{m}^{m+1} e^{2\pi i n x} f(x) \, dx = \int_{-\infty}^\infty e^{2\pi i n x} f(x) \, dx = \hat{f}(n). \]
+It is enough to require that there exists some $x > 1$ such that
+\[ (1 + \abs{x}^n)(\abs{f} + \abs{f''}) \]
+is bounded, and $f \in C^2$. We may prove this differently, however; consider $S(\RR)$ as a vector space, and define $S^\ast(\RR)$ as a tempered distribution of linear functional on $S(\RR)$ which are continuous in some sense. Then $f \mapsto \sum_{n \in \ZZ} f(n)$ is an element of $S^\ast(\RR)$. Observe that $\lambda(f(x + n)) = \lambda(f)$ for all $n \in \ZZ$; then
+\[ \lambda(e^{2\pi i n x}f(x)) = \lambda(f(x)), \quad n \in \ZZ. \] \vspace{-22pt}
+\begin{lemma}
+    An element of $S^\ast(\RR)$ with these properties is unique up to multiplication by a constant.
+\end{lemma}
+\noindent On the other hand, $\mu(f) = \sum_{n \in \ZZ} \hat{f}(n)$, so we claim that $\mu$ satisfies the same properties; $\lambda$ is equal to $\mu$ up to a constant, so we show that the constant is equal to $1$. It is enough to find $f$ such that $\lambda(f) = 0$ and $f = \hat f$. If we take $f(x) = e^{-\pi x^2}$, we have that
+\[ \wh{e^{2\pi i m x} f(x)} = \int_{-\infty}^\infty e^{2\pi i x y} e^{2\pi i m x} f(x) \, dx = \int_{-\infty}^\infty e^{2\pi i x(y + m)} f(x) \, dx = \hat{f}(y + m). \]
+We have that the correction function in the definition of $\xi(s)$ can be written as
+\[ \int_0^\infty e^{-\pi x^2} x^{s-1} \, dx. \]
