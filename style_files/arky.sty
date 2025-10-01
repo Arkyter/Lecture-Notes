@@ -8,6 +8,7 @@
 % - reduce margins, i think, i need more space here :(
 % - package options: include algebra symbols, topo. symbols only, etc... or "all"
 % - hrulebar fix
+% - caveat emptor
 
 % ----------------------------------------------------------------
 % Packages
@@ -113,18 +114,18 @@
 \providecommand{\thedate}{\@date}
 
 % paragraph styling
-\newcommand{\hrulebar}{
+\newcommand{\hrulebar}{ % to be FIXED. (indentation at the beginning)
   \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
   \par\nointerlineskip \vspace{\baselineskip}
-} % this needs to be fixed.
-\newcommand{\confusion}[1]{
+}
+\newcommand{\confusion}[1]{ % add more if necessary
   \cbcolor{crimson}
   \begin{changebar}
     #1
   \end{changebar}
 }
 
-% general - action on inputs
+% general
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}} % cube root
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} % floor
 \newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil} % ceiling
@@ -140,10 +141,9 @@
 %\newcommand{\th}{^{\text{th}}} % broken don't use
 \DeclareMathOperator*{\lcm}{lcm} % lowest common multiple (i thought this was alr defined)
 
-% general - action between objects
+% general - maps
 \newcommand{\liff}{\leftrightarrow} % rarely used
 \newcommand{\lthen}{\rightarrow} % rarely used
-\newcommand{\opname}{\operatorname}
 \newcommand{\surjto}{\twoheadrightarrow} % surjection map
 \newcommand{\injto}{\hookrightarrow} % injective map
 
@@ -152,6 +152,7 @@
 	\left.\kern-\nulldelimiterspace #1 \littletaller\right|_{#2}
 }}
 \newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}} % for restriction
+\newcommand{\opname}{\operatorname} % create an operator spontaneously
 
 % symbols
 \newcommand{\eps}{\varepsilon} % epsilon. duh
@@ -159,14 +160,15 @@
 
 % fields, etc. (repurposed to be mathbb commands tbh)
 \newcommand{\CC}{\mathbb C} % complex
+\newcommand{\DD}{\mathbb D} % unit disc centered @ origin
 \newcommand{\FF}{\mathbb F} % field, or just F
-\newcommand{\HH}{\mathbb H} % half space & quaternions
+\newcommand{\HH}{\mathbb H} % half space and quaternions
 \newcommand{\NN}{\mathbb N} % naturals
 \newcommand{\QQ}{\mathbb Q} % rationals
 \newcommand{\RR}{\mathbb R} % reals
+\newcommand{\TT}{\mathbb T} % unit circle regarded as quotient R/Z
 \newcommand{\ZZ}{\mathbb Z} % integers
-\newcommand{\TT}{\mathbb T} % sometimes called the unit circle in linear ops
-\newcommand{\DD}{\mathbb D} % disc... sometimes... 354...
+% add smth about projective spaces?
 
 % probability
 \newcommand{\EE}{\mathbb E} % expectation
@@ -182,26 +184,16 @@
 \DeclareMathOperator{\curl}{curl} % curl
 \DeclareMathOperator{\Vol}{Vol} % as in volume
 
+% partial diff eqs
+% \newcommand{\pfrac}[2][]{\frac{\partial #1}{\partial #2}} % partials
+% \newcommand{\bfx}{\mathbf x}
+% \newcommand{\bfy}{\mathbf y}
+
 % inequalities
 \newcommand{\cycsum}{\sum_{\mathrm{cyc}}} % cyclic sum
 \newcommand{\symsum}{\sum_{\mathrm{sym}}} % symmetric sum
 \newcommand{\cycprod}{\prod_{\mathrm{cyc}}} % cyclic product
 \newcommand{\symprod}{\prod_{\mathrm{sym}}} % symmetric product
-
-% algebra
-\let\mod\relax
-\DeclareMathOperator{\mod}{mod} % yeah, fuck that space in front of the usual ams package's mod or something. go away.
-\DeclareMathOperator{\ord}{ord} % order
-\DeclareMathOperator{\charin}{char} % characteristic
-\DeclareMathOperator{\spn}{span} % because span is a command already
-\DeclareMathOperator{\sign}{sign} % sign
-\DeclareMathOperator{\Aut}{Aut} % automorphism
-\DeclareMathOperator{\Inn}{Inn} % inner automorphism
-\DeclareMathOperator{\Syl}{Syl} % sylow
-\DeclareMathOperator{\Gal}{Gal} % galois
-\DeclareMathOperator{\GL}{GL} % general linear group
-\DeclareMathOperator{\SL}{SL} % special linear group
-\newcommand{\inv}{^{-1}} % inverses
 
 % complex analysis
 \DeclareMathOperator{\cis}{cis} % cis x + i sin x: shorthand
@@ -213,14 +205,12 @@
 
 % functional analysis - import from joshua lau from MAT436
 % tbd - fredholm, etc., calkin algebras
-%\newcommand{\indx}{\operatorname{index}}
-%\DeclareMathOperator{\indx}{index} ? or ind
-
-% topology
-\DeclareMathOperator{\diam}{diam} % diameter of a set, metric
-\DeclareMathOperator{\bdry}{bdry} % boundary
-\DeclareMathOperator{\Bdry}{Bdry} % boundary alternative
-\DeclareMathOperator{\diag}{diag} % diagonal
+\DeclareMathOperator{\ind}{ind} % fredholm index
+\DeclareMathOperator{\indx}{index} % fredholm index alternative
+\DeclareMathOperator{\ev}{ev} % evaluation map
+\DeclareMathOperator{\Fred}{Fred} % fredholm operator space
+\DeclareMathOperator*{\esssup}{ess\,sup} % essential supremum
+\DeclareMathOperator*{\essinf}{ess\,inf} % essential infimum
 
 % operators
 \DeclareMathOperator{\img}{im} % image
@@ -239,6 +229,28 @@
 \DeclareMathOperator{\Hom}{Hom} % homomorphism
 \DeclareMathOperator{\Mor}{Mor} % morphisms
 \DeclareMathOperator{\End}{End} % endomorphism
+
+% topology
+\DeclareMathOperator{\diam}{diam} % diameter of a set, metric
+\DeclareMathOperator{\bdry}{bdry} % boundary
+\DeclareMathOperator{\Bdry}{Bdry} % boundary alternative
+\DeclareMathOperator{\diag}{diag} % diagonal
+
+% algebra
+\let\mod\relax
+\DeclareMathOperator{\mod}{mod} % yeah, fuck that space in front of the usual ams package's mod or something. go away.
+\DeclareMathOperator{\ord}{ord} % order
+\DeclareMathOperator{\charin}{char} % characteristic
+\DeclareMathOperator{\spn}{span} % because span is a command already
+% \DeclareMathOperator{\clspn}{\overline{span}} % idk.
+\DeclareMathOperator{\sign}{sign} % sign
+\DeclareMathOperator{\Aut}{Aut} % automorphism
+\DeclareMathOperator{\Inn}{Inn} % inner automorphism
+\DeclareMathOperator{\Syl}{Syl} % sylow
+\DeclareMathOperator{\Gal}{Gal} % galois
+\DeclareMathOperator{\GL}{GL} % general linear group
+\DeclareMathOperator{\SL}{SL} % special linear group
+\newcommand{\inv}{^{-1}} % inverses
 
 % lie and primes - frakturs
 \newcommand{\kb}{\mathfrak b}
@@ -331,4 +343,4 @@
 \declaretheorem[name=Exercise,numbered=no]{exercise*}
 \declaretheorem[name=Problem,numbered=no]{problem*}
 \declaretheorem[name=Question,numbered=no]{question*}
-% \declaretheorem[name=Problem,numbered=no]{hwproblem*} % homework use
+% \declaretheorem[name=Problem,numbered=no]{hwproblem*} % homework use % just use problem
