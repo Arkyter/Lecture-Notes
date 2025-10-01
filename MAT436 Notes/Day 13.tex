@@ -1,1 +1,14 @@
 \section{Episode 13: (Oct. 1, 2025)}
+I'm just going to type up the notes from tutorial. Let $A : H \to H$ be a compact operator; then $A$ is the limit of $A_n$ with $n \to \infty$, where each $A_n$ is a fintie rank operator. If $A^\ast = A_n$, then $A_n \in M_n \CC$ is a unitarily diagonalizable matrix with real eigenvalues as seen from linear algebra, i.e., $A_n = U_n D_n U_n^\ast$ where $U_n$ is unitary and $D_n$ is diagonal. In this manner, we have the following sketch for a proof,
+\[ A = \lim_{n \to \infty} A_n = \lim_{n \to \infty} (U_n D_n U_n^\ast) \stackrel{?}{=} U(\lim D_n) U^\ast, \]
+where we \textit{suspect} that the eigenvalues of $A$ (henceforth denoted the spectrum $\spec A$) is given by the limit of the eigenvalues of $A_n$. Note that for any operator $T : H \to H$, we have that $T = A + iB$, where $A = \frac{1}{2}(T + T^\ast)$ and $B = \frac{1}{2i}(T - T^\ast)$; then $A \in M_n\CC$, where $\det(A - I\lambda)$ is its characteristic polynomial, and we may define
+\[ \spec(A) = \{\lambda \in \CC \mid A - I\lambda \text{ is not invertible}\}, \]
+for $A \in B(H)$. If $A$ is compact, then we may follow the process,
+\begin{enumerate}[(i)]
+    \item Find an eigenvector for the eigenvalue $\norm{A}$ (from compactness).
+    \item dot dot dot idk
+\end{enumerate}
+\begin{theorem}
+    $\spec(A) \subset B^C_{\norm{A}}$.
+\end{theorem}
+\noindent i stopped paying attention after this
