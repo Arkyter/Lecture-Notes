@@ -2,12 +2,10 @@
 
 % todo list!
 % - table of contents rework
-% - probably clean up symbols and whatever. add in ones i need
 % - tabular system?
 % - reduce space in maketitle macro
 % - reduce margins, i think, i need more space here :(
 % - package options: include algebra symbols, topo. symbols only, etc... or "all"
-% - hrulebar fix
 % - caveat emptor
 
 % ----------------------------------------------------------------
@@ -115,7 +113,8 @@
 
 % paragraph styling
 \newcommand{\hrulebar}{ % to be FIXED. (indentation at the beginning)
-  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  %\par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  \par\rule{0.95\linewidth}{.7pt}\hspace{\fill} % temporary fix: get rid of the first \hspace{\fill} because atm it's indent -> hrulebar of 0.95 line width with padding on both sides evenly, so i make it indent -> hrule with ONLY padding on right side. intention is that size of indent = size of hspace on rhs
   \par\nointerlineskip \vspace{\baselineskip}
 }
 \newcommand{\confusion}[1]{ % add more if necessary
