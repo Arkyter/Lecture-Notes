@@ -1,0 +1,71 @@
+\section{Day 9: More on Wave Equation, Heat Equation (Sep. 29, 2025)}
+
+Let's look at the wave equation in \( d + 1 \) dimensions. This is
+\[ \left\{\begin{NiceMatrix}u_{tt} - c^{2} \Delta_{x} u = 0 & t \in \mathbb{R}, x \in \mathbb{R}^{d} \\ u(x, 0) = \phi(x) \\ u_{t}(x, 0) = \psi(x)\end{NiceMatrix}\right.  \]
+
+
+We defined the energy density \( \sigma(x, t) = \frac{1}{2} |u_{t}|^{2} + \frac{1}{2} c^{2} | \nabla u|^{2} \), and the total energy at the time \( t \) as
+\[ E(t) = \int_{\mathbb{R}^{d}} \sigma(x, t) dx.  \]
+We proved for sufficiently nice solutions that \( \dot{E} \equiv 0 \).
+
+\begin{theorem}[Finite Speed of Propagation]
+	If \( \phi, \psi \) vanish for \( |x| > R \) then \( u(x, t) = 0 \) for \( |x| > R + ct \) where \( t > 0 \). If \( d = 1 \) this is just D'Alembert.
+\end{theorem}
+\begin{proof}
+	The past cone (the domain of dependence of \( (x_{0}, t_{0}) \)) is
+	\[\tag{\( 0 \le t \le t_{0} \)} |x - x_{0}| = c(t_{0} - t). \]
+	Taking the gradient of the function
+	\[ F(x, t) = |x - x_{0}| - c(t_{0} - t) \]
+	yields the unit outward normal to our cone \( C \). It is  precisely
+	\[ \left( x - x_{0}, -c \frac{t - t_{0}}{|t - t_{0}|} \right) \frac{1}{\sqrt{1 + c^{2}}}. \]
+	Define \( R = x - x_{0} \) and write 
+	\[ \hat m = \left( \frac{R}{|R|}, c \right) \frac{1}{\sqrt{1+c^{2}}} \]
+	on \( C \). Then we have that
+	\[ \partial_{t} \sigma(x, t) - \nabla \cdot p(x, t) = 0, \]
+	where
+	\[ \sigma(x, t) = \frac{1}{2}|u_{t}|^{2} + \frac{1}{2}c^{2} | \nabla u|^{2}, \qquad p(x, t) = c^{2} u_{t} \nabla u. \]
+	This can be found just by plugging these in to the above and cancelling out. Call \( D \) the solid region of the cone between \( 0 \) and \( t \). For the rest of this proof refer to \href{https://www.desmos.com/3d/njaziiud1o}{this desmos graph} for the sets. Then
+	\[ \int_{D} \partial_{t} \sigma - \nabla \cdot p dV = 0, \]
+	but this is just the divergence (in both \( x \) and \( t \)) of the vector field \( (-p, \sigma) \), so applying Gauss, this is
+	\[ \int_{\partial D} (-p, \sigma) \cdot \hat m\, da, \]
+	where \( \partial D = T \cup B \cup K \), where \( T \) is the top of our slice of the cone, \( B \) is the bottom slice, and \( K \) is the boundary connecting them (again, refer to our graph).
+	\begin{align*}
+		\int_{T} (-p, \sigma) \cdot (0, \ldots, 0, 1) dx &= \int_{T} \sigma dx \\
+		&= \frac{1}{2} \int_{T} u^{2}_{t} + c^{2} | \nabla u(t)|^{2} dx\\
+		\tag{\( * \)}\int_{B} (-p, \sigma) \cdot (0, \ldots, -1) dx &= \frac{-1}{2} \int_{B} \psi^{2} + c^{2} | \nabla \phi|^{2} dx \\
+		\int_{K} (-p, \sigma) \cdot \hat m &= \int_{K} -p \hat m_{x} + \sigma \hat m_{t} \\
+																			 &= \frac{1}{\sqrt{1 + c^{2}}} \int_{K}  - c^{2} u_{t} \nabla u \cdot \frac{R}{|R|} + c \left(\frac{1}{2} u_{t}^{2} + \frac{c^{2}}{2} | \nabla u|^{2}\right) d a \\
+		\int_{T} \frac{1}{2} u_{t}^{2} + \frac{c^{2}}{2} | \nabla u|^{2} & \le \int_{B}  \frac{1}{2} \psi^{2} + \frac{1}{2} c^{2} | \nabla \phi|^{2} - \int_{K} \cdots.
+	\end{align*}
+	We will show that our integral over \( K \) is positive to show that we can drop this term in the inequality. To do this, set \( u_{r} = \nabla u \cdot \frac{R}{|R|} \), to represent the radial derivative of \( u \). Then
+	\begin{align*}
+		\frac{1}{c} I &= -c u_{t} u_{r} + \frac{1}{2} u_{t}^{2} + \frac{c^{2}}{2}| \nabla u|^{2}  \\
+			&= \frac{1}{2} \left( u_{t} - c u_{r} \right)^{2} + \frac{c^{2}}{2} (| \nabla u|^{2} - u^{2}_{r}) \\
+			&= \frac{1}{2} (u_{t} - cu_{r})^{2} + \frac{c^{2}}{2} \left| \nabla u - u_{r} \cdot \frac{R}{|R|} \right|^{2} \\
+			&\ge 0.
+	\end{align*}
+	It follows that
+	\[ \int_{T}  \frac{1}{2}u_{t}^{2} + \frac{c^{2}}{2} | \nabla u|^{2} \le \int_{B}  \frac{1}{2} \psi^{2} + \frac{c^{2}}{2} | \nabla \phi|^{2}, \]
+	%, set 
+	% \[ \left| -b(a \cdot \frac{R}{|R|}) \right| \le \frac{1}{2} b^{2} + \frac{1}{2} \left| a - \frac{R}{|R|} \right|^{2} = \frac{1}{2} b^{2} + \frac{1}{2} |a|^{2}  \left| \frac{R}{R} \right|= 1. \]
+
+	so if \( \phi, \psi = 0 \) on \( B \), then \( \int_{T} u_{t}^{2} + | \nabla u|^{2} dx = 0  \). This implies \( u \equiv 0 \) on \( T \) so \( u \equiv 0 \) on the whole cone. Also, \( u(x_{0}, t_{0}) \) is zero if data is zero on the base of the past cone of \( (x_{0}, t_{0}) \) (i.e.\ the domain of dependence).
+\end{proof}
+
+What we showed also implied finite speed property for \( d + 1 \) dimensional wave equation. ``No more cones for a while. We may have ellipses and spheres, but no cones. Well, maybe I'll say one thing\ldots'' Think about how the energy inequality implies uniqueness of our solution. Also, think about how \( \dot{E}(t) = 0 \) implies uniqueness.
+
+Now let's start on the Heat/Diffusion equation in 1d. Recall this is
+\[ \tag{\( k > 0 \)}u_{t} - k u_{x x} = 0. \]
+We may assign initial data \( u(x, 0) = \phi(x) \). We may also look at boundary conditions. Here, only take \( t \ge 0 \). For \( t < 0 \) the problem is generally ill-posed. Notice that if you change \( t \) to \( -t \) this is not the same equation, because we are requiring \( k > 0 \).
+
+We will solve it explicitly later. First, let's look at some properties that can be obtained only from the equation.
+\begin{theorem}[Weak Maximum Principle]
+	Consider the rectangle \( 0 \le x \le \ell \) and \( 0 \le t \le T \). Suppose we have a solution here. Namely, we have that \( u_{t} = k u_{x x} \) in \( (x, t) \in [0, \ell] \times [0, T] = R \). Then the max value for \( u \) in \( R \) is obtained on either \( x = 0 \), \( x = \ell \) or \( t = 0 \).
+\end{theorem}
+
+\begin{remark}
+	The strong maximum principle says the max can only be on the boundaries mentioned (unless the function is constant). The weak maximum principle is provable easily, the strong maximum principle is very hard.
+\end{remark}
+We will save the proof for next time. It's a basic trick in analysis. It's different in flavour from what we've done so far---no integration by parts or integrals at all.
+
+We also have the min principle. Just apply the max principle to \( -u \). We will also have this same idea for the elliptic equation.\footnote{There was something else at the end but I really had to pee so I wasn't paying attention at the very end. It was something about uniqueness in the heat equation and boundary conditions, but I figure he'll go over it again if it's important.}
