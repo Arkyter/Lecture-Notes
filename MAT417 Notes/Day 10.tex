@@ -1,0 +1,69 @@
+\section{Day 10: Norms and Integration on \texorpdfstring{$\QQ^p$}{Qp} (Oct. 2, 2025)}
+We want to motivate the correction factor; start by computing the following with the change of variables $y = \pi x^2$,
+\begin{align*}
+    \int_0^\infty e^{-\pi x^2} x^{s - 1} \, ds &= \frac{1}{2} \int_0^\infty e^{-y} \left(\frac{y}{\pi}\right)^{\frac{s-1}{2}} \left(\frac{y}{\pi}\right)^{-\frac{1}{2}} \frac{1}{\pi} \, dy \\
+    &= \frac{1}{2} \int_0^\infty e^{-y} g^{\frac{s}{2} - 1}\pi^{1 - \frac{s}{2}} \frac{1}{\pi} \, dy = \frac{1}{2} \pi^{-\frac{s}{2}} \Gamma\left(\frac{s}{2}\right).
+\end{align*}
+This means we have
+\[ \int_0^\infty e^{-\pi x^2} \abs{x}^{s-1} \, dx = \pi^{-\frac{s}{2}} \Gamma\left(\frac{s}{2}\right) = \int_{-\infty}^\infty e^{-\pi x^2} \abs{x}^2 \frac{dx}{\abs{x}}. \]
+Recall that if $K$ is any field, we define a norm on $K$ to be a map $\norm{\cdot} : K \to \RR_{\geq 0}$ such that it is absolutely homogeneous, subadditive, and equal to $0$ if and only if the input is zero. For example,
+\begin{enumerate}[(i)]
+    \item $\RR$ or $\CC$ with the usual absolute value and ``Euclidean distance from origin'' norm,
+    \item (\textit{$p$-adic norm}) $K = \QQ$; any element of $\QQ$ can be written as $\frac{p^s r}{q}$, where $p$ is prime and $p \nmid r$. Then the norm of such is given by $p^{-s}$ (we also define the norm of $0$ to be $0$ in this case).
+\end{enumerate}
+\noindent We know that norms induce metric topologies on the space that is being normed, and we say that two norms are equivalent if they induce the same topology.
+\begin{exercise}
+    Two norms $\norm{\cdot}_1, \norm{\cdot}_2$ are equivalent if and only if there exists $c$ such that $\norm{\cdot}_1 = \norm{\cdot}_2^c$. 
+\end{exercise}
+\begin{theorem}[Ostrowski]
+    For $K = \QQ$, the usual norm and the $p$-adic norm are the only norms for $K$ up to equivalence. We say that the $p$-adic norm is \textit{archimedean}, and the usual norm \textit{non-archimedean}.
+\end{theorem}
+\noindent If $K$ is a field with norm $\norm{\cdot}$, you can do the following;
+\begin{enumerate}[(i)]
+    \item You can define the convergence of a sequence and its limits.
+    \item You can take Cauchy sequences.
+\end{enumerate}
+\noindent $\QQ$ is not complete with respect to the $p$-adic norm nor the usual $2$-norm, so Cauchy sequences do not necessarily converge here. In general, if $K$ is a normed field, we can define its completion $\hat K$ with respect to the original norm. Elements of $\hat K$ are Cauchy sequences up to e.quivalence, i.e., $\{a_n\}$ is Cauchy if, for all $\eps > 0$, there exists $N > 0$ such that $\abs{a_n - a_m} < \eps$ for all $n, m \geq N$. We say that $\{a_n\} \sim \{k_n\}$ if, for all $\eps > 0$, there exists $N$ such that $\abs{a_n - k_m} < \eps$ for all $n, m \geq N$. Cauchy sequences up to equivalence form a field containing $K$, but is complete, which we call $\hat K$.
+\\[8pt]
+As an example, take $K = \QQ$ with th eusual notion; then $\hat K = \RR$. Let $p$ be prime, and let $\QQ_p$ be defined as the completion of $\QQ$ with resepect to $\norm{\cdot}_p$; then $\ZZ_p \subset \QQ_p$, where $\ZZ_p$ is the closure of $\ZZ$ inside $\QQ_p$. The \textit{explicit} definition of $Z_p$ is that we have
+\[ \ZZ_p = \lim_{n \to \infty} \ZZ/p^n \ZZ = \{a_n \in \ZZ/p^n \ZZ \mid a_n \text{ is the image of } a_{n+1} \text{ under } \ZZ/p^{n+1}\ZZ \to \ZZ/p^n\ZZ\}. \]
+Since this is a ring, addition and multiplication are defined as term-by-term addition and multiplication of $\{a_n\}$.
+\begin{lemma}
+    Any Cauchy sequence of integers with respect to $\norm{\cdot}_p$ converges in $\ZZ_p$ and any element of $\ZZ_p$, and any element of $\ZZ_p$ is a limit of integers.
+\end{lemma}
+\noindent Let $\abs{\{a_n\}} = p^{-(m-1)}$, i.e., $m$ is the smallest integer where $a_m \neq 0$; then we see that $\QQ_p$ is the field of fractions of $\ZZ_p$, where $\QQ_p \ni x = \frac{a}{b}$ and $a_1 b \in \ZZ_p$? In fact, any element of $\QQ_p$ has the form $\frac{a}{p^\ell}$, where $a \in \ZZ_p$ and $\ell \geq 0$.
+\\[8pt]
+We now discuss integration on $\QQ_p$. Let $S(\QQ_p)$ be the set of locally constant complex-valued functions with compact support on $\QQ_p$. Since $\ZZ_p \subset \QQ_p$, we may write the following lemma,
+\begin{lemma}
+    $\ZZ_p$ is open and compact in $\QQ_p$.
+\end{lemma}
+\noindent Let $f : \QQ_p \to \CC$ have bounded support. If there exists $p > 0$ such that $f(x) = 0$ if $\abs{x} \geq r$, then f is locally constant, i.e., every point has a neighborhood such that $f$ is constant on said neighborhood. We also have that $f$ has compact support if and only if there exists $n \geq 0$ such that $f(x + y) = f(x)$ for all $x, y \in p^n \ZZ_p$. We call $S(\QQ_p)$ the space of \textit{Schwartz-Bruhat} functions.
+\\[8pt]
+If $f \in S(\QQ_p)$, we can define $\int_{\QQ_p} f(x) \, dx$. Assume, for example, that the support of $f$ is in $\ZZ_p$. Then $f(x) = 0$ if $x \not\in \ZZ_p$, and there exists $n$ such that $f(x + y) = f(x)$ for all $z \in p^n \ZZ_p$, since $\ZZ_p/p^n\ZZ_p = \ZZ/p^n\ZZ \to \CC$ under $\ol f$. Define
+\[ \int_{\ZZ_p} f(x) \, dx = p^{-n} \sum_{a \in \ZZ/p^n\ZZ} \ol f(a). \]
+For $\int_{\QQ_p}$, note that $\QQ_p/p^n \ZZ_p = \QQ/p^n\ZZ$, so any $f \in S(\QQ_p)$ is actually a function $\ol f$ on $\QQ/p^n\ZZ$, with finite support. Then define the integral by the same formula. As an example,
+\[ \int_{\ZZ_p} 1 \, dx = 1 = \int_{\ZZ_p} f(x) \, dx, \quad f(x) = \begin{cases} 1 & \abs{x} \leq 1, \\ 0 & \abs{x} > 1, \end{cases} \quad f_n(x) = \begin{cases} 1 & \abs{x} \leq p^{-n}, \\ 0 & \abs{x} > p^{-n}. \end{cases} \]
+In this manner, we analogously obtain $\int_{\QQ_p} f_n(x) \, dx = p^{-n}$. Observe that
+\[ \int_{\QQ_p} f_n(x) \abs{x}^s \, dx = \int_{\ZZ_p} \abs{x}^s \, dx, \]
+even though we are ``cheating'' a little bit because $\abs{x}^s$ is not an element of $S(\QQ_p)$; really, we are writing
+\[ \int_{\ZZ_p} \abs{x}^s \, dx = \sum_{n \geq 0} \int_{\abs{x} = p^{-n}} p^{-ns} \, ds; \]
+we claim that $\int_{\abs{x} = p^{-n}} 1 \, dx = (p-1) p^{-(n+1)}$. For $n = 0$, we have that $\{x \mid \abs{x} = 1\} = \ZZ_p \setminus p \ZZ_p$, and consider the map $\pi : \ZZ_p \to \ZZ/p\ZZ$ and $\{x \mid \abs{x} = 1\} \mapsto (\ZZ/p\ZZ)^\ast$. Assume that $\pi^{-1}(a)$ has volume $p\inv$. Altogether, we get $(p-1) p\inv$. For other $n$, the calculation is similar.
+\\[8pt]
+In this manner, consider
+\[ \int_{\QQ_p} f_0(x) \abs{x}^{s-1} \, dx = \sum_{n \geq 0} p^{-n(s-1)} (p-1) p^{-(n+1)} = \frac{p-1}{p} \sum_{n \geq 0} p^{-ns} = \frac{p-1}{p} \frac{1}{1 - p^{-s}}, \]
+where we recognize the latter fraction as the Euler factor in the Riemann $\zeta$-function. Specifically,
+\[ \Gamma\left(\frac{s}{2}\right) n^{-\frac{s}{2}} = \int_0^\infty e^{-\pi x^2} (x)^{s-1} \, dx, \]
+where we recall the definition of $f_0$. The analog of $e^{-\pi/s^2}$ is $f_0(x)$ up to a constant. $e^{-\pi s^2}$ is essetnailly the simplest possible function whose Fourier transform is closed. $f_n(x)$ has a similar property of $\QQ_p$, where $s \mapsto e^{2\pi i x}$ is a homomorphism from $\RR$ to $\CC^\ast$. Recall that the Fourier transform is given by
+\[ \hat f(y) = \int_\RR f(x) e^{2\pi i x y} \, dx. \]
+We want an continuous additive character of $\QQ_p$. Take a character $\psi : \QQ_p/\ZZ_p \to \CC^\ast$, where $\QQ_p/\ZZ_p = \{a \in \QQ/\ZZ \mid ap^i = 0, i >> 0\}$; then
+\[ 0 \subset p\inv \ZZ/\ZZ \subset p^{-2} \ZZ/\ZZ \subset p^{-3} \ZZ/\ZZ \subset \dots. \]
+We may pick any additive character $\varphi$ such that $\restr{\psi}{p\inv \ZZ/\ZZ} \neq 1$ as the analog of $e^{2\pi i x}$. In this manner, we have that
+\[ \hat f(y) = \int_{x \in \QQ_p} f(x) \psi(x, y) \, dx. \] \vspace{-16pt}
+\begin{lemma}
+    If $f \in S(\QQ_p)$, then $\hat f(y) = S(\QQ_p)$. We also have that $\hat f(x) = f(-x)$.
+\end{lemma}
+\noindent $f = f_0$ is the characteristic function of $\ZZ_p \subset \QQ_p$. We have that $\hat f_s(0) = f_s(y)$, and for $y \in \ZZ_p$, we have
+\[ \hat f_0(y) = \int_{z \in \QQ_p} f_0(x) \psi(xy) \, dx = \int_{\ZZ_p} \psi(xy) \, dx = \int_{\ZZ_p} 1 \, dx. \]
+In particular, since for any $z, y \in \ZZ_p$, we have $xy \in \ZZ_p$, we have that $\psi(xy) = 1$. If $x \not\in \ZZ_p$, then $x \mapsto \psi(xy)$ is a nontrivial character of $\ZZ_p$, and
+\[ \int_{\ZZ_p} f_y(x) \, dx = p^{-n} \sum_{a \in \ZZ/p^n \ZZ} \ol \psi_y(a) = 0. \]
+We may choose $n$ such that $\psi_y(x)$ is trivial on $p^n \ZZ_p$, and so $\psi_y(x)$ can be regarded as a nontrivial function $\ol \psi_y$ on $\ZZ/p^n \ZZ$.
