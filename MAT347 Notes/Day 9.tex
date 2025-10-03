@@ -36,7 +36,7 @@ In this manner, we have that $\sign \sigma = \det M_{\sigma}$.
     Every permutation $\sigma \in S_n$ can be written as a product of transpositions (obviously, such a product is not necessarily unique).
 \end{claim}
 \noindent An informal proof of this is to simply observe the bubble sort algorithm. We have that $\sign(\sigma)$ is equal to $(-1)$ to the power of however many transpositions are in the transposition decomposition of $\sigma$; the question is, is this well-defined? We may formally define $\sign$ as
-\[ \sign(\sigma) = \prod_{i=1}^n (-1)^{\sigma_i) - 1}, \tag{$\sigma_i = \sigma(i)$} \]
+\[ \sign(\sigma) = \prod_{i=1}^n (-1)^{(\sigma_i) - 1}, \tag{$\sigma_i = \sigma(i)$} \]
 for which we may write down equivalent formulations
 \[ \sign(\sigma) = \prod_{i < j} \sign(\sigma_j - \sigma_i) = \prod_{i \neq j} \frac{\sign(\sigma_j - \sigma_i)}{\sign(j - i)} = \prod_{\substack{\{i, j\} \subset [n] \\ i \neq j}} \sign \left(\frac{\sigma_j - \sigma_i}{j - i}\right), \]
 where each successive expression is ``gooder'' than the rest.\footnote{dror-ism}
