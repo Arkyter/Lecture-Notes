@@ -1,0 +1,26 @@
+\section{Day 10: Jordan-H\"older Decomposition (Oct. 3, 2025)}
+Recall from last class that if $N \nunlhd G$, then $N$, $G/N$ are simple. $\ZZ/n$ is simple if and only if $n$ is prime. The sign function $\sign : S_n \to \{\pm 1\}$ tells you the parity of a permutation, where $\sign \sigma = 1$ if $\sigma$ is even and $-1$ if it is odd. Finally, $A_n = \ker \sign$ is the ``alternating'' group, i.e., the set of even permutations in $S_n$.
+\\[8pt]
+We have a condensed strategy to approach this. Suppose $\{e\} \neq N \lhd A_n$; we will show that $N$ contains a $3$-cycle $(i, j, k)$.
+\\[8pt]
+We now move onto Jordan-H\"older.
+\begin{definition}
+    A Jordan-H\"older decomposition for a group $G$ is a sequence
+    \[ G = G_0 \nunrhd G_1 \nunrhd \dots \nunrhd G_n = \{0\} \]
+    such that for all $i$, $H_i = G_i/G_{i+1}$ is simple.
+\end{definition}
+\noindent We give a few motivating examples. Let us consider $\ZZ/n\ZZ$, where $n = p_1 \dots p_k$. Then we have that
+\[ \ZZ \nunrhd p_1 \ZZ \nunrhd p_1 p_2 \ZZ \nunrhd \dots \nunrhd n \ZZ. \]
+By modding out the entire sequence by $n\ZZ$, we have
+\[ \ZZ/n\ZZ \nunrhd \frac{p_1 \ZZ}{n\ZZ} \nunrhd \frac{p_1p_2 \ZZ}{n\ZZ} \nunrhd \dots \nunrhd \frac{n\ZZ}{n\ZZ} = \{e\}; \]
+let the elements of the sequence be named $G_0, G_1, \dots, G_k$ in order; observe that we have (where we pick a random index because Dror does that),
+\[ H_2 = \frac{G_2}{G_3} = \frac{p_1p_2 \ZZ / n\ZZ}{p_1p_2p_3 \ZZ / n\ZZ} = \frac{p_1p_2 \ZZ}{p_1p_2p_3 \ZZ} \]
+by the third isomorphism theorem, and we may factor out $p_1, p_2$ to obtain $\ZZ/p_3\ZZ$, which we know is simple. We may follow the same computation to demonstrate that the above sequence is indeed a Jordan-H\"older decomposition. Note that the decomposition itself is not necessarily unique with respect to the group, however, because as seen above, we may take $p_1, \dots, p_k$ in any order to obtain a sequence with the same property.
+\\[8pt]
+For another example, consider $G = S_n$ with $n \geq 5$. We have that
+\[ G = G_0 \nunrhd G_1 = A_1 \nunrhd G_2 = \{e\}. \]
+We have that $H_0 = S_n/A_n = \img(\sign) = \{\pm 1\} = \ZZ/2\ZZ$ which we know is simple, and $H_1 = A_n/\{e\} = A_n$ is simple.
+\\[8pt]
+For a third example, consider $G = S_4$ (which has $24$ elements). Since $A_4$ is the only non-simple alternating group, we may write
+\[ G_0 = S_4 \nunrhd A_4 \nunrhd \ker \phi = \{e, (12)(34), (13)(24), (14)(23)\} \cong \ZZ/2\ZZ \times \ZZ/2\ZZ \nunrhd \{e\}. \]
+where $\phi : A_4 \to A_3$ and $H_0 = S_4/A_4 = \ZZ/2\ZZ$, $H_1 = \img \phi = A_3 = \ZZ/3\ZZ$. % https://math.stackexchange.com/a/121495 - reference for klein 4 group here. i'll return to think abt this some more later.

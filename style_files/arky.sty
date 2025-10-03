@@ -252,6 +252,13 @@
 \DeclareMathOperator{\SL}{SL} % special linear group
 \newcommand{\inv}{^{-1}} % inverses
 
+% https://tex.stackexchange.com/questions/33793/symbol-for-proper-ideal-unlhd-lneq
+\newcommand{\nunlhd}{ % proper normal subgroup; proper ideal
+	\mathrel{\ooalign{$\lneq$\cr\raise.22ex\hbox{$\lhd$}\cr}}}
+\newcommand{\nunrhd}{ % other direction
+	\mathrel{\ooalign{$\gneq$\cr\raise.22ex\hbox{$\rhd$}\cr}}}
+
+
 % lie and primes - frakturs
 \newcommand{\kb}{\mathfrak b}
 \newcommand{\kg}{\mathfrak g}
