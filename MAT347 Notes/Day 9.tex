@@ -1,2 +1,63 @@
-\section{Day 9: (Oct. 1, 2025)}
-tbd
+\section{Day 9: Lattice Theorem and Simple Groups (Oct. 1, 2025)}
+Recall the first three isomorphism theorems;
+\begin{enumerate}[(i)]
+    \item If $\phi : G \to H$ is a morphism, then $\ker \phi \cong \img \phi$
+    \item If $H, K < G$ with $K^H = K$, then $H/(H \cap K) \cong HK/K$.
+    \item If $B, C \lhd A$ and $C \lhd B$, then $(A/C) / (B/C) \cong A/B$.
+\end{enumerate}
+\noindent We now present the fourth isomorphism theorem.
+\begin{theorem}[Lattice Theorem]
+    If $N \lhd G$, then $\pi : G \to G/N$ induces a ``faithful'' bijection between $\{H \mid N < H < G\}$ and the subgroups of $G/N$. Specifically, for all $A, B$ such that $N < A < B < G$, we have that $\{1\} < \pi(A) < \pi(B) < G/N$, and if $N < A \lhd B < G$, we have that $\{1\} < \pi(A) \lhd \pi(B) < G/N$, and vice versa. Moreover, $\pi(A \cap B) = \pi(A) \cap \pi(B)$.
+\end{theorem}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+%\noindent As an aside, we have that $\ZZ \rhd 3\ZZ \cong \ZZ$, and so every subgroup of an abelian group is abelian.
+\begin{definition}
+    A group is said to be \textit{simple} if it admits no normal subgroups aside from $\{e\}$ and itself.
+\end{definition}
+\noindent Observe that $\ZZ/n\ZZ$ is simple if and only if $n$ is prime. We claim that if $A < \ZZ$, then $A$ is given by $m \ZZ$ for some unique $m$.
+\begin{proof}
+    Let $A < \ZZ$, and observe that if $A = \{0\}$, then $m = 0$; otherwise, let $k = \min\{k \in A \mid k > 0\}$. This means that $m\ZZ \subset A$. Now, suppose $k \in A$, and write $k = m \cdot q + r$ with $0 \leq r < m$. We have that $r = k - mq \in A$, and by minimality of $m$, we must have $r = 0$, and so $k = mq$, i.e., $k \in m\ZZ$. 
+\end{proof}
+\noindent In this manner, we see that $m\ZZ > n\ZZ$ if and only if $\frac{n}{m}$ is an integer. As an example, observe that $2 \ZZ > 4 \ZZ$, and $\frac{4}{2} = 2 \in \ZZ$. This means that the set of nontrivial subgroups of $\ZZ/n\ZZ$ if equivalent to the set of integers $\{m\ZZ \mid m \mid n\}$, and the smallest set containing nothing other than $n\ZZ$ and $\ZZ$ occurs if and only if $n$ itself is prime.
+\begin{example}
+    Is $S_n$ simple?
+\end{example}
+\noindent No, but it is \textit{nearly}. Let us define the sign function $\sign : S_n \to \{\pm 1\}$, for which we may regard $\{\pm 1\}$ as a group with two elements. Let $S_n \ni \sigma \mapsto \sign(\sigma) := (-1)^\sigma$, which we will call the \textit{parity} of $\sigma$, where if it is even, $\sign(\sigma) = 1$, and odd yields $-1$.\footnote{dror has a pretty confusing explanation of parity, but see this \href{https://en.wikipedia.org/wiki/Parity_of_a_permutation}{link} for better intuition about it. combinatorics type stuff.} It remains to check if $\sign$ is a well-defined function.
+\\[8pt]
+Let us associate to each $\sigma \in S_n$ a matrix $M_\sigma \in M_{n \times n}$, where $M_\sigma = (\delta_{i, \sigma(i)})_{ij}$, i.e., one such matrix might look like
+\[ M_{[1, 3, 2]} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}. \]
+In this manner, we have that $\sign \sigma = \det M_{\sigma}$.
+\begin{definition}
+    A \textit{transposition} is a permutation given by $(ij)$; i.e., it admits a single $2$-cycle while fixing all other elements.
+\end{definition}
+\begin{claim}
+    Every permutation $\sigma \in S_n$ can be written as a product of transpositions (obviously, such a product is not necessarily unique).
+\end{claim}
+\noindent An informal proof of this is to simply observe the bubble sort algorithm. We have that $\sign(\sigma)$ is equal to $(-1)$ to the power of however many transpositions are in the transposition decomposition of $\sigma$; the question is, is this well-defined? We may formally define $\sign$ as
+\[ \sign(\sigma) = \prod_{i=1}^n (-1)^{\sigma_i) - 1}, \tag{$\sigma_i = \sigma(i)$} \]
+for which we may write down equivalent formulations
+\[ \sign(\sigma) = \prod_{i < j} \sign(\sigma_j - \sigma_i) = \prod_{i \neq j} \frac{\sign(\sigma_j - \sigma_i)}{\sign(j - i)} = \prod_{\substack{\{i, j\} \subset [n] \\ i \neq j}} \sign \left(\frac{\sigma_j - \sigma_i}{j - i}\right), \]
+where each successive expression is ``gooder'' than the rest.\footnote{dror-ism}
+\begin{theorem}
+    $\sign$ is a morphism.
+\end{theorem}
+\begin{proof}
+    Directly write as follows for any $\sigma, \tau \in S_n$,
+    \begin{align*}
+        (-1)^{\sigma \tau} &= \prod_{i \neq j} \sign \left(\frac{\sigma\tau_j - \sigma\tau_i}{\tau_j - \tau_i}\right) \sign \left(\frac{\tau_j  - \tau_i}{j - i}\right) \\
+        &= \prod_{i \neq j} \sign \left(\frac{\sigma\tau_j - \sigma\tau_i}{\tau_j - \tau_i}\right) \prod_{i \neq j} \sign \left(\frac{\tau_j  - \tau_i}{j - i}\right) \\
+        &= (-1)^\sigma \cdot (-1)^\tau,
+    \end{align*}
+    since $\tau$ is a bijection.
+\end{proof}
+\begin{definition}
+    We define the \textit{alternating group} $A_n \subset S_n$ as $\ker \sign$, i.e., the set of even permutations in $S_n$.
+\end{definition}
+\noindent By the first isomorphism theorem, we have that
+\[ \abs{A_n} = \frac{\abs{S_n}}{2} = \frac{n!}{2}, \quad n \geq 2, \]
+by the first isomorphism theorem. For example, $\abs{A_3} = 3$, $\abs{A_4} = 12$, $\abs{A_5} = 60$.
+\begin{theorem}
+    The alternating group $A_n$ is simple for $n \neq 4$. See this \href{https://drorbn.net/AcademicPensieve/Classes/25-347-GroupsRingsFields/SimplicityOfAn.pdf}{handout}.
+\end{theorem}
