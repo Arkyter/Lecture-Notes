@@ -5,7 +5,7 @@ exists. Recall that $\CC$ can be identified with $\RR^2$ by considering any $z =
 \begin{proposition}
     If $f = u + iv$ is holomorphic at $z_0 = x_0 + iy_0$, then we have that all four partial derivatives
     \[ \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial v}{\partial x}, \frac{\partial v}{\partial y} \]
-    exist and they satisfy the Cauchy-Riemann equations
+    exist and they satisfy the Cauchy--RIemann equations
     \[ \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} = \Re f(z_0), \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} = \Im f(z_0). \]
     We also have that $F$ is differentiable at $P_0 = (x_0, y_0)$.
 \end{proposition}
@@ -19,7 +19,7 @@ is called the Jacobian matrix of $F$ at $(x_0, y_0)$. To see this, consider the 
 \[ \begin{pmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{pmatrix} \begin{pmatrix} h_1 \\ h_2 \end{pmatrix} = \begin{pmatrix} \frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y} h_2 \\ \frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2 \end{pmatrix}. \]
 This is a vector in $\RR^2$, which we may associate with the complex number
 \[ \left(\frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y} h_2\right) + i \left(\frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2\right) = \left(\frac{\partial u}{\partial x} + i \frac{\partial y}{\partial x}\right) h_1 + \left(\frac{\partial u}{\partial y} + i \frac{\partial v}{\partial y}\right) h_2, \]
-which, by the Cauchy-Riemann equations, we obtain
+which, by the Cauchy--RIemann equations, we obtain
 \[ \left(\frac{\partial u}{\partial x} - i \frac{\partial u}{\partial y}\right) h_1 + i \left(\frac{\partial u}{\partial y} + \frac{\partial u}{\partial x}\right) h_2 = \left(\frac{\partial u}{\partial x} - i \frac{\partial u}{\partial y}\right)(h_1 + ih_2), \]
 which is precisely equal to $f(z_0 + h) - f(z_0) - f(z_0) h$. In particular,
 \[ \lim_{h \to 0} \abs{\frac{f(z_0 + h) - f(z_0) - f(z_0)h}{h}} = \lim_{h \to 0} \abs{\frac{f(z_0 + h) - f(z_0)}{h} - f(z_0)} = 0. \]
@@ -28,7 +28,7 @@ Similarly, per the definition of the Jacobian, we must have
 and this concludes the proof of proposition 3.1. \qed
 \newpage
 \begin{theorem}
-    Suppose $f = u + iv$ is a complex-valued function defined on an open set $\Omega \subset \CC$. If $u, v : \Omega \to \RR$, are continuously differentiable and satisfy the Cauchy-Riemann equations, then $f$ is holomorphic on $\Omega$ and $f'(z) = \frac{1}{2} \left(\frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y}\right)$.
+    Suppose $f = u + iv$ is a complex-valued function defined on an open set $\Omega \subset \CC$. If $u, v : \Omega \to \RR$, are continuously differentiable and satisfy the Cauchy--RIemann equations, then $f$ is holomorphic on $\Omega$ and $f'(z) = \frac{1}{2} \left(\frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y}\right)$.
 \end{theorem}
 \begin{proof}
     Since $u$ is continuously differentiable at the point $(x, y) \in \Omega$, there exists a linear transformation $J_u : \RR^2 \to \RR$ where
@@ -43,7 +43,7 @@ and this concludes the proof of proposition 3.1. \qed
         &= \left(\frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial h_y} h_2\right) + \norm{h} \psi_1(h) + i\left(\frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2\right) + i \norm{h} \psi_2(h) \\
         &= \left(\frac{\partial u}{\partial x} - i \frac{\partial u}{\partial y}\right) (h_1 + ih_2) + \norm{h} \psi_1(h) + i \norm{h} \psi_2(h)
     \end{align*}
-    from Cauchy-Riemann. Thus, we have that\footnote{i swear wenyu has an invisible key wired into her back like nano from nichijou and it's permanently cranked on}
+    from Cauchy--RIemann. Thus, we have that\footnote{i swear wenyu has an invisible key wired into her back like nano from nichijou and it's permanently cranked on}
     \begin{align*}
         \lim_{h \to 0} \frac{f(z+h) - f(z)}{h} &= \lim_{h \to 0} \frac{\partial u}{\partial x} + i \frac{\partial u}{\partial y} + \frac{\norm{h}}{h} (\psi_1(h) + i \psi_2(h)) \\
         &= \frac{\partial u}{\partial x} + i \frac{\partial u}{\partial y} = \frac{1}{2} \left(\frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y}\right). \qedhere
