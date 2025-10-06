@@ -26,7 +26,7 @@ i.e., $z$ as a complex variable.
         \abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} &= \abs{\frac{\sum_{n={N+1}}^\infty a_n(z_0 + h)^n - \sum_{n=N+1}^\infty a_n z_0^n}{h}} \\
         &\leq \sum_{n=N+1}^\infty \frac{\abs{a_n}}{h} \abs{(z_0 + h)^n - z_0^n} \\
         &\leq \sum_{n=N+1}^\infty \abs{a_n} \abs{(z_0 + h)^{n-1} + (z_0 + h)^{n-2} + \dots + z_0^{n-1}} \\
-        &\leq \sum_{n=N+1}^\infty \abs{a_n} \gamma^{n-1} \cdot n \taking{n \to \infty} 0,
+        &\leq \sum_{n=N+1}^\infty \abs{a_n} \gamma^{n-1} \cdot n \taking{N \to \infty} 0,
     \end{align*}
     as $y$ has the radius of convergence of $R > r$. Next,
     \[ \abs{S_N'(z_0) - g(z_0)} \taking{N \to \infty} 0, \]
