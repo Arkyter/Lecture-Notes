@@ -76,6 +76,6 @@ A smooth or piecewise smooth curve given by $z : [a, b] \to \CC$ is said to be \
     \[ \int_{T^{(n)}} f(z) \, dz = \int_{T^{(n)}} f(z_0) \, dz + \int_{T^{(n)}} f'(z_0) (z - z_0) \, dz + \int_{T^{(n)}} \psi(z) (z - z_0) \, dz. \]
     The first two terms vanish, since $f(z)$, $f'(z_0)(z - z_0)$ have primitives $f(z_0) z$ and $\frac{1}{2} f(z_0) (z - z_0)^2$ respectively. It remains to compute the last term; we have that
     \[ \abs{\int_{T^{(n)}} \psi(z) (z - z_0) \, dz} \leq \left(\sup_{z \in T^{(n)}} \abs{\psi(z)}\right) \left(\sup_{z \in T^{(n)}} \abs{z - z_0}\right) \length T^{(n)} \]
-    where we note the first term approaches $0$ as $n \to 0$, the second term is bounded above by $2^{-n} d^{(0)}$, and the third term is bounded above by $2^{-n} p^{(n)}$. We may combine everything to obtain
+    where we note the first term approaches $0$ as $n \to \infty$, the second term is bounded above by $2^{-n} d^{(0)}$, and the third term is bounded above by $2^{-n} p^{(n)}$. We may combine everything to obtain
     \[ \abs{\int_{T^{(0)}} f(z) \, dz} \leq 4^n \abs{\int_{T^{(n)}} f(z) \, dz} \leq d^{(0)} p^{(0)} \left(\sup_{z \in T^{(n)}} \abs{\psi(z)}\right) \taking{n \to \infty} 0. \qedhere \]
 \end{proof}
