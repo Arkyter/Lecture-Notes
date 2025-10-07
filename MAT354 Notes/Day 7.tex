@@ -1,8 +1,8 @@
 \section{Day 7: Cauchy's Integral Formula and Corollaries (Sep. 23, 2025)}
 We start with an example.
-\begin{example}[Fresnel Integrals]
+\begin{example}[Fresnel integrals; Shakarchi Ex. \S 2.1)]
     Prove that
-    \[ \int_0^\infty (\sin x^2) \, dx = \int_0^\infty \cos(x^2) \, dx = \frac{\sqrt{2\pi}}{4}. \]
+    \[ \int_0^\infty \sin (x^2) \, dx = \int_0^\infty \cos(x^2) \, dx = \frac{\sqrt{2\pi}}{4}. \]
 \end{example}
 \begin{solution}
     To do this, we proceed by Cauchy's theorem, i.e., using functions of complex variables. Let $e^{ix^2}$, which, per Euler's formula, is equal to $\cos(x^2) + i \sin(x^2)$ for $x \in \RR$. Let us reframe the question by integrating $e^{z^2}$, where $z \in \CC$, over the contour (closed curve) given by a $\frac{\pi}{4}$ radian sector of the circle of radius $R > 0$ centered at $0$; specifically, the contour is given by $0 \to R$, $R \to R e^{i \pi/4}$ along the arc, and $R e^{i \pi/4} \to 0$. In this manner, let $z = \rho e^{i \pi/4}$, where $\rho \in (0, R)$, we have that
