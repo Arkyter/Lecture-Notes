@@ -63,7 +63,7 @@ A smooth or piecewise smooth curve given by $z : [a, b] \to \CC$ is said to be \
 \end{theorem}
 \begin{proof}
     Let $T^{(0)}$ be the original triangle. Let $d^{(0)}, p^{(0)}$ be the diameter and perimeter of $T^{(0)}$ respectively. Take the midpoints of each side of $T^{(0)}$, and form $4$ smaller triangles with orientation consistent to the orientation of $T^{(0)}$; we will call these triangles $T_1^{(1)}, \dots, T_4^{(1)}$. Clearly,
-    \[ \int_{T^{(0)}} f(z) \, dz = \sum_{k=1}^4 \int_{T_k^(1)} f(z) \, dz, \]
+    \[ \int_{T^{(0)}} f(z) \, dz = \sum_{k=1}^4 \int_{T_k^{(1)}} f(z) \, dz, \]
     along with
     \[ \abs{\int_{T^{(0)}} f(z) \, dz} = \sum_{k=1}^4 \abs{\int_{T_k^{(1)}} f(z) \, dz}. \]
     Let $T_j^{(1)}$ be chosen to be such that $\abs{\int_{T_k^{(1)}} f(z) \, dz}$ is maximal among $k \in \{1, \dots, 4\}$; we will write $T^{(1)} = T_j^{(1)}$, and iterate this process to obtain a sequence of triangles $\{T_0, T_1, \dots\}$, where
