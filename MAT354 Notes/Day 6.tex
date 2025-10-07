@@ -8,7 +8,7 @@ We introduce a follow-up to this thoerem.
 \noindent To prove this, we start by using Goursat's theorem to show $f$ has a primitive, and then we complete the proof using the complex FTC, i.e., if $f$ is holomorphic on a disc, then $f$ has a primitive on that disc.
 \begin{proof}
     After a translation, we may assume that the center of the disc is $0$. Define $F : D \to \CC$, given by $z \mapsto \int_{\gamma_z} f(u) \, du$. To show that $F$ is holomorphic and $F'(z) = f(z)$, fix $z \in D$, and observe that for any $h \in \CC \setminus \{0\}$ with $z + h \in D$, we have that
-    \[ F(z+h) - F(z) = \int_{\gamma_{z+h}} f(u + h) \, du - \int_{\gamma_z} f(u) \, du. \]
+    \[ F(z+h) - F(z) = \int_{\gamma_{z+h}} f(u) \, du - \int_{\gamma_z} f(u) \, du. \]
     Regard this as the path from $z$ to $0$ to $z+h$. Let us add to the expression the integrals over two paths, going both directions so that we do not change the value of $F(z+h) - F(z)$, one between $z$ and $\Re(z+h) + i \Im(z)$, and one between $z$ and $z+h$ directly. In this manner, we've created a rectangular region and a triangular region on which we have path integrals over, and per Goursat's theorem, they all vanish, and we are left with the integral on the path $\eta$ from $z$ to $z+h$. This means all that remains is to compute\footnote{GOD KNOWS if this is a $w$ or an $\omega$, i'm just going to use $w$ for now. forensic analysis on yalls handwriting holy shit}
     \[ F(z + h) - F(z) = \int_{\eta} f(w) \, dw \]
     Since $f$ is continuous at $z$, we may write $f(w) = f(z) + \psi(w)$, where $\psi(w) \to 0$ as $w \to z$. This means we may write
