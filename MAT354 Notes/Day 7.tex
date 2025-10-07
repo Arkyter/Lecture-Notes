@@ -25,7 +25,7 @@ We start with an example.
     \[ \abs{\int_{I_2} f(z) \, dz} \leq \int_0^{\pi/4} \abs{e^{-(Re^{it})^2} i Re^{it}} \, dt = \int_0^{\pi/4} Re^{-R^2(\cos 2t)} \, dt. \]
     Let us compute $\cos(2t)$; we have that $2t \in [0, \frac{\pi}{2}]$, so $\cos(2t) = \sin(\frac{\pi}{2} - 2t)$, and $\sin(\theta) \geq \frac{2}{\pi} \theta$ by appealing to geometric intuition; this means
     \begin{align*}
-        \int_0^{\pi/4} Re^{-R^2(\cos 2t)} \, dt &\leq \int_0^{\pi/4} Re^{-R^2 \frac{2}{\pi} \left(\frac{pi}{2}  - 2t\right)} \, dt \tag{Let $s = \frac{\pi}{2} - 2t$}\\
+        \int_0^{\pi/4} Re^{-R^2(\cos 2t)} \, dt &\leq \int_0^{\pi/4} Re^{-R^2 \frac{2}{\pi} \left(\frac{\pi}{2}  - 2t\right)} \, dt \tag{Let $s = \frac{\pi}{2} - 2t$}\\
         &= \frac{1}{2} \int_0^{\pi/2} Re^{-R^2 \frac{2}{\pi} s} \, ds \\
         &= \frac{1}{2} \int_0^{\pi/2} R d\left(\frac{e^{-R^2 \frac{2}{\pi} s}}{-R^2 \frac{2}{\pi}}\right) \\
         &= \frac{1}{2} \cdot \frac{1}{R \frac{2}{\pi}} \left(e^{-R^2} - 1\right) \taking{R \to \infty} 0.
@@ -69,7 +69,7 @@ We start with an example.
         \[ \int_{I_3} \frac{f(\zeta)}{\zeta - z} \, d\zeta = \int_{I_3} \frac{f(\zeta) - f(z)}{\zeta - z} \, d\zeta + f(z) \int_{I_3} \frac{1}{\zeta - z} \, d\zeta, \]
         where the latter term is equal to $-2\pi i f(z)$, per (p.47 in Shakarchi)
         \[ \int_{I_3} \frac{f(z)}{\zeta - z} \, d\zeta = f(z) \int_{I_3} \frac{d\zeta}{\zeta - z} = -f(z) \int_0^{2\pi} \frac{\eps ie^{-it}}{\eps e^{-it}} \, dt = -f(z) 2\pi i. \]
-        For the former term, there exists $e_0 > 0$ such that for all $\zeta \in D_{\eps_0}(z)$, we have that
+        For the former term, there exists $\eps_0 > 0$ such that for all $\zeta \in D_{\eps_0}(z)$, we have that
         \[ \abs{\frac{f(\zeta) - f(z)}{\zeta - z}} \leq \abs{f'(z)} + 2. \]
         We obtain
         \[ \abs{\int_{I_3} \frac{f(\zeta) - f(z)}{\zeta - z} \, d\zeta} \leq (\abs{f'(z)} + 2) \cdot 2\pi \eps \taking{\eps \to 0} 0. \]
