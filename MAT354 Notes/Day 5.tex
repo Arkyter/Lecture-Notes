@@ -73,7 +73,7 @@ A smooth or piecewise smooth curve given by $z : [a, b] \to \CC$ is said to be \
     Let $\ST^{(n)}$ be the solid triangle enclosed by $T^{(n)}$. Clearly, $\ST^{(0)} \supset \ST^{(1)} \supset \dots \supset \ST^{(n)}$, and there exists a unique $z_0 \in \CC$ such that $z_0 \in \ST^{(n)}$ for every $n$; since $f$ is holomorphic at $z_0$, we have that
     \[ f(z) = f(z_0) + f'(z_0)(z - z_0) + \psi(z)(z - z_0) \]
     with $\psi(z) \to 0$ as $z \to z_0$. We may write,
-    \[ \int_{T^{(n)}} f(z) \, dz = \int_{T^{(0)}} f(z_0) \, dz + \int_{T^{(n)}} f'(z_0) (z - z_0) \, dz + \int_{T^{(0)}} \psi(z) (z - z_0) \, dz. \]
+    \[ \int_{T^{(n)}} f(z) \, dz = \int_{T^{(n)}} f(z_0) \, dz + \int_{T^{(n)}} f'(z_0) (z - z_0) \, dz + \int_{T^{(n)}} \psi(z) (z - z_0) \, dz. \]
     The first two terms vanish, since $f(z)$, $f'(z_0)(z - z_0)$ have primitives $f(z_0) z$ and $\frac{1}{2} f(z_0) (z - z_0)^2$ respectively. It remains to compute the last term; we have that
     \[ \abs{\int_{T^{(n)}} \psi(z) (z - z_0) \, dz} \leq \left(\sup_{z \in T^{(n)}} \abs{\psi(z)}\right) \left(\sup_{z \in T^{(n)}} \abs{z - z_0}\right) \length T^{(n)} \]
     where we note the first term approaches $0$ as $n \to 0$, the second term is bounded above by $2^{-n} d^{(0)}$, and the third term is bounded above by $2^{-n} p^{(n)}$. We may combine everything to obtain
