@@ -108,14 +108,14 @@ We start with an example.
 \begin{proof}
     Fix any $z \in D$; by Cauchy's integral formula, we have that
     \[ f(z) = \frac{1}{2\pi i} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \]
-    Note that per our previous corollary. The idea is to write
+    Note that per our previous corollary, the idea is to write
     \[ \frac{1}{\zeta - z} = \frac{1}{\zeta - z_0 + z_0 - z} = \frac{1}{(\zeta - z_0)}\frac{1}{\left(1 - \frac{z - z_0}{\zeta - z_0}\right)}, \]
     where we observe that since $z \in D$ is fixed and $\zeta \in C$, we know that there exists some $r \in (0, 1)$ such that
     \[ \abs{\frac{z - z_0}{\zeta - z_0}} < r, \]
     so we may regard the geometric series representation
     \[ \frac{1}{1 - \frac{z - z_0}{\zeta - z_0}} = \sum_{n=0}^\infty \left(\frac{z - z_0}{\zeta - z_0}\right)^n, \]
     for which the series converges uniformly for any $\zeta \in C$. This means we may interchange the integral and the sum to obtain
-    \[ f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n = \sum_{n=0}^\infty \left(\frac{1}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} \, d\zeta\right) (z - z_0^n). \qedhere \]
+    \[ f(z) = \sum_{n=0}^\infty a_n (z - z_0)^n = \sum_{n=0}^\infty \left(\frac{1}{2 \pi i} \int_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} \, d\zeta\right) (z - z_0)^n. \qedhere \]
 \end{proof}
 \begin{corollary}[Liouville's Theorem: Thm.\ 4.5, Shakarchi]
     If $f$ is entire and bounded, then $f$ is constant. We say that $f$ is \textit{entire} if it is holomorphic on the whole of $\CC$.
