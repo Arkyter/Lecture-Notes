@@ -36,8 +36,8 @@ We introduce a follow-up to this thoerem.
     Let us consider the integral $\abs{\int_{I_1} f(z) \, dz}$, with parameter $I_1 : [0, \xi] \to \CC$, given by $t \mapsto R + it$; we have that
     \[ \abs{\int_{I_1} f(z) \, dz} = \abs{\int_0^\xi f(R + it) i \, dt} = \abs{\int_0^\xi e^{-\pi(R + it)^2} i \, dt}, \]
     for which we observe that the integrand
-    \[ e^{-\pi(R+it)^2} i = e^{-\pi(R^2 - t^2)} e^{i \pi 2 Rt} \leq e^{-\pi(R^2 - \xi^2)} \to 0, \quad R \to +\infty, \]
+    \[ \abs{e^{-\pi(R+it)^2} i} = \abs{e^{-\pi(R^2 - t^2)}} \abs{i} \abs{e^{i \pi 2 Rt}} \leq \abs{e^{-\pi(R^2 - \xi^2)}} \to 0, \quad R \to +\infty, \]
     so the integrals on $I_1, I_2 \to 0$ for large enough $R$ (we note that the same conclusion held for $I_2$ because the computation follows analogously). For the last part, consider that
     \[ \int_{I_3} f(z) \, dz = \int_{-R}^R f(t + i\xi) \, dt = \int_{-R}^R e^{-\pi(t + i\xi)^2} \, dt = e^{\pi \xi^2} \int_{-R}^R e^{-\pi t^2} e^{-2 \pi i \xi t} \, dt, \]
-    upon which we obtain $e^{\pi \xi^2} (\SF f)(\xi)$ as $R \to \infty$. This means we have that $0 = -e^{\pi \xi^2} (\SF f)(\xi)$, where the minus sign is from the orientation of $I_3$. This means we may conclude that $(\SF f)(\xi) = e^{-\pi \xi^2} = f(\xi)$.
+    upon which we obtain $e^{\pi \xi^2} (\SF f)(\xi)$ as $R \to \infty$. This means we have that $-e^{\pi \xi^2} (\SF f)(\xi)$ vanishes, where the minus sign is from the orientation of $I_3$, and so we may conclude that $(\SF f)(\xi) = e^{-\pi \xi^2} = f(\xi)$.
 \end{solution}
