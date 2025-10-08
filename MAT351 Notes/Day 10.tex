@@ -1,0 +1,55 @@
+\section{Day 10: Heat/Diffusion Equation (Oct. 6th, 2025)}
+
+\begin{theorem}
+	Let \( u \) solve \( u_{t} = ku_{x x} \), for \( k > 0 \) in the rectangle \( R = [0, \ell] \times [0, T] \) with initial/boundary conditions
+	\[ \left\{\begin{NiceMatrix}u(x, 0) = \phi(x) & 0 \le x \le \ell \\ u(0, t) = g(t) & 0 \le t \le T\\ u(\ell, t) = h(t) & 0 \le t \le T.\end{NiceMatrix}\right.  \]
+	Notice here that the \( u(0, t) \) and \( u(\ell, t) \) terms represent some sort of ``forcing,'' which represents either pumping in or removing heat or something of that sort.
+
+	Then we have that \( u \) attains its max somewhere along \( B = \partial R \setminus \left\{ (x, T) : 0 < x < \ell \right\} \).
+\end{theorem}
+\begin{proof}
+	If \( u \) has a max at a point \( p \) in the interior of \( R \), then \( u_{t}|_{p} = 0 \) and \( u_{x x}|_{p} \le 0 \). This is almost violating the PDE. The idea is to create a big of room.
+
+	Let \( v(x, t) = u(x, t) + \varepsilon x^{2} \). Then \( v \) solves
+	\[ v_{t} - k v_{x x} = u_{t} - k u_{x x} - 2 \varepsilon k < 0, \]
+	if \( \varepsilon > 0 \). But then \( v = \mu + \varepsilon x^{2}  \), \( \varepsilon > 0 \) arbitrary cannot have an interior max \( Q \), as otherwise, \( v_{t}|_{Q} = 0 \), \( v_{x x}|_{Q} \le 0  \), which is a contradiction. Thus, \( v \) attains its max on the boundary.
+
+	Assume that \( v \) attains its max along the top. Specifically, suppose it attains a max at \( (x_{0}, T) \). It follows that
+	\[ \lim_{\delta \to 0} \frac{v(x_{0}, T) - v(x_{0}, T - \delta)}{\delta} \ge 0. \]
+	Then we still get a contradiction to \( v_{t} - v_{x x} = 0 \).
+
+	To show \( u \) attains its max along the boundary, let \( M = \max_{R} u \). We have therefore that \( \max_{R} v = \max_{B} v \). This implies
+	\[ \max_{R} u + \varepsilon x^{2} = \max_{B} u + \varepsilon x^{2} \]
+	and thus
+	\[ \max_{R} u \le \max_{B} u + \varepsilon \ell^{2}, \]
+	for \( \varepsilon \) arbitrary. This implies that \( \max_{R} u \le \max_{B}u \).
+\end{proof}
+
+\begin{remark}
+	We also have a minimum principle, as discussed last time. The PDE is linear, so just negate our solution and apply the above.
+\end{remark}
+
+From here, uniqueness follows and also continuous dependence on data.
+
+Say that \( g = h = 0 \). Then \( u_{j} \) solves with \( u_{j}(x, 0) = \phi_{j}(x) \), \( j = 1, 2 \). Because \( u_{1} - u_{2} \) and \( u_{2} - u_{1} \) are solutions, we get
+\[ \max_{R} |u_{1} - u_{2}| \le \max_{0 \le x \le \ell} | \phi_{1}(x) - \phi_{2}(x)|. \]
+This gives stability/continuous dependence in the sup norm.
+
+\begin{proposition}
+	We can find the uniqueness/continuous dependence using the energy method. Define
+	\[ E(t) = \frac{1}{2} \int_{0}^{\ell} u^{2}(x, t) dx. \]
+	Then we have
+	\begin{align*}
+		\dot{E}(t) &= \int_{0}^{\ell} u(x, t) u_{t}(x, t) dx
+						\\ &= \int_{0}^{\ell}  u k u_{x x} dx \\
+							&= -k \int_{0}^{\ell}  (u_{x})^{2}(x, t) dx \le 0.
+	\end{align*}
+	Then this gives uniqueness and continuous dependence. Uniqueness because given \( u_{1}, u_{2} \) solving, \( v = u_{1} - u_{2} \) satisfies
+	\[ \frac{1}{2} \int_{0}^{\ell} v^{2}(x, t) dx \le \frac{1}{2} \int_{0}^{\ell} v^{2}(x, 0) dx = 0,  \]
+	so thus \( u_{1} = u_{2} \). Continuous dependence because given \( \phi_{1}, \phi_{2} \) that solve, \( v= u_{1} - u_{2} \). Then we have by the same argument above that solutions depend continuously wrt the \( L^{2} \) norm. Here, we have that the \( L^{2} \) norm of \( \phi \) is
+	\[ || \phi||_{L^{2}} = \left( \int_{0}^{\ell} \phi^{2}(x) dx. \right)^{\frac{1}{2}}. \]
+
+	\begin{remark}
+		Continuous dependence in ODEs is nice and simple, because the norm between two functions at a given time is very easy to compute, just take the standard Euclidean norm. Furthermore, since most norms on \( \mathbb{R}^{n} \) are equivalence, we don't have to worry too much about which norm the dependence is continuous with respect to. For PDEs, it's not quite the same. The \( L^{\infty} \) norm (sup norm) and the \( L^{2} \) norm are indeed not equivalent, so when we talk about continuous dependence, we have to specify which norm it depends continuously upon.
+	\end{remark}
+\end{proposition}
