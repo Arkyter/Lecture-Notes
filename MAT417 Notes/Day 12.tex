@@ -1,0 +1,40 @@
+\setcounter{section}{11}
+\section{Day 12: Proof of Prime Number Theorem (Oct. 9, 2025)}
+Today we will give a proof of the prime number theorem, probably modulo the ``analytic theorem''. Let $\pi(x)$ be the prime counting function denoting the number of primes less than or equal to $x$; we want to show that
+\[ \pi(x) \sim \frac{x}{\log x}, \]
+with the limit of this ratio approaching $1$ as $x \to \infty$. Recall from last time that we have the following functions defined,
+\[ \zeta(s) = \sum_n \frac{1}{n^s}, \quad \Phi(s) = \sum_p \frac{\log p}{p^s}, \quad \theta(x) = \sum_{p \leq x} \log p. \]
+Last time, we proved that the prime number theorem follows from the fact that $\theta(x) \sim x$, i.e.,
+\[ \lim_{x \to \infty} \frac{\theta(x)}{x} = 1, \]
+which was obtained from writing
+\[ (1 - \eps) \log x \cdot \left(\pi(x) + O(x^{1 - \eps})\right) \leq \theta(x) \leq \pi(x) \log x, \]
+for which we may divide throughout by $\log x$ and take $x \to \infty$ to get the desired result. The first step towards this proof is to check that
+\[ \int_1^\infty \frac{\theta(x) - x}{x^2} \, dx \]
+is convergent; assuming $\lim_{x \to \infty} \frac{\theta(x)}{x} \neq 1$, there exists some arbitrarily large $x$ such that $\theta(x) \geq \lambda x$, or there exists $\lambda < 1$ such that for arbitrarily large $x$, $\theta(x) \leq \lambda x$. Supposing the former case occurs for some $x$; we have that
+\[ \int_x^{\lambda x} \frac{\theta(t) - t}{t^2} \, dt \geq \int_x^{\lambda x} \frac{\lambda x - t}{t^2} \, dt = \int_1^\lambda \frac{\lambda - \tau}{\tau^2} \, d\tau > 0 \]
+obtained by picking $\tau = xt$. Observe that, if for some $f$, we have that $\int_1^\infty f(t) \, dt$ is convergent, then for all $\eps > 0$, there exists $A$ such that $\abs{\int_a^b f(t) \, dt} < \eps$ for $A \leq a \leq b$. Thus, pick $f(t)$ to be our integrand as above, and we have that if $\int_1^\lambda \frac{\lambda - \tau}{\tau^2} \, d\tau > \eps$, we have a contradiction. In the latter case, we have that
+\[ \int_{\lambda x}^\lambda \frac{\theta(t) - t}{t^2} \, dt \leq \int_{\lambda x}^x \frac{\lambda x - t}{t^2} \, dt = \int_\lambda^1 \frac{\lambda - t}{t^2} < 0, \]
+and we may apply the same argument. Returning to the original statement, we see that convergence of $\int \frac{\theta(x) - x}{x^2} \, dx$ follows from \begin{parlist} \item the observation that $\frac{\theta(x)}{x}$ is bounded, since $\theta(x) = O(x)$, \item that $\Phi(s)$ is holomorphic on $\Re s \geq 1$ (as it has no zeroes on this set), \item the ``tauberian'' theorem, i.e., $f(t)$ is a bounded, locally integrable function defined for $t \geq 0$; taking $g(z) = \int_0^\infty f(t) e^{-zt} \, dt$, which is holomorphic for $\Re z > 0$, and assuming that it is holomorphic on $\Re z \geq 0$, we have that $g(0) = \int_0^\infty f(t) \, dt$, and that the RHS is convergent. \end{parlist}
+\\[8pt]
+To prove the convergence of the integral, it suffices to prove (ii) and (iii), since (i) was proved last time.
+\begin{theorem}[Classical Tauberian theorem]
+    Let $\{a_n\}$ be a sequence such that $a_n = o(\frac{1}{n})$ if and only if $\lim_{n \to \infty} n a_n = 0$, i.e., $a_n$ goes to $0$ slightly better than $\frac{1}{n}$. Then $f(x) = \sum a_n x^n$ is holomorphic for $\abs{z} < 1$, and we may assume that $\lim_{\abs{z} < 1, z \to 1} f(x)$ exists and is equal to $s$. Then $\sum_{k=0}^\infty a_n = s$.
+\end{theorem}
+\noindent We have that $\Phi(s)$ is absolutely convergent for $\Re s > 1$ (uniformly on compact sets); for all $\eps > 0$, we have that $\log < x^2$ for $x >\!\!> 0$. For $p >\!\!> 0 $, we also have that
+\[ \abs{\frac{\log p}{p^s}} = \abs{\frac{p^\eps}{p^s}} = \abs{\frac{1}{p^{s - \eps}}}. \]
+If $\Re s > 1$, find $\eps > 0$ such that $\Re(s - \eps) > 1$; the above implies that $\sum_{n=1}^\infty \frac{1}{n^{s-\eps}}$ is absolutely convergent, and so $\sum \frac{1}{p^{s-\eps}}$ also converges, and so $\sum \frac{\log p}{p^2}$ is also convergent. Directly write as follows,
+\[ \sum_p \frac{\log p}{p^s} = \int_1^\infty \frac{d\theta(x)}{x^s} = \int_1^\infty \frac{\theta(x)}{x^{s+1}} \, dx = \sum_{i=0}^\infty s \int_{p_i}^{p_{i+1}} \frac{\theta(x)}{x^{s+1}} \, dx = \sum_{i=1}^\infty (p_i^{-s} - p_{i+1}^{-s}) \theta(p_i). \]
+Thus, $\Phi(s) = \sum p_i^{-s} \log p_i$. We may also write $\Phi(s) = s \int_0^\infty e^{-st} \theta(e^t) \, dt$, so taking $f(t) = \theta(e^t) e^{-t} - 1$, observe the following lemma,
+\begin{lemma}
+    $g(z) = \frac{\Phi(z + 1)}{z+1} = \frac{1}{z}$.
+\end{lemma}\vspace{-8pt}
+\[ \int_0^\infty f(t) x^{-st} \, dt = \int_0^\infty \theta(e^t) e^{-t} e^{-st} \, dt - \int e^{-zt} \, dt = \frac{\phi(z + 1)}{z+1} - \frac{1}{z}, \]
+which is holomorphic for $\Re z \geq 0$. Observe that our three observations from earlier are that (i) $\theta(s) = O(s)$ guarantees boundedness for $f(t)$, (ii) guarantees the assumption in the theorem, and (iii) shows that the theorem is equivalent to the convergence of our integral.
+\\[8pt]
+We now discuss the analyticity of $\Phi(x)$ and its connection to the absence of zeroes of $\zeta(s)$. Observe that we have
+\[ \log(\zeta(s))' = \frac{\zeta'(s)}{\zeta(s)} = \sum_{p} \frac{\log p}{p^2 - 1} = \Phi(s) + \sum_p \frac{\log p}{p^s(p^s - 1)}. \]
+Also, the sum converges for $\Re s > \frac{1}{2}$. The above shows that $\Phi(s)$ is meromorphic for $\Re s > \frac{1}{2}$, and we want to see that its only simple pole is at $s = 1$. Moreover, poles of $\Phi(s)$ for $\Re s > \frac{1}{2}$ are poles of $\zeta'(s)/\zeta(s)$, so it is enough to show that $\zeta(s)$ has no zeroes for $\Re s = 1$, since we've already established previously that it has no zeroes for $\Re s > 1$.
+\\[8pt]
+Assume we have a zero of order $\mu$ of $\zeta$ at $1 + i\alpha$. Then we also have the same at $1 - i\alpha$. Let $\nu$ be the order of the zero of $\zeta$ at $1 + 2 i \alpha$. Then
+\[ \sum_{\nu = -2}^2 \binom{4}{2+r} \phi(1 + \eps + i \nu \alpha) = \sum_p \frac{\log p}{p^{1+\eps}} \left(p^{i \alpha/2} + p^{-i\alpha/2}\right)^4 \geq 0. \]
+Some quick computations follow that $\mu = 0$, since $6 - 8p - 2\nu \geq 0$.\footnote{sloppy writing this time, i'm tired as heck}
