@@ -1,1 +1,70 @@
 \section{Day 11: ... (Oct. 8, 2025)}
+We start by giving some examples of Jordan--H\"older decompositions.
+\begin{example}
+    Let $n$ admit a prime decomposition of $p_1 \dots p_k$; then
+    \[ \ZZ/n \! \stackrel{\ZZ/p_1}{\nunrhd} \! p_1\ZZ/n \! \stackrel{\ZZ/p_2}{\nunrhd} \! p_1p_2\ZZ/n \! \stackrel{\ZZ/p_3}{\nunrhd} \! \dots \! \stackrel{\ZZ/p_n}{\nunrhd} \! \{e\}, \]
+    for which we note that the quotient of any term with its successor is abelian, as denoted on top of the $\nunrhd$ symbols.
+\end{example}
+\begin{example}
+    Using the fact that $A_4$ is not simple, we have that
+    \[ S_4 \stackrel{\ZZ/2}{\nunrhd} A_4 \stackrel{\ZZ/3}{\nunrhd} (\ZZ/2)^2 \stackrel{\ZZ/2}{\nunrhd} \ZZ/2 \stackrel{\ZZ/2}{\nunrhd} \{e\}. \]
+    For $A_n$ where $n \neq 4$, we have the decomposition
+    \[ S_n \stackrel{\ZZ/2}{\nunrhd} A_n \stackrel{A_n}{\nunrhd} \{e\}. \]
+\end{example}
+\begin{theorem}[Jordan--H\"older decomposition theorem]
+    If $G$ is a finite group, then there exists a sequence
+    \[ G = G_0 \nunrhd G_1 \nunrhd \dots \nunrhd G_n = \{e\}, \]
+    such that $H_i = G_i/G_{i+1}$ is simple. We call $(H_0, H_1, \dots)$ the \textit{composition series of $G$}, and it is unique up to a permutation.
+\end{theorem}
+\begin{proof}
+    By induction on $\abs{G}$, assume that the theorem is true for all groups with order under $\abs{G}$; then take a proper maximal normal subgroup $G_1 \nunlhd G$, and decompose $G \nunrhd G_1 \nunrhd \dots \nunrhd G_n = \{e\}$. $G/G_1$ is simple, because if there exists a nontrivial normal subgroup $N \nunlhd G/G_1$, then by the fourth isomorphism theorem, we have $G \nunrhd N' \nunrhd G_1$, contradicting the maximality of $G_1$.
+    \\[8pt]
+    We can also demonstrate uniqueness; suppose $G$ admits two decompositions
+    \begin{align*}
+        G &\nunrhd G_1 \nunrhd G_2 \nunrhd \dots, \\
+        G &\nunrhd G_1' \nunrhd G_2' \nunrhd \dots,
+    \end{align*}
+    where $G_1 \neq G_1'$; then we claim that $G_1 G_1' = G$, and $G_1 G_1'$ is indeed a normal subgroup of $G$, which is strictly bigger than each of $G_1, G_1'$ individually. Choose a decomposition series $G_1 \cap G_1' \nunrhd G_3'' \nunrhd G_4'' \nunrhd \dots$, where
+    \[ G = G_1 G_1' \stackrel{H_0}{\nunrhd} G_1 \stackrel{H_0'}{\nunrhd} G_1 \cap G_1', \quad G_1 G_1' \stackrel{H_0'}{\nunrhd} G_1' \stackrel{H_0}{\nunrhd} G_1 \cap G_1'. \]
+    By the second isomorphism theorem, we have that
+    \begin{align*}
+        G/G_1 &\cong H_0 \cong G_1' / G_1 \cap G_1', \\
+        G/G_1' &\cong H_0' \cong G_1 / G_1 \cap G_1',
+    \end{align*}
+    and so the two decomposition sequences $G \nunrhd G_1 \nunrhd G_2 \nunrhd \dots$ and $G \nunrhd G_1' \nunrhd G_1 \cap G_1' \nunrhd G_3'' \nunrhd \dots$ are equivalent by induction, where, by inspection, $G \nunrhd G_1' \nunrhd G_2' \nunrhd \dots$ is also equivalent by induction.\footnote{reference \href{https://planetmath.org/proofofthejordanholderdecompositiontheorem}{here}}
+\end{proof}
+\newpage
+\noindent Up to this point, we've considered groups by what they do (for example, the tetrahedron); it is time to formalize that notion.
+\begin{definition}[$G$-sets]
+    A $G$-set (specifically left $G$-sets) is a set $X$ with $G \times X \to X$, mapping $(g, x) \mapsto gx$, such that \begin{parlist} \item $ex = x$, \item $(g_1 g_2) x = g_1 (g_2 x)$, which we call the ``action axiom''. \end{parlist}
+\end{definition}
+\noindent If $G$ acts on $X$, we write $G \curvearrowright X$; i.e., $G$-sets are equivalent to a homomorphism $\alpha : G \to S(X)$, where $S(X)$ is the group of all bijections from $X$ to itself.
+\begin{definition}
+    A right $G$-set satisfies $X \times G \to X$ where $(x, g) \mapsto xg$ such that $xe = x$ and $(xg_1)g_2 = x(g_1g_2)$. Note that this is basically the definition from earlier but we've swapped everything to the right.
+\end{definition}
+\noindent Similarly, right $G$-sets are equivalent to an anti-homomorphism $\beta : G \to S(X)$.
+\begin{example}
+    Any singleton is a $G$-set, left or right.
+\end{example}
+\begin{example}
+    Any $G$-set acts on itself $G \curvearrowright G$ by left multiplication. In particular, this means that $\alpha : G \to S(G)$ is a morphism of groups, and in this case, $\alpha$ is injective. Supposing $\alpha(G) = I$, then $g' = I(g') = \alpha(g)(g') = gg'$; by cancellation, $g = e$. This means that every group is a subgroup of a permutation group.
+\end{example}
+\begin{example}
+    $G$ acts on itself by conjugation, which is a right action. We have that $\beta(h)(g) = g^h = h\inv g h$. $G$ right acts on its subgroups by conjugation as well; for all $g \in G$, we have that $\beta(g) N = N$ if and only if $N$ is normal.
+\end{example}
+\begin{example}
+    If $G > H$, then $G/H$ is a left $G$-set (even if it isn't normal). We have that $G \curvearrowright G/H : g(g'H) = gg'H$, whcih is well-defined and is also an action. As a quick subexample, let $G = S_n > H = S_{n-1} = \{\sigma \in S_n \mid \sigma n = n\}$. Then $\abs{G/H} = n$, and $G/H = \{\tau_1 S_{n-1}, \tau_2 S_{n-1}, \dots\}$, where $(\sigma \cdot S_{n-1}) n = \sigma n$ and we take $\tau_j$ to be a permutation $\tau_j(n) = j$ for all $1 \leq j \leq n$. We have that
+    \[ \sigma \tau_j s_{n-1} = \tau_{\sigma(j)} s_{n-1}, \quad S_n/S_{n-1} \cong \ZZ/n. \]
+\end{example}
+\begin{claim}
+    The collection of all $G$-sets forms a category, for which the objects are group actions $G \curvearrowright X$, and morphisms $(G \curvearrowright X) \to (G \curvearrowright Y)$ are maps $f : X \to Y$, where $f(gx) = gf(x)$ for all $g \in G$ and $x \in X$. Note that if $G \curvearrowright X_1$ and $G \curvearrowright X_2$, then $G \curvearrowright X_1 \sqcup X_2$.
+\end{claim}
+\begin{theorem}
+    Every $G$-set is the disjoint union (possibly infinite) of ``transitive $G$-sets''. If $G \curvearrowright X$ is transitive, then $X \cong G/\stab_X(x_0)$, for some $x_0 \in X$.
+\end{theorem}
+\begin{definition}
+    We say a $G$-set is transitive if, for any two elements $x_1, x_2 \in X$, there exists some $g \in G$ such that $gx_1 = x_2$. Transitive $G$-sets are essentially the ``primes'' of $G$-sets.
+\end{definition}
+\begin{definition}
+    Given $G \curvearrowright X \ni x_0$, the \textit{stabilizer} $\stab_X(x_0)$ is given by the set of all $g \in G$ such that $gx_0 = x_0$.
+\end{definition}
