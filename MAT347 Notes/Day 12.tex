@@ -1,0 +1,23 @@
+\section{Day 12: Group Actions, First Sylow Theorem (Oct. 10, 2025)}
+Recall the definitions from last class; we write the left action $G \curvearrowright X$ denoting a morphism $G \to S(X)$, where $(g, x) \mapsto gx$ such that $ex = x$ and $(g_1g_2x) = g_1(g_2x)$; similarly, the right action $X \curvearrowleft G$ means an anti-morphism $G \to S(X)$ where $(x, g) \mapsto xg$, $x = xe$, and $x(g_1, g_2) = (xg_1) g_2$. Both left and right actions make a category. We say that a $G$-set is transitive if, for all $x_1, x_2$, there exists $g$ such that $gx_1 = x_2$. Recall the theorem from last class,
+\begin{theorem}
+    Every $G$-set is a disjoint union of transitive $G$-sets, and if $G \subset X$ is transitive and $x_0 \in X$, then\footnote{personal note: \href{https://mathworld.wolfram.com/G-Set.html}{link}}
+    \[ X \cong G/[\stab(x_0) := \{g \mid gx_0 = x_0\}] \cong G/H, \]
+    where the latter isomorphism is given by $(g', (gH)) \mapsto g'gH$.
+\end{theorem}
+\begin{proof}
+    Define the equivalence relation $\sim$ on $X$ by $x_1 \sim x_2$ if and only if there exists an element $g \in G$ such that $gx_1 = x_2$. We see that $\sim$ is well-defined, as \begin{parlist} \item $ex = x$, \item $gx_1 = x_2$ implies $g\inv x_2 = x_1$, \item if $g_1x_1 = x_2$ and $g_2x_2 = x_3$, then $g_2g_1x_1 = x_3$. \end{parlist}
+    \\[8pt]
+    From this, we have that $X/\sim$ is given by the set of orbits of $X$, i.e., $\{gx_0 \mid x_0 \in X\}$. Each equivalence class is called a $G$-orbit, and is always of the form $Gx_0$ for some $x_0 \in X$; clearly, each orbit is transitive, since $x_1 = g_1x_0$ and $x_2 = g_2x_0$ implies $x_1, x_2 \in Gx_0$, with $g_2g_1\inv x_1 = x_2$. The disjointness for the first part of the theorem comes from the fact that equivalence classes are always disjoint.
+    \\[8pt]
+    For the second part of the theorem, given $x_1 \in X$, by transitivity, there exists $g \in G$ such that $gx_0 = x_1$. We will construct maps $L : G/H \to X$ and $R : X \to G/H$ (where $H$ is the stabilizer) to demonstrate the isomorphism between $X$ and $G/H$. Let $R(x_1) = gH$; observe this map is well defined because for any other $g' \in G$ satisfying $g'x_0 = x_1$, we have $g'H = gH$, since $gx_0 = x_1$, $g'x_0 = x_1$ imply $gx_0 = g'x_0$, so $x_0 = g\inv g'x_0$ implies $g\inv g' \in \stab_X(x_0) = H$. Now, let $L : gH \mapsto gx_0$; then $L$ is well-defined as we may check per earlier, so $L$, $R$ are morphisms of $G$-sets, meaning we have $L \circ R = I$, $R \circ L = I$.
+\end{proof}
+\begin{theorem}[Orbit-Stabilizer]
+    If $G \curvearrowright X$ and $\{x_i\}$ are representatives from each orbit, then
+    \[ \abs{X} = \sum_i \frac{\abs{G}}{\abs{\stab_X(x_i)}} \]
+\end{theorem}
+\begin{proof}
+    The proof is obvious from the above construction.
+\end{proof}
+\noindent We now introduce the class equation. Let $G \curvearrowleft G$ (where conjugation is a right action). Pick one $y_i$ from each nontrivial orbit (each orbit contains at least one element, but some orbits contain nothing else, so nontrivial means non-singleton), i.e., one e $y_i$ from each non-trivial ``conjugacy class of $G$''. Then $\abs{G}$ is given by the the number of $1$-element orbits and the sum $\sum_i \frac{\abs{G}}{\stab_G(y_i)}$. Specifically, this is written
+\[ \abs{G} = \abs{Z(G)} + \sum_i \bigl[G : C_G(y_i)\bigr] \]
