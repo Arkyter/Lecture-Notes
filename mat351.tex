@@ -23,9 +23,9 @@
 \tableofcontents
 \newpage
 
-\foreach \i in {1,...,10} {
+\foreach \i in {1,...,36} {
 	\edef\FileName{MAT351 Notes/Day \i.tex}
-	\input{\FileName} \newpage
+	\IfFileExists{\FileName}{\input{\FileName} \newpage}
 }
 
 \end{document}

@@ -1,0 +1,138 @@
+\section{Day 11: Heat/Diffusion Again (Oct. 8, 2025)}
+
+We will consider the following equation where \( x \in \mathbb{R} \) and \( t \ge 0 \). We have a fixed parameter \( k > 0 \).
+\[ \left\{\begin{NiceMatrix}u_{t} - k u_{x x} = 0\\ u(x, 0) = \phi(x)\end{NiceMatrix}\right.  \]
+The goal is to find an explicit formula for the solution fo the IVP above. We will eventually state the full theorem.
+
+The idea is to use invariance properties and symmetries of our equation to reduce it to ODEs. 
+Here are some nice invariances of our equation. These are only invariances of the PDE and not the initial data.
+\begin{enumerate}
+
+	\item If \( u(x, t) \) is a solution, then this implies that \( u(x - y, t) \) is a solution, for all \( y \in \mathbb{R} \).
+	\item If \( u \) is a solution, then \( \partial_{x} u \), \( \partial_{t} u \), \( \partial_{x x}u \) are also solutions.
+	\item Linear combinations of solutions are solutions (superposition principle).
+	\item If \( S = S(x, t) \) is a solution, then
+		\[ \int_{\mathbb{R}} S(x - y, t) \psi(y) dy \]
+		is also a solution, for any nice enough \( \psi \).
+
+\begin{remark}
+	The general solutions of many linear PDEs have solutions in the form
+	\[ \int_{\mathbb{R}} K(x-y, t) \phi(y) dy, \]
+	for some \( K \) called the fundamental solution. This is called the convolution of \( K( \cdot, t) \) and \( \phi \). 
+\end{remark}
+	\item If \( u \) is a solution, then \( u( \sqrt{a} x, a t) \) is a solution for all \( a > 0 \).
+\end{enumerate}
+\begin{remark}[By me, not Fabio]
+We are going to solve our PDE with initial conditions \( u(x, 0) = \chi_{\left\{ x \ge 0 \right\}} \). As usual, I use \( \chi \) for the indicator function.\footnote{If you object, please DM me how to write \texttt{\textbackslash{}mathbb\{1\}} for future.} This is the distribution function for the Kronecker delta function. For those unaware, the Kronecker delta function is a generalized function \( \delta \) such that
+\[ \int_{a}^{b} \delta(x) dx = \left\{\begin{NiceMatrix}1 & 0 \in [a, b] \\ 0 & \text{otherwise.}\end{NiceMatrix}\right. \]
+Obviously this function doesn't actually exist because it would have to be infinite height at \( 0 \), but using measure theory this can be made perfectly formal. In some sense as well, we have that \( \partial_{x} \phi = \delta \). Not in the classical sense of course, because \( \phi \) is discontinuous, but we \textit{would} have that an analog of the fundamental theorem of calculus holds:
+\[ \int_{a}^{b} \delta(x) dx = \phi(b) - \phi(a). \]
+This is idea behind the Radon-Nikodym derivative, for those curious. 
+
+But why do we care about all this fancy stuff? Suppose that we have some function \( \phi : \mathbb{R} \to \mathbb{R} \). Then it would follow that
+\[ \phi(x) = \int_{\mathbb{R}} \delta(x-y) \phi(y) dy. \]
+So if we can set \( K(x, t) \) to have \( K(x, 0) = \delta(x) \) (whatever this means) and \( K \) solves our ODE (whatever \textit{this} means), then by symmetry \( 4 \), we should have that the function
+\[ u(x, t) = \int_{\mathbb{R}} K(x-y, t) \phi(y) dy \]
+solves our ODE, and also
+\[ u(x, 0) = \int_{\mathbb{R}} K(x-y, 0) \phi(y) dy = \int_{\mathbb{R}} \delta(x-y) \phi(y) dy = \phi(x). \]
+In other words, \( u \) would satisfy the initial conditions \( u(x, 0) = \phi(x) \).
+
+So we will start by trying to solve the PDE for the (mostly normal) function \( u(x, 0) = \chi_{\left\{ x \ge 0 \right\}}(x) \), then applying symmetry \( 2 \), we should get a solution for
+\[ v(x, 0) = u_{x}(x, 0) = \delta(x). \]
+From here, we should have a formula to solve our PDE with any initial conditions. If we have done this, then we can retroactively verify it works, instead of having to formalize these middle steps. Alright, back to what Fabio said.
+\end{remark}
+We will find the fundamental solution of \( u_{t} - u_{x x} = 0 \). Let's start by solving with initial conditions
+\[ u(x, 0) = \chi_{\left\{ x \ge 0 \right\}}. \]
+By symmetry 5, we look for \( Q(x, t) = g(p) \) with \( p = \frac{x}{\sqrt{4t}} \). Calculating the PDE for \( Q \) yields
+\[ \partial_{t} Q = g'(p) \frac{x}{\sqrt{4t}} \left( \frac{-1}{2t} \right) = \frac{-1}{2t} p g'(p). \]
+Also, 
+\[ \left\{\begin{NiceMatrix}
+	\partial_{x}Q = g'(p) \frac{1}{\sqrt{4t}}\\
+	\partial_{x x} Q = g''(p) \frac{1}{4t}
+\end{NiceMatrix}\right. \]
+Which means \( Q \) solves if
+\begin{align*}
+	- \frac{1}{2t} p g'(p) - \frac{1}{4t} g''(p) &= 0 \\
+	\tag{\( v = g' \)}v' + 2pv &= 0 \\
+	v(p) = e^{- p^{2}}C_{1}.
+\end{align*}
+So it follows that for some \( C_{1}, C_{2} \in \mathbb{R} \),
+\[ g(p) = C_{1} \int_{- \infty}^{p} e^{-q^{2}} dq + C_{2}, \]
+and therefore we can solve the PDE with
+\[ Q(x, t) = C_{1} \int_{- \infty}^{\frac{x}{\sqrt{4t}}} e^{-p^{2}} dp + C_{2}. \]
+Now, we want to find \( C_{1}, C_{2} \) for the given data \( \phi \). Formally, take \( t \searrow 0 \), because we want \( \lim_{t \searrow 0} Q(x, t) = \phi(x) \). Then
+\begin{align*}
+	\tag{\( x > 0 \)} \lim_{t \searrow 0} Q(x, t) &= C_{1} \frac{\sqrt{\pi}}{2} + C_{2} \\
+	\tag{\( x < 0 \)} \lim_{t \searrow 0} Q(x, t) &= - \frac{C_{1} \sqrt{\pi}}{2} + C_{2} \left[ \frac{\sqrt{\pi}}{2} \int_{0}^{\infty} e^{- p^{2}} dp  \right] \\
+	\left\{\begin{NiceMatrix}C_{1} \frac{\sqrt{\pi}}{2} + C_{2} = 1 \\ - C_{1} \frac{\sqrt{\pi}}{2} + C_{2} = 0\end{NiceMatrix}\right. 
+\end{align*}
+and thus \( C_{2} = \frac{1}{2} \) and \( C_{1} = \frac{1}{\sqrt{\pi}} \). It follows that
+\[ Q(x, t) = \frac{1}{\sqrt{\pi}} \int_{0}^{\frac{x}{\sqrt{4t}}} e^{-p^{2}} dp + \frac{1}{2} \]
+is a solution. Therefore \( \partial_{x}Q = S(x, t) \) is a solution, and
+\[ S(x, t) = \frac{1}{\sqrt{4 \pi t}} e^{- \frac{x^{2}}{4t}}. \]
+This is just the Gaussian. From here, for any data \( \phi \),
+\[ \frac{1}{\sqrt{4 \pi t}} \int_{\mathbb{R}}  e^{- \frac{(x-y)^{2}}{4t}} \phi(y) dy \]
+is a solution.
+\begin{claim}
+	This is \( u(x, t) \) solving
+	\[ \left\{\begin{NiceMatrix}u_{t} - u_{x x} = 0 \\ u(x, 0) = \phi(x)\end{NiceMatrix}\right.  \]
+	for all given \( \phi \) (\( t \ge 0 \)).
+\end{claim}
+\begin{proof}
+	The first part is satisfied (well, we will be more rigorous later) by our properties above. The second part we have also verified in some sense, but we will be more rigorous here. Our question is whether
+	\begin{align*}
+		\tag{\( * \)}	u(x, t) &= \frac{1}{\sqrt{4 \pi t}} \int_{- \infty}^{\infty}  e^{- \frac{(x - y)^{2}}{4t}} \phi(y) dy \to \phi(x)
+	\intertext{as \( t \searrow 0 \). To show it does, notice that}
+						&= \int_{- \infty}^{\infty} \partial_{x}Q(x-y) \phi(y) dy \\
+						&= \int_{- \infty}^{\infty}  - \partial_{y}Q(x - y) \phi(y) dy \\
+						&= \left[ -Q(x - y) \phi(y) \right]_{- \infty}^{\infty} + \int_{- \infty}^{\infty} Q(x - y) \phi'(y) dy \\
+						&= \int_{- \infty}^{\infty} Q(x - y, t) \phi'(y) dy
+	\end{align*}
+		We assume that \( \phi(\infty) = \phi(-\infty) = 0 \) to make the boundary conditions cancel out. You should know \( (*) \) by heart. 
+
+		Notice that \( (*) \) makes sense for all \( t > 0 \), when \( \phi \) is not growing too fast at \( y = \pm \infty \). This is because the first term (our Gaussian) becomes very very small, so it won't end up affecting the integral too much. Now, let's take
+		\begin{align*}
+			\lim_{t \searrow 0} u(x, t) &= \int_{- \infty}^{\infty}  Q(x-y, t) \phi'(y) dy \\
+																	&= \int_{- \infty}^{x} \phi'(y) dy = \phi(x)
+		\end{align*}
+\end{proof}
+As such we say that \( S(x, t) \) is the fundamental solution of the heat equation on \( \mathbb{R} \). Actually, \( S(x, t) \) is singular as \( t \searrow 0 \) if \( x = 0 \) [as you should expect by my remark]. But  it's smooth in \( x \) and if we integrate over \( \mathbb{R} \), then for all \( t > 0 \),
+\[ \int_{\mathbb{R}} \frac{1}{\sqrt{4 \pi t}} e^{- \frac{x^{2}}{4t}} dx = 1.  \]
+and \( S \) solves \( S_{t} - S_{x x} = 0 \), when \( t > 0 \). 
+
+			\begin{remark}
+				For the wave equation, singularities would be propagated, but for the heat equation, they are immediately smoothed out. Also, we have that the heat equation in some sense has infinite speed of propagation. To prove this, just look at the formula.
+				\[ u(x, t) = \frac{1}{\sqrt{4 \pi t}} \int_{\mathbb{R}} e^{- \frac{(x - y)^{2}}{4t}} \phi(y) dy. \]
+				If \( \phi \) has compact support (also, suppose it's positive), then for any \( x \in \mathbb{R} \), we can choose some \( y \in \mathbb{R} \) such that \( \phi(y) \) is nonzero, and although the integrand will be multiplied by \( e^{- \frac{(x-y)^{2}}{4t}} \), this is strictly positive (albeit very small). Accordingly, every point on \( \mathbb{R} \) will immediately be nonzero.
+			\end{remark}
+\begin{theorem}
+	Let \( \phi \) be continuous and bounded. Then \( (*) \) is a solution to 
+	\[ \left\{\begin{NiceMatrix}u_{t} - u_{x x} = 0 \\ u(x, 0) = \phi\end{NiceMatrix}\right. \]
+	and moreover, 
+	\begin{enumerate}
+	
+		\item \( u \in C^{\infty}(\mathbb{R} \times (0, \infty)) \)
+		\item \( \lim_{t \searrow 0} u(x, t) = \phi(x) \) for all \( x \).
+	
+	\end{enumerate}
+\end{theorem}
+		\begin{proof}
+			\begin{align*}
+				\tag{\( z = x - y \)}u(x, t) &= \int_{\mathbb{R}} \frac{1}{\sqrt{4 \pi t}} e^{- \frac{z^{2}}{4t}} \phi(x - z) dz  \\
+				\tag{\( p = \frac{z}{\sqrt{t}} \)} &= \int_{\mathbb{R}} \frac{1}{\sqrt{4 \pi t}} e^{- \frac{p^{2}}{4}} \phi(x - \sqrt{t} \, p) dp
+			\end{align*}
+				We write convolutions as \( f * g(x) = \int f(x - y) g(y) dy \). Now, let's argue that we can bring partial derivatives inside the integral.
+				\begin{align*}
+					u(x, t) &= \int_{- \infty}^{\infty} e^{- \frac{(x - y)^{2}}{4t}} \phi(y) dy \\
+					|u(x, t)| &\le \int_{- \infty}^{\infty}  \frac{e^{- \frac{(x - y)^{2}}{4t}}}{\sqrt{4 \pi t}} | \phi(y)| dy \\
+										&\le \sup_{y} | \phi(y)|,
+				\end{align*}
+				so we want to show that 
+				\[ \partial_{x} u(x, t) = \int_{- \infty}^{\infty} \partial_{x} S(x-y, t) \phi(y) dy. \]
+				To do this, think of this as a limit
+				\begin{align*}
+					\frac{\partial}{\partial x} \int_{- \infty}^{\infty} F(x, y) dy &\cong \lim_{m \to \infty} \int_{- \infty}^{\infty} F_{m}(x, y) dy \\
+																																					&= \int \lim_{m \to \infty} F_{m}(x, y) dy
+				\end{align*}
+				provided \( F_{m}(y) \) converges as \( m \rightarrow \infty \) uniformly and this limit is absolutely integrable.
+		\end{proof}
