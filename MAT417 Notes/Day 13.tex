@@ -1,0 +1,25 @@
+\section{Day 13: (Oct. 14, 2025)}
+We digress the course a little bit; we want to do some analytic number theory related to general number fields. Today, we will study what ``prime'' means in more general number fields.
+\\[8pt]
+Let $\ol \QQ$ be the field of algebraic numbers; observe that we have $\QQ \subset \ol \QQ \subset \CC$, where we have that $\alpha \in \CC$ is algebraic (over $\QQ$) if there exists $f(x) \in \QQ[x]$ with $f(x) = 0$ such that $f(\alpha) = 0$. Equivalently, the field $K = \QQ(\alpha) \subset \CC$ is a finite extension of $\QQ$, i.e., $\dim_\QQ (\QQ(\alpha))$ is finite. In general, if $L \supset K$ as fields, we say that the degree of the extension $[L : K] = \dim_K L$, where we say that $L$ is a finite extension if $[L : K] < \infty$.
+\begin{fact}
+    The algebraic numbers form a field.
+\end{fact}
+\begin{definition}
+    A number field $K$ is a subfield of $\CC$ which is a finite extension of $\QQ$.
+\end{definition}
+\noindent We give a few examples; \begin{parlist} \item $K = \QQ$ is trivially a number field, \item $\QQ(i) = \{a + bi \mid a, b \in \QQ\}$ has $[\QQ(i) : \QQ] = 2$, \item $\QQ(\sqrt{5})  = \{a + b\sqrt{5} \mid a, b \in \QQ\}$. \end{parlist} For $K = \QQ$, we also have $\ZZ$ as the ring of integers, and we may regard the positive integers as non-zero ideals of $\ZZ$. Given a commutative ring $R$, $I \subset R$ is an ideal if it is closed under addition, and for all $i \in I$, $R \ni a \mapsto ai \in I$. $I$ is called a principal ideal if there exists $i \in R$ such that $I = \{ai \mid a \in R\}$.
+\begin{fact}
+    Any ideal of $\ZZ$ is principal.
+\end{fact}
+\noindent Clearly, $\left<i\right> = \left<-i\right>$, and we have that $\left<i\right> = \left<j\right>$ implies $i = \pm j$ for $\ZZ$, and in general for any ring $R$, it means that there exists $u \in R^\ast$ (regarded as the group of invertible elements in $R$) such that $i = uj$. Since $R$ has no zero divisors, it is an integral domain. For $\ZZ$, we have a unique decomposition into product of primes, and only in $\ZZ$ do we have a unique decomposition into a product of primes up to sign. (?)
+\\[8pt]
+We now discuss the ring of integers of a number field. $\alpha \in \ol \QQ$ is an algebraic niteger if there exists a monic polynomial $f(x) \in \ZZ[x]$ such that $f(\alpha) = 0$. Specifically, this is equivalent to $\ZZ[\alpha] \subset \CC$ being a finitely generated abelian group, which is equivalent to it being a finitely generated $\ZZ$-module. 
+\begin{exercise}
+    Prove that the algebraic integers form a subring of $\ol \QQ$.
+\end{exercise}
+\noindent Let $K$ be a number field, i.e., a finite extension of $\QQ$. Let $\SO_K$ be the ring of integers of $K$. We have that $\SO_K$ is given by the intersection of the algebraic integers and $K$. As some examples, if $K = \QQ(i)$, then $\SO_K$ = $\ZZ[i] = \{a + bi \mid a, b \in \ZZ\}$. For $K = \QQ(\sqrt{5})$, we have that $\SO_K = \ZZ[\frac{1 \pm \sqrt{5}}{2}]$.
+\\[8pt]
+We want to develop some sort of ``arithmetic'' system for $\SO_K$ similar to the usual arithmetic for $\ZZ$. As another example, consider $K = \QQ(\sqrt{-5})$. We can show that $2 + \sqrt{-5}$ is a unit.
+\\[8pt]
+Given $R$ a ring and $p \subset R$ an ideal, we say that $p$ is prime if $R/P$ is an integral domain (has no zero divisors). Next lecture, we will give a more correct analog of the idea that prime numbers are prime ideals of $\SO_K$.
