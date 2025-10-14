@@ -1,0 +1,43 @@
+\section{Day 11: Singularities of Holomorphic Functions (Oct. 8, 2025)}
+Let $f$ be a holomorphic function define in an open set $\Omega$, except at $z_0 \in \Omega$. We call $z_0$ an isolated singularity of $f$. For an example, let $\Omega = \DD$, $z_0 = 0$;
+\begin{enumerate}[(i)]
+    \item Let $f_1(z) = z$ and $f_2(z) = z^2 + 1$. We may extend $f_1, f_2$ holomorphically to $z_0 = 0$ by plugging in $z = 0$ to the definitions of each to get $f_1(0) = 0$ and $f_2(0) = 1$. Clearly, $f_1, f_2$ in this manner are holomorphic on $\DD$.
+    \item Let $f_1(z) = \frac{1}{z}$ and $f_2(z) = \frac{1}{z^2}$. In both cases, $\lim_{z \to 0} \abs{f_i(z)} \to +\infty$.
+    \item Let $f(z) = e^{1/z}$. We can show that the limit as $z \to 0$ of $f(z)$ does not exist. For all $z \in \CC \setminus \{0\}$, write $z = \rho e^{i\theta}$; we have that $f(z) = f(\rho e^{i\theta}) = \exp(\frac{1}{\rho}e^{-i\theta})$. Along $\theta = 0$, we have that $\exp(1/p) \to \infty$, while along $\theta = \pi$, we have that $\exp(-1/p) \to 0$, so the limit clearly does not exist.
+\end{enumerate}
+\noindent Let $f$ be a holomorphic function defined on an open set $\Omega$, except at $z_0 \in \Omega$.
+\begin{enumerate}[(i)]
+    \item If we can define $f$ at $z_0$ in such a way that $f$ becomes holomorphic on $\Omega$, we say that $z_0$ is a removable singularity.
+    \item We say that $z_0$ is a pole of $f$ if $1/f$ is holomorphic on $U \setminus \{z_0\}$ with $U$ being some open neighborhood of $z_0$ in $\Omega$, and setting $(1/f)(z_0) = 0$ makes $1/f$ holomorphic on $U$.
+    \item If $z_0$ is neither removable nor a pole, then we say that it is an essential singularity of $f$.
+\end{enumerate}
+\begin{theorem}[Riemann's theorem on removable singularities]
+    Suppose $f$ is holomorphic on $\Omega \setminus \{z_0\}$ for some $z_0 \in \Omega$; if $f$ is bounded on $\Omega \setminus \{z_0\}$, then $z_0$ is a removable singularity.
+\end{theorem}
+\begin{proof}
+    Assume $\Omega = D_r(z_0)$, where $r > 0$ and $C = \partial D$ with the counterclockwise orientation. It suffices to show that for all $z \in D_r(z_0) \setminus \{z_0\}$, we have
+    \[ f(z) = \frac{1}{2\pi i} \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta, \]
+    i.e., Cauchy's integral formula holds. This is not immediate as $\opname{int} C \not\subset \Omega \setminus \{z_0\}$. If we indeed have Cauchy's integral formula, we can show that $f$ is holomorphic at $z_0$ per the following,
+    \[ \frac{1}{2\pi i} \int_0^{2\pi} \frac{f(\zeta)}{\zeta - z} \, d\zeta = \frac{1}{2\pi i} \int_0^{2\pi} \frac{z_0 + re^{i\theta}}{z_0 + re^{i\theta} - z} i e^{i \theta} \, d\theta, \]
+    where the integrand can be denoted $F(z, \theta)$ on $D_r(z_0) \times [0, 2\pi]$. By the third application of Cauchy's integral formula, we have that $f$ is indeed holomorphic. Having established this, we now show the formula holds for all $z \in D$. Consider the double keyhole contour on $C$ and about $z, z_0$. By sending the width of the corridors between $C$ and $z, z_0$ to zero, we have that
+    \[ 0 = \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta + \int_{C_\eps(z)} \frac{f(\zeta)}{\zeta - z} \, d\zeta + \int_{C_\eps(z_0)} \frac{f(\zeta)}{\zeta - z} \, d\zeta, \]
+    where we impose a radius of $\eps$ for the keyholes about $z$ and $z_0$. By parameterizing the respective contours, we have
+    \[ \int_{-C_\eps(z)} \frac{f(\zeta)}{\zeta - z} \, d\zeta = - \int_0^{2\pi} \frac{f(z + \eps e^{i\theta})}{\eps e^{i \theta}} i \eps e^{i \theta} \, d\theta = -i \int_0^{2\pi} f(z + i \eps i^\theta) \, d\theta. \]
+    As $\eps \to 0$, this is just $-i 2\pi f(z)$. We may show that the contour integral about $-C_\eps(z_0)$ also vanishes; directly write as follows,
+    \begin{align*}
+        \abs{\int_{C_\eps(z_0)} \frac{f(\zeta)}{\zeta - z} \, d\zeta} &= \length(C_\eps(z_0)) \sup_{C_\eps(z_0)} \abs{\frac{f(\zeta)}{\zeta - z}} \\
+        &\leq \length(C_\eps(z_0)) \cdot \sup_{C_\eps(z_0)} (f(\zeta)) \cdot \frac{1}{\frac{\abs{z - z_0}}{2}} \cdot 2 \pi \eps,
+    \end{align*}
+    which converges to $0$ as $\eps \to 0$ using the fact that $f$ is bounded. From here, it is immediate that
+    \[ 2 \pi i f(z) = \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \qedhere \]
+\end{proof}
+\begin{corollary}
+    Let $f$ be holomorphically defined on an open $\Omega$ except at $z_0 \in \Omega$. Then $z_0$ is a pole if and only if $\abs{f(z)} \to \infty$ as $z \to z_0$.
+\end{corollary}
+\begin{proof}
+    We proceed in both directions.
+    \begin{itemize}
+        \item[($\Leftarrow$)] $\abs{f(z)} \to \infty$ as $z \to z_0$, so $(1/f)(z_0) = 0$. This means that $1/f$ is holomorphic on some $U \setminus \{z_0\}$ where $U$ is an open neighborhood of $z_0$ in $\Omega$; however, this means $1/f$ is bounded on $U \setminus \{z_0\}$, so Riemann's theorem on removable singularities shows that $z_0$ is a removable singularity, so $z_0$ has to be a pole of $f$.
+        \item[($\Rightarrow$)] Let $\tilde f$ denote the holomorphic extension onto $U$ of $1/f$. In particular, we have that $1/f$ is continuous at $z_0$, so $(1/f)(z_0) = \lim_{z \to z_0} (1/f)(z) = 0$. \qedhere
+    \end{itemize}
+\end{proof}
