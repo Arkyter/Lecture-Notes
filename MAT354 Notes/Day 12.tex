@@ -1,0 +1,81 @@
+\section{Day 12: (Oct. 14, 2025)}
+Last time, we talked about singularities of holomorphic functions. Let $f$ be holomorphic on an open set $\Omega$ except at $z_0 \in \Omega$; then $z_0$ is called an isolated singularity of $f$.
+\begin{enumerate}[(i)]
+    \item $z_0$ is a removable singularity if we can define $f(z_0)$ such that $f$ is holomorphic on $\Omega$.
+    \item $z_0$ is a pole if $(1/f)(z_0) = 0$ makes $1/f$ a holomorphic function in a neighborhood of $z_0$.
+    \item $z_0$ is an essential singularity if it is neither removable nor a pole. One such example is given by $\exp(\frac{1}{z - z_0})$.
+\end{enumerate}
+\begin{theorem}[Casorati--Weierstrass, \S 3.3.3]
+    Suppose $f$ is holomorphic in the punctured disc $D_r(z_0) \setminus \{z_0\}$ and has an essential singularity at $z_0$. Then the image of $(D_r(z_0) \setminus \{z_0\})$ under $f$ is dense.
+\end{theorem}
+\begin{proof}
+    We will prove by contradiction. Suppose $f(D_r(z_0) \setminus \{z_0\})$ is not dense; then there exists $w \in \CC$ and $\delta > 0$ such that $D_\delta(w) \cap f(D_r(z_0) - \{z_0\}) = \emptyset$, i.e., $\abs{f(z) - w} \geq \delta$ for all $z \in D_r(z_0) \setminus \{z_0\}$. Consider $g : D_r(z_0) \setminus \{z_0\} \to \CC$ defined by
+    \[ g(z) = \frac{1}{f(z) - w}, \]
+    for which we note that $\abs{g(z)} \leq \delta\inv$. We have that $g$ is holomorphic on $D_r(z_0) \setminus \{z_0\}$, and it is bounded. By Riemann's theorem on removable singularities, we conclude that $z_0$ is a removable singularity of $g$, so $g$ can be analytically extended to $z_0$. We usually denote the analytic extension by the same symbol. We have two cases to consider;
+    \begin{enumerate}[(i)]
+        \item If $g(z_0) = 0$, then $f(z) \to \infty$ as $z \to z_0$, so $z_0$ is a pole of $f$, which is a contradiction.
+        \item If $g(z_0) \neq 0$, then $f(z) - w$ can be analytically extended to $z_0$, which also contradicts the assumption. \qedhere
+    \end{enumerate}
+\end{proof}
+\noindent We now describe the local behaviors of singularities. Consider the zeroes of a holomorphic function.
+\begin{theorem}[\S 3.1.1]
+    Suppose $f$ is holomorphic in a connected open set $\Omega$, has a zero at $z_0 \in \Omega$, and does not vanish identically on $\Omega$. Then there exists an open neighborhood $U \subset \Omega$ of $z_0$ and a non-vanishing holomorphic $g$ on $U$ with a unique $n \in \NN$ such that
+    \[ f(z) = (z - z_0)^n g(z), \quad \forall z \in U. \]
+\end{theorem}
+\begin{proof}
+    Since $\Omega$ is a connected open set and $f$ does not vanish identically on $\Omega$, we have that the zeroes of $f$ are isolated. There exists an open disc $D_r(z_0)$ such that $z_0$ is the only zero of $f$ on $D_r(z_0)$; then on $D_r(z_0)$, $f$ has the power series expansion
+    \[ f(z) = \sum_{k=0}^\infty a_k(z - z_0)^k = (z - z_0)^n \left[a_n + a_{n+1}(z - z_0) + \dots \right], \]
+    where we take $n$ to be minimal and for which we denote the latter $g(z)$ as per our previous proofs. By Hadamard's formula, $g(z)$ is a convergent power series on $D_r(z_0)$, and hence holomorphic. Moreover, $g(z_0) = a_n \neq 0$, and so we may prove the uniqueness of $n$. Suppose that we can also write
+    \[ (z - z_0)^n g(z) = (z - z_0)^m h(z) \]
+    with $m > n$. Then $g(z) = (z - z_0)^{m-n} h(z)$, where we take $z \to z_0$ to see $g(z_0)= 0$, which is contradictory. Thus, $m = n$ and $h = g$, so we are done here.
+\end{proof}
+\begin{theorem}[\S 3.1.2]
+    If $f$ has a pole at $z_0 \in \Omega$, then there exists an open neighborhood $U \subset \Omega$ of $z_0$, a non-vanishing holomorphic function $h$ on $U$, and a unique $n \in \NN$ such that
+    \[ f(z) = (z - z_0)^{-n} h(z), \quad \forall z \in U \setminus \{z_0\}. \]
+\end{theorem}
+\begin{proof}
+    By the previous theorem, we have $1/f(z) = (z - z_0)^n g(z)$, where $g$ is holomorphic and non-vanishing in a neighborhood of $z_0$, so the result is given by taking $h(z) = 1/g(z)$.
+\end{proof}
+\begin{theorem}[\S 3.1.3]
+    If $f$ has a pole of order $n$ at $z_0$, we may write
+    \[ f(z) = \frac{a_{-n}}{(z - z_0)^n} + \frac{a_{-n+1}}{(z - z_0)^{n-1}} + \dots + \frac{a_{-1}}{z - z_0} + G(z), \]
+    where $G(z) = \sum_{n \geq 0} b_n(z - z_0)^n$ is holomorphic on $U$.\footnote{this was bundled together with the proof of the previous theorem in class, but i'm separating because of shakarchi`'}
+\end{theorem}
+\begin{proof}
+    Since $z_0$ is a pole of $f$, we consider $F(z) = (1/f)(z)$, which admits $z_0$ as a zero. By the previous theorem, $F(z) = (z - z_0)^n g(z)$. 
+\end{proof}
+\noindent Note that specifically, in the context above, we call
+\[ \frac{a_{-n}}{(z - z_0)^n} + \frac{a_{-n+1}}{(z - z_0)^{n-1}} + \dots + \frac{a_{-1}}{z - z_0} \]
+the \textit{principal part} of $f$ at $z_0$, and $a_{-1}$ the residue of $f$ at $z_0$.
+\begin{definition}
+    A function $f$ on an open set $\Omega$ if there exists a sequence of points $\{z_0, z_1, \dots, \}$ that has no limit points in $\Omega$, and such that \begin{parlist} \item $f$ is holomorphic on $\Omega \setminus \{z_0, z_1, \dots\}$, and \item $f$ has poles at $\{z_0, z_1, \dots\}$. \end{parlist}
+\end{definition}
+\noindent We define the extended complex plane $\hat \CC$ as $\CC \cup \{\infty\}$, and we equip $\hat \CC$ with the following topology; we say that $U$ is open in $\hat \CC$ if $U$ is open in $\CC$, or $\hat \CC \setminus U$ is closed and bounded in $\CC$. As an example, $U = \CC \setminus \ol{D_r(z_0)} \cup \{\infty\}$ is open.
+\begin{proposition}
+    $\hat \CC$ is homeomorphic to a sphere $S$ in $\RR^3$.
+\end{proposition}
+\begin{proof}
+    Identify the complex plane with the $xy$-plane in $\RR^3$, and suppose that the sphere is centered at $(0, 0, \frac{1}{2})$ with radius $\frac{1}{2}$. Let $\Phi : S \setminus \{N\} \to \CC$, where $N = (0, 0, 1)$, be the stereographic projection of $W = (X, Y, Z) \mapsto w = (x, y, 0)$. We have that
+    \[ \frac{X}{x} = \frac{Y}{y} = \frac{1-z}{1} \implies x = \frac{x}{1-z}, y = \frac{y}{1-z}. \]
+    We may check that the stereographic projection $\Phi$ is a bijective homeomorphism by writing $\Phi\inv : \CC \to S \setminus \{N\}$ is given by
+    \[ \Phi\inv(x, y) = \left(\frac{x}{x^2 + y^2 + 1}, \frac{y}{x^2 + y^2 + 1}, \frac{x^2 + y^2}{x^2 + y^2 + 1}\right). \]
+    In fact, we may extend to $\Phi : S \to \hat \CC$ by observing that $\Phi(W) \to \infty$ as $W \to N$, so we just set $\Phi(N) = \infty$.
+\end{proof}
+\newpage
+\noindent We say that a meromorphic function $f$ in $\CC$ is meromorphic in $\hat \CC$ if \begin{parlist} \item $\infty$ is an isolated singularity of $f$, i.e., $f$ is holomorphic on $\CC \setminus \ol{D_r(z_0)}$ for some $z_0 \in \CC$ and $r > 0$, and \item $f$ is either holomorphic at $\infty$ or has a pole at $\infty$, i.e., if $F(z) = f(1/z)$, then $0$ is an unisolated singularity of $F$. $f$ is holomorphic at $\infty$ if $F$ is holomorphic at $0$, and $f$ has a pole at $\infty$ if $F$ has a pole at $0$. \end{parlist}
+\begin{theorem}[\S 3.3.4]
+    The meromorphic functions on $\hat \CC$ (the extended complex plane) are rational functions $P(z)/Q(z)$ (where $P(z), Q(z)$ are polynomials).
+\end{theorem}
+\begin{proof}
+    Let $f$ be any meromorphic function on $\hat \CC$. This means $\infty$ is an isolated singularity, which means $f$ is holomorphic in $\CC \setminus \ol{D_r(0)}$. Then $f$ can only have finitely many poles in $\CC$, say, $z_1, \dots, z_n$. For each pole $z_k$, there exists an open neighborhood $U_k$ of $z_k$, and a non-vanishing holomorphic function $g_k$ on $U_k$ such that
+    \[ f(z) = \frac{a_{-n_k}}{(z - z_k)^{n_k}} + \dots + \frac{a_{-1}}{z - z_k} + g_k(z) \]
+    on $U_k$, and define $f_k(z)$ to be the principal part of $f$ at $z_0$, for which $f_k$ is a poylnomial in $\frac{1}{z - z_k}$. Similarly, we can consider $F(z) = f(1/z)$, where $0$ is an isolated singularity of $F$. If $0$ is a pole of $F$, then there exists an open disc $D_r(0)$ and a holomorphic function $g_0$ such that
+    \[ F(z) = \tilde{f}_0(z) + \tilde{g}_0(z) \]
+    on $D_r(0) \setminus \{0\}$; note that $\tilde{f}_0(z)$ denotes the principal part of $F$ at $0$ (and similarly for $\tilde{g}$), which is a polynomial in $1/z$. We may perform a final change of coordinates
+    \[ f(z) = F(1/z) = \tilde{f}_0(1/z) + \tilde{g}_0(1/z), \]
+    where $\tilde{f}_0(1/z) = f_0(z)$ which is a polynomial in $z$. Finally, write
+    \[ H(z) = f(z) - f_0(z) + \left[\sum_{k=1}^n f_k(z)\right], \]
+    for which we note that each term of the summation is a polynomial in $\frac{1}{z-z_k}$ and $f_0$ is a polynomial in $z$. It suffices to check that $H$ is entire and bounded so we may apply Liouville's theorem to conclude. To see that $H$ is entire, it suffices to show that each $z_k$ is a removable singularity of $H$. Recall that $f_k$ is the principal part of $f$ at $z_k$; there exists an open neighborhood $U_k$ of $z_k$ and a holomorphic $g_k$ on $U_k$ such that $f(z) - f_k(z) = g_k(z)$, where $g_k$ gives a holomorphic extension of $f - f_k$ to $z_k$. This means $\sum_{j \neq k} f_j(z) + f_0(z)$ is holomorphic on $U_k$, and so $z_k$ is a removable singularity of $H$.
+    \\[8pt]
+    For boundedness, it suffices to check that $H$ is bounded on $\CC \setminus \ol{D_R(0)}$ for some $R > 0$ (per compactness implying boundedness immediately). Recall that $f_0$ comes from the principal part of $F(z) = f(1/z)$ at $0$. We have that $F(z) = \tilde{f}_0(z) + g_0(z)$, which is holomorphic on $D_r(0)$, and $g_0$ is bounded on $\ol{D_{r/2}(0)}$, so $f(z) - \tilde{f}_0(z) = g_0(1/z)$ is bounded on $\CC \setminus \ol{D_{2/r}(0)}$.
+\end{proof}
