@@ -11,8 +11,8 @@ Let $f$ be a holomorphic function define in an open set $\Omega$, except at $z_0
     \item We say that $z_0$ is a pole of $f$ if $1/f$ is holomorphic on $U \setminus \{z_0\}$ with $U$ being some open neighborhood of $z_0$ in $\Omega$, and setting $(1/f)(z_0) = 0$ makes $1/f$ holomorphic on $U$.
     \item If $z_0$ is neither removable nor a pole, then we say that it is an essential singularity of $f$.
 \end{enumerate}
-\begin{theorem}[Riemann's theorem on removable singularities]
-    Suppose $f$ is holomorphic on $\Omega \setminus \{z_0\}$ for some $z_0 \in \Omega$; if $f$ is bounded on $\Omega \setminus \{z_0\}$, then $z_0$ is a removable singularity.
+\begin{theorem}[\S 3.3.1: Riemann's theorem on removable singularities]
+    Suppose $f$ is holomorphic on $\Omega \setminus \{z_0\}$ for some $z_0 \in \Omega$; if $f$ is bounded on $\Omega \setminus \{z_0\}$, then $z_0$ is a removable singularity.\footnote{i'm going to start using this to label shakarchi sections.}
 \end{theorem}
 \begin{proof}
     Assume $\Omega = D_r(z_0)$, where $r > 0$ and $C = \partial D$ with the counterclockwise orientation. It suffices to show that for all $z \in D_r(z_0) \setminus \{z_0\}$, we have
@@ -31,7 +31,7 @@ Let $f$ be a holomorphic function define in an open set $\Omega$, except at $z_0
     which converges to $0$ as $\eps \to 0$ using the fact that $f$ is bounded. From here, it is immediate that
     \[ 2 \pi i f(z) = \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \qedhere \]
 \end{proof}
-\begin{corollary}
+\begin{corollary}[\S 3.3.2]
     Let $f$ be holomorphically defined on an open $\Omega$ except at $z_0 \in \Omega$. Then $z_0$ is a pole if and only if $\abs{f(z)} \to \infty$ as $z \to z_0$.
 \end{corollary}
 \begin{proof}
