@@ -1,0 +1,122 @@
+\section{Day 12: Heat/Diffusion Part 3 (Oct. 15, 2025)}
+
+\begin{theorem}
+	Let \( \phi \) be bounded and continuous, \( \phi = \phi(x) \), \( x \in \mathbb{R} \). Then the formula \( u(x, t) = \int_{\mathbb{R}} S(x-y, t) \phi(y) dy \), where
+	\[ S(z, t) = \frac{1}{\sqrt{4 \pi t}}e^{- \frac{z^{2}}{4t}}, \]
+	is such that
+	\begin{enumerate}
+	
+		\item \( u \in C^{\infty}(\mathbb{R} \times (0, \infty)), \)
+		\item \( u \) solves \( u_{t} - u_{x x} = 0 \).
+		\item \( \lim_{t \searrow 0} u(x, t) = \phi(x) \) for all \( x \).
+	
+	\end{enumerate}
+	Notably, even if \( \phi \) is not smooth, \( u \) is.
+\end{theorem}
+\begin{proof}
+	We can write 
+	\[ u(x, t) = \int_{\mathbb{R}} S(z, t) \phi(x - z) dz. \]
+	This is just the convolution \( S( \cdot, t) * \phi \). Now, if we set \( z = \sqrt{t p} \), then  this yields
+	\[ u(x, t) \int_{\mathbb{R}} e^{- \frac{p^{2}}{x}} \phi(x - \sqrt{t}p) dp. \]
+	Notice that \( |u(x, t)| \le \sup_{y}| \phi(y)| \).
+	\begin{enumerate}
+	
+		\item To prove that \( u \in C^{\infty}(\mathbb{R} \times (0, \infty)) \), first we will state a nice general lemma.
+			\begin{lemma}
+				\[ \lim_{m \to \infty} \int_{\mathbb{R}} F_{m}(y) dy = \int_{\mathbb{R}} \lim_{m \to \infty} F_{m}(y) dy, \]
+				provided that \( \lim F_{m}(y) \) exists for all \( y \in \mathbb{R} \), this limit is absolutely integrable, and \( F_{m} \rightrightarrows F \).
+			\end{lemma}
+			From here, notice that if \( F_{m}(x) = \frac{u(x + h_{m}, t) - u(x, t)}{h_{m}} \), then applying this to suitable sequences \( h_{m} \) yields that
+		\[ \frac{\partial}{\partial x}u(x, t) = \int_{\mathbb{R}} \frac{\partial}{\partial x} S(x - y, t) \phi(y) \, dy \]
+			To do this, let us check our conditions. For absolute integrability,
+			\begin{align*}
+				\int_{\mathbb{R}} \frac{\partial}{\partial x} S(x - y, t) \phi(y) \, dy	&= \frac{1}{\sqrt{4 \pi t}} \int_{\mathbb{R}} - \frac{x - y}{2t} e^{- \frac{(x - y)^{2}}{4t}} \phi(y) dy \\
+				\tag{\( \frac{x - y}{\sqrt{t}} = p \)}&= \frac{1}{\sqrt{4 \pi t}} \int_{\mathbb{R}} \frac{1}{2 \sqrt{t}} e^{- p^{2}}p \phi(x - p \sqrt{t}) dp. \\
+																							&\implies \left| \int_{\mathbb{R}} \frac{\partial}{\partial x} S(x-y, t) \phi(y) dy \right| \le \frac{C}{t} \sup | \phi|.
+			\end{align*}
+			This proves that this middle part is absolutely integrable. Also, by Taylor's formula,
+			\begin{align*}
+				\tag{For some \( 0 \le |\xi| \le |h_{m}| \)}\left| \frac{S(z + h_{m}, t) - S(z, t)}{h_{m}} - \frac{\partial}{\partial z}S(z, t) \right|  &= \left| \frac{\partial}{\partial z}S(z + \xi, t) - \frac{\partial}{\partial z} S(z, t) \right| \\
+				\tag{\( 0 \le |\xi_{0}| \le | \xi| \)}& = | \xi| \cdot |S''(z + \xi_{0}, t)| \\
+				&\le |h_{m}| \sup |S''(z, t)| \\
+			\end{align*}
+			and thus we have that our convergence is uniform. It follows that we can interchange the integral and limit. It follows that the first derivative of \( u \) exists. We can do similar proofs to show it is \( C^{k} \) for any \( k \), so it is \( C^{\infty} \).
+		\item In the proof of \( (i) \) we showed that
+			\[ \frac{\partial^{2}}{\partial x^{2}} u(x, t) = \int_{\mathbb{R}} \frac{\partial^{2}}{\partial x^{2}} S(x - y, t) \phi(y) dy. \]
+			We also showed that
+			\[ \frac{\partial}{\partial t} u(x, t) = \int_{\mathbb{R}}  \frac{\partial}{\partial t}S(x - y, t) \phi(y) dy \]
+			thus, since \( S \) solves the heat equation for \( t > 0 \),
+			\[ u_{t} - u_{x x} = 0. \]
+
+			\item We want to show that \( \lim_{t \searrow 0} u(x, t) = \phi(x) \).
+				\[ u(x, t) - \phi(x) = \int_{\mathbb{R}} \frac{1}{\sqrt{4 \pi}}e^{- \frac{p^{2}}{4}} \phi(x - \sqrt{t}p) - \frac{1}{\sqrt{4 \pi}} e^{-\frac{p^{2}}{2}} \phi(x) \, dp, \]
+				so we need to show that
+				\[ \lim_{t \searrow 0} \int_{\mathbb{R}} e^{- \frac{p^{2}}{4}} \left[ \phi(x - \sqrt{t}p) - \phi(x) \right] dp = 0. \]
+				To do this, we can just use the continuity of \( \phi \). It \( \sqrt{t}p \ll 1 \), this should be roughly \( 0 \) close to \( x \), and \( e^{- \frac{p^{2}}{4}} \) makes things small elsewhere. Specifically, 
+				\[ \int_{\mathbb{R}} e^{- \frac{p^{2}}{4}} \left[ \phi(x - \sqrt{t}p) - \phi(x) \right] dp = I_{1} + I_{2}, \]
+				where we have that
+				\begin{align*}
+					I_{1} &= \int_{|p \sqrt{t}| < \delta} e^{- \frac{p^{2}}{4}} \left[ \phi(x - \sqrt{t}p) - \phi(x) \right] dp \\
+					I_{2} &= \int_{|p \sqrt{t}| \ge \delta} e^{- \frac{p^{2}}{4}}\left[ \phi(x - \sqrt{t}p) - \phi(x) \right] dp.
+				\end{align*}
+				Fix \( \varepsilon > 0 \) arbitrary. We want to show that there exists \( t_{0} > 0 \) such that for all \( t \le t_{0} \) we have that
+				\[ |I_{1}| < \frac{\varepsilon}{2}, \quad |I_{2}| < \frac{\varepsilon}{2}. \]
+				To do this, let \( \delta \) be such that
+				\[ | \phi(x - y) - \phi(x)| < \frac{\varepsilon}{2}, \qquad |y| < \delta. \]
+				\begin{enumerate}
+				
+					\item To estimate \( I_{1} \), notice that
+						\begin{align*}
+							|I_{1}| \le \int_{|\sqrt{t} p| < \delta} e^{- \frac{p^{2}}{4}} | \phi(x - \sqrt{t}p) - \phi(x)| \, dp \\
+							&\le \int_{\mathbb{R}} e^{- \frac{p^{2}}{4}} \frac{\varepsilon}{2 \sqrt{4 \pi}} \, dp \le \frac{\varepsilon}{2}.
+						\end{align*}
+					\item To estimate \( I_{2} \),
+						\begin{align*}
+							|I_{2}| &\le \int_{|p \sqrt{t}| \ge \delta} e^{- \frac{p^{2}}{4}} \, dp 2 \sup_{y \in \mathbb{R}} | \phi(y)| \\
+											&= \int_{|p| < \frac{\delta}{\sqrt{t}}} e^{- \frac{p^{2}}{4}}\, dp 2 \sup | \phi| \\
+											&= 4 \sup | \phi| \int_{\frac{\delta}{\sqrt{t}}}^{\infty} e^{- \frac{p^{2}}{4}}\, dp. 
+						\end{align*}
+						Given \( \varepsilon \) and \( \delta \), pick \( t_{0} \) small enough such that
+						\[ \int_{\frac{\delta}{\sqrt{t_{0}}}}^{\infty} e^{- \frac{p^{2}}{4}}\, dp < \frac{\varepsilon}{8 \sup | \phi|}, \]
+						so we are done.
+				\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	We always said that \( u(x, t) = S(\cdot, t) * \phi \). This is \textbf{a} solution to the IVP
+	\[ \left\{\begin{NiceMatrix}u_{t} = u_{x x} & t > 0 & x \in \mathbb{R}\\ u = \phi & t = 0 & x \in \mathbb{R}.\end{NiceMatrix}\right.  \]
+	We said this because it's not unique. In particular, there exists \( u \) solving
+	\[ \left\{\begin{NiceMatrix}u_{t} = u_{x x} & t > 0 \\ u(x, 0) = 0,\end{NiceMatrix}\right.  \]
+	but with \( u \not \equiv 0 \). At the same time, under some conditions (see homework) we can get uniqueness.
+\end{remark}
+
+\begin{remark}
+	\( u_{t} = u_{x x} \) is ill-posed for \( t < 0 \). To see this, consider the data
+	\[ \frac{1}{m} \sin(m x) = \phi_{m}(x). \]
+	Then the solution is
+	\[ u_{m}(x, t) = \frac{1}{m} \sin(mx) e^{- m^{2} t}. \]
+	If \( t = - \varepsilon \), then \( u_{m}(x, - \varepsilon) = \frac{1}{m}\sin(mx) e^{\varepsilon m^{2}}, \)
+	so there's no continuous dependence on data.
+\end{remark}
+
+\begin{example}[Diffusion with a source]
+	This is the non-homogeneous case.
+	\[ u_{t} - u_{x x} = f(x, t). \]
+	We'll say that \( t > 0 \), and that \( f \) has to be nice enough such that the following stuff still works. We want to find a solution using Duhamel's formula/operator method. To do this, we want to ``think of the pde as an ode.'' To do this, recall how Duhamel works.
+	\[ \left\{\begin{NiceMatrix}u_{t} + Au = f \\ u(0) = \phi,\end{NiceMatrix}\right.  \]
+	where \( A \) is a matrix (linear operator). Use integrating factors.
+	\[ v = e^{At}u \implies v_{t} = e^{At}f. \]
+	This yields that
+	\begin{align*}
+		v(t) &= \underbrace{v(0)}_{\phi} + \int_{0}^{t} e^{As}f(s) \, ds \\
+		u(t) &= e^{-At} \phi + \int_{0}^{t} e^{-A (t - s)} f(s) \, ds.
+	\end{align*}
+	In the ODE case, \( e^{-A t} \phi \) is the solution of the homogeneous problem. In the PDE case, this is given by
+	\[ e^{-At \phi} \leftrightarrow S_{t} * \phi. \]
+	We can also write this as \( e^{t \partial_{x}^{2}} \phi \) [I do hate this, sorry Fabio]. Thus, writing our Duhamel's formuls for PDEs yields
+	\[ u(x, t) = S_{t} * \phi + \int_{0}^{t} S_{t-s}( \cdot) * f( \cdot, s) ds. \]
+	We will work with this more next time.
+
+\end{example}
+
