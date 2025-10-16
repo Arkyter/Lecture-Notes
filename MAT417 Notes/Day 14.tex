@@ -1,0 +1,75 @@
+\section{Day 14: Field Extensions (Oct. 16, 2025)}
+Last time, we discussed that $K \subset \CC$ is a number field if and only if it is a finite extension of $\QQ$, and $K \supset \SO_K$ (the ring of integers), where we can think of $\SO_K$ as the intersection of the algebraic integers (recall that this is the set of all $\alpha$ such that there exists $f \in \ZZ[x]$ with $f(\alpha) = 0$) and $K$.
+\\[8pt]
+Let $E/F$ be a finite extension of fields, where $\dim_F E < \infty$. We define a norm $N_{E/F} : E \to F$ to be given by
+\[ N_{E/F}(xy) = N_{E/F}(x) N_{E/F}(y), \]
+where $N_{E/F}(x)$ is the determinant of the multiplication map by $x$ as a map from $F$ to $E$. We denote $\Tr_{E/F}$ as the trace of the same map. Assume $E, F$ both have characteristic zero (more generally, we need $E/F$ to be a separable extension); let $E(x)$ be the minimal polynomial of $\alpha$. Then the monic polynomial of minimal degree in $F[x]$ such that $f(\alpha) = 0$,
+\[ f(x) = x^m + \sum_{i=0}^m-1 a_i x^i. \]
+is the minimal polynomial for the map of multiplication by $\alpha$ from $F$ to $E$.
+\begin{claim}
+    $n$ is divisible by $m$, and $N_{E/F}(\alpha) = \left[(-1)^m a_n)\right]^{n/m}$, i.e., the product of all roots of $f$ with multiplicity $n/m$.
+\end{claim}
+\noindent We have that $E \supset F(\alpha) \supset F$, and $[E:F] = [E:F(\alpha)] \cdot [F(\alpha):F]$.
+\begin{corollary}
+    $K = \RR/\QQ$ is a number field, and we have $\alpha \in \SO_K$ implies $N_{E/\QQ}(\alpha) \in \ZZ$.
+\end{corollary}
+\begin{proof}
+    This will follow if we know that the minimal polynomial of $\alpha$ is in $\ZZ[x]$. Let $f(x)$ be some monic polynomial in $\ZZ[x]$ such that $f(\alpha) = 0$, and let $f_{\opname{min}}(x)$ be the minimal polynomial of $\alpha$ over $\QQ$. Then
+    \[ f(x) = g(x) f_{\opname{min}}(x), \]
+    where $f(x) \in \ZZ[x]$ and $g, f_{\opname{min}} \in \QQ[x]$. Assume that there exists some prime $p$ such that some denominator of a coefficient of $f_{\opname{min}}$ is divisible by $p$. Let $n$ be the max degree of $p$, for which all denominators of $p^n f_{\opname{min}}$ is prime to $p$, and at least one numerator is prime to $p$. We may do the same to $g$ to get $p^m g$ with the same property. Now, we may reduce mod $p$, i.e., for any $a/b \in \QQ$ with $(b, p) = 1$, we have that $(a \mod p) (b \mod p)\inv \in \ZZ/p\ZZ = \FF_p$ as a field. Denote $\ol{\cdot}$ as the reduction; we may write
+    \[ p^{n+m} f = (p^m g) \cdot (p^n f_{\opname{min}}) \implies 0 = \ol{p^m g} \cdot \ol{p^n f_{\opname{min}}} \in \FF_p[x], \]
+    where both terms vanish under reduction.
+\end{proof}
+\begin{definition}
+    Let $V$ be a vector space over $\QQ$ of dimension $n$. A lattice $L \subset V$ is an abelian subgroup isomorphic to $\ZZ^n$. $L$ has the form $L = \{\sum a_iv_i \mid a_i \in \ZZ\}$, where $\{v_i\}$ is some basis of $V$.
+\end{definition}
+\begin{lemma}
+    Let $L \subset V$ be a subgroup which spans $V$. Then the following are equivalent, \begin{parlist} \item $L$ is a lattice, \item $L$ is finitely generated, and \item If $v_1, \dots, v_n \in L$ is a basis of $V$, then there exists $\eps > 0$ such that if $\sum a_i v_i \in L$, then for all $i$, either $a_i = 0$ or $\abs{a_i} \geq \eps$. \end{parlist}
+\end{lemma}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+\newpage
+\begin{corollary}
+    $\SO_K \subset K$ is a lattice.
+\end{corollary}
+\begin{proof}
+    If $\alpha \in K$, then there exists nonzero $\beta \in \ZZ$ such that $p := \beta \alpha \in \SO_K$. Let $f \in \QQ[x]$ be monic such that $f(\alpha) = 0$; we may write
+    \[ f(\alpha) = \alpha^n + \sum_{i=0}^{n-1} a_i \alpha^i = 0 \implies \left(\frac{p}{b}\right)^n + \sum_{i=1}^{n-1} a_i \left(\frac{p}{b}\right)^i = 0, \]
+    i.e., $p^n + \sum_{i=0}^{n-1} a_i b^{n-i} p^i = 0$, and we just need to find $b$ such that $a_j b^{n-i} \in \ZZ$ for $i = 0, \dots, n-1$. Let $v_1, \dots, v_k$ be a basis of $K$ over $\QQ$ such that $v_i \in \SO_K$ for all $i$. If $\sum a_iv_i \in \SO_K$, then
+    \[ N_{K/\RR}\left(\sum_i a_i v_i\right) \in \ZZ, \]
+    and if there exists $\sum a_i v_i \in \SO_K$ (regarded as a homogeneous polynomial in $a_i$), with arbitrarily small $a_i$, then $N(\sum a_iv_I)$ is also arbitrarily small.
+\end{proof}
+\begin{corollary}
+    Let $\alpha \in \SO_K$. Then $\Tr_{K/\QQ}(\alpha) \in \ZZ$, i.e., the trace but for all coefficients of the characteristic polynomial of multiplication by $\alpha$.
+\end{corollary}
+\begin{proof}
+    We can find $K \cong \QQ^n$ such that $\SO_K \cong \ZZ^n$ such that multiplication by $\alpha$ preserves $\SO_K$, represented by an integral matrix. Thus, there indeed is an integral characteristic polynomial. Conversely, we also have that if the characteristic polynomial of $\ast \alpha$ is in $\ZZ[x]$, then $\alpha \in \SO_K$. Fix a monic $f(x) \in \ZZ[x]$. Since $\alpha \in \SO_K$, we have that $f(\alpha) = 0$ by linear algebra.
+\end{proof}
+\begin{corollary}
+    Let $\alpha$ be a squarefree integer. Let $K = \QQ(\sqrt{\alpha})$, so $[K:\QQ] = 2$. We have that $\alpha \in \QQ(\sqrt{d})$ is in $\SO_K$ if and only if the norm and trace of $\alpha$ are in $\ZZ$.
+\end{corollary}
+\begin{proof}
+    Observe that $N_{K/\QQ}(\alpha) = \alpha \ol \alpha = a^2 - b^2 d$, where we let $\alpha = a + b \sqrt d$ and $\ol \alpha = a - b \sqrt d$ (we note that $\alpha + \ol \alpha$ is the trace). Then $1, \sqrt{d}$ forms a basis of $K$ over $\QQ$. Multiplication by $\alpha$ is of the matrix
+    \[ \begin{pmatrix} a & bd \\ b & a \end{pmatrix}, \]
+    with determinant $a^2 - b^2 d$ and trace $2a$.
+\end{proof}
+\noindent As an example, let $d = -1$; let $K = \QQ(i)$, and consider that $a + bi \in \SO_K$ if and only if $2\alpha \in \ZZ$, $a^2 + b^2 \in \ZZ$.
+\begin{lemma}
+    Let $d \in \ZZ$ be squarefree. Then if $d \equiv 2, 3 \mod 4$, then $\SO_K = \ZZ[\sqrt{d}] = \{a + b\sqrt{d} \mid a, b \in \ZZ\}$; if $d \equiv 1 \mod 4$, then $\SO_K = \ZZ[\frac{1 + \sqrt{d}}{2}]$, where we write $\alpha = \frac{1+\sqrt{d}}{2}$, and we have $\alpha^2 - \alpha = 0$.
+\end{lemma}
+\noindent We now do some counterexamples. Let $u \in \SO_K$ be nonzero; we say $u$ is a unit if $u \in \SO_K^\ast$, i.e., $u\inv \in \SO_K$.
+\begin{lemma}
+    $u$ is invertible if and only if $N_{K/\QQ}(u) = \pm 1$.
+\end{lemma}
+\begin{proof}
+    $N(u\inv) = N(u)\inv$ implies $u \in \SO_K^\ast$; then $N(u) \in \ZZ^\ast$. 
+\end{proof}
+\begin{claim}
+    Let $A \in M(n \times n, \ZZ)$, and $\det A = \pm 1$. Then $A\inv \in M(n \times n, \ZZ)$.
+\end{claim}
+\begin{proof}
+    We have that $K \cong \QQ^n \sup \ZZ^n \cong \SO_K$, so if $N(u) = \pm 1$, we have that multiplication by $u$ in this basis is a matrix in $M(n \times n, \ZZ)$, and $u\inv \alpha \in \SO_K$ if $u \in \SO_K$. Take $\alpha = 1$.
+\end{proof}
+\noindent As an example, consider $K = \QQ(i)$. Then $\SO_K = \ZZ[i]$, and $N(a + bi) = a^2 + b^2$. We have $\pm 1, \pm i$ as units. $\alpha \in \SO_K$ is irreducible if, for all $\alpha = p_1 p_2$ with $p_1, p_2 \in \SO_K$, we have $p_1$ or $p_2$ as a unit. It is true (and easy) to see that any nonzero $\alpha \in \SO_K$ is a product of irreducible elements. The question is; is it unique? We can guess that the representation is unique up to multiplication by units and permutation; however, we see that this is still not true in general, by observing the example $\QQ(\sqrt{-5}) = K \supset \SO_K = \ZZ[\sqrt{-5}]$, where $\alpha = 6 = (1 + \sqrt{-5})(1 - \sqrt{-5}) = 2 \cdot 3$. We may check that all $a + b \sqrt{-5}$ is irreducible, since $N(a + b\sqrt{-5}) = a^2 + 5b^2$ (and a bunch more computations here and there that I didn't follow).
