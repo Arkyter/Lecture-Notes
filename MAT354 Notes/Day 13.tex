@@ -1,0 +1,36 @@
+\section{Day 13: Residue Theorem (Oct. 16, 2025)}
+Recall the theorem from last class,
+\begin{theorem}
+    Let $f$ be holomorphic on $\Omega \setminus \{z_0\}$, with $z_0 \in \Omega$. Suppose $z_0$ is a pole of $f$; then there exists a neighborhood $U \subset \Omega$ of $z_0$, a holomorphic $g$ on $U$, and a unique $n \in \NN$ such that
+    \[ f(z) = \frac{a_{-n}}{(z - z_0)^n} + \dots + \frac{a_{-1}}{(z - z_0)} + g(z) \]
+    for all $z \in U \setminus \{z_0\}$, where we say $n$ is the order of the pole $z_0$ and $a_{-1}$ is the residue of $f$ at $z_0$, denoted $\res_{z_0} f$.
+\end{theorem}
+\noindent We now introduce the residue formula, which is an extension of Cauchy's integral formula to meromorphic functions.
+\begin{theorem}[Residue Formula; \S 3.2.1]
+    Suppose $f$ is holomorphic on an open set containing a circle and its interior, except for $z_0 \in \opname{int} C$, where $f$ has a pole. Then
+    \[ \int_C f(z) \, dz = 2 \pi i \res_{z_0} f. \]
+\end{theorem}
+\begin{proof}
+    We will use the keyhole contour $\Gamma_\eps$ on $C$, with an $\eps$-radius path $C_\eps$ about $z_0$. By Cauchy's integral formula, we have that
+    \[ 0 = \int_{\Gamma_\eps} f(z) \, dz \taking{\delta \to 0^+} \int_C f(z) \, dz + \int_{C_\eps} f(z) \, dz, \]
+    where $\delta$ is the width of the corridor, which, per usual, we send to $0$. To find $\int_{C_\eps} f(z) \, dz$, we use an approximation for $f$ near $z_0$. Take $D_r(z_0)$, $g$ holomorphic on $D_r(z_0)$, and $n \in \NN$ such that
+    \[ f(z) = \frac{a_{-n}}{(z - z_0)^n} + \dots + \frac{a_{-1}}{z - z_0} + g(z) \quad \text{on $D_r(z_0) \setminus \{z_0\}$}; \]
+    since $g$ is holomorphic, we have that $\int_{-C_\eps} g(z) \, dz = 0$. For $1 \leq j \leq n$,
+    \[ \int_{-C_\eps} \frac{a_{-j}}{(z - z_0)^j} \, dz = \int_0^{2\pi} \frac{a_{-j}}{\eps^j e^{ij \theta}} i \eps e^{i\theta} \, d\theta = i a_{-j} \eps^{1-j} \int_{0}^{2\pi} e^{i(1-j)\theta} \, d\theta. \]
+    If $j = 1$, this is equal to $i a_{-j} 2\pi$; if $j \neq 1$, then it vanishes, so we are done.
+\end{proof}
+\noindent If there are multiple poles, take multiple keyholes; we get $2\pi i \sum \res_{z_j} f$. Now, suppose $f$ has no poles and does not vanish on $C$; then what is
+\[ \int_{C} \frac{f'(z)}{f(z)} \, dz \]
+given by? In the real setting, we have that the integrand is equal to $(\log \circ f(x))'$ by the chain rule; but this does not hold for complex. In fact, we claim that the integral is equal to the $2\pi i$ multiplied by the number of zeroes of $f$ in $C$, subtracted by the number of poles of $f$ in $C$.\footnote{\S 3.4.1} Next time, we will study $\log z$ in further detail. We now show that the above claim is true (while counting with order and multiplicity).
+\begin{proof}
+    Let $z_1, \dots, z_n$ be the zeroes of $f$ in $C$ and let $w_1, \dots, w_m$ be the poles of $f$ in $C$. Take keyholes around all of those points; we have that
+    \[ \int_C \frac{f'(z)}{f(z)} \, dz = \sum_{j=1}^N \int_{-C_{j,\eps}} \frac{f'(z)}{f(z)} \, dz + \sum_{k=1}^m \int_{-C_{k,\eps}} \frac{f'(z)}{f(z)} \, dz. \]
+    Since $z_j$ is a zero, we may find an open disc $D_r(z_j)$, a holomorphic non-vanishing $g_j$ on $D_r(z_j)$, and a unique $n \in \NN$ such that
+    \begin{align*}
+        f(z) &= (z - z_j)^{n_j} g_j(z), \\
+        f'(z) &= n_j (z - z_j)^{n_j - 1} g_j(z) + (z - z_j)^n g_j'(z),
+    \end{align*}
+    for all $z \in D_r(z_j)$. Thus, we have
+    \[ \int_{-C_{z_j,\eps}} \frac{f'(z)}{f(z)} \, dz = \int_{-C_{z_j, \eps}} \frac{n_j}{z - z_j} + \int_{-C_{z_j,\eps}} \frac{g_j'(z)}{g_j(z)} = 2\pi n j \]
+    by the residue formula, since we may observe the latter integrand is holomorphic. For $w_k$, we have that $f(z) = (z - w_k)^{-n_k} h_k(z)$, and $f'(z) = -n_k(z - w_k)^{-n_k - 1} h_k(z) + (z - w_k)^{-n_k} h_k'(z)$, so from the above, we obtain that their integrals are simply $-2\pi n k$, and so this yields our sum as desired.
+\end{proof}
