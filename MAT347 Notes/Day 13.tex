@@ -1,1 +1,53 @@
-\section{Day 13: (Oct. 15, 2025)}
+\section{Day 13: Sylow Theorem, Pt. 1 (Oct. 15, 2025)}
+Today we introduce the Sylow theorem. Pick one $y_i$ from each of the non-singleton conjugacy classes of $G_i$, where
+\[ \abs{G} = \abs{Z(G)} + \sum_i (G : C_G(y_i)), \]
+where $G \curvearrowleft G$ by conjugation.
+\begin{corollary}
+    If $G$ is a $p$-group (a group whose order is a power of a prime $p$), it has a non-trivial center, i.e., $Z(G) \neq \{e\}$.
+\end{corollary}
+\begin{proof}
+    Since $p \mid \abs{G}$, we have that each $(G : C_G(y_i))$ is divisible by $p$, meaning that $p$ into $\abs{Z(G)}$, and so $\abs{Z(G)} > 1$.
+\end{proof}
+\noindent In particular, let $\abs{G} < \infty$, and $\abs{G} = p^\alpha \cdot m$ such that $\alpha$ is chosen maximally ($p \nmid m$); we may define the Sylow $p$-subgroups as follows,
+\begin{definition}
+    The set of all Sylow $p$-subgroups is given by $\Syl_p(G) = \{\ul P < G \mid \abs{\ul P} = P\}$, where the number of them is written $n_p(G) = \abs{\Syl_p(G)}$. Here, $\ul P$ denotes a subgroup of $G$, and is specifically a Sylow $p$-subgroup.
+\end{definition}
+\begin{theorem}[Sylow]
+    \begin{parlist}
+        \item The Sylow $p$-subgroups exist, and $n_p(G) > 0$,
+        \item Every $p$-subgroup of $G$ is contained in a Sylow $p$-subgroup,
+        \item All Sylow $p$-subgroups of $G$ are conjugate, and
+        \item $n_p(G) = 1 \mod p$, and $n_p(G) \mid \abs{G}$.
+    \end{parlist}
+\end{theorem}
+\noindent As a quick example, consider
+\begin{example}
+    $\abs{G} = 21 = 3 \cdot 7$; we have that $n_3(G)$ divides $21$, and $n_3(G) = 1 \mod 3$.
+\end{example}
+\noindent We ask; what are all the groups of order $15$? As a preliminary, observe that any group of order $p$ is isomorphic to $ZZ/p$;
+\begin{proof}
+    Let $\abs{G} = p$; as seen previously, we have that $G = \left<x\right>$, so $G = \{x^0 = e, x^1 = x, \dots, x^{p-1}\}$, which is indeed isomorphic to $\ZZ/p = \{[0], [1], \dots, [p-1]\}$. 
+\end{proof}
+\noindent We now figure out the groups of order $15$. Let $\abs{G} = 15 = 3 \cdot 5$; by Sylow, there exists $P_3 < G$ and $P_5 < G$ such that they are of orders $3$ and $5$ respectively. Furthermore, we have that $n_3(G) = 1$ and $n_5(G) = 1$, so $P_3 \lhd G$ and $P_5 \lhd G$. Writing
+\begin{align*}
+    P_3 &= \left<x\right> = \{x^i \mid 0 \leq i \leq 4\}, \\
+    P_5 &= \left<y\right> = \{y^j \mid 0 \leq j \leq 2\},
+\end{align*}
+we see that $y$ commutes with $P_5 : C_y \in \Aut P_5$ (where $C_y$ denotes conjugation by $y$). As an aside, what is $\Aut(\ZZ/p)$? We see that $\phi : \Aut(\ZZ/p)$ is given by $\phi : x \mapsto x^k$ for some $k = 1, \dots, p-1$, and so $x^i \mapsto x^{ik}$ with $x^p = e \mapsto e$ obviously. Thus, $\Aut(\ZZ/p) = \{1 , \dots, p-1\}$. We now continue to answer the question. $\abs{C_y}$ is equal to $1$ mod $3$< but there are no elements of order $3$ in $\Aut P_5$, so $\abs{C_y} = 1$ and $C_y = I$, meaning $y$ commutes with $P_5$. Thus, $G = P_5 \times P_3$, and we see that $\ZZ/15 \cong \ZZ/5 \times \ZZ/3$. Note that this argument doesn't hold for $\abs{G} = 21 = 3 \cdot 7$ because the divisibility doesn't work out.
+\begin{theorem}
+    If $(a, b) = 1$, then $\ZZ/a \times \ZZ/b \cong \ZZ/ab$.
+\end{theorem}
+\begin{proof}
+    Find $s, t \in \ZZ$ such that $as = bt = 1$, per Bezout's identity. Then let $R : \ZZ/{ab} \to \ZZ/a \times \ZZ/b$ be given by multiplication by $(s, t)$ and $L : \ZZ/a \times \ZZ/b \to \ZZ/ab$ be given by $(x, y) \mapsto bx + ay$. We claim that $R, L$ are well-defined and inverses of each other. Observe that we have
+    \[ (L \circ R)(h) = L(th, sh) = bth + ash = (bt + as)h = h; \]
+    we may also prove this by simply doing matrix products.
+\end{proof}
+\noindent From this, we see that we indeed have $\ZZ/{21} = \ZZ/3 \times \ZZ/7$. We now prove the Sylow theorem. To see that $\Syl_p(G) \neq \emptyset$, observe that by induction on $\abs{G}$, write
+\[ \abs{G} = \abs{Z(G)} + \sum_i (G : C_G(y_i)) \]
+as before; without loss of generality, let $p^2 \mid \abs{G}$; then $p$ must divide both or neither of the terms of the class equation. Suppose that $p$ divides into neither of them; then $p \nmid \sum_i (G : C_G(y_i))$, and so there exists $y_i$ such that $p \nmid (G : C_g / y_i)$, which is equal to $\abs{G} / \abs{C_G / y_i}$. THus, $ p^2 \mid \abs{C_G(y_i)}$, and by induction, $C_G(y_i)$ has a subgroup of order $p^2$, and so that's also true for $G$. In the case that $p$ divides into both, we have that $p \mid \abs{Z(G)}$, and so we may find $x \in Z(G)$ such that $\abs{x} = p$. Consider $G' = G/\left<x\right>$; we may use induction to find a Sylow $p$-subgroup of $G/\left<x\right>$. We may use the fourth isomorphism theorem to lift it to a subgroup $\ul P$ of $G$.
+\begin{lemma}[Cauchy's Theorem]
+    If $G$ is abelian, $p$ prime, and $p \mid \abs{G}$, there exists $x \in G$ with $\abs{x} = p$.
+\end{lemma}
+\begin{proof}
+    It is enough to find $z \in G$ with $p \mid \abs{z}$; indeed, if $\abs{z} = pn$, take $x = z^n$ and $\abs{x} = p$; pick $e \neq z \in G$. If $p \mid \abs{z}$, we are done, so assume $p \nmid \abs{z}$. We have that $p \mid \abs{G/\left<z\right>}$. By induction, find $y \in G$ such that $\abs{[y]_{\left<z\right>}} = p$. Then $\abs{y} \mid \abs{[y]} = p$ implies $\abs{y} = p$, and indeed, $[y]^{[y]} = [y^{\abs{y}}] = [e] = e$. Thus, $p \mid \abs{y}$.
+\end{proof}
