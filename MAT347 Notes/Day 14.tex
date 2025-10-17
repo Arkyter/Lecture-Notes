@@ -1,0 +1,40 @@
+\section{Day 14: Sylow Theorem, Pt. 2 (Oct. 17, 2025)}
+Let $\abs{G} = p^\alpha m$ for some maximal $\alpha$ such that $p \nmid m$ (and so $p^\alpha \mid \abs{G}$). We define $\Syl_p(G) := \{\ul P < G \mid \abs{\ul P} = p^\alpha\}$\footnote{please, read this as ``the set of subgroups of $G$ with order $p^\alpha$... $\ul P$ denotes `subgroup' in dror fuckin bar natan notation''}, and $n_p(G) := \abs{\Syl_p(G)}$. Recall the Sylow theorems,
+\begin{theorem}[Sylow]
+    \begin{parlist}
+        \item $\Syl_p(G) \neq \emptyset$,
+        \item Every $p$-subgroup is contained in a Sylow $p$-subgroup,
+        \item All Sylow $p$-subgroups are conjugate.
+        \item $n_p(G) = 1 \mod p$, and $n_p(G) \mid \abs{G}$.
+    \end{parlist}
+\end{theorem}
+\begin{lemma}
+    \begin{parlist}
+        \item If $\ul P \in \Syl_p$ (we drop the $G$ when the group is obvious) and $H < G$ is a $p$-subgroup of $G$ such that $H < N_G(\ul P)$, then $H < \ul P$.
+        \item If $\ul P \in \Syl_p$, $\abs{x} = p^\beta$ with $\beta \geq 1$, $x\inv \ul P x = \ul P$, then $x \in \ul P$.
+    \end{parlist}
+\end{lemma}
+\noindent Specifically, both the conditions in the lemma are equivalent to saying that you can't extend a Sylow $p$-subgroup by ``anything with $p$ in it''. We may reformulate the lemma as follows,
+\begin{lemma*}
+    Let $\ul P \in \Syl_p(G)$, $\abs{H} = p^\beta$, then $N_H(\ul P) = H \cap \ul P$.
+\end{lemma*}
+\begin{proof}
+    For (i), we have that $\ul P H$ is a group, so $\ul P \lhd P H$ and
+    \[ \abs{\frac{\ul P H}{\ul P}} = \abs{\frac{H}{H \cap \ul P}} \]
+    is a power $p^\gamma$ of $p$. This means $\abs{PH} = \abs{\ul P} \cdot \abs{PH/\ul P} = p^{\alpha + \gamma}$, and $\gamma = 0$, i.e., $\abs{PH/\ul P} = 1$, so $H = H \cap \ul P$, and so $H \subset \ul P$. For (ii), take $H = \left<x\right>$ as a $p$-group $H < N_G(\ul P)$. This means $H < \ul P$, so $x \in \ul P$.
+\end{proof}
+\begin{claim}
+    If $\ul P \in \Syl_p$, the number of conjugates of $\ul P$ is equivalent to $1$ mod $p$. We denote the set of all conjugates of $\ul P$ as $\SC$, where $\abs{\SC} = n_{\ul p}$.
+\end{claim}
+\noindent We claim that this is obviously true from the fact that $n_{\ul p} \mid \abs{G}$.
+\begin{proof}
+    Consider the action $\SC \curvearrowleft G$; since $n_{\ul p} \mid \abs{G}$ and $\SC \curvearrowleft G$ is transitive, we have that $\abs{\SC} \mid \abs{G}$. Now, consider $\SC \curvearrowleft \ul P$, and suppose $\ul P' \in \SC$. We have that $\orb_\CC(\ul P') \cong \ul P / \stab_\SC(\ul P')$, where the stabilizer of $\ul P'$ is $N_{\ul P}(\ul P')$, so
+    \[ \abs{\orb_\SC(\ul P')} = \frac{\abs{\ul P}}{\abs{\ul P \cap \ul P'}}, \]
+    which is equal to $1$ if $\ul P = \ul P'$, and $p^\beta$ with $\beta \geq 1$ otherwise. This means $\SC$ has $1$ singleton orbit and the rest have sizes divisible by $p$, so $\abs{\SC} = 1 \mod p$.
+\end{proof}
+\begin{claim}
+    If $H < G$ is a $p$-group and $\ul P \in \Syl_p$, then $H$ is contained in some conjugate of $\ul P$. In particular, all Sylow subgroups are conjugate to each other, and the theorem is proven.
+\end{claim}
+\begin{proof}
+    Let $\SC$ be the set of all conjugates of $\ul P$ as before, and consider the action $\SC \curvearrowleft H$ by conjugation. Per our previous claim, we see that $\abs{\SC} = 1 \mod p$, so $\SC$ must have at least one singleton orbit, namely $\ul P'$, which is a conjugate of $\ul P$ such that $H < N_G(\ul P')$, implying $H < \ul P'$.
+\end{proof}
