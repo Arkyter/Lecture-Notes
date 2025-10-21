@@ -1,0 +1,63 @@
+\section{Day 14: (Oct. 21, 2025)}
+Recall the argument principle; suppose $f$ is a meromorphic function in an open set containing a circle $C$ and its interior. If $f$ has no zeroes and poles on $C$, then
+\[ \frac{1}{2\pi i} \int_C \frac{f'(z)}{f(z)} \, dz \]
+is given by the number of zeroes of $f$ inside $C$, subtracted by the number of poles of $f$ inside $C$, both of which are counted for multiplicity.
+\begin{theorem}[Rouch\'e's theorem \S 3.4.3]
+    Suppose that $f$ and $g$ are holomorphic on an open set containing a circle $C$ and its interior. If $\abs{f(z)} > \abs{g(z)}$ for all $z \in C$, then the number of zeroes of $f$ inside $C$ is equal to the number of zeroes of $f + g$ inside $C$.
+\end{theorem}
+\noindent We will prove this using the argument principle and by deforming $f$ to $f + g$.
+\begin{proof}
+    For $t \in [0, 1]$, define $F_t(z) = f(z) + tg(z)$ so $F_0 = f$ and $F_1 = f + g$. Let $n_t$ denote the number of zeroes of $F_t$ inside $C$. For all $z \in C$, observe that we have
+    \[ \abs{F_t(z)} = \abs{f(z) + tg(z)} \geq \abs{f(z)} - t \abs{g(z)} \geq \abs{f(z)} - \abs{g(z)} > 0; \]
+    by the argument principle, we may write
+    \[ n_t = \frac{1}{2\pi i} \int_C \frac{F_t'(z)}{F_t(z)} \, dz, \]
+    where $n_t$ is always an integer. In order to show $n_0 = n_t$, it suffices to show that $n_t$ is continuous with respect to $t$. Observe that
+    \[ \frac{F_t'(z)}{F_t(z)} = \frac{f'(z) + tg'(z)}{f(z) + tg(z)} \]
+    is continuous on $C \times [0, 1]$, which is compact, so it is uniformly continuous. This means $n_t$ is continuous with respect to $t$, so it must be constant.
+\end{proof}
+\begin{example}
+    Suppose $f$ and $g$ are holomorphic in a region containing the disc $\abs{z} \leq 1$, for which $f$ has a simple (order $1$) zero at $z = 0$, and vanishes nowhere else in $\abs{z} \leq 1$. We may perturb $f$ using $g$; let $f_\eps = f + \eps g$; we will show that if $\eps$ is sufficiently small, then $f_\eps$ has a unique zero in $\abs{z} < 1$. Moreover, if $z_\eps$ is such a unique zero, then the mapping $\eps \mapsto z_\eps$ is continuous.
+\end{example}
+\begin{proof}
+    Indeed, we need to pick $\eps$ small enough such that $\abs{f(z)} > \abs{\eps g(z)}$ for all $\abs{z} = 1$ to apply Rouche's theorem. Since $f$ does not vanish on $\abs{z} = 1$, we may find $\eps_0 > 0$ such that $\abs{f} > \eps_0 \abs{g}$ on $\abs{z} = 1$; specifically,
+    \[ \inf_{\abs{z} = 1} \abs{f(z)} > \eps_0 \sup_{\abs{z} = 1} \abs{g(z)}. \]
+    In particular, for all $\eps \in \CC$ with $\abs{\eps} < \eps_0$, by Rouche's theorem, we have that 
+    \[ 1 > \#\{z \mid f(z) = 0, \abs{z} \leq 1\} = \#\{z \mid f_\eps(z) = 0, \abs{z} \leq 1\}. \]
+    We may modify the above proof by observing that for all $r \in (0, 1)$, $f$ does not vanish on $\abs{z} = r$, so there exists $\eps_r$ (in place of $\eps_0$) such that the above holds. We may follow through with the earlier proof to obtain that the number of zeroes of $f$ and $f_\eps$ in $\abs{z} \leq r$ must coincide to conclude continuity.
+\end{proof}
+\newpage
+\noindent A mapping between topological spaces is said to be open if it maps open sets to open sets. As an example, consider $f : \RR \to \RR$ given by $x \mapsto x^2$; we have $f(\RR) = [0, \infty)$.
+\begin{theorem}[Open mapping theorem \S 3.4.4]
+    If $f$ is holomorphic and non-constant in a region $\Omega$, then $f$ is open.
+\end{theorem}
+\begin{proof}
+    It suffices to show that $\Im f$ is open. Pick any $w_0 \in \Im f$; then $w_0 = f(z_0)$ for some $z_0 \in \Omega$. We want to find an open neighborhood $U$ of $w_0$ such that $U \subset \Im f$. Pick any $w \in \CC$; consider the function $g$ on $\Omega$ defined by $g(z) = g(z) - w$ (we have that $w \in \Im f$ if and only if $g$ has a zero in $\Omega$), which is equal to $(f(z) - w_0) + (w_0 - w)$. Let the former be $F(z)$ and the latter $G(z)$. Since $f$ is non-constant, so is $F$, and we have that $z_0$ is a zero of $F$, so we may find some closed disc $\ol{D_\delta(z_0)}$ such that $z_0$ is the only zero of $F$. This implies $\eps_0 = \inf_{z \in \partial D_\delta (z_0)} \abs{F(z)} > 0$. For all $w \in D_{\eps_0/2} (w_0)$, we have
+    \[ \inf_{z \in \partial D_\delta (z_0)} \abs{F(z)} > \sup_{z \in \partial D_\delta(z_0)} \abs{G(z)} = \abs{w_0 - w}; \]
+    by Rouche's theorem, we have that the number of zeroes of $F$ is equal to the number of zeroes of $F + G$ on $D_\delta(z_0)$, and we are done. \footnote{\textit{read the proof in Shakarchi for this. it is much better}}
+\end{proof}
+\begin{theorem}[Maximum modulus principle \S 3.4.5]
+    If $f$ is a nonconstant holomorphic function in a region $\Omega$, then $f$ cannot obtain a maximum in $\Omega$.
+\end{theorem}
+\begin{proof}
+    Suppose $f$ attains maximum at $z_0$; since $f$ is holomorphic, it is an open mapping, so by the open mapping theorem, there exists $\delta > 0$ such that $D_\delta(f(z_0)) \subset \Im f$. This proves that $\abs{f(z)} > \abs{f(z_0)}$ for some $z \in \Omega$, which is a contradiction.
+\end{proof}
+\noindent We now discuss homotopies and simply connected domains. Let $\Omega$ be an open set, and let $\gamma_0, \gamma_1 : [a, b] \to \Omega$ be two parameterized curves such that $\gamma_0(a) = \gamma_1(a) = \alpha$ and $\gamma_0(b) = \gamma_1(b) = \beta$. These two curves are said to be homotopic in $\Omega$ if we can deform $\gamma_0$ continuously to $\gamma_1$ in $\Omega$, i.e., if there exists a continuous map $F(s, t) : [0, 1] \times [a, b] \to \Omega$ such that $F(0, \cdot) = \gamma_0$, $F(1, \cdot) = \gamma_1$ and $F(\cdot, a) = \alpha$, $F(\cdot, b) = \beta$.
+\begin{theorem}[\S 3.5.1]
+    Let $f$ be a holomorphic function on $\Omega$. Then $\int_{\gamma_0} f(z) \, dz = \int_{\gamma_1} f(z) \, dz$ for any two homotopic curves $\gamma_0, \gamma_1$ in $\Omega$.
+\end{theorem}
+\begin{proof}
+    Let $F : [0, 1] \times [a, b] \to \Omega$ be a continuous map that deforms $\gamma_0$ to $\gamma_1$ in $\Omega$. Let $K := F([0, 1] \times [a, b])$. Clearly, $K$ is compact, and there exists $\eps > 0$ such that, for all $(s, t) \in [0, 1] \times [a, b]$, $D_{3\eps}(F(s, t)) \subset \Omega$. Since $F$ is uniformly continuous, there exists $\delta > 0$ such that
+    \[ \sup_{t \in [a, b]} \abs{\gamma_{s_1}(t) - \gamma_{s_2}(t)} < \eps \]
+    for all $s_1, s_2 \in [0, 1]$ with $\abs{s_1 - s_2} < \delta$. We choose discs $\{D_0, \dots, D_n\}$ of radius $2\eps$, and choose consecutive points $\{z_0, \dots, z_{n+1}\}$ on $\gamma_{s_1}$ and $\{w_0, \dots, w_{n+1}\}$ on $\gamma_{s_2}$ such that $\gamma_{s_1}, \gamma_{s_2}$ are covered by the union of the discs and $z_i, z_{i+1}, w_i, w_{i+1} \in D_i = D_{2\eps}(z_i)$. On each $D_i$, $f$ has a primitive $F_i$, and on each $D_{i-1} \cap D_i$, $f$ has two primitives $F_{i-1}$ and $F_i$, of which they differ by a constant $F_i - F_{i-1} = c_i$, where
+    \[ F_i(z_i) - F_{i-1}(z_i) = F_i(w_i) - F_{i-1}(w_i) \implies F_i(z_i) - F_i(w_i) = F_{i-1}(z_i) - F_{i-1}(w_i). \]
+    Directly write as follows,
+    \begin{align*}
+        \int_{\gamma_{s_1}} f(z) \, dz - \int_{\gamma_{s_2}} f(z) \, dz &= \sum_{i=0}^n \left[F_i(z_{i+1}) - F_i(z_i)\right] - \sum_{i=0}^n \left[F_i(w_{i+1}) - F_i(w_i)\right] \\
+        &= \sum_{i=0}^n \left[F_i(z_{i+1}) - F_i(w_{i+1})\right] - \left[F_i(z_i) - F_i(w_i)\right] \\
+        &= \left[F_n(z_{n+1}) - F_n(w_{n+1})\right] - \left[F_0(z_1) - F_0(w_1)\right] = 0. \qedhere
+    \end{align*}
+\end{proof}
+\noindent A \textit{region} $\Omega$ in $\CC$ is simply connected if any pair of curves in $\Omega$ with the same endpoints are homotopic in $\Omega$.
+\begin{example}
+    Any open disc $D \subset \CC$ is simply connected.
+\end{example}
