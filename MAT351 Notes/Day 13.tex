@@ -1,0 +1,55 @@
+\section{Day 13: Heat/Diffusion Part 4 (Oct. 15, 2025)}
+Midterm: everything we convered in class up to and including section 3.5.
+
+I was a bit late (why have you forsaken me TTC) so I missed the start. Notes were harder to infer because I missed the critical initial explanation. I've done my best to fill it in.
+
+He had rewrote the formula for solutions of IVP\@. I presume before I arrived he discussed that we would apply Duhamel's to the case of ODEs, and then show that it extends naturally to the case of PDEs. I believe the correspondence between the PDEs and ODEs comes from essentially just ignoring the \( x \) derivatives. So the heat equation \( u_{t} - u_{x x} = f \) gives \( u_{t} - u = f \).  Likewise, the wave equation \( u_{t t} - u_{x x} =f \) gives \( u_{t t} - u = f \). It is kind of intuitive that this should work, but I did not catch Fabio's justification of it.
+
+With that aside, we started with the heat equation. Use Duhamel's on
+\[ u'(t) = u(t) + f(t) \]
+to get \( u(t) = e^{t} \phi + \int_{0}^{t} e^{t-s} f(s) ds \).
+
+Translated to the PDE, in the above, the \( e^{t} \phi \) gives the solution of homogeneous problem at time \( t \). We solved the homogeneous heat equation as 
+\[ \frac{e^{- \frac{x^{2}}{4t}}}{\sqrt{4 \pi t}} * \phi, \]
+where \( * \) is convolution, so we would hope that in the Duhamel's formula, this substitutes for \( e^{t} \phi \). But notice that actually
+\[ \left\{\begin{NiceMatrix}u_{t} = u_{x x} + f(x, t) \\ u(x, 0) = \phi(x)\end{NiceMatrix}\right.  \]
+is solved by
+\[ u(t) = S(t) \phi + \int_{0}^{t} S(t - s) ds, \]
+where
+\[ S(t) g = \frac{e^{\frac{-x^{2}}{4t}}}{\sqrt{4 \pi t}} * g, \]
+so indeed we see that it is the case.
+
+This is what the book called using the ``operator method.''
+
+Let's do the same thing for the wave equation. I strongly recommend you check out page 77 and 78 of Strauss. I couldn't follow what Fabio was doing.
+\[ \left\{\begin{NiceMatrix}u_{t t} - u_{x x} = f(x, t) \\ u(x, 0) = g(x) \\u_{t}(x, 0) = h(x)\end{NiceMatrix}\right.  \]
+The ODE analogue is
+\[ \left\{\begin{NiceMatrix}\ddot u + Bu = f(t) \\ u(0) = g \\ \dot u(0) = h\end{NiceMatrix}\right.  \]
+(where \( g \) and \( h \) are constants---this is the notation he used).
+Solving this requires we have some information about \( B \). So let's assume \( B > 0 \). Then, we can solve this as roughly looking like \( \sin \) and \( \cos \). Specifically, the solution of homogeneous problem is
+\[ \cos(Bt) g + \frac{\sin(Bt)}{B}h. \]
+For the non-homogeneous problem, it's
+\[ u(t) = \cos(Bt) g + \frac{\sin(Bt)}{B}h + \int_{0}^{t} \frac{\sin(B(t-s))}{B}f(s) ds. \]
+Notice that this is Duhamels, where \( S(t) = \frac{\sin(Bt)}{B}h \). Specifically 
+\[ u(t) = S'(t) g + S(t) \psi + \int_{0}^{t} S(t-s) f(s) ds. \]
+Comparing with D'Alembert's, the homogeneous solution \( \frac{\sin(Bt)}{B} h \) looks unrecognizable.
+
+We will see that\footnote{He did not write \( \cong \), he just wrote \( = \). This pains me, so I did not.}
+\[ \cos(Bt)g \cong \frac{1}{2} (g(x + t) + g(x - t)) \]
+and 
+\[ \frac{\sin(Bt)}{B}h \cong \frac{1}{2} \int_{x-t}^{x+t} h(y) dy \]
+Later we'll see why \( \cos(i \partial_{x}t) g = \frac{1}{2} (g(x + t) + g(x - t)). \)
+[He mentioned pset 5, but I forget what it was regarding.]
+
+From here, Duhamel's gives
+\[ \frac{1}{2} \int_{0}^{t}  \int_{x - (t - s)}^{x + (t - s)} f(y, s) dy ds = \frac{1}{2} \iint_{(x, t)} f dS.  \]
+[We have to prove this formula of course, but he didn't do this in class.]
+
+Odd even extension to solve heat/wave on half-line. This is assigned reading.
+
+Fabio then asked if we want him to manually write out the solution for heat with source on the whole line. The class said yes. Here it is (assuming he wrote it right and I copied it right).
+\[
+u(x, t) = \int_{- \infty}^{\infty} \frac{e^{- \frac{(x - y)^{2}}{4t}}}{\sqrt{4 \pi t}} \phi(y) dy + \int_{0}^{t} \int_{- \infty}^{\infty} e^{- \frac{(x-y)^{2}}{4(t-s)}} \cdot \frac{1}{\sqrt{4 \pi (t-s)}} f(y, s) dy ds.
+\]
+
+Now, we just have to check that this is correct. A posteriori we have to show it makes sense. Of course we got here from theory so we know it is correct, but we still have to prove it.

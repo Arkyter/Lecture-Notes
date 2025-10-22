@@ -67,13 +67,13 @@
 				
 					\item To estimate \( I_{1} \), notice that
 						\begin{align*}
-							|I_{1}| \le \int_{|\sqrt{t} p| < \delta} e^{- \frac{p^{2}}{4}} | \phi(x - \sqrt{t}p) - \phi(x)| \, dp \\
+							|I_{1}| &\le \int_{|\sqrt{t} p| < \delta} e^{- \frac{p^{2}}{4}} | \phi(x - \sqrt{t}p) - \phi(x)| \, dp \\
 							&\le \int_{\mathbb{R}} e^{- \frac{p^{2}}{4}} \frac{\varepsilon}{2 \sqrt{4 \pi}} \, dp \le \frac{\varepsilon}{2}.
 						\end{align*}
 					\item To estimate \( I_{2} \),
 						\begin{align*}
-							|I_{2}| &\le \int_{|p \sqrt{t}| \ge \delta} e^{- \frac{p^{2}}{4}} \, dp 2 \sup_{y \in \mathbb{R}} | \phi(y)| \\
-											&= \int_{|p| < \frac{\delta}{\sqrt{t}}} e^{- \frac{p^{2}}{4}}\, dp 2 \sup | \phi| \\
+							|I_{2}| &\le \left( 2 \sup_{y \in \mathbb{R}} \phi(y) \right) \int_{|p \sqrt{t}| \ge \delta} e^{- \frac{p^{2}}{4}} \, dp \\
+											&=\left( 2 \sup_{y \in \mathbb{R}} \phi(y) \right) \int_{|p| < \frac{\delta}{\sqrt{t}}} e^{- \frac{p^{2}}{4}}\, dp  \\
 											&= 4 \sup | \phi| \int_{\frac{\delta}{\sqrt{t}}}^{\infty} e^{- \frac{p^{2}}{4}}\, dp. 
 						\end{align*}
 						Given \( \varepsilon \) and \( \delta \), pick \( t_{0} \) small enough such that

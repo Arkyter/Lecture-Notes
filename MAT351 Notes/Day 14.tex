@@ -1,0 +1,76 @@
+\section{Day 14: Conserved Quantities and Fourier Series (Oct. 22, 2025)}
+We talked about conserved quantities/energy. For example, energy in the wave equation and momentum in the wave equation. But we found both of these based on physical intuition. How do we find conserved quantities? 
+
+One way is that invariances of the equation (technically the Lagrangian) and conserved quantities have a correspondence (Noether's Theorem).
+
+Connection back to ODEs is that we use the principle of least action [this is from classical mechanics and the calculus of variations], and then if the action is invariant under symmetries, then applying these symmetries to our solution will preserve their satisfying the principle of least action, so they will also be solutions.
+
+Let's use a different method from what we previously had to prove that energy is conserved by the wave equation.
+\begin{example}
+	Recall that the wave equation is \( u_{tt} - u_{x x} = 0 \). From here, we're going to basically guess a factor that should make things invariant.
+	\[ \int_{- \infty}^{\infty} (au + bu_{x} + cu_{t})(u_{tt} - u_{x x}) dx = 0  \]
+	But we're not actually guessing at \textit{random} what this factor is. We can cancel out some factors based on the symmetries of the equations.
+	\begin{align*}
+		\int_{- \infty}^{\infty} u_{t} u_{tt} - u_{t} u_{x x} dx \\
+		\tag{IBP} = \int_{- \infty}^{\infty} \partial_{t} \frac{u_{t}^{2}}{2} + \partial_{x} u_{t} u_{x} dx \\
+		= \frac{d}{dt} \int_{- \infty}^{\infty} \frac{u_{t}^{2}}{2} + \frac{u_{x}^{2}}{2} dx
+	\end{align*}
+	Specifically, if \( u(x, t) = u(x, t+h) \), then taking the derivative with respect to \( h \) yields
+	\[ \left. \frac{\partial}{\partial h} \right|_{h = 0}u(x, t+h) = u_{t}. \]
+		So using our Lagrangian, this motivates the choice of \( u_{t} \).
+\end{example}
+From here, we will start something completely different. We haven't yet solved our wave and heat equations on a finite interval. Rather, we've only done it on the whole line. The goal is to solve it on some interval \( x \in [0, \ell] \), and \( t \in \mathbb{R} \) with the conditions
+\[ \left\{\begin{NiceMatrix}u_{tt} - u_{x x} = 0 \\u(x, 0) = \phi(x) \\ u_{t}(x, 0) = \psi(x) \\ \text{Boundary Conditions at \( x = 0, \ell \)}\end{NiceMatrix}\right. \]
+and a similar initial value problem for \( u_{t}- u_{x x} \) with boundary conditions on an interval.
+[This method is going to be similar in theory to how we solved the heat equation on the whole line, where we find one particular solution, then combine it with itself in ways such that they approximate our initial conditions well.]
+
+To do this, we will look for a solution of the wave equation in separated form
+\[ u(x, t) = X(x)T(t), \]
+and we will impose that it solves the equation (only the equation, not the boundary condition). But this uses quite a clever trick [in my opinion---Fabio said it's boring]. 
+\begin{align*}
+	X(x) T''(t) &= c^{2} X''(x) T(t) \\
+	\frac{X''(x)}{X(x)} &= \frac{T''(t)}{c^{2}T(t)}
+\end{align*}
+thus since the left side is a function of \( x \) and the right side is a function of \( t \), they must both be constant. We will assume (and justify later) that the constant is negative. This gives
+\[ \frac{X''}{X} = \frac{T''}{c^{2} T} = - \beta^{2}. \]
+For later we will say \( \beta^{2} = \lambda \). But then if \( X'' = - \beta^{2} X \) and \( T'' = - c^{2} \beta^{2} T  \), then we have that
+\[ \left\{\begin{NiceMatrix}X(x) = C \cos(\beta x) + D \sin(\beta x) \\ T(t) = A \cos(c \beta t) + B \sin(c \beta t).\end{NiceMatrix}\right.  \]
+Now, we'll impose the Dirichlet boundary conditions (later we will use Neumann, Mixed and Robin boundary conditions). That is, \( u(0, t) = 0 = u(\ell, t) \).
+It follows that \( X(0)T(t) = 0 = X( \ell)T(t) \) so \( X(0) = 0 = X(\ell) \), so
+\[ \left\{\begin{NiceMatrix}X(0) = C = 0 \\ X(\ell) = D \sin( \beta \ell) = 0\end{NiceMatrix}\right.  \]
+But we don't want to set \( D = 0 \) or else our solution sucks [that's the technical term] so we instead use this to find \( \beta = \frac{\pi n}{\ell} \).
+
+\begin{remark}
+	We found that \( \beta = \frac{\pi n}{\ell} \). But \( - \beta^{2} \) is an eigenvalue for the problem
+	\[ \left\{\begin{NiceMatrix}X'' = (- \beta^{2}) X  \\ X(0) = 0 = X(\ell).\end{NiceMatrix}\right. \]
+	and so what we've done here is find the eigenfunction \( D_{n} \sin \left(  \frac{\pi n}{\ell}x \right) \). 
+\end{remark}
+
+Therefore we found that
+\[ u_{n}(x, t) = \sin \left( \frac{\pi n}{\ell} x \right) \left( A_{n} \cos \left( c \frac{\pi n}{\ell} t \right) + B_{n} \sin \left( c \frac{\pi n}{\ell} t \right) \right) \]
+In particular, we have that linear combinations of these solutions will be a solution. Further, even an infinite series will be a solution, assuming the convergence is nice and yields a nice enough function.
+
+What is left is that we have the make our function satisfy the initial conditions \( \phi \) and \( \psi \). So given a solution of the form
+\[ \tag{\( * \)}\sum_{m \ge 1}  \sin \left( \frac{\pi n x}{\ell} \right) \left( A_{n} \cos \left( \frac{c \pi n}{\ell}t \right) + B_{n} \sin \left( \frac{c \pi n}{\ell}t \right) \right) \]
+If we impose
+\begin{enumerate}
+
+	\item \( u(x, 0) = \phi(x) \), then we have that 
+		\[ \phi(x) = \sum_{n \ge 1} A_{n} \sin \left( \frac{\pi n x}{\ell} \right) = \phi(x)\ \]
+		so if \( \phi \) has a Fourier series representation as above for a specific \( A_{m} \), we have found our \( A_{m} \).
+	\item \( u_{t}(x, 0) = \psi \), then we have that
+		\[ \psi(x) = \sum_{n \ge 1} \sin \left( \frac{\pi n x}{\ell} \right) \cdot \frac{c \pi n}{\ell} B_{n}. \]
+
+\end{enumerate}
+These both follow just by plugging in \( (*) \) into these equations in the place of \( u \). In summary, if everything works out nicely, then we have solved initial + dirichlet boundary value problem for the wave, provided that these sums work nicely.
+
+The only consideration remaining is to show that the constant from separating variables is negative. So recall that in the separation of variables, we got the eigenvalue problem
+\[ \left\{\begin{NiceMatrix}X'' = kX \\ X(0) = 0 = X(\ell).\end{NiceMatrix}\right.  \]
+Let \( k \) be a constant. We said that our constant \( k \) should be negative. Why? Well if our constant is \( 0 \), then our solution is linear, and therefore to satisfy the boundary conditions, it must be identically \( 0 \). If the constant is positive, then we end up with hyperbolic sine and cosine.
+\[ X(x) = a e^{\gamma x} + b e^{- \gamma x}. \]
+But if \( X(0) = a + b = 0 \) and \( X(\ell) = ae^{\gamma \ell} + b e^{- \gamma \ell} = 0 \), then we have that
+\[ a e^{2 \gamma \ell} + b = 0, \]
+so \( e^{2 \gamma \ell} = 1 \), which constradicts \( \gamma > 0 \). Thus, our only possible solutions are \( \gamma < 0 \) and the trivial case of \( \gamma = 0 \).
+
+Next we'll solve Neumann boundary conditions. The book covers Robin and Mixed conditions in great detail. These are \( u_{x}(0, t) = 0 \) and \( u_{x}(\ell, t) = 0 \). This boils down to basically the same thing, just with a different eigenvalue problem.
+
