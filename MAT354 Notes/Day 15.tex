@@ -1,0 +1,29 @@
+\section{Day 15: Morera's revisited, Complex Logarithm (Oct.\ 24, 2025)}
+Recall the definition of homotopy and simply connected domains.
+\begin{theorem}[Morera's, revisited \S 3.5.2]
+    In a simply connected domain, any holomorphic function has a primitive.
+\end{theorem}
+\begin{proof}
+    Let $\Omega$ be a simply connected domain, and let $f$ be a holomorphic function on $\Omega$. Fix $z_0 \in \Omega$; define $F : \Omega \to \CC$ by $F(z) = \int_{\gamma_z} f(w) \, dw$, where $\gamma_z$ is a curve going from $z_0$ to $z$, and exists by the fact that $\Omega$ is path connected. Per simple connectedness, we have that $F(z)$ is independent of the choice of $\gamma_z$, so it is indeed well defined; we now check that it is a primitive. Observe that
+    \[ F(z+h) - F(z) = \int_{\gamma_{z+h}} f(w) \, dw - \int_{\gamma_z} f(w) \, dw; \]
+    pick $\gamma_z$ and $\gamma_{z+h}$ as in the proof of Morera's theorem, from which we obtain the straight line path $\eta$ from $z$ to $z + h$ such that the above is equal to $\int_{\eta} f(w) \, dw$. Then we obtain the same conclusion that
+    \[ \abs{\frac{F(z+h) - F(z)}{h} - f(z)} \taking{h \to 0} 0. \qedhere \]
+\end{proof}
+\noindent We now introduce the complex logarithm. Recall that the real log is the inverse of the exponential function, i.e., there is a unique $x$ such that $e^{\log x} = x$; from this, we wish to define an analogous complex log such that $e^{\log z} = z$. Observe that
+\begin{enumerate}[(i)]
+    \item if we write $z = \rho e^{i \theta}$, then $\rho = \abs{z}$ and $\theta = \arg z$; we may define $\log z = \log \abs{z} + i \arg z$.
+    \item we can choose a single value for $\log z$ in a continuous and holomorphic way with respect to $z$.
+\end{enumerate}
+Any such choice is called a branch of the complex logarithm. The existence of such a branch requires restriction on the domain $\Omega$; as an example, consider $\Omega = \CC \setminus \{0\}$; on $\Omega$, such a branch does not exist, since we would have $\log 1 = 0 + 0$ and a continuous choice of angle going about the unit circle such that $\log 1 = 2\pi$ (read: $\RR/\ZZ$).
+\begin{theorem}[\S 3.6.1]
+    Let $\Omega$ be a simply connected domain with $1 \in \Omega$, $0 \not\in \Omega$. Then in $\Omega$, there is a branch of $\log$, $F(z) = \log_\Omega z$, such that \begin{parlist} \item $F$ is holomorphic in $\Omega$, \item $e^{F(z)} = z$ for all $z \in \Omega$, and \item $F(r) = \log r$ for all $r \in \RR$ close to $1$. \end{parlist}
+\end{theorem}
+\noindent Note that we require the last condition because the real logarithm doesn't necessarily agree with the complex logarithm.\ (?)
+\begin{proof}
+    For any $z \in \Omega$, define $F(z) = \int_{\gamma_z} \frac{1}{w} \, dw$, where $\gamma_z$ connects $1$ to $z$; similar to before, $F$ is well-defined because $\Omega$ is simply connected. Since $F(z)$ is holomorphic in $\Omega$, we have that $F'(z) = \frac{1}{z}$, showing (i). We also see that (ii) is equivalent to $z e^{-F(z)} = 1$, where we see that $1 e^{-F(1)} = 1 e^0 = 1$, so
+    \[ (z e^{-F(z)})' = e^{-F(z)} + ze^{-F(z)} (-F'(z)) = e^{-F(z)} - ze^{-F(z)} \cdot \frac{1}{z} = e^{-F(z)} - e^{-F(z)} = 0. \]
+    Thus, $z e^{-F(z)}$ is constant, so it is equal to $1$ for all $z \in \Omega$ as desired. Finally, let $r \in \RR$ be close to $1$; we may simply choose the line segment along $\RR$ to get the normal definition of the logarithm in $\RR$ as desired.
+\end{proof}
+\noindent The classic choice of $\Omega$ is $\CC \setminus (-\infty, 0]$; here, $\log_\Omega z = \log z + i \arg z$, where $\abs{\arg z} < \pi$. We may regard $\log z$ as a curve going from $1$ to $r$ along the real line, then $r \to z$ along the circle centered at zero with radius $r$; this means we have
+\[ \log_\Omega z = \int_{\gamma_z} \frac{1}{w} \, dw = \int_1^r \frac{1}{x} \, dx + \int_0^\theta \frac{i re^{iz}}{re^{iz}} \, dz = \log r + \int_0^\theta i \, dz = \log r + i \theta, \]
+and so we have $\abs{\theta} < \pi$ by design.
