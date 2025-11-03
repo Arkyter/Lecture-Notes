@@ -1,0 +1,49 @@
+\section{Day 15: Semidirect Products (Oct.\ 22, 2025)}
+Recall the Sylow theorem(s)\footnote{at this point i'll just say whatever man};
+\begin{enumerate}[(i)]
+    \item $\Syl_p(G) \neq \emptyset$;
+    \item If $H < G$ is a $p$-group, then $H$ is contained in a Sylow $p$-group.
+    \item $n_p(G) \equiv 1 \mod p$ and $n_p(G)$ divides into $\abs{G}$.
+\end{enumerate}
+\noindent Let us go over an example. Consider the groups of order 21; let $G$ be such that $\abs{G} = 21$, and take $P_3, P_7 < G$ to be Sylow-3 and Sylow-7 respectively. We see that $n_7 = 1$ by the above theorem, so $P_7 \lhd G$ (as it is the unique Sylow-7 group), and $n_3$ is equal to $1$ or $7$ by checking the factors of $21$. If $n_3 = 1$, then $P_3 \lhd G$.
+\\[8pt]
+As an aside, if $K, H \lhd G$, $KH = G$, and $K \cap H = \{e\}$, then $G = K \times H$.
+\begin{claim}
+    Recall the commutator notation, where we denote $[a, b] = ab a\inv b\inv$. We claim that $[K, H] = \{e\}$.
+\end{claim}
+\begin{proof}
+    $k h k\inv h\inv$ can be seen as the product of $k$ and $h k\inv h\inv$ (of which both are in $K$ per normality) and the product of $k h k\inv$ and $h\inv$ (for which both are in $H$). This means $k h k\inv h\inv \in [K, H]$, of which is equal to $\{e\}$ per the fact that $H, K \lhd G$ and $H \cap K = \{e\}$.
+\end{proof}
+\noindent We may use this to prove the aside. Consider $\mu : K \times H \mapsto KH = G$, where $\mu(k, h) = kh$. This is clearly an isomorphism; and so we indeed see $G = K \times H$.
+\\[8pt]
+Returning to our example of order 21 groups, observe that, in this manner, we may pick $K = P_3$, $H = P_7$, to get $G = P_3 \times P_7 \cong \ZZ_3 \times \ZZ_7 \cong \ZZ_{21}$ as they are coprime. This concludes the $n_3 = 1$ case. In the $n_3 = 7$ case, however, we have that $P_3$ is not normal in $G$. Consider $P_7 = \left<x\right>$ and $P_3 = \left<y\right>$. Per normality of $P_7$, we see that $y x y\inv = x^q \in P_7$ for some $q$ (regarded as an element of the cyclic group). Now, observe that the operation of conjugation by $y$ yields the sequence
+\[ x \to yxy\inv \to y^2 x (y\inv)^2 \to y^3 x (y \inv)^3 = x, \]
+and $x \to x^q \to x^{q^2} \to x^{q^3} = x$ simultaneously, for which we see $q^3 \equiv 1 \mod 7$, and so $q \in \{1, 2, 4\}$. Fixing a particular such $q$, we see that
+\[ x^a y^b x^c y^d = x^a y^b x^c y^{-b} y^{b+d} = x^a x^{c \cdot q^b} y^{b+d} = x^{a + c \cdot q^b} y^{b+d} \]
+fixes the multiplication table of $G$. If $q = 1$ as before, we have that $G \cong \ZZ_{21}$. If $q = 2$ or $4$, they follow the above, but they are isomorphic, i.e., there are 2 groups of order 21. To show this, we need to introduce semidirect products. Let $N, H < G$, and consider $N \times H$ and $NH$.
+\\[8pt]
+$\mu : N \times H \to NH$ given by $\mu(n, h) = nh$ always exists as a surjective map, but it is not a homomorphism in general. If $N \cap H = \{e\}$, then $\mu$ is injective, but still not necessarily a homomorphism, and $N \cdot H$ may not even be a group. If $N, H \lhd G$ with $N \cap H = \{e\}$, then $[N, H] = \{e\}$, and $\mu$ is an isomorphism, so we have $N \times H \cong NH$. If $N \lhd G$, $H < G$, we have an interesting case. Take $\phi : H \to \Aut N$ by $\phi(h)(n) = h n h\inv$ (alternatively written $\phi_h(n)$).
+\begin{claim}
+    If you know $\phi$, you know $NH$.
+\end{claim}
+\noindent Consider $n_1h_1 \cdot n_2h_2 = n_1h_1 n_2 h_1\inv h_1 h_2 = n_1 \phi_{h_1}(n_2) h_1 h_2$. We have that $(nh)\inv = h\inv n\inv = h\inv n\inv h h\inv = \phi_{h\inv} (n\inv) h\inv$.
+\begin{definition}
+    Given groups $N, H$ and a morphism $\phi : H \to \Aut N$, define a new group $N \rtimes_\phi = N \rtimes H$ ``the semidirect product of $N$ and $H$ relative to $\phi$'', where $N \rtimes_\phi H = N \times H$ as a set (but different as a group), with multiplication given by $(n_1, h_1)(n_2, h_2) = (n_1 \phi_{h_1}(n_2), h_1 h_2)$.
+\end{definition}
+\begin{proposition}
+    \begin{enumerate}[(i)]
+        \item $N \rtimes H$ is a group.
+        \item $N \lhd (N \rtimes H)$, $H < N \rtimes H$, and $N \rtimes H / N \cong H$.
+        \item If $N \lhd G$, $H < G$, and $N \cap H = \{e\}$, we have $\mu : N \rtimes H \to NH$ is an isomorphism with our defined multiplication.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item We have that $e_{N \rtimes H} = (e_N, e_H)$, which is obviously true, and everything else is also clear enough.
+        \item $N \cong (N, e_H)$, which is clearly a subgroup as $(n_1, e)(n_2, e) = (n_1n_2, e)$ as $\phi_e(n_2) = n_2$. Checking that it is normal is left as an exercise, and the last part is also left as an exercise with the observatino that $H \cong (e_N, H)$ is obviously a subgroup too.
+        \item This is true by design. \qedhere
+    \end{enumerate}
+\end{proof}
+\begin{example}
+    Consider the group $ax + b$, where $(ax + b) \circ (cx + d) = acx + ad + b$. Then $\{ax + b\} \cong \RR_b^+ \rtimes_{\phi} \RR_a^\times$, where $\phi_a(b) = a \cdot b$.
+\end{example}
