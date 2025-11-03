@@ -1,0 +1,39 @@
+\section{Day 15: Boundary and IVPs and Fourier Series (Nov. 3, 2025)}
+Happy birthday to my Dad (not Fabio's). Midterm in class on Wednesday (Nov. 5 i think?) if you weren't aware. Usual room and all that. Also a review session TODAY (Nov. 3) from 5 to 7. We get to meet the one and only Matt.
+
+Last time we used ``formal'' calculations to write down solutions for the problems
+\[ \tag{W} \left\{\begin{NiceMatrix}u_{t t} - c^{2} u_{x x} = 0 & 0 < x < \ell, t \in \mathbb{R} \\
+		u(0, t) = 0 = u(\ell, t) & t \in \mathbb{R} \\ 
+u(x, 0) = \phi(x) & u_{t}(x, 0) = \psi(x) & 0 < x < \ell\end{NiceMatrix}\right.  \]
+which is the wave on an interval with Dirichlet boundary conditions (the second line), and
+\[ \tag{H} \left\{\begin{NiceMatrix}u_{t} = k u_{x x} \\ u(0, t) = 0 = u(\ell, t) \\ u(x, 0) = \phi(x)\end{NiceMatrix}\right.  \]
+which is the heat equation on an interval. We can consider boundary conditions other than the Dirichlet boundary conditions as well.
+
+To solve the Dirichlet boundary conditions, using separation of variables and solving the eigenvalue problem
+		\[ \left\{\begin{NiceMatrix}-X'' = \lambda X & 0 < x < \ell \\ X(0) = 0 = X(\ell)\end{NiceMatrix}\right.  \]
+yields an eigenfunction \( X \) for the eigenvalue \( \lambda \) of the system.
+
+Via this method, we arrived at the solution for the Dirichlet boundary conditions
+\[ u(x, t) = \sum_{n \in \mathbb{Z}} \left[ A_{n} \cos \left( \frac{c n \pi t}{\ell} \right) + B_{n} \sin \left( \frac{c n \pi t}{\ell} \right) \right] \underbrace{\sin \left( \frac{n \pi x}{\ell} \right)}_{X_{n}(x)}. \]
+
+Using the same method as last time, we can also solve the heat equation with
+\[ u(x, t) = \sum_{n \in \mathbb{Z}} A_{n} e^{- k \left( \frac{n \pi}{\ell} \right)^{2} t} \underbrace{\sin \left( \frac{n \pi x}{\ell} \right)}_{X_{n}(x)}. \]
+Notice that in these two solutions, our \( X_{n} \) is the same. This is because in the first step, look at \( u(x, t) = X(x)T(t) \) to get that when we plug into \( u_{t} = k u_{x x} \),
+\[ XT' = kX''T \implies \frac{X''}{X} = \frac{T'}{kT} = - \lambda, \]
+where \( \lambda \in \mathbb{R}_{>0} \) is a constant. We justified why this constant must be negative last time. Since the \( \frac{X''}{X} = - \lambda \) is the same in both, this is why our \( X_{n} \) is the same between question. 
+
+But what can \( \lambda \) possibly be? Well we need \( X \) to satisfy
+\[ \left\{\begin{NiceMatrix}- X'' = \lambda X \\ X(0) = 0 = X( \ell)\end{NiceMatrix}\right. \]
+for \( u \) to satisfy our boundary value problem. Thus, \( \lambda = \left( \frac{\pi n}{\ell} \right)^{2} \). This implies \( X(x) = \sin \left( \frac{\pi n}{\ell} x \right) = \sin \left( \sqrt{\lambda_{n} x} \right) \).
+We also have to solve for \( T(t) \), but
+\[ T' = - k \lambda T \implies T(t) = A e^{-k \lambda t} = A e^{-k \left( \frac{\pi n}{\ell} \right)^{2} t}. \]
+This yields our solution of (H) above.
+
+Now, let's solve the Schr\"odinger equation for fun. Recall that this is \( u_{t} = i u_{x x} \). ``It's like the heat, with \( k \to i \).'' He then shouted loudly ``\( k \) STILL HAS TO BE REAL!!'' which scared me. Nevertheless, if we just na\"ively plug in to the formula for the heat solution, we get a solution to the Schr\"odinger equation
+\[ u(x, t) = \sum_{n \in \mathbb{Z}} A_{n} e^{-i \left( \frac{n\pi}{\ell} \right)^{2} t} \sin \left( \frac{n \pi x}{\ell} \right). \]
+This solution is found by literally replacing every \( k \) with an \( i \) in our proof of the solution of the heat equation. 
+
+We can get uniqueness using the energy for the wave and heat equation on an interval. Of course for the Schr\"odinger equation we have to be more careful because it's complex valued. The Schr\"odinger equation has conserved mass
+\[ M(t) = \frac{1}{2} \int_{0}^{\ell}  | u(x, t)|^{2} dx. \]
+
+Next week we will need to find the coefficients \( A_{m} \) and \( B_{m} \), which will lead us to Fourier series.
