@@ -1,1 +1,31 @@
 \section{Day 16: Semidirect Products, Pt.\ 2 (Oct.\ 24, 2025)}
+Recall the definition of the semidirect product. Let $N, H$ be groups and consider
+\begin{align*}
+    \phi : H &\to \Aut N, \\
+    h &\mapsto (\phi_n : N \to N);
+\end{align*}
+we have $N \rtimes_\phi H = N \times H$ as a set, with $(n_1, h_1) \cdot (n_2, h_2) = (n_1 \phi_{n_1}(n_2), h_1 h_2)$ and $(n, h)\inv = (\phi_{h\inv}(n\inv), h\inv)$.
+\begin{theorem}
+    $N \rtimes_\phi H$ is a group. $(N \rtimes H)/N \cong H$, $N \lhd N \rtimes_\phi H$, and $H < N \rtimes H$.
+\end{theorem}
+\noindent We can identify $n \sim (n, e_H)$ and $h \sim (e_N, h)$; from this, we have $(n, h) = (n, e) \cdot (e, h)$.
+\begin{example}
+    We have that $\{ax + b\} \cong \RR^+ \rtimes \RR^\times$.
+\end{example}
+\begin{example}
+    Consider a vector space $V$ of dimension $n$, and consider $\{Ax + b\}$ where $A$ is a linear automorphism of $V$ and $b \in V$. We have that this is isomorphic to $V_b \rtimes_\phi \Aut (V)_A$, where $x \mapsto Ax + b$ is a map from $V$ to $V$. We can identify
+    \[ V_b \rtimes_\phi \Aut (V)_A \cong R^n_b \rtimes_\phi \{A \mid A \in \GL_n(V)\}, \]
+    where $\phi_A(b) = A \cdot b$.
+\end{example}
+\begin{example}
+    The Poincar\`e group $\RR_+ \rtimes O(3, 1)$ is the set of ``Lorentz transforms'' $\sum_{i=1}^3 x_i^2 - t^2$.
+\end{example}
+\begin{example}
+    Suppose $\phi_n = \id$ for all $h \in H$; we have that $N \rtimes_\phi H \cong N \times H$ as a group.
+\end{example}
+\begin{example}
+    Let $N = \ZZ/n$ and $H = \{0, 1\}$. Then taking $\phi_h(k) = h \cdot k$, we have $\ZZ/n \rtimes_\phi H \cong D_{2n}$. Note that $\ZZ \mod n$ can be viewed as the rotations of a polygon with $n$ sides, with ``one extra thing'' being reflections.
+\end{example}
+\begin{example}
+    $N = \ZZ/7 = \left<x\right>/x^7 = e$ and $H = \ZZ/3 = \left<y\right>/y^3 = e$. Consider $\phi_1(x) = x$, $\phi_2(x) = x^2$, and $\phi_3(x) = x^4$. Let $G_i = N \rtimes_{\phi_i} H$, where $i = 1, 2, 3$; we have $\abs{G} = 21$, and $G_1 = \ZZ/{21}$, and $G_2 = G_3$. These are the two groups of order 21 (of which one is abelian and the other is not)
+\end{example}
