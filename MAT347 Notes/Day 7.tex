@@ -1,7 +1,7 @@
-\section{Day 7: First and Second Isomorphism Theorems (Sep. 24, 2025)}
+\section{Day 7: First and Second Isomorphism Theorems (Sep.\ 24, 2025)}
 Recall from last lecture that we define $G/N := \{gN \mid g \in G\}$, where if $N \lhd G$, then $(g_1N)(g_2N) = g_1g_2N$, making it a group.
 \begin{example}
-    Let $N = n\ZZ = \ZZ = G$ (where $n \in \ZZ$, and we regard $n\ZZ$ as the group of all integers divisible by $n$). We write the ``lazy notation'' $\ZZ/n$ for $\ZZ/n\ZZ$,\footnote{i am one million trillion percent he will backtrack this notation after backlash} which is a group as $n\ZZ$ is normal as $\ZZ$ is abelian. We have that $\ZZ/n\ZZ = \{[0], [1], \dots, [n-1]\}$, i.e., the equivalence classes of integers modulo $n$, where $[a] + [b] = [a + b]$.
+    Let $N = n\ZZ$ and $G = \ZZ$ (where $n \in \ZZ$, and we regard $n\ZZ$ as the group of all integers divisible by $n$). We write the ``lazy notation'' $\ZZ/n$ for $\ZZ/n\ZZ$,\footnote{i am one million trillion percent he will backtrack this notation after backlash} which is a group as $n\ZZ$ is normal as $\ZZ$ is abelian. We have that $\ZZ/n\ZZ = \{[0], [1], \dots, [n-1]\}$, i.e., the equivalence classes of integers modulo $n$, where $[a] + [b] = [a + b]$.
 \end{example}
 \noindent As an aside, $H < G$ implies that $\abs{G} = \abs{H} \cdot \abs{G/H}$, which should be regarded as the statement that ``every coset has size $H$'', and that there are $\abs{G/H}$ cosets (given by the equivalence classes). In turn, we obtain
 \begin{theorem}[Lagrange's Theorem]
@@ -35,7 +35,7 @@ We now discuss the group analogue of this fact. The intersection of two groups i
     Given $H, K < G$, we have that $HK = \{hk \mid h \in H, k \in K\} < G$ if and only if $HK = KH$.
 \end{claim}
 \begin{proof}
-    We check the reverse implication first, i.e., we want to show that $HK$ is a group. For any $(h_1, k_!), (h_2, k_2) \in HK$, we have that $(h_1, k_1) \cdot (h_2 k_2) = h_1 (k_1 h_2) k_2$; we may let $k_1h_1 = h'k'$ since $KH = HK$, so we obtain $h_1 h' k' k_2 = (h_1 h') (k' k_2) \in HK$. Clearly, the identity is in $HK$ since $e_{HK} = e_H e_K \in HK$, and $HK$ admits inverses since $(hk) \inv = k \inv h \inv = h' k' \in HK$ for some $h', k'$.
+    We check the reverse implication first, i.e., we want to show that $HK$ is a group. For any $h_1k_1, h_2k_2 \in HK$, we have that $(h_1k_1) \cdot (h_2k_2) = h_1 (k_1 h_2) k_2$; we may let $k_1h_1 = h'k'$ since $KH = HK$, so we obtain $h_1 h' k' k_2 = (h_1 h') (k' k_2) \in HK$. Clearly, the identity is in $HK$ since $e_{HK} = e_H e_K \in HK$, and $HK$ admits inverses since $(hk) \inv = k \inv h \inv = h' k' \in HK$ for some $h', k'$.
     \\[8pt]
     For the forwards direction, assume that $HK < G$; to see $KH \subset HK$, observe that $(kh) \inv = h \inv k \inv \in HK$; so $((kh)\inv)\inv = kh \in HK$. To see $HK \subset KH$, observe that for any $hk \in HK$, we have that $(hk)\inv = k\inv h\inv \in KH$, and so by the same process, $((hk)\inv)\inv = hk \in KH$.
 \end{proof}
