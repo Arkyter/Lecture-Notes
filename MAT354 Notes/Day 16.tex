@@ -1,0 +1,63 @@
+\section{Day 16: (Nov.\ 4, 2025)}
+%Consider the complex logarithm $\log z$.
+\begin{theorem}[\S 3.6.2]
+    If $f$ is a nowhere vanishing holomorphic function in simply connected region $\Omega$, then there exists a holomorphic function $g(z)$ on $\Omega$ such that $f(z) = e^{g(z)}$.
+\end{theorem}
+\begin{proof}
+    Fix $z_0 \in \Omega$, and define $g : \Omega \to \CC$ by
+    \[ g(z) = \int_{\gamma_z} \frac{f'(w)}{f(w)} \, dw + c_0, \]
+    where $\gamma_z$ is a path from $z_0$ to $z$, and $c_0$ is a complex number picked such that $e^{c_0} = f(z_0)$. Since $\Omega$ is simply connected, any two paths sharing the same endpoints are homotopic, so we see that the definition of $g(z)$ is independent of our choice of $\gamma_z$. Since we know $g$ is holomorphic as seen previously, we get that $g'(z) = f'(z)/f(z)$, so
+    \[ \frac{d}{dt} \left(f(z) e^{-g(z)}\right) = f(z) e^{-g(z)} + f(z) e^{-g(z)} (-g'(z)) = 0, \]
+    i.e., $f(z) e^{-g(z)}$ is constant. This means $f(z) e^{-g(z)} = f(z_0) e^{-g(z_0)} = f(z_0) e^{-c_0} = 1$.
+\end{proof}
+\noindent We now move onto conformal maps (this is section 8 in Shakarchi).
+\begin{question}
+    Given any two open sets $U$ and $V$ in $\CC$, does there exist a bijective holomorphic map $f : U \to V$?
+\end{question}
+\noindent In particular, we can consider $U$ to be any random open set and $V = \DD$.
+\begin{definition}
+    We call a bijective holomorphic map $f : U \to V$ \textit{conformal} (or a biholomorphism).
+\end{definition}
+\noindent Note that this is the convention for our textbook. In some other literatures, a holomorphic function $f : U \to V$ is called \textit{conformal} if $f'(z) \neq 0$ for all $z \in U$.
+\begin{proposition}[\S 8.1.1]
+    Let $f : U \to V$ be a bijective and holomorphic function. Then $f'(z) \neq 0$ for all $z \in U$ and the inverse of $f$ on its range is holomorphic; in particular, the inverse of a conformal map is also holomorphic.
+\end{proposition}
+\begin{proof}
+    Suppose, for the sake of contradiction, that there exists $z_0 \in U$ such that $f'(z_0) = 0$. Express $f$ as a power series centered at $z_0$,
+    \[ f(z) = f(z_0) + \sum a_n (z - z_0)^n = f(z_0) + a_k(z - z_0)^k + G(z), \]
+    where $a_k \neq 0$ and $G(z)$ denotes the remaining higher order terms (we may note that $k > 1$ because $f'(z_0) = 0$). We have
+    \[ f(z) - f(z_0) = a_k(z - z_0)^k + G(z), \]
+    and there exists some $r > 0$ such that on $D_r(z_0)$,
+    \[ \abs{a_k(z - z_0)^k} > \abs{G(z)} \]
+    for all $z \in D_r(z_0) \setminus \{z_0\}$, i.e., there exists a sufficiently close non-zero complex number $w$ such that
+    \[ \abs{a_k(z - z_0)^k - w} > \abs{G(z)} \tag{1} \]
+    on $C_{r/2}(z_0)$. Notice that (1) allows us to use Rouch\'e's theorem to see that the number of zeroes of $F(z)$, $k$, is equal to the number of zeroes of $f(z) - f(z_0) - w$ on $D_{r/2}(z_0)$, i.e., $f(z) = f(z_0) + w$ has at least two roots by multiplicity. Since $f$ is injective, $z_0$ is an isolated zero of $f'$; then $f'(z) \neq 0$ on $D_{r/2}(z_0) \setminus \{z_0\}$. Hence, $f(z) = f(z_0) + w$ has at least two distinct solutions, which contradicts the fact that $f$ is injective, and we are done.
+    \\[8pt]
+    We now prove that the inverse of $f$ on its range is holomorphic. Assume $f(U) = V$, and denote $f\inv$ on $V$ by $g$. Pick any $w_0 \in V$ and $w$ sufficiently close to $w_0$ such that
+    \[ \frac{g(w) - g(w_0)}{w - w_0} = \frac{z - z_0}{f(z) - f(z_0)} = \frac{1}{\frac{f(z) - f(z_0)}{z - z_0}}. \]
+    As $w \to w_0$, $z \to z_0$, so
+    \[ \lim_{w \to w_0} \frac{g(w) - g(w_0)}{w - w_0} = \frac{1}{f(z_0)} = \frac{1}{f'(g(w_0))}.\qedhere \]
+\end{proof}
+\noindent We define the upper half-plane to be $\HH = \{z \in \CC \mid \Im z > 0\}$. $\HH$ is particularly useful because it gives a model for hyperbolic 2-space; let $ds = \sqrt{dx^2 + dy^2}$; we have that the hyperbolic metric is given by
+\[ ds^2 = \frac{\sqrt{dx^2 + dy^2}}{y}. \] \vspace{-14pt}
+\begin{theorem}[\S 8.1.2]
+    The map $F : \HH \to \DD$ is a conformal map with inverse $G : \DD \to \HH$, where
+    \[ F(z) = \frac{i - z}{i + z}, \quad G(w) = i \frac{1 - w}{1 + w}, \]
+\end{theorem}
+\begin{proof}
+    We see that $F, G$ are holomorphic on their respective domains and $F(\HH) \subset \DD$; for all $z \in \HH$, we have that
+    \[ \abs{i - z} < \abs{i + z}\implies \abs{F(z)} < 1. \]
+    We also have that $G(\DD) \subset \HH$, since for all $w = u + iv$, we have
+    \[ \Im G(w) = \Im\left(i \frac{1 - (u + iv)}{1 + (u + iv)}\right) = \Im \left(i \frac{(1 - u) - iv}{(1 + u) + iv}\right) = \frac{1 - u^2 - v^2}{(1 + u)^2 + v^2} > 0. \]
+    As an exercise, we leave the computation that $F \circ G(w) = w$ and $G \circ F(z) = z$. This is clear from just expanding the definitions.
+\end{proof}
+\noindent What is the behavior of $F$ on $\partial \HH =\RR$? Observe that $F(\partial \HH) \subset \partial \DD$. Note that the image of the real line under $F$ is the unit circle, but without the point $-1$.\footnote{follow the discussion on p.209 of Shakarchi}
+\begin{example}[Ex.\ 2, p.\ 210]
+    For all naturals $n \geq 2$, let $S : \{z \in \CC \mid 0 < \arg z < \pi/n\} \to \HH$, and $f : z \mapsto z^n$, i.e., $\rho e^{i \theta} \mapsto \rho^n e^{i n \theta}$. The inverse of $f$ is given by $\HH \to S$ with $w \mapsto w^{1/n}$.
+    \\[8pt]
+    Consider the behavior of $f$ on the boundary. $x$ travels from $-\infty$ to $0$ along the real line, and $f(x) = x^n$ travels from $\infty$ to $0$ along the real line.
+\end{example}
+\noindent We then went through more examples.
+\begin{exercise}
+    Let $S = \{x + iy \mid -\pi/2 < x < \pi/2\}$. Let $f(z) = e^{iz}$. \begin{parlist} \item Find $f(S)$ and verify that $f$ maps $S$ conformally to $f(S)$, and \item Try to investigate the behavior of $f$ on $\partial S$. \end{parlist}
+\end{exercise}
