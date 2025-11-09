@@ -1,0 +1,46 @@
+\section{Day 17: Automorphisms and Schwarz Lemma (Nov.\ 6, 2025)}
+A conformal map from an open set $\Omega$ to itself is called an automorphism of $\Omega$. In particular, we write $\Aut(\Omega)$ to denote the set of all automorphisms of $\Omega$; we may endow it with composition as a binary operation to obtain a group structure on $\Aut(\Omega)$.
+\medbreak
+\noindent Let $\Omega = \DD$. What are the elements of $\Aut (\DD)$? The identity on $\DD$ is one such example. We also have rotation by $\theta \in \RR$, where $R_\theta : \DD \to \DD$ with $z \mapsto e^{i\theta} z$ is another example. Finally, the Blaschke factors,
+\[ \psi_\alpha(z) = \frac{\alpha - z}{1 - \ol \alpha z}, \]
+for all $\alpha \in \DD$, are also automorphisms of $\DD$ (we proved this in the first homework).
+\begin{theorem}[\S 8.2.2]
+    Let $f \in \Aut(\DD)$. Then there exists $\theta \in \RR$ and $\alpha \in \DD$ such that
+    \[ f(z) = R_\theta \circ \psi_\alpha(z) = e^{i\theta} \frac{\alpha - z}{1 - \ol \alpha z} \]
+    for all $z \in \DD$.
+\end{theorem}
+\begin{lemma}[Schwarz Lemma, \S 8.2.1]
+    Let $f : \DD \to \DD$ be a holomorphic with $f(0) = 0$. Then
+    \begin{enumerate}[(i)]
+        \item $\abs{f(z)} \leq \abs{z}$ for all $z \in \DD$,
+        \item if $\abs{f(z_0)} = z_0$ for some $z_0 \in \DD \setminus \{0\}$, then $f$ is a rotation (meaning $f(z) = e^{i\theta} z$ for some $\theta \in \RR$, or alternatively written $f(z) = cz$ with $c \in \CC$, $\abs{c} = 1$),
+        \item if $\abs{f'(0)} = 1$, then $f$ is a rotation.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Let us express $f$ as a power series at $0$;
+    \[ f(z) = a_0 + a_1z + a_2z^2 + \dots; \]
+    since $f(0) = 0$, we have $a_0 = 0$, so
+    \[ \frac{f(z)}{z} = a_1 + a_2z + a_3z^2 + \dots \]
+    on $\DD \setminus \{0\}$, where $0$ is a removable singularity. Since $f(z)/z$ is holomorphic on $\DD$, for all $r \in (0, 1)$, we have
+    \[ \abs{\frac{f(z)}{z}} \leq \sup_{z \in \partial \ol{D_r(0)}} \abs{\frac{f(z)}{z}} \leq \frac{1}{r^2} \]
+    on each $\ol{D_r(0)}$, so by taking $r \to 1$, we get $\abs{f(z)} \leq \abs{z}$ for all $z \in \DD$ as desired. To prove (ii) and (iii), set
+    \[ g(z) = \frac{f(z)}{z} \]
+    on the punctured disc, and observe that it admits an analytic extension to $0$, where $g(0) = a_1 = f'(0)$. By part (1), $\abs{g(z)} \leq 1$ on $\DD \setminus \{0\}$, and by continuity, we also have $\abs{g(0)} \leq 1$ Thus, to prove (ii), assume $z_0 \in \DD \setminus \{0\}$ such that $\abs{f(z_0)} = \abs{z_0}$; then $\abs{g(z_0)} = 1$, and by the maximum principle, $g$ is a constant, i.e., $f(z) = cz$ for some $c \in \CC$ with $\abs{c} = 1$ for all $z \in \DD$. To prove (iii), we may simply assume $\abs{f'(0)} = 1$ to get $\abs{g(0)} = 1$.
+\end{proof}
+\noindent We now prove the theorem from earlier.
+\begin{proof}
+    Since $f$ is an automorphism, there exists a unique $\alpha \in \DD$ such that $f(\alpha) = 0$. Consider the automorphism $g = f \circ \psi_\alpha$ with $g(0) = f \circ \psi_\alpha(0) = f(\alpha) = 0$. Applying the Schwarz lemma to $g$, we have that $\abs{g(z)} \leq \abs{z}$ for all $z \in \DD$, for which $g \inv \in \Aut(\DD)$ with $g\inv(0) = 0$. Applying the Schwarz lemma to $g\inv$, we get $\abs{g\inv(w)} \leq \abs{w}$ for all $w \in \DD$, so $\abs{g(z)} = \abs{z}$ for all $z \in \DD$. Using the Schwarz lemma again, there exists $\theta \in \RR$ such that
+    \[ f \circ \psi_\alpha(z) = g(z) = e^{i\theta} z, \quad \forall z \in \DD, \]
+    so $f = f \circ \psi_\alpha \circ \psi_\alpha = e^{i\theta} \psi_\alpha(z)$.\footnote{ill fix up the intuition of this proof later. for now, check shakarchi!}
+\end{proof}
+\noindent We now discuss automorphisms of the upper half plane $\HH$. Recall that $\HH$ and $\DD$ are conformally equivalent, which we see from constructing $F : \HH \to \DD$ and $G : \DD \to \HH$, given by
+\[ F(z) = \frac{i-z}{i+z}, \quad G(w) = i \frac{1-w}{1+w}. \]
+These induce an isomorphism of automorphism groups $T : \Aut(\DD) \to \Aut(\HH)$, given by $f \mapsto F\inv \circ f \circ F$.
+\begin{theorem}[\S 8.2.4]
+    We have that $\Aut(\HH) \cong \SL_2(\RR) / \{M \sim -M \mid M \in \SL_2(\RR)\} \cong \SL_2(\RR) / \left<-I_2\right>$, where $\SL_2(\RR)$ is the group of $2 \times 2$ matrices with determinant $1$.\footnote{really, we're saying the automorphisms of $\HH$ are the projective special linear group}
+\end{theorem}
+\noindent We write down some definitions in preparation for next lecture. Let
+\[ f_m(z) = \frac{az + b}{cz + d}, \]
+which is meromorphic on $\CC$ with poles $-a/c$ if $c \neq 0$. $f_m$ is a holomorphic map on $\HH$, where $f_m(\HH) \subset \HH$, and
+\[ \Im\left(\frac{az + b}{cz + d}\right) = \frac{(ad - bc) \Im z}{\abs{cz + d}^2} = \frac{\Im z}{\abs{cz + d}^2} > 0. \]
