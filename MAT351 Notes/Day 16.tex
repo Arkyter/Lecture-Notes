@@ -1,0 +1,49 @@
+\section{Day 16: Boundary Value Problems with a view towards Fourier Series (Nov. 10, 2025)}
+We did separation of variables to find solutions to initial and boundary value problems for the heat, wave, and Schr\"odinger equation. Our boundary conditions can be
+\begin{enumerate}
+
+	\item Dirichlet, where \( u(x, 0) = u(\ell, 0) = 0 \)
+	\item Neumann, where \( u_{x}(0, t) = u_{x}( \ell, t) = 0 \)
+	\item Robin (we will skip---but he might give up problems on it).
+
+\end{enumerate}
+We also have initial conditions of \( u(x, 0) = \phi(x) \), where \( 0 \le x \le \ell \). We did Dirichlet boundary conditions last time, so let's do Neumann boundary conditions. In this case, we will consider the wave equation \( u_{tt} = c^{2} u_{x x} \).
+
+\begin{example}
+	Suppose \( u_{x}(0, t) = u_{x}(\ell, t) = 0 \). Now, let's look for a separable solution. \( u(x, t) = X(x)T(t) \). Plugging into our PDE yields
+	\[ \frac{X''(x)}{X(x)} = - \lambda, \qquad \frac{T''(t)}{c^{2} T(t)} = -\lambda, \]
+	where \( \lambda \) is a positive contant. Thus, 
+	\[ \tag{EP}\left\{\begin{NiceMatrix}-X'' = \lambda X & 0 < x < \ell \\ X'(0) = 0 = X'(\ell)\end{NiceMatrix}\right.  \]
+	If \( \lambda = \beta^{2} \), then the solution to this ODE (without the boundary conditions) is
+	\[ X(x) = A \cos(\beta x) + B \sin(\beta x),  \]
+	for some constants \( A, B  \). From here, differentiating yields
+	\[ \left\{\begin{NiceMatrix}X'(0) = \beta B \cos(0) - A \beta \sin(\beta 0) = 0 \\ X'(\ell) = \beta B \cos(\beta \ell) - A \beta \sin( \beta \ell) = 0,\end{NiceMatrix}\right.  \]
+	so therefore \( B = 0 \), so as long as \( A \ne 0 \), \( \beta \ell = n \pi \) for some \( n \in \mathbb{N} \). Thus, \( \beta = \frac{n \pi}{\ell} \). As usual, always think of \( X \) as an eigenvector, and \( \lambda \) as an eigenvalue. 
+
+	It follows that the eigenvalue problem (EP) has solutions 
+	\[ \lambda_{n} = \left( \frac{n \pi}{\ell} \right)^{2}, \qquad X_{n}(x) = \cos \left( \frac{n \pi}{\ell} x \right). \]
+
+	We will solve for \( T \) now. The eigenvalue problem for \( T \) is
+	\[ -T'' = \lambda c^{2} T, \]
+	and so solving gives 
+	\[ u(x, t) = \sum_{n \ge 1}  \cos \left( \frac{n \pi}{\ell}x \right) \left[  A_{n} \cos \left( \frac{n \pi c}{\ell} t \right) B_{n} \sin \left( \frac{n \pi c}{\ell}t \right) \right]. \]
+	But something is missing here. This is correct, but not fully complete. This is because we only considered \( \lambda > 0 \). This was justified for the Dirichlet boundary conditions, because the other cases of \( \lambda \) yielded no solutions. But let's ask if the same is the case here. When \( \lambda < 0 \), then we have \( X'' = a X \) for \( a > 0 \), but then it's impossible to satisfy our boundary conditions \( X'(0) = X'(\ell) = 0 \) (if \( X \) is nontrivial). On the other hand, if \( \lambda = 0 \), then a linear function satisfies \( X'' = 0 \). To make it satisfy our boundary conditions \( X'(0) = X'(\ell) = 0 \), we have to have \( X \) be constant. This yields an ode \( T'' = 0 \), which would give \( T(t) \) is linear. Thus, our general solution would be
+	\[ u(x, t) = \left( \sum_{n \ge 1}  \cos \left( \frac{n \pi}{\ell}x \right) \left[  A_{n} \cos \left( \frac{n \pi c}{\ell} t \right) B_{n} \sin \left( \frac{n \pi c}{\ell}t \right) \right] \right) + A_{0} + B_{0} t. \]
+\end{example}
+
+\begin{example}[Mixed Boundary Conditions]
+	The mixed boundary conditions are 
+	\[ X(0) = 0 = X'( \ell). \]
+	These are distinct from Robin boundary conditions, which are \( a u(0, t) + b u_{x}(0, t) = 0 \). For Schr\"odinger, Heat, and Wave, you always end up with the same ODE for \( X \), so you should know the general solution.
+	\[ \left\{\begin{NiceMatrix}-X''(x) = \lambda X(x) \\ X(0) = 0 = X'(\ell).\end{NiceMatrix}\right.  \]
+	But then this is solved by (assuming \( \lambda = \beta^{2} \))
+	\[ X(x) = A\cos(\beta x) + B \sin( \beta x). \]
+	Now, this implies that \( A = 0 \), and so if \( X'(\ell) = 0 \), this implies
+	\[ 0 = X'(\ell) = B \beta \cos(\beta \ell), \]
+	so assuming \( B \ne 0 \), we have \( \beta \ell = n + \frac{\pi}{2} \) for some \( n \in \mathbb{N} \). Thus,
+	\[ X(x) = B \sin \left(  \left( n + \frac{1}{2} \right) \frac{\pi}{\ell} x \right). \]
+	Robin is a bit harder he claims.
+\end{example}
+This will have to be done on the midterm, in the problems, etc.
+
+We saw that we can solve Heat/Wave/Schr\"odinger equations by separating variables and solving the Eigenvalue problem, and we arrive at the solution \( u \) as a series of \( \sin(\beta_{n} x) \) and/or \( \cos(\beta_{n} x) \) times \( T_{n} \). But we still haven't solved the IVP part (\( u(x, 0) = \phi(x) \)). We will do this next time.
