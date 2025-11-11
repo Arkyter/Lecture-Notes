@@ -7,7 +7,7 @@
     Fix $z_0 \in \Omega$, and define $g : \Omega \to \CC$ by
     \[ g(z) = \int_{\gamma_z} \frac{f'(w)}{f(w)} \, dw + c_0, \]
     where $\gamma_z$ is a path from $z_0$ to $z$, and $c_0$ is a complex number picked such that $e^{c_0} = f(z_0)$. Since $\Omega$ is simply connected, any two paths sharing the same endpoints are homotopic, so we see that the definition of $g(z)$ is independent of our choice of $\gamma_z$. Since we know $g$ is holomorphic as seen previously, we get that $g'(z) = f'(z)/f(z)$, so
-    \[ \frac{d}{dt} \left(f(z) e^{-g(z)}\right) = f(z) e^{-g(z)} + f(z) e^{-g(z)} (-g'(z)) = 0, \]
+    \[ \frac{d}{dt} \left(f(z) e^{-g(z)}\right) = f'(z) e^{-g(z)} + f(z) e^{-g(z)} (-g'(z)) = 0, \]
     i.e., $f(z) e^{-g(z)}$ is constant. This means $f(z) e^{-g(z)} = f(z_0) e^{-g(z_0)} = f(z_0) e^{-c_0} = 1$.
 \end{proof}
 \noindent We now move onto conformal maps (this is section 8 in Shakarchi).
