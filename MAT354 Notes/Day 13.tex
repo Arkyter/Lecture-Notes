@@ -24,13 +24,13 @@ Recall the theorem from last class,
 given by? In the real setting, we have that the integrand is equal to $(\log \circ f(x))'$ by the chain rule; but this does not hold for complex. In fact, we claim that the integral is equal to the $2\pi i$ multiplied by the number of zeroes of $f$ in $C$, subtracted by the number of poles of $f$ in $C$.\footnote{\S 3.4.1} Next time, we will study $\log z$ in further detail. We now show that the above claim is true (while counting with order and multiplicity).
 \begin{proof}
     Let $z_1, \dots, z_n$ be the zeroes of $f$ in $C$ and let $w_1, \dots, w_m$ be the poles of $f$ in $C$. Take keyholes around all of those points; we have that
-    \[ \int_C \frac{f'(z)}{f(z)} \, dz = \sum_{j=1}^N \int_{-C_{j,\eps}} \frac{f'(z)}{f(z)} \, dz + \sum_{k=1}^m \int_{-C_{k,\eps}} \frac{f'(z)}{f(z)} \, dz. \]
-    Since $z_j$ is a zero, we may find an open disc $D_r(z_j)$, a holomorphic non-vanishing $g_j$ on $D_r(z_j)$, and a unique $n \in \NN$ such that
+    \[ \int_C \frac{f'(z)}{f(z)} \, dz = \sum_{j=1}^n \int_{-C_{j,\eps}} \frac{f'(z)}{f(z)} \, dz + \sum_{k=1}^m \int_{-C_{k,\eps}} \frac{f'(z)}{f(z)} \, dz. \]
+    Since $z_j$ is a zero, we may find an open disc $D_r(z_j)$, a holomorphic non-vanishing $g_j$ on $D_r(z_j)$, and a unique $n_j \in \NN$ such that
     \begin{align*}
         f(z) &= (z - z_j)^{n_j} g_j(z), \\
-        f'(z) &= n_j (z - z_j)^{n_j - 1} g_j(z) + (z - z_j)^n g_j'(z),
+        f'(z) &= n_j (z - z_j)^{n_j - 1} g_j(z) + (z - z_j)^{n_j} g_j'(z),
     \end{align*}
     for all $z \in D_r(z_j)$. Thus, we have
-    \[ \int_{-C_{z_j,\eps}} \frac{f'(z)}{f(z)} \, dz = \int_{-C_{z_j, \eps}} \frac{n_j}{z - z_j} + \int_{-C_{z_j,\eps}} \frac{g_j'(z)}{g_j(z)} = 2\pi n j \]
-    by the residue formula, since we may observe the latter integrand is holomorphic. For $w_k$, we have that $f(z) = (z - w_k)^{-n_k} h_k(z)$, and $f'(z) = -n_k(z - w_k)^{-n_k - 1} h_k(z) + (z - w_k)^{-n_k} h_k'(z)$, so from the above, we obtain that their integrals are simply $-2\pi n k$, and so this yields our sum as desired.
+    \[ \int_{-C_{z_j,\eps}} \frac{f'(z)}{f(z)} \, dz = \int_{-C_{z_j, \eps}} \frac{n_j}{z - z_j} + \int_{-C_{z_j,\eps}} \frac{g_j'(z)}{g_j(z)} = 2\pi n_j \]
+    by the residue formula, since we may observe the latter integrand is holomorphic. For $w_k$, we have that $f(z) = (z - w_k)^{-n_k} h_k(z)$, and $f'(z) = -n_k(z - w_k)^{-n_k - 1} h_k(z) + (z - w_k)^{-n_k} h_k'(z)$, so from the above, we obtain that their integrals are simply $-2\pi n_k$, and so this yields our sum as desired.
 \end{proof}
