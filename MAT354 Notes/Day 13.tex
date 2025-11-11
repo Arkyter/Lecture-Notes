@@ -32,5 +32,5 @@ given by? In the real setting, we have that the integrand is equal to $(\log \ci
     \end{align*}
     for all $z \in D_r(z_j)$. Thus, we have
     \[ \int_{-C_{z_j,\eps}} \frac{f'(z)}{f(z)} \, dz = \int_{-C_{z_j, \eps}} \frac{n_j}{z - z_j} + \int_{-C_{z_j,\eps}} \frac{g_j'(z)}{g_j(z)} = 2\pi n_j \]
-    by the residue formula, since we may observe the latter integrand is holomorphic. For $w_k$, we have that $f(z) = (z - w_k)^{-n_k} h_k(z)$, and $f'(z) = -n_k(z - w_k)^{-n_k - 1} h_k(z) + (z - w_k)^{-n_k} h_k'(z)$, so from the above, we obtain that their integrals are simply $-2\pi n_k$, and so this yields our sum as desired.
+    by the residue formula, since we may observe the latter integrand is holomorphic (as $g \neq 0$ in the interior of the circle). For $w_k$, we have that $f(z) = (z - w_k)^{-n_k} h_k(z)$, and $f'(z) = -n_k(z - w_k)^{-n_k - 1} h_k(z) + (z - w_k)^{-n_k} h_k'(z)$, so from the above, we obtain that their integrals are simply $-2\pi n_k$, and so this yields our sum as desired.
 \end{proof}
