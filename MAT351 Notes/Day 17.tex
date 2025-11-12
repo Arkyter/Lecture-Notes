@@ -1,0 +1,81 @@
+\section{Day 17: Fourier Series (Nov. 12, 2025)}
+Before we've solved our 1+1 dimensional wave, heat, and Schr\"odinger boundary value problems by writing our solutions as a series of \( \sin \), \( \cos \), and so on. For example,
+\[ \left\{\begin{NiceMatrix}u_{t} = ku_{x x} \\ \text{boundary conditions at \( x = 0 \) and \( x = \ell \)}\end{NiceMatrix}\right.  \]
+is solved by
+\[ u(x, t) = \sum_{n \ge 0} e^{-\lambda_{m} k t} \left[ A_{n} \cos \left( \sqrt{\lambda_{n}} x \right) + B_{n} \sin \left( \sqrt{\lambda_{n}} x \right) \right], \]
+where \( \lambda_{n} \) is such that \( - X'' = \lambda_{n} X \) has nontrivial solutions which satisfy our boundary conditions.\footnote{Depending on our boundary conditions, we might be able to solve \( X'' = \lambda_{n} X \) with \( \lambda_{n} > 0 \).}
+
+Now, we will focus on the initial value problem. Let's forget about the PDE for now, and just consider how to solve the initial value problem
+\[ u(x, 0) = \sum_{n \ge 0} \left[ A_{n} \cos \left( \sqrt{\lambda_{n}}x)  \right)+ B_{n}\sin \left( \sqrt{\lambda_{n} x} \right) \right],  \]
+for a given sequence of \( \lambda_{n} \). We will look at a theoretical/general approach to the series using real and also functional analysis.
+
+The sine seies (dirichlet boundary conditions gave us this) is
+\[ \sum_{n \ge 1} A_{n} \sin \left( \frac{\pi n}{\ell} x \right) = \phi(x). \]
+If this is true, what should our \( A_{n} \) be? Well multiply both sides by \( \sin \left( \frac{\pi m}{\ell} x \right) \) and integrate from \( 0 \) to \( \ell \).
+\[ \int_{0}^{\ell} \phi(x) \sin \left( \frac{m \pi}{\ell} x \right) dx = \sum_{n \ge 1}  A_{n} \int_{0}^{\ell} \sin \left( \frac{n \pi}{\ell}x \right) \sin \left( \frac{m \pi}{\ell} x \right). \]
+Our claim is that
+\[ \int_{0}^{\ell} \sin \left( \frac{n \pi}{\ell} x \right) \sin \left( \frac{m \pi}{\ell} x \right) dx = \frac{\ell}{2} \delta_{n m}. \]
+This can be proven by showing that
+\[ 2 \sin(x) \sin(y) = \cos(x-y) - \cos(x+y), \]
+so integrating this will yield \( 0 \) since it is periodic and even. You can prove this using the polarization identity for \( \sin \) and \( \cos \).
+Since
+\begin{align*}
+	\int_{0}^{\ell} \phi(x) \sin \left( \frac{m \pi}{\ell} x \right) dx &= \sum_{n \ge 1}  A_{n} \int_{0}^{\ell} \sin \left( \frac{n \pi}{\ell}x \right) \sin \left( \frac{m \pi}{\ell} x \right)dx \\
+																																			&= \sum_{n \ge 1} A_{n} \delta_{n, m} \cdot \frac{\ell}{2} \\
+																																			&= A_{m} \frac{\ell}{2}.
+\end{align*}
+It follows that
+\[ A_{m} = \frac{2}{\ell}\int_{0}^{\ell} \phi(x) \sin \left( \frac{m \pi}{\ell} x \right) dx, \]
+so we have found our coefficients \( A_{n} \). We can do the same this with cosine using a similar product identity. If
+\[ \phi(x) = \sum_{n \ge 0} B_{m} \cos\left(\frac{n \pi}{\ell}x\right), \]
+then by almost the exact same argument,
+\[ B_{m} = \frac{2}{\ell} \int_{0}^{\ell} \cos \left( \frac{m \pi}{\ell} x \right) \phi(x) dx. \]
+
+
+\begin{example}
+	Suppose that \( \phi(x) \equiv 1 \). Then
+	\[ A_{n} = \frac{2}{\ell} \sin \left( \frac{n \pi}{\ell}x dx \right) = \frac{2}{\ell} \left[ - \cos \left( \frac{n \pi}{\ell} x \right) \frac{\ell}{n \pi} \right]_{0}^{\ell} = \frac{2}{n \pi} \left( 1 - \cos(n \pi) \right). \]
+	Thus,
+	\[ 1 = \sum_{\text{\( n \) odd}}  \frac{4}{\pi n} \sin \left( \frac{\pi n}{\ell} x \right) = \sum_{n \ge 0}  \frac{4}{\pi (2n + 1)} \sin \left( \frac{\pi (2n+1)}{\ell} x \right). \]
+\end{example}
+	In the problem set we use Fourier series methods to solve some interesting questions in number theory, such as the Basel problem. 
+
+\begin{example}
+	Set \( \phi(x) = x \). Then we want to find the sine series for \( \phi \). This is just
+	\begin{align*}
+		A_{n} &= \frac{2}{\ell} \int_{0}^{\ell} \sin \left( \frac{n \pi}{\ell}x \right) x dx \\
+		&= \frac{2}{n \pi} \left[ - \cos \left( \frac{n \pi}{\ell} x \right) \cdot x \right]_{0}^{\ell} + \frac{2}{n \pi} \int_{0}^{\ell} \cos \left( \frac{n \pi}{dx} x \right) dx\\
+		&= \frac{2}{n \pi} \left[ - \cos \left( n \pi \right)\ell \right] + \frac{2}{n \pi} \left[ \sin \left( n \pi \right) \cdot \frac{\ell}{n \pi} \right] \\
+		&= \frac{- 2 \ell}{n \pi} \cos(n \pi) + \frac{2}{n \pi} \cdot \frac{\ell}{n \pi} \sin(n \pi) \\
+		&= \left\{\begin{NiceMatrix}\frac{- 2 \ell}{n \pi} & \text{\( n \) even} \\
+		\frac{2 \ell}{n \pi} & \text{\( n \) odd}.\end{NiceMatrix}\right. \\
+		&= (-1)^{n+1} \frac{2 \ell}{n \pi}
+	\end{align*}
+	So the sine series is \( A_{n} = \frac{\left( -1 \right)^{n+1}2 \ell}{n \pi} \), and the cosine series is \( \frac{-4 \ell}{n^{2} \pi^{2}} \), when \( n \) is odd, and \( 0 \) otherwise. This second one you have to verify for yourself, but it's a similar calculation.
+\end{example}
+
+Suppose that we are given a \( \phi(x) \) on \( [- \ell, \ell] \). Then we will express it as the full series
+	\[ \phi(x) = \frac{A_{0}}{2} + \sum_{n \ge 1} A_{n}  \cos \left( \frac{\pi n}{\ell} x \right) + B_{n}\sin \left( \frac{\pi n}{\ell} x \right). \]
+	To find \( A_{m} \) and \( B_{m} \), we apply the same trick, integrating against \( \cos \left( \frac{m \pi}{\ell} x \right) \) and \( \sin \left( \frac{m \pi}{\ell} x \right) \) on \( - \ell < x < \ell \). With the previous claims plus
+	\[ \int_{- \ell}^{\ell} \sin \left( \frac{\pi a x}{\ell} \right) \cos \left( \frac{\pi b x}{\ell} \right) dx = 0, \]
+	for all \( a, b \in \mathbb{Z} \). This leads us to a general formula for our coefficients that
+	\[ \phi(x) = \frac{A_{0}}{2} + \sum_{n \ge 1}  A_{n} \cos \left( \frac{\pi n x}{\ell} \right) + B_{n} \sin \left( \frac{\pi n x}{\ell} \right), \]
+	where
+	\begin{align*}
+		A_{n} &= \frac{1}{\ell} \int_{- \ell}^{\ell}  \cos \left(  \frac{n \pi x}{\ell} \right) \phi(x) dx, \\
+		B_{n} &= \frac{1}{\ell} \int_{- \ell}^{\ell}  \sin \left(  \frac{n \pi x}{\ell} \right) \phi(x) dx.
+	\end{align*}
+
+\begin{example}
+	Consider \( \phi(x) = x \) on the interval \( [-\ell, \ell] \) rather than \( [0, \ell] \). Then we need the full Fourier series. Then
+	\[ x = \frac{A_{0}}{2} + \sum_{n \ge 1} A_{n} \cos \left( \frac{\pi n}{\ell} x \right) + \sum_{n \ge 1} B_{n} \sin \left( \frac{\pi n}{\ell} x \right). \]
+	But \( \phi \) is odd, so all of the \( A_{n} \) cancel out, including \( \frac{A_{0}}{2} \). Now, since \( \phi \) is odd and \( \sin \) is odd, we have that their product is even, so
+	\[ \int_{- \ell}^{\ell}  \sin \left( \frac{n \pi x}{\ell} \right) \phi(x) dx = 2 \int_{0}^{\ell} \sin \left( \frac{n \pi x}{\ell} \phi(x) \right) dx. \]
+	But since our formula for \( B_{n} \) in the full Fourier series differs by a factor of 2  from our \( B_{n} \) in the Sine series, we have that the coefficients of \( \phi(x) = x \) on \( [0, \ell] \) is the same as the coefficients of \( \phi(x) = x \) on \( [- \ell, \ell] \). In other words,
+	\[ B_{n} = (-1)^{n + 1} \frac{2 \ell}{n \pi}. \]
+	Another way to think about it is graphically, where since \( \phi \) is odd and our sine series is odd, keeping our coefficients the same will yield \( \phi \) on our full interval.
+\end{example}
+
+I just remembered that the subsection command exists, so expect the notes to henceforth be a bit more organized.
+
+He talked a bit about extending \( \phi \) using even, odd, and periodic extensions. 
