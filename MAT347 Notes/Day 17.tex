@@ -1,2 +1,45 @@
-\section{Day 17: (Nov.\ 5, 2025)}
-hi, notes will be late. studyin for complex rn!
+\section{Day 17: Semidirect Products, Pt.\ 3 (Nov.\ 5, 2025)}
+Recall the semidirect product definition from last class. Let $G$ be a group of order $12$, where $\abs{G} = 12 = 2^2 \cdot 3$, and pick $P_2, P_3 \in G$ to be Sylow-$p$ subgroups; we see that $P_3 \cong \ZZ/3$ and $\abs{P_2} = 4$, so $P_2$ is either isomorphic to $\ZZ/4$ or $\ZZ/2 \times \ZZ/2$.
+\medbreak
+\noindent As a quick proof, observe that $e \neq a \in P_2$ is either of order $2$ or $4$; if $\abs{a} = 4$, then $P_2 \cong \ZZ/4$; if all elements are of order two, though, then all elements square to $e$, and so the multiplication is forced to be that of $V_4 \cong \ZZ/2 \times \ZZ/2$. We will see later that $\abs{G} = p^2$ is forced to be either $G \cong \ZZ/p^2$ or $\ZZ/p \times \ZZ/p$.
+\medbreak
+\noindent Assume neither is normal; then $n_3(G) = 4$ gives $(3 - 1) \cdot 4 = 8$ elements of order $3$. $n_2(G) = 3$, so by the same argument, there are at least $7$ elements of order $2$, which is too many elements, meaning either $P_2$ or $P_3$ must be normal.\footnote{i may be counting order two elements incorrectly.. the point being that maybe the Sylow-2 subgroups may intersect, so $3+2+2=7$. read \href{https://kconrad.math.uconn.edu/blurbs/grouptheory/group12.pdf}{here}} We may now consider a semidirect product.
+\begin{enumerate}[(i)]
+    \item For the first case, suppose $P_2 = \ZZ/2 \times \ZZ/2$. We have two subcases to consider first. If $P_2, P_3 \lhd G$, we have that $G = P_2 \times P_3 \cong \ZZ/2 \times \ZZ/2 \times \ZZ/3 \cong \ZZ/2 \times \ZZ/6$. If $P_3 \lhd G$, then $G = \ZZ_3 \rtimes_\phi (\ZZ/2 \times \ZZ/2)$, where any such automorphism is either the identity, or switches $1$ and $2$. This means $\phi : \ZZ/2 \times \ZZ/2 \to \{\pm\}$ has three choices, and is ``essentially'' $\phi : \{\pm\} \times \{\pm\} \to \{\pm\}$. In any case, we get the group $(\ZZ/3 \rtimes_{-1} \ZZ/2) \times \ZZ/2 \cong D_6 \times \ZZ/2$, where $\ZZ/3, \ZZ/2$ in the former are regarded as rotation and reflection.
+    \\[8pt]
+    One such example of this multiplication is $\ZZ/3 \rtimes_{(-1)} \ZZ/2$, where $\ZZ/3 = \{1, r, r^2\}$ and $\ZZ/2 = \{1, s\}$; we have that the group multiplication is given by $r_1 s_1 \cdot r_2 s_2 = r_1 r_2\inv \cdot s_1 s_2$, where $s_1 = 1$ and $s_2 = s$ denotes `+' and `--' respectively. This is clearly the rule given in the definition of $D_n = \left<r, s \mid r^n = s^2 = 1, rs = sr\inv\right>$.
+    \\[8pt]
+    For the third subcase, we have that $G = (\ZZ/2 \times \ZZ/2) \rtimes \ZZ/3$, where the sets are $\{e, a_1, a_2, a_3\}$ and $\{0, 1, 2\}$ respectively, where $\ZZ/3$ acts as a cyclic permutation of $a_1, a_2, a_3$. We let $\phi_b(a_i) = a_{i + b \mod 3}$ for $b \in \{0, 1, 2\}$.
+    \begin{claim}
+        $G \cong A_4 = \{e, (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)\} \rtimes \left<(4 3 2)\right>$.
+    \end{claim}
+    \noindent This is immediate from checking conjugation by $(4 3 2)\inv$ is the action above, and hence shows the claim.
+    \item For the second case, consider $P_2 \cong \ZZ/4$; for the first subcase, we have that $G = P_2 \times P_3 \cong \ZZ/4 \times \ZZ/3 \cong \ZZ/12$; for the second subcase, let $G = \ZZ/3 \rtimes_\phi \ZZ/4$, where $\phi : \ZZ/4 \to \Aut(\ZZ/3) = \ZZ/2$. The only such $\phi$ maps $\{0, 2\}$ to $0$ and $\{1, 3\}$ to $1$, and there is no better name for this group. For the third subcase, consider $G = \ZZ/4 \rtimes_\phi \ZZ/3$, where $\Aut(\ZZ/4) \cong \ZZ/2$. We have that $\phi : \ZZ/3 \to \ZZ/2$ is the identity, meaning the semidirect product in this case really is the direct product, which doesn't exist.
+\end{enumerate}
+Thus, we establish that there are $5$ groups of order $12$. Specifically, they are $\{\ZZ/12, \ZZ/6 \times \ZZ/2, D_6 \times \ZZ/2, A_4, \ZZ/3 \rtimes_\phi \ZZ/4\}$.
+\medbreak
+\noindent We now begin an informal discussion of braid groups, but we discuss free groups and fundamental groups $\pi$ first.
+\begin{definition}
+    A free group $F_n = \left<x_1, \dots, x_n\right>$ is the set of all ``words'' of $x_i$'s and $x_i\inv$'s of finite length. We sasume that $x_i x_i\inv = x_i\inv x_i = ()$ is an empty word.
+\end{definition}
+\noindent This is a group under concatenation of words as multiplication. As an example, $(bar)(natan) = barnatan$ in the English alphabet. Naturally, $\id$ is the empty word. Showing multiplication is associative is annoying and uninteresting.
+\medbreak
+\noindent Those who have taken a Dror 327 will know that the picture of $F_2 = \left<a, b\right>$ is the Mexican cross. Elements of $F_2$ are thus walks along said Mexican cross.
+\begin{definition}
+    A fundamental group $\pi_1(X, x_0)$ is just the set of all paths or walks in a space such that each path cannot be deformed to any other in the set. In other words, $\{[\gamma] \mid \gamma : [0, 1] \to X, \gamma(0) = \gamma(1) = x_0\}$, with the equivalence classes given by homotopy.
+\end{definition}
+\noindent For a donut $\pi_1(\TT) = \ZZ \times \ZZ$, which we see from just counting the number of times we go around the holes and the number of times we go through the hole. For an annulus, we have that its fundamental group is $\ZZ$.
+\medbreak
+\noindent What is $\pi_1(\DD \setminus \{a_1, a_2, a_3\})$, where $a_1, a_2, a_3 \in \DD$ are isolated points? We see that we can loop around any of the $a_i$'s or clockwise or counterclockwise, so $\pi_1(\DD \setminus \{a_1, a_2, a_3\}) = F_3$, where unlike the torus, order matters, so we actually get the free group instead of just $\ZZ^3$. We may now discuss the braid groups.
+\medbreak
+\noindent The braid group $\PB_3$ is a group on vertical connections;\footnote{please, just read about it \href{https://en.wikipedia.org/wiki/Braid_group}{here}.} it is a given by the set of crossinsg on $3$ braids, for which to get an inverse, we simply flip all crossings. Let $\SP : \PB_n \to \PB_{n-1}$ be the function deleting the last strand. We can think of $\PB_{n-1} < \PB_n$, where the last strand is straight with no crossings with the first $n-1$ strands. What is $N = \ker \SP$? The set of braids that are only ``tangled'' by strand $n$; if we count passing under a strand to the left as $i$ and under the strand $i$ to the right as $i\inv$, we see that $\ker P = F_{n-1}$. We now have $F_{n-1} = N \lhd \PB_n > \PB_{n-1} = H$.
+\begin{claim}
+    $H \cap N = \{e\}$ and $G = N \cdot H$.
+\end{claim}
+\begin{proof}
+    The former is easy; since we count crossing of $n$ in $N$, and there are no crossings of $n$ in $H$, $N \cap H$ is simply the empty word, i.e., $\{e\}$.
+    \\[8pt]
+    If we push the $n$th strand to the bottom of the braid, we see that this revelas an element of $H$, and a crossing of $n$, or an element of $N$. Thus, $G = NH$ implies $\PB_n \cong F_{n-1} \rtimes \PB_{n-1}$. By recursion, we have that
+    \[ F_{n-1} \rtimes \PB_{n-1} \cong F_{n-1} \rtimes (F_{n-2} \rtimes (F_{n-3} \rtimes (\dots (F_1)))), \]
+    where $F_1 = \ZZ$. In knot theory, ``braids are easy'', as they are just semidirect products of words, and we just pick conjugation to be the action.
+\end{proof}
