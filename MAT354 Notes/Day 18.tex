@@ -1,0 +1,43 @@
+\section{Day 18: Automorphisms of the Upper Half Plane (Nov.\ 13, 2025)}
+Let $M \in \SL_2(\RR)$, and define a meromorphic function on $\CC$ by
+\[ M = \begin{pmatrix} a & b \\ c & d \end{pmatrix}, \quad f_M(z) = \frac{az + b}{cz + d}. \]
+We call $f_M$ a M\"obius transformation. Last time, we proved that $f_M \in \Aut(\HH)$.
+\begin{theorem}[\S 8.2.4]
+    Any automorphism of $\HH$ is of the form $f_M$ for $M \in \SL_2(\RR)$.
+\end{theorem}
+\begin{proof}
+    For the first step,\footnote{note that we're starting from step three in shakarchi} pick any $z, w \in \HH$. We want to find $M \in \SL_2(\RR)$ such that $f_M(z) = w$. We can assume $w = i$; suppose such a matrix $M$ exists; then we would have that
+    \[ \Im f_M(z) = \Im \left(\frac{az + b}{cz + d}\right) = \frac{\Im z}{\abs{cz + d}^2} = \frac{\Im z}{\abs{cz}^2} = 1, \]
+    which we do by choosing $d = 0$ and $c \in \RR$ such that the above works. Pick $M_1 \in \SL_2(\RR)$ given by
+    \[ M_1 = \begin{pmatrix} 0 & -c\inv \\ c & 0 \end{pmatrix}; \]
+    we have that
+    \[ f_{M_1}(z) = \frac{-c\inv}{cz} = \frac{-\ol z}{c^2 \abs{z}^2} = -\frac{\Re z}{c^2 \abs{z}^2} + i \frac{\Im z}{c^2 \abs{z}^2}, \]
+    so $\Im f_{M_1}(z) = 1$. Now, pick $M_2$ with its associated $f_{M_2}$ by
+    \[ M_2 = \begin{pmatrix} 1 & -\Re z / c \abs{z}^2 \\ 0 & 1 \end{pmatrix} \in \SL_2(\RR), \quad f_{M_2}(w) = w - \frac{\Re z}{c \abs{z}^2} \]
+    for all $w \in \HH$. In this manner, we obtain $(f_{M_2} \circ f_{M_1})(z) = i$, so we conclude that $f_{M_2 M_1}(z) = i$. Recall that the Schwarz lemma states that any rotation of $\DD$ that fixes $0$ is an automorphism. Pick $F : \HH \to \DD$ to be the canonical conformal map, and take
+    \[ M_\theta = \begin{pmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \in \SL_2(\RR) \]
+    to be a rotation matrix by $\theta$. We have that
+    \[ \begin{tikzcd}
+        \HH \arrow[rr, "f_{M_\theta}"] \arrow[d, "F"] & & \HH \arrow[d, "F"] \\
+        \DD \arrow[rr, "F \circ f_{M_\theta} \circ F\inv"] & & \DD
+    \end{tikzcd} \]
+    indeed yields an automorphism of the disc. We leave it as an exercise that $F \circ f_M \circ F\inv(z) = e^{-2i\theta} F(z)$ for all $z \in \DD$.
+    \\[8pt]
+    For the last step, let $f \in \Aut(\HH)$. There exists a unique $z_0 \in \HH$ such that $f(z_0) = i$, so by the first step, there exists $M \in \SL_2(\RR)$ such that $f_M(i) = z_0$. Then $f \circ f_M \in \Aut(\HH)$ with $f \circ f_M(i) = i$. Then $F \circ f \circ f_M \circ F\inv \in \Aut(\DD)$ with $F \circ f \circ f_M \circ F\inv(0) = 0$. By a corollary of the Schwarz lemma, we obtain that $F \circ f \circ f_M \circ F\inv$ is a reflection, and from step two, we have that there exists $M_\theta$ such that $F \circ f \circ f_M \circ F\inv = F \circ f_{M_\theta} \circ F\inv$, so $f = f_{M_\theta} \circ f_M\inv = f_{M_\theta M\inv}$.
+\end{proof}
+\noindent Having proved the homomorphism of the groups $\Phi : \SL_2(\RR) \to \Aut(\HH)$ by $M \mapsto f_M$ is surjective. Observing that $\ker \Phi = \{\pm I\}$, we see that $\PSL_2(\RR) = \SL_2(\RR) / \ker \Phi$.
+\begin{theorem}[Riemann mapping theorem \S 8.3.1]
+    Let $\Omega$ be a proper, simply connected open set. For any $z_0 \in \Omega$, there exists a unique conformal map $F : \Omega \to \DD$ such that $F(z_0) = 0$, $F'(z_0) > 0$.
+\end{theorem}
+\begin{theorem}[Montel's theorem \S 8.3.2]
+    Let $\Omega$ be an open set in $\CC$, and let $\SF$ be a family of holomorphic functions on $\Omega$.
+    \begin{enumerate}[(i)]
+        \item (\textit{Convergence}) $\SF$ is said to be \textit{normal} if, for any sequence $\{f_n\}$ in $\SF$, there exists a subsequence of $\{f_n\}$ such that this subsequence converges uniformly on every compact subset of $\Omega$. The limit does not need to be in $\SF$.
+        \item (\textit{(Boundedness}) $\SF$ is said to be uniformly bounded on every compact subset of $\Omega$ if for each compact subset $K$, there exists $M = M(K)$ such that $\abs{f(z)} \leq M$ for all $f \in \SF$ and $z \in K$.
+        \item (\textit{Continuity}) $\SF$ is said to be equicontinuous on a compact subset $K \subset \Omega$ if, for all $\eps > 0$, there exists $\delta > 0$ such that, for all $z, w \in K$, we have that $\abs{z - w} < \delta$ implies $\abs{f(z) - f(w)} < \eps$ for all $f \in \SF$.
+    \end{enumerate}
+    Montel's theorem states that uniform boundedness implies equicontinuity and normality.
+\end{theorem}
+\begin{lemma}
+    Any open set $\Omega$ in $\CC$ has an exhaustion, i.e., a sequence of compact subsets of $\Omega$, say $\{K_\ell\}_{\ell = 1}^\infty$, such that $K_\ell \subset K_{\ell + 1}$ for all $\ell \in \NN$ and any compact subset $K \subset \Omega$ is contained in some $K_\ell$. In particular, we may pick $K_\ell = \{z \in \Omega \mid \abs{z} \leq \ell, d(z, \partial \Omega) \leq \ell\inv\}$.
+\end{lemma}
