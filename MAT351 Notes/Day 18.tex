@@ -23,11 +23,11 @@ Fiven two functions \( f, g \) on \( [a, b] \), define an inner product for func
 [He did indeed use the round parentheses here. Come on Fabio.] If we are using Complex Valued functions, we should use the conjugate on the second function to make it a Hermitian inner product. Refer back to 247. We say \( f \perp g \) if \( \left( f, g \right) = 0 \). Refer back to 247.
 
 \begin{question}
-	What kind of functions are \( f \) and \( g \)? If \( f \) and \( g \) are continuous, then this will be an inner product, but if we just require integrable, then we might have that there exists \( f \ne 0 \) but \( (f, f) = 0  \), which would contradict our inner product axioms. 
+	What kind of functions are \( f \) and \( g \)? If \( f \) and \( g \) are continuous, then this will be an inner product, but if we just require integrable, then we might have that there exists \( f \ne 0 \) but \( (f, f) = 0  \), which would contradict our inner product axioms. [This means that as it stands, \( \left( f, f \right) \) is a pre-inner product (which is defined as you'd guess)].
 
 	An example of such a function is the indicator function on a singleton. But for the sake of our theory, instead of worrying about this, we will think of functions as being parts of equivalence classes, where
 	\[ f \sim g \iff \left( f - g, f - g \right) = 0. \]
-	This turns out to be equivalent to \( ||f - g||_{L^{2}} = 0 \), which is fun. [Fabio defined it in class as \( f - g \) differing only on a set with measure zero, but I like this definition more because it is more direct in my humble opinion].
+	This turns out to be equivalent to \( ||f - g||_{L^{2}} = 0 \), which is fun. After modding out by the self-orthogonal vectors, we have that \( (\cdot, \cdot) \) is an inner product. Fabio defined it in class as \( f \) and \( g \) differing only on a set with measure zero, but I like this definition more because it is more direct in my humble opinion. 
 \end{question}
 
 \begin{definition}
