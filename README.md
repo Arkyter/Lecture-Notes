@@ -7,10 +7,8 @@ Current list of classes:
 - MAT347 (Algebra)
 - MAT351 (Partial Differential Equations) -- maintained by [@evlasics](https://github.com/evlasics)
 - MAT354 (Complex Analysis)
-- MAT436 (Linear Operators)
 
 Audit list (notes may be kept, but sparsely):
-- MAT417 (Analytic NT)
 - None this semester (so far) :3c
 
 **Archived classes!**
@@ -26,6 +24,10 @@ Audit list (notes may be kept, but sparsely):
 - MAT257 (Analysis II) - complete set done.
 - MAT267 (Advanced ODEs) - yea no. i can't read anything on the board sorry
 - APM461 (Combinatorial Methods) - ankle fracture so i can't commute to this class unfortunately
+
+> Fall 2026
+- MAT417 (Analytic NT) - stopped going
+- MAT436 (Linear Operators) - nothing that really can be written from class...
 
 
 **Todo List**:
