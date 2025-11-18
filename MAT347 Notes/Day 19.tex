@@ -15,7 +15,7 @@
     Verifying that this is indeed a well-defined bijection is left as homework.
 \end{proof}
 \begin{proposition}
-    If $A' = PAQ$, where $P \in M_{G \times G}(\ZZ)$ is invertible, $Q \in M_{X \times X}(\ZZ)$ is invertible (whose columns have finite support and finite inverses), then $M_A = M_{A'}$, i.e.,
+    If $A' = PAQ$, where $P \in M_{G \times G}(\ZZ)$ is invertible, $Q \in M_{X \times X}(\ZZ)$ is invertible (whose columns have finite support and finite inverses), then $M_A = M_{A'}$, i.e.,\footnote{throughout the rest of today's notes i will omit the f.s.\ from $\ZZ^X_{f.s.}$, since it is clear that elements of $\ZZ^X$ are finitely supported}
     \[ \begin{tikzcd} \ZZ^X \arrow[r, "A"] & \ZZ^G \arrow[d, "P"] \\ \ZZ^X \arrow[u, "Q"] \arrow[r, "A'"] & \ZZ^G \end{tikzcd} \]
 \end{proposition}
 \noindent Before we provide a proof, we will show that the conditions actually work. Since $A'$ maps from $\ZZ^X \to \ZZ^G$, where $\ZZ^X$ is the additive group of finitely supported functions $f : X \to \ZZ$, consider $Qv$, where $v$ is a column vector that admits finitely many nonzero components (which, without loss of generality, we will call $v_1, \dots, v_n$). Since the respective columns $Q_{v_1}, \dots, Q_{v_n}$ in $Q$ also have finite support, we see that there can only be finitely many nonzero entries in $Qv$, so we see that the proposition indeed yields restricted row and column operations on $A$ without changing $M_A$.\footnote{alteration of dror's proof where he thinks $3$ is a big enough number (read: $n = 3$)}
