@@ -1,0 +1,51 @@
+\section{Day 19: Riemann Mapping Theorem (Nov.\ 18, 2025)}
+We will now prove the Riemann mapping theorem. Recall its statement as follows,
+\begin{theorem*}
+    Let $\Omega$ be a proper (i.e., non-empty and not the whole of $\CC$), simply connected open set. For any $z_0 \in \Omega$, there exists a unique conformal map $F : \Omega \to \DD$ such that $F(z_0) = 0$ and $F'(z_0) > 0$.
+\end{theorem*}
+\noindent The proof is long, so we will divide it into three parts, with the first being Montel's theorem. Let $\Omega$ be an open set and $\SF$ a family of holomorphic functions on $\Omega$.
+\begin{theorem}[\S 8.3.3]
+    Suppose $\SF$ is uniformly bounded on every compact subset of $\Omega$. Then $\SF$ is equicontinuous on every compact subset of $\Omega$, and it is a normal family.
+\end{theorem}
+\noindent Recall that the definition of equicontinuity is that, given any compact subset $K \subset \Omega$ and any $\eps > 0$, there exists $\delta = \delta(K) > 0$ such that $z, w \in K$ with $\abs{z - w} < \delta$ implies $\abs{f(z) - f(w)} < \delta$ for all $f \in \SF$. $\SF$ is also said to be a normal family if, given any sequence $\{f_n\} \in \SF$ there exists a subsequence $\{f_{n_k}\}$ that converges uniformly on every compact subset. We now prove Montel's theorem, following p.226 in Shakarchi.
+\begin{proof}
+    We will start by proving that boundedness implies equicontinuity. Fix any compact subset $K \subset \Omega$; there exists $r > 0$ such that, for all $z \in K$, $\ol{D_{3r}(z)} \subset \Omega$. Now, for all $f \in \SF$, for any $z, w \in K$ with $\abs{z - w} < r$, we may use Cauchy's integral formula to compute
+    \begin{align*}
+        \abs{f(z) - f(w)} &= \abs{\frac{1}{2\pi i} \int_{\partial D_{3r}(z)} \frac{f(\zeta)}{\zeta - z} \, d\zeta - \frac{1}{2\pi i} \int_{\partial D_{3r}(z)} \frac{f(\zeta)}{\zeta - w} \, d\zeta} \\
+        &\leq \frac{1}{2\pi} \sup_{\zeta \in \partial D_{3r}(z)} \abs{f(\zeta) \left(\frac{1}{\zeta - z} - \frac{1}{\zeta - w}\right)} \cdot 2\pi(3r) \\
+        &\leq 3r \cdot \sup_{\zeta \in \partial D_{3r}(z) } \abs{f(\zeta)} \cdot \sup_{\zeta \in \partial D_{3r}(z)} \abs{\frac{z - w}{(\zeta - z)(\zeta - w)}},
+    \end{align*}
+    for which there exists some uniform bound $B > 0$ such that, for all $z \in N_{3r}(K)$ (read: neighborhood), we have that $\abs{g(z)} \leq B$ for any $g \in \SF$. In this manner, we may continue our bounding as follows,
+    \[ \dots \leq 3r \cdot B \cdot \sup_{\zeta \in \partial D_{3r}(z)} \abs{\frac{z - w}{(\zeta - z)(\zeta - w)}} \leq \frac{3r B \abs{z - w}}{r^2} \leq \frac{3}{r} B \abs{z - w}, \]
+    which can be made arbitrarily small, and so we are done.
+    \\[8pt]
+    For the second part,\footnote{arzela-ascoli, link \href{https://en.wikipedia.org/wiki/Arzel\%C3\%A0\%E2\%80\%93Ascoli_theorem\#Statement_and_first_consequences}{here}} we will show that $\SF$ is a normal family. Let $\{f_n\}$ be a sequence of functions in $\SF$, for which $\{f_{n_k}\}$ converges uniformly on every compact subset. Let $K$ be any compact subset of $\Omega$, and choose a sequence of points $\{w_j\}_{j \geq 1}$ of $\Omega$ that is dense in $\Omega$; we will prove that $\{f_n(w_j)\}$ converges in $n$ and $j$ by the diagonalization argument. For $w_1$, we see that $\{f_n(w_1)\}$ is a bounded sequence of complex numbers, so there must exist a convergent subsequence $\{f_{n,1}(w_1)\}$; for $w_2$, $\{f_{n,1}(w_2)\}$ is bounded, so there must exist a convergent subsequence $\{f_{n,2}(w_2)\}$, and so on. In general, $\{f_{n,j-1}(w_j)\}$ is a bounded sequence on $\CC$, so there must exist some convergent subsequence $\{f_{n,j}(w_j)\}$.
+    \\[8pt]
+    Let $g_n = f_{n,n}$; by the method we constructed $f_{n,n}$, for all $w_j$, we see that $\{g_n(w_j)\}_{n \geq 1}$ converges. We ask; does this converge on $K$? Given $\eps > 0$, let $\delta > 0$ be the constant for equicontinuity. We have
+    \[ K \subset \bigcup_{j \geq 1} D_\delta(w_j). \]
+    Since $K$ is compact, there exists $J \in \NN$ such that $K \subset \bigcup_{j=1}^J D_\delta(w_j)$ is its finite subcover, for which we will show $\{g_n(z)\}$ is also convergent on. We will demonstrate that the sequence is in fact, Cauchy. For all $n, m \in \NN$, directly write as follows,
+    \[ \abs{g_n(z) - g_m(z)} \leq \abs{g_n(z) - g_n(w_j)} + \abs{g_n(w_j) - g_m(w_j)} + \abs{g_m(w_j) - g_m(z)}. \]
+    The first and third terms are bounded by $\eps$ by equicontinuity, and the second term is bounded by $\eps$ given that we picked $n, m > N$ for some $N$ large enough to satisfy the Cauchy property of $\{g_n(w_j)\}_{n \geq 1}$ (since we've previously established that it is convergent). Thus, the sum is bounded from above by $3\eps$, and we have $\abs{g_n(z) - g_m(z)} \to 0$ uniformly, since $N$ does not depend on $z$.
+    \\[8pt]
+    Recall that any open set $\Omega$ in $\CC$ has an exhaustion sequence, i.e., there exists a sequence of compact subsets $\{K_\ell\}_{\ell \geq 1}$ of $\Omega$ such that $K_\ell \subset K_{\ell + 1}$ for all $\ell \in \NN$, and that any compact subset $K$ of $\Omega$ is contained in some $K_\ell$. To finish our proof, we simply use the diagonalization argument (on $K_j$ and $f_j$) again to conclude that $\{f_{n,j}\}$ converges uniformly on $K_j$.
+\end{proof}
+\noindent We now prove the Riemann mapping theorem.
+\begin{proof}
+    Our first step is to establish that there exists an injective holomorphic map $F : \Omega \to \DD$ such that $F(z_0) = 0$. Since $\Omega$ is proper, there exists $\alpha \in \CC \setminus \Omega$ such that $z - \alpha$ is holomorphic and does not vanish on $\Omega$. Then, there exists a branch of $\log$ such that $f(z) = \log(z - \alpha)$ is holomorphic on $\Omega$, for which we see $e^{f(z)} = z - \alpha$, implying that $f$ is injective and holomorphic on $\Omega$.
+    \\[8pt]
+    Fix $w \in \Omega$ such that $f(w) + 2 \pi i$ is bounded away from $f(\Omega)$. We will proceed by contradiction; assume that this is not true. Then there exists a convergence sequence $\{z_n\}$ in $\Omega$ where $f(z_n) \to f(w) + 2\pi i$, for which we may exponentiate this relation to obtain $z_n - \alpha \to w - \alpha$, so $f(z_n) \to f(w)$, which is a contradiction. Now, consider the function
+    \[ F(z) = \frac{1}{f(z) - (f(w) + 2\pi i)} \]
+    is bounded, injective, and holomorphic on $\Omega$. Composing $F$ with a translation and a rescaling map, we prove step 1.
+    \\[8pt]
+    Assume that $\Omega$ is an open subset of $\DD$ that contains $0$, and consider the following family of functions $\SF = \{f : \Omega \to \DD \mid f \text{ is inj., hol., and } f(0) = 0\}$. Indeed, $\SF$ is nonempty, since it contains the inclusion function $\iota : \Omega \to \DD$ with $z \mapsto z$; it is also uniformly bounded on every compact subset of $\Omega$ because $f(\Omega) \subset \DD$. Take $\delta = \sup_{f \in \SF} \abs{f'(0)}$; $\delta$ is necessarily greater than zero, since the inclusion function has nonzero derivative at the origin. We also have that $\delta < \infty$, since
+    \[ \delta = \sup_{f \in \SF} \abs{f'(0)} = \sup_{f \in \SF} \abs{\frac{1}{2\pi i} \int_{\partial D_r(0)} \frac{f(\zeta)}{\zeta^2} \, d\zeta} \leq \frac{2\pi r}{2\pi r^2} = \frac{1}{r}. \]
+    Finally, we will show that there exists $f \in \SF$ such that $\abs{f(0)} = \delta$. For now, though, let us assume that such an $f$ exists. We will show that $f \in \SF$ with $\abs{f'(0)} = \sup_{g \in \SF} \abs{g'(0)}$ must be surjective. Suppose, by contradiction, that there exists $\alpha \in \DD$ such that $\alpha \not\in f(\Omega)$. Consider the Blaschke factor $\psi_\alpha$ given by
+    \[ \psi_\alpha(z) = \frac{\alpha - z}{1 - \ol \alpha z}, \]
+    where $\psi_\alpha$ interchanges $0$ and $\alpha$. We see that $0 \not\in \psi_\alpha \circ f(\Omega)$, so we may find a branch of the logarithm such that $g(w) = \exp(\frac{1}{2}\log w) = \sqrt{w}$ is holomorphic on $\psi_\alpha \circ f(\Omega)$. Indeed, we obtain that $g \circ \psi_\alpha \circ f : \Omega \to \DD$ (for which we know this is into $\DD$ because $\psi_\alpha \circ f$ is into $\DD$) is injective and holomorphic. Since $\psi_{g(\alpha)}\inv \circ g \circ \psi_\alpha$ sends $0$ to $0$ and is also injective and holomorphic, let us consider the function
+    \[ F = \psi_{g(\alpha)}\inv \circ g \circ \psi_\alpha \circ f : \Omega \to \DD, \]
+    is an injective holomorphic function with $F(0) = 0$, so $F \in \SF$. Let $h(w) = w^2$ be the square function, and observe that we now have
+    \[ f = \psi_\alpha\inv \circ h \circ \psi_{g(\alpha)} \circ F = \Phi \circ F, \]
+    where $\Phi := \psi_\alpha\inv \circ h \circ \psi_{g(\alpha)} : \DD \to \DD$ fixes zero. By the Schwarz lemma, we get $\abs{\Phi'(0)} < 1$, where the inequality is strict because $h$ is not injective. From this, we get $\abs{f'(0)} = \abs{\Phi'(0)} \abs{F'(0)} < \abs{F'(0)}$, contradicting the maximality of $\abs{f'(0)} = \sup_{g \in \SF} \abs{g'(0)}$ in $\SF$.
+    \\[8pt]
+    Next class, we will use Montel's theorem to prove that such an $f$ actually exists.
+\end{proof}
