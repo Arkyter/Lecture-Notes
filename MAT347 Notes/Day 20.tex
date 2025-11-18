@@ -1,1 +1,43 @@
-\section{Day 20: asdf (Nov.\ 14, 2025)}
+\section{Day 20: Rings (Nov.\ 14, 2025)}
+\begin{definition}
+    A ring $(R, +, \cdot)$ is a set equipped with an addition and multiplication operation such that the additive and multiplicative identities are distinct. It must also satisfy the below,
+    \begin{enumerate}[(i)]
+        \item $(R, +, 0)$ is an abelian group with respect to its addition operation.
+        \item $(ab)c = a(bc)$, associative law.
+        \item For all $a$, $1a = a1 = a$, multiplicative identity.
+        \item $a(b + c) = ab + ac$ and $(a + b)c = ac + bc$, distributive law.
+    \end{enumerate}
+\end{definition}
+\noindent Note that there are such things as ``rings without unit'' and ``commutative rings''.
+\begin{lemma}
+    In a ring, $0 \cdot a = 0$.
+\end{lemma}
+\begin{proof}
+    $0 = (0 + 0)$, so $0a = (0 + 0)a = 0a + 0a$ implies $0a = 0$.
+\end{proof}
+\begin{lemma}
+    $(-a) \cdot b = a(-b) = -(ab)$ and $(-a)(-b) = ab$.
+\end{lemma}
+\begin{proof}
+    This is true by applying the distributive law.
+\end{proof}
+\noindent Here are some examples of rings.
+\begin{enumerate}[(a)]
+    \item $R = \{0, 1\}$, i.e., it has its additive and multiplicative identity only. Isomorphism is exactly what you would expect, $R \cong \ZZ/2$.
+    \item $\ZZ$
+    \item $\ZZ/n$
+    \item $M_{n \times n}(R)$, where $R$ is a ring.
+\end{enumerate}
+\noindent As an aside, $M_{n \times n}(M_{m \times m}(R)) \cong M_{mn \times m}(R)$. Given any set $X$, $M_{X \times X}(R)$ is the set of $X \times X$ matrices with entries in $R$ and finitely many nonzero entries in each column.
+\begin{enumerate}[(a)] \setcounter{enumi}{4}
+    \item Polynomials: given a ring $R$, we have $R[x] = \{\sum_{i=0}^n a_i x^i \mid a_i \in R\}$. Similarly, $\ZZ[x]$ and $\RR[y]$ are rings too. Let $f = \sum a_ix_i$ and $g = \sum b_ix_i$; we have
+    \[ f \cdot g = \sum_{k=0}^\infty \left(\sum_{i=0}^k a_i b_{k-i}\right) x^k. \]
+    \item Power series: given any $R$, we have $R[\![x]\!] = \left\{\sum_{i=0}^\infty a_i x^i\right\}$. As some examples, we have that
+    \[ \sum_{n=0}^\infty \frac{1}{n!} x^n \in R[\![x]\!], \quad \sum_{n=0}^\infty n! x^n \in R[\![x]\!]. \]
+    \item If $G$ is a group and $R$ is a commutative ring, the group-ring of $G$ with coefficients in $R$ is
+    \[ RG = \left\{ \sum_{\text{finite} i} a_i g_i \mid g_i \in G, a_i \in R\right\}, \]
+    where $(\sum_i a_i g_i) (\sum_j b_j h_j) = \sum_{i,j} a_i b_j g_i h_j$. We denote $\ul 0 = \sum_\emptyset$ and $\ul 1 = 1_R \cdot e_G$.
+\end{enumerate}
+\noindent We also have that
+\[ \ZZ_{\text{ring}} \ZZ_{\text{group}} \cong \ZZ \left<x\right> = \left\{ \sum_{i \in \ZZ} a_i x^i \mid a_i \in \ZZ \right\}, \]
+which are the \href{https://en.wikipedia.org/wiki/Laurent_polynomial}{Laurent polynomials} with integer coefficients.
