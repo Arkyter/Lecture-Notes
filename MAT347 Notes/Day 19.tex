@@ -1,1 +1,54 @@
-\section{Day 19: asdf (Nov.\ 12, 2025)}
+\section{Day 19: Finitely Generated Abelian Groups, Pt.\ 2 (Nov.\ 12, 2025)}
+\begin{claim}
+    If $A = A_1 \oplus A_2$, i.e.,
+    \[ A = \begin{pNiceArray}{c|c} A_1 & 0 \\ \hline 0 & A_2 \end{pNiceArray} \in M_{G \times X} \]
+    with $A_1 \in M_{G_1 \times X_1}$, $A_2 \in M_{G_2 \times X_2}$ such that $G = G_1 \cup G_2$ and $X = X_1 \cup X_2$, then $M_A \cong M_{A_1} \times M_{A_2}$.
+\end{claim}
+\begin{theorem}
+    By iterating this claim, we see that
+    \[ A = \begin{pNiceArray}{ccc|ccc} 0 & & & & & \\ & \ddots & & & & \\ & & 0 & & & \\ \hline & & & p_1^{s_1} & & \\ & & & & \ddots & \\ & & & & & p_n^{s_n} \end{pNiceArray}, \]
+    for which the top left block is of size $r \times r$.
+\end{theorem}
+\begin{proof}
+    To see this, we will construct a map $M_{A_1} \times M_{A_2} \to M_A$. Indeed, $M_{A_1}$ is defined as $\ZZ^{G_1}/\img \phi_{A_1}$ and $M_{A_2}$ is defined as $\ZZ^{G_2}/\img \phi_{A_2}$, so we may let the map be given by
+    \[ \biggl(\biggl[\sum_{g \in G_1} a_g e_g\biggr], \biggl[\sum_{g \in G_2} a_g e_g\biggr]\biggr) \mapsto \biggl[\sum_{g \in G} a_g e_g\biggr]. \]
+    Verifying that this is indeed a well-defined bijection is left as homework.
+\end{proof}
+\begin{proposition}
+    If $A' = PAQ$, where $P \in M_{G \times G}(\ZZ)$ is invertible, $Q \in M_{X \times X}(\ZZ)$ is invertible (whose columns have finite support and finite inverses), then $M_A = M_{A'}$, i.e.,
+    \[ \begin{tikzcd} \ZZ^X \arrow[r, "A"] & \ZZ^G \arrow[d, "P"] \\ \ZZ^X \arrow[u, "Q"] \arrow[r, "A'"] & \ZZ^G \end{tikzcd} \]
+\end{proposition}
+\noindent Before we provide a proof, we will show that the conditions actually work. Since $A'$ maps from $\ZZ^X \to \ZZ^G$, where $\ZZ^X$ is the additive group of finitely supported functions $f : X \to \ZZ$, consider $Qv$, where $v$ is a column vector that admits finitely many nonzero components (which, without loss of generality, we will call $v_1, \dots, v_n$). Since the respective columns $Q_{v_1}, \dots, Q_{v_n}$ in $Q$ also have finite support, we see that there can only be finitely many nonzero entries in $Qv$, so we see that the proposition indeed yields restricted row and column operations on $A$ without changing $M_A$.\footnote{alteration of dror's proof where he thinks $3$ is a big enough number (read: $n = 3$)}
+\begin{proof}
+    Observe the following diagram,
+    \[ \begin{tikzcd}
+        \ZZ^X \arrow[r, "A"] & \ZZ^G \arrow[d, "P"] \arrow[r, "\pi"] & M_A \arrow[d, "\ol P"] \\
+        \ZZ^X \arrow[u, "Q"] \arrow[r, "A'"] & \ZZ^G \arrow[r, "\pi'"] & M_{A'}
+    \end{tikzcd} \]
+    where $M_A = \ZZ^G / \img A$ and $M_{A'} = \ZZ^G / \img A'$. We define $\ol P$ by $\ol P([\alpha]) = [P_\alpha]$ and ${\ol P}\inv ([\alpha']) = [P\inv \alpha']$. Indeed, to see that $\ol P$ is well-defined, it is enough to diagram chase. Suppose $[\alpha_1] = [\alpha_2]$; we immediately obtain that $\alpha_1 - \alpha_2 \in \img A = \ker \pi$. Now, pick $\beta \in \ZZ^X$ such that $\alpha_1 - \alpha_2 = A \beta$. We obtain
+    \[ P \alpha_1 - P \alpha_2 = P(\alpha_1 - \alpha_2) = P A \beta = P A Q Q\inv \beta = A' Q\inv \beta = A' \beta', \]
+    meaning that $P \alpha_1 - P \alpha_2 \in \img A'$, and is hence in the kernel of $\pi$ again. Thus, $\ol P$ is well-defined.
+\end{proof}
+\begin{proposition}
+    If $A'$ is obtained from $A$ by adding or removing columns of zeroes, then $M_A = M_{A'}$, and $(A') = (A \mid 0)$.
+\end{proposition}
+\begin{proof}
+    This is immediate from our discussion before the previous proof.
+\end{proof}
+\begin{claim}
+    With our operations, we can diagonalize $A$.
+\end{claim}
+\begin{proof}
+    Of all the presentation matrices of $M$ (of the form $PAQ$) of all entries, let $a_{11}$ be the smallest positive entry. Without loss of generality, we may assume that
+    \begin{enumerate}[(i)]
+        \item All entries in the row and column associated to $a_{11}$ must be zero except $a_{11}$ itself, since all entries in said row and column must be divisible by $a_{11}$ (if not, we may perform row and column operations to contradict minimality).
+        \item All other entries are divisible by $a_{11}$ for the same reason.
+    \end{enumerate}
+    In this manner, we see that $A$ can be transformed into
+    \[ \begin{pNiceArray}{c|ccc} a_{11} & 0 & \dots & 0 \\ \hline 0 & \Block{3-3}{A_1} & & \\ \vdots & & & \\ 0 & & & \end{pNiceArray}, \]
+    for which we may repeat the operation on $A_1$ and subsequent matrices to obtain
+    \[ \begin{pNiceArray}{ccc|ccc} a_{11} & & & \Block{3-3}{0} & & \\ & \ddots & & & & \\ & & a_{nn} & & & \end{pNiceArray}, \tag{$G = \{g_1, \dots, g_n\}$} \]
+    for which we may note that the the latter columns are all zeroes. Moreover, if there exists an entry in the diagonal that is zero, we see that all latter entries must vanish as well (let $r$ denote the number of zeroes on said diagonal). If we denote $D$ as the square diagonal matrix with entries $a_{11}, \dots, a_{nn}$, we obtain that $M = M_D$ (as all we did was apply row and column operations, so we may apply propositions 19.3 and 19.4), where we may write
+    \[ M = M_D \cong \ZZ^r \times \prod_{a_{ii} \neq 0, 1} \ZZ/a_{ii} \cong \ZZ^r \times \prod \ZZ/p_i^{s_i}. \]
+    Indeed, we may decompose each $\ZZ/a_{ii}$ into their prime factors using the fact that $\ZZ/{ab} = \ZZ/a \times \ZZ/b$ if $(a, b) = 1$. We also have that if $a_{ii} = 1$, we may factor out $\ZZ/\ZZ = \{e\}$, and if $a_{ii} = 0$, then it is simply $\ZZ$.
+\end{proof}
