@@ -1,0 +1,154 @@
+\section{Day 19: Fourier Series Part 3. (Nov. 12, 2025)}
+Intended midterm average was 60-65. In the past his averages have been 55-60. Our average was around 51-52. He will curve depending on the results of the other midterms.
+
+Last time we talked about a bit of functional analysis. Hilbert spaces, inner products, and some basic properties.
+\begin{example}
+	If \( X \subseteq \mathbb{R}^{n} \), then \( L^{2}(X) \) space is the functions
+	\[ L^{2}(X) = \left\{ f : \int_{X} |f|^{2} dx < \infty \right\}. \]
+	The norm is induced by the inner product from last time
+	\[ \left( f, g \right) = \int_{X} f \cdot \bar g \, dx, \]
+	where the \( \bar \cdot \) is the complex conjugate. We take the conjugate when our codomain is the complex numbers (or something like it where integrals make sense), to make this a Hermetian inner product. If our codomain is a real vector space, we can exclude it.
+
+	To show that \( L^{2} \) is a Hilbert space, we need to show completeness. Of course this requires that we either take the Lebesgue measure, or we do a hack by taking closure of compactly supported functions or something. Ultimately these things aren't of large importance to this class.
+\end{example}
+
+\begin{example}
+	\[ \ell^{2} = \left\{ ( a_{n} )_{n \in \mathbb{Z}} : \sum_{n \in \mathbb{Z}} |a_{n}|^{2} < \infty \right\}, \]
+	where the norm is given by
+	\[ ||(a_{n})||_{\ell^{2}} = \left( \sum_{n \in \mathbb{Z}} |a_{n}|^{2} \right)^{\frac{1}{2}}.  \]
+	This norm is induced by the inner product
+	\[ \left( (a_{n}), (b_{n}) \right) = \sum_{n \in \mathbb{Z}} \sum_{n \in \mathbb{Z}} a_{n} \cdot \bar b_{n}. \]
+	Our remarks about complex vector spaces are the same as before.
+\end{example}
+
+\begin{example}
+	\( \mathbb{R}^{n} \) with the dot product and usual norm.
+\end{example}
+
+\begin{example}
+	Consider continuous functions on \( [0, 1] \) with the norm
+	\[ ||f|| = \left( \int_{0}^{1} |f(x)|^{2} \, dx \right)^{\frac{1}{2}}. \]
+	We claim that this is not a Hilbert space, because it's not complete. For exmple,
+	\[ d(x^{n}, x^{m}) = \left( \int_{0}^{1} |x^{n} - x^{m}|^{2} dx \right)^{\frac{1}{2}} \to 0, \]
+	as \( n, m \to \infty \). But these converge to a discontinuous function (it's \( 0 \) everywhere except for at \( 1 \), where it's \( 1 \)). On the other hand, with the uniform norm (\( L^{\infty} \), or \( \sup \) norm), they are not Cauchy, so they do not converge.
+
+	One should remark that if we take this sequence in the \( L^{2} \) space, then these do converge, and they converge to \( 0 \). This is because the indicator function on \( \left\{ 1 \right\} \) is in the same equivalence class as the \( 0 \) function in the \( L^{2} \) space.
+\end{example}
+
+\begin{example}
+	Consider continuous functions on \( [0, 1] \) with the \( L^{\infty} \) norm. We call this space \( C^{0}([0, 1]) \). Then this space \textit{is} complete, because the uniform limit of continuous functions is continuous.
+\end{example}
+
+\begin{example}
+	For \( L^{p} \) spaces, they are not Hilbert spaces (when \( p \ne 2 \)), but they are complete normed vector spaces, so they are Banach spaces. Of course,
+	\[ ||f||_{L^{p}} = \left( \int |f(x)|^{p} dx \right)^{\frac{1}{p}}. \]
+	To show this, we can show that the parallelogram identity does not hold for the \( L^{p} \) norm (\( p \ne 2 \)).
+\end{example}
+
+\subsection{Orthogonality}
+We are trying to write \( f(x) = \sum_{n \ge 0} a_{n} X_{n}(x) \), where \( X_{n}) \) are eigenfunctions of \( - \partial_{x}^{2} \).
+\begin{proposition}
+	Two eigenfunctions of \( - \partial_{x}^{2} \), \( -X_{i}'' = \lambda_{i} X_{i} \), \( i = 1, 2 \) with \( \lambda_{1} \ne \lambda_{2} \), then we claim that \( X_{1} \perp X_{2} \) with respect to \( \left( \cdot , \cdot \right) \).
+\end{proposition}
+\begin{proof}
+	\begin{align*}
+		\left( \lambda_{1} - \lambda_{2} \right) \int_{a}^{b} X_{1} X_{2} &= \int_{a}^{b} \lambda_{1} X_{1} X_{2} - \int_{a}^{b} X_{1} \left( \lambda_{2} X_{2} \right) \\
+																																			&= \int_{a}^{b} - X_{1}'' X_{2} + \int_{a}^{b} X_{1} X_{2}'' \\
+																																			&= \left[ - X_{1}'X_{2} \right]_{a}^{b} + \int_{a}^{b} X_{1}'X_{2}' \\
+																																			&+ \left[ X_{1}X_{2}' \right]_{a}^{b} - \int_{a}^{b} X_{1}'X_{2}' \\
+																																			&= 0,
+	\end{align*}
+	so long as our boundary conditions ensure that
+	\[ \left[ X_{1}X_{2}' - X_{1}'X_{2} \right]_{a}^{b} = 0. \]
+\end{proof}
+
+\begin{definition}
+	Boundary conditions (for the eigenvalue problem \( -X'' = \lambda X \)) for which
+	\[ \left[ X_{1}X_{2}' - X_{1}'X_{2} \right]_{a}^{b} = 0 \]
+	are called symmetric boundary conditions.
+\end{definition}
+\begin{example}
+	\begin{enumerate}
+	
+		\item Dirichlet \( X(a) = 0 = X(b) \)
+		\item Neumann \( X'(a) = 0 = X'(b) \)
+		\item Robin [Check in the Homework]
+		\item Periodic \( X(a) = X(b) \), \( X'(a) = X'(b) \)
+	
+	\end{enumerate}
+\end{example}
+
+\begin{remark}
+	We may have \( 2 \) or more eigenfunctions with the same eigenvalue. For example, \( -X'' = \lambda X \) on \( [0, 2 \pi] \),
+	\[ X(0) = X(2 \pi), X'(0) = X'(2 \pi) \]
+	have eigenfunctions of \( \sin(nx) \) and \( \cos(nx) \) with eigenvalue \( n^{2} \) for all \( n \). Also, any linear combination. That being said, fortunately \( \sin(nx) \) and \( \cos(nx) \) are already orthogonal. In general, by Gram-Schmidt you can make these eigenfunctions orthogonal. We know that the eigenspace is finite dimensional because it's a homogeneous second order ODE, so the general solution is a 2D vector space.
+\end{remark}
+
+\begin{corollary}
+	\begin{enumerate}
+	
+		\item 
+	With symmetric boundary conditions, eigenfunctions of \( -X'' = \lambda X \) with different eigenvalues are orthogonal.
+		\item The eigenvalues of \( -X'' = \lambda X \) are real.
+		\item We can make eigenfunctions with the same value orthogonal.
+	
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	We already proved the first and third part. The second part follows doing the same proof as the other part, but on
+	\[ (\lambda - \bar \lambda) \int X \bar X. \]
+\end{proof}
+
+As a consequence, with symmetric boundary conditions, if
+\[ f(x) = \sum_{n \ge 0} a_{n} X_{n}(x) \]
+(which we will call a generalized Fourier series) then it follows that
+\[ a_{n} = \frac{\left( f, X_{n} \right)}{\left( X_{n}, X_{n} \right)}, \]
+where our \( X_{n} \) are an orthogonal set (which we are sure we can find).
+
+\begin{theorem}
+	For \( -X'' = \lambda X \) with symmetric boundary conditions, there exists infinitely many eigenvalues \( \lambda_{1} \le \lambda_{2} \le \cdots \), with \( \lambda_{n} \nearrow \infty \).
+\end{theorem}
+
+\begin{question}
+	When we write \( f(x) = \lim_{N \to \infty} \sum_{n = 1}^{N} a_{n} X_{n}(x) \) where
+	\[ a_{n} = \frac{\left( f, X_{n} \right)}{\left( X_{n}, X_{n} \right)}, \]
+	with respect to which norm does this limit converge? We are interested in the different modes of convergence of the series of functions
+	\[ \sum_{n = 1}^{N} a_{n} X_{n}(x) \]
+	and the convergence to what. That is, it may not converge to \( f \) even if it does converge.
+\end{question}
+
+\subsection{Notions of Convergence}
+\begin{definition}
+	We say that \( \sum f_{n}(x) \) converges pointwise to \( f \) in \( (a, b) \) if
+	\[ \lim_{N \to \infty} \left| \sum_{n=1}^{N} f_{n}(x) - f(x) \right| = 0. \]
+\end{definition}
+
+\begin{definition}
+	We say \( \sum f_{n}(x) \) converges uniformly to \( f \) on \( [a, b] \) if 
+	\[ \lim_{N \to \infty} \sup_{[a, b]} \left| \sum_{n= 0}^{N} F_{n}(x) - f(x) \right| = 0. \]
+\end{definition}
+
+\begin{definition}
+	We say \( \sum f_{n} \) converges to \( f \) in \( L^{2}([a, b]) \) if
+	\[ \lim_{N \to \infty} \left| \left| \sum_{n=0}^{N} f_{n}(x) - f(x) \right| \right|_{L^{2}([a, b])} = 0. \]
+\end{definition}
+
+\begin{remark}
+Uniform Convergence implies Pointwise convergence and \( L^{2} \) convergence.
+\end{remark}
+
+\begin{remark}
+	Uniform convergence is strictly stronger than Pointwise convergence, as \( x^{n} \) converges pointwise but not uniformly.
+\end{remark}
+
+\begin{remark}
+	Pointwise convergence does not imply \( L^{2} \) convergence, which we can see by taking functions like \( g_{n} = \chi_{(\frac{n-1}{n}, 1)} \cdot \sqrt{n} \). [This is my own example. If you round the edges you can make it continuous or smooth if you want. Fabio used triangles, which was basically the same idea.]
+\end{remark}
+
+\begin{remark}
+	\( L^{2} \) convergence also does not imply pointwise convergence. Consider
+	\[ g_{n} = \chi_{(\sin(n - \frac{1}{n}), \sin(n+\frac{1}{n}))}, \]
+	where as usual, \( \chi \) is the indicator function. Then by Diophantine approximation, we have that this sequence will be nonzero at every point infinitely many times (indeed, even if we set it to be \( (\sin(n - \frac{1}{n^{2}}), \sin(n + \frac{1}{n^{2}})) \),\footnote{On the other hand, if instead of squaring it we take an exponent of \( \alpha \) with \( \alpha > 2 \), then it has measure \( 0 \) and Hausdorff (fractal) dimension less than \( 2 \). Wenyu proved this fact in class in MAT335.} it would diverge on a comeagre set---a set whose compliment has measure \( 0 \)), but its \( L^{2} \) norm also clearly goes to \( 0 \), as \( \sin \) is a contraction mapping, so we have that the diameter of our interval goes to \( 0 \), and therefore the \( L^{2} \) norm of our sequence goes to \( 0 \). As such, we are done.
+
+	Once again, this was my example. But in this case, Fabio did not give an example (or at least he didn't write one down. He may have said one out loud.) 
+\end{remark}
