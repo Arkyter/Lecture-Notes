@@ -1,0 +1,53 @@
+\section{Day 20: Convergence of Fourier Series (Nov. 24, 2025)}
+We did some formal non-rigorous calculations with fourier series already to solve boundary and initial value problems. We also talked about the theory behind it with orthogonality and that stuff. We also discussed in the more general context of Hilbert spaces. So now we will consider questions of convergence.
+
+Our plan is to state and prove three theorems about convergence. One about uniform convergence, one about \( L^{2} \) convergence, and one about pointwise convegence. This is going to be the most theoretical part so far.
+
+\begin{theorem}
+	Assume that \( f \) on \( [a, b] \) is such that \( f \), \( f' \), and \( f'' \) are all continuous. Then the Fourier series
+	\[ \sum_{n= 1}^{N} A_{n} X_{n}(x) \rightrightarrows f \]
+	on \( [a, b] \).
+\end{theorem}
+\begin{remark}
+	Here, as in the previous lecture, \( X_{n} \) is defined as solutions to the ODE \( -X'' = \lambda X \) with some symmetric boundary conditions, and
+	\[ A_{n} = \frac{\left( f, X_{n} \right)}{\left( X_{n}, X_{n} \right)}. \]
+	We can get the same conclusion with different assumptions, but for that we need to do something slightly different.
+\end{remark}
+\begin{proof}
+	Use Theorem 1.4 and the homework.
+\end{proof}
+
+\begin{theorem}
+	Let \( f \in L^{2}([a, b]) \). Namely, we want \( f \) to have \( L^{2} \) norm less than infinity. Then
+	\[ \sum_{n=1}^{N} A_{n} X_{n}(x) \to f \]
+	in \( L^{2}([a, b]) \).
+\end{theorem}
+
+\begin{theorem}
+	Let \( f \in C([a, b]) \) with \( f \) piecewise continuous. Then the classical fourier series (with sine and cosine) converges pointwise to \( f \). And if \( f \) is piecewise continuous, then at any jump \( x_{0} \), the Fourier series converges to
+	\[ \frac{\lim_{x \to x_{0}^{+}} f(x) + \lim_{x \to x_{0}^{-}}f(x) }{2}. \]
+\end{theorem}
+
+\subsection{The \( L^{2} \)-Theory}
+\begin{theorem}[Least Square]
+	Let \( X_{n} \) be an orthogonal set of eigenfunctions and \( ||f||_{L^{2}} < \infty \). Then for \( N \) fixed,
+	\[ \left| \left| f - \sum_{n=1}^{N} c_{n} X_{n}(x)  \right| \right|_{L^{2}} \]
+	is going to be minimized by the Fourier coefficients
+	\[ c_{i} = A_{i} = \frac{\left( f, X_{n} \right)}{\left( X_{n}, X_{n} \right)}. \]
+\end{theorem}
+\begin{proof}
+	This will give us some implications. Set \( E_{N} = \left| \left| f - \sum_{n=1}^{N} c_{n} X_{n} \right| \right|_{L^{2}}^{2} \). Expanding this yields
+	\[ E_{N} = ||f||^{2}_{L^{2}} - 2 \sum_{n=1}^{N} c_{n} \left( f, X_{n} \right) + \left| \left| \sum_{n=1}^{N}c_{n}^{2} \left( X_{n}, X_{n} \right) \right| \right|_{L^{2}},  \]
+	where we can bring the squares inside the norm by the pairwise orthogonality of our \( X_{n} \). Now, we want to complete the squares.
+	\[ 0 \le E_{N} = ||f||^{2}_{L^{2}} + \underbrace{\sum_{n=1}^{N} \left( X_{n}, X_{n} \right) \left[ c_{n} - \frac{\left( f, X_{n} \right)}{\left( X_{n}, X_{n} \right)} \right]^{2}} - \sum_{n=1}^{N}  \frac{\left( f, X_{n} \right)^{2}}{\left( X_{n}, X_{n} \right)}. \]
+	where the term with the underbrace is the only term which varies with respect to our \( c_{n} \). As such, by minimizing each of the individual terms of the sum, we minimize the series, which is accomplished by our hypotheses---when
+	\[ c_{n} = \frac{(f, X_{n})}{(X_{n}, X_{n})}. \]
+\end{proof}
+\begin{corollary}
+	With \( c_{n} = A_{n} \), we get
+	\[ \sum A_{n}^{2} \left( X_{n}, X_{n} \right) \le ||f||_{L^{2}}. \]
+\end{corollary}
+\begin{proof}
+	Rearrange the final line of our previous proof to get this. \( \left( X_{n}, X_{n} \right) \) being multiplied and not divided is \textit{not} a typo. 
+\end{proof}
+We will continue on Wednesday.
