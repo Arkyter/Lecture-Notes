@@ -1,0 +1,37 @@
+\section{Day 21: (Nov.\ 19, 2025)}
+\begin{definition}
+    A ring $R$ is formally defined as $(R, +, \cdot, 0 \neq 1)$, where $(R, +, 0)$ is an Abelian group. $(R, +, 1)$ is a monoid (group without inverses). Note the distributive laws, commutative rings, and rings without identities.
+\end{definition}
+\begin{definition}
+    Let $R$, $S$ be rings, and let $\varphi : R \to S$; we say $\varphi$ is a morphism if it preserves structure, i.e., $\varphi(x + y) = \varphi(x) + \varphi(y)$, and $\varphi(x \cdot y) = \varphi(x) \cdot \varphi(y)$.
+\end{definition}
+\noindent In this sense, the collection of rings is a category. We now give examples.
+\begin{enumerate}[(i)]
+    \item $\ZZ \to \ZZ/n$ is a ring morphism; as an aside, the kernel is a ring.
+    \item $R \to M_{2 \times 2}(R)$, where $x$ maps to the diagonal matrix with entries $x$ on its diagonal, is a morphism.
+    \item $R \to R[t]$ by $a \mapsto a t^0 + 0 t^1 + \dots$.
+    \item $\ev_u : R[x] \to R$ for $u \in R$; this only makes sense if $R$ is commutative, or if $u$ is central.
+    \item Fix commutative $R$ and let $\varphi : G \to H$ be a morphism of groups; we get a morphism $\varphi_\ast : RG \to RH$, i.e., $\sum a_i g_i \to \sum a_i \varphi(g_i)$. The ``group ring construction with fixed $R$'' is a functor. Fixing a group $G$, let $\varphi : R \to S$ be a morphism of commutative rings $\varphi_\ast : RG \to SG$ by $\sum a_i g_i \mapsto \sum \varphi(a_i) g_i$. The group ring construction is a bifunctor, where the product of commutative rings with groups is taken into rings.
+    \item $M_{n \times n}(R[x])$ and $M_{n \times n}(R)[x]$ are isomorphic.
+\end{enumerate}
+\noindent As an aside, let us discuss the Cayley--Hamilton theorem.
+\begin{theorem}[Cayley--Hamilton]
+    A matrix annihilates its characteristic polynomial; i.e., let $R$ be a commutative ring, and let $A \in M_{n \times n}(R)$. Let $\chi_A(t) = \det(tI - A) \in R[t]$. Then $\chi_A(A) = 0$.
+\end{theorem}
+\begin{proof}
+    For any matrix $M$ over any commutative ring, the adjugate matrix $\adj M$ of $M$ is defined using the minors of $M$, which satisfy $\det(M) I_n = (\adj M) M$. We will use this with $M = tI - A$ over the ring $R[t]$ and find that in the ring $M_{n \times n}(R[t])$, we have\footnote{ik i'm inconsistent with using $I_n$ and $I$, i'm just leaving it in when necessary to determine indices}
+    \[ \chi_A(t) I_n = \det(tI - A) I_n = (\adj(tI - A)) (tI - A), \]
+    where, since $M_{n \times n}(R[t]) \cong M_{n \times n}(R)[t]$, on the latter, there exist sa linear evaluation at $t = A$ map $\ev_A : M_{n \times n}(R)[t] \to M_{n \times n}(R)$ defined by $\sum B_k t^k \mapsto \sum B_k A^k$ by putting $A$ to the right of all the coefficients. This evaluation map is not multiplicative, but annihilates anything that has a right factor of $(tI - A)$. Hence, under $\ev_A$ the above equality becomes $\chi_A(A) I_n = 0$.
+\end{proof}
+\begin{claim}
+    If $\varphi : R \to S$ is a morphism of rings, then $\img \varphi$ is a subring of $S$.
+\end{claim}
+\noindent However, $\ker \varphi$ isn't a ring as $1 \not\in \ker \varphi$. Yet, it is a rng (ring without identity). Namely, $0 \in \ker \varphi$, and $\ker \varphi$ is additively and multiplicatively closed; indeed, we have that $\varphi(x \cdot y) = \varphi(x)  \cdot \varphi(y) = 0 \cdot 0 = 0$. We can prove a stronger theorem; in fact, if $x \in \ker \varphi$ and $a \in R$, then $ax \in \ker \varphi$ and $xa \in \ker \varphi$, since
+\[ \varphi(ax) = \varphi(a) \varphi(x) = \varphi(a) \cdot 0 = 0. \]
+\begin{definition}
+    An \textit{ideal} $I$ in a ring $R$ is a subset $I \subset R$ such that $I$ is a subring and, for all $a \in R$, we have $aI \subset I$ and $Ia \subset I$, which is equivalent to $RI = I = IR$.
+\end{definition}
+\noindent We ask; if $I \subset R$ is an ideal, does there exist $\varphi : R \to S$ such that $I = \ker \varphi$? Indeed, the answer is yes, since, given $I \subset R$ an ideal in a ring $R$< we can define $x \sim y$ if $x - y \in I$, where $\sim$ is an equivalence relation by group theory. Define $R/I = \{[x] \mid x \in R\}$, and $0_{R/I} := [0] = I$, $1_{R/I} := [1] = 1 + I$. More generally, we write
+\[ [x] = \{y \mid x - y \in I\} = x + I, \]
+so $[x] + [y] = [x + y]$, which is well-defined as checked in Abelian group theory. We have that $[x] [y] := [xy]$, so we can claim well-definedness. In particular, let $x' \sim x$ and $y' \sim y$; is it true that $[x'y'] = [xy]$? We see this from writing
+\[ xy - x'y' = xy - xy' + xy' - x'y' = x(y - y') + (x - x')y' = x(0) + (0)y' = 0. \]
