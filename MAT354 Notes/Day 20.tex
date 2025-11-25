@@ -20,4 +20,20 @@ Recall the statement of the Riemann mapping theorem: let $\Omega$ be a proper si
 \end{proof}
 \noindent We now discuss harmonic functions, i.e., functions with the mean-value property. Let $\Omega$ be a region in $\CC$, and let $u : \Omega \to \RR$. $u$ is said to satisfy the mean value property if, for all $z \in \ol{D_r(z_0)} \subset \Omega$, we have that
 \[ u(z_0) = \frac{1}{2\pi} \int_0^{2\pi} u(z_0 + re^{i\theta}) \, d\theta. \]
-As shown in problem set two, we've demonstrated that if $u$ is a harmonic function, then $u$ satisfies the mean value property. \textbf{to be continued!}
+As shown in problem set two, we've demonstrated that if $u$ is a harmonic function, then $u$ satisfies the mean value property.
+\begin{theorem}
+    A continuous function $u(z)$ on $\Omega$ satisfying the mean value property is a harmonic function.
+\end{theorem}
+\begin{theorem}[Poisson's formula]
+    Suppose $u(z)$ is harmonic on $\abs{z} < R$ and continuous on $\abs{z} \leq R$. Then\footnote{i believe this is chapter 3, problem 2 in shakarchi.}
+    \[ u(a) = \frac{1}{2\pi} \int_{\abs{z} = R} \frac{R^2 - \abs{a}^2}{\abs{z - a}^2} u(z) \, d\theta. \]
+\end{theorem}
+\begin{proof}
+    Consider the linear transformation
+    \[ z = S(\xi) = \frac{R(R\xi + A)}{R + \ol a \xi} = R \cdot \frac{(\xi + \frac{a}{R})}{(1 + \frac{\ol a \xi}{R})}, \]
+    which we may note looks like a Blaschke factor. Let $u : D_R \to \RR$; we want to show that $u \circ S$ is harmonic by Cauchy--Riemann. By the mean value property of $u \circ S$ at $0$, we have that
+    \[ u(a) = u \circ S(0) = \frac{1}{2\pi} \int_{\abs{\xi} = 1} u \circ S(\xi) \, d(\arg \xi); \]
+    we will find $d(\arg \xi)$. Observe, that $d(\arg \xi) = \Im \frac{d \xi}{\xi}$, and $\arg = \arctan(y/x)$, so
+    \[ d \arctan\left(\frac{y}{x}\right) = - \frac{y}{x^2 + y^2} \, dx + \frac{x}{x^2 + y^2} \, dy. \]
+    Alternatively, $\log \xi = \log r + i \arg \xi$, so, locally, we have that $d(\log \xi) = \frac{d\xi}{\xi} = \frac{dr}{r} + d(\arg \xi)$, so $d \arg(\xi) = \Im \left(\frac{d \xi}{\xi}\right)$.
+\end{proof}
