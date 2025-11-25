@@ -1,0 +1,23 @@
+\section{Day 20: Riemann Mapping Theorem, Pt.\ 2, and Harmonic functions (Nov.\ 20, 2025)}
+Recall the statement of the Riemann mapping theorem: let $\Omega$ be a proper simply connected open set in $\CC$. For all $z_0 \in \Omega$, there exists a conformal map $F : \Omega \to \DD$ such that $F(z_0) = 0$ and $F'(z_0) = 0$.
+\medbreak
+\noindent Last class, we showed that there is an injective holomorphic map $F : \Omega \to \DD$ such that $F(z_0) = 0$ and $0 \in \Omega$, which, without loss of generality, we may assume $\Omega$ is an open subset of $\DD$ as well. It remains to show that $\SF = \{f : \Omega \to \DD \mid f \text{ is inj., hol., and } f(0) = 0\}$, for which $s = \sup_{f \in \SF} \abs{f'(0)}$ exists, and there being some $f \in \SF$ such that $\abs{f'(0)} = s$.
+\begin{proof}
+    By the definition of $s$ and uniform boundedness of $\SF$, there exists some sequence $\{f_n\} \in \SF$ such that $\abs{f_n'(0)} \taking{n \to \infty} s$. By Montel's theorem, there exists a subsequence $\{f_{n_k}\}$ that converges uniformly on compact subsets of $\Omega$. Now, the limit function $f$ is holomorphic on $\Omega$. We will show that $f \in \SF$, i.e., $f(\Omega) \subset \DD$ and $f$ is injective.
+    \medbreak
+    \noindent By definition, $\abs{f(z)} \leq 1$ on $\Omega$; however, we cannot achieve a maximum on $\Omega$ by the maximum modulus principle, so we indeed have $\abs{f(z)} < 1$, so $f(\Omega) \subset \DD$. Clearly, $f$ is holomorphic so long as $f$ is not constant, which holds since $\abs{f'(0)} = s \geq 1$. We now show that $f$ is injective.
+    \begin{proposition}
+        Let $\Omega$ be a connected open set, and let $\{f_n\}$ be a sequence of holomorphic injective functions converging to $f$ on $\Omega$. Then $f$ is injective or constant.
+    \end{proposition}
+    \begin{proof}
+        Assume that $f$ is neither injective nor constant; then there exist distinct points $z_1, z_2 \in \Omega$ such that $f(z_1) = f(z_2)$. For $n \in \NN$, define the holomorphic injective functions $g_n : \Omega \to \CC$, given by $g_n(z) = f_n(z) - f_n(z_1)$. Then $z_1$ is the only zero of $g_n$; set $g(z) = f(z) - f(z_1)$; then $g(z)$ admits two zeroes, $z_1$ and $z_2$. Since $f$ is nonconstant, $z_2$ is an isolated zero of $g$, so there is a ball on which $z_2$ is the only zero of $g$; say, $\ol{D_r(z_2)}$ (where $r$ is chosen small enough to exclude $z_1$). By the argument principle, we get that the number of zeroes of $g$ on $D_r(z_2)$ is given by evaluating
+        \[ \frac{1}{2\pi i} \int_{\partial D_r(z_2)} \frac{g'(\xi)}{g(\xi)} \, d\xi > 0; \]
+        likewise, the number of zeroes of $g_n$ in $D_r(z_2)$ is given by
+        \[ \frac{1}{2\pi i} \int_{\partial D_r(z_2)} \frac{g_n'(\xi)}{g_n(\xi)} \, d\xi = 0. \]
+        Thus, there is an integer sequence consisting of zeroes entirely, but somehow converges to a number greater than zero; this is clearly a contradiction, so we see that $f$ must be either injective or constant.
+    \end{proof}
+    \noindent In our context, this proposition tells us that $f$ must be injective, so $f$ is indeed in $\SF$, which means we may follow through with step two and three to conclude the Riemann mapping theorem.
+\end{proof}
+\noindent We now discuss harmonic functions, i.e., functions with the mean-value property. Let $\Omega$ be a region in $\CC$, and let $u : \Omega \to \RR$. $u$ is said to satisfy the mean value property if, for all $z \in \ol{D_r(z_0)} \subset \Omega$, we have that
+\[ u(z_0) = \frac{1}{2\pi} \int_0^{2\pi} u(z_0 + re^{i\theta}) \, d\theta. \]
+As shown in problem set two, we've demonstrated that if $u$ is a harmonic function, then $u$ satisfies the mean value property. \textbf{to be continued!}
