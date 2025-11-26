@@ -1,0 +1,103 @@
+\section{Day 21: Convergence of Fourier Series cont. (Nov. 24, 2025)}
+Last time we proved that our \( A_{n} \) really are the best coefficients. This is in the sense that
+\[ \sum_{n \ge 1} |A_{n}|^{2} \left( X_{n}, X_{n} \right) \le ||f||^{2}_{L^{2}}.  \]
+If \( \left( X_{n}, X_{n} \right) = 1 \), then
+\[ \sum_{n \ge \mathbb{N}} |A_{n}|^{2} \le ||f||^{2}_{L^{2}}, \quad A_{n} = \left( f, X_{n} \right).  \]
+So, we will keep this in mind. We also got Bessel's inequality
+\begin{align*}
+0 \le E_{N} &= \left| \left| f(x) - \sum_{n=1}^{N} A_{n} X_{n}(x) \right| \right|^{2}_{L^{2}} \\
+					&= \left| \left| f \right| \right|^{2}_{L^{2}} - \sum_{n=1}^{N} \frac{\left| \left( f, X_{n} \right) \right|^{2}}{\left( X_{n}, X_{n} \right)}.
+\end{align*}
+But this is just the error between our function and the partial fourier sum (measured in \( L^{2} \)). This will be zero if our right hand sum actually converges to the norm squared (rather than just having our inequality above). Namely,
+\[ \sum_{n=1}^{\infty} |A_{n}|^{2} \left( X_{n}, X_{n} \right) = \left| \left| f \right| \right|^{2}_{L^{2}}. \]
+This is called Parseval's identity, and when it holds, we have \( L^{2} \) convergence of our Fourier series to \( f \).
+
+\begin{theorem}
+	Let \( w_{n} \) be an orthonormal sequence in a Hilbert space \( H \). The following are equivalent:
+	\begin{enumerate}
+	
+		\item Finite linear combinations
+			\[ \sum_{n=1}^{N} b_{n} w_{n}  \]
+			are dense (\( b_{n} \in \mathbb{C} \)) in the Hilbert space.
+		\item If \( \left\langle u, w_{n} \right\rangle = 0 \) for all \( n \) then \( u = 0 \).
+		\item Parseval's Identity.
+			\[ ||u||^{2}_{H} = \sum_{n=1}^{\infty}  \left| \left\langle u, w_{n} \right\rangle \right|^{2}. \]
+		\item \( \left( w_{n} \right) \) is an orthonormal basis for \( H \).
+	
+	\end{enumerate}
+\end{theorem}
+Fabio didn't actually go through the proofs explicitly. It'll be easy to find this proof though.
+
+It follows that to complete the proof of \( L^{2} \) convergence in our setting, you can verify any of the above properties. A shortcut to prove property \( 1 \) is to use the Stone-Weierstrass theorem (from 357) to show that the trig polynomials are dense in the continuous functions with respect to the \( L^{\infty} \) norm. From here, the continuous functions are dense in \( L^{2} \) with respect to the \( L^{2} \) norm, and convergence in the \( L^{\infty} \) norm of a sequence our trig polynomials implies convergence (to the same limit) in the \( L^{2} \) norm, therefore the trig polynomials are dense in the \( L^{2} \) norm.
+
+\begin{theorem}
+	Let \( f \) be a \( C^{1} \) functions on \( \mathbb{R} \) of period \( 2 \pi \). Define 
+	\[ \left( S_{n} f \right)(x) = \frac{A_{0}}{2} + \sum_{n= 1}^{N} A_{n} \cos(nx) + \sum_{n=1}^{N} B_{n} \sin(nx).  \]
+	Then \( S_{N} f(x) \to f(x) \) pointwise.
+\end{theorem}
+\begin{proof}
+	Step 1 is to take \( S_{N} \) and write it as a convolution of a kernel with \( f \).
+	\begin{align*}
+		(S_{N} f)(x) &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} f(y) dy \\
+								 &\qquad+ \sum_{n=1}^{N} \left( \frac{1}{\pi} \int_{- \pi}^{\pi} f(y) \cos(n y) dy \right)\cos(nx) \\
+								 &\qquad+ \sum_{n=1}^{N} \left( \frac{1}{\pi} \int_{-\pi}^{\pi} f(y) \sin(ny) dy \right)\sin(nx) \\
+		(S_{N} f)(x) &= \frac{1}{2 \pi} \left( \int_{- \pi}^{\pi} f(y) dy\right. \\
+								 &\qquad+ \sum_{n=1}^{N} \left( \int_{- \pi}^{\pi} f(y) \cos(n y) dy \right) 2 \cos(nx) \\
+								 &\qquad\left.+ \sum_{n=1}^{N} \left(\int_{-\pi}^{\pi} f(y) \sin(ny) dy \right)2 \sin(nx)\right) \\
+		(S_{N} f)(x) &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} f(y) \left( 1 + \sum_{n=1}^{N} 2 \cos \left( ny \right) \cos(nx) + 2 \sin(ny) \sin(nx) \right) dy \\
+		(S_{N} f)(x) &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} f(y) \left( 1 + 2 \sum_{n=1}^{N} \cos \left( n(x-y) \right) \right) dy
+	\end{align*}
+	We notice that this kinda looks like a convolution, so we are going to set
+	\[ K_{N}(x-y) = 1 + 2 \sum_{n=1}^{N} \cos \left( n(x-y) \right). \]
+	We claim
+	\[ K_{N}(\theta) = \frac{\sin \left( \left( N + \frac{1}{2} \right) \theta \right)}{\sin \left( \frac{\theta}{2} \right)}. \]
+	This can be proven via residues! According to Fabio at least. He seems to have opted to do it directly. 
+	\begin{align*}
+		K_{N}(\theta) &= 1 + 2 \sum_{n=1}^{N} \cos(n \theta) \\
+									&= 1 + 2 \operatorname{Re} \left( \sum_{n=1}^{N} e^{i n \theta} \right) \\
+									&= \sum_{n=-N}^{N} e^{in \theta} \\
+									&= e^{- i N \theta} \sum_{n=0}^{2N} e^{in \theta} \\
+		\tag{Geometric Series}&= e^{-iN \theta} \frac{\left( 1 - e^{i(2N+1) \theta} \right)}{1 - e^{i \theta}} \\
+		&= \frac{e^{-i N \theta} - e^{i(N+1) \theta}}{1 - e^{i \theta}} \cdot \frac{e^{-i \frac{\theta}{2}}}{e^{-i \frac{\theta}{2}}} \\
+		&= \frac{e^{-i (N + \frac{1}{2}) \theta} -e^{i(N + \frac{1}{2}) \theta} }{e^{-i \frac{\theta}{2}} - e^{i \frac{\theta}{2}}} \\
+		&= \frac{\sin \left( \left( N + \frac{1}{2} \right) \theta \right)}{\sin \left( \frac{\theta}{2} \right)}
+	\end{align*}
+	This function will be nice everywhere except possibly at \( \theta = 0 \). But the limit as we approach \( 0 \) is just
+	\[ \lim_{\theta \to 0} K_{N}(\theta) = \lim_{\theta \to 0} \frac{\sin \left( (N+\frac{1}{2}) \theta \right)}{\sin \left( \frac{\theta}{2} \right)} = \lim_{\theta \to 0} \frac{(N+\frac{1}{2}) \theta + o(\theta)}{\frac{\theta}{2} + o(\theta)} = 2N + 1,  \]
+	so the limit exists, and equals our original sum.
+
+	Now, we want to calculate \( S_{N} f(x) - f(x) \to 0 \) for a fixed \( x \). But notice that
+	\[ \tag{*}\frac{1}{2 \pi} \int_{- \pi}^{\pi} K_{N}(\theta) d \theta = 1, \]
+	by remarking that
+	\[ K_{N}(\theta) = \sum_{n=-N}^{N} e^{in \theta},  \]
+	thus the integral cancels out all the terms except \( n = 0 \), which will integrate to \( 2 \pi \). ``This kernel is nice, but not \textit{too} nice.'' Rewrite
+	\[ S_{N}f(x) = \int_{- \pi}^{\pi} K_{N}( \theta) f(x + \theta) \frac{d \theta}{2 \pi}. \]
+	This is by the periodicity of \( f \). From here,
+	\begin{align*}
+	S_{N}f(x) - f(x) &= \int_{- \pi}^{\pi} K_{N}( \theta) \left[ f(x + \theta) - f(x)\right] \frac{d \theta}{2 \pi}
+		\intertext{which is because of the integral on line \( (*) \).}
+	&= \int_{- \pi}^{\pi} \sin \left( (N + \frac{1}{2} \theta \right)  \frac{f(x + \theta) - f(x)}{\sin \left( \frac{\theta}{2} \right)}\frac{d \theta}{2 \pi}
+	\end{align*}
+	If we set
+	\[ g_{x}( \theta) = \frac{f( x + \theta) - f(x)}{\sin \left( \frac{\theta}{2} \right)}, \]
+	(\( x \) is fixed) we want to show that
+	\[ \int_{- \pi}^{\pi} \sin \left( \left( N+ \frac{1}{2} \right) \theta \right) g_{x}(\theta) d \theta \to 0 \]
+	as \( N \to \infty \). But we know that \( g \) is continuous in \( \theta \), and its limit as \( \theta \to 0 \), of \( g_{x} \) is just \( 2f'(x) \), so we have that it can be extended to continuous everywhere. Thus, we will try to use some recent knowledge. Recall Bessel's inequality. If \( h \) has \( ||h||^{2}_{L^{2}} < \infty \), and \( X_{n} \) is an orthogonal set.
+	\[ \sum \frac{\left( h, X_{n} \right)^{2}}{\left( X_{n}, X_{n} \right)} \le ||h||^{2}_{L^{2}}. \]
+	If \( |\left( X_{n}, X_{n} \right)| \le C \) for some uniform bound \( C \) (independent of \( n \)), then we have that \( \left( h, X_{n} \right) \) is square summable, thus \( \left( h, X_{n} \right) \to 0 \) as \( n \to \infty \). 
+
+	Applying this, if we show \( g_{x} \) is \( L^{2} \), and that our \( \sin \left( \left( N + \frac{1}{2} \right) \theta \right) \) have bounded inner product, then this would prove the theorem, because
+	\[ \int_{- \pi}^{\pi}  \sin \left( \left( N + \frac{1}{2} \right)  \theta \right) g_{x}( \theta) \frac{d \theta}{2 \pi} = \left( \sin \left( \left( N + \frac{1}{2} \right) \theta \right), g_{x}( \theta) \right) \cdot \frac{1}{2 \pi}. \]
+	Thus we just have to verify these.
+	\begin{enumerate}
+	
+		\item We know that \( ||g_{x}||_{L^{2}} < \infty \) because \( g(\theta) = \frac{f(x+ \theta) - f(x)}{\sin \left( \frac{\theta}{2} \right)} \) is continuous on \( [- \pi, \pi] \), and therefore it is bounded and integrable, so it is \( L^{2} \).
+		\item 
+			\[ \left| \int_{- \pi}^{\pi} \sin^{2} \left( N + \frac{1}{2} \theta \right) d \theta \right| \le 2 \pi \left| \sup_{\theta \in [- \pi, \pi]} \sin(\theta) \right| = 2 \pi, \]
+			so our functions are uniformly bounded.
+		\item For orthogonality, notice that our \( \sin \left( \left( N + \frac{1}{2} \right) \theta \right) \) are the eigenfunctions of the eigenvalue problem
+			\[ \left\{\begin{NiceMatrix}X'' = - \lambda X \\ X(0) = 0 \\ X'(\pi) = 0\end{NiceMatrix}\right.  \]
+			and so since the different \( N \) correspond to different eigenfunctions, they are orthogonal.
+	\end{enumerate}
+	Thus, we are done. We have shown pointwise convergence.
+\end{proof}
