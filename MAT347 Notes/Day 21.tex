@@ -29,7 +29,7 @@
 \noindent However, $\ker \varphi$ isn't a ring as $1 \not\in \ker \varphi$. Yet, it is a rng (ring without identity). Namely, $0 \in \ker \varphi$, and $\ker \varphi$ is additively and multiplicatively closed; indeed, we have that $\varphi(x \cdot y) = \varphi(x)  \cdot \varphi(y) = 0 \cdot 0 = 0$. We can prove a stronger theorem; in fact, if $x \in \ker \varphi$ and $a \in R$, then $ax \in \ker \varphi$ and $xa \in \ker \varphi$, since
 \[ \varphi(ax) = \varphi(a) \varphi(x) = \varphi(a) \cdot 0 = 0. \]
 \begin{definition}
-    An \textit{ideal} $I$ in a ring $R$ is a subset $I \subset R$ such that $I$ is a subring and, for all $a \in R$, we have $aI \subset I$ and $Ia \subset I$, which is equivalent to $RI = I = IR$.
+    An \textit{ideal} $I$ in a ring $R$ is a subset $I \subset R$ such that $I$ is a subrng\footnote{yes, subrng, not subring} and, for all $a \in R$, we have $aI \subset I$ and $Ia \subset I$, which is equivalent to $RI = I = IR$.
 \end{definition}
 \noindent We ask; if $I \subset R$ is an ideal, does there exist $\varphi : R \to S$ such that $I = \ker \varphi$? Indeed, the answer is yes, since, given $I \subset R$ an ideal in a ring $R$< we can define $x \sim y$ if $x - y \in I$, where $\sim$ is an equivalence relation by group theory. Define $R/I = \{[x] \mid x \in R\}$, and $0_{R/I} := [0] = I$, $1_{R/I} := [1] = 1 + I$. More generally, we write
 \[ [x] = \{y \mid x - y \in I\} = x + I, \]
