@@ -1,1 +1,33 @@
-\section{Day 22: (Nov.\ 21, 2025)}
+\section{Day 22: Isomorphism Theorems for Rings (Nov.\ 21, 2025)}
+We define a ring modulo an ideal by the quotient
+\[ \pi : R \to R/I = \{[x]_I \mid x \in R\}, \]
+where $[x]_I = x + I$; $R/I$ inherits identities ($0$ and $1$) and the addition and multiplication from $R$, where $IR = RI = I$.
+\begin{theorem}
+    $R/I$ is a ring, and $\pi$ is a ring morphism with $\ker \pi = I$.
+\end{theorem}
+\noindent As an example, we have that $\ZZ/n\ZZ$ is a ring, for which $\ZZ$ is a ring, and $n\ZZ$ is a rng. Let $R = \RR[x]$ be the ring of polynomials in the reals, and consider the ideal $I = \left<x^2 + 1\right>$ (this notation denotes the smallest ideal containing $x^2 + 1$). We have that $R/I$ is indeed the complex numbers, but we will prove this later. As an aside, in a general commutative ring $\RR$, we have that $I = \left<x_1, \dots, x_n\right>$ with $x_i \in R$ is given by
+\[ I = \left<x_1, \dots, x_n\right> = Rx_1 + \dots + Rx_n. \]
+Indeed, the above is closed by addition and multiplication. We now discuss the isomorphism theorems.
+\begin{theorem}[Iso.\ 1]
+    Let $\varphi : R \to S$ be a morphism; then $R / \ker \varphi \cong \img \varphi$.
+\end{theorem}
+\noindent From the first isomorphism theorem of groups, we see that there is an isomorphism between the additive abelian groups $(R, +)$ and $(S, +)$; we just need to check that $\varphi$ preserves the multiplication group defined on $R$ and $S$ as well. Recall, that the second isomorphism theorem for groups $G$ is given by $HK/K \cong H/(H \cap K)$ when $H < G$ and $K \lhd G$. We obtain something similar for rings, i.e.,
+\begin{theorem}[Iso.\ 2]
+    Let $R$ be a ring, and let $S$ be a subring and $I$ be an ideal. Then
+    \[ \frac{S + I}{I} \cong \frac{S}{S \cap I}, \]
+    where we may regard $S + I$ as another subring, and $S \cap I$ as an ideal of $S$.
+\end{theorem}
+\noindent In this case, we also have the established isomorphism on the additive group, so it suffices to check that the isomorphism holds for the multiplicative parts too.
+\begin{theorem}[Iso.\ 3]
+    Let $R$ be a ring, and let $I, J$ be ideals of $R$; if $I \subset J$, then
+    \[ \frac{R/I}{J/I} \cong \frac{R/J}. \]
+\end{theorem}
+\begin{theorem}[Iso.\ 4]
+    Let $R$ be a ring; fix an ideal $I \subset R$; there is an inclusion-preserving bijection between ideals $J$ such that $I \subset J \subset R$ and ideals in $R/I$, given by $I \subset J \iff J/I \subset R/I$.
+\end{theorem}
+\noindent As an example in the context of rings, consider $\varphi : R_1 \to \CC$ given by $R_1 = \RR[x] / \left<x^2 + 1\right>$. If $\varphi$ is given by $x \mapsto i$, then $\varphi(x^2 + 1) = i^2 + 1 = 0$, meaning that the ideal $\left<x^2 + 1\right>$ vanishes under $\varphi$. Moreover, $\varphi$ is a surjective map, since we may readily check that any polynomial $f \in \RR[x]$ reduces to $a + bx$ by adding and subtracting multiples of $x^2 + 1$; indeed, $a + bx \mapsto a + bi$, so $R_1 = \{[f]_{\left<x^2 + 1\right>}\} = \{[a + bx]\}$ over all $a, b \in \RR$, from which we observe $\varphi$ has trivial kernel. Per the first isomorphism theorem of rings, $R_1 / \ker \varphi \cong \img \varphi = \CC$, proving our example from the beginning of this lecture. 
+\medbreak
+\noindent In preparation for next lecture, let us define fields.
+\begin{definition}
+    A field is a commutative ring $F$ such that $F \setminus \{0\}$ is a group under multiplication. All techniques from linear algebra work in any such field $F$.
+\end{definition}
