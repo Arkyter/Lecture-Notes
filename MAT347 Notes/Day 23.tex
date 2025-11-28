@@ -1,0 +1,58 @@
+\section{Day 23: (Nov.\ 26, 2025)}
+We discuss ``better rings and ideals'' today, but we will start with an aside.
+\begin{definition}
+    A division ring is a field in which $\cdot$ isn't necessarily commutative. More formally, it's a ring $R$ in which, if $x = 0$, then there exists $y$ such that $xy = yx = 1$.
+\end{definition}
+\noindent As an example, consider the quaternions $\HH = \{a\ell + bi + cj + dk \mid a, b, c, d \in \RR\}$, modded out by $i^2 = j^2 = h^2 = -1$, and that $jk = i$, $ki = j$, and $ij = k$. The quaternions encode a lot of 3-dimensional geometry, of which they are non-commutative and the division ring $a + bi + cj + dk$ has an inverse unless $a = b = c = d = 0$. Indeed, the inverse is given by
+\[ \frac{a - bi - cj - dk}{a^2 + b^2 + c^2 + d^2}. \]
+We make the following definition,
+\begin{definition}
+    $\ol{a + bi + cj + dk} := a - bi - cj - dk$.    
+\end{definition}
+\noindent If $z = a + bi + cj + dk$, then $z \cdot \ol{z} = \abs{z}^2$. If $\abs{z}^2 \neq 0$, then $(z \ol z)/\abs{z}^2 = 1$. From this point onwards, all rings are assumed to be commutative unless mentioned otherwise.
+\begin{theorem}
+    If $I$ is an ideal in $R$, then $R/I$ is a field if and only if $I$ is maximal (i.e., if $J \supset I$ is also an ideal, then $J = I$).
+\end{theorem}
+\begin{proof}
+    We proceed by checking both implications.
+    \begin{itemize}
+        \item[($\Leftarrow$)] Assume $I$ is maximal; we need to show that $R/I$ is a field. Indeed, $R/I$ is commutative, and if $[x] \neq 0$, then there exists $y$ such that $[x][y] = [1]$. Let $J = Rx + I$; we may see that $J + J \subset J$ and $RJ = JR = J$; if $1 \not\in J$, we would have that $J$ is an ideal strictly containing $I$, since $x \in J \setminus I$, but $I$ was assumed to be maximal. Thus, we see that $1 \in J$, and so there exists $y$ such that $1 = yx + i$ for some $i \in I$. Thus, $[yx] = [1]$, and we have $[y][x] = 1$, so $[x]$ is invertbile.
+        \item[($\Rightarrow$)] Now, assume $J$ is an ideal in $R$ and $J \supsetneq I$. Let $x \in J \setminus I$ such that $[x]_I$ is invertible, as $R/I$ is a field, and $[x]_I \neq 0$; this means there exists $y$ such that $[x y] = 1$, so $xy\inv \in I$, and equivalently, $-1 \in -xy + I$. However, this means $1 \in xy + I$, which is a contradiction. \qedhere
+    \end{itemize}
+\end{proof}
+\noindent We now give some examples. $p\ZZ$ is a maximal ideal in $\ZZ$ if $p$ is prime, so $\ZZ/p\ZZ$ is a field. If $R = \ell^\infty$, i.e., the set of bounded sequences of real numbers, then $I_n = \{(a_i) : a_n = 0\}$ is a maximal ideal too. We have that $\ell^\infty / I_n \cong \RR$, and $\pi_n : \ell^\infty \to \ell^\infty / I_n$ by $\pi(\{a_i\}) = a_n$; we may define $I_\infty = \{(a_i) : a_i \to 0\}$.
+\medbreak
+\noindent Notice, however, that $I_\infty$ is not maximal. Indeed, $J = \{(a_i) : a_{2i} \to 0\} \supsetneq I$.
+\begin{theorem}
+    Every ideal is contained in a maximal ideal.
+\end{theorem}
+\begin{proof}
+    Use Zorn's lemma or the axiom of choice.
+\end{proof}
+\noindent Take $J \supset I_\infty$; there are $2^{2^\omega}$ because $\abs{\beta \NN} = 2^{2^{\omega}}$ (the ultrafilter on the set of naturals coincides with the Stone--\v{C}ech compactification of $\NN$). We claim that $\ell^\infty / J \cong R$.
+\begin{proof}
+    Consider the map $\RR \to \ell^\infty / J$, $x \mapsto (x)_{n \in \NN}$. We have that $\lim_j : \ell^\infty \to \ell^\infty / J = \RR$, where $\lim_j(a_n) = \pi_J(a_n)$. Then the limit w.r.t.\ the index $j$ of the infinite sequence $(a_i)$ with each $a_i \equiv c$ is given by $c$, $\lim_j(a_i) = 0$ if $(a_i)$ is such that $a_i \to 0$, and $\lim_j(a_i) = \lim_{i \to \infty} (a_i)$ if the conventional limit exists. $\lim_j$ is additive and multiplicative, so $\ell^\infty / J$ is a field. Moreover, we see that every sequence in $\ell^\infty$ converges in $J$, so $I_\infty$ cannot be a maximal ideal, as it is contained in $J$.
+\end{proof}
+\noindent Note that the set of commutative rings contains the set of integral domains, which also contains the set of fields.
+\begin{definition}
+    An integral domain is a commutative ring with no zero divisors, i.e., $ab = 0$ implies $a = 0$ or $b = 0$.
+\end{definition}
+\noindent We give some examples of integral domains. $R = \{0, 1\}$ is a domain. Any field, including $\ZZ$ is a domain; $\ZZ[x]$ is a domain. For non-examples, consider $\ZZ/6$ (where $2 \cdot 3 = 0$) and $M_{2 \times 2}(\ZZ)$ are not domains.
+\begin{lemma}[Cancellation Law]
+    In a domain, if $ab = ac$ and $a \neq 0$, then $b = c$.
+\end{lemma}
+\begin{proof}
+    $ab = ac$ implies $a(b - c) = 0$, but $a \neq 0$, so $b - c = 0$, and therefore $b = c$.
+\end{proof}
+\begin{theorem}
+    If $I \subset R$ is called ``prime'' if it satisfies the property that $a \cdot b \in I$ implies $a \in I$ or $b \in I$.
+\end{theorem}
+\begin{proof}
+    Assume that $R/I$ is a domain; if $ab \in I$, then $[ab] = [0]$ in $R/I$, i.e., $[a][b] = 0$, so $[a]$ or $[b] = 0$, so $a$ or $b$ is in $I$. This means $I$ is prime. In the other direction, if $[a][b] = 0$, then $[ab] = 0$, so $ab \in I$. This means $a$ or $b \in I$ implies $[a]$ or $[b] \in I$.
+\end{proof}
+\begin{claim}
+    A maximal ideal is prime.
+\end{claim}
+\begin{proof}
+    If $I$ is a maximal ideal, then $R/I$ is a field, which is a domain, so $I$ is a prime ideal.
+\end{proof}
