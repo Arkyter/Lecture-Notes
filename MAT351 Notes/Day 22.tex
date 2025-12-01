@@ -1,0 +1,89 @@
+\section{Day 22: Laplace Equation (Dec. 1, 2025)}
+Fabio has gone to New York. Slacker. We will be looking at the Laplace equation with the amazing TA Oliver. This is \( \Delta u = 0 \).
+
+Where does this arise? It gives us stationary solutions to the heat and wave equation. This is of course because if \( u (x, t) : \mathbb{R} \times \mathbb{R}^{n} \to \mathbb{R} \) is harmonic in \( x \) and constant in \( t \), then
+\[ \partial_{t}^{k} u + c \Delta u = 0. \]
+(for \textit{all} \( c \in \mathbb{R} \)). Both the heat and wave eqution are of this form. Also the Schr\"odinger equation.
+
+\begin{example}
+Let's look at the Laplace equation in \( [0, \pi]^{2} \).
+\[ \left\{\begin{NiceMatrix}u_{xx} + u_{y y} = 0 \\ u(0, y) = u(\pi, y) = 0 \\ u(x, 0) = 0, u(x, \pi) = g(x)\end{NiceMatrix}\right.. \]
+Then as usual we'll look for a separable solution.
+\[ u(x, y) = X(x) Y(y) \implies \frac{X''}{X} = - \frac{Y''}{Y} = \lambda, \]
+so we do what we've always done, and write the eigenvalue problem
+\[ \left\{\begin{NiceMatrix}X'' = \lambda X \\ X(0) = 0 = X(\pi)\end{NiceMatrix}\right.. \]
+Using some (very difficult and hard to prove) facts about trig functions, \( \lambda = n^{2} \) for some \( n \in \mathbb{Z} \), so
+\[ X(x) = a_{n} \cos \left( nx \right) + b_{n} \sin(nx), \]
+and since we know all the solutions for second order constant coefficient ODEs, we can also deduce from our vast repertoire of ODE knowledge that
+\[ Y(y) = c_{n} \sinh(ny) + d_{n} \cosh(ny) \]
+
+Plugging in the boundary conditions of \( X(0) = 0 = X(\pi) \) and \( Y(0) = 0 \), we can deduce \( a_{n} = 0 \) and \( d_{n} = 0 \), so
+\[ X(x) = b_{n} \sin \left( nx \right), \qquad Y(y) = c_{n} \sinh(ny). \]
+We can then write
+\[ u(x, y) = \sum_{n=1}^{\infty} A_{n} \sin(nx) \sinh(ny). \]
+Our final boundary condition (and orthogonality of eigenfunctions with different eigenvalues) gives us that
+\[ A_{n} \sinh(n \pi) = \frac{2}{\pi} \int_{0}^{\pi} g(x) \sin(nx) dx, \]
+so since \( \sinh(n \pi) \ne 0 \), we are done. 
+\end{example}
+
+\begin{example}
+	
+We're gonna do the problem on a disc.\footnote{``I wanna do something that's not on a \textit{rectangle}.'' Oliver, your prejudices are showing.}
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 & B(0, 1) \subseteq \mathbb{R}^{2} \\ u = g & \partial B(0, 1).\end{NiceMatrix}\right.  \]
+The natural way to do this is using polar coordinates. In polar coordinates,
+\[ \Delta = \partial^{2}_{r} + \frac{1}{r} \partial_{r} + \frac{1}{r^{2}} \partial^{2}_{\theta}. \]
+If we write
+\[ u = R(r) \Theta(\theta), \]
+then
+\[ R''\Theta + \frac{1}{r}R' \Theta + \frac{1}{r^{2}} R \Theta'' = 0. \]
+Then
+\[ - \frac{\Theta''}{\Theta} = \frac{r^{2} R'' + rR'}{R} = \Lambda. \]
+What sign should \( \lambda \) be? Well we'll use the \( \Theta \) term to exploit that since
+\[ \Theta'' = - \lambda \Theta \]
+and \( \Theta \) is \( 2 \pi \)-periodic, then we either have that \( \Theta \) is constant and \( -\lambda = 0 \), or \( \Theta(\theta) = a_{n} \cos \left( n \theta \right) + b_{n} \sin \left( n \theta \right) \) and \( - \lambda \) is negative. We'll look at the latter case.
+
+Notice that
+\[ r^{2} R'' + r R' - n^{2} R = 0, \]
+so this is a Cauchy-Euler differential equation, and therefore setting as ansatz \( R = r^{\alpha} \),
+\[ r^{\alpha} \left[ \alpha (\alpha - 1) + \alpha - n^{2} \right] = 0 \]
+thus \( \alpha^{2} - n^{2} = 0 \), so we have that \( \alpha = \pm n \). Thus, this ODE will be solved by
+\[ R(r) = c_{n} r^{n} + d_{n} r^{-n}. \]
+On the other hand, since we want this to be continuous on the disc, we need \( d_{n} = 0 \), as \( r^{-n} \) isn't defined at \( r = 0 \). It follows that
+\[ u(r, \theta) = A_{0} + \sum_{n=1}^{\infty} r^{n} \left( A_{n} \cos(n \theta) + B_{n} \sin(n \theta) \right). \]
+Since \( g(\theta) = A_{0} + \sum A_{n} \cos(n \theta) + B_{n} \sin(n \theta),   \)
+we just need \( A_{n} \) and \( B_{n} \) to be the Fourier coefficients of \( g \).
+\end{example}
+
+\begin{example}
+Let's look at the Neumann boundary conditions.
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 & B(0, 1) \\ \frac{\partial u}{\partial n} = h & \partial B(0, 1).\end{NiceMatrix}\right.  \]
+Our deductions are the same to get up to the general solution
+\[ u(r, \theta) = A_{0} + \sum_{n=1}^{\infty} r^{n} \left( A_{n} \cos(n \theta) + B_{n} \sin(n \theta) \right), \]
+so since we know (hello 257) \( \frac{\partial u}{\partial n} = \nabla u \cdot n \) on the circle (and the normal vector at a point \( x \) on a circle of radius \( 1 \) is just \( x \) itself). Then we can deduce that
+\[ \frac{\partial u}{\partial n} = \sum_{n=1}^{\infty} n \left[ A_{n} \cos(n \theta) + B_{n} \sin (n \theta) \right] = h(\theta). \]
+Integrating yields our Fourier coefficients as usual. We can't determined \( A_{0} \) by this formula which is confirmation of our non-uniqueness. Also, \( \hat h(0) = 0 \) (the \( 0 \)th Fourier coefficient for \( h \) is \( 0 \)). It follows that
+\[ 0 = \frac{1}{\pi} \int_{0}^{2 \pi} h(\theta) d \theta. \]
+	
+\end{example}
+
+\begin{example}
+Let's do another wacky and fun domain. 
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 & 1 < r < 2 & 0 < \theta < \pi \\ u(r, 0) = 0 = u(r, \pi) \\ u(1, \theta) = \sin \theta \\ u(2, \theta) = 0.\end{NiceMatrix}\right.  \]
+This will look like a rainbow (waow). \( \Theta(\theta) = a_{n} \cos \left( n \theta \right) + b_{n} \sin \left( n \theta \right) \) and \( R(r) = c_{n} r^{n} + d_{n} r^{-n} \). In this case, we don't have any reason to cancel out the \( r^{n} \) and \( r^{-n} \).
+
+Now, \( u(r, 0) = 0 = r(r, \pi) \) implies \( \Theta(0) =0 = \Theta(\pi) \), so \( a_{n} = 0 \). Thus,
+\[ u(r, \theta) = \sum_{n=1}^{\infty} \left( C_{n} r^{n} + D_{n} r^{-n} \right) \sin(n \theta). \]
+There won't be a constant. When we set \( r = 1 \), we get that
+\[ \sum_{n=1}^{\infty} \left( C_{n} + D_{n} \right) \sin(n \theta) = \sin \left( \theta \right), \]
+therefore
+\[ \left\{\begin{NiceMatrix}C_{1} + D_{1} = 1 \\ C_{n} + D_{n} = 0 & n > 1.\end{NiceMatrix}\right.  \]
+When \( r = 2 \), then
+\[ \sum_{n=1}^{\infty} \left( C_{n} 2^{n} + D_{n} 2^{-n} \right) \sin(n \theta) = 0 \]
+and therefore
+\[ C_{n} 2^{n} + D_{n} 2^{-n} = 0, \qquad n \ge 1. \]
+For each \( n \), this is a linear system of two equations in two unknowns, so we can solve it. I won't write out that process, taking on faith that you have taken 240.
+\[ C_{1} = \frac{- 1}{3}, D_{1} = \frac{4}{3}, \qquad C_{n} = 0,  D_{n} = 0, \qquad n > 1. \]
+Therefore
+\[ u(r, \theta) = \left( \frac{-r}{3} + \frac{4}{3r} \right) \sin \left( \theta \right). \]
+\end{example}
+Happy Holidays everyone. It's Dynamical Systems December for me.
