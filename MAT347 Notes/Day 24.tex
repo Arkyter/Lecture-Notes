@@ -1,1 +1,27 @@
-\section{Day 24: (Nov.\ 28, 2025)}
+\section{Day 24: Primes and Irreducibles (Nov.\ 28, 2025)}
+From here on, we assume that all rings are commutative. Recall that $R/I$ is a field if and only if $I$ is a maximal ideal, and $R/I$ is a domain (it admits no zero divisors) if and only if $I$ is prime ($ab \in I$ implies $a \in I$ or $b \in I$). All rings are assumed to be domains!
+\begin{definition}
+    We write $a \mid b$ (i.e., $a$ divides into $b$) if $a \neq 0$ and there exists $q$ such that $qa = b$.
+\end{definition}
+\begin{definition}
+    If $a \mid b$ and $b \mid a$, we say that ``$a$ and $b$ are associates'' and write $a \sim b$.
+\end{definition}
+\noindent As a quick lemma, $a \mid b$ and $b \mid c$ implies $a \mid c$, and the other direction holds. $a$ and $b$ being associates is equivalent to the existence of $u, v$ such that $au = b$, $bv = a$, and $uv = 1$.
+\begin{definition}
+    $R^\ast$ is the set of invertible elements in $R$; we call such elements \textit{units}, and $R^\ast$ is always a group. 
+\end{definition}
+\noindent For examples, consider $\ZZ^\ast = \{\pm 1\}$ and $\QQ[x]^\ast = \QQ \setminus \{0\}$. The moral is that $a \sim b$ if and only if there exists $u \in R^\ast$ such that $au = b$, where the equivalence relation comes from the group action $R \setminus \{0\} \curvearrowleft R^\ast$, We may regard $R \setminus \{0\} / R^\ast$ as the classes of associativity.
+\medbreak
+\noindent A nonzero nonunit $x \in R$ is called \textit{irreducible} if $x = ab$ implies $a \in R^\ast$ or $b \in R^\ast$, and a nonzero nonunit $x \in R$ is called \textit{prime} if $x \mid ab$ implies $x \mid a$ or $x \mid b$.
+\begin{claim}
+    Prime implies irreducible.
+\end{claim}
+\begin{proof}
+    Suppose $p$ is a prime and $p = ab$. Then $p \mid ab$ implies $p \mid a$ or $p \mid b$; without loss of generality, we will assume the former. This means that there exists some $u$ such that $a = pu$, and $a = abu$ implies $1 = bu$, so $b \in R^\ast$.
+\end{proof}
+\noindent The converse need not hold; indeed, consider the classic example $\ZZ[\sqrt{-5}]$, where $2$ is irreducible but not prime. We may write
+\[ \ZZ[\sqrt{-5}] = \{a + b \sqrt{-5} \mid a, b \in \ZZ\} = \ZZ[x] / \left<x^2 + 5\right>; \]
+$2$ is not prime, since $2$ divides into $6 = (1 + \sqrt{-5})(1 - \sqrt{-5})$, but $2$ does not divide into either of $1 \pm \sqrt{-5}$. Let us give some background; recall that $\norm{a + bi}^2 = a^2 + b^2 = (a + bi)\ol{a + bi}$, so $\norm{a + b\sqrt{-5}}^2 = (a + b\sqrt{-5})(a - b\sqrt{-5}) = a^2 + 5b^2 \in \ZZ$; for $z_1, z_2 \in \ZZ[\sqrt{-5}]$, we have that $\norm{z_1 z_2}^2 = \norm{z_1}^2 \cdot \norm{z_2}^2$ and $\norm{2}^2 = 4$. Since $2 = z_1 \cdot z_2$ in $R$, $\norm{2}^2 = \norm{z_1}^2 \norm{z_2}^2 = 4$ in $\ZZ$, it must be that $\abs{z_1}^2$ is given by $1$, $2$, or $4$, so one of the factors must be trivial.
+\begin{claim}
+    $p \in R$ is prime if and only if $\left<p\right> = pR$ is a prime ideal, i.e., $p \mid ab$ implies $p \mid a$ or $p \mid b$ if and only if $ab \in I$ implies $a \in I$ or $b \in I$.
+\end{claim}
