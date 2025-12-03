@@ -1,0 +1,40 @@
+\section{Day 22: Dirichlet Problem (Nov.\ 27, 2025)}
+We discuss the solution to Dirichlet's problem. Note that we will be following Ahlfors' textbook.\footnote{i'll be recompiling these notes before the exam so bear with me lol}
+\begin{theorem}
+    Let $\Omega$ be a region such that every boundary point is the endpoitn of a line segment whose other poitns are exterior to $\Omega$. Let $f$ be a continuous bounded function on $\partial \Omega$. Then there exists $U$ on $\ol \Omega$ such that
+    \[ \begin{cases} \Delta U = 0 & \text{on $\Omega$}, \\ U = f & \text{on $\partial \Omega$}. \end{cases} \]
+\end{theorem}
+\noindent We start with Harnack's principle (convergence of harmonic functions).
+\begin{theorem}
+    Consider a sequence of functions $u_n(z)$ each defined and harmonic on a certain region $\Omega_n$. Let $\Omega$ be a region such that ecah point has a neighborhood that is contained in all but finitely many $\Omega_n$; moreover, assume that $u_n(z) \leq u_{n+1}(z)$ on this neighborhood for all indices $n$. Then there are two cases; either
+    \begin{enumerate}[(i)]
+        \item $u_n(z)$ diverges to $+\infty$ uniformly on compact subsets, or
+        \item $u_n(z)$ converges uniformly to a harmonic function $u(z)$ on $\Omega$ on compact subsets.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Last lecture, we proved that if there exists $z_0 \in \Omega$ such that $\lim_{n \to \infty} u_n(z_0) = \infty$, then the first case holds. We now assume the opposite case; suppose $\lim_{n \to \infty} u_n(z) < \infty$. Then we want to show that the limit function $u$ is harmonic. First, we will show that $u_n$ converges to $u$ uniformly on compact subsets. For any $z_0 \in \Omega$, there exists $D_r(z_0) \subset \Omega_n$ for all large enough $n$; by Harnack's inequality, we have that
+    \[ \frac{r - \abs{z}}{r + \abs{z}} (u_{n+1}(z_0) - u_n(z_0)) \leq u_{n+1}(z) - u_n(z) \leq \frac{r + \abs{z}}{r - \abs{z}} (u_{n+1}(z_0) - u_n(z_0)), \]
+    which implies that $\{u_n\}$ converges uniformly on $\abs{z - z_0} \leq r/2$. Hence, the limiting function $u$ is continuous on $\Omega$ and harmonic. For any $z_0 \in \Omega$ and $\abs{z - z_0} \leq r$, we have that
+    \[ u(z_0) = \frac{1}{2\pi} \int_0^{2\pi} u(z_0 + re^{i\theta}) \, d\theta = \lim_{n \to \infty} u_n(z_0) = \lim_{n \to \infty} \frac{1}{2\pi} \int_0^{2\pi} u_n(z_0 + r e^{i\theta}) \, d\theta, \]
+    where the last equality is justified from $u_n$ being harmonic and uniform convergence.
+\end{proof}
+\begin{definition}
+    A continuous real-valued function $v(z)$ on a region $\Omega$ is said to be \textit{subharmonic} in $\Omega$ if, for any harmonic function $u$ on $\Omega' \subset \Omega$, $v - u$ satisfies the maximum principle (i.e., $v - u$ cannot have a max in $\Omega'$ without being constant).
+\end{definition}
+\begin{theorem}
+    A continuous function $v$ is \textit{subharmonic} on $\Omega$ if and only if
+    \[ v(z_0) \leq \frac{1}{2\pi} \int_0^{2\pi} v(z_0 + re^{i\theta}) \, d\theta \]
+    for all discs $\abs{z - z_0} \leq r$ in $\Omega$.
+\end{theorem}
+\begin{proof}
+    We will prove both directions. Let $u$ be any harmonic function on $\Omega' \subset \Omega$, and assume $v - u$ has a maximum on $\Omega'$, say, $M := (v - u)(z_0) = \sup_{z \in \Omega} (v - u)(z)$. Then let $\Omega_M = \{z \in \Omega \mid (v - u)(z) = M\}$; pick any $w_0 \in \Omega_M$ and any disc $\abs{w - w_0} = r$ in $\Omega$. We have that
+    \[ (v - u)(w_0) \leq \frac{1}{2\pi} \int_0^{2\pi} (v - u)(-w_0) + re^{i\theta}) \, d\theta; \]
+    since $(v - u)(w_0) = \sup (v_u)$, we see $(v - u) \equiv M$ on the circle $w - w_0 = r$, so there exists an open disc centered at $w_0$ on which $v - u \equiv M$. This means that $\Omega_M$ is open.\footnote{i need to check ahlfors for this argument, itll be fixed / justified better in the complex compilation} Moreover, $\Omega_M$ is closed by continuity of $v - u$, so we conclude that the function is constant.
+    \\[8pt]
+    For the other direction, assume $v$ is subharmonic; then, for any $z_0 \in \Omega$, we have that for any disc $\abs{z - z_0} \leq r$, we want to show that
+    \[ v(z_0) \leq \frac{1}{2\pi} \int_0^{2\pi} v(z_0 + re^{i\theta}) \, d\theta = P_v(z_0), \]
+    which is the Poisson integral of $v$ at $z_0$. Recall that this is given by
+    \[ P_v(z) = \frac{1}{2\pi} \int_0^{2\pi} \frac{r^2 - \abs{z - z_0}^2}{\abs{re^{i\theta} + z_0 - z}^2} v(z_0 + re^{i\theta}) \, d\theta. \]
+    Now, consider $v - P_v$; by Schwarz's theorem, $P_v$ is harmonic and $v - P_v = 0$ on $\abs{z - z_0} = r$. Thus, $v - P_v$ cannot have a maximum on $\abs{z - z_0} < r$, admits a maximum on $\abs{z - z_0} \leq r$, and so said maximum should be on $\abs{z - z_0} \geq r$.
+\end{proof}
