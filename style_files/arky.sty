@@ -201,7 +201,6 @@
 \DeclareMathOperator*{\argmin}{arg min} % complex; argument min
 \DeclareMathOperator*{\argmax}{arg max} % complex; argument max
 \DeclareMathOperator{\res}{res} % residue
-\DeclareMathOperator{\PSL}{PSL} % projective special linear group
 
 % real analysis - import from 357/457-1000 probably
 % tbd
@@ -215,6 +214,9 @@
 \DeclareMathOperator{\spec}{spec} % spectrum
 \DeclareMathOperator*{\esssup}{ess\,sup} % essential supremum
 \DeclareMathOperator*{\essinf}{ess\,inf} % essential infimum
+\let\sp\relax
+\DeclareMathOperator{\sp}{sp} % spectrum of an element
+\DeclareMathOperator{\Sp}{Sp} % Gelfand spectrum
 
 % operators
 \DeclareMathOperator{\img}{im} % image
@@ -225,7 +227,7 @@
 \DeclareMathOperator{\rank}{rank} % rank
 \DeclareMathOperator{\Spec}{Spec} % spectrum
 \DeclareMathOperator{\Tr}{Tr} % trace
-\DeclareMathOperator{\tr}{Tr} % alternative trace
+\DeclareMathOperator{\tr}{tr} % trace alternative
 \DeclareMathOperator{\pr}{pr} % projection, other than \pi
 \DeclareMathOperator{\ext}{ext} % extension
 \DeclareMathOperator{\pred}{pred} % predecessor
@@ -245,7 +247,6 @@
 \let\mod\relax
 \DeclareMathOperator{\mod}{mod} % yeah, fuck that space in front of the usual ams package's mod or something. go away.
 \DeclareMathOperator{\ord}{ord} % order
-\DeclareMathOperator{\adj}{adj} % adjugate matrix
 \DeclareMathOperator{\charin}{char} % characteristic
 \DeclareMathOperator{\spn}{span} % because span is a command already
 % \DeclareMathOperator{\clspn}{\overline{span}} % idk.
@@ -267,7 +268,6 @@
 	\mathrel{\ooalign{$\gneq$\cr\raise.22ex\hbox{$\rhd$}\cr}}}
 
 % lie and primes - frakturs
-\newcommand{\ka}{\mathfrak a} % ideal
 \newcommand{\kb}{\mathfrak b}
 \newcommand{\kg}{\mathfrak g}
 \newcommand{\kh}{\mathfrak h}
