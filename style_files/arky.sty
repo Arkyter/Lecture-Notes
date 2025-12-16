@@ -63,6 +63,10 @@
 	\setlength{\textheight}{8.75in}
 	\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 	\setlength{\footskip}{0.3in}
+
+	\usepackage{anyfontsize} % https://tex.stackexchange.com/a/328322
+	\usepackage[T1]{fontenc}
+	\usepackage{newtx} % daniel said to
 }
 { % if koma is used, ...
 	\usepackage[headsepline]{scrlayer-scrpage}
@@ -147,6 +151,7 @@
 \newcommand{\lthen}{\rightarrow} % rarely used
 \newcommand{\surjto}{\twoheadrightarrow} % surjection map
 \newcommand{\injto}{\hookrightarrow} % injective map
+\DeclareMathOperator{\supp}{supp} % support
 
 % general - miscellaneous
 \newcommand\restr[2]{{ % restriction
@@ -217,6 +222,7 @@
 \let\sp\relax
 \DeclareMathOperator{\sp}{sp} % spectrum of an element
 \DeclareMathOperator{\Sp}{Sp} % Gelfand spectrum
+\DeclareMathOperator{\essim}{essim} % essential image
 
 % operators
 \DeclareMathOperator{\img}{im} % image
@@ -281,24 +287,28 @@
 \DeclareMathOperator{\Tor}{Tor} % Tor functor
 \newcommand{\GF}{\opname{GF}}
 \newcommand{\gl}{\opname{\mathfrak{gl}}} % frak gl group
+\let\sl\relax
 \newcommand{\sl}{\opname{\mathfrak{sl}}} % frak sl group
 
 % calligraphy letters
 \newcommand{\SA}{\mathcal A}
 \newcommand{\SB}{\mathcal B}
-\newcommand{\SC}{\mathcal C} % C^r spaces
+\newcommand{\SC}{\mathcal C} % C^r spaces (sometimes)
 \newcommand{\SD}{\mathcal D}
 \newcommand{\SE}{\mathcal E}
 \newcommand{\SF}{\mathcal F} % Fourier transform
+\newcommand{\SG}{\mathcal G} % group map (sometimes)
 % \newcommand{\SL}{\mathcal L} % what do i even use to replace this
-\newcommand{\SM}{\mathcal M}
+\newcommand{\SK}{\mathcal K} % compact operators
+\newcommand{\SM}{\mathcal M} 
 \newcommand{\SN}{\mathcal N}
 \newcommand{\SO}{\mathcal O} % open cover
-\newcommand{\SP}{\mathcal P}
+\newcommand{\SP}{\mathcal P} 
 \newcommand{\SQ}{\mathcal Q}
-\newcommand{\SR}{\mathcal R}
+\newcommand{\SR}{\mathcal R} 
 % \newcommand{\SS}{\mathcal S}
-\newcommand{\ST}{\mathcal T} % topology
+\newcommand{\ST}{\mathcal T} % topology (or \tau lol)
+\newcommand{\SU}{\mathcal U} % group of unitary operators
 
 % script letters
 \newcommand{\SCA}{\mathscr A}
