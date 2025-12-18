@@ -38,7 +38,7 @@ i.e., $z$ as a complex variable.
 \end{proof}
 \begin{corollary}
     The power series $f(z) = \sum_{n=0}^\infty a_n z^n$ is infinitely complex differentiable on its disc of convergence. For $k \in \NN$, its $k$th derivative $f^{(k)}$ is given by
-    \[ f^{(k)}(z) = \sum_{n=0}^\infty (a_n z^n)^k. \]
+    \[ f^{(k)}(z) = \sum_{n=k}^\infty \frac{n!}{(n-k)!} a_n z^{n-k}. \]
 \end{corollary}
 \begin{definition}
     A function $f : \Omega \to \CC$ is said to be \textit{analytic} at $z_0 \in \Omega$ if there exists a power series $\sum_{n=0}^\infty a_n (z - z_0)^n$ with positive radius of convergence such that

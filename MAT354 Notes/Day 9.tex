@@ -5,7 +5,7 @@ Recall Liouville's theorem that if $f$ is an entire (holomorphic on the whole co
 \end{corollary}
 \begin{proof}
     Proceed by contradiction by means of Liouville's theorem. Suppose $P(z)$ is nonconstant and admits no roots in $\CC$; then $P(z)\inv$ is entire, and it remains to check that it is bounded. It is enough to get a lower bound for $a_nz^n$, since the dominating term of $P(z)$ is $a_nz^n$; supposing $a_n \neq 0$, we have that
-    \[ \frac{P(z)}{z^n} = a_n + \left(\frac{a_{n-1}}{z} + \dots + \frac{a_n}{z^n}\right), \]
+    \[ \frac{P(z)}{z^n} = a_n + \left(\frac{a_{n-1}}{z} + \dots + \frac{a_0}{z^n}\right), \]
     of which we know is defined on $\CC \setminus \{0\}$; taking $\abs{z} \to +\infty$, we have that $\frac{P(z)}{z^n} \to a_n$, so there exists $R > 0$ such that
     \[ \abs{P(z)} \geq \frac{\abs{a_n}}{2} \abs{z}^n \]
     for all $\abs{z} > R$. This means
