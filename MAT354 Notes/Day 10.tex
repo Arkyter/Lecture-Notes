@@ -20,7 +20,7 @@ where $F(z, s)$ is holomorphic for $z \in \CC$ and continuous in $s \in \RR$. Is
     \[ f_n(z) = \frac{1}{n} \sum_{k=1}^n F(z, k/n), \]
     for which we may note that each $f_n$ is holomorphic in $z$ by property (i). We claim that $\{f_n\}$ converges uniformly to some $f$, i.e., as $n \to \infty$, we have that
     \[ \frac{1}{n} \sum_{k=1}^n F(z, k/n) \to \int_0^1 F(z, s) \, ds = f(z). \]
-    For any open disc $D$ with closure $\ol D \subset \Omega$, we want to show that $\{f_n\} \to f$ uniformly on $D$. Since $F$ is continuous on $\Omega \times [0, 1] \supset$, it is also continuous on $\ol D \times [0, 1]$, which we observe is compact, so we indeed have uniform continuity. In particular, this means that for all $\eps > 0$, there exists $\delta > 0$ such that $\sup_{z \in D} \abs{F(z, s_1) - F(z, s_2)} < \eps$ whenever $\abs{s_1 - s_2} < \delta$.
+    For any open disc $D$ with closure $\ol D \subset \Omega$, we want to show that $\{f_n\} \to f$ uniformly on $D$. Since $F$ is continuous on $\Omega \times [0, 1]$, it is also continuous on $\ol D \times [0, 1]$, which we observe is compact, so we indeed have uniform continuity. In particular, this means that for all $\eps > 0$, there exists $\delta > 0$ such that $\sup_{z \in D} \abs{F(z, s_1) - F(z, s_2)} < \eps$ whenever $\abs{s_1 - s_2} < \delta$.
     \\[8pt]
     In this manner, we may take that given $n > \delta\inv$ and $z \in D$, we have that
     \begin{align*}
@@ -37,13 +37,13 @@ where $F(z, s)$ is holomorphic for $z \in \CC$ and continuous in $s \in \RR$. Is
 \begin{proof}
     It suffices to consider that this holds for every strip $S_{\delta, m} = \{s \in \CC \mid \delta < \Re s < M\}$, where $\delta, M$ are positive reals satisfying $\delta < M$. For all $s \in S_{\delta, M}$, denote $\Re s$ by $\sigma$. Then
     \[ \abs{\int_0^\infty e^{-t} t^{s-1} \, dt} \leq \int_0^\infty \abs{e^{-t} t^{s-1}} \, dt = \int_0^\infty e^{-t} t^{\sigma - 1} \, dt, \]
-    per Euler's formula, of which we may observe the latter integral converges by real convergence (as discussed earlier). Now, let $f(s, t) = e^{-t} t^{s-t}$ be holomorphic in $s$ and continuous in $(s, t)$. For $\eps > 0$, define
+    per Euler's formula, of which we may observe the latter integral converges by real convergence (as discussed earlier). Now, let $f(s, t) = e^{-t} t^{s-1}$ be holomorphic in $s$ and continuous in $(s, t)$. For $\eps > 0$, define
     \[ F_\eps(s) = \int_\eps^{\frac{1}{\eps}} e^{-t} t^{s-1} \, dt; \]
     per our previous result, we have that $F_\eps(s)$ is holomorphic in $s$ on $S_{\delta, M}$. Also, per the first result of Cauchy's formula, it suffices to check that $F_\eps$ converges uniformly to $\Gamma$ on $S_{\delta, M}$. Directly write as follows,
     \[ \abs{\Gamma(s) - F_\eps(s)} \leq \int_0^\eps e^{-t} t^{\sigma - 1} \, dt + \int_{\frac{1}{\eps}}^\infty e^{-t} t^{\sigma - 1} \, dt, \]
     for which we may observe that
     \begin{align*}
-        \int_0^\eps e^{-t} t^{\sigma - 1} \, dt &= \frac{\eps^\delta}{\delta} = \frac{\eps^\delta}{\delta} \taking{\eps \to 0} 0 \tag{on $0 < \eps < 1$}, \\
+        \int_0^\eps e^{-t} t^{\sigma - 1} \, dt &= \frac{\eps^\delta}{\delta} \taking{\eps \to 0} 0 \tag{on $0 < \eps < 1$}, \\
         \abs{\int_{\frac{1}{\eps}}^\infty e^{-t} t^{\sigma - 1} \, dt} &\leq \int_{\frac{1}{\eps}}^\infty e^{-t} t^{M-1} \, dt \leq C \int_{\frac{1}{\eps}}^\infty e^{-\frac{t}{2}} \, dt \taking{\eps \to 0} 0.
     \end{align*}
     Thus, we obtain uniform convergence of $F_\eps \to \Gamma$ independent of $s$, and we indeed have an analytic continuation of $\Gamma$ to the half-plane $\Re s > 0$.

@@ -79,7 +79,7 @@ For case (iv), we can partition the triangle into subtriangles satisfying case (
 \noindent With this, we may now prove the Schwartz reflection principle.
 \begin{proof}
     Let $f$ be holomorphic on $\Omega^+$ and let it extend continuously to $I$ such that it is real-valued on $I$. We claim that there exists $F$ on $\Omega$ such that the restrction of $F$ onto $\Omega^+$ is equal to $f$ on $\Omega^+$. We may construct such $F$ by having $f^-(z) = \ol{f(z)}$ for $z \in \Omega^-$. It suffices to check that $f^-$ is holomorphic on $\Omega^-$; for all $z, z_0 \in \Omega^-$, we have that $\ol z, \ol{z_0} \in \Omega^+$. Since $f$ is holomorphic at $\ol{z_0}$, $f$ admits a power series
-    \[ f(\ol{z_0}) = \sum_{n=0}^\infty a_n(\ol z - \ol{z_0}), \]
+    \[ f(\ol{z}) = \sum_{n=0}^\infty a_n(\ol z - \ol{z_0}), \]
     which converges on some $D_r(\ol{z_0})$ with $r > 0$. In particular,
     \[ f^-(z) = \ol{f(\ol z)} = \sum_{n=0}^\infty \ol{a_n} (z-z_0)^n, \]
     which converges on $D_r(z_0)$, which by Hadamard's formula, admits the same radius of convergence as the power series about $f(\ol{z_0})$, i.e., the power series for $f^-(z)$ converges on $D_r(z_0)$. Hence, $f^-$ is holomorphic at $z_0$, and since $f$ extends continuous to $I$ and is real valued on $I$, we have that $\ol{f(\ol x)} = f(x)$ for all $x \in I$, and so $f^-$ can be extended continuously to $I$ such that $f^- = f^+$ on $I$. In this manner, we may apply the symmetric principle from earlier to obtain $F$ satisfying the Schwartz reflection principle.\footnote{ref: p.60 shakarchi}

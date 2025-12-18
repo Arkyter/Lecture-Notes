@@ -22,11 +22,11 @@ Let $f$ be a holomorphic function define in an open set $\Omega$, except at $z_0
     where the integrand can be denoted $F(z, \theta)$ on $D_r(z_0) \times [0, 2\pi]$. By the third application of Cauchy's integral formula, we have that $f$ is indeed holomorphic. Having established this, we now show the formula holds for all $z \in D$. Consider the double keyhole contour on $C$ and about $z, z_0$. By sending the width of the corridors between $C$ and $z, z_0$ to zero, we have that
     \[ 0 = \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta + \int_{C_\eps(z)} \frac{f(\zeta)}{\zeta - z} \, d\zeta + \int_{C_\eps(z_0)} \frac{f(\zeta)}{\zeta - z} \, d\zeta, \]
     where we impose a radius of $\eps$ for the keyholes about $z$ and $z_0$. By parameterizing the respective contours, we have
-    \[ \int_{-C_\eps(z)} \frac{f(\zeta)}{\zeta - z} \, d\zeta = - \int_0^{2\pi} \frac{f(z + \eps e^{i\theta})}{\eps e^{i \theta}} i \eps e^{i \theta} \, d\theta = -i \int_0^{2\pi} f(z + i \eps i^\theta) \, d\theta. \]
+    \[ \int_{-C_\eps(z)} \frac{f(\zeta)}{\zeta - z} \, d\zeta = - \int_0^{2\pi} \frac{f(z + \eps e^{i\theta})}{\eps e^{i \theta}} i \eps e^{i \theta} \, d\theta = -i \int_0^{2\pi} f(z + i \eps e^{i\theta}) \, d\theta. \]
     As $\eps \to 0$, this is just $-i 2\pi f(z)$. We may show that the contour integral about $-C_\eps(z_0)$ also vanishes; directly write as follows,
     \begin{align*}
-        \abs{\int_{C_\eps(z_0)} \frac{f(\zeta)}{\zeta - z} \, d\zeta} &= \length(C_\eps(z_0)) \sup_{C_\eps(z_0)} \abs{\frac{f(\zeta)}{\zeta - z}} \\
-        &\leq \length(C_\eps(z_0)) \cdot \sup_{C_\eps(z_0)} (f(\zeta)) \cdot \frac{1}{\frac{\abs{z - z_0}}{2}} \cdot 2 \pi \eps,
+        \abs{\int_{-C_\eps(z_0)} \frac{f(\zeta)}{\zeta - z} \, d\zeta} &= \sup_{\zeta \in C_\eps(z_0)} \abs{\frac{f(\zeta)}{\zeta - z}} \cdot \length(C_\eps(z_0)) \\
+        &\leq \sup_{\zeta \in C_\eps(z_0)} \abs{f(\zeta)} \cdot \left(\frac{\abs{z - z_0}}{2}\right)\inv \cdot 2 \pi \eps,
     \end{align*}
     which converges to $0$ as $\eps \to 0$ using the fact that $f$ is bounded. From here, it is immediate that
     \[ 2 \pi i f(z) = \int_C \frac{f(\zeta)}{\zeta - z} \, d\zeta. \qedhere \]
