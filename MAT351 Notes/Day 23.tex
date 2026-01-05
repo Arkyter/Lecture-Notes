@@ -1,0 +1,52 @@
+\section{Day 23: Welcome Back (Jan. 5, 2026)}
+My new year's resolution is to take 351. I'm succeeding so far.
+
+Midterm 2 will cover problems from the problem sets plus a little more. It will cover everything since the beginning of the class, but it will skew towards later stuff. We need to set a date. Midterm 3 is like midterm 1.
+\textbf{Midterm 2 is on January 28th, and Midterm 3 is on March 4th.}
+
+\subsection{Course Outline}
+In the second semester we'll cover
+\begin{enumerate}
+
+	\item Laplace (2, 3 spacial dimensions)
+		\begin{enumerate}
+		
+			\item Strong max principle, Poisson's Formula, Green's Functions
+			\item Solving on various domains with special geometry
+		
+		\end{enumerate}
+	\item Heat, Wave with 2, 3 spacial dimensions
+	\item Schr\"odinger, Hydrogen Atom (woah)
+	\item Fourier Transform
+	\item (This one might not be placed here chronologically) Do a bit more on conservation laws. We'll go back to first order 1 dimensional quasilinear problems (e.g. Burger's Equation).
+
+\end{enumerate}
+
+Last semester we ended with Fourier Series, applying to solve Boundary/Initial value problems, etc. We also discussed the theory of convergence. \textbf{Assigned reading: Section 5.6 of Strauss.}
+
+\subsection{Laplacian and Harmonic Functions}
+Laplace's equation is
+\begin{itemize}
+
+	\item \( u_{x x} + u_{y y} = 0 \) in 2d
+	\item \( u_{x x} + u_{y y} + u_{z z} \) in 3d.
+
+\end{itemize}
+ We will write this as \( \Delta u = 0 \) (and add a subscript \( \Delta_{3} u \) if the dimension is unclear. Poisson's equation is
+ \[ - \Delta u = f(x), \]
+ where the minus sign is added so that this is a positive operator. We'll look at this on domains in \( \mathbb{R}^{d} \) (\( d = 2, 3 \) and some things will work for arbitrary dimensions) and we'll also provide boundary conditions. Typically Dirichlet (\( u = g \) on \( \partial D \)) or Neumann \( \frac{\partial u}{\partial n} = h \) on \( \partial D \)). In the first few weeks we showed uniqueness and such for these boundary conditions. Review if you forget.
+\begin{definition}
+	A harmonic function \( u \) is a solution of \( \Delta u = 0 \).
+\end{definition}
+
+Where do Laplace/Poisson's equations appear?
+\begin{itemize}
+
+	\item In electrostatics, Maxwell's equations are \( \nabla \times E = 0 \) and \( \nabla \cdot E = 4 \pi e \).
+		If the domain of \( E \) is simply connected, then it will be the gradient of some function \( E = - \Delta \phi \). But then we know that \( - \Delta \phi = 4 \pi e \). This is a poisson equation.
+	\item In fluid flow you have a velocity field \( v \). If we have a potential flow, then \( \nabla \times v = 0. \)\footnote{I have no clue what a potential flow is.} Thus, \( v = - \nabla \phi \). An incompressible flow satisfies \( \nabla \cdot v = 0 \) as well, because of conservation of mass (use the Divergence theorem to show that on any domain mass will be conserved). If we have these two, then \( - \Delta \phi = 0 \).
+	\item Apparently there's some connection to complex analysis. Not that I've heard of it or anything. If \( f : \mathbb{C} \to \mathbb{C} \) and \( f(z) = u(z) + i v(z) \) where \( u, v : \mathbb{C} \to \mathbb{R} \),, then \( u \) and \( v \) are harmonic when \( f \) is holomorphic due to Cauchy-Riemann. He wrote this out more explicitly, I figure you can review your 354 notes if you want.
+
+\end{itemize}
+
+
