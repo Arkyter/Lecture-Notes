@@ -1,0 +1,31 @@
+\documentclass[11pt]{scrartcl}
+
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package}
+\WarningFilter{xcolor}{Package option} % `usenames' is obsolete and ignored. yea ik idgaf
+\WarningFilter{microtype}{Unable to apply patch} % fuck off footnotes are working
+
+\usepackage{{style_files/arky}}
+\usepackage{standalone}
+\usepackage{import}
+
+% extra stuff
+\usepackage{quiver}
+\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} % tikz is a finicky annoying thing
+
+\begin{document}
+\title{MAT425 Lecture Notes}
+\author{Emily}
+\date{'26 Winter Semester} % add date
+\maketitle
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+
+\foreach \i in {1} {
+	\edef\FileName{MAT425 Notes/Day \i.tex}
+	\IfFileExists{\FileName}{\input{\FileName} \newpage}
+}
+
+\end{document}

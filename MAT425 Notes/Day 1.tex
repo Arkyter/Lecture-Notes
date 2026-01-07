@@ -1,0 +1,70 @@
+\section{Day 1: Manifolds or Whatever (Jan. 6, 2025)}
+The textbook is Differential Topology, by Guillemin \& Pollack. This course is about smooth manifolds. But this is a very vast subject, so it's more accurate to say that it's all about a specific circle of questions which are related to something called transversality.
+
+What is a manifold? Well a manifold is\ldots a subset of \( \mathbb{R}^{n} \) with some requirements on dimensionality. We don't loose any generality this way (due to Whitney's Embedding Theorem) therefore for our purposes this is sufficient.
+
+Assume that \( X \subseteq \mathbb{R}^{n} \) and \( Y \subseteq \mathbb{R}^{m} \) and \( f : X \to Y \) is smooth. What does this mean? Well let's recall an easier case. When \( X \) and \( Y \) are open, then this is just our standard definition of differentiability (locally linear and such). On the other hand, if \( X \) and \( Y \) aren't open, then it can be much harder---if \( X \) and \( Y \) are some complicated fractal sets then how do you define it? 
+
+We say a map \( f : X \to Y \) is smooth at a point \( x \in X \) if there exists some open neighborhood \( U \) of \( x \) and some function \( F : U \cup X \to \mathbb{R}^{m} \) such that the following diagram commutes:
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcY2FwIFUiXSxbMCwxLCJYIl0sWzEsMCwiXFxtYXRoYmIgUl5tIl0sWzEsMSwiWSJdLFsxLDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiRiJdLFsxLDMsImYiLDJdLFszLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+\[\begin{tikzcd}
+	{X \cap U} & {\mathbb R^m} \\
+	X & Y
+	\arrow["F", from=1-1, to=1-2]
+	\arrow[hook, from=2-1, to=1-1]
+	\arrow["f"', from=2-1, to=2-2]
+	\arrow[hook, from=2-2, to=1-2]
+\end{tikzcd}\]
+and additionally, \( F \) is smooth at \( x \). We say that \( f \) is smooth if it is smooth everywhere in its domain. 
+
+\begin{definition}
+	Two sets \( X \subseteq \mathbb{R}^{n} \) and \( Y \subseteq \mathbb{R}^{m} \) are diffeomorphic if there is a map \( f : X \to Y \) which is bijective, smooth, and \( f^{-1} \) is smooth as well.
+\end{definition}
+
+\begin{definition}
+	\( X \) is a \( k \)-dimensional smooth manifold if for all \( x \in X \) there exists some open \( U \subseteq \mathbb{R}^{n} \) such that \( x \in U \) and \( U \cap X \) is diffeomorphic to an open \( V \subseteq \mathbb{R}^{m} \). 
+\end{definition}
+Thus, there exists \( \varphi : U \cap X \to V \) and \( \psi : V \to U \cap X \) with \( \varphi^{-1} = \psi \) and \( \varphi, \psi \) are smooth maps. 
+
+\begin{definition}
+	\( X \subseteq \mathbb{R}^{n} \) is a \( k \)-dimensional smooth manifold if it is locally diffeomorphic to open sets of \( \mathbb{R}^{k} \).
+\end{definition}
+I have no clue why he wrote this as a separate definition. Assume that \( X \subseteq \mathbb{R}^{n} \) is a \( k \)-dimensional manifold. Then there exists a local parameterization \( \varphi : U \subseteq \mathbb{R}^{k} \to V \cap X \). The opposite direction (\( V \to U \)) is called a coordinate system for our manifold.
+
+Let us now define the tangent spaces. If \( X \) is a \( k \)-dimensional manifold, the tangent space is given by the local parameterizations. Suppose that \( \varphi:  U \to V \cap X \) is a parameterization of our manifold. Suppose that \( u_{0} \in U \) and \( f(u_{0}) = x \). Then we say that the tangent space of \( X \) at \( x \) is
+\[ T_{x}X = d \varphi(u_{0})(\mathbb{R}^{k}) \subseteq \mathbb{R}^{n}. \]
+Notice that the tangent spae is independent of parameterization. He drew a photo of the tangent line to a curve. Also notice that the tangent space is centered at \( 0 \), but it's natural to imagine it centered at \( x \) (and infinitesimal) instead.
+
+To define the derivative for a smooth manifold naturally, we need two things.  First, it should agree with our usual Euclidean definition of derivative. Second, it should satisfy the chain rule. For it to make sense, \( df(x) \) should map \( T_{x}X \) to \( T_{f(x)}Y \).
+
+Let \( U \) and \( V \) be open neighborhoods, and \( \phi_{\cdot} \) and \( \psi_{\cdot} \) be parameterizations and charts of their manifolds. Define \( h \) such that the following diagram commutes.
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJVIl0sWzAsMCwiWCJdLFsxLDAsIlkiXSxbMSwxLCJWIl0sWzAsMSwiXFx2YXJwaGlfWCIsMCx7Im9mZnNldCI6LTF9XSxbMSwwLCJcXHBzaV9YIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsImYiXSxbMiwzLCJcXHBzaV9ZIiwwLHsib2Zmc2V0IjotMX1dLFszLDIsIlxcdmFycGhpX1kiLDAseyJvZmZzZXQiOi0xfV1d
+\[\begin{tikzcd}
+	X & Y \\
+	U & V
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\psi_X}", shift left, from=1-1, to=2-1]
+	\arrow["{\psi_Y}", shift left, from=1-2, to=2-2]
+	\arrow["{\varphi_X}", shift left, from=2-1, to=1-1]
+	\arrow["{\varphi_Y}", shift left, from=2-2, to=1-2]
+	\arrow["{h}", from=2-1, to=2-2]
+\end{tikzcd}\]
+Namely, \( h = \psi_{Y} \circ f \circ \varphi_{X} \). Suppose (for simplicity) that \( 0 \in U, V \), \( \varphi_{X}(0) = x \), and \( \psi_{Y}(f(x)) = 0 \). Then we have that 
+\[ df(x) = d \varphi_{Y}(0) \circ dh(0) \circ d \psi_{X}(x). \]
+[This part is quite dense in the notation, so draw a picture to make sure you're clear with the notation---it helped me a ton to work through it].
+
+Because our manifolds are smooth we can discuss general position. What does this mean? Well consider two lines. They might intersect at one point, no points, or infinitely many points. But if we slightly perturb our lines, they will only intersect at one point. Therefore, we say that they generally intersect once.
+
+We can do the exact same thing on a torus. It's possible to find two lines which intersect infinitely many times, but we can find a general number of times they intersect. Using these ideas we can formulate all sorts of interesting topological invariants. This is all about transversality (he didn't define).
+
+We can formulate these ideas in a general setting. Sard's theorem is most at home in Euclidean space (telling you that the critical points of a function form a measure zero set), but we can also do it for manifolds.
+
+\begin{definition}
+	A critical point \( x \in X \) of a smooth map \( f : X \to Y \) between manifolds is a point where \( df(x) \) does not have full rank. Otherwise, \( x \) is regular.
+\end{definition}
+\begin{definition}
+	A critical value \( y \in Y \) of a smooth map \( f : X \to Y \) is a point which is the image of some critical point. Otherwise, \( y \) is regular.
+\end{definition}
+Sard's theorem tells us that the set of critical values of our manifold has measure \( 0 \). This is important because we want to perturb into regular values.
+
+Next class we will cover the implicit function theorem (i might have misheard, he might have said inverse), normal maps, Sard's theorem, degrees of maps, Transversality, topological invariants, then some bonus if there's time (Morse theory).
