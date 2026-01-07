@@ -1,0 +1,56 @@
+\section{Day 1: Recap of Preliminaries (Jan. 6, 2026)}
+We give a review of the necessary definitions.
+\begin{theorem}
+    $\RR$ has the least upper bound property.
+\end{theorem}
+Specifically, for all subsets $S \subset \RR$, we say $M$ is an upper bound for $S$ if, for all $x \in S$, we have $x \leq M$. Any non-empty $S \subset \RR$ that is bounded above has a least upper bound; i.e., there exists $M$ such that $x \leq M$ for all $x \in S$, and if $\hat M$ is another upper bound for $S$, then $M \leq \hat M$. Note that $M$ is unique.
+\begin{theorem}[Archimedean Property]
+    If $a, b \in \RR$ such that $a < b$, then there exists $q \in \QQ$ such that $a < q < b$.
+\end{theorem}
+\begin{proof}
+    Assume $0 < a < b$; let $M \in \NN$ such that $M > \frac{1}{b-a}$, i.e., $M (b - a) > 1$. Let $N$ be the largest natural number such that $N \leq Ma$; then $q = \frac{N + 1}{M}$ satisfies the above, i.e.,
+    \[ N + 1 > Ma \implies a < \frac{N + 1}{M}, \quad Mb > Ma + 1 \geq N + 1 \implies b > \frac{N+1}{M}. \qedhere \]
+\end{proof}
+We now discuss sequences. We say $(a_n)$ converges to $a \in \RR$ if, for all $\eps > 0$, there exists $N$ such that for all $n \geq N$, we have $\abs{a - a_n} < \eps$. In this case, we write $\lim_{n \to \infty} a_n = a$, or $a_n \to a$ as $n \to \infty$.
+\begin{definition}
+    $(a_n)$ is said to be \textit{Cauchy} if, for all $\eps > 0$, there exists $N > 0$ such that, for all indices $n, m \geq N$, we have $\abs{a_n - a_m} < \eps$.
+\end{definition}
+\begin{theorem}
+    A sequence converges to some $a \in \RR$ if and only if it is Cauchy.
+\end{theorem}
+\begin{proof}
+    The proof for convergent implies Cauchy is immediate, so it is left as an exercise. For the other direction, suppose $(a_n)$ is Cauchy; we start by claiming that the sequence is bounded. Indeed, let $\eps = 1$; then there exists some $N$ such that $\abs{a_n - a_m} \leq 1$ for all $n, m \geq N$, and so $\abs{a_n} \leq \abs{a_N} + 1$ for all $n \geq N$, whence the tail is bounded.
+    \\[8pt]
+    Now, consider the set $B$ to be the set of all $x \in \RR$ for which there are infinitely many $n$ such that $a_n \geq x$. Then $B$ is nonempty and bounded above; let $a = \sup B$. Take $\eps > 0$ and $N$ large enough such that $\abs{a_n - a_m} < \eps$ for all $n, m \geq N$, and that for all $n \geq N$, we have $a_n \leq a + \eps$. In this manner, we must have $a - \eps \in B$, so we can choose $M \geq N$ such that $a_m \geq a - \eps$. If $n \geq m$, then $\abs{a - a_n} \leq \abs{a_n - a_m} + \abs{a_m - a} \leq 2\eps$. \qedhere
+\end{proof}
+\begin{corollary}
+    $\RR$ is complete.
+\end{corollary}
+\begin{definition}
+    A metric space is a set $M$ equipped with a function ${d : M \times M \to \RR}$ (which we will call a metric) such that
+    \begin{enumerate}[(i)]
+        \item (\textit{Non-negativity}) $d(x, y) \geq 0$; we have equality, i.e., $d(x, y) = 0$ if and only if $x = y$.
+        \item (\textit{Symmetry}) $d(x, y) = d(y, x)$ for all $x, y \in M$.
+        \item (\textit{Triangle inequality}) $d(x, z) \leq d(x, y) + d(y, z)$.
+    \end{enumerate}
+\end{definition}
+For some examples, consider
+\begin{enumerate}[(i)]
+    \item $M = \RR$, $d(x, y) = \abs{x - y}$
+    \item If $M = \RR^n$, then $d_1(x, y) = \sum_{i=1}^n \abs{x_i - y_i}$ is the taxicab norm; we also have
+    \[ d_2(x, y) = \left(\sum_{i=1}^n \abs{x_i - y_i}^2\right)^{1/2} \]
+    is the standard $L^2$-norm.
+    \item $\ell^1 := \{(a_n) \mid \sum_{n=1}^\infty \abs{a_n} < \infty\}$; then $d_1(x, y) = \sum_{i=1}^\infty \abs{x_i - y_i}$ is a normed vector space with $\norm{a} = \sum_{n=1}^\infty \abs{a_n}$.
+    \item $C([0, 1])$ is the space of continuous functions $f : [0, 1] \to \RR$ with metric
+    \[ d_\infty(f, g) = \sup_{x \in [0, 1]} \abs{f(x) - g(x)}. \]
+    It is a normed vector space with norm $\norm{f} = \sup_{x \in [0, 1]} \abs{f(x)}$.
+\end{enumerate}
+\begin{definition}
+    A normed vector space is a vector space together with a norm $\norm{\cdot} : V \to \RR$ such that
+    \begin{enumerate}[(i)]
+        \item $\norm{v} \geq 0$ for all $v \in V$. $\norm{v} = 0$ if and only if $v = 0$.
+        \item $\norm{\lambda v} = \abs{\lambda} \norm{v}$
+        \item $\norm{v + w} \leq \norm{v} + \norm{w}$.
+    \end{enumerate}
+\end{definition}
+If $(V, \norm{\cdot})$ is a normed vector space, then $(V, d)$ is a metric space with $d(v, w) = \norm{v - w}$.

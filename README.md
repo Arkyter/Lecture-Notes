@@ -6,7 +6,10 @@ Lecture notes from my classes at UofT; will be updated daily (hopefully).
 Current list of classes:
 - MAT347 (Algebra)
 - MAT351 (Partial Differential Equations) -- maintained by [@evlasics](https://github.com/evlasics)
-- MAT354 (Complex Analysis)
+- MAT357 (Intro to Real Analysis)
+- MAT367 (Differential Geometry)
+- MAT425 (Differential Topology) -- maintained by [@evlasics](https://github.com/evlasics)
+- MAT454 (Adv. Complex Analysis)
 
 Audit list (notes may be kept, but sparsely):
 - None this semester (so far) :3c
@@ -28,7 +31,9 @@ Audit list (notes may be kept, but sparsely):
 > Fall 2026
 - MAT417 (Analytic NT) - stopped going
 - MAT436 (Linear Operators) - nothing that really can be written from class...
+- MAT354 (Complex Analysis)
 
+> Winter 2026
 
 **Todo List**:
 - Rework style files system (like, 10% done or whatev...)

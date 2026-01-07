@@ -1,0 +1,30 @@
+\documentclass[11pt]{scrartcl}
+
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package}
+\WarningFilter{xcolor}{Package option} % `usenames' is obsolete and ignored. yea ik idgaf
+\WarningFilter{microtype}{Unable to apply patch} % fuck off footnotes are working
+
+\usepackage{{style_files/arky}}
+\usepackage{standalone}
+\usepackage{import}
+
+% extra stuff
+%\usepackage{quiver}
+\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} % tikz is a finicky annoying thing
+
+% document specific
+\setlength{\parindent}{0pt} % no indents
+
+\begin{document}
+\title{MAT357 Lecture Notes}
+\date{'26 Winter Semester} % add date
+\maketitle
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+
+\include{MAT357 Notes/Day 1}
+
+\end{document}
