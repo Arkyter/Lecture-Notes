@@ -1,0 +1,134 @@
+\section{Day 24: Harmonic Functions (Jan. 7, 2026)}
+A harmonic function is a function with \( \Delta u = 0 \). We'll mostly work in 2d and 3d, but some things are more general. We'll go over the weak maximum principle, which is actually review.
+
+\begin{theorem}
+	Let \( D \) be a bounded connected domain in \( \mathbb{R}^{d} \) and let \( u \) be harmonic in \( D \). Let \( u \) be continuous on \( \bar D \). Then the max and min of \( u \) are assumed on \( \partial D \), and nowhere else---unless \( u \) is constant.
+
+	Notice that as usual, we need \( u \) to be differentiable twice in each its variables (or else \( \Delta u \) is not well defined) so we assume \( u \) to be twice continuously differentiable.
+\end{theorem}
+\begin{proof}[Proof (Weak Max/Min Principle)]
+	To do this, look at \( v = u + \varepsilon |x|^{2} \), for \( x \in \mathbb{R}^{d} \). Then \( \Delta v = \Delta u + \varepsilon \cdot 2d > 0 \). Therefore \( v \) cannot have negative second derivatives, so \( v \) cannot have a max in \( \operatorname{int} D \).  We know that
+	\[ \operatorname{max}_{D} u \le \operatorname{max}_{D} v \le \operatorname{max}_{\partial D} v, \]
+	so therefore as \( \varepsilon \to 0 \), \( \operatorname{max}_{\partial D} v \to \operatorname{max}_{\partial D} u \), thus we have that \( \operatorname{max}_{D} u \le \operatorname{max}_{\partial D} u \).
+\end{proof}
+
+\begin{remark}
+		Proof for min can be found by taking \( - u \).
+\end{remark}
+\begin{remark}
+		Same proof above for the max works if you only know that \( \Delta u \ge 0 \). Usually we write this as \( - \Delta u \le 0 \). Same thing.
+\end{remark}
+Let's work towards proving the strong max principle in 2d. We will need Poisson's formula. This is independently important, but also needed for this. Before we can consider Poisson's formula, we need to look at the Laplacian in polar coordinates. ``I just thought of doing it like this. Then we'll go back to following the book.''
+
+Consider that \( \Delta u = u_{x x} + u_{y y} \), and 
+\[ \left\{\begin{NiceMatrix} x &= r \cos \theta \\ y &= r \sin \theta\end{NiceMatrix}\right.  \]
+Then the laplacian in polar coordinates is
+\[ \Delta = \partial_{r}^{2} + \frac{1}{r} \partial_{r} + \frac{1}{r^{2}} \partial_{\theta}. \]
+To derive this, notice that
+\[ \left\{\begin{NiceMatrix}r &= \sqrt{x^{2} + y^{2}} \\ \theta &= \arctan \left( \frac{y}{x} \right)\end{NiceMatrix}\right.  \]
+so therefore
+\[ \frac{\partial}{\partial x} = \frac{\partial r}{\partial x} \frac{\partial }{\partial r} + \frac{\partial \theta}{\partial x} \frac{\partial}{\partial \theta} \]
+Then (recall 257),
+\[ \frac{\partial r}{\partial x} = \cos \theta \qquad \frac{\partial \theta}{\partial x} = \frac{1}{1 + \left( \frac{y}{x} \right)^{2}} \left( - \frac{y}{x^{2}} \right) = -\frac{y}{x^{2} + y^{2}}, \]
+and thus, plugging in,
+\[ \frac{\partial}{\partial x} = \cos \theta \frac{\partial}{\partial r} - \frac{\sin \theta}{r} \frac{\partial}{\partial \theta}, \]
+and repeating for \( y \) gives
+\[ \frac{\partial}{\partial y} = \sin \theta \frac{\partial}{\partial r} + \frac{\cos \theta}{r} \frac{\partial}{\partial \theta}. \]
+It follows by simplifying that
+\[ \partial_{x}(\partial_{x}) + \partial_{y}(\partial_{y}) = \partial_{r}^{2} + \frac{1}{r} \partial_{r} + \frac{1}{r^{2}} \partial_{\theta}^{2}, \]
+which tells us our formula for the radial laplacian. 
+
+Now, we want to find a radial harmonic function \( f = v(r) \) such that \( \Delta f = 0 \). Then
+\[ f = f(x, y) = v(\sqrt{x^{2} + y^{2}}). \]
+This implies
+\[ (\partial_{r}^{2} + \frac{1}{r}\partial_{r})v = 0. \]
+
+Now, if \( v'' + \frac{1}{r} v' = 0 \), then (\( v' = g \))
+\begin{align*}
+	g' &= - \frac{1}{r} g \\
+	\frac{g'}{g} &= - \frac{1}{r}  \\
+	\left( \log g \right)' &= \left( - \log r \right)' \\
+	\log g &= - \log r + C \\
+	g &= \frac{C}{r} \\
+	v(r) &= C_{1} \log r + C_{2}.
+\end{align*}
+Notice that \( v \) is not smooth at \( r = 0 \).
+
+\begin{theorem}[Dirichlet Problem in a Disc]
+	Suppose that 
+	\[ \left\{\begin{NiceMatrix} \Delta u = 0 & B = \left\{ x^{2} + y^{2} < a^{2} \right\} \\ u = f & \partial B = \left\{  x^{2} + y^{2} = a^{2} \right\}\end{NiceMatrix}\right.  \]
+	Then 
+	\[ u(r, \theta) = \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') P_{a}(r, \theta - \theta') d \theta', \]
+	where
+	\[ P_{a}(r, \psi) = \frac{a^{2} - r^{2}}{a^{2} + r^{2} - 2 a r \cos(\psi)}, \]
+\end{theorem}
+\begin{proof}
+	First we need to solve \( \Delta u = 0 \) using polar separation of variables. Then we will impose the boundary conditions \( u = f \) on \( \partial B \). 
+
+	Let's pass to \( u(r, \theta) \) and look for a separable solution \( u(r, \theta) =X(r) Y(\theta) \). Then
+	\[ \partial_{r}^{2} \frac{1}{r}\partial_{r} + \frac{1}{r^{2}} \partial_{\theta}^{2}(X(r) Y(\theta)) = 0 \]
+	yields that
+	\[ X'' Y + \frac{1}{r} X' Y + \frac{1}{r^{2}} Y'' X = 0, \]
+	so we have to separate variables. If \( Y \ne 0 \), then
+	\[ \frac{r^{2}}{X} \left( X'' + \frac{1}{r} X' \right)(r) + \frac{Y''}{Y} = 0. \]
+	Since these two terms are dependent on different variables, they must both be constant. 
+	\[ \frac{Y''}{Y} = C \quad \frac{r^{2}}{X} \left( X'' + \frac{1}{r} X' \right) = C \]
+	for some constant \( C \). Using the periodicity of \( Y \), we have that \( C = -n^{2} \) for some \( n \in \mathbb{N} \cup \left\{ 0 \right\} \). We've done this a million times.
+
+	Let's solve our eigenvalue problems. 
+	\[ Y'' = -n^{2} Y, \qquad \frac{r^{2}}{X} \left( X'' + \frac{1}{r} X' \right) = n^{2}. \]
+	The solutions to \( Y \) we've done a million times.
+	\[ Y(\theta) = A_{n} \cos \left( n \theta \right) + B_{n} \sin \left( n \theta \right). \]
+	For \( X \), 
+	\[ r^{2} X'' + r X' - n^{2} X = 0, \]
+	so this is a Cauchy-Euler equation, and thus if our Ansatz is \( X(r) = r^{\alpha} \), then
+	\[ \alpha(\alpha-1)r^{2} \cdot r^{\alpha - 2} + \alpha r \cdot r^{\alpha-1} - n^{2} r^{\alpha} = 0.  \]
+	Thus, we have that
+	\[ \alpha \left( \alpha - 1 \right) + \alpha - n^{2} = 0 \implies \alpha^{2} - n^{2} = 0 \implies \alpha = \pm n. \]
+	On the other hand, if \( \alpha = 0 \), then this gives \( \log r \) and \( 1 \) as our solutions, which we showed solves our equation above. Thus, our solutions are
+	\[ A_{0} + B_{0} \log r , \qquad A_{n} r^{n} + \frac{B_{n}}{r^{n}}. \]
+	But since the function we are looking for is continuous, we know that \( B_{0} = 0 \) and \( B_{n} = 0 \) for all \( n \in \mathbb{N} \). If you exclude the center, then you can have these other solutions. 
+
+	For \( n \ge 1 \), our solutions are
+	\[ u_{n}(r, \theta) = \left[ A_{n} \cos \left( n \theta \right) + B_{n} \sin \left( n \theta \right) \right] r^{n}, \]
+	and for \( n = 0 \),
+	\[ u_{n}(r, \theta) = \frac{A_{0}}{2} + \sum_{n \ge 1} \left[ A_{n} \cos \left( n \theta \right) + B_{n} \sin \left( n \theta \right) \right] r^{n}, \]
+	which solve \( \Delta u = 0 \).
+
+	Applying the boundary conditions at \( r = a \) give that
+	\[ u(a, \theta) = f(\theta), \]
+	and thus
+	\[ u(a, \theta) = \frac{A_{0}}{2} + \sum_{n \ge 0} a^{n} \left[ A_{n} \cos \left( n \theta \right) + B_{n} \sin \left( n \theta \right) \right], \]
+	so from our Fourier theory (for \( 2 \pi \)-periodic functions), we know that
+	\[ a^{n} A_{n} = \frac{1}{\pi} \int_{0}^{2 \pi} f(\theta') \cos \left( n \theta' \right) d \theta', \]
+	when \( n \ge 0 \), and
+	\[ a^{n} B_{n} = \frac{1}{\pi} \int_{0}^{2 \pi} f(\theta') \sin(n \theta') d \theta', \]
+	when \( n \ge 1 \).  This gives us our specific solution 
+	\[ u(r, \theta) = \frac{A_{0}}{2} + \sum_{n \ge 1}  \left[ A_{n} \cos(n \theta) + B_{n} \sin(n \theta), \right] \]
+	where \( A_{k} \) and \( B_{k} \) are defined in terms of the above formulas.
+
+	We can now use the formula to get a more compact expression.
+	\begin{align*}
+		u(r, \theta) &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f( \theta') d \theta' + \sum_{n \ge 1} \left( \frac{r}{a} \right)^{n} \cdot\\
+								 & \quad \left[ \int_{0}^{2 \pi} f( \theta') \cos \left( n \theta' \right)  \cos \left( n \theta \right) d \theta' \right.
+	\left.+ \int_{0}^{2 \pi} f(\theta') \sin \left( n \theta' \right) \sin \left( n \theta \right) d \theta\right] \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f( \theta') \left[ 1 + 2 \sum_{n \ge 1} \left( \frac{r}{a} \right)^{n} \left( \cos(n \theta) \cos(n \theta') + \sin(n \theta) \sin(n \theta') \right)  \right] d \theta' \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') \left[ 1 + 2 \sum_{n \ge 1} \left( \frac{r}{a} \right)^{n} \cos \left( n \left( \theta - \theta' \right) \right) \right] d \theta' \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') \left[ 1 + \sum_{n \ge 1}  \left( \frac{r}{a} \right)^{n} e^{i n \left( \theta - \theta' \right)} + e^{-in (\theta - \theta')} \right] d \theta' \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') \left[ 1 + \frac{\frac{r}{a} e^{i (\theta - \theta')}}{1 - \frac{r}{a} e^{i (\theta - \theta')}} + \frac{\frac{r}{a} e^{-i (\theta - \theta')}}{1 - r e^{-i (\theta - \theta')}} \right] d \theta' \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') \left[ 1 + \frac{r e^{i (\theta - \theta')}}{a - r e^{i (\theta - \theta')}} + \frac{r e^{-i (\theta - \theta')}}{a - r e^{-i (\theta - \theta')}} \right] d \theta' \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') \left[ 1 + \frac{2 a r \cos(\theta - \theta')}{a^{2} + r^{2} - 2 a r \cos(\theta - \theta')} \right] d \theta' \\
+								 &= \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') \left[ \frac{a^{2} - r^{2}}{a^{2} + r^{2} - 2 a r \cos(\theta - \theta')} \right] d \theta'
+	\end{align*}
+	This is Poisson's formula, which we know from complex analysis. If we set
+	\[ P_{a}(r, \psi) = \frac{a^{2} - r^{2}}{a^{2} + r^{2} - 2 a r \cos(\psi)}, \]
+	then we have that
+	\[ u(r, \theta) = \frac{1}{2 \pi} \int_{0}^{2 \pi} f(\theta') P_{a}(r, \theta - \theta') d \theta'. \]
+\end{proof}
+
+\begin{remark}
+	Let's think about this in a more geometric fashion. If \( \vec x = (x, y) \), then
+	\[ u(\vec x) = \frac{1}{2 \pi} \int_{|x'| = a} u(x') \frac{a^{2} - |\vec x|^{2}}{|\vec x - x'|^{2}} dx', \]
+	which you can find by plugging in (or working backwards from the formula).
+\end{remark}
+We will start from here next time.
