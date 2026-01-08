@@ -6,10 +6,10 @@ Lecture notes from my classes at UofT; will be updated daily (hopefully).
 Current list of classes:
 - MAT347 (Algebra)
 - MAT351 (Partial Differential Equations) -- maintained by [@evlasics](https://github.com/evlasics)
-- MAT357 (Intro to Real Analysis)
+- MAT357 (Intro to Real Analysis) -- since Landon (prof) uploads notes, I will write the compilation later on in the course instead (since there is no point in scribin daily atp yea?)
 - MAT367 (Differential Geometry)
 - MAT425 (Differential Topology) -- maintained by [@evlasics](https://github.com/evlasics)
-- MAT454 (Adv. Complex Analysis)
+- MAT454 (Adv. Complex Analysis) -- also supposedly kept by the prof, but we'll see
 
 Audit list (notes may be kept, but sparsely):
 - None this semester (so far) :3c
