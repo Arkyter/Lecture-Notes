@@ -1,1 +1,19 @@
-\section{Day 1: Recap of Preliminaries (Jan. 6, 2026)}
+\section{Day 1: Recap of Preliminaries (Jan.\ 6, 2026)}
+Today's class can be followed more precisely on \S1.2 to \S1.4 of our textbook by \href{https://link.springer.com/book/10.1007/978-3-031-25409-3}{Gross and Meinrenken}. The slogan of this class is that a manifold is something that locally looks like $\RR^n$. Specifically, an $n$-manifold can be covered $n$-dimensional charts $(U \subset M) \to \RR^n$, with our main motivating example being solutions sets to equations. Recall the implicit function theorem,
+\begin{theorem}
+    Given a smooth function $f : \RR^{n+1} \to \RR$, consider the solution set $f(x_1, \dots, x_{n+1}) = 0$ and a point $p \in \RR^n$ such that $\nabla f(p) \neq 0$; then, for $(x_1, \dots, x_{n+1})$ in said solution set near $p$, we can represent solutions as $(x_1, \dots, x_n, g(x_1, \dots, x_n))$, where $g$ is also a smooth function.
+\end{theorem}
+In particular, if $0$ is a regular value\footnote{note to self: what's a regular value?} of $f$, then we can cover $\{x \mid f(x) = 0\}$ by graphs/charts. We present some examples;
+\begin{enumerate}[(i)]
+    \item Let $f(x, y) = xy$; then $\ker f$ is precisely the $x$ and $y$ axes, which is not a manifold, because it does not look like $\RR^n$ (for any $n$) near the origin.
+    \item Let $f(x, y) = y - x^{2/3}$; then $\ker f$ can be graphed in desmos as $y = x^{2/3}$, which is not a smooth manifold because of its behavior at $0$.
+    \item The $n$-sphere $S^n = \{x \in \RR^n \mid x_1^2 + \dots + x_{n+1}^2 = 1\}$ can be regarded as the level set of the $\ell^2$-norm, for which $S^0 = \{\pm 1\} \subset \RR$, $S^1$ is a circle, $S^2$ is the usual sphere. Note that we may use the stereographic projection as seen in complex analysis, to view $S^3$ (and any of the previous or subsequence $S^n$) as $\RR^3 \cup \{\infty\}$.
+    \item The $2$-dimensional torus $T^2$ is the surface of revolution obtained from a circle of radius $r$ and $R$ about an axis of revolution. It can be regarded as a level set by writing
+    \[ T^2 = \{(x, y, z) \in \RR^3 \mid (\sqrt{x^2 + y^2} - R)^2 + z^2 = r\}. \]
+    \item The M\"obius strip can't be a part of a level set (at a regular value) because level sets are orientable (2-sided), while the strip is not.
+    \item The Klein bottle is also not orientable; it is closed (doesn't have a boundary), and doesn't embed into $\RR^3$. It can be immersed into $\RR^3$, i.e., locally embedded but not globally, as seen in the textbook.
+\end{enumerate}
+\begin{theorem}[Whitney Embedding Theorem]
+    Every $n$-manifold has an embedding in $\RR^{2n}$.
+\end{theorem}
+In this class, we prefer to deal with intrinsic descriptions of manifolds rather than extrinsic ones; a good motivation is given on p.7 in the textbook with respect to our $2$-torus.
