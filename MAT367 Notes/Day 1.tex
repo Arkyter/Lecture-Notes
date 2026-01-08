@@ -17,3 +17,21 @@ In particular, if $0$ is a regular value\footnote{note to self: what's a regular
     Every $n$-manifold has an embedding in $\RR^{2n}$.
 \end{theorem}
 In this class, we prefer to deal with intrinsic descriptions of manifolds rather than extrinsic ones; a good motivation is given on p.7 in the textbook with respect to our $2$-torus.
+
+Now, consider $M$ to be the rotations of a ball. We call this a configuration spcae; i.e., its points are a way of configuring another object. How do we put coordinates on a piece of this space? To start, we wish to describe $M$; one possible way is by considering the $3 \times 3$ orthonormal matrices, i.e., $\opname{SO}(3)$; another way is to first designate a point on the unit sphere as the north pole $N$ (of which there are two degrees of freedom in this choice), then choosing where the vector $(1, 0, 0)$ at $N$ is mapped to (of which we have one degree of freedom).
+
+In this manner, we may regard $M$ as a $3$-dimensional manifold and define coordinates for points near the identity.
+
+A second example is given by considering linkages, which are collections of line segments and joints (p.8-10); suppose we have four segments given by $n_1, \dots, n_4$, to be regarded as vectors in $\RR^2$; without additional constraints imposed, we see that this can be regarded as $8$-dimensional. In imposing the conditions on \textit{making} $n_1, \dots, n_4$ a linkage, we see that $\norm{n_i}$ for each $i = 1, \dots, 4$ is fixed (whence $4$ less dimensions), $n_1 + n_2 + n_3 + n_4 = 0$ (whence one less), and $n_1$ is fixed (whence one less again), so such a linkage can be regarded as a $2$ dimensional manifold with coordinates $\theta$ and $\varphi$.
+
+Finally, denote $\RP^2$ the real projective plane, given by lines passing through the origin in $\RR^3$; equivalently, we may regard this as the pairs of antipodal $\{x, -x\}$ points in $S^2$.
+\begin{fact}
+    ``Closed'' (equivalently, compact) surfaces are easy to enumerate.
+\end{fact}
+Fedya then said something about orientability, but that's left in the textbook and easier to read there.
+
+We now wish to define manifolds. For a first attempt, we want to say that a smooth manifold is a set $M$ covered by a set of smooth charts $\varphi_i : (U_i \subset M) \to \RR^n$, such that each $p \in M$ is covered by some $U_i$. However, we run into a problem; what does ``smooth'' mean? $f : U \to \RR^n$ recall that a function is said to be smooth if it has partial derivatives of all orders. A function $f : U \to V$ is a diffeomorphism if it's a smooth bijectino and its inverse is also smooth.
+\begin{definition}
+    A coordinate chart is an injective map $\varphi : U \to \RR^n$ with open image for some $U \subset M$.
+\end{definition}
+In particular, we say that two charts $\varphi : U \to \RR^n$ and $\psi : V \to \RR^n$ are compatible if the transition $\psi \circ \varphi\inv : \varphi(U \cap V) \to \psi(U \cap V)$ is a diffeomorphism. Clearly, if $U \cap V = \emptyset$, then said maps are compatible; note, however, that compatibility is not an equivalence relation, since, while it is symmetric and reflexive, it is not necessarily transitive.
