@@ -36,8 +36,7 @@ Audit list (notes may be kept, but sparsely):
 > Winter 2026
 
 **Todo List**:
-- Rework style files system (like, 10% done or whatev...)
-- smth smth tutorial answers? idk if i *want* to do it tho hmm.
+- Rework style files system (like, 75% done or whatev...)? but i want the spacing to be nice... without having to write \\[8pt] and \noindent. fmlllll ~w~
 
 Errata list (?):
 - none so far wawawawa
