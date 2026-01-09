@@ -1,0 +1,44 @@
+\section{Day 2: (Jan.\ 8, 2026)}
+We correct an error from last class. Let $M$ be a set, and consider $\varphi : U \to \RR^n$, where $U \subset M$. We call $\varphi$ a (coordinate) chart if $\varphi(U)$ is open and $\varphi$ is injective; indeed, we identify $U$ with an open subset of $\RR^n$. Given two charts $\varphi : U \to \RR^n$ and $\psi : V \to \RR^n$, we say they are \textit{compatible} if
+\[ \psi \circ \varphi\inv : \varphi(U \cap V) \to \psi(U \cap V) \]
+is a diffeomorphism of open subsets.\footnote{defn 2.4 in gross meinrenken} We now present an idea; indeed, we may regard $\varphi$ as a coordinate system on $U$, i.e., $\varphi(p) = (x^1, \dots, x^n)$ are \textit{coordinates} of $p$ (with respect to $\varphi$), for which our transition maps are realized as coordinate changes.
+\begin{definition}
+    A set of charts $\SA = \{(U_\alpha, \varphi_\alpha)\}_{\alpha \in I}$ that covers $M$ (i.e., every $p \in M$ is in some $U_\alpha$) is called an \textit{atlas}.
+\end{definition}
+From this we may draft the following definition,
+\begin{definition*}
+    A \textit{manifold} is a set $M$ with an atlas $\SA$ of charts.
+\end{definition*}
+Observe the following examples,
+\begin{enumerate}[(i)]
+    \item Consider the $n$-sphere $S^n$, for which we have the stereographic projection $\varphi_N$, projecting $N$ through a point on the sphere onto $\RR^n$, which we may define as follows,
+    \[ \varphi_N(x_1, \dots, x_{n+1}) = \frac{1}{1 - x_{n+1}} (x_1, \dots, x_n). \]
+    However, it is evident that $\varphi_N$ does not admit $N$ in its domain; thus, we may similarly define the stereographic projection from the south pole by
+    \[ \varphi_S(x_1, \dots, x_{n+1}) = \frac{1}{1 + x_{n+1}} (x_1, \dots, x_n) \]
+    in order to cover $S^n$. Do these two maps form an atlas for $S^n$? It suffices to check that they are compatible; directly write as follows,\footnote{see: p.22-23 for the $S^1$ case}
+    \[ \varphi_S \circ \varphi_N\inv (y_1, \dots, y_n) = \frac{1}{\abs{\vec{y}}^2} (y_1, \dots, y_n), \]
+    where $\vec y = (y_1, \dots, y_n)$.\footnote{fedya u seem cool n all but we cannot be friends if u use this notation (that is, until i change my mind and start appreciating $\vec \bullet$)}
+    \item Let $M$ be the set of straight lines in $\RR^2$, i.e., of the form ``$ax + by = c$''. Consider the charts $\varphi$ mapping $mx + b$ to $(m, b) \in \RR^2$ and $\psi$ mapping $x = ny + c$ to $(n, c) \in \RR^2$ (in this manner, we account for both horizontal and vertical lines). Then the transition map between them is realized as
+    \[ \psi \circ \varphi\inv(m, b) = \left(\frac{1}{m}, -\frac{b}{m}\right) \]
+    whenever $m \neq 0$ (when the line is neither horizontal nor vertical).
+\end{enumerate}
+Given two atlases, how do we test that they define the same manifold?
+\begin{definition}[\S2.8]
+    A chart $\varphi : U \to \RR^n$ is \textit{compatible} with an atlas if $\SA = \{(U_\alpha, \varphi_\alpha)\}$ if $\varphi$ is compatible with every $\varphi_\alpha$.
+\end{definition}
+\begin{lemma}[\S2.10]
+    If $\varphi : U \to \RR^n$, $\psi : V \to \RR^n$ are compatible with the same atlas $\SA$, then they're compatible with each other.
+\end{lemma}
+\begin{proof}
+    It is straightforward to check the properties, so just read the book.
+\end{proof}
+\begin{theorem}[\S2.11]
+    Given an atlas $\SA$ on $M$, there's a unique \textit{maximal} atlas $\wt \SA$ which consists of all charts compatible to $\SA$. Every chart compatible with $\SA$ is already in $\wt \SA$.
+\end{theorem}
+\begin{proof}
+    In one direction, if a chart is compatible with $\tilde \SA$, then it is compatible with $\SA$, and is therefore in $\wt \SA$; in the other direction, $\wt \SA$ is an atlas, so it covers because it contains $\SA$ and is pairwise compatible by the lemma, so we are done.
+\end{proof}
+With this, we give a second attempt and defining a manifold.
+\begin{definition*}
+    A manifold is a set $M$ with a maximal atlas $\SA$.
+\end{definition*}
