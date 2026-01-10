@@ -8,7 +8,7 @@ Assume that \( X \subseteq \mathbb{R}^{n} \) and \( Y \subseteq \mathbb{R}^{m} \
 We say a map \( f : X \to Y \) is smooth at a point \( x \in X \) if there exists some open neighborhood \( U \) of \( x \) and some function \( F : U \cup X \to \mathbb{R}^{m} \) such that the following diagram commutes:
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcY2FwIFUiXSxbMCwxLCJYIl0sWzEsMCwiXFxtYXRoYmIgUl5tIl0sWzEsMSwiWSJdLFsxLDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiRiJdLFsxLDMsImYiLDJdLFszLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
 \[\begin{tikzcd}
-	{X \cap U} & {\mathbb R^m} \\
+	{X \cup U} & {\mathbb R^m} \\
 	X & Y
 	\arrow["F", from=1-1, to=1-2]
 	\arrow[hook, from=2-1, to=1-1]

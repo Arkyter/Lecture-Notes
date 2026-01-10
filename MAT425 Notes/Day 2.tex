@@ -1,0 +1,92 @@
+\section{Day 2: IFT, Immersions, Submersions (Jan. 8, 2025)}
+Review: \( M \subseteq \mathbb{R}^{n} \) is a \( k \)-manifold if it is locally diffeomorphic to \( \mathbb{R}^{k} \). Our manifolds are locally parameterized by \( k \)-dimensional space. This means that for every \( x \in M \) there exists a \( \varphi \) such that \( \varphi(0) = x \), and \( \varphi: U \subseteq \mathbb{R}^{k} \to M \) is a local diffeomorphism. 
+
+We can think of \( \varphi \) as a collection of \( n \) functions from \( \mathbb{R}^{k} \) to \( \mathbb{R} \).
+
+When we think about the differential, sometimes it's nice to imagine a curve through \( 0 \) \( \alpha : \mathbb{R} \to \mathbb{R}^{k} \), and then we have
+\[ d(\varphi \circ \alpha) = d \varphi(0) \cdot \alpha'(0). \]
+But otherwise, we can just do what we did last time.
+
+We say that if \( N^{k} \subseteq M^{n} \subseteq \mathbb{R}^{N} \), and \( M^{n} \) is a manifold in \( \mathbb{R}^{N} \), then \( N^{k} \) is a submanifold of \( M^{n} \).\footnote{Nabutovsky seems to be using the notation \( M^{n} \) to refer to an \( n \)-dimensional manifold. It's not the product.}
+
+\subsection{Inverse and Implicit Function Theorem}
+Suppose that \( f : M \to N \) is a smooth map, and that at \( x_{0} \in M \), we have that \( df(x_{0}) : TM_{x_{0}} \to TN_{f(x_{0})} \) is an isomorphism. Then we have that \( f \) is a local diffeomorphism near \( x_{0} \). That is, there exists an open subset \( U \subseteq M \), and \( x_{0} \in U \), and an open set \( V \subseteq N \), with \( f(x_{0}) \in V \) such that \( f|_{U} \) is a diffeomorphism. Notice that because the differential is an isomorphism, \( M \) and \( N \) have the same dimension. 
+
+This version of the theorem can be derived by the regular inverse function theorem in Euclidean space. This is because given parameterizations \( \varphi : U \to M^{k} \) and \( \psi : V \to N^{k} \),
+\[ 
+	\begin{tikzcd}
+		{M^{k}} & {N^{k}} \\
+		U & V \\
+		\arrow["\varphi", from=2-1, to=1-1]
+		\arrow["\psi", from=2-2, to=1-2]
+		\arrow["f", from=1-1, to=1-2]
+		\arrow["\psi^{-1} \circ f \circ \varphi"', from=2-1, to=2-2]
+	\end{tikzcd}
+\]
+we can use the regular inverse function theorem on \( \psi^{-1} \circ f \circ \varphi \), to get an inverse function \( \varphi^{-1} \circ f^{-1} \circ \psi \) locally, and then just compose with \( \psi^{-1} \) and \( \varphi \) to get our local inverse function for \( f \). Nabutovsky drew a picture, but it was not at all helpful so I will not include it.
+
+Nabutovsky then went over the regular inverse function theorem. This is because nobody in the class could recall the proof of the inverse function theorem from memory. Nabutovsky gave an interesting proof. Notice that 
+\[ f(\vec x) = f(\vec x_{0}) + Df(\vec x_{0})(\vec x - \vec x_{0}) + O(||\vec x - \vec x_{0}||^{2}), \]
+therefore it's possible to define a contraction mapping and then use this to get a unique inverse point. If we can show this point varies continuously on our output point, then chain rule shows it's differentiable and gives the formula. The contraction mapping was blocked by Nabutovsky's body, but if we say \( f(x^{*}) = y \), and assume without loss of generality that \( f(\vec x_{0}) = 0 \) and \( x_{0} = 0 \), then
+\[ \Gamma(x^{*})(p) = df(0)^{-1}(f(p) - y) + x^{*}.  \]
+Then I believe Banach gives us that \( x^{*} \) is the unique fixed point, and we can use another argument to get continuity. Nabutovsky however said that there is an entirely elementary proof of the inverse function theorem, which we can prove by first proving the implicit function theorem, then showing their equivalence.
+
+Let \( \vec x_{0} \in \Omega \subseteq \mathbb{R}^{n+m} \), and \( f : \Omega \to \mathbb{R}^{n} \). Then \( Df(\vec x_{0}) \) is an \( n \times (n + m) \) matrix
+\[ \begin{pNiceMatrix}\partial_{1} f_{1} & \cdots & \partial_{n+m} f_{1} \\ \vdots & \ddots & \vdots \\ \partial_{1}f_{n} & \cdots & \partial_{n+m} f_{n}\end{pNiceMatrix}.  \]
+If we assume that \( Df|_{(x_{1}, \ldots, x_{n})}(\vec x_{n}) \) is invertible, then there exists some \( \Omega_{1} \subseteq \mathbb{R}^{n} \), \( \Omega_{2} \subseteq \mathbb{R}^{m} \) (both open), and a map \( \varphi = \begin{pNiceMatrix} \varphi_{1} \\ \vdots \\ \varphi_{m} \end{pNiceMatrix}  \) with \( \varphi : \Omega_{1} \to \Omega_{2} \) such that
+\[ f(x_{1}, \ldots, x_{n}, \varphi_{1}(x_{1}, \ldots, x_{n}), \ldots, \varphi_{m}(x_{1}, \ldots, x_{n})) = f(\vec x_{0}), \]
+for \( (x_{1}, \ldots, x_{n}) \in \Omega_{1} \).
+
+We can actually prove the inverse function theorem from the implicit function theorem (the other implication is in Spivak, but he did do it explicitly in class), by defining
+\[ F(\vec x, \vec b) = f(\vec x) - \vec b, \]
+and then if \( F(\vec x, \vec b)=0 \), we can find \( \vec x \) as a function of \( \vec b \). Therefore to prove all our theorems, we need only prove the implicit function theorem. But there is an elementary proof.
+
+\begin{proof}[Proof (Implicit Function Theorem)]
+	Suppose that \( f : \mathbb{R}^{n} \times \mathbb{R} \to \mathbb{R} \). Then, suppose without loss of generality that \( f(0, 0) = 0 \), and \( Df_{(x_{1}, \ldots, x_{n})}(0, 0) \) is invertible.
+
+	For the purposes of illustration, let us first consider the case where \( n = 1 \). Then in this case we have that \( \partial_{1}f(0, 0) \ne 0 \). This implies that on some neighborhood \( U \) of \( 0 \), \( \partial_{1}f(0, 0) \) all has the same sign. Let us assume without loss of generality that it is positive. This implies that along the \( x \)-axis our function is strictly increasing. But since \( f(0, 0) = 0 \), this implies that for \( (x, 0) \in U \), \( f(x, 0) < 0 \) when \( x < 0 \) and \( f(x, 0) > 0 \), when \( x > 0 \).
+
+	Fix some \( a > 0 \) such that \( (-a, a) \times \{0\} \subseteq U \). Now, find an \( \varepsilon > 0 \) such that for \( (x, y) \in \in B_{\varepsilon}(-a, 0) \), \( f(x, y) < 0 \), and for \( (x, y) \in B_{\varepsilon}(a, 0) \), \( f(x, y) > 0 \), and
+	\[ [-a, a] \times (- \varepsilon, \varepsilon) \subseteq U. \]
+	It follows that for any \( y_{0} \in (-\varepsilon, \varepsilon), \)
+	\[ f(-a, y_{0}) < 0, \qquad f(a, y_{0}) > 0, \]
+	and so by the intermediate value theorem, there exists \( x_{0} \in (-a, a) \) such that \( f(x_{0}, y_{0}) = 0 \).
+
+	This implies that each \( y_{0} \) has a unique zero along it. We also know it depends continuously on \( y_{0} \) by the continuity of \( f \), and therefore we can handwave away any requirements of differentiability or invertibility (Nabutovsky said it's easy---so it probably isn't\footnote{Many of the above details were filled in by me, he mostly just gave intuition and a proof sketch}).
+
+	The proof for \( n \ne 1 \) is the exact same except with parallelepipeds instead of rectangles. To prove it for \( m \ne 1 \), use induction on \( m \) to reduce it into showing it for \( m-1 \) dimensions and \( 1 \) dimension independently. This is fairly clear.
+\end{proof}
+x)
+So let's return to the inverse function theorem on manifolds. Given \( X, Y \) manifolds of the same dimension \( k \), if \( df(x_{0}) : T_{x_{0}}X^{k} \to T_{f(x_{0})}Y^{k}(x_{0}) \) is an isomorphism, then by the inverse function theorem in \( \mathbb{R}^{n} \), we've proven the inverse function theorem for manifolds.
+
+We say that a function \( f : X^{n} \to Y^{m} \) is an immersion if for all \( x \in X^{n} \), \( df(x) \) is injective. If \( n > m \) then it is clear that \( f \) will never be an immersion. Thus we have the counterpart of a submersion, which is a map such that \( df(x) \) is surjective, for all \( x \in X^{n} \).
+
+What the inverse function theorem for manifolds proves is that if \( f \) is an immersion and a submersion, then \( f \) is a \textit{local} diffeomorphism. There is a related notion. We say that \( x \in X^{n} \) is a regular point of \( X \) if \( df(x)(T_{x}X^{n}) = T_{f(x)}Y^{m} \). Therefore, \( f \) is a submersion if and only if every point of \( X^{n} \) is regular.
+
+We say that \( x \) is critical if it is not regular. If \( f : X^{n} \to Y^{m} \) and \( n < m \), then every point of \( X^{n} \) is a critical point.
+
+If \( x \) is a critical point, then we call \( f(x) \) a critical value. A regular value \( y \in Y^{m} \) is a value which is not critical---for all critical point \( x \in X^{n} \), \( f(x) \ne y \). It follows that if \( n < m \), then \( f(X^{n}) \) are the critical values of \( Y^{m} \). Notice that \( Y^{m} \setminus f(X^{n}) \) are all regular values.\footnote{cf. Sard's Theorem}
+
+Now how do we actually apply the implicit and inverse function theorem? Well consider \( f : \mathbb{R}^{n+m} \to \mathbb{R}^{n} \) and \( f \) is a submersion, with \( f(\vec x_{0}) = \vec 0 \in \mathbb{R}^{n} \). Suppose that 
+\[ f(x_{1}, \ldots, x_{n}, x_{n+1}, \ldots, x_{n+m}) = \vec a. \]
+Then a priori we know that \( \left\{ \vec a : f(\vec x) = \vec a \right\} \) is nonempty, but not much else. On the other hand, with the implicit function theorem, we know that this set is an \( m \)-dimensional manifold.
+
+If \( df(\vec x) : T_{\vec x} \mathbb{R}^{n+m} \to T_{\vec a} \mathbb{R}^{n} \) is a surjection. Then it has full rank when we consider it as a matrix, so we can use the implicit function theorem to get \( \varphi \) which parameterizes the image locally. 
+
+Let us consider a generalization: If \( f : X^{n} \to Y^{m} \) is a submersion (we know therefore that \( n \ge m \)), then for all \( y \in f(X^{n}) \subseteq Y^{m} \), then \( f^{-1}(y) \) is an \( (m-n) \)-manifold. Even further, if \( y \) is regular, then \( f^{-1}(y) \) is an \( (m-n) \)-manifold. This is the preimage theorem.
+
+Think about our domain as being \( X^{n} \) and our range being \( \mathbb{R}^{n} \), with \( f(x) = x \) for simplicity. Then we can just use our local parameterization to get our theorem, because the implicit function theorem is a local statement.
+
+Let's look more at immersions and submersions. If \( f \) is an immersion, then the canonical immersion is from \( \mathbb{R}^{n} \to \mathbb{R}^{m} \) where
+\[ (x_{1}, \ldots, x_{n}) \mapsto (x_{1}, \ldots, x_{n}, \overbrace{0, \ldots, 0}^{\text{\( n-m \) \( 0 \)'s}}) \]
+If \( f : X^{n} \to Y^{m} \) is an immersion, then for all \( x \in X^{n} \), there exists some open sets \( U \subseteq \mathbb{R}^{n} \), \( V \subseteq \mathbb{R}^{m} \), where \( x \in U \), \( f(x) \in V \), with paramaterizations \( \varphi : U \to X^{n} \), \( \psi : V \to Y^{m} \), such that
+\[ 
+\begin{tikzcd}
+	X^{n} & Y^{m} \\
+	U & V
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["\varphi", from=2-1, to=1-1]
+	\arrow["\psi", from=2-2, to=1-2]
+	\arrow["\text{canon}"', from=2-1, to=2-2]
+\end{tikzcd}.\]
+Analogously, the canonical submersion maps \( (x_{1}, \ldots, x_{m}, \ldots, x_{n}) \) to \( (x_{1}, \ldots, x_{m}) \). This is just the orthogonal projection. The submersion theorem shows us that the exact same commutative diagram commutes, except it's the canonical surjection at the bottom this time. This implies the preimage theorem when \( f \) is a submersion immediately.
