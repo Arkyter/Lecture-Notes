@@ -96,13 +96,41 @@
 	\addtolength{\textheight}{3.14cm}
 	\setlength{\footskip}{0.5in}
 	\setlength{\headsep}{10pt}
-	%\setlength{\parskip}{8pt plus 1pt minus 1pt}
+	%\setlength{\parskip}{8pt plus 1pt minus 1pt} % parskip stuff..,,
 	\automark{section}
+
+	% genuinely. fuck all of this.
+	% \begingroup
+	% 	\makeatletter
+	% 	\@for\theoremstyle:=definition\do{% since i only use definition anyways
+	% 		\expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+	% 			\setlength\thm@preskip{0pt}
+	% 			\setlength\thm@postskip{0pt}
+	% 		}%
+	% 	}
+	% \endgroup
+	% \let\oldproof\proof
+	% \let\endoldproof\endproof
+	% \renewenvironment{proof}{% fixes proof spacing
+	% 	\vspace{-1.5\parskip}\begin{oldproof}% is it really right to do -1.2 parskip?
+	% 	}{%
+	% 	\end{oldproof}\vspace{-\parskip}%
+	% }
 	
+	% \RedeclareSectionCommands[
+	% 	runin=false,
+	% 	afterindent=false,
+	% 	beforeskip=.5\baselineskip,
+	% 	afterskip=.1\baselineskip
+	% ]{section,subsection,subsubsection}
+	% %\usepackage{xpatch} % gets rid of the space after \section
+	% %\xapptocmd{\sectionlinesformat}{\vspace*{-\parskip}}{}{}
+	% %\xapptocmd{\subsectionlinesformat}{\vspace*{-\parskip}}{}{}
+
 	\ihead{\footnotesize\textbf{\theauthor} (\thedate)}
 	\chead{}
 	\ohead{\footnotesize\textbf{\thetitle}}
-	\cfoot{\pagemark}	
+	\cfoot{\pagemark}
 }
 
 % ----------------------------------------------------------------
@@ -224,6 +252,9 @@
 \DeclareMathOperator{\sp}{sp} % spectrum of an element
 \DeclareMathOperator{\Sp}{Sp} % Gelfand spectrum
 \DeclareMathOperator{\essim}{essim} % essential image
+
+% differential geometry
+\newcommand{\RP}{\mathbb{R}\mathrm{P}}
 
 % operators
 \DeclareMathOperator{\img}{im} % image

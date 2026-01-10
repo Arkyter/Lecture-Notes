@@ -1,24 +1,23 @@
 \documentclass[11pt]{scrartcl}
-
 \usepackage{silence}
 \WarningFilter{latex}{You have requested package}
-\WarningFilter{xcolor}{Package option} % `usenames' is obsolete and ignored. yea ik idgaf
-\WarningFilter{microtype}{Unable to apply patch} % fuck off footnotes are working
+\WarningFilter{xcolor}{Package option}
+\WarningFilter{microtype}{Unable to apply patch}
 
 \usepackage{{style_files/arky}}
-%\usepackage[sexy]{{style_files/evan}}
-%\usepackage{{style_files/NMC}}
 \usepackage{standalone}
 \usepackage{import}
 
 % extra stuff
-%\usepackage{quiver}
-\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} % tikz is a finicky annoying thing
-\DeclareMathOperator{\PB}{PB} % braid group..?
+\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} 
+\DeclareMathOperator{\PB}{PB} % braid group
+
+% document specific
+\setlength{\parindent}{0pt} % no indents
 
 \begin{document}
 \title{MAT347 Lecture Notes}
-\date{'25 Fall \& '26 Winter Semester} % add date
+\date{'25 Fall \& '26 Winter Semester}
 \maketitle
 
 \setcounter{tocdepth}{1}
@@ -50,6 +49,7 @@
 \include{MAT347 Notes/Day 23}
 \include{MAT347 Notes/Day 24}
 \include{MAT347 Notes/Day 25}
+\include{MAT347 Notes/Day 26}
 
 
 \end{document}
