@@ -1,0 +1,47 @@
+\section{Day 25: Poisson's Formula (Jan. 12, 2026)}
+The plan is
+\begin{enumerate}
+
+	\item Recap of Poisson's Formula
+	\item Theorem on the consequences of Poisson
+	\item Solve Dirichlet's Problem on some simple 2D geometry other than the disk
+	\item We will do stuff in higher dimensions using Green's formulas and Identities. We will do Green's functions eventually, but this will not appear before the midterm.
+
+\end{enumerate}
+Last time we solved the Dirichlet problem in the disk using Poisson's formula. This formula in particular is
+\[ u(r, \theta) = \frac{1}{2 \pi} \int_{0}^{2 \pi}  P_{a}(r, \phi - \theta) f( \phi) d \phi, \]
+where we have
+\[ P_{a}(r, \theta) = \frac{a^{2} - r^{2}}{a^{2} + r^{2} - 2 a r \cos(\theta)}. \]
+This solves it for sufficiently nice functions \( f \).
+
+\[ \tag{*}u(x) = \frac{a^{2} - |x|^{2}}{2 \pi a} \int_{|x'| = a} \frac{1}{|x - x'|^{2}}f(x') dx',  \]
+when \( x \in D_{a} \) and \( x' \in \partial D_{a} \).
+
+\begin{theorem}
+	Let \( f \in C(\partial D_{a}) \). Then (*) is the unique solution to the Dirichlet problem in the disk, and
+	\begin{enumerate}
+	
+		\item If \( x \in D \) and \( x_{0} \in \partial D \), then \( \lim_{x \to x_{0}} u(x) = f(x_{0}) \).
+		\item  \( u \in C^{\infty}(D) \).
+	
+	\end{enumerate}
+	Notice that 2 is the real exciting bit. 1 is basically just restating that (*) solves our equation.
+\end{theorem}
+\begin{proof}
+	We essentially already proved this in the context of the heat equation. To prove 2, notice that for any fixed \( x \in D \) there's some ball \( B_{\ell}(x) \subseteq D \) such that \( u(x) \) is a well-defined function
+	\begin{align*}
+	\partial_{x_{1}}u(x) &= \partial_{x_{1}} \left( \frac{a^{2} - |x|^{2}}{2 \pi a} \int_{|x'| = a} \frac{1}{|x - x'|^{2}}f(x') dx' \right) \\
+											 &= \partial_{x_{1}} \left( \frac{a^{2} - |x|^{2}}{2 \pi a} \right) \int_{|x'| = a} \frac{1}{|x-x'|^{2}}f(x') dx' + \frac{a^{2} - |x|^{2}}{2 \pi a} \partial_{x_{1}}\left( \int_{|x'| = a} \frac{1}{|x - x'|^{2}} f(x') dx' \right)
+											 \intertext{But notice that our domain is bounded, and the function on the inside is smooth with all derivatives bounded, so we can pull our derivative inside the integral.}
+											 &= \partial_{x_{1}} \left( \frac{a^{2} - |x|^{2}}{2 \pi a} \right) \int_{|x'| = a} \frac{1}{|x-x'|^{2}}f(x') dx' + \frac{a^{2} - |x|^{2}}{2 \pi a} \left( \int_{|x'| = a} \partial_{x_{1}}\frac{1}{|x - x'|^{2}} f(x') dx' \right),
+	\end{align*}
+	and this will be \( C^{\infty} \).
+
+	Now, consider
+	\begin{align*}
+		\Delta u(x) &= \Delta \int_{|x'| = a} \frac{a^{2} - |x|^{2}}{2 \pi a} \frac{1}{|x - x'|^{2}} f(x') dx' \\ 
+		&= \int_{|x'| = a} \Delta \left( \frac{a^{2} - |x|^{2}}{2 \pi a} \frac{1}{|x - x'|^{2}} \right) f(x)' dx' \\
+		&= 0,
+	\end{align*}
+	and we can check this is \( 0 \) directly by just computing the partial derivatives. Let us prove the limit equals what we hope. This proof turns out to be very similar to that of the heat equation. This is because our Poisson kernel approaches a constant multiple of the Dirac delta function as our radius approaches \( a \), so convolving with our function yields the desired solution. On Wednesday we will cover this more explicitly.
+\end{proof}
