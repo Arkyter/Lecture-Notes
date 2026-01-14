@@ -1,0 +1,56 @@
+\section{Day 27: Euclidean Algorithm in Euclidean Domains; Modules (Jan.\ 14, 2026)}
+Recall from last class that we established if $R$ is a PID, then for $a, b \in R$, we have $\left<a, b\right> = \left<\gcd(a, b)\right>$. The proof is that if $R$ is a PID, then $\left<a, b\right> = \left<y\right>$ for some $y \in R$, where $y \mid a$ and $y \mid b$, so $y \mid \gcd(a, b)$, and so $\gcd(a, b) \in \left<y\right>$. The other direction ``follows immediately''.
+\begin{corollary}
+    In a PID, if $a, b \in R$ and $g = \gcd(a, b)$, then there exists $s, t \in R$ such that $g = sa + tb$.
+\end{corollary}
+\begin{proof}
+    In a Euclidean domain, we may use the Euclidean algorithm (as seen at the beginning of this course) as an effect way to find our desired $s$ and $t$. Without loss of generality, suppose $e(a) \geq e(b)$. If $b \mid a$, then $\left<a, b\right> = \left<b\right>$, from which $\gcd(a, b) = b$, so $(s, t) = (0, 1)$. Otherwise, we need to perform more steps; write $a = bq + r$ where $w \mid e(r)$ and $e(r) < e(b)$; we have $\left<a, b\right> = \left<b, r\right>$ with $\gcd(a, b) = \gcd(b, r)$. Each time this operation is performed, we get a strictly smaller Euclidean norm in $\NN$, so this process must terminate, from which we may then reverse the computation to obtain our desired $s$ and $t$.
+\end{proof}
+As an example, let us compute $\gcd(a, b) = (33, 48)$ in $\ZZ$. The Euclidean algorithm yields
+\begin{align*}
+    48 &= 33 \cdot 1 + 15, \\
+    33 &= 15 \cdot 2 + 3, \\
+    15 &= 3 \cdot 5 + 0,
+\end{align*}
+from which we see
+\[ 3 = 33 - 15 \cdot 2 = 33 - (48 - 33) \cdot 2 = 33(3) - 48(2), \]
+so it is clear that $(s, t) = (-2, 3)$. We now discuss modules. For now, assume that $R$ need not be a commutative domain.
+\begin{definition}[Module]
+    A (left) $R$-module is a ``vector space over a ring'', i.e., a set $M$ with two operations
+    \[ +\colon M \times M \to M, \quad \cdot \colon R \times M \to M, \]
+    such that $(M, +)$ is an abelian group, the distributive laws
+    \[ a(m_1 + m_2) = am_1 + am_2, \quad (a_1 + a_2)m = a_1m + a_2m \]
+    hold, and $a(bm) = (ab)m$.
+\end{definition}
+Note that right modules are defined in the exact same way, except we do all the multiplication on the right; in particular, if $R$ is a commutative ring, left and right modules are the same thing. We now present some examples;
+\begin{enumerate}[(a)]
+    \item A vector space over a field is a module.
+    \item If $A$ is an abelian group, then it can be regarded as a $\ZZ$-module $na = a^n$ in $A$.
+    \item Suppose $V$ is a vector space over a field $F$ and $T\colon V \to V$ is a linear map. We can regard $V$ as a module over $F[x]$ by writing
+    \[ \left(\sum a_i x^i\right) v = \sum a_i T^i v. \]
+    \begin{claim}
+        Any module over $F[x]$ is of the form described above. Indeed, $M$ is automatically a vector space so we can define $Tv := x$ to get the above form.
+    \end{claim}
+    \item If $I \subset R$ is an ideal, then $M = R/I$ is a left $R$ module with $r[m] = [rm]$; in this manner, we can view $\ZZ/3$ as an example of a $\ZZ$ module.
+    \item Let $v \in \RR^n$. Column vectors with entries in $R$ are a module over $M_{n \times n}(R)$ in the usual sense of matrix multiplication. Alternatively, we could also do row vectors and have the matrices on the right to get a right $R$ module.
+    \item $M_{n \times n}(R)$ is both a left and right module using the appropriate matrices.
+\end{enumerate}
+We now discuss homomorphisms of modules. Fix a ring $R$, and denote the drorism $R$-mod and mod-$R$ as left and right $R$ modules respectively. We can regard these two as categories, meaning they have morphisms; namely, $\phi(a + b) = \phi(a) + \phi(b)$ and $\phi(ra) = r\phi(a)$ like a linear map. We can also discuss submodules as $A \subset B$ if $A$ is closed under the operations (just like vector spaces), and $B/A$ works for all submodules.
+\begin{theorem}[Isomorphism Theorems for Modules] \,
+    \begin{enumerate}
+        \item If $\phi : A \to B$ is a homomorphism, then $A/\ker \phi \cong \img \phi$.
+        \item Let $A, B, M$ be $R$ modules. Then
+        \[ \frac{A + B}{B} \cong \frac{A}{A \cap B}. \]
+        \item Let $A, B, M$ be $R$ modules. Then
+        \[ \frac{M/A}{B/A} \cong \frac{M}{B}. \]
+        \item Let $M$ be a module and $N$ a submodule of $M$. There is a bijection between the submodules of $M$ containing $N$ and the submodules of $M/N$, for which the correspondence is given by $A \leftrightarrow A/N$ for all $A \supset N$.
+    \end{enumerate}
+\end{theorem}
+We want to be able to factor certain modules, so we will now discuss direct sums. Let $M, N$ be $R$ modules, and write
+\[ M \oplus N = \{(m, n) \mid m \in M, n \in N\}. \]
+This is clearly a module in the common sense, and we can extend this to finite direct sums. Indeed, $\opname{mor}(\bigoplus_{j=1}^n A_j, \bigoplus_{i=1}^m B_i)$ is a set of matrices
+\[ \begin{pmatrix} \phi_{11} & \dots & \phi_{1m} \\ \vdots & \ddots & \vdots \\ \phi_{n1} & \dots & \phi_{nm} \end{pmatrix}, \quad \phi_{ij} : A_j \to B_i. \]
+Compositions are matrix multiplications. In a PID, the maps $\phi$ and $\psi$ sending
+\[ R/\left<a\right> \oplus R/\left<b\right> \taking{\phi} R/\left<\ell\right> \oplus R/\left<g\right> \taking{\psi} R/\left<a\right> \oplus R/\left<b\right>, \]
+where $g = \gcd(a, b)$ and $\ell = \lcm(a, b) = \frac{ab}{g}$ are given by
+\[ \phi = \begin{pmatrix} \frac{tb}{g} & \frac{sa}{g} \\ -1 & 1 \end{pmatrix}, \quad \psi = \begin{pmatrix} 1 & -\frac{sa}{g} \\ 1 & \frac{tb}{g} \end{pmatrix}. \]
