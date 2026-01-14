@@ -23,7 +23,7 @@ Here are some nice invariances of our equation. These are only invariances of th
 	\item If \( u \) is a solution, then \( u( \sqrt{a} x, a t) \) is a solution for all \( a > 0 \).
 \end{enumerate}
 \begin{remark}[By me, not Fabio]
-We are going to solve our PDE with initial conditions \( u(x, 0) = \chi_{\left\{ x \ge 0 \right\}} \). As usual, I use \( \chi \) for the indicator function.\footnote{If you object, please DM me how to write \texttt{\textbackslash{}mathbb\{1\}} for future.} This is the distribution function for the Kronecker delta function. For those unaware, the Kronecker delta function is a generalized function \( \delta \) such that
+We are going to solve our PDE with initial conditions \( u(x, 0) = \chi_{\left\{ x \ge 0 \right\}} \). As usual, I use \( \chi \) for the indicator function.\footnote{If you object, please DM me how to write \texttt{\textbackslash{}mathbb\{1\}} for future.} This is the distribution function for the Dirac delta function. For those unaware, the Dirac delta function is a generalized function \( \delta \) such that
 \[ \int_{a}^{b} \delta(x) dx = \left\{\begin{NiceMatrix}1 & 0 \in [a, b] \\ 0 & \text{otherwise.}\end{NiceMatrix}\right. \]
 Obviously this function doesn't actually exist because it would have to be infinite height at \( 0 \), but using measure theory this can be made perfectly formal. In some sense as well, we have that \( \partial_{x} \phi = \delta \). Not in the classical sense of course, because \( \phi \) is discontinuous, but we \textit{would} have that an analog of the fundamental theorem of calculus holds:
 \[ \int_{a}^{b} \delta(x) dx = \phi(b) - \phi(a). \]

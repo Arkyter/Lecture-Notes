@@ -1,0 +1,106 @@
+\section{Day 26: Poisson's Formula Cont. (Jan. 14, 2026)}
+We proved Poisson's Formula last time.
+\begin{remark}
+	Harmonic functions in \( D \) are smooth in \( D \). They are also analytic, which we will not prove.
+\end{remark}
+
+\begin{theorem}
+	Given \( f \) continuous,
+	\[ u(x) = \frac{a^{2} - |x|^{2}}{2 \pi a} \int_{|x'| = a} \frac{f(x')}{|x - x'|^{2}} ds  \]
+	is the unique solution to the Dirichlet problem in the disc,
+	where the \( ds \) is integrating with respect to the arclength. This is
+	\[ u(x) = \frac{a^{2} - r^{2}}{2 \pi} \int_{0}^{2 \pi}  \frac{f(\theta')}{r^{2} - a^{2} - 2 a r \cos \left( \theta - \theta' \right)} d \theta'. \]
+	in polar coordinates.
+	Specifically, they have the properties that \( - \Delta u = 0 \) and
+	\[ \lim_{x \to x_{0}} u(x) = f(x_{0}), \]
+	where \( x \in D \) and \( x_{0} \in \partial D \).
+\end{theorem}
+\begin{proof}
+	To show that \( \lim_{x \to x_{0}} u(x) = f(x_{0}) \), fix \( \theta_{0} \) and consider
+	\[ u(r, \theta_{0}) = \int_{0}^{2 \pi} P_{a}(r, \theta - \theta') f(\theta') d \theta'. \]
+	We ask whether as \( r \to a \) this is \( f(\theta_{0}) \). First we note that \( P_{a} \ge 0 \) for \( P > 0 \) and \( r < a \). Further, we have that
+	\[ \int_{0}^{2 \pi} P_{a}(r, \psi) d \psi = 1, \]
+	and we can see this by looking at how the Poisson kernel was derived (it was a sum of sine and cosines, so just look at the only terms which don't cancel. One can also do it directly, which was actually on one of my midterms in 157.
+
+	Notice that if \( | \psi| > \delta > 0 \), then
+	\begin{align*}
+		P_{a}(r, \psi) &= \frac{a^{2} - r^{2}}{(a - r)^{2} + 2 a r (1 - \cos \psi)} \\ 
+									 &= \frac{a^{2} - r^{2}}{(a - r)^{2} + a r \sin^{2} \left( \frac{\pi}{2} \right)} \\
+									 &\le \frac{a^{2} - r^{2}}{\left( a - r \right)^{2} + a r \sin^{2} \left( \frac{\delta}{2} \right)} \to 0. 
+	\end{align*}
+	Thus, it's gonna approximate a Delta function as \( r \to a \), [as I remarked last time.] The formal proof is that
+	\begin{align*}
+	u(r, \theta_{0}) - f(\theta_{0}) &= \frac{1}{2 \pi} \int_{0}^{2 \pi} P_{a}(r, \theta_{0} - \theta') \left[ f(\theta') - f(\theta_{0}) \right] d \theta' \\
+																	 &= \frac{1}{2 \pi} \int_{| \theta' - \theta_{0}| < \delta} P_{a}(r, \theta_{0} - \theta') \left[ f(\theta') - f(\theta_{0}) \right] d \theta' \\ &\qquad\qquad + \frac{1}{2 \pi}\int_{| \theta' - \theta_{0}| \ge \delta} P_{a}(r, \theta_{0} - \theta') \left[ f(\theta') - f(\theta_{0}) \right] d \theta' \\
+	\end{align*}
+	and we have that the former limit goes to \( 0 \) since \( f(\theta') - f(\theta_{0}) \to 0 \) and the latter goes to \( 0 \) as \( r \to a \).
+\end{proof}
+The Poisson kernel is the fundamental solution (sometimes called the Green's function) for the Dirichlet problem in the disk
+\[ \Delta u|_{D_{a}} = 0, \qquad u|_{\partial D_{a}} = f. \]
+
+\begin{theorem}
+	If \( u \) is harmonic in a disc \( D \) and continuous in \( \bar D \), then the value of \( u \) at the center of \( D \) is the average of \( u \) on \( \partial D \).
+\end{theorem}
+\begin{proof}
+	By translation invariance, let \( D \) be centered at the origin. Then recall Poisson's formula.
+	\begin{align*}
+		u(x) &= \frac{a^{2} - |x|^{2}}{2 \pi a} \int_{|x'| = a} \frac{u(x')}{|x - x'|^{2}} ds \\
+		u(0) &= \frac{a^{2}}{2 \pi a} \int_{|x'| = a}  \frac{u(x')}{|x'|^{2}} ds \\
+				 &= \fint_{|x'| = a} u(x') ds,
+	\end{align*}
+	where \( \fint \) is defined to be the average value.
+\end{proof}
+
+\begin{theorem}
+	If \( u \) is harmonic in a domain \( D \subseteq \mathbb{R}^{2} \) connected, then \( u \) can only attain a max on \( \partial D \) unless it in constant.
+\end{theorem}
+\begin{proof}
+	This will follow by our mean value theorem. Suppose that \( x \in D \) is a max, where \( D \subseteq \mathbb{R}^{2} \) is connected. Then there exists some \( \varepsilon > 0 \) such that \( D_{\varepsilon}(x) \subseteq D \). As such,
+	\[ \fint_{|x - x'| = \varepsilon} u(x') dx' \le \fint_{|x - x'| = \varepsilon} u(x) dx',\]
+	and therefore we have that for all \( x' \in D \) with \( |x - x'| = \varepsilon \), \( u(x') = u(x) \) (they cannot be greater, so they must be identically equal). But then on \( x_{0} \in D_{\varepsilon}(x) \) we have that \( u(x_{0}) = u(x) \), so we have that the set \( u^{-1}( \left\{ u(x) \right\}) \) is open. But since it is the preimage of a single point, it must be a closed set, so since it is both open and closed and \( D \) is connected, we have that \( u^{-1}( \left\{ u(x) \right\}) = D \), so \( u \) is constant.
+\end{proof}
+
+\begin{remark}
+	The reason we didn't show it for the heat is because it was more complicated to get domains on which the heat is the average, but once you have that property it's the same proof.
+\end{remark}
+
+Recall that Harmonic functions are \( C^{\infty} \) smooth. We know through Poisson's formula, where we assumed \( u \) is merely continuous on the boundary. We are assuming that \( u \in C^{2} \) when we right
+
+\begin{remark}
+	We can make sense of the equation \( \Delta u = 0 \) even for non-\( C^{2} \) functions. One way to do this is to look at (for \( w : D \subseteq \mathbb{R}^{n} \to \mathbb{R} \)) the Dirichlet energy
+	\[ \int_{D} \left| \nabla w \right|^{2} dw, \]
+	and to minimize it subject to \( u = f \) on \( \partial D \). This is analogous to the principle of least action in classical mechanics.
+\end{remark}
+
+We'll solve the Dirichlet problem on some special geometries. We've done the disc, so we can next do it on the wedge and the annuli. On the rectangle is in the homework. It can be solved using proper separation of variables and Fourier series. Really for any of these we just want them to be rectangles in some coordinate system.
+
+\begin{example}[Dirichlet Problem in a Wedge]
+	Let \( D = \left\{ 0 < \theta < \beta, 0 < r < \theta \right\} \). Then we want to solve \( \Delta u = 0 \). Let's suppose that our boundary conditions are
+	\[ u(r, 0) = 0 = u(r, \beta) = \frac{\partial}{\partial r} u (a, \theta) = f(\theta). \]
+	Let's start by separating variables.
+	\[ u(r, \theta) = R(r) \Theta(\theta) \implies \frac{R''}{R} + \frac{1}{r} \frac{R'}{R} + \frac{1}{r^{2}} \frac{\Theta''}{\Theta} = 0.  \]
+	Thus, we have that
+	\[ \left\{\begin{NiceMatrix} \frac{\Theta''}{\Theta} = - \lambda \\ \Theta(0) = \Theta(\beta) = 0 \end{NiceMatrix}\right.  \]
+	and \( r^{2} R'' + r R' - \lambda R = 0 \). Then
+	\[ \Theta(\theta) = c_{1} \sin \left( \sqrt{ \lambda} \theta \right) + c_{2} \cos( \sqrt{\lambda} \theta), \]
+	but the cosine term cancels out from our boundary conditions, so
+	\[  0 = \Theta( \beta) = c_{1} \sin( \sqrt{\lambda} \beta), \]
+	and thus \( \sqrt{\lambda} \beta = n \pi \) and thus \( \sqrt{\lambda} = \frac{n \pi}{\beta} \), and also \( \Theta(\theta) = c_{n} \sin \left(  \frac{n \pi}{\beta} \theta \right) \).
+
+	Solving for \( R \) (Cauchy-Euler), we have that
+	\[ r^{2} R'' + r R' - \left( \frac{n \pi}{\beta} \right)^{2} R = 0, \]
+	and so trying out \( R(r) = r^{\gamma} \) gives
+	\[ \gamma \cdot (\gamma - 1)r^{\gamma} + \gamma \cdot r^{\gamma} - \left( \frac{n \pi}{\beta} \right)^{2} r^{\gamma} = 0 \]
+	which yields
+	\[ \gamma^{2} - \left( \frac{n \pi}{\beta} \right)^{2} = 0, \]
+	then
+	\[ \gamma = \pm \frac{n \pi}{\beta} = \pm \sqrt{\lambda}. \]
+	After all this, we arrive at the general solution
+	\[ u(r, \theta) = \sum_{n \ge 1}  A_{n} r^{\frac{n \pi}{\beta}} \sin \left(  \frac{n \pi}{\beta} \theta \right), \]
+	and since we need \( \partial_{r} u(a, \theta) = f(\theta) \), we want
+	\[ \partial_{r }u(a, \theta) = \sum_{n \ge 1}  A_{n} \frac{n \pi}{\beta}a^{\frac{n \pi}{\beta} - 1} \sin \left(  \frac{n \pi}{\beta} \theta \right). \]
+	And so we can get our fourier coefficients by integrating against \( f(\theta) \) here in the usual way.
+	\[ A_{n} \frac{n \pi}{\beta}  a^{\frac{n \pi}{\beta}-1} = \frac{2}{\beta} \int_{0}^{\beta} f(\theta) \sin \frac{n \pi}{\beta} \theta d \theta. \]
+\end{example}
+We do 3D stuff next time
+
