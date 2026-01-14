@@ -1,0 +1,55 @@
+\section{Day 3: Real and Complex Projective Plane; Real and Complex Grassmannians (Jan.\ 13, 2026)}
+Last class, we finished with our ``second draft'' of a definition of a manifold, i.e., a set $M$ with a maximal atlas $\SA$ (if a chart is compatible with $\SA$, then it is already in $\SA$). In practice, it is sufficient to take a ``reasonably large'' atlas, from which it can be uniquely completed to a maximal atlas. Two atlases generate the same maximal atlas if and only if each chart from one atlas is compatible with every chart in the other.
+\\[8pt]
+There are still some problems with our definition, though. For example, if $M$ is ``too big'', such as $M = \RR$ and we consider the atlas $\varphi_r : U_r \to \RR^0 = \{0\}$, where each $U_r = \{r\} \in \RR$, then $M$ is just ``uncountable dust'', and doesn't fit in every $\RR^N$.\footnote{this is example \S2.14 in the textbook, p.26}
+\begin{definition}
+    A manifold $(M, \SA)$ is \textit{second countable} if it can be covered by countably many charts.
+\end{definition}
+\noindent As another example, consider the line with two origins, $\RR \cup \{0'\}$; we may give this two charts, $\id : \RR \to \RR$, and $\RR \setminus \{0\} \cup \{0'\} \to \RR$ given by the identity everywhere except $0' \mapsto 0$.
+\begin{definition}[\S2.16b]
+    A manifold $(M, \SA)$ is \textit{Hausdorff} if every pair of points lie in disjoint charts, i.e., for all $p_1, p_2 \in M$, there are
+    \[ \varphi_1 : U_1 \to \RR^n, \quad \varphi_2 : U_2 \to \RR^n, \]
+    such that $U_1 \cap U_2 = \emptyset$, $p_1 \in U_1$, and $p_2 \in U_2$. Note that in a maximal atlas, given a chart $\varphi : U \to \RR^n$, the restriction
+    \[ \restr{\varphi}{V} : V \to \RR^n \]
+    is also a chart as long as $\varphi(V)$ is open.
+\end{definition}
+In particular, this means that if $p_1, p_2$ are in the same chart, they can't obstruct the Hausdorff property. With this, we can define the manifold properly,
+\begin{definition}
+    A manifold is a set $M$ with a maximal atlas $\SA$ that is second countable and Hausdorff.
+\end{definition}
+\noindent We now present some examples.
+\begin{enumerate}[(a)]
+    \item (\S2.18) Let $S^n$ be equipped with the maximal atlas containing the stereographic projections $\varphi_N$ and $\varphi_S$. $M$ is second countable because it is covered by two charts, and Hausdorff because the only interesting case to look at is when $p_1 = N$ and $p_2 = S$ (otherwise, we can cover $p_1, p_2$ with the same chart), but we can then restrict $\varphi_S$ and $\varphi_N$ on the open hemispheres. 
+    \item (Section \S 2.3.2) Consider the real projective $n$-space $\RP^n$, which can be regarded as the set of lines through $0$ in $\RR^{n+1}$, or
+    \[ (\RR^{n+1} \setminus \{0\}) / \bigl\{v \sim cv \mid c \in \RR \setminus \{0\}\bigr\}, \]
+    or $S^n / v \sim -v$ (read: equivalence classes), or $\ol{B^n} / \{v \sim -v \mid v \in \partial \ol{B_n}\}$, where $B^n = \{x \in \RR^n \mid \norm{x}^2 \leq 1\}$. Note that all of these ways to express $\RP^n$ are equivalent to each other.
+\end{enumerate}
+\begin{definition}
+    Since any nonzero vector in $\RR^{n-1}$ determines a line (through the origin), we write $(x^0 : x^1 : \dots : x^n)$ to be the \textit{homogeneous coordinates} in the equivalence class of $(x^0, \dots, x_n) \in \RR^{n-1} \setminus \{0\}$ with equivalence if two points agree up to a nonzero scalar multiple.
+\end{definition}
+The projective space $\RP^n$ can be given a chart, i.e., a projection taking the open northern hemisphere to $\RR^n$ by
+\[ \varphi : (x^0 : x^1 : \dots : x^n) \mapsto \left(\frac{x^1}{x^0}, \dots, \frac{x^n}{x^0}\right), \]
+for which $\varphi_0$ admits the domain $U_0 := \{(x^0 : x^1 : \dots : x^n) \mid x^0 \neq 0\}$. We may, in this manner, construct $\varphi_1, \dots, \varphi_n$ similarly covering $\RP^n$ (where we omit the $j$th coordinate for $\varphi_j$)\footnote{see p.31 for a more careful treatment}, since every point in $\RP^n$ has some nonzero homogeneous coordinate. In this manner, we may view $U_j$ to consists of the lines intersecting the affine hyperplane $H_j = \{x \in \RR^{n+1} \mid x^j = 1\}$.
+\begin{exercise}
+    Compute the transition maps for $\RP^n$ and verify that they're smooth. What do we need in order to show that this is a manifold? We need to show that \begin{parlist} \item the charts cover $\RP^n$, \item the transition maps are smooth (which induces some maximal atlas), \item is second countable, \item and is Hausdorff. \end{parlist} Note that the first two conditions are shown because we already demonstrated earlier that the $\varphi_0, \dots, \varphi_n$ form a chart, and that second countability comes from (i). We will show (iv) later.
+\end{exercise}
+\begin{enumerate}[(a)] \setcounter{enumi}{2}
+    \item (Section \S 2.3.3) We now discuss the complex projective space $\CP^n$, which we take to be $\CC^{n+1} \setminus \{0\}$ quotientied out by constant multiples, or $S^{2n+1}$ quotiented out by the relation $v \sim e^{i\theta} v$, where $\theta \in [0, 2\pi)$ (each equivalence class is a circle). Here, we write the homogeneous coordinates to be $(z^0 : z^1 : \dots : z^n)$, and we have a similar construction for charts,
+    \[ \varphi_i (z^0 : z^1 : \dots : z^n) = \left(\frac{z^0}{z^i}, \dots, \frac{z^{i-1}}{z^i}, \frac{z^{i+1}}{z^i}, \dots, \frac{z^n}{z^i}\right), \]
+    where $\varphi_i : U_i \to \RR^{2n} \cong \CC^n$. As an example, consider $\RP^1 \cong \RR \cup \{(1:0)\} \cong S^1$, and $\CP^1 \cong \CC \cup \{(1:0)\} \cong S^2$, where we view $\CC = \{(z:1) \mid z \in \CC\}$. Note that this is not a rigorous visualization.
+\end{enumerate}
+\begin{remark}
+    The transition maps here are not just diffeomorphic, but also holomorphic. $\CP^n$ can be regarded as a complex manifold, and in general, you can define manifolds with some ``extra structure'' if their transition maps have said extra structure.
+\end{remark}
+\begin{enumerate}[(a)] \setcounter{enumi}{3}
+    \item (Section \S 2.3.4) The \textit{real Grassmannian} is denoted $\Gr(k, n)$ and defined as the $k$-dimensional vector subspaces of $\RR^n$. As an example,
+    \[ \RP^n = \Gr(1, n+1) \cong \Gr(n, n+1). \]
+    How do we build charts in this manifold? As an idea, we can think of the subspaces as graphs of linear functions; one such chart might be
+    \[ \spn \begin{pmatrix} 1 & 0 & a \\ 0 & a & b \end{pmatrix} \to (a, b) \in \RR^2; \]
+    in general, there are $\binom{n}{k}$ total charts\footnote{i will leave some of the exposition to the textbook, i don't like what fedya is doing}.
+\end{enumerate}
+\begin{claim}
+    These charts cover $\Gr(k, n)$, i.e., in each $k$-dimensional subspace $E$, we can find $e_{i_1}, \dots, e_{i_k}$, such that $E$ is the graph of a function sending $(x^{i_1}, \dots, x^{i_k})$ to the other $n-k$ coordinates in $\RR^n$.
+\end{claim}
+Since I've basically lost what Fedya is saying because he writes in cursive and his jumping around everywhere in the textbook treatment for real Grassmannians, I direct you to read pages 34-36 for the same treatment of this subject that has already been written down.
+%Let $I$ be the set of $k$ indices associated to $E$, and let $I'$ be its complement; suppose we also have another set of $k$ indices $J$, and let $J'$ be defined similarly. Then $E \cong \RR^I \cong \RR^J$,

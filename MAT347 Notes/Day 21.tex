@@ -31,7 +31,7 @@
 \begin{definition}
     An \textit{ideal} $I$ in a ring $R$ is a subset $I \subset R$ such that $I$ is a subrng\footnote{yes, subrng, not subring} and, for all $a \in R$, we have $aI \subset I$ and $Ia \subset I$, which is equivalent to $RI = I = IR$.
 \end{definition}
-\noindent We ask; if $I \subset R$ is an ideal, does there exist $\varphi : R \to S$ such that $I = \ker \varphi$? Indeed, the answer is yes, since, given $I \subset R$ an ideal in a ring $R$< we can define $x \sim y$ if $x - y \in I$, where $\sim$ is an equivalence relation by group theory. Define $R/I = \{[x] \mid x \in R\}$, and $0_{R/I} := [0] = I$, $1_{R/I} := [1] = 1 + I$. More generally, we write
+\noindent We ask; if $I \subset R$ is an ideal, does there exist $\varphi : R \to S$ such that $I = \ker \varphi$? Indeed, the answer is yes, since, given $I \subset R$ an ideal in a ring $R$, we can define $x \sim y$ if $x - y \in I$, where $\sim$ is an equivalence relation by group theory. Define $R/I = \{[x] \mid x \in R\}$, and $0_{R/I} := [0] = I$, $1_{R/I} := [1] = 1 + I$. More generally, we write
 \[ [x] = \{y \mid x - y \in I\} = x + I, \]
 so $[x] + [y] = [x + y]$, which is well-defined as checked in Abelian group theory. We have that $[x] [y] := [xy]$, so we can claim well-definedness. In particular, let $x' \sim x$ and $y' \sim y$; is it true that $[x'y'] = [xy]$? We see this from writing
 \[ xy - x'y' = xy - xy' + xy' - x'y' = x(y - y') + (x - x')y' = x(0) + (0)y' = 0. \]
