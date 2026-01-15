@@ -23,7 +23,7 @@
 \tableofcontents
 \newpage
 
-\foreach \i in {1, 2} {
+\foreach \i in {1, ..., 3} {
 	\edef\FileName{MAT425 Notes/Day \i.tex}
 	\IfFileExists{\FileName}{\input{\FileName} \newpage}
 }

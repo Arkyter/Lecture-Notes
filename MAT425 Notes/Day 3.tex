@@ -1,0 +1,138 @@
+\section{Day 3: Submersion, Immersion, Preimage Theorems (Jan. 13, 2025)}
+As a notation (which Nabutovsky did not use) I will say that \( \pi \) is our canonical submersion and \( \iota \) is our canonical immersion. This is because Nabutovsky wrote it out in plain text every time he referred to it, which is harder to fit into latex. Use this notation at your own risk.  
+
+Let \( f : X^{k} \to Y^{\ell} \) be a function (where \( k \le \ell \)). Suppose that for some \( x_{0} \in X^{k} \), \( df(x_{0}) : TX^{k} \to TY^{\ell} \) is injective. We want to show that there are open sets \( U \subseteq \mathbb{R}^{k} \), \( V \subseteq \mathbb{R}^{\ell} \), with \( x_{0} \in U \), and parameterizations \( \varphi : U \to X^{k} \) and \( \psi : V \to Y^{\ell} \) such that the following diagram commutes.
+\[ 
+\begin{tikzcd}
+ X & Y \\
+ U & V 
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi", from=2-1, to=1-1]
+ \arrow["\psi", from=2-2, to=1-2]
+ \arrow["\iota", from=2-1, to=2-2]
+\end{tikzcd}
+\]
+Recall that our canonical immersion \( \iota : \mathbb{R}^{k} \to \mathbb{R}^{\ell} \) is just
+\[ \iota(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{k}, \underbrace{0, \ldots, 0}_{\text{\( \ell - k \) zeroes}}). \]
+Despite Nabutovsky's incomprehensible summary, the idea behind this is actually quite simple. Choose arbitrary parameterizations \( \varphi : U \to X^{k} \) and \( \psi : U' \to Y^{\ell} \) such that \( x_{0} \in \operatorname{im} \varphi \), and the following diagram commutes for some \( g : U \to U' \)
+\[ \begin{tikzcd}
+ X & Y \\
+ U & U' 
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi", from=2-1, to=1-1]
+ \arrow["\psi", from=2-2, to=1-2]
+ \arrow["g", from=2-1, to=2-2]
+\end{tikzcd} \]
+
+Without loss of generality, we can assume that the top \( \ell \times \ell \) minor of \( Dg \) (that is, the first \( \ell \) rows of \( Dg \)) is invertible.
+Define \( G : \mathbb{R}^{k} \times \mathbb{R}^{\ell - k} \to \mathbb{R}^{\ell} \) by
+\[ G(x, z) = g(x) + z. \]
+Then we have that
+\[ DG = \begin{pNiceArray}{c|c}[margin] \Block{2-1}{Dg} & 0 \\ \cline{2-2}  & I_{k - \ell}\end{pNiceArray}, \]
+so \( G \) is a local diffeomorphism. Why do we care? Let \( V = \iota(U) \). Then we have that the following diagram commutes:
+\[ 
+\begin{tikzcd}
+	V & U & X \\
+	{} & U' & Y 
+ \arrow["f", from=1-3, to=2-3]
+ \arrow["\varphi", from=1-2, to=1-3]
+ \arrow["\psi", from=2-2, to=2-3]
+ \arrow["\iota", from=1-2, to=1-1]
+ \arrow["G"', from=1-1, to=2-2]
+ \arrow["g", from=1-2, to=2-2]
+\end{tikzcd}
+\]
+Therefore removing the extraneous pieces, the following diagram commutes
+\[ 
+\begin{tikzcd}
+ X & Y \\
+ U & V  
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi", from=2-1, to=1-1]
+ \arrow["\psi \circ G"', from=2-2, to=1-2]
+ \arrow["\iota", from=2-1, to=2-2]
+\end{tikzcd}
+\]
+Since \( G \) is a local diffeomorphism, by shrinking our sets \( U \) and \( V \) sufficiently (but ensuring that that \( x_{0} \in U \)), we can get that \( G|_{U} \) is a global diffeomorphism and therefore \( \psi \circ G|_{U} \) is a parameterization, proving the theorem.
+
+For the submersion theorem, we do almost the exact same thing. We want that if \( f : X^{k} \to Y^{\ell} \) and \( x_{0} \in X^{k} \) is such that \( df(x_{0}) \) is surjective, then there exists parameterizations \( \varphi : U \to X^{k} \), \( \psi : V \to Y^{\ell} \) such that \( x_{0} \in \operatorname{im} \varphi \), andthe following diagram commutes:
+\[ \begin{tikzcd}
+ X & Y \\
+ U & V  
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi", from=2-1, to=1-1]
+ \arrow["\psi"', from=2-2, to=1-2]
+ \arrow["\pi", from=2-1, to=2-2]
+\end{tikzcd}. \]
+For this purpose, choose parameterizations \( \varphi : U \to X^{k} \) and \( \psi : U' \to Y^{\ell} \) such that the following commutes.
+\[ \begin{tikzcd}
+ X & Y \\
+ U & U'  
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi", from=2-1, to=1-1]
+ \arrow["\psi"', from=2-2, to=1-2]
+ \arrow["g", from=2-1, to=2-2]
+\end{tikzcd}. \]
+If we set \( G : U \to U' \times \mathbb{R}^{k - \ell} \) and
+\[ G(x_{1}, \ldots, x_{k}) = \left( g(x_{1}, \ldots, x_{k}), x_{\ell +1}, \ldots, x_{k} \right), \]
+\[ DG = \begin{pNiceArray}{cc}[margin,hvlines] \Block{1-2}{Dg} &  \\ 0 & I_{k - \ell}\end{pNiceArray}, \]
+therefore (once again, up to a change of basis) \( DG \) is invertible, and so \( G \) is a local diffeomorphism. If we set \( V = G(U) \), then the following diagram commutes
+\[ 
+\begin{tikzcd}
+	V & U & X \\
+	{} & U' & Y 
+ \arrow["f", from=1-3, to=2-3]
+ \arrow["\varphi", from=1-2, to=1-3]
+ \arrow["\psi", from=2-2, to=2-3]
+ \arrow["G", from=1-2, to=1-1]
+ \arrow["\pi"', from=1-1, to=2-2]
+ \arrow["g", from=1-2, to=2-2]
+\end{tikzcd}
+\]
+which implies that so too does
+\[ \begin{tikzcd}
+ X & Y \\
+ U & V  
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi \circ G^{-1}", from=2-1, to=1-1]
+ \arrow["\psi"', from=2-2, to=1-2]
+ \arrow["\pi", from=2-1, to=2-2]
+\end{tikzcd} \]
+which once more yields our desired result by shrinking \( U \) and \( V \).
+
+So we are done the immersion and submersion theorems. Let us look at the preimage theorem. If \( y \in f(X) \) is regular for \( f : X^{k} \to Y^{\ell} \), then \( f^{-1}(y) \) is locally diffeomorphic to \( \mathbb{R}^{k - \ell} \). 
+
+This is fairly intuitive in light of the submersion theorem. This is because a direct application submersion theorem yields our parameterization at any given point of \( X^{k} \). Given \( x_{0} \in f^{-1}(y) \) (such that \( f \) is a submersion at \( x_{0} \)), we know that there exists \( \varphi \), \( \psi \) such that the following diagram commutes
+\[ \begin{tikzcd}
+ X & Y \\
+ U & V  
+ \arrow["f", from=1-1, to=1-2]
+ \arrow["\varphi", from=2-1, to=1-1]
+ \arrow["\psi"', from=2-2, to=1-2]
+ \arrow["\pi", from=2-1, to=2-2]
+\end{tikzcd} \]
+where \( \varphi^{-1}(x_{0}) \in U \) and \( \psi^{-1}(y) \in V \). But then \( \pi^{-1}(\psi^{-1}(y)) \) gives a subspace of \( U \) which parameterizes \( f^{-1}(y) \) via the map \( \varphi \).
+
+Why do we care? All of this is kind of nebulous, so it might be nice to check out a concrete example. \( M_{n \times n} \), the \( n \times n \) matrices, can be thought of as basically \( \mathbb{R}^{n^{2}} \). If we set \( \operatorname{Sym}_{n \times n} \) to be the \( n \times n \) symmetric matrices, then we have a subspace (it can be identified with \( \mathbb{R}^{\frac{n(n+1)}{2}} \) by only controlling the entries of the lower diagonal). Now, if we consider the map \( f : M_{n \times n} \to \operatorname{Sym}_{n \times n} \)
+\[ f(A) = A^{\top} A, \]
+then \( f^{-1}(I) \) will be all the orthogonal matrices \( O_{n \times n} \). To show this is a manifold, we can consider \( df \), and show that \( df(A) \) is surjective whenever \( A \) is orthogonal.
+\begin{align*}
+	\lim_{h \to 0} \frac{f(A + h B) - f(A)}{h} &= \lim_{h \to 0} \frac{A^{\top} A + h B^{\top} A + h A^{\top} B + h^{2} B^{\top} B - A^{\top} A}{h} \\
+	&= \lim_{h \to 0} B^{\top} A + h A^{\top} B + hB^{\top} B \\
+	&= B^{\top} A + A^{\top} B.
+\end{align*}
+Fix some symmetric matrix \( C \). Then we want to construct \( B \) such that \( B^{\top} A + A^{\top} B = C \). But we have that \( C = C^{\top} \) by its orthogonality, so
+\begin{align*}
+	B^{\top} A + A^{\top}B &= C \\
+	B^{\top} A + A^{\top} B &= \frac{1}{2} \left( C^{\top} + C \right) \\
+	A^{\top} B &= \frac{C}{2}  \\
+	B &= \left( A^{\top} \right)^{-1}\frac{C}{2}  \\
+	B &= \frac{AC}{2}
+\end{align*}
+therefore for all orthogonal \( A \) and symmetric \( C \) there exists some matrix \( B \) such that \( df(A)(B) = C \), which implies that \( df(A) \) is a surjection at every orthogonal \( A \), and therefore \( I \) is a regular value of \( f \). This implies that \( f^{-1}(I) = O_{n \times n} \) is a manifold. Furthermore, its dimension will be \( \dim M_{n \times n} - \dim S_{n \times n} = \frac{n(n-1)}{2} \).
+
+Next up we ask when immersions yield manifolds. If \( f : X^{k} \to Y^{\ell} \) is an immersion, is \( f(X^{k}) \) a manifold? Well not necessarily, consider something like \( X = \mathbb{R} \) and \( f(x) = \left( \sin t, \sin t \cos t \right) \). This will be a lemniscate (looks a bit like \( \infty \)) which is not smooth at \( 0 \). What if we require \( f \) is injective? Then is it a manifold? Still not necessarily. Consider something like \( f(x) = (x, \alpha x) \) for some irrational \( \alpha \), then consider the map from \( \mathbb{R}^{2} \to S^{1} \times S^{1} \) given by
+\[ f(s, t) = \left( \cos s, \sin s, \cos t, \sin t \right). \]
+The intuition is that this mapping will be dense in \( S^{1} \times S^{1} \) (by a Diophantine approximation argument), but its image should only be one dimensional because \( f \) is smooth, which is a contradiction.
+
+Next time we will cover one way to ensure our image is a manifold.
