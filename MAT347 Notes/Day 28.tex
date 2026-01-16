@@ -1,0 +1,17 @@
+\section{Day 28: Modules, Pt.\ 2 (Jan.\ 16, 2026)}
+We start with an example. Recall that in a PID,
+\[ R/\left<a\right> \oplus R/\left<b\right> \taking{\phi} R/\left<\ell\right> \oplus R/\left<g\right> \taking{\psi} R/\left<a\right> \oplus R/\left<b\right>, \]
+where $g = \gcd(a,b)$, $\ell = \lcm(a, b) = \frac{ab}{g}$, and the maps are given by
+\[ \phi = \begin{pmatrix} \frac{tb}{g} & \frac{sa}{g} \\ -1 & 1 \end{pmatrix} \quad \psi = \begin{pmatrix} 1 & -\frac{sa}{g} \\ 1 & \frac{tb}{g} \end{pmatrix}, \quad \phi \circ \psi = \id. \]
+We want to verify that this is indeed an isomorphism. Observe, that, using the notation from last lecture, we have $\phi_{11}(ka) = \frac{kabt}{g} = \ell kt = [0]$ in the target $R/\left<\ell\right>$, and the other cases are similarly easy to check. They are obviously inverses, so $\phi, \psi$ are in bijection and linear, whence they are isomorphisms.\footnote{dror the point is you should do the example on the board.} As some subexamples, observe that
+\[ \ZZ/6 \oplus \ZZ/15 \cong \ZZ/30 \oplus \ZZ/3, \quad \ZZ/1001 \cong \ZZ/77 \oplus \ZZ/13 \cong \ZZ/7 \oplus \ZZ/11 \oplus \ZZ/13. \] \vspace{-24pt}
+\begin{theorem}
+    If $M$ is a finitely generated module over a PID, then it uniquely factors as
+    \[ M \cong R^k \oplus \bigoplus_i R/\left<p_i^{s_i}\right>, \]
+    where the $p_i$'s are prime and $s_i \geq 1$.
+\end{theorem}
+\begin{proof}
+    In a Euclidaen domain, the proof is the same for the $\ZZ$ case, which reduces to our similar theorem on finitely generated abelian groups. The only time we used a property of $\ZZ$ is that it has an element of smallest norm, which every Euclidean domain has.\footnote{what? go read d\&f or lang.}
+\end{proof}
+%Recall that the proof of that went as follows; let $G$ be the finite set of generators for $M$, and consider 
+Basically, modules are mostly the same as abelian groups, which are the products of the ring $\ZZ$ and its quotients.
