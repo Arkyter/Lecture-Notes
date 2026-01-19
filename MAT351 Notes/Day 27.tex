@@ -1,0 +1,54 @@
+\section{Day 27: Dirichlet's Problem (Jan. 19, 2026)}
+We did Dirichlet's problem 
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 & \text{ in \( D \)} \\ u = f & \text{ on \( \partial D \)}\end{NiceMatrix}\right.  \]
+using separation of variables and Fourier series on ``simple'' geometries. Simple geometries are 
+\begin{enumerate}
+
+	\item Disc (Poisson)
+	\item Rectangle (and Triangle)
+	\item Annuli (using radial solutions to \( \Delta u = 0 \))
+	\item Wedge (in class).
+
+\end{enumerate}
+
+For the wedge in particular,
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 &\text{interior of wedge} \\ \frac{\partial u}{\partial n} = f & \text{radial part of wedge} \\ u = 0 & \text{sides of wedge}\end{NiceMatrix}\right.  \]
+gave 
+\[ u(r, \theta) = \sum_{n \ge 1} A_{n} r^{\frac{n \pi}{\beta}} \sin\left(\frac{n \pi}{\beta} \theta\right), \]
+	where
+	\[ A_{n} = \frac{2}{n \pi a^{\frac{n \pi}{\beta} - 1}} \int_{0}^{\beta}  f( \theta) \sin \left(  \frac{n \pi}{\beta} \theta \right) d \theta. \]
+
+In general we should make sure that our boundary conitions make sense. For example, if we have Neumann boundary conditions on the side of our domain, then we should have at least that \( u \) is \( C^{1} \).
+
+As another example, for a disc \( D \), let's solve
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 & \text{in \( D^{c} \)} \\ u = f & \text{on \( \partial D \)}\end{NiceMatrix}\right.  \]
+Then our solutions will be linear combinations of \( r^{n}, r^{-n}, \) and \( \log r \), for \( n \ge 0 \). But if we wanna impose an additional condition (e.g.\ boundedness) then this would eliminate all the \( r^{n} \) and \( \log r \) terms.
+
+The plan is to cover the Laplacian in 3D in spherical coordinates (read from the book, and Fabio will discuss how to remember it---it is just a bunch of chain rule, he says). From there, we will find radial solutions.
+
+\subsection{Green's Functions}
+We are hoping to solve Dirichlet's problem
+\[ \left\{\begin{NiceMatrix}- \Delta = f & \text{in \( \Omega \)} \\ u = g & \text{on \( \partial \Omega \)}\end{NiceMatrix}\right.  \]
+(or Neumann---\( \frac{\partial u}{\partial n} = g \)). We want to find some special function \( G(x, y) \) (for \( x, y \in \Omega \), and which depends on \( \Omega \)) that we can use to get a representation formula for our solution.
+
+Let us first review Green's identities.
+\begin{enumerate}
+
+	\item
+		\[ \int_{\Omega} \left( \nabla u \nabla v + v \cdot \Delta u \right) dV = \int_{\partial \Omega}  v \frac{\partial u}{\partial n} dS \]
+	\item Next time.
+
+\end{enumerate}
+We can use this to prove the mean value theorem in 3D. Let \( D = \left\{ |x| < a \right\} \subseteq \mathbb{R}^{3} \). Then \( \partial D = \left\{ |x| = a \right\} = S \). Let \( \Delta u = 0 \). Note that the outward unit is \( \frac{x}{|x|} \) when \( x \in \mathbb{R}^{3} \). By the divergence theorem (Green's 1st theorem with \( v \equiv 1 \)), we get
+\[ \int_{S} \frac{\partial u}{\partial n} ds = 0. \]
+Thinking of \( u \) in spherical coordinates (where \( u = u(r, \theta, \phi) \)), we get
+\[ \int_{0}^{2 \pi}  \int_{0}^{\pi} u_{r}(a, \theta, \phi) a^{2} \sin \phi \, d \phi \, d \theta = 0. \]
+Then we have
+\[ \frac{1}{4 \pi} \int_{0}^{2 \pi} \int_{0}^{\pi} u_{r}(a, \theta, \phi) \sin \phi \, d \phi \, d \theta = 0 \]
+therefore
+\[ 0 = \partial_{r}|_{r = a} \left( \frac{1}{4 \pi} \int_{0}^{2 \pi} \int_{0}^{\pi} u(r, \theta, \phi) \sin \phi \, d \phi \, d \theta  \right) \]
+and so since this is true for any \( a \), this gives that
+\[ \frac{1}{4 \pi} \int_{0}^{2 \pi} \int_{0}^{\pi} u(r, \theta, \phi) \sin \phi \, d \phi \, d \theta \]
+is a constant in \( r \), so if we evaluate at \( r = 0 \), this gives the value for all \( r \). Specifically, at \( r = a \),
+\[ u(0) = \fint_{S} u(a, \theta, \phi) dS. \]
+
