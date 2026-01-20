@@ -1,0 +1,62 @@
+\section{Day 4: Topology on Manifolds (Jan.\ 20, 2026)}
+Given a manifold $M$ with a maximal atlas $\{(U_\alpha, \varphi_\alpha)\}$, we define a subset $U \subset M$ to be open if, for all charts $\varphi_\alpha\colon U_\alpha \to \RR^n$, $\varphi_\alpha(U \cap U_\alpha)$ is open in $\RR^n$.
+\begin{proposition}
+    $U$ is open if and only if $\varphi_\beta(U \cap U_\beta)$ is open in $(U_\beta, \varphi_\beta)$ covering $U$ (e.g., a non-maximal atlas).
+\end{proposition}
+For example, $U \subset S^n$ is open if and only if $\varphi_N(U \setminus \{N\})$ and $\varphi_S(U \setminus \{S\})$ is open.
+\begin{proof}
+    The forward direction is clear, so we will check the converse only. Let $\varphi_\alpha \colon U_\alpha \to \RR^n$ be another chart in $\SA$; then $U \cap U_\alpha = \bigcup_\beta U \cap U_\alpha \cap U_\beta$, whence
+    \begin{align*}
+        \varphi_\alpha(U \cap U_\alpha \cap U_\beta) &= (\varphi_\alpha \circ \varphi_\beta\inv) \circ \varphi_\beta(U \cap U_\alpha \cap U_\beta) \\
+        &= (\varphi_\alpha \circ \varphi_\beta\inv)(\varphi_\beta(U \cap U_\beta) \cap \varphi_\beta(U_\alpha \cap U_\beta)).
+    \end{align*}
+    Indeed, each $\varphi_\beta(U \cap U_\beta)$ is open by assumption and each $\varphi_\beta(U_\alpha \cap U_\beta)$ is open because $\varphi_\alpha$ and $\varphi_\beta$ are compatible charts (as they're in the same atlas). Thus, $\varphi_\beta(U \cap U_\alpha \cap U_\beta)$ is open in $\RR^n$, and so $\varphi_\alpha(U \cap U_\alpha \cap U_\beta)$ is open, so $\varphi_\alpha(U \cap U_\alpha)$ is a union of open sets and is therefore itself open.
+\end{proof}
+\begin{fact}
+    If $\SA$ is an atlas on $M$ and $U \subset M$ is open, then $A_U = \{(U \cap U_\alpha, \restr{\varphi_\alpha}{U \cap U_\alpha})\}$ is an atlas on $U$. The proof of this fact is left as an exericse.
+\end{fact}
+Moreover, observe that if $\SA_U$ inherits maximality, second countability, and Hausdorff-ness from $\SA$, meaning that if $(M, \SA)$ is a manifold, then $(U, \SA_U)$ is one as well.
+\begin{proposition}
+    Using our definition from earlier, the collection of open subsets of $M$ forms a topology on $M$. Specifically, $\emptyset, M$ are open, the finite intersection of open sets are open, and the arbitrary union of open sets is also open.
+\end{proposition}
+The proof sketch is that we will use the fact that the above is indeed true in $\RR^n$, so we will adapt that idea down here. We start by defining more things in topology, though. We call $N \subset M$ a neighborhood of $p$ if there exists open $U$ such that $p \in U \subset N$. A set $A$ is \textit{closed} if its complement is open. $M$ is \textit{disocnnected} if it can be written as $U \sqcup V$, where $U, V$ are open and nonempty (equivalently, this means there are no nonempty proper subsets of $M$ that are clopen).
+\\[8pt]
+For example, $S^0 = \{-1, 1\} \subset \RR$ has $\{-1\}$ and $\{1\}$ as open sets, so they are both disconnected. We say $M$ is connected if it is not disconnected. We say $M$ is Hausdorff if any two points have disjoint neighborhoods.
+\begin{remark}
+    $U$ is open if and only if it's a union of $U_\alpha$, where $(U_\alpha, \varphi_\alpha)$ are charts in a maximal atlas. (A maximal atlas gives a basis for the manifold topology).
+\end{remark}
+\begin{proof}
+    If $(U_\alpha, \varphi_\alpha)$ is a chart and $\varphi(U \cap U_\alpha)$ is open, then $(U \cap U_\alpha, \restr{\varphi_\alpha}{U \cap U_\alpha})$ is also a chart in the maximal atlas.
+\end{proof}
+We now discuss compactness. $K \subset \RR^n$ is compact if it is closed and bounded (for example, a closed ball). 
+\begin{definition}
+    $K \subset M$ is compact if $K = K_1 \cup \dots \cup K_n$, where $K_i \subset U_i$ and $\varphi_i(K_i) \subset \RR^n$ is compact.
+\end{definition}
+In particular, in $\RR^n$, finite unions of compact sets are compact. Alternatively, we can define $K$ to be compact if $K \subset U_i$ and $\varphi_i(K)$ is compact in $\RR^n$. We give some examples.
+\begin{enumerate}[(i)]
+    \item $S^n$ is compact. Moreover, if we take $\{x \in S^n \mid x_{n+1} \geq 0\}$ and $\{x \in S^n \mid x_{n+1} \leq 0\}$ to be the upper and lower hemispheres of $S^n$, then stereographic projection from the opposite poles will demonstrate that their images are compact in $\RR^n$.
+    \item $\RP^n$ is compact, since we may regard it as $\{\coor{x_0 : x_1 : \dots : x_n}\}$ with an atlas $U_i = \{\coor{x_0 : x_1 : \dots : x_n} \mid x_i \neq 0\}$ and its associated map $\varphi_i$; by noticing that if we manually construct $x_0^2 + \dots + x_n^2 = 1$, there is some element $x_i \geq \sqrt{n}\inv$, so $\norm{\varphi_i(\coor{x_0:x_1:\dots:x_n})} \leq \sqrt{n}$, i.e.,
+    \[ \RP^n = \bigcup_i \varphi_i\inv\bigl(\ol{B_{\sqrt{n}}(0)}\bigr). \]
+\end{enumerate}
+In topology, we have the following definition for compactness.
+\begin{definition}
+    $K$ is compact if, for all collections $\{U_\alpha\}$ of open sets such that $\bigcup_\alpha U_\alpha \supset K$ (i.e., the $U_\alpha$ cover $K$), there is a finite subcollection that also covers $K$.
+\end{definition}
+\begin{proposition}
+    If $K$ is topologically compact in a manifold $M$, then $K$ is closed. If $C \subset M$ is closed, then $K \cap C$ is compact.
+\end{proposition}
+\begin{proof}
+    Suppose $K$ is not compact; then $M \setminus K$ is not open, so there exists a point $y \notin K$ such that every open neighborhood of $y$ intersects $K$. By Hausdorffness, for all $x$, there exists $U_x \ni x$ and $V_x \ni y$ an open disjoint set such that $\{U_x \mid x \in K\}$ covers $K$. This cover has a finite subcover, for which $K \subset U_{x_1} \cup \dots \cup U_{x_n}$ and $K \cap (V_{x_1} \cap \dots \cap V_{x_n}) = \emptyset$, which contradicts our assumption on $y$.
+    \\[8pt]
+    For the second part of the proposition, take $\{U_\alpha\}$ an open cover of $K \cap C$; then $\{U_\alpha\} \cup \{M \setminus C\}$ is an open cover of $K$. By compactness, this has a finite subcover for $K$; taking out $M \setminus C$, we get a finite subcover of $\{U_\alpha\}$ for $K \cap C$.
+\end{proof}
+\begin{proposition}
+    The two definitions for compactness are equivalent. Note that we assume this fact for $\RR^n$ (per the Heine--Borel theorem).
+\end{proposition}
+\begin{proof}
+    Suppose $K$ is charts-compact; then $K = K_1 \cup \dots \cup K_n$, where $k_i \subset U_i$ for some charts $(U_i, \varphi_i)$. Let $\{V_n\}$ be an open cover of $K$; by Heine--Borel, each $V_i$ is covered by finitely many $\varphi_i(V_\alpha \cap U_i)$, so $K$ admits a finite subcover of $\{V_n\}$.
+    \\[8pt]
+    For the other direction, suppose $K$ is topologocailly compact. Take the open cover $\{V_{U,\varphi,x,\eps}\}$, where $V_{U,\varphi,x,\eps} = \varphi\inv(B_\eps(x))$ where $U, \varphi$ is a chart, $x \in \varphi(U)$, and $\ol{B_\eps(x)} \subset \varphi(U)$. Take a finite subcover $V_{U_i,\varphi_i,x_i,\eps_i}$. Then
+    \[ K \subset \bigcup_{i=1}^n \varphi_i\inv(B_{\eps_i}(x_i)) \implies K = \bigcup_{i=1}^n \varphi_i\inv(\ol{B_{\eps_i}(x_i)} \cap K). \]
+    By the earlier proposition, this set is compact, so we are done.
+\end{proof}

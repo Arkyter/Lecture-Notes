@@ -61,12 +61,26 @@
 	\setlength{\textwidth}{6.5in}
 	\setlength{\headwidth}{6.5in}
 	\setlength{\textheight}{8.75in}
-	\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+	%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+	\setlength{\parskip}{0.4ex plus 0.2ex minus 0.2ex} % changing it up for the preschool / elementary writeups
 	\setlength{\footskip}{0.3in}
 
 	\usepackage{anyfontsize} % https://tex.stackexchange.com/a/328322
 	\usepackage[T1]{fontenc}
-	\usepackage{newtx} % daniel said to
+	\usepackage{newtx} % times new roman
+	\usepackage[cal=cm]{mathalfa} % turns mathcal back into \varcal, see https://tex.stackexchange.com/a/639198
+	% \renewcommand{\@listI}{ % changes enumerate environments for the article class. maybe necessary
+	% 	\leftmargin=27pt
+	% 	\rightmargin=0pt
+	% 	\labelsep=5pt
+	% 	\labelwidth=20pt
+	% 	\itemindent=0pt
+	% 	\listparindent=0pt
+	% 	\topsep=3pt plus 2pt minus 4pt
+	% 	\partopsep=2pt plus 1pt minus 1pt % what does this one do?
+	% 	\parsep=3pt plus 1pt
+	% 	\itemsep=\parsep
+	% }
 }
 { % if koma is used, ...
 	\usepackage[headsepline]{scrlayer-scrpage}
@@ -230,10 +244,25 @@
 \newcommand{\symprod}{\prod_{\mathrm{sym}}} % symmetric product
 
 % complex analysis
+%\newcommand{\ssubset}{\subset\joinrel\subset} % "is a domain"
+\newcommand\ssubset{ % "is a domain"
+  \mathrel{ \mathrlap{\subset} \hphantom{\ll} \mathllap{\subset} }
+}
+\newcommand{\coor}[1]{% homogeneous coordinate spacing in math mode
+  \begingroup\lccode`~=`: \lowercase{\endgroup
+  \edef~}{\mathbin{\mathchar\the\mathcode`:}\nobreak}%
+  [% opening symbol
+  \begingroup
+  \mathcode`:=\string"8000
+  #1%
+  \endgroup 
+  ]% closing symbol
+}
 \DeclareMathOperator{\cis}{cis} % cis x + i sin x: shorthand
 \DeclareMathOperator*{\argmin}{arg min} % complex; argument min
 \DeclareMathOperator*{\argmax}{arg max} % complex; argument max
 \DeclareMathOperator{\res}{res} % residue
+\DeclareMathOperator{\Res}{Res} % residue but caps
 \DeclareMathOperator{\PSL}{PSL} % projective linear group
 
 % real analysis - import from 357/457-1000 probably
@@ -282,6 +311,9 @@
 \DeclareMathOperator{\bdry}{bdry} % boundary
 \DeclareMathOperator{\Bdry}{Bdry} % boundary alternative
 \DeclareMathOperator{\diag}{diag} % diagonal
+
+% differential topology
+% tbd... do i need this sec lol...
 
 % algebra
 \let\mod\relax
