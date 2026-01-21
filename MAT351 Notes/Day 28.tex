@@ -1,0 +1,108 @@
+\section{Day 28: Green's Identities (Jan. 21, 2026)}
+Recall Green's identities.
+\begin{enumerate}
+
+	\item For \( u, v : D \subseteq \mathbb{R}^{d} \to \mathbb{R} \) (where we're assuming \( u \) and \( v \) are sufficiently nice to make the below work)
+		\[ \int_{D}  v \Delta u + \int_{D}  \nabla u \cdot \nabla v = \int_{\partial D}  v \frac{\partial u}{\partial n} dS. \]
+		In this case, \( dS \) is the surface element and \( n \) is the outward unit normal, so this right-hand integral is a surface integral.
+	\item The second identity can be given by exchanging \( u \) and \( v \) in the above then subtracting to get that
+		\[ \int_{D} v \Delta u - u \Delta v = \int_{\partial D} v \frac{ \partial u}{\partial n} - u \frac{\partial v}{\partial n} dS.  \]
+		By applying the divergence theorem to \( v \nabla u - u \nabla v \) we get this.
+
+\end{enumerate}
+
+Our applications are 
+\begin{enumerate}
+
+	\item The mean value property for harmonic functions in 3-dimensions (and arbitrary dimensions).
+	\item Dirichlet Principle
+	\item Uniqueness for \( \Delta u = f \) with boundary conditions (although this was already in a homework at some point).
+
+\end{enumerate}
+Let's look at application 2 for now.
+\begin{theorem}[Dirichlet's Principle]
+	Consider the functional \( E \) on a fixed \( D \) such that
+	\[  w \xmapsto E \int_{D} | \nabla w|^{2} dx. \]
+	which we call the Dirichlet energy of \( w \) in \( D \). Actually, typically the Dirichlet energy is half of this, but Fabio forgot about it and only mentioned later.
+	
+	Among the \( w \) in \( D \) which satisfy \( w = h \) on \( \partial D \) (for some fixed \( h \)), then if there exists a harmonic function on our boundary conditions, it minimizes the energy \( E \).
+\end{theorem}
+
+\begin{proof}
+	Consider \( u \) harmonic with \( u = h \) on \( \partial D \) and any other \( w \) such that \( w = h \) on \( \partial D \). Then we want to show that
+	\[ E[w] \ge E[u]. \]
+	Let us consider \( v = u - w \). Then we want to expand \( E[w] \).
+	\begin{align*}
+		E[w] &= E[v - u]  \\
+				 &= \int_{D} \left| \nabla v - \nabla u \right|^{2} \\
+				 &= \int_{D} | \nabla v|^{2} - 2 \nabla v \nabla u + \int_{D}  | \nabla u|^{2}\\
+				 &\ge - 2 \int_{D} \nabla u \cdot \nabla v + E[u]
+	\end{align*}
+	Note that \( \int_{D} \nabla u \cdot \nabla v = 0 \) because by Green's first identity, we have that
+	\[ \int_{D}  \nabla u \nabla v = - \int_{D} \Delta u v + \int_{\partial D} \frac{\partial u}{\partial n} v,   \]
+	and the first integral vanishes because \( u \) is harmonic, and the second vanishes because \( v \equiv 0 \) on \( \partial D \). It follows that \( E[w] \ge E[u] \) by subbing in to the above.
+\end{proof}
+
+\begin{remark}
+	We don't know a priori that a minimizer exists. By Wenyu's complex analysis class we have nice general criteria for when one exists fortunately---when the barriers exist and etc. 
+\end{remark}
+
+Let us do something similar but slightly different in conception.
+\begin{theorem}
+	If \( u : D \to \mathbb{R} \) with \( u|_{\partial D} = h \) has minimal Dirichlet energy among all functions \( w \) with the same boundary conditions then \( u \) is harmonic. In other words, no non-harmonic function is a minimizer.\footnote{Notice that this is stronger than our previous proposition---it shows that in the absence of a solution to the Dirichlet problem with our boundary conditions, there is no minimizer.} 
+\end{theorem}
+
+\begin{proof}
+	Let \( E [ u] = \int_{D} | \nabla u|^{2} \) and let \( u \) be minimal among functions with the same boundary conditions. Set \( u = \varepsilon v \) for a small \(  \varepsilon \), where \( v \) is smooth and \( v = 0 \) on \( \partial D \).
+	\[ E[u] \le E[u + \varepsilon v] = E[u] + \varepsilon^{2} E[v] + 2 \varepsilon \int_{D} \nabla u \cdot \nabla v. \]
+	But then think of this as a function of \( \varepsilon \). It has a minimum at \( \varepsilon = 0 \) so
+	\[ \left.\frac{d}{d \varepsilon}\right|_{\varepsilon = 0} \left( E[u] + \varepsilon^{2} E[v] + 2 \varepsilon \int_{D} \nabla u \nabla v \right) = 0. \]
+		Then we have that
+		\[ \int_{D} \nabla u \nabla v = 0  = - \int_{D} \Delta u \, v + \int_{\partial D} \frac{\partial u}{\partial n} v. \]
+		But we have that \( v \equiv 0 \) on \( \partial D \) so we have that 
+		\[ \int_{D} \Delta u \, v = 0, \]
+		and since this holds for all smooth \( v \) (also compactly supported), we must have that \( \Delta u \equiv 0 \). This is because we can vary \( v \) (setting it to be bump functions or such) to show that on any region its integral is \( 0 \).
+	
+\end{proof}
+
+\begin{remark}
+	When we took \( \frac{d}{d \varepsilon} E[u + \varepsilon v] \), this is called taking the derivative of our operator \( E \). This is an idea taken from the calculus of variations. Beautiful.
+\end{remark}
+
+\subsection{Representation Formula for Harmonic Functions}
+Take \( u \) harmonic and 
+\[ v = - \frac{1}{4 \pi} \frac{1}{|x - x_{0}|}. \]
+This is motivated by solving ``\( \Delta v = 0 \)'' in 3 dimensions. Then
+\[ \int_{D} u \Delta v = \int_{\partial D} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS. \]
+Obviously this doesn't make sense when \( x = x_{0} \). On the other hand, we can show that this is \( u(x_{0}) \) on the left hand side in a natural way.\footnote{Which we could do formally with Radon-Nikodym} Thus, it acts like a \( \delta_{x_{0}} \), a delta function.
+
+\begin{theorem}
+	Let \( u \) be harmonic in \( D \). Then 
+	\[ u(x_{0}) = \int_{\partial D}  u \frac{\partial}{\partial n} \left( - \frac{1}{4 \pi} \frac{1}{|x - x_{0}|}  \right) dS - \int_{\partial D} \left( - \frac{1}{4 \pi} \frac{1}{|x - x_{0}|} \right) \frac{\partial u}{\partial n} dS. \]
+
+\end{theorem}
+
+	We are saying (and will show rigorously)
+	\[ \int_{D} u(x) \Delta \left( - \frac{1}{4 \pi} \frac{1}{|x - x_{0}|} \right) dx = u(x_{0}). \]
+	Of course this doesn't quite make sense. If we look for radial solutions of \( \Delta u = 0 \) in 3 dimensions, we get \( \left( \partial_{r}^{2} + \frac{2}{r} \partial_{r} \right) u = 0 \), so one possible solution is
+	\[ u = \frac{1}{r} = \frac{1}{|x|}, \]
+	which is just singular at \( r = 0 \). We call \( - \frac{1}{4 \pi r} \) our fundamental solution for \( \Delta u = 0 \). This is because
+	\[ \left\{\begin{NiceMatrix} \Delta \left( -\frac{1}{4 \pi r} \right) = 0 & r \ne 0 \\ \Delta \left( - \frac{1}{4 \pi r} \right) = \delta & r = 0\end{NiceMatrix}\right.  \]
+	[Fabio put quotation marks around the second line. I don't know how to tex that.]
+	In actuality, our second line should mean that
+	\[ \int_{\partial D} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS = u(x_{0}), \]
+	when \( u \) is harmonic.
+
+	\begin{remark}
+		What's a \( \delta \) function? Well actually \( \delta_{x} \) is not a function. It's a linear functional. Specifically, \( \delta_{x} \) has \( f \xmapsto {\delta_{x}} f(x) \). We denote linear functionals by using \( \int \) so we might write
+		\[ \delta(f), \quad \int f \cdot \delta, \quad \left\langle \delta, f \right\rangle. \]
+		We can think of \( \int f \delta \) as being an integral with respect to a certain measure \( \delta \). This is the point measure. But we are moving more in the direction of the physics way of thinking about things.
+
+		Consider some smooth bump function with \( \int_{\mathbb{R}} \varphi = 1 \). Then consider
+		\[ \lim_{\varepsilon \to 0} \int_{\mathbb{R}} \frac{1}{\varepsilon} \varphi \left( \frac{x}{\varepsilon} \right) f(x) dx. \]
+		This is going to be equal to (for nice functions \( f \))
+		\[ \lim_{\varepsilon \to 0} \int_{\mathbb{R}} \varphi(y) f(\varepsilon y) dy \to f(0). \]
+		thus \( (\varphi_{\varepsilon}, f) \to f(0) \), therefore the \textit{action} of \( \varphi_{\varepsilon} \) converges even though the function does not (it seems to go to \( 0 \) everywhere except at \( 0 \) where it goes to \( \infty \)).
+
+		This is the physics version of a \( \delta \) function. What we really care about is the action on nice enough functions, not the actual function. We say \( \delta \) is the weak limit of \( \varphi_{\varepsilon} \)---the limit, not as a function, but in terms of how it acts on other functions.
+	\end{remark}
