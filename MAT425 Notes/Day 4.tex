@@ -1,0 +1,61 @@
+\section{Day 4: Embeddings and Measure (Jan. 22, 2025)}
+We recapped why our previous construction of the immersion of the line into the torus was not a submanifold. I'm sure you can deduce the argument---no neighborhood locally looks like an interval because they are dense in the torus, but they don't cover any open subset of the torus so it doesn't yield a higher dimensional manifold (removing a single point disconnects our immersion of the line).
+
+Therefore, we need a better notion of a map to make it so that when \( f \colon X \to Y \) is \textit{this kind} of map, its image is a submanifold of \( Y \). To this end, we define a preliminary (purely topological) property that maps can have/
+
+\begin{definition}
+	A map \( \varphi : X \to Y \) is proper if for all compact subsets \( C \subseteq Y \), \( \varphi^{-1}(C) \) is compact as well.
+\end{definition}
+The intuition is that we want the preimage of bounded sets to be bounded.\footnote{In a metric space with the Heine-Borel property, this is indeed equivalent. Since manifolds by our definition are metrizable---they all live in \( \mathbb{R}^{n} \) so use the restriction of the metric---this is really what we care about.}
+
+\begin{definition}
+	\( f : X \to Y \) is an embedding if \( f \) is an injective proper immersion.
+\end{definition}
+
+The obvious question raised is whether this is sufficient to accomplish our goal. Unsurprisingly,\footnote{It is unsurprising from a pedagogical point of view; Nabutovsky would not have defined it this way otherwise.} it is.
+\begin{theorem}
+	If \( X, Y \) are manifolds and \( f : X \to Y \) is an embedding, then \( f(X) \) is a submanifold of \( Y \).
+\end{theorem}
+\begin{proof}
+	If \( x \in X \) and \( W \) is a sufficiently small neighborhood of \( x \). We need to show first that \( f(W) \) is open in \( f(X) \). So suppose by way of contradiction that it is not. Then there exists a sequence \( \left\{ y_{n} \right\}_{n \in \mathbb{N}} \subseteq f(X) \) such that \( y_{n} \in f(X) \setminus f(W) \), but \( \lim_{n \to \infty} y_{n} = y \) has \( y \in f(W) \).
+	
+	We know that \( \left\{ y_{1}, y_{2}, \ldots \right\} \cup \left\{ y \right\} \) is compact, so \( f^{-1}\left(\left\{ y_{1}, y_{2}, \ldots \right\} \cup \left\{ y \right\}\right) \) is compact. By shrinking \( W \) to be sufficiently small such that the local immersion theorem holds, we have that if we set \( x_{n} = f^{-1}(y_{n}) \), then we can assume (wlog by taking a subsequence---since \( \left\{ x_{1}, x_{2}, \ldots \right\} \cup \left\{ f^{-1}(y) \right\} \) is compact there exists a suitable convergent subsequence) that \( \lim_{n \to \infty} x_{n} = z \) for some \( z \in X \).
+
+	From here, since \( \left\{ x_{1}, x_{2}, \ldots \right\} \subseteq X \setminus W \), \( z \in X \setminus W \), as \( X \setminus W \) is closed. On the other hand, we have that since \( f \) is continuous, 
+	\[ y = \lim_{n \to \infty} y_{n} = \lim_{n \to \infty} f(x_{n}) = f \left( \lim_{n \to \infty} x_{n} \right) = f(z), \]
+	so \( z = f^{-1}(y) \in W \), which is a contradiction. Therefore, \( f(W) \) must be open. 
+
+	Since it is open, we can shrink \( W \) to be sufficiently small for the local immersion theorem to hold, and therefore we have parameterized \( Y \) locally.
+\end{proof}
+
+\subsection{Sard's Theorem}
+The most complicated parts of the course have already happened by now. The book would typically go to transversality and then to homotopy and stability, but we will skip to Sard's theorem. Many of the things from differential topology require algebraic topology to prove. Since we don't know algebraic topology, we have to take a more roundabout route to prove many things. I don't remember what the point of this discussion by Nabutovsky was.
+
+\begin{definition}
+	A subset \( A \subseteq \mathbb{R}^{n} \) is measure zero if for all \( \varepsilon > 0 \) there exists a cover \( \left\{ U_{k} \right\}_{k \in \mathbb{N}} \) of \( A \) by parallelepipeds such that
+	\[ \sum_{k \in \mathbb{N}} |U_{k}| < \varepsilon. \]
+
+	Here, we say that if \( U_{k} = (a_{1}, b_{1}) \times \cdots \times (a_{n}, b_{n}) \), then
+	\[ |U_{k}| = \prod_{i = 1}^{n} b_{i} - a_{i}. \]
+\end{definition}
+
+Notice that given a countable collection of measure zero sets, their union has measure zero. As such, we have a natural characterization of measure zero sets of manifolds which says that \( A \subseteq X \) is measure zero if for every parameterization \( \varphi \) of \( X \), \( \varphi^{-1}(A) \) has measure zero (notice this follows by manifolds being second-countable). 
+
+\begin{theorem}
+\( [0, 1]^{n} \) has measure \( 1 \). In other words, that any covering of \( [0, 1]^{n} \) by parallelepipeds has volume of at least \( 1 \). 
+\end{theorem}
+\begin{proof}
+	While one could use the typical proof we learn, there's a much more clever argument that Nabutovsky presented. Suppose that \( \left\{ U_{n} \right\} \) is a cover of \( [0, 1]^{n} \) by parallelepipeds. Since \( [0, 1]^{n} \) is compact, without loss of generality we can assume that this set is \( \left\{ U_{1}, \ldots, U_{N} \right\} \). Let \( \lambda \in \mathbb{R}_{> 0} \)  and define \( T_{\lambda}x = \lambda x \) for all \( x \in \mathbb{R}^{n} \). Then we have that \( T_{\lambda}([0, 1]^{n}) = [0, \lambda]^{n} \), and \( |T_{\lambda}(U_{n})| = \lambda^{n} |U_{n}| \).
+
+	Define now \( N(A) = |A \cap \mathbb{Z}^{n}| \) for all \( A \subseteq \mathbb{R}^{n} \). Then we know that for any parallelepiped \( U \),
+	\[ \lim_{\lambda \to \infty} \frac{N(T_{\lambda}(U))}{\lambda^{n}} = |U|. \]
+	But now notice that
+	\begin{align*}
+	\sum_{n = 1}^{N} |U_{n}| &= \sum_{n=1}^{N} \lim_{\lambda \to \infty} \frac{N(T_{\lambda}(U_{n}))}{\lambda^{n}} \\
+	&= \lim_{\lambda \to \infty} \sum_{n=1}^{N} \frac{N(T_{\lambda}(U_{n}))}{\lambda^{n}} \\
+	&\ge \lim_{\lambda \to \infty} N\left( \bigcup_{n=1}^{N} T_{\lambda}(U_{n}) \right) \frac{1}{\lambda^{n}} \\
+	&\ge \lim_{\lambda \to \infty} N\left( [0, \lambda]^{n} \right) \frac{1}{\lambda^{n}} \\
+	&= 1 \\
+	\end{align*}
+	and therefore we are done.
+\end{proof}
