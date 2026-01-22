@@ -1,0 +1,35 @@
+\section{Day 5: Orientability (Jan.\ 22, 2026)}
+Observe that the M\"obius strip (following our construction in this class) only has ``one side''. We can associate the right hand rule with $\det(v_1 \mid v_2 \mid v_3) > 0$.
+\begin{definition}
+    A linear transformation $T\colon V \to V$ is \textit{orientation preserving} if $\det T > 0$; a transition map $\tau\colon V_1 \to V_2$ between two charts is \textit{orentation preserving} if $\det(D\tau) > 0$ everywhere.
+\end{definition}
+\begin{exercise}
+    If $\det(D\tau) > 0$ in one half of the M\"obius strip, then it has $\det(D\tau) < 0$ in the other half, and vice versa.
+\end{exercise}
+\begin{definition}
+    We say $\varphi_1$ and $\varphi_2$ are \textit{orientation compatible} if their transition map is orientation preserving.
+\end{definition}
+\begin{definition}
+    An \textit{oriented atlas} is one in which all charts are orientation compatible. A \textit{maximal oriented atlas} contains all charts orientation compatible with a given oriented manifold $(M, \SA)$.
+\end{definition}
+Note that the definition of maximal oriented atlas only makes senes if, in any oriented atlas, any two charts that are oriented compatibly to said atlas are orientation compatible to each other. This is left as an exercise. We now give examples.
+\begin{enumerate}[(i)]
+    \item The sphere is orientable. We claim that the usual atlas $\{\varphi_N, \varphi_S\}$ is not oriented compatibly, but $\{\varphi_N, (-x_1, x_2, \dots, x_n) \circ \varphi_S\}$ is. Observe that for $n \geq 2$, the intersection $U_N \cap U_S = S^n \setminus \{N, S\}$ is connected, meaning that the sign of $\det(D \tau) \neq 0$ on the whole set (by the intermediate value theorem).
+    \begin{fact}
+        Let $X$ be a connected space, and let $f\colon X \to A$ (where $A$ is taken to be some set) be locally constant, i.e., for every $p \in X$, there exists an open neighborhood $U \ni x$ such that $\restr{f}{U}$ is constant. Then $f$ is constant.
+    \end{fact}
+    \begin{proof}
+        Observe that the preimage of fibers $f\inv(a) = \bigcup_{p \in f\inv(a)} U_p$ is open, so $X$ can be realized as the disjoint union $\bigsqcup_{a \in A} f\inv(a)$; per connectedness of $X$, it must be that there is only one such $a$.
+    \end{proof}
+    \item $\RP^2$ is not orientable. We leave this as an exercise.
+\end{enumerate}
+\begin{definition}
+    Let $(M, \SA)$ be an oriented manifold. Then there is an opposite orientation $\tilde \SA = \{F(U), F \circ \varphi\}$ for each $(U, \varphi) \in \SA$, where $F\colon \RR^n \to \RR^n$ and $x \mapsto (-x_1, x_2, \dots, x_n)$.
+\end{definition}
+\begin{proposition}
+    Let $(M, \SA)$ be an oriented manifold. Every connected chart $(U, \varphi)$ is oriented compatible with $\SA$ or $\tilde \SA$.
+\end{proposition}
+\begin{proof}
+    Let $\SA = \{(U_\alpha, \varphi_\alpha)\}$, and define $\Sigma_p \coloneq \mathrm{sign}(\det \restr{D(\varphi_\alpha \circ \varphi\inv)}{\varphi(p)})$ is independent of $\alpha$. We may note that $\Sigma_p \colon U \to \{+, -\}$ is a locally constant function; but $U$ is connected, so it must be constant.
+\end{proof}
+We leave it as an exercise that if $M$ is a connected manifold, then there is exactly one maximal oriented atlas.
