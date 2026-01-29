@@ -1,0 +1,32 @@
+\section{Day 7: Smooth Maps and Diffeomorphisms (Jan.\ 29, 2026)}
+Recall that a map between two manifolds $f\colon M \to N$ is \textit{smooth} at a point $p \in M$ if there are coordinate charts $(U, \varphi)$ about $p$ and $(V, \psi)$ about $f(p)$ such that $f(U) \subset V$ and
+\[ \psi \circ f \circ \varphi\inv \colon \varphi(U \cap f\inv(V)) = \varphi(U) \to \psi(V) \]
+is smooth. $f$ is said to be smooth if it is smooth at every $p \in M$, and it is said to be a diffeomorphism if it's a smooth bijection with smooth inverse. Last time, we gave an example of a diffeomorphism from $\RP^1 \to S^1$ by considering $\coor{x:1} \mapsto \varphi_N\inv(x)$ and $\coor{1:0} \mapsto N$. We now give more examples.
+\begin{enumerate}[(i)]
+    \item (\S3.6.3) Let $\pi\colon \RR^{n+1} \setminus \{0\} \to \RP^n$, given by $(x^0, \dots, x^n) \mapsto \coor{x^0:\dots:x^n}$. It is clear that this map is smooth because
+    \[ \pi \circ \varphi_i(x^0, \dots, x^n) = \pi(\coor{x^0:\dots:x^n}) = \left(\frac{x^0}{x^i}, \dots, \frac{x^{i-1}}{x^i}, \frac{x^{i+1}}{x^i}, \dots, \frac{x^n}{x^i}\right). \]
+    \item Let $\pi\colon \CC^{n+1} \setminus \{0\} \to \CP^n$, where $(z^0, \dots, z^n) \mapsto \coor{z^0:\dots:z^n}$. The map is smooth by the same proof as above.
+    \item (\S3.22) The map $\CP^1 \to S^2$ given by $\coor{z:1} \mapsto \varphi_N\inv(x, y)$ and $\coor{1:0} \mapsto N$ is smooth. To see this, let $p = \coor{z:1} \in \CP^1$; we have the following diagram,
+    \[ \begin{tikzcd}
+        \CP^1 \setminus \{\coor{1:0}\} \arrow[r,"f"] \arrow[d,"\varphi_1"] & S^2 \arrow[d,"\varphi_N"] \\
+        \varphi_1(\CP^1 \setminus \{\coor{1:0}\}) \arrow[r,"\id"] & \varphi_N(S^2 \setminus \{N\})
+    \end{tikzcd} \] 
+    which clearly commutes, so we only have $p = \coor{1:0}$ left to check. Indeed, swap out $\varphi_1$ with $\varphi_0$ and $\varphi_N$ with $\varphi_S$; we get
+    \[ \varphi_0(\coor{1:0}) = 0 = \varphi_S(N). \]
+    It suffices to check that we have smoothness in a neighborhood. In one direction, we have
+    \[ \varphi_0(\coor{z:1}) = \varphi_0(\coor{1:z\inv}) = \frac{1}{2} = \frac{\ol z}{z^2}; \]
+    in the other, we have
+    \[ \varphi_S \circ \varphi_N\inv(x, y) = \frac{(x, y)}{x^2 + y^2} = \frac{z}{\abs{z}^2}, \]
+    so we see the map $\varphi_0(\CP^1 \setminus \{\coor{0:1}\}) \to \varphi_S(S^2 \setminus \{S\})$ is given by complex conjugation.
+    \item $f\colon \RR \to \RR$, where $f(x) = x^3$ is smooth and bijective, but $f\inv(x) = x^{1/3}$ is not differentiable at $x = 0$, so $f$ is not a diffeomorphism!
+\end{enumerate}
+We now check that compositions of smooth functions are smooth. A \textit{homeomorphism} is a continuous bijection with continuous inverse (topological equivalence). For example, $x \mapsto x^3$ is a homeomorphism but not a diffeomorphism; are homeomorphic manifolds always diffeomorphic? In $1$ to $3$ dimensions, this is true, but otherwise it is not true.\footnote{yes bro drop us the paper bro} There are infinitely many spaces taht are homeomorphic but not diffeomorphic to $\RR^1$.\footnote{freedman, donaldson, ...}
+\\[8pt]
+We now discuss Hopf fibration (\S3.7). Specifically, consider the map $h \colon S^3 \to \CP^1$ realized as the sequence
+\[ S^3 \injto \RR^4 \setminus \{0\} \taking{\pi} \CP^1 \cong S^2. \]
+What can we say? First this is smooth by composition, and given $p = \coor{z:w} \in S^2$ (where, without loss of generality, we can assume $\abs{z}^2 + \abs{w}^2 = 1$), we see that $h\inv(p)$ is actually a circle
+\[ h\inv(\coor{z:w}) = \{(e^{i\theta} z, e^{i\theta} w)\} \subset S^3. \]
+Recall that $S^3$ can be realized as the one point compactification of $\RR^3$ (by considering the stereographic projection), i.e.,
+\[ h\inv\pcoor{0:1} = (0, 0, t), \quad h\inv\pcoor{1:0} = (\cos \theta, \sin \theta, 0). \]
+In general,
+\[ h\inv\pcoor{z:r} = \left(\frac{e^{i\theta} z}{1 - (\sin \theta)r}, \frac{(\cos \theta) r}{1 - (\sin \theta)r}\right) \]

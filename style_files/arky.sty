@@ -258,6 +258,12 @@
   \endgroup 
   ]% closing symbol
 }
+\newcommand{\pcoor}[1]{% parenthesis version of above
+  \begingroup\lccode`~=`: \lowercase{\endgroup\edef~}{\mathbin{\mathchar\the\mathcode`:}\nobreak}%
+  (\begingroup\mathcode`:=\string"8000
+  #1
+  \endgroup)
+}
 \DeclareMathOperator{\cis}{cis} % cis x + i sin x: shorthand
 \DeclareMathOperator*{\argmin}{arg min} % complex; argument min
 \DeclareMathOperator*{\argmax}{arg max} % complex; argument max
