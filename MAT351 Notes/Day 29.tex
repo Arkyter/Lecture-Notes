@@ -1,0 +1,47 @@
+\section{Day 29: A Lemma About Representation (Feb. 2, 2026)}
+Going towards a representation formula for solutions of
+\[ \left\{\begin{NiceMatrix}- \Delta u = f & \text{in \( D \)} \\ \text{\( u = g \) or \( \frac{\partial u}{\partial n} u = g \)} & \text{on \( \partial D \)} \end{NiceMatrix}\right.  \]
+and explicit formulae in some ``simple'' geometries (e.g.\ half space or the 3d ball).
+
+We looked at Green's identities previously. We will do a lemma about representation in 3d, and then go over Green's functions.
+
+Let's start in 3d. Some facts we want are that \( \frac{1}{r} \) is a radial solution of \( \Delta u = 0 \) in \( \mathbb{R}^{3} \) (in \( 2d \) we have \( \log r \)). For this, we need to be able to write the laplacian in spherical coordinates \( (r, \theta, \phi \)). Let's restrict to only radial. Then the laplacian is \( \partial^{2}_{r} + \frac{2}{r} \partial_{r} \). In \( n \) dimensions, it is \( \partial_{r}^{2} + \frac{n-1}{r}\partial_{r} \). In general,
+\[ \Delta_{\mathbb{R}^{3}} = \partial_{r}^{2} + \frac{2}{r} \partial_{r} + \frac{1}{r^{2}} \Delta_{S^{2}} \]
+where \( \Delta_{S^{2}} \) is the laplacian in \( \theta, \phi \).
+
+Find a radial function on \( \mathbb{R}^{3} \) such that \( \Delta u = 0 \) then
+\[ u'' + \frac{2}{r} u' = 0 \]
+so setting \( v = u' \) we get that \( v' + \frac{2}{r} v = 0 \)
+and therefore
+\begin{gather*}
+\frac{v'}{v} = - \frac{2}{r}\\
+\left( \log v \right)' = - \frac{2}{r}\\
+\log v = -2 \log r + C_{1}\\
+v = \frac{C_{1}}{r^{2}}\\
+u = \frac{C_{1}}{r} + C_{2}
+\end{gather*}
+which tells us that these really are solutions.
+\begin{lemma}
+	If \( u \) is harmonic in \( D \), then at any point \( x_{0} \in D \), we have that
+	\[ \tag{R} u(x_{0}) = \int_{\partial D} - u(x) \frac{\partial}{\partial n} \frac{1}{|x - x_{0}|} + \frac{\partial u}{\partial n} (x) \frac{1}{|x - x_{0}|} \frac{d S_{x}}{4 \pi}.  \]
+\end{lemma}
+\begin{proof}
+	Recall Green's second identity.
+	\[ \int_{D} u \Delta v - v \Delta u = \int_{\partial D} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n}. \]
+	Since \( \Delta u = 0 \), this gives
+	\[ \tag{\( * \)}\int_{D} u \Delta v  = \int_{\partial D} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n}, \]
+	so from here we want to use \( v_{x_{0}}(x) = - \frac{1}{4 \pi |x - x_{0}|} \).  With this \( v \), the right hand side of \( (R) \) and \( (*) \) match. But this doesn't really make sense, because it's not differentiable everywhere. But if we can establish that
+		\[ \int_{D} u(x) \Delta \left( - \frac{1}{4 \pi |x - x_{0}|} \right) dx = u(x_{0}), \]
+		in some manner, we would be done. As usual, when we can't do something globally, we just ignore the bad regions and see if things work out. In the spirit of this method, define \( D_{\varepsilon} = D \setminus B_{\varepsilon}(x_{0}) \). 
+		\[	\int_{D_{\varepsilon}} u \Delta v =  \int_{\partial D}  u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS + \int_{\partial B_{\varepsilon}(x_{0})} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS \]
+This works fine because we aren't integrating over the singular point. Suppose without loss of generality that \( x_{0} = 0 \). Then all that is left to show is that
+\[ \int_{\partial B_{\varepsilon}(0)} u \frac{\partial}{\partial n} \frac{1}{|x|} - \frac{1}{|x|} \frac{\partial u}{\partial n} \frac{dS}{4 \pi} \xrightarrow{\varepsilon \to 0} u(0)  \]
+(compared to our original formula our orientation is inverted which is why this formula seems to be negative of that in the question). Let's look at only the second term of this integral. Then
+\[ \int_{\partial B_{\varepsilon}(0)} \frac{1}{|x|} \frac{\partial u}{\partial n}(x) dS_{x} \xrightarrow{\varepsilon \to 0} 0,  \]
+as the surface area goes to \( 0 \) at the rate of \( O(\varepsilon^{2}) \) and \( \frac{1}{|x|} = \frac{1}{\varepsilon} \), and \( u \) is a nice function so its derivative is bounded. For the first term, we need only show that
+\[ \int_{\partial B_{\varepsilon}(0)} u \frac{\partial}{\partial n} \frac{1}{|x|} \frac{dS}{4 \pi} \xrightarrow{\varepsilon \to 0} u  \]
+But then this is just
+\[ \int_{\partial B_{\varepsilon}(0)} u(x) \frac{1}{|x|^{2}} \frac{dS}{4 \pi} = \frac{1}{4 \pi \varepsilon^{2}} \int_{\partial B_{\varepsilon}(0)} u(x) dS = \fint_{\partial B_{\varepsilon}(0)}u(x) dS  \xrightarrow{\varepsilon \to 0} = u(0). \]
+Up to the aforementioned considerations about the orientation, this proves the lemma.
+\end{proof}
+
