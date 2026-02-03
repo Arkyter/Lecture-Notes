@@ -32,8 +32,13 @@ and the induced map (dashed arrow) is a unique module homomorphism. As an aside,
 More generally, if $g \colon N_1 \to N_2$ as well, then we also get $N_1 \otimes M_1 \to N_2 \otimes M_2$ defined by $n \otimes m \mapsto g(n) \otimes f(m)$.
 \\[8pt]
 We now discuss (iv): distributivity, i.e., $A \otimes (B \oplus C) \cong (A \otimes B) \oplus (A \otimes C)$. Observe the diagram
+\[ \begin{tikzcd} A \otimes (B \oplus C) \arrow[r] \arrow[rd] & A \otimes (B \oplus C) \arrow[d, dashed, "f"] \\ & (A \otimes B) \oplus (A \otimes C) \end{tikzcd} \]
+As in the previous proof, we use the map $(a, (b, c)) \mapsto (a \otimes b, a \otimes c)$. This is bilienar, and so by the universal property of tensor products, the above diagram gives us a map $f \colon A \otimes (B \oplus C) \to (A \otimes B) \oplus (A \otimes C)$ as a module homomorphism. Next, observe the following diagram.
 \[ \begin{tikzcd}
     A \times B \arrow[r] \arrow[dr] & A \otimes B \arrow[d, "\text{univ prop}"] \arrow[dr, "\text{proj}"] & \\
     & A \otimes (B \oplus C) & (A \otimes B) \oplus (A \otimes C) \arrow[l] \\
     A \times C \arrow[r] \arrow[ur] & A \otimes C \arrow[u, "\text{univ prop}"'] \arrow[ur, "\text{proj}"'] &
 \end{tikzcd} \]
+The property of direct sums (from homework 11) tells us that we get the other homomorphism, from which it follows that $g$ must have that $g(a \otimes b, 0) = a \otimes (b, 0)$, and $g(0, a \otimes c) = a \otimes (0, c)$. Indeed, we obtain
+\[ f \circ g(a \otimes b, a \otimes c) = f(a \otimes (b, 0) + a \otimes (0, c)) = f(a \otimes (b, c)) = (a \otimes b, a \otimes c). \]
+Now, we also have $g \circ f(a \otimes (b, c)) = g \circ (a \otimes b, a \otimes c)$, which is given by $a \otimes (b, 0) + a \otimes (0, c) = a \otimes (b, c)$. Thus, $g = f\inv$ demonstrates the isomorphism. Note that the map we've chosen here is a module homomorhpism $A \otimes B \to A \otimes (B \oplus C)$, and so it must be the correct one by uniqueness.
