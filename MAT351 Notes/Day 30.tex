@@ -1,0 +1,115 @@
+\section{Day 30: Toward's Green's Function (Feb. 4, 2026)}
+
+\begin{lemma}[Representation Formula]
+		\( u \in \mathcal{C}^{2} \) and \( x_{0} \in D \), \( \Delta u = 0 \) then
+	\[ \mu(x_{0}) = \int_{D} v(x) (- \Delta) u(x) dx + \int_{\partial D}  \mu \frac{\partial}{\partial n} v - v \frac{\partial u}{\partial n} dS_{x} \]
+	where
+	\[ v_{x_{0}}(x) - \frac{1}{4 \pi} \frac{1}{|x - x_{0}|} \]
+\end{lemma}
+\begin{proof}
+	We did it with \( \Delta u = 0 \). As an exercise we want to add \( \Delta u \ne 0 \) to that proof.
+\end{proof}
+
+We used \[ v_{x_{0}}(x) = -\frac{1}{4 \pi |x - x_{0}|} \]
+as a very important function. This is because intuitively it has the property that
+\[ \int_{D} - \Delta v u dx = u(x_{0}), \]
+even though this is not well defined, so in some sense \( v(x, x_{0}) \) solves \( \Delta_{x} v_{x_{0}}(x) = \delta_{x_{0}}(x) \). 
+
+\begin{remark}
+	We saw a similar idea with the heat kernel where it approximates the delta function. Also we saw it with the Poisson kernel.
+\end{remark}
+
+We'll use our representation formula to solve
+\[ \left\{\begin{NiceMatrix}- \Delta u = 0 & \text{in \( D \)} \\ u = h & \text{on \( \partial D \)}.\end{NiceMatrix}\right.  \]
+for a general domain \( D \).
+
+\begin{definition}
+	A Green's function for \( - \Delta \) in a domain \( D \) at a point \( x_{0} \in D \) is a function defined such that \( \forall x \in D \) such that
+	\begin{enumerate}
+	
+		\item \( G \in \mathbb{C}^{2} \) with \( \Delta_{x} G = 0 \) in \( D \)
+		\item \( G(x) = 0 \) on \( \partial D \)
+		\item \( G(x) + \frac{1}{4 \pi |x - x_{0}|}\) is finite at \( x_{0} \) and \( \mathcal{C}^{2} \) everywhere, and harmonic everywhere.
+	
+	\end{enumerate}
+
+\end{definition}
+
+	\begin{remark}
+		Varying \( x_{0} \) we get a two parameter function \( G(x, x_{0}) \) \( x \ne x_{0} \). This will be notation used henceforth.
+	\end{remark}
+
+	\begin{theorem}
+		If \( G(x, x_{0}) \) is a Green's function for a domain \( D \), then
+		\[ u(x_{0}) = \int_{\partial D} \frac{\partial G}{\partial n}(x, x_{0}) u(x) dS_{x}.  \]
+		solves the problem
+		\[ \left\{\begin{NiceMatrix} \Delta u = 0 & \text{in \( D \)} \\ u = h & \text{on \( \partial D \)}\end{NiceMatrix}\right.  \]
+
+		If we have the alternative condition  that
+		\[ - \Delta u = f, \]
+		this adds
+		\[ \int_{D} f(x) G(x, x_{0}) dx \]
+		to our solution.
+	\end{theorem}
+	\begin{proof}
+		Recall the representation formula above.
+		Define \( H \) by \( G(x, x_{0}) = v_{x_{0}}(x) + H(x) \). Then by our properties of Greens' functions, we have that \( \Delta H = 0 \) everywhere (specifically, \( (i) \) gives it everywhere away from \( x_{0} \) and \( (iii) \) tells us at \( x_{0} \)). From Green's second identity on \( u \) and \( H \), we have that
+		\[ 0 = \int_{\partial D} u \frac{\partial H}{\partial n} - H \frac{\partial u}{\partial n} dS_{x}. \]
+		Therefore, if we add this to our representation formula we get
+		\begin{align*}
+			u(x_{0}) &= \int_{\partial D}  u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS_{x} + \int_{\partial D}  u \frac{\partial H}{\partial n} - H \frac{\partial u}{\partial n} dS_{x} \\
+							 &= \int_{\partial D} u(x) \frac{\partial G_{x_{0}}(x)}{\partial n}(x) - G_{x_{0}}(x) \frac{\partial u}{\partial n}(x) dS_{x}
+		\end{align*}
+		and the second term cancels by property \( 2 \).
+	\end{proof}
+
+	In a bit we'll find Green's function for some domain (half-space, ball). Before this let's show that
+	\begin{lemma}
+		For Green's function \( G(x, x_{0}) \), \( x, x_{0} \in D \), \( x \ne x_{0} \), then
+		\[ G(x, x_{0}) = G(x_{0}, x). \]
+	\end{lemma}
+	\begin{proof}
+		Consider \( u(x) = G(x, a) \) and \( v(x) = G(x, b) \) for \( a, b \in D \). Then Green's second identity tells us that
+		\begin{align*}
+			0 &= \int_{D \setminus (B_{\varepsilon}(a) \cup B_{\varphi}(b)}  u \Delta v - v \Delta u dx \\
+				&= \int_{\partial \left( B_{\varepsilon}(a) \cup B_{\varepsilon}(b) \right)} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS
+				\intertext{because \( G|_{x \in \partial D} = 0 \)}
+				&= \int_{\partial B_{\varepsilon}(a)} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS + \int_{\partial B_{\varepsilon}(b)} u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS  
+		\end{align*}
+		Recall that \( u \) is singular at \( x = a \) and \( v \) is singular at \( x = b \). Then,
+			\[ 0 = \lim_{\varepsilon \to 0} \int_{\partial B_{\varepsilon}(a)} - v \frac{\partial u}{\partial n} dS + \int_{\partial B_{\varepsilon}(b)} u \frac{\partial v}{\partial n} dS. \]  
+			Now, we ask where do these different pieces converge to as \( \varepsilon \to 0 \)? Well
+			\[ \lim_{\varepsilon \to 0} \int_{\partial B_{\varepsilon}(a)} - v \frac{\partial u}{\partial n} dS \xrightarrow{\varepsilon \to 0} v(a).  \]
+			This is because we're basically just taking the average on a sphere of the values of our \( v \). This is the same proof as last class.
+	\end{proof}
+
+Let's solve Dirichlet's problem in half-space. We'll use Green's function method. 
+\[ \left\{\begin{NiceMatrix} \Delta u = 0 & \text{in \( z > 0 \)} \\ u = h(x, y) & \text{on \( z = 0 \)}\end{NiceMatrix}\right.  \]
+\( (x, y) \in \mathbb{R}^{2} \) coord on the boundary \( P = (x_{0}, y_{0}, z_{0}) \) a point in \( z > 0 \). We're looking for a Green's function. We want \( G(x, x_{0}) \) defined at all \( x \ne x_{0} \) in \( z > 0 \).
+\begin{enumerate}
+
+	\item \( G \in C^{2} \) when \( x \ne x_{0} \)
+	\item \( G(x, x_{0}) = 0 \) when \( x \in \partial D \)
+	\item \( G(x, x_{0}) + \frac{1}{4 \pi |x-x_{0}|} \) is \( C^{2} \) and harmonic.
+
+\end{enumerate}
+If we let \( x_{0}^{*} \) be the reflection over the \( z \) axis of \( x_{0} \), then we can write
+\[ - \frac{1}{4 \pi |x - x_{0}|} + \frac{1}{4 \pi |x - x_{0}^{*}|}. \]
+Such a reflection is gonna be anti-symmetric over the \( z \)-axis, so we will have \( 0 \) on the boundary. Also we've already shown it satisfies property one. For property three, notice that this is
+\[ G(x, x_{0}) + \frac{1}{4 \pi |x - x_{0}|} = \frac{1}{4 \pi |x - x_{0}^{*}|} \]
+which we know is \( C^{2} \) and harmonic away from \( x_{0}^{*} \), which is outside of our domain \( D \).
+
+Therefore, the solution to the problem is
+\[ u(x_{0}) = \int_{z = 0} \frac{\partial G}{\partial n}(x, x_{0}) \cdot h(x) dS_{x} \]
+writing this out explicitly, we have that
+\[ \left.\frac{\partial G}{\partial n}\right|_{z = 0} = \underbrace{2}_{\text{\( G \) is odd}} \cdot \left( \frac{1}{2} \frac{2 (z - z_{0})}{4 \pi |x - x_{0}|^{3}} \right) = \frac{-z_{0}}{2 \pi |x-x_{0}|^{3}}. \]
+
+	Plugging back in, when \( x_{0} \in \left\{ z > 0 \right\} \),
+	\[ u(x_{0}) = \frac{- z_{0}}{2 \pi} \int_{z = 0}  \frac{1}{|x_{0} - x'|^{3}} h(x') dx'. \]
+	Next time we'll do the ball in \( \mathbb{R}^{3} \). The exercise is to apply Green's functions method to the half-plane.
+
+	\begin{remark}
+		So far, all the procedures and ideas are general, except the only specific thing we used is
+		\[ v_{x_{0}}(x) = - \frac{1}{4 \pi |x - x_{0}|} \]
+		as the starting point. This was because we are in 3d. In 2d we'd do the same thing but with a different \( v_{x_{0}} \). Specifically, in 2d, our fundamental solution is going to look something like \( \log |x - x_{0}| \). This is because in 3d the radial solution was the above \( v \). This might need a coefficient and such. Next time try applying it to the disk to get the Poisson kernel.
+	\end{remark}
