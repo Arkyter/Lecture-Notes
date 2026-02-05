@@ -246,23 +246,19 @@
 % complex analysis
 %\newcommand{\ssubset}{\subset\joinrel\subset} % "is a domain"
 \newcommand\ssubset{ % "is a domain"
-  \mathrel{ \mathrlap{\subset} \hphantom{\ll} \mathllap{\subset} }
+  	\mathrel{ \mathrlap{\subset} \hphantom{\ll} \mathllap{\subset} }
 }
 \newcommand{\coor}[1]{% homogeneous coordinate spacing in math mode
-  \begingroup\lccode`~=`: \lowercase{\endgroup
-  \edef~}{\mathbin{\mathchar\the\mathcode`:}\nobreak}%
-  [% opening symbol
-  \begingroup
-  \mathcode`:=\string"8000
-  #1%
-  \endgroup 
-  ]% closing symbol
+	\begingroup\lccode`~=`: \lowercase{\endgroup\edef~}{\mathbin{\mathchar\the\mathcode`:}\nobreak}
+	\left[\begingroup\mathcode`:=\string"8000
+	#1
+	\endgroup\right]
 }
 \newcommand{\pcoor}[1]{% parenthesis version of above
-  \begingroup\lccode`~=`: \lowercase{\endgroup\edef~}{\mathbin{\mathchar\the\mathcode`:}\nobreak}%
-  (\begingroup\mathcode`:=\string"8000
-  #1
-  \endgroup)
+	\begingroup\lccode`~=`: \lowercase{\endgroup\edef~}{\mathbin{\mathchar\the\mathcode`:}\nobreak}
+	\left(\begingroup\mathcode`:=\string"8000
+	#1
+	\endgroup\right)
 }
 \DeclareMathOperator{\cis}{cis} % cis x + i sin x: shorthand
 \DeclareMathOperator*{\argmin}{arg min} % complex; argument min
@@ -356,6 +352,7 @@
 \newcommand{\km}{\mathfrak m}
 \newcommand{\kp}{\mathfrak p} % primes
 \newcommand{\kq}{\mathfrak q} % primes
+\newcommand{\KX}{\mathfrak X} % arbitrary domain... tmp for complex
 \DeclareMathOperator{\Ext}{Ext} % Ext functor
 \DeclareMathOperator{\Tor}{Tor} % Tor functor
 \newcommand{\GF}{\opname{GF}}

@@ -1,4 +1,4 @@
-\section{Day 30: Tensors as a Ring (Jan.\ 23, 2026)}
+\section{Day 30: Modules as a Semiring (Jan.\ 23, 2026)}
 Let $R$ be a (commutative, since we assume so in this class) ring. Then the $R$-modules form a semiring under $\oplus, \otimes$ as the binary operations and $0, R$ as the additive and multiplicative identities. We claim the following,
 \begin{proposition}
     The modules form a ring as defined above with the following properties,
@@ -13,7 +13,7 @@ Let $R$ be a (commutative, since we assume so in this class) ring. Then the $R$-
 Note that $\oplus$ does not have additive inverses, so the modules do not form a ring, but a semiring instead. We will leave (ii) and (v) as an exercise. For property (i), we want to show that $R \otimes M \cong M \cong M \otimes R$. We will show the left side, since commutativity would yield the right. To start, we use the universal property of tensor products on $R \otimes M$.
 \[ \begin{tikzcd} R \times M \arrow[r, hook, "\iota"] \arrow[dr, "f"] & R \otimes M \arrow[d, "\exists! \wt f"] \\ & N \end{tikzcd} \]
 The above diagram shows that, for all bilinear $f \colon R \times M \to N$, we have that $f(r, m) = f(1, rm)$. By considering the map $R \times M \to M$ by $(r, m) \mapsto rm$ and define $\wt f(m) = f(1, m)$, we get
-\[ \begin{tikzcd}[column sep=2cm] R \times M \arrow[r, "\ell\colon (r{,}m) \mapsto rm"] \arrow[rd, "f"] & R \otimes M \arrow[d, "\wt f(m)=(1{,}m)"] \\ & N \end{tikzcd} \]
+\[ \begin{tikzcd}[column sep=2cm] R \times M \arrow[r, "\ell\colon (r{,}m) \mapsto rm"] \arrow[rd, "f"] & M \arrow[d, "\wt f(m)=(1{,}m)"] \\ & N \end{tikzcd} \]
 By uniqueness of $\wt f$, we get that $\wt f(rm) = f(1, rm) = f(r, m)$ as desired. Thus, $(M, \ell)$ satisfies the universal property, meaning $M \cong R \otimes_R M$.
 \\[8pt]
 We now discuss (iii). To see $\otimes$ is associative, i.e., $A \otimes (B \otimes C) \cong (A \otimes B) \otimes C$, observe that we may write
@@ -32,7 +32,7 @@ and the induced map (dashed arrow) is a unique module homomorphism. As an aside,
 More generally, if $g \colon N_1 \to N_2$ as well, then we also get $N_1 \otimes M_1 \to N_2 \otimes M_2$ defined by $n \otimes m \mapsto g(n) \otimes f(m)$.
 \\[8pt]
 We now discuss (iv): distributivity, i.e., $A \otimes (B \oplus C) \cong (A \otimes B) \oplus (A \otimes C)$. Observe the diagram
-\[ \begin{tikzcd} A \otimes (B \oplus C) \arrow[r] \arrow[rd] & A \otimes (B \oplus C) \arrow[d, dashed, "f"] \\ & (A \otimes B) \oplus (A \otimes C) \end{tikzcd} \]
+\[ \begin{tikzcd} A \times (B \oplus C) \arrow[r] \arrow[rd] & A \otimes (B \oplus C) \arrow[d, dashed, "f"] \\ & (A \otimes B) \oplus (A \otimes C) \end{tikzcd} \]
 As in the previous proof, we use the map $(a, (b, c)) \mapsto (a \otimes b, a \otimes c)$. This is bilienar, and so by the universal property of tensor products, the above diagram gives us a map $f \colon A \otimes (B \oplus C) \to (A \otimes B) \oplus (A \otimes C)$ as a module homomorphism. Next, observe the following diagram.
 \[ \begin{tikzcd}
     A \times B \arrow[r] \arrow[dr] & A \otimes B \arrow[d, "\text{univ prop}"] \arrow[dr, "\text{proj}"] & \\
