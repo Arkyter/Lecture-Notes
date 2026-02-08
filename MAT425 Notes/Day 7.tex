@@ -62,8 +62,29 @@ Sard's theorem has one more application. Specifically, Whitney's embedding theor
 	Suppose that \( X^{n} \) is compact and \( X^{n} \subseteq \mathbb{R}^{N} \). Then there exists an embedding from \( X \) to \( \mathbb{R}^{2n+1} \).
 \end{theorem}
 \begin{remark}
-	We don't need compactness, but then we need some way to show our map is proper, which is more difficult. As such, we will assume compactness \textit{for now}.
+	We don't need compactness, but then we need some way to show our map is proper, which is more difficult. As such, we will assume compactness \textit{for now}. Also, 
+
+	Why do we bother proving Whitney's? Well a priori we could have that \( N \) is huge. As such, it's nice to have an upper bound on the dimension of the space. Is \( 2n+1 \) a tight upper bound? No, in fact it's never the optimal dimension. We can show that all manifolds can be embedded into \( \mathbb{R}^{2n} \), but it's much harder to do. Even in this case, we can show that sometimes manifolds can be embedded into spaces of lower dimension, but this is still an open problem in differential topology (what is the optimal dimension we can embed into?
 \end{remark}
 \begin{proof}
-	
+	We're gonna show that so long as \( N > 2n+1 \) there exists some vector \( a \in \mathbb{R}^{N} \) with \( a \ne 0 \) such that the orthogonal projection \( \pi_{a} \colon \mathbb{R}^{N} \to \left\langle a \right\rangle^{\perp} \) is an embedding for \( X^{n} \) into \( \mathbb{R}^{N-1} \). 
+
+	In general, we cannot just pick any vector because it might not be injective and our map \( \pi_{a} \) might not be an immersion. So, let us identify when our \( a \) is bad. Define the map \( h \colon X \times X \times \mathbb{R} \to \mathbb{R}^{N} \) such that
+	\[ h(x, y, t) = t(x - y). \]
+	Then we have that if \( a \in \operatorname{im} h \), this implies that there exists \( x \in X \), \( y \in Y \), \( t \in \mathbb{R} \) such that \( tx = ty + a \), and thus \( \pi_{a}(tx) = \pi_{a}(ty) \).
+
+	Notice that if \( N > 2 \dim X + 1 \), then we have that every point of \( \operatorname{im} h \) will be critical. But then by mini-Sard's, the image of \( h \) is going to be meagre in \( \mathbb{R}^{N} \), so really \textit{most} choices of \( a \) will work.
+
+	But this still might not be an embedding. This is because we need to ensure that our map is also an immersion. To do this, we need to look at the tangent bundles. The tangent bundle \( TM \) of a manifold is the collection of all its tangent spaces, and the tangent bundle of an \( n \)-manifold will have dimension \( 2n \). Another way to put this is that
+	\[ TM = \left\{ (x, v) \colon x \in M, v \in T_{x}M \cong \mathbb{R}^{n}. \right\} \]
+
+	If \( \varphi \) is a parameterization of our manifold \( X \), then we are in trouble when \( d \varphi_{x_{0}}(v) = ta \) for some nonzero \( v \) and some \( t \in \mathbb{R} \). This is because in this case
+	\[ d\left( \pi_{a} \circ \varphi \right)_{x_{0}}(v) = d \left( \pi_{a} \right)_{\varphi(x_{0})}( d \varphi_{x_{0}}(v)) = \pi_{a}(ta) = 0, \]
+	so our map \( \pi_{a} \) wouldn't be an immersion. But to avoid this, notice that the mapping \( g \colon TM \to \mathbb{R}^{N} \) by
+	\[ g(x, v) = d \varphi_{x}(v) \]
+	will have measure zero image as long as \( N > 2n \). Thus, since we can cover \( M \) via countably many coordinate charts, the bad points will form a measure zero subset of \( \mathbb{R}^{N} \).
 \end{proof}
+\begin{remark}
+	We can show that there exists an \textit{immersion} into \( \mathbb{R}^{2n} \) by the above argument. Sure, when we project from \( \mathbb{R}^{2n+1} \) to \( \mathbb{R}^{2n} \) we may lose injectivity, but that's okay for an immersion. There exists an embedding too, but you just have to trust him on that one.
+\end{remark}
+Notice that this is slightly disappointing, because we went through the trouble of proving Sard's theorem and yet so far we've only used the easier version of it. But it's not the worst thing in the world. You'll live.
