@@ -1,0 +1,49 @@
+\section{Day 9: Whitney's Embedding Theorem}
+We need to show that our mapping is proper. To do this, we're gonna construct a proper map \( \rho \colon M \to [0, \infty) \). It is sufficient if we can show that \( \rho^{-1}([0, a]) \) is compact for every \( a \in \mathbb{R} \).
+
+\begin{lemma}
+	If we have a proper function \( \rho \colon M^{n} \to [0, \infty) \), then \( M \) can be embedded into \( \mathbb{R}^{2n+1} \).
+\end{lemma}
+\begin{proof}
+Start with an injective immersion of \( M \) into \( \mathbb{R}^{2n+1} \). Since \( \mathbb{R}^{2n+1} \) is diffeomorphic to the unit sphere in \( \mathbb{R}^{2n+1} \), we can suppose that \( f \colon M \to \mathbb{R}^{2n+1} \) is an injective immersion from \( M \) ot the unit sphere of this space.
+
+Now, define \( F \colon M \to \mathbb{R}^{2n+2} \) by \( F(x) = (f(x), \rho(x)) \). Then  we can project back down as before. But there is a potential problem---this projection might map an unbounded set of \( M \) to a bounded subset of \( \mathbb{R}^{2n+1} \). For example, something like 
+\[ \left\{ \left( \frac{\sin(t)}{t}, \frac{\cos(t)}{t}, t \right) : t \in [1, \infty) \right\} \]
+projected along the \( z \)-axis would not be suitable.
+
+What we claim is that so long as \( a \) is not one of the poles of \( S^{2k+1} \), then \( \pi_{a} \circ F \) is a proper map. From here, since almost every \( a \in S_{2k +1} \) makes \( \pi_{a} \circ F \) an injective immersion, almost every \( a \in S^{2k+1} \) makes \( \pi_{a} \circ F \) into an embedding of \( M \) into \( \mathbb{R}^{2n+1} \).
+
+We claim that so long as \( a \) is not one of the poles, the set \( \left\{ x \in M : |\pi_{a} \circ F(x)| \le c \right\} \) is contained in the set \( \rho^{-1}([0, d]) \) for some \( d \in [0, \infty) \). This would imply that the preimage of every closed ball would be compact, proving the theorem.
+
+So suppose this is not the case. Then there exists a sequence \( x_{i} \in M \) such that \( | \pi_{a} \circ F(x_{i})| \le c \) but \( \rho(x_{i}) \to \infty \). By the definition of an orthogonal complement, \( F(x_{i}) - \pi_{a}(F(x_{i})) \) is a multiple of \( a \), so the vector
+\[ \frac{1}{\rho(x_{i})} \left( F(x_{i}) - \pi_{a} \circ F(x_{i}) \right) \]
+is as well. But then
+\[ \frac{F(x_{i})}{\rho(x_{i})} = \frac{(f(x_{i}), \rho(x_{i})}{\rho(x_{i})} \xrightarrow{i \to \infty} (0, \ldots, 0, 1). \]
+
+But then we would have that \( (0, \ldots, 0, 1) \) is a multiple of \( a \), which is impossible as this would imply that \( a \) is one of the poles we excluded.
+\end{proof}
+
+\begin{theorem}
+	Given a noncompact manifold \( M^{n} \) there exists a proper \( \rho \colon M^{n} \to \mathbb{R} \).
+\end{theorem}
+
+\begin{definition}
+	If \( \left\{ U_{\alpha} \right\} \) is an open cover of \( M \), then a partition of unity subordinate to this cover is a collection of functions \( \left\{ \theta_{\alpha} \right\}_{\alpha \in I} \) such that
+	\begin{enumerate}
+	
+		\item For each \( \theta_{\alpha} \) there exists some \( \alpha' \) such that for some closed set \( C_{\alpha} \subseteq U_{\alpha'} \), \( \theta_{\alpha} \) is zero outside of \( C_{\alpha} \).
+		\item For each \( x \in M \) there exists a neighborhood \( V \) of \( x \) such that only finitely many \( \theta_{\alpha} \) are nonzero on \( V \).
+		\item Our \( \theta_{\alpha} \) sum to \( 1 \) everywhere.
+	
+	\end{enumerate}
+\end{definition}
+
+\begin{proof}[Existence of Proper Function]
+	Define a partition of unity \( \eta_{n} \) subordinate to the collection of open sets whose closure is compact. Then define
+	\[ \rho(x) = \sum_{n \in \mathbb{N}} n \cdot \eta_{n}. \]
+	Then we have that
+	\[ \rho^{-1}([0, n]) \subseteq \bigcup_{i=1}^{n} \operatorname{supp} \eta_{n} \]
+	which will have compact closure.
+\end{proof}
+
+From here, we are going to move on to something completely different, so I will not talk about this right now. Instead, I will go to bed. I have not typed up the proof that partitions of unity can be constructed, but he went over it in class in full detail.
