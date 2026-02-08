@@ -1,0 +1,164 @@
+\section{Day 5: Sard's Theorem (Jan 22. 2025)}
+In Euclidean space, we say that \( A \) is of measure \( 0 \) if for all \( \varepsilon > 0 \) there exists a cover \( \left\{ U_{i} \right\} \) of \( A \) such that \( \sum |U_{i}| < \varepsilon \), where \( U_{i} \) are parallelepipeds.\footnote{I \textit{think} Nabutovsky said they must be rectilinear, but I don't know. Probably stick to that on midterms.} Notice that \( \mathbb{R}^{k} \subseteq \mathbb{R}^{n} \) is of measure zero. To do this, cover \( \mathbb{R}^{k} \) by
+\[ [-N, N]^{k} \times \left[ \frac{-\varepsilon}{N^{k} 2^{N}}, \frac{\varepsilon}{N^{k} 2^{N}} \right] \]
+You can modify this formula to make it sum to exactly \( \varepsilon \) but that is too much work for me.
+
+\begin{theorem}
+	Let \( U \subseteq \mathbb{R}^{n} \) and \( f \colon U \to \mathbb{R}^{n} \) be smooth. If \( A \subseteq U \subseteq \mathbb{R}^{n} \) is closed and \( A \) has measure zero, then \( f(A) \) has measure zero.
+\end{theorem}
+
+\begin{proof}
+	Nabutovsky's proof was quite overcomplicated, so after class I asked him about a different argument and he said that my argument was better and during the Sard's theorem proof he thought of it independently too. I will put this argument rather than Nabutovsky's original one.
+
+	First of all, there is a problem which may not be immediately obvious when you start trying to prove this. Namely, just because \( A \) has arbitrarily small covers in \( \mathbb{R}^{n} \), it doesn't mean that \( A \) necessarily has arbitrarily small covers in \( U \). To resolve this, we can use an idea reminiscent of MAT335:
+
+	Define a grid of hyper-cubes with sidelengths \( \delta \) of the form
+	\[ \mathcal{B}_{\delta} = \left\{ \left[ \frac{k_{1}}{\delta} , \frac{k_{1} + 1}{\delta} \right] \times \cdots \times \left[ \frac{k_{n}}{\delta}, \frac{k_{n} + 1}{\delta} \right] : k_{1}, \ldots, k_{n} \in \mathbb{Z} \right\}. \]
+	Then these will clearly cover \( \mathbb{R}^{n} \). Now, notice that if we take all of the cubes of this form containing a (rectilinear) parallelepiped \( P \), they will be contained in the \( \delta \sqrt{n} \)-enlargement of \( P \)---namely,
+	\[ E_{\delta \sqrt{n}}(P) = \left\{ x \in \mathbb{R}^{n} : d(x, P) \le \delta \sqrt{n} \right\}, \]
+	where \( E_{\bullet} \) provides our enlargement function.
+	 From here, \( |E_{\delta \sqrt{n}}(P)| \le \left( 1 + 2 \delta \sqrt{n} \right)^{n} |P| \). 
+
+	Now, notice that since \( A \) is closed, there exists some \( r > 0 \) such that \( r < d(A, U^{c}) \). This is because \( U^{c} \) is closed, so the distance is well-defined. Fix \( \varepsilon > 0 \). Choose a cover \( \left\{ U_{i} : U_{i} \in \mathbb{N} \right\} \) of \( A \) such that 
+	\[ \sum_{i \in \mathbb{N}} |U_{i}| < \varepsilon.  \]
+	Choose \( \delta > 0 \) such that \( \delta \sqrt{n} < r \) and
+	\[ \left( 1 + 2 \delta \sqrt{n} \right)^{n} \cdot \sum_{i \in \mathbb{N}} |U_{i}| < \varepsilon. \]
+	It follows that the cover
+	\[ \mathcal{U} = \left\{ B \in \mathcal{B}_{\delta} : B \cap A \ne \varnothing \right\} \]
+	satisfies two important properties:
+	\begin{enumerate}
+	
+		\item Since \( \operatorname{diam}(B) = \delta \sqrt{n} \) for all \( B \in \mathcal{B}_{\delta} \), we have that our cover \( \mathcal{U} \) consists of only rectangles contained in \( U \).
+		\item For any \( B_{1}, B_{2} \in \mathcal{U} \), \( B_{1} \cap B_{2} \) is of measure zero (it's contained in some lower dimensional hyperplane), and for all \( B \in \mathcal{U} \), 
+			\[ B \subseteq \bigcup_{i \in \mathbb{N}} E_{\delta \sqrt{n}}(U_{i}).  \]
+			This implies that
+			\[ \sum_{B \in \mathcal{U}} |B| \le \sum_{i \in \mathbb{N}} (1 + \delta \sqrt{n}) \cdot |U_{i}|,   \]
+			and so
+			\[ \sum_{B \in \mathcal{U}} |B| \le (1 + \delta \sqrt{n}) \cdot \sum_{i \in \mathbb{N}} |U_{i}| < \varepsilon. \]
+	
+	\end{enumerate}
+	Thus, \( \mathcal{U} \) provides of cover of \( A \) of cubes contained within \( U \) with volume less than \( \varepsilon \).
+
+	Now that we have this cover, we need to show that the volume is preserved under our function. To do this we can suppose without loss of generality that \( A \) is bounded, and by shrinking our \( U \) a little bit we can suppose that \( f \) is lipschitz with lipschitz constant \( K \). From here, \( \operatorname{diam}(f(B)) \le K \cdot \operatorname{diam}(B) \) for any set \( B \subseteq U \). Since \( K \) is fixed, we are done.
+\end{proof}
+
+\begin{definition}
+	A set \( A \subseteq M \) has measure \( 0 \) if for every parameterization \( \varphi \colon U \to M \), \( \varphi^{-1}(A) \) has measure \( 0 \). This is sensible by the above theorem.
+\end{definition}
+
+\begin{theorem}[Mini-Sard's]
+	If \( f \colon M^{m} \to N^{n} \), and \( m < n \), then the critical values \( C(f) \) is a set of measure zero.
+\end{theorem}
+\begin{proof}
+	Consider the following diagram
+		\[\begin{tikzcd}
+			  & M & N \\
+			U & U \times \left\{ 0 \right\}^{n-m} & V
+			\arrow["\varphi",from=2-1,to=1-2]
+			\arrow["\iota^{}",from=2-1,to=2-2]
+			\arrow["\varphi \times 0"',from=2-2,to=1-2]
+			\arrow["f",from=1-2,to=1-3]
+			\arrow["\psi",from=2-3,to=1-3]
+		\end{tikzcd} \]	
+where \( \iota \) is the canonical immersion. By definition we have that we can extend \( \varphi \times 0 \) to some neighborhood of \( U \times \left\{ 0 \right\}^{n - m} \) smoothly (this is our definition of \( \varphi \times 0 \) being smooth). It follows that the map \( \psi^{-1} \circ f \circ \varphi \times 0 : U \times \left\{ 0 \right\}^{n-m} \to V \) is a smooth map, and therefore we can extend it to some open set \( \tilde U \) containing \( U \times \left\{ 0 \right\}^{n-m} \). I will call this extended map \( \tilde f \). Then \( U \times \left\{ 0 \right\}^{n-m} \) has measure zero in \( \tilde U \), so by our above theorem, \( \tilde f(U \times \left\{ 0 \right\}^{n-m}) = f(M \cap \varphi(U)) \) will have measure zero.
+
+Since we let our parameterizations be arbitrary, this proves the theorem.\footnote{I might have fucked up some details, but I'm sure you see the idea.}
+\end{proof}
+
+\begin{lemma}[Fubini's theorem]
+	Let \( A \subseteq \mathbb{R}^{n+1} \) be closed.\footnote{This theorem is more generally true. If we know that \( A \) is Lebesgue-measurable, then it holds. Closed sets are contained in our measurable sets of \( \mathbb{R}^{n+1} \) (if we can establish that all the sets in the Borel \( \sigma \)-algebra are measurable then this is immediate). But be careful not to apply it accidentally without the closedness condition.} Define 
+	\[ A_{c} = A \cap \left\{ \left( x_{1}, \ldots, x_{n+1} \right) \in \mathbb{R}^{n} : x_{n+1} = c \right\}. \]
+	Then we have that \( A \) has measure zero if every \( \pi(A_{c}) \) has measure zero, where \( \pi \colon \mathbb{R}^{n+1} \to \mathbb{R}^{n} \) is the orthogonal projection along the \( n+1 \)th coordinate.
+\end{lemma}
+\begin{proof}
+	We can reduce to the case where \( A \) is bounded. Since we can cover \( \mathbb{R}^{n} \) by countably many parallelepipeds, if we know that \( A \cap P \) has measure zero for every parallelepiped, then let \( \left\{ P_{1}, \ldots \right\} \) be our cover of \( \mathbb{R}^{n} \) by (countable) parallelepipeds, and cover \( A \cap P_{k} \) by a cover with volume \( \varepsilon \cdot 2^{-k} \). It follows that this will be a cover of \( A \) with volume \( \varepsilon \).
+
+	As such, consider a bounded closed set satisfying the above property. Then \( A \) is compact. Suppose that \( A \subseteq \mathbb{R}^{n} \times [a, b] \) for some \( a, b \in \mathbb{R} \). Now, let \( V \) be an open neighborhood of \( A_{c} \) for some \( c \in [a, b] \). I claim that there exists some \( I \subseteq [a, b] \)  such that
+	\[ A_{c_{0}} \subseteq V \times I, \quad c_{0} \in I. \]
+	Otherwise would yield a sequence of points \( \left\{ x_{n} \right\} \) with \( x_{n} \in A_{c_{n}} \) where \( c_{n} \to c \), but \( x_{n} \not \in V \) for all \( n \in \mathbb{N} \), This would imply that \( \lim x_{n} \not \in A_{c} \), which would imply that \( A \) is not closed.
+
+	From here, it's just a matter of choosing open neighborhoods \( V_{c} \) of each \( A_{c} \) and open intervals \( I_{c} \) such that \( c \in I_{c} \), \( A \cap U \times I \subseteq V_{c} \times I_{c} \), and ensuring that \( V_{c} \) has measure less than \( \varepsilon \).\footnote{It's not necessary to cite the full strength of Lebesgue measure here---for open sets the outer measure equals the Lebesgue measure.} Then it's a matter of taking a finite subcover of \( A \) by \( V_{c} \times I_{c} \), and potentially modifying these finitely many \( I_{c} \) such that their lengths sum to less than \( 2 (b - a) \). This is all quite simple so I will leave the details to you rather than writing out the endless details necessary.
+\end{proof}
+\begin{remark}
+	This is not an if and only if. Consider \( A_{c} = \mathbb{R}^{n} \times \left\{ 0 \right\} \). I almost fell for this.
+\end{remark}
+
+\begin{theorem}[Sard's Theorem]
+	Given a map \( f \colon M \to N \), the critical values \( C \) of \( f \) have measure zero.
+\end{theorem}
+\begin{remark}
+	What's the intuition here? Well we'll use an identity to yield the most important case: If \( \mu \) denotes the Lebesgue measure of a set, then we have that for all \( A \subseteq \mathbb{R}^{n} \),
+	\[ \mu(A) \le C_{n} \cdot \operatorname{diam}(A)^{n}, \]
+	where \( C_{n} \) is the volume of a unit diameter ball in \( \mathbb{R}^{n} \), with equality holding of \( A \) is a ball in \( \mathbb{R}^{n} \). As such, if \( f \colon \mathbb{R}^{n} \to \mathbb{R}^{m} \) is Lipschitz with constant \( K \),
+	\[ \mu(f(A)) \le C_{m} \cdot \operatorname{diam}(f(A))^{m} \le C_{m} \cdot K^{m} \cdot \operatorname{diam}(A)^{m} \le \frac{C_{m} K^{m}}{C_{n}} \mu(B)^{\frac{m}{n}},  \]
+	where \( B \) is a ball containing \( A \). As such, when we are mapping from low dimensions to higher dimensions, we have that \( \frac{m}{n} > 1 \), so as we cover \( A \) with smaller and smaller balls, this bounds the volume of \( f(A) \) by smaller and smaller quantities. But when \( m \le n \), we need a better remainder.
+
+	Bu  imagine for a moment that rather than just Lipschitz, we had the condition that for some \( \alpha > \frac{n}{m} \)
+	\[ \operatorname{diam}(f(A)) \le C \cdot \operatorname{diam}(A)^{\alpha}. \]
+	Then our inequalities would look like
+	\[ \mu(f(A)) \le C_{m} \cdot \operatorname{diam}(f(A))^{\alpha \cdot m} \le C_{m} \cdot K^{m} \cdot \operatorname{diam}(A)^{\alpha \cdot m} \le \frac{C_{m} K^{m}}{C_{n}} \mu(B)^{\alpha \cdot \frac{m}{n}}, \]
+	which would yield itself to the same proof as above. Unfortunately requiring such a condition globally is equivalent to requiring that our function is constant (it's equivalent to \( \alpha \)-H\"older, and we're considering the case of \( \alpha > 1 \)). But if we only want it at a single point, then we can acheive this by assuming that all of the \( k \)th derivatives, where \( k \le \frac{n}{m} \) vanish. Then our function would locally look like some homogeneous function. Specifically, given \( v \in \mathbb{R}^{n} \) with and \( h \in \mathbb{R} \), we would have
+	\[ \lim_{h \to 0}\frac{f(x+hv) - f(x)}{\sqrt[m]{h^{n}}} = 0, \]
+	which is precisely what we want. Then we could essentially just repeat the proof of mini-Sard verbatim and conclude. But why are we even considering such a dream scenario? After all, we don't even know that the first derivatives vanish. Well in Nabutovsky's words, ``This is precisely the drama of the proof.'' Let me move on to proving it.
+\end{remark}
+
+\begin{proof}
+	Notice that a zero dimensional manifold is just a discrete collection of points, so its image will always have measure zero, as its image will be countable. So we will take this as a base case and use strong induction to prove the theorem.
+
+	Let \( f \colon M^{n} \to N^{m} \) be smooth, where \( n \ge 0 \) and \( m \ge 1 \).\footnote{I hate that \( n \) is the dimension for \( M \) and \( m \) is the dimension for \( N \).} Now, let \( C \) be the set of critical values of \( f \), and define \( C_{i} \) to be the critical values of \( f \) where all of the first \( i \) derivatives vanish. 
+
+	Let us first reduce the problem to something slightly simpler. Given charts \( (U, \varphi) \) of \( M \) and \( (V, \psi) \) of \( N \), if we can show that \( \psi(C) \) has measure zero, then we are done. Therefore, since \( U \) has a countable compact exhaustion, this reduces to showing that \( \psi(C \cap f \circ \varphi^{-1}(X)) \) has measure zero for every compact \( X \subseteq U \). But then this is the same as showing that \( f : A \subseteq \mathbb{R}^{n} \to B \subseteq \mathbb{R}^{m} \) satisfies Sard's theorem, where \( A \) and \( B \) are both bounded sets. This makes life easier. 
+
+	Now, there are three cases we need to consider:
+	\begin{enumerate}
+	
+		\item First, let \( \mathcal{B}_{\delta} \) be the collection of rectangles of sidelength \( \delta \), as in the proof of Theorem 5.1. Now, I claim that for every \( \alpha > 0 \) there exists sufficiently large \( k \) such that for every \( x \in C_{k} \), there exists some sufficiently large \( \delta \) and some constant \( c \) such that for all \( B \in \mathcal{B}_{\delta} \) with \( x \in B \),
+			\[ \mu(f(B)) \ge c \cdot \mu(B)^{\alpha}. \]
+			To prove this, notice that nearby \( x \), \( f \) satisfies
+			\[ \lim_{h \to 0} \frac{f(x + hv) - f(x)}{h^{k-1}} = 0, \]
+			which implies that on for any small enough neighborhood \( U \) of \( x \),
+			\[ \operatorname{diam}(f(U)) < c \cdot \operatorname{diam}(U)^{k-1}, \]
+			which (by the discussion in the remark) yields the claim. Now, since we have that (for small enough \( \delta \))
+			\[ \sum_{B \in \mathcal{B}_{\delta}, B \cap C_{k} \ne \varnothing} \mu(B) \le \mu(A),  \]
+			we have that
+			\[ \mu(B) \le \frac{\mu(A)}{|\mathcal{B}_{\delta}|} \]
+			so therefore as \( \delta \to 0 \), if \( \alpha > 1 \), then
+			\[ \sum_{B \in \mathcal{B}_{\delta}, B \cap C_{k} \ne \varnothing} \mu(f(B)) \le \sum_{B \in \mathcal{B}_{\delta}, B \cap C_{k} \ne \varnothing} c \cdot \mu(B)^{\alpha} \to 0. \]
+		\item We will show that \( C \setminus C_{1} \) has measure zero. If \( y = f(x_{0}) \), then \( x_{0} \) is critical, but there exists \( i, j \) such that \( D_{i}f^{j}(x_{0}) \ne 0\). Suppose that \( i=j=1 \) for simplicity and consider the following change of coordinates: 
+
+			Let \( h \colon B_{\delta}(x_{0}) \to \mathbb{R}^{n} \) where
+			\[ h(x_{1}, \ldots, x_{n}) = \left( f(x_{1}, \ldots, x_{n}), x_{2}, \ldots, x_{n} \right). \]
+			Then for some nonzero \( m_{l} \)
+			\[ Dh(x_{0}) = \begin{bNiceMatrix} \lambda & 0 & \cdots & 0 \\ * & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ * & 0 & \cdots & 1 \end{bNiceMatrix}, \]
+			so \( Dh \) is invertible, and thus we can assume (potentially shrinking \( \delta \)) that \( h \) is a diffeomorphism. Define \( h^{-1} \) and use it to change coordinates. Then
+			\[ d(f \circ h^{-1}) = \begin{bNiceMatrix}1 & 0 & \cdots & 0 \\ * & * & \cdots & * \\ \vdots & \vdots & \ddots & \vdots \\ * & * & \cdots & * \end{bNiceMatrix}  \]
+			so considering the minor of this matrix attained by removing the top row and the leftmost column, we get a matrix which is singular (otherwise \( d(f \circ h^{-1}) \) would be invertible and thus we wouldn't have that \( x_{0} \) is a critical point).
+
+			Suppose that \( x_{0} \) has first coordinate \( a \) and \( y \) has first coordinate \( b \). Then applying our induction hypothesis we have that the map \( g_{a} \colon \mathbb{R}^{n-1} \to \left\{ b \right\} \times \mathbb{R}^{m-1} \) given by
+			\[ g_{a}(x) = f(a, x) \]
+			has a set of critical points which are measure zero. It follows that \( C \setminus C_{1} \cap \left\{ b \right\} \times \mathbb{R}^{m-1} \) is measure zero for all \( b \in \mathbb{R} \), so by Fubini's theorem, \( C \setminus C_{1} \) has measure zero as well.
+
+			\item We claim that \( C_{i} \setminus C_{i + 1} \) has measure zero. To show this, consider the coordinate maps \( f_{1}, \ldots, f_{m} \) of \( f \), and notice that one of these will have a nonzero \( i+1 \)th derivative. As such, consider
+				\[ a = \frac{\partial f_{\ell}}{\partial x_{j_{1}} \partial x_{j_{2}} \cdots \partial x_{j_{i}}} \]
+				Then define \( h(x) = (a(x), x_{2}, \ldots, x_{n}) \). Then \( a \) has a nonzero derivative, so we have that \( dh \) is invertible, and thus (potentially shrinking the neighborhood once more) \( h \) is a diffeomorphism. But then all the critical values of \( f \circ h^{-1} \) lie in the plane \( \left\{ 0 \right\} \times \mathbb{R}^{n-1} \), and therefore by induction this set has measure zero as well.
+	\end{enumerate}
+	The three of these together yield that
+	\[ C = C \setminus C_{1} \cup C_{1} \setminus C_{2} \cup \cdots \cup C_{n-1} \setminus C_{n} \cup C_{n} \]
+	is the union of finitely many measure zero sets, so it has measure zero as well.
+\end{proof}
+
+\begin{corollary}
+	Given \( \left\{ f_{k} \right\}_{k \in \mathbb{N}} \), we have that the union of their critical values has measure zero.
+\end{corollary}
+
+\begin{corollary}
+	The critical values of a function are meagre topologically---their complement is a dense open set.
+\end{corollary}
+\begin{proof}
+	Notice that the determinant is a continuous map and \( Df(x) \) is a continuous map. As such \( \det Df^{-1}(\left\{ 0 \right\}) \) is an open subset of \( \mathbb{R}^{n} \). Now, notice that since the critical values have measure zero, they cannot contain any open set, therefore its complement intersects every open set, which is the definition of being dense.
+\end{proof}
+The important thing is that the critical values can be approximated by regular values always.
+
+\begin{remark}[Nabutangent]
+	Now really having the critical values meagre isn't good enough in many scenarios. Thinking about invertibility, having a critical value is the same as having an eigenvalue of zero of the Jacobian somewhere. For some things we want to ensure that not only is our matrix \textit{invertible}, but furthermore, we want a bound on the size of the smallest eigenvalue. This leads us to something called the quantitative Sard's theorem. This shows that the values with eigenvalues smaller than some \( \varepsilon \) has small measure (not zero in general). If we have this then we can generally move to values that are not only not critical, but not \textit{close} to being critical.\footnote{I don't know the details here so don't take any of this as set in stone. He didn't prove the quantitative Sard's theorem.}
+\end{remark}
