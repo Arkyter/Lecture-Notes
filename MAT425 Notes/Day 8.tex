@@ -1,0 +1,42 @@
+\section{Day 8: Morse Functions}
+A function from \( \mathbb{R}^{n} \to \mathbb{R} \) is morse if at critical points its hessian is nondegenerate. 
+
+\begin{lemma}[Morse Lemma]
+If \( f \colon \mathbb{R}^{n} \to \mathbb{R} \) and \( x_{0} \) is a nondegenerate critical point of \( f \) then there are local coordinates \( x_{1}', \ldots, x_{n}' \) in a neighborhood of \( x_{0} \) such that \( f \) in these coordinates is a quadratic form. Namely,
+\[ f(x_{1}', \ldots, x_{n}') = f(x_{0}) + \sum_{i=1}^{n} \sum_{j=1}^{n} \frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}(x_{0}) x_{i}'x_{j}'. \]
+\end{lemma}
+We will not prove this right now. Notice that in our original coordinates,
+\[ f(x) = f(x_{0}) + df_{x_{0}}(x - x_{0}) + \sum_{i=1}^{n} \sum_{j=1}^{n} \frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}(x_{0}) x_{i}x_{j} + O(||x - x_{0}||^{3}) \]
+so the Morse lemma comes to proving we can eliminate this remainder. Also by definition, the linear term cancels out.
+
+If \( f \colon M \to \mathbb{R} \) and \( M \) is a closed manifold, then suppose that \( f(M) = [0, 1] \). Then by considering the sets \( f^{-1}([0, x]) \) we can learn a lot about the topology of \( M \) and about the nondegenerate critical values as well. The signature (the negative eigenvalues of the Hessian) tell you about homology groups and Betti numbers and all sorts of fancy stuff.
+
+Suppose we have a different coordinate system \( \psi \). Define \( f^{\psi} \) to be \( f \circ \psi \) (I don't know why he used this notation). Then we have that if \( x_{0} \) is a critical point of \( f \) then \( \psi^{-1}(x_{0}) \) is a critical point of \( f^{\psi} \). What we want to show is that if \( f \) has nondegenerate Hessian, then so does \( f^{\psi} \).
+
+Notice now that
+\[ \frac{\partial f^{\psi}}{\partial x_{i}} = \sum_{\alpha=1}^{n} \frac{\partial f}{\partial x_{\alpha}} \frac{\partial \psi_{\alpha}}{\partial x_{i}}. \]
+As such,
+\[ \frac{\partial^{2} f^{\psi}}{\partial x_{i} \partial x_{j}} = \sum_{\alpha=1}^{n}  \frac{\partial f}{\partial x_{\alpha}} \frac{\partial^{2} \psi_{\alpha}}{\partial x_{i} \partial x_{j}} + \sum_{\alpha, \beta = 1}^{n} \frac{\partial^{2} f}{\partial x_{\alpha} \partial x_{\beta}} \frac{\partial \psi_{\alpha}}{\partial x_{i}} \frac{\partial \psi_{\beta}}{\partial x_{j}} = D^{T} \psi D^{2} f D \psi.  \]
+where the first sum is zero because we are considering a critical point of \( f^{\psi} \).
+
+Suppose now that \( f \colon U \to \mathbb{R} \) which is not necessarily morse. We want to show that there is a linear function such that perturbing \( f \) by this linear function makes it morse.
+\begin{lemma}
+	The measure of vectors such that \( f_{a} \colon U \subseteq \mathbb{R}^{n}\to \mathbb{R} \) given by
+	\[ f_{a}(x) = \left\langle x, a \right\rangle + f(x) \]
+	is \textit{not} morse is \( 0 \).
+\end{lemma}
+\begin{proof}
+	\( d \left( f_{a} \right) = df + a \) so the critical points of \( f_{a} \) are points where \( df(x_{0}) = -a \). The upshot is that \( f_{a} \) is morse if for all \( x \), \( \nabla f(x) = -a \implies d( \nabla f)(x) \) is nondegenerate. This is equivalent to saying that \( -a \) is a regular value of \( \nabla f \), which is true for all but a measure zero set of \( a \) by Sard's theorem.
+\end{proof}
+
+\begin{theorem}
+	If \( f \colon M^{n} \to \mathbb{R} \) where \( M^{n} \subseteq \mathbb{R}^{N} \), then we have that \( f_{a} = f + a \cdot x \) is morse for almost all \( a \in \mathbb{R}^{N} \).
+\end{theorem}
+\begin{proof}
+	Let \( x \in M^{n} \) and consider our coordinate functions \( x_{1}, \ldots, x_{N} \) on \( \mathbb{R}^{N} \). Then we can suppose (without loss of generality) that the first \( x_{1}, \ldots, x_{n} \) form a coordinate system for some neighborhood \( V \) of \( x \). Then it follows that for any tuple \( \left( c_{n+1}, \ldots, c_{N} \right) \), we can define the function
+	\[ f_{(0, c_{n+1}, \ldots, c_{N})} = f + c_{n+1} x_{n+1} \cdots + c_{N} x_{N}. \]
+	Then for almost all \( b \in \mathbb{R}^{n} \),
+	\[ f_{(b, c)} = f_{(0, c)} + b_{1} x_{1} + \cdots + b_{k} x_{k} \]
+	is going to be Morse, so applying Fubini's yields that on this neighborhood of \( x \) the function \( f \) is Morse. Now, if we notice that we can cover \( M^{n} \) with countably many neighborhoods (since \( f \) is second-countable it is in particular Lindel\"of) we can extend this from a statement about a neighborhood of one point to a statement about all of \( M^{n} \). Isn't second-countability nice?
+\end{proof}
+Next class we'll prove Whitney's embedding theorem for non-compact manifolds. This will be tedious for me.
