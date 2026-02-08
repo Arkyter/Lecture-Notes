@@ -13,7 +13,7 @@ You can modify this formula to make it sum to exactly \( \varepsilon \) but that
 	First of all, there is a problem which may not be immediately obvious when you start trying to prove this. Namely, just because \( A \) has arbitrarily small covers in \( \mathbb{R}^{n} \), it doesn't mean that \( A \) necessarily has arbitrarily small covers in \( U \). To resolve this, we can use an idea reminiscent of MAT335:
 
 	Define a grid of hyper-cubes with sidelengths \( \delta \) of the form
-	\[ \mathcal{B}_{\delta} = \left\{ \left[ \frac{k_{1}}{\delta} , \frac{k_{1} + 1}{\delta} \right] \times \cdots \times \left[ \frac{k_{n}}{\delta}, \frac{k_{n} + 1}{\delta} \right] : k_{1}, \ldots, k_{n} \in \mathbb{Z} \right\}. \]
+	\[ \mathcal{B}_{\delta} = \left\{ \left[ k_{1} \delta , (k_{1} + 1) \delta \right] \times \cdots \times \left[ k_{n} \delta, (k_{n} + 1) \delta \right] : k_{1}, \ldots, k_{n} \in \mathbb{Z} \right\}. \]
 	Then these will clearly cover \( \mathbb{R}^{n} \). Now, notice that if we take all of the cubes of this form containing a (rectilinear) parallelepiped \( P \), they will be contained in the \( \delta \sqrt{n} \)-enlargement of \( P \)---namely,
 	\[ E_{\delta \sqrt{n}}(P) = \left\{ x \in \mathbb{R}^{n} : d(x, P) \le \delta \sqrt{n} \right\}, \]
 	where \( E_{\bullet} \) provides our enlargement function.

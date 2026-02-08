@@ -1,3 +1,30 @@
-\section{Day 6: More on Sard's (Jan. 22, 2025)}
+\section{Day 6: Transversality}
+When is \( f^{-1}( \left\{ y \right\}) \) a manifold? Well we all know this, this is when \( y \) is a regular value. But what about a manifold? Suppose that \( f \colon M^{m} \to N^{n} \) is smooth and \( Z \subseteq N \) is a submanifold of dimension \( \ell \) (embedded rather than immersed). Is \( f^{-1}(Z) \) a submanifold of \( M \)? 
 
-Soon we'll see some concrete applications of Sard's in a moment.
+This is really a local question, so let's look at it locally. Fix some \( z_{0} \in Z \) and some open set \( W_{0} \subseteq Z \) with \( z_{0} \in W_{0} \). Now, there exists an open set \( W \subseteq N \) such that \( W \cap Z = W_{0} \). Our observation is that from here we can choose parameterizations such that the following diagram commutes
+\[ 
+\begin{tikzcd}
+	W_{0} & W \\
+	V & V \times \left\{ 0 \right\} \\
+	\arrow["\iota",from=2-1,to=2-2]
+	\arrow[hook,from=1-1,to=1-2]
+	\arrow["\tilde \varphi",from=2-1,to=1-1]
+	\arrow["\varphi",from=2-2,to=1-2]
+\end{tikzcd}\]
+where \( \tilde \varphi \) is the restriction of \( \varphi \), and \( \iota \) is the canonical immersion. Now write \( \varphi = (\varphi_{1}, \ldots, \varphi_{n}) \). It follows that if we define \( g : W \to \mathbb{R}^{n-\ell} \) by
+\[ g(x) = (\varphi_{\ell+1}, \ldots, \varphi_{n}), \]
+then \( Z = g^{-1}(\left\{ 0 \right\}), \) and therefore
+\[ f^{-1}(Z) = (g \circ f)^{-1}(\left\{ 0 \right\}). \]
+So if we can show that \( 0 \) is a regular value of this function, then we would have that this is a submanifold. Is it? Notice that
+\[ d(g \circ f)(x) = dg(f(x)) \circ df(x). \]
+But we have the the image of \( dg \) is going to precisely be \( T_{f(x)}Z \), so this will be surjective when
+\[ \operatorname{im} df(x) + T_{f(x)}Z = T_{f(x)}N. \]
+This is called the transversality condition. Specifically, we say that \( f \) is transversal to \( Z \) (notated \( f \pitchfork Z  \)) when for all \( x \in M \) with \( f(x) \in Z \), we have that \( \operatorname{im} df(x) + T_{f(x)}Z = T_{f(x)}N \). When this holds, we have that \( f^{-1}(Z) \subseteq M \) is a submanifold of dimension \( m + \ell - n \).
+
+We write that the codimension of \( Z \) (\( \codim Z \)) is the dimension of \( N \) minus the dimension of \( Z \). In other words, \( \codim Z = n - \ell \) in the above case. As such, when we have that \( f \pitchfork Z \), then the dimension of \( f^{-1}(Z) \) is going to be \( m - \codim Z \). 
+
+But what \textit{is} transversality? Well notice that given a function like \( f \colon \mathbb{R}^{n} \to \mathbb{R}^{m} \), at any point the image of \( df(x) \) is going to looke like a plane. When this plane intersects a manifold at an angle (rather than being tangent) then the function will be transversal to the manifold. Funnily enough, while I couple spend time drawing a diagram, the prototypical example of transversality is actually the \( \pitchfork \) symbol. We have that the \( | \) and the \( \cap \) intersect at a ninety degree angle. This is what transversality tries to capture.
+
+Given a manifold \( N \) and submanifolds \( M, Z \subseteq N \), let \( \iota \colon M \to N \) be the inclusion map. Then we say that \( M \pitchfork Z \) if \( \iota \pitchfork Z \). By this definition we can say
+\[ \left\{ (x, y, 0) : x, y \in \mathbb{R} \right\} \pitchfork \left\{ (x, x, 0) : x \in \mathbb{R} \right\}, \quad \left\{ (x, 0) \right\} \not \pitchfork \left\{ (x, y^{3}) \right\} \]
+How does transversality connect to Sard's? Suppose that \( f \not \pitchfork Z \). I claim that there exists \( \varepsilon = (\varepsilon_{1}, \ldots, \varepsilon_{n}) \) such that \( f - \varepsilon \pitchfork Z \). Furthermore, we want that these \( \varepsilon \) can be arbitrarily small. This will yield the transversality theorem, but it's just Sard's Theorem. 

@@ -13,6 +13,8 @@
 \usepackage{quiver}
 \usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy} % tikz is a finicky annoying thing
 
+\newcommand{\codim}{\operatorname{codim}}
+
 \begin{document}
 \title{MAT425 Lecture Notes}
 \author{Emily}
@@ -23,7 +25,7 @@
 \tableofcontents
 \newpage
 
-\foreach \i in {1, ..., 5} {
+\foreach \i in {1, ..., 6} {
 	\edef\FileName{MAT425 Notes/Day \i.tex}
 	\IfFileExists{\FileName}{\input{\FileName} \newpage}
 }

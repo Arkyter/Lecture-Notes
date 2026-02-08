@@ -1,0 +1,69 @@
+\section{Day 7: Homotopies and Stability Theorem}
+Let's suppose that we have some \( f_{0} \colon M \to N \). Then we define a homotopy to be a smooth function \( F \colon M \times [0, 1] \to N \) such that
+\[ F(x, 0) = f_{0}(x). \]
+Sometimes we write \( f_{t}(x) = F(x, t) \). As Nabutovsky said suggestively, \( F \) is a \( 1 \)-parametric family of \( t \).
+
+Let's suppose that \( f_{0} \) has some nice property. Then we want to show that for sufficiently small times \( F \) preserves this property. This leads us to the following monster of a theorem:
+\begin{theorem}
+	Suppose that \( X \) is a compact manifold, \( Y \) is a manifold, and \( f_{0} \colon X \to Y \) is smooth. Let \( F \colon X \times [0, 1] \to Y \)  be a smooth homotopy with \( F(x, 0) = f_{0}(x) \). Then if \( f_{0} \) is
+	\begin{enumerate}
+	
+		\item A local diffeomorphism
+		\item An immersion
+		\item A submersion
+		\item Transversal to some \( Z \subseteq Y \)
+		\item An embedding
+		\item A diffeomorphism
+	
+	\end{enumerate}
+	then for some sufficiently small \( \varepsilon \), all of the maps \( f_{t} \) share this property for \( t < \varepsilon \). In other words, these properties are preserved by homotopy for small enough times.
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+	
+		\item Really a local diffeomorphism is just an immersion and a submersion. But if \( \dim X = \dim Y \) then by the rank-nullity theorem of linear algebra, we need only show our map is an immersion. As such, it suffices to prove 2.
+		\item Let's show it locally first. To do this, notice that for each point \( x \) there exists a collection of indices \( I \) such that the minor consisting of only the rows \( I \) of the matrix \( df_{0}(x) \) is invertible. Let \( \widetilde{df_{0}}(x)_{I} \) be this minor. Then notice that
+			\[ \det \widetilde{df_{0}}(x)_{I} > 0 \]
+			As such, since the determinant (and the Jacobian matrix) are continuous, there exists some open neighborhood \( U_{x} \subseteq X \times [0, 1] \) with \( (x, 0) \in U_{x} \) such that for all \( (x_{0}, t) \in U_{x} \),
+			\[ \det \widetilde{df_{t}}(x)_{I} > \frac{1}{2} \det \widetilde{df_{0}}(x)_{I}.  \]
+			It follows that on this neighborhood, \( f_{\bullet} \) is an immersion. As such, there's an open neighborhood of \( X \times \left\{ 0 \right\} \) on which \( f_{\bullet} \) is an immersion, so the compactness of \( X \) yields that there exists some \( \varepsilon > 0 \) such that \( f_{\bullet} \) is an immersion on \( X \times [0, \varepsilon) \).
+		\item Submersions are proven in the exact same way as immersions. There's a minor of the Jacobian which has nonzero determinant, etc.
+		\item Recall from the section on transversality that this condition is equivalent to \( g \circ f_{0} \) being an immersion on \( f_{0}^{-1}(Z) \). Thus it reduces to immersion.
+		\item We know that immersions and submersions are preserved, so we need to preserve injectivity. Suppose that we have \( \left\{ (x_{n}, y_{n}, t_{n}) \right\} \) such that
+				\[ x_{n} \ne y_{n} \quad f_{t_{n}}(x_{n}) = f_{t_{n}}(y_{n}) \quad \lim_{n \to \infty}t_{n} = 0. \]
+				Without loss of generality (by the compactness of \( X \)) we can suppose that our \( x_{n} \) and our \( y_{n} \) both converge. As such, suppose that
+				\[ x = \lim_{n \to \infty} x_{n} \ne \lim_{n \to \infty} y_{n} = y \]
+				Then since \( F(x, 0) \ne F(y, 0) \), it follows by the continuity of \( F \) that there exists open neighborhoods \( U_{x} \), \( U_{y} \) of \( \left( x, 0 \right) \) and \( (y, 0) \) such that \( F(U_{x}) \cap F(U_{y}) = \varnothing \). But we have that for some \( n \in \mathbb{N} \), \( (x_{n}, t_{n}) \in U_{x} \) and \( (y_{n}, t_{n}) \in U_{y} \) and thus
+				\[ f_{t_{n}}(x_{n}) \ne f_{t_{n}}(y_{n}), \]
+				which is a contradiction. It follows that \( \lim_{n \to \infty} x_{n} = \lim_{n \to \infty} y_{n} \).
+
+				But then set \( G(x, t) = (F(x, t), t) \). Then we know that \( DG(x, 0) \) is invertible as it is of the form
+				\[ \begin{bNiceMatrix}DF(x, 0) & * \\ 0 & 1\end{bNiceMatrix}  \]
+				where \( DF(x, 0) \) has full rank, and this is meant to be a block matrix.
+
+				It follows that we can apply the immersion theorem to get that on some neighborhood of \( (x, 0) \), \( G \) is an injection. But since \( t_{n} \to 0 \) and \( x_{n} \to 0 \) and \( y_{n} \to 0 \), it follows that for any large enough \( n \),
+				\[ G(x_{n}, t_{n}) = G(y_{n}, t_{n}) \implies (x_{n}, t_{n}) = (y_{n}, t_{n}) \]
+				which is a contradiction. From here it's just another compactness argument to make the choice of \( \varepsilon \) uniform across all points.
+
+		\item Every embedding is diffeomorphic to its image, so since we know that embeddings are preserved, we need only show that the image is the same for sufficiently small times. Nabutovsky devised the world's worst proof of this fact so I'll present mine which he said was good.
+
+			Suppose that \( (U, \varphi) \) is a parameterization of \( X^{n} \) and \( (V, \psi) \) is a parameterization of \( Y^{n} \). Then if \( f_{0}(\varphi(x_{0})) = \psi(y_{0}) \), we want to show that there is some function \( h \colon [0, \varepsilon) \to U \) such that for all \( t \in [0, \varepsilon) \),
+			\[ \psi^{-1} \circ f_{t} \circ \varphi(h(t)) = y_{0}. \]
+			Let
+			\[ G(x, t) = \psi^{-1} \circ f_{t} \circ \varphi(x) - y_{0} \]
+			Since \( F \) is a smooth homotopy, we have that \( G \) is smooth, so since \( G(x_{0}, 0) = 0 \), and \( G \) has full rank in its first \( n \) columns (this is equivalent to \( f_{0} \) being a submersion), by the implicit function theorem, there exists precise some \( h \) as above. 
+
+			Now, it's just another compactness argument where we show that we can find a common \( \varepsilon \) for every point of \( X \). This is because we have that our map \( h \) varies continuously on \( x_{0} \).
+	\end{enumerate}
+\end{proof}
+
+Sard's theorem has one more application. Specifically, Whitney's embedding theorem.
+\begin{theorem}[Whitney's Embedding Theorem]
+	Suppose that \( X^{n} \) is compact and \( X^{n} \subseteq \mathbb{R}^{N} \). Then there exists an embedding from \( X \) to \( \mathbb{R}^{2n+1} \).
+\end{theorem}
+\begin{remark}
+	We don't need compactness, but then we need some way to show our map is proper, which is more difficult. As such, we will assume compactness \textit{for now}.
+\end{remark}
+\begin{proof}
+	
+\end{proof}
