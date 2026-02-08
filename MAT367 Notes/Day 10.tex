@@ -1,0 +1,38 @@
+\section{Day 10: }
+Last class, we defined submanifolds, the rank of a smooth map, and maps of maximum rank (submersions) $f \colon M^m \to N^n$, where $M$ is of dimension $m$ and $N$ is of dimension $n$ with $m \geq n$.
+\begin{fact}
+    In a submersion $f$, $f\inv(p)$ are submanifolds.
+\end{fact}
+Recall that, if $f \colon M^m \to N^n$ with $m \leq n$ has rank $m$ everywhere, then it is an \textit{immersion}.
+\\[-12pt]
+\begin{theorem}[Normal form theorem]
+    Let $f \colon M \to N$ be a map of rank $m$ at $p \in M$. Then there are charts $(U, \varphi)$ at $p \in M$ and $(V, \psi)$ at $f(p)$ for $N$ such that the diagram commutes,
+    \[ \begin{tikzcd} U \arrow[r, "f"] \arrow[d, "\varphi"] & V \arrow[d, "\psi"] \\ \varphi(U) \arrow[r, hook] & \psi(V) \end{tikzcd} \]
+\end{theorem}
+\begin{proof}
+    This follows from the $\RR^n$ version.
+\end{proof}
+Equivalently, $\restr{f}{U}$ is the inclusion of a submanifold, which we see by restricting $(V, \psi)$ to $\psi\inv(U \times \RR^{n-m})$. We now discuss examples.
+\begin{enumerate}[(i)]
+    \item A curve is a smooth map $\gamma \colon (a, b) \to M$. A curve is immmersed at $p$ if, for $(V, \psi)$ a chart, $\frac{d}{dt} \restr{(\psi \circ \gamma)}{t} \neq 0$. However, if we consider $\gamma(t) = (t^2, t^3)$ or $(t^3, t^3)$ in $\RR^2$, the image \textit{is} a submanifold, but the parameterization is bad!
+    \item Consider the figure eight, given by the map $S^1 \to \RR^2$.
+    \item Consider $\RR \to \RR^2$ given by $t \mapsto e^{it}$.
+    \item (\S4.42) something something immersion to get a klein bottle.
+\end{enumerate}
+\begin{definition}
+    An \textit{embedding} is an injective immersion, where the image is a submanifold.
+\end{definition}
+\begin{theorem}
+    If $M$ is compact, then any injective immersion $f \colon M \to N$ is an embedding.
+\end{theorem}
+\begin{proof}
+    We want to show that, at each point $p \in M$, there is a submanifold chart $(V, \psi)$, i.e., 
+    \[ \begin{tikzcd} V \cap f(M) \arrow[r, hook] \arrow[d, "\restr{\psi}{M}"] & V \arrow[d, "\psi"] \\ \psi(V) \cap \RR^m \arrow[r] & \psi(V) \end{tikzcd} \]
+    To start, we know that there exists charts $(U, \varphi)$ and $(V, \psi)$ such that
+    \[ \begin{tikzcd} U \arrow[r, "f"] \arrow[d, "\varphi"] & V \arrow[d, "\psi"] \\ \psi(V) \cap \RR^m \arrow[r] & \psi(V) \end{tikzcd} \]
+    Recall that the images of compact sets are compact. This means $f(M)$ is compact in $N$, whence $f(M \setminus U) = A$ is closed (because closed subsets of compact sets are compact). Thus, $V \setminus A$ is open, and so $f(U) = (V \setminus A) \cap f(M)$. From this, we get the diagram
+    \[ \begin{tikzcd} (V \setminus A) \cap f(M) \arrow[r] \arrow[d, "\restr{\psi}{f(M)}"] & V \setminus A \arrow[d, "\psi"] \\ \psi(V) \cap \RR^m \arrow[r] & \psi(V) \end{tikzcd} \qedhere \]
+\end{proof}
+We give an example. Consider $A \neq B \neq C \in \RR$; then define
+\[ F_{A,B,C} \colon \RP^2 \to \RR^4, \quad \pcoor{\alpha : \beta : \gamma} \mapsto (\beta \gamma, \alpha \gamma, \alpha \beta, A\alpha^2, B\beta^2, C\gamma^2), \]
+where $(\alpha, \beta, \gamma) \in S^2$, is an injective immersion, i.e., an embedding, since $\RP^2$ is compact.
