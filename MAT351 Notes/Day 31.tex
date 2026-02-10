@@ -1,0 +1,40 @@
+\section{Day 31:  (Feb. 9, 2026)}
+Regarding the midterm: ``When you get a high grade you think `Oh I'm good'\ldots don't think you're okay.''
+
+Today we'll finish the discussion on Green's functions, then do the Ball in \( \mathbb{R}^{3} \). Next we'll do waves in 2d and heat in higher dimensions. This stuff will be on the midterm. Then we'll see what we do. It won't be on the midterm but it may be on the final. Later: first order quasilinear and fourier analysis and also some Schr\"odinger. Plus we'll do the hydrogen atom. yay.
+
+Our aim is to solve the question
+\[ \left\{\begin{NiceMatrix}- \Delta u = f & \text{in \( D \)} \\ u = h & \text{on \( \partial D \)}\end{NiceMatrix}\right.  \]
+We proved the following: Given a Green's function \( G(x, x_{0}) \) \( x, x_{0} \in D \)
+\begin{theorem}[Representation Formula]
+	The solution of this problem is
+	\[ u(x_{0}) = \int_{\partial D} \frac{\partial G}{\partial n}(x, x_{0}) h(x) dS + \int_{D} G(x, x_{0}) f(x) dV.  \]
+\end{theorem}
+Fabio then recapped our previous lectures to a student.
+
+It reduces to solving for \( H \)
+\[ \left\{\begin{NiceMatrix}- \Delta H = 0 & \text{in \( D \)} \\ H = \frac{1}{4 \pi |x - x_{0}|} & x \in \partial D\end{NiceMatrix}\right. \]
+\begin{enumerate}
+
+	\item We can do this explicitly in some geometries.
+	\item In general we have methods to solve this problem. Perron's method and minimization of
+		\[ \int_{D} |\nabla u|^{2}  \]
+
+\end{enumerate}
+
+Let's solve the Dirichlet problem in the ball.
+\begin{theorem}
+	The solution of 
+	\[ \left\{\begin{NiceMatrix}- \Delta u = 0 & \text{in \( B_{a} = \left\{ x \in \mathbb{R}^{3} : |x| < a \right\} \)} \\ u = h & \text{on \( \partial B_{a} \)}\end{NiceMatrix}\right.  \]
+	is the function
+	\[ u(x_{0}) = \frac{a^{2} - |x_{0}|^{2}}{4 \pi a} \int_{|x| = a}  \frac{h(x)}{|x - x_{0}|^{3}} dS_{x}. \]
+\end{theorem}
+We have that
+\[ \frac{\partial G}{\partial n}(x, x_{0}) = \frac{a^{2} - |x_{0}|^{2}}{4 \pi a} \frac{1}{|x - x_{0}|^{3}} \]
+\begin{proof}
+	Start with 
+	\[ - \frac{1}{4 \pi |x - x_{0}|} \]
+	and correct by a term \( H \) to get something zero on the boundary \( \partial B_{a} \). To do this we're gonna reflect across the sphere. \( x_{0}^{*} = \frac{x_{0}}{|x_{0}|^{2}} a^{2} \) then write
+	\[ G(x, x_{0}) = - \frac{1}{4 \pi |x - x_{0}|} + \frac{1}{4 \pi |x - x_{0}^{*}|}. \]
+	This gives us our Green's function. We can deduce it has all our desired properties of a Green's function. Obviously the smoothness holds, but to show it's zero on the boundary show it's zero when we reflect over the sphere.
+\end{proof}
