@@ -1,0 +1,42 @@
+\section{Day 14: Derivations on Tangent Spaces (Feb.\ 12, 2026)}
+For any curve $\gamma \colon (a, b) \to M$ on a manifold, we have the velocity vector
+\[ \frac{d\gamma}{dt}. \]
+The derivatives of a smooth map $f \colon M \to N$ are given by\footnote{check p.55 of lee's smooth manifolds or section 1.2 of guillemin and pollack's differential topology} $Df_p \colon T_p M \to T_{f(p)} N$, which is a generalization of the notion of Jacobians of maps $\RR^m \to \RR^n$. Recall that, for all $v \in T_pM$, where $v \colon C^\infty(M) \to \RR$, we say $v$ is a \textit{tangent vector} if it satisfies the product rule\footnote{read: look up derivations for a treatment on this subject.}
+\[ v(g) = \restr{\frac{d}{dt}}{t = 0} g(\gamma(t)), \]
+where $\gamma \colon (a, b) \to M$ is a curve with $\gamma(0) = p$.
+\begin{definition}[\S5.11]
+    $Df_p(v)(g) = v(g \circ f)$ for $g \in C^\infty(N)$.
+\end{definition}
+\begin{proposition}
+    The above definition is equivalent to $Df_p([\gamma]) = [f \circ \gamma]$.
+\end{proposition}
+\begin{proof}
+    Directly write as follows,
+    \[ Df_p(v)(h) = v(h \circ f) = \restr{\frac{d}{dt}}{t=0} (h \circ f)(\gamma(t)) = \restr{\frac{d}{dt}}{t=0} h(f \circ \gamma(t)) = [f \circ \gamma] \in T_{f(p)}N. \qedhere \]
+\end{proof}
+We introduce some notation. We denote $Df_p(v)$ also as $f_\ast v$, i.e., the \textit{pushforward} of $v$. We claim that the chain rule holds.
+\[ D(g \circ f)_p(v) = Dg_{f(p)} \circ Df_p (v). \]
+\begin{proof}
+    Consider the diagram\footnote{there is a much better diagram for this holy shit fedya.}
+    \[ \begin{tikzcd}[column sep=40pt] T_p M \arrow[r, "Df_p"] \arrow[d, "D\varphi_p"] & T_{f(p)} N \arrow[d, "D \psi_{f(p)}"] \\ \RR^m \arrow[r, "D(\psi \circ f \circ \varphi\inv)_{\varphi(p)}"'] & \RR^n \end{tikzcd} \]
+    We may notice that $D(\psi \circ f \circ \varphi\inv)_{\varphi(p)}$ is just the Jacobian on $\RR^m \to \RR^n$.
+\end{proof}
+We now revisit a definition from last week. The rank of $f$ at $p$ is the rank of $Df_p$. $f$ is a \textit{submersion} if $Df_p$ is surjective, immersion if it injective, and a critical point if $Df_p \leq \min\{m, n\}$. It is a regular point if $Df_p = \min\{m, n\}$. We now discuss tangent spaces of submanifolds. Given $S \subset M$ a submanifold, we have $\iota \colon S \to M$ as an injection, which induces the injection $T_p S \injto T_p M$. As an exapmle, recall that if $f \colon M \to N$, if $q \in N$ is a regular value then $f\inv(q)$ is an $m-n$ submanifold in $M$.
+\begin{claim}[\S5.18]
+    Let $q$ be a regular value of $f \colon M \to N$; then if we denote $f\inv(q)$ to be the submanifold $S$ in $M$, we have that $T_p S = \ker Df_p$.\footnote{check the proof inside meinrenken's book, or the proposition at p.24 at the bottom of guillemin and pollack, or insert thing from lee's smooth manifolds.}
+\end{claim}
+\begin{proof}
+    Both sides have dimension $m - n$, so it is enough to show that $T_p S \subset \ker Df_p$. The second observation is that $f \circ \iota \equiv q$, whence $Df_p \circ D\iota_p = D(f \circ \iota)_p = 0$, whence $T_p S \subset Df_p$.
+\end{proof}
+Note that, if we have $T_p S \subset \RR^{n+1}$ as an $n$-dimensional hypersurface in $\RR^{n+1}$, we can regard $T_p S = \left<p\right>^\perp$ geometrically. For the sphere $S^n$, we can regard it as the preimage of the norm map $F\inv(1)$, where $F(x) = \norm{x}$. In particular, $\nabla_p F = 2p$, hence $T_p S^n = \spn(p)^\perp$.
+\\[8pt]
+For a last application of tangent spaces, let $G$ be a matrix Lie group (under matrix multiplication), regarded as a subgroup of $M_{n \times n}(\RR) \cong \RR^{n^2}$ (specifically, $G$ admits the identity matrix $I_n$ and is closed under matrix multiplication).
+\begin{definition}
+    $T_I G \subset M_{n \times n}(\RR)$ is the Lie algebra of $G$, denoted $\kg$.
+\end{definition}
+\begin{fact}
+    $\kg$ is closed under $[X, Y] = XY - YX$, i.e., the matrix commutator. This operation is called the Lie bracket.
+\end{fact}
+\begin{proof}
+    Left as an exercise in the book. check g\&p p.22
+\end{proof}
