@@ -1,0 +1,55 @@
+\section{Day 33: Higher Dimensional Wave Equation (Feb. 23, 2026)}
+
+The midterm next wednesday will cover everything up to waves in dimension 3 and 2. Also of course waves in 1d. It will have the Laplacian, Elliptic Problems, Green's function stuff, and Harmonic functions. It'll have diffusion in 1d, and higher dimensions if we cover it.
+
+\begin{theorem}[Kirchoff's Formula]
+	Consider the problem
+	\[ \left\{\begin{NiceMatrix}u_{t t} - \Delta u = 0 & \text{\( t \in \mathbb{R} \), and \( x \in \mathbb{R}^{3} \)}, \\ u(x, 0) = \phi(x) & x \in \mathbb{R}^{3} \\ u_{t}(x, 0) = \psi(x) & x \in \mathbb{R}^{3}.\end{NiceMatrix}\right.  \]
+	Then \( u \) is given by the formula
+	\[ u(x_{0}, t) = \frac{1}{4 \pi c^{2} t} \int_{S} \psi(x) dS_{x} + \frac{\partial}{\partial t} \left( \frac{1}{4 \pi c^{2} t} \int_{S} \phi(x) dS_{x} \right), \]
+	where we have that
+	\[ S = \left\{ x : \left| x - x_{0} \right| = ct \right\}. \]
+	Namely, \( S \) is a sphere.
+\end{theorem}
+
+\begin{proof}
+	We looked at \( v(r, t) = r \bar u(r, t ; x) \), where \( \bar u \) is the spherical average (and \( r > 0 \)). We proved that \( v \) satisfies the 1d wave equation on the half line, so by odd reflection, we got a formula using D'Alembert.
+	\[ v(r, t) = \frac{1}{2c} \int_{ct - r}^{ct + r} s \bar \psi(s) ds + \frac{\partial}{\partial t} \left[ \frac{1}{2 c} \int_{ct - r}^{ct + r} s \bar \phi(s) ds. \right] \]
+		with \( r \le ct \).
+
+		Then from here observe that (wlog \( x = 0 \))
+		\[ u(t , x) = \lim_{r \to 0} \frac{v(r, t)}{r} = \left. \partial_{r} v \right|_{r = 0}.\]
+			From here, we know that
+	\begin{align*}
+		u(t, x_{0}) &= \frac{1}{2 c} \left[ (r + ct) \bar \psi(r + ct) - (ct - r) \bar \psi(ct - r) \right]_{r = 0} \\ 
+							 &\qquad+ \frac{1}{2c} \frac{\partial}{\partial t} \left[ (ct+r) \bar \phi(r + ct) + (ct - r) \bar \phi(ct -r) \right]_{r = 0}  \\
+							 &= \frac{1}{2 c} \left[ ct \bar \psi(ct) +ct \bar \psi(ct) \right] + \frac{1}{2c} \frac{\partial}{\partial t} \left[ ct \bar \phi(ct) + (ct) \bar \phi(ct) \right]  \\
+							 &= t \bar \psi(ct) + \frac{\partial}{\partial t} \left[ t \bar \phi(ct) \right]  \\
+	\end{align*}
+	Now, notice that indeed
+	\[ \bar \psi(ct ; 0) = \fint_{|x| = ct} \psi(x) dS_{x} = \frac{1}{4 \pi \left( ct \right)^{2}} \int_{S} \psi(x) dS_{x}, \]
+	which plugging in (both \( \bar \psi \) and \( \bar \phi \)) would match our formula above. We just need to translate stuff, but since we have invariance by space translations, it doesn't mess stuff up to only consider it centered at \( 0 \).
+\end{proof}
+This proof is nice because it reduces the 3d to the 1d version. So we'll do some comments of the proof and the outcomes.
+\begin{remark}
+	We solved our 3d wave equation by using the 1d formula. This can be done in all odd dimensions, but not in even dimensions. On the other hand, we can use the \( 2k+1 \)d formula to get the \( 2k \)d formula. We'll do the case of 3d \( \to \) 2d  now. We'll leave comparison and other properties of our solution until later---next time. This will all (potentially) be on the midterm.
+\end{remark}
+
+\subsection{2d Wave: Method of Descent}
+\[ \left\{\begin{NiceMatrix}u_{t t} - \Delta u = 0 & (x, y) \in \mathbb{R}^{2} \\ u(x, 0) = 0 \\ u_{t}(x, 0) = \psi\end{NiceMatrix}\right.  \]
+Think of \( \psi = \psi(x, y) \) as a function on \( \mathbb{R}^{3} \) constant in \( z \). Then (set \( (0, 0, 0) \) to be our point of reference)
+\[ u(0, 0, t) = \frac{1}{4 \pi c^{2} t} \int_{|(x, y, z)| = ct} \psi(x, y) dS_{x, y, z}. \]
+Let us calculate this surface integral. To do this, parameterize the sphere by
+\[ z = \pm \sqrt{(ct)^{2} - x^{2} - y^{2}}. \]
+The \( \pm \) corresponds to the top and bottom halves of the sphere. But the value of their integrals will be the same because \( \psi \) is independent of \( z \). Then
+\begin{align*}
+	u(0, 0, t) &= \frac{2}{4 \pi c^{2} t} \int_{\text{top}} \psi(x, y) dS \\
+						 &= \frac{1}{2 \pi c^{2} t} \int_{x^{2} + y^{2} \le c^{2} t^{2}} \psi(x, y) \sqrt{1 + \left| \nabla_{x, y}f(x, y) \right|^{2}}\, dx\, dy
+\end{align*}
+because \( \psi \) is independent of \( z \). Then we just want to calculate this square root term.
+\[ \sqrt{1 + | \nabla f|^{2}} = \sqrt{\frac{|(x, y)|^{2}}{c^{2}t^{2} - x^{2} - y^{2}}} = \sqrt{\frac{x^{2} + y^{2}}{c^{2}t^{2} - x^{2} - y^{2}}} = \sqrt{\frac{c^{2}t^{2}}{c^{2}t^{2} - x^{2} - y^{2}}}. \]
+Plugging it in yields our final formula.
+\[ u(0, 0, t) = \frac{1}{2 \pi c} \int_{x^{2} + y^{2} \le c^{2} t^{2}} \psi(x, y) \frac{1}{\sqrt{c^{2}t^{2} - x^{2} - y^{2}}} \, dx\, dy.  \]
+
+
+

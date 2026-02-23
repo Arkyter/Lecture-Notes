@@ -1,7 +1,9 @@
-\section{Day 31:  (Feb. 9, 2026)}
+\section{Day 31: Green's Stuff (Feb. 9, 2026)}
 Regarding the midterm: ``When you get a high grade you think `Oh I'm good'\ldots don't think you're okay.''
 
-Today we'll finish the discussion on Green's functions, then do the Ball in \( \mathbb{R}^{3} \). Next we'll do waves in 2d and heat in higher dimensions. This stuff will be on the midterm. Then we'll see what we do. It won't be on the midterm but it may be on the final. Later: first order quasilinear and fourier analysis and also some Schr\"odinger. Plus we'll do the hydrogen atom. yay.
+Today we'll finish the discussion on Green's functions, then do the Ball in \( \mathbb{R}^{3} \). Next we'll do waves in 2d and heat in higher dimensions. This stuff will be on the midterm. Then we'll see what we do. It won't be on the midterm but it may be on the final. Later: first order quasilinear and fourier analysis and also some Schr\"odinger. Plus we'll do the hydrogen atom.\ yay.
+
+I couldn't really focus today because 425 was on my mind. Please consult Strauss for this content if they are unclear. But most of the class was spent on a question which we had already answered.
 
 Our aim is to solve the question
 \[ \left\{\begin{NiceMatrix}- \Delta u = f & \text{in \( D \)} \\ u = h & \text{on \( \partial D \)}\end{NiceMatrix}\right.  \]
@@ -36,5 +38,5 @@ We have that
 	\[ - \frac{1}{4 \pi |x - x_{0}|} \]
 	and correct by a term \( H \) to get something zero on the boundary \( \partial B_{a} \). To do this we're gonna reflect across the sphere. \( x_{0}^{*} = \frac{x_{0}}{|x_{0}|^{2}} a^{2} \) then write
 	\[ G(x, x_{0}) = - \frac{1}{4 \pi |x - x_{0}|} + \frac{1}{4 \pi |x - x_{0}^{*}|}. \]
-	This gives us our Green's function. We can deduce it has all our desired properties of a Green's function. Obviously the smoothness holds, but to show it's zero on the boundary show it's zero when we reflect over the sphere.
+	This gives us our Green's function. Well not really. It doesn't vanish along the boundary. So we need to add a new term to the denominator to make it satisfy the properties we want. We will cover this next time.
 \end{proof}

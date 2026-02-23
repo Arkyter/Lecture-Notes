@@ -1,0 +1,146 @@
+\section{Day 32: Green's Function in Ball, Wave Equation (Feb. 11, 2026)}
+
+\begin{theorem}[Green's Function on 3d Ball]
+	Solution of the problem
+	\[ \left\{\begin{NiceMatrix} \Delta u = 0 & \text{in \( B_{a} \)} \\ u = h & \text{on \( \partial B_{a} \)}\end{NiceMatrix}\right.  \]
+	is given by
+	\[ u(x_{0}) = \frac{a^{2} - |x_{0}|^{2}}{4 \pi a} \int_{|x| = a} \frac{h(x)}{|x - x_{0}|^{3}} dS_{x}  \]
+	for each \( x_{0} \in B \).
+\end{theorem}
+\begin{proof}
+	Reflect \( x_{0} \) along \( \partial B_{a} \). \( x_{0}^{*} = \frac{x_{0}}{|x_{0}|^{2}}a^{2} \) so as usual start with
+	\[ - \frac{1}{4 \pi |x - x_{0}|} + \text{correction term} \]
+	so that the correction term makes this function zero on \( \partial B_{a} \). Let's try
+	\[ - \frac{1}{4 \pi |x - x_{0}|} + \frac{1}{4 \pi |x - x_{0}^{*}| \cdot \bullet} \]
+	where \( \bullet \) is an unknown term added to make our function vanish along the boundary. We will get zero on the boundary if \( |x - x_{0}| = |x - x_{0}^{*}| \cdot \bullet \), when \( |x| = a \). 
+
+	
+
+	Ensure that the length from \( y \) to \( \frac{x_{0}}{|x_{0}|} \cdot a \) equals the length from \( x_{0} \) to \( x \). But then
+	\[ y = \frac{x}{a} |x_{0}|, \]
+	so therefore we can compute that
+	\begin{align*}
+		|x - x_{0}| &= \left| y - \frac{x_{0}}{|x_{0}|} a \right| \\ 
+								&= \left| \frac{x}{a}|x_{0}| - \frac{x_{0}}{|x_{0}|} a \right| \\ 
+								&= \left| \frac{x}{a} |x_{0}| - x_{0}^{*} \frac{|x_{0}|}{a} \right| \\
+								&= \frac{|x_{0}|}{a} \left| x - x_{0}^{*} \right|.
+	\end{align*}
+	It follows that our \( \bullet \) term is
+	\[ \bullet = \frac{|x_{0}|}{a}. \]
+	There's other ways to get this, but the diagram was clearly the best way to derive this.
+
+	[I will include the diagram in a bit. Until then just keep in mind that there was some magical geometry he used.]
+
+	Since now we have that
+	\[ G(x, x_{0}) = - \frac{1}{4 \pi |x - x_{0}|} + \frac{1}{4 \pi |x - x_{0}^{*}|} \cdot \frac{a}{|x_{0}|}, \]
+	we just need to find the normal derivative of our Green's function at \( |x| = a \) to conclude. Namely,
+	\begin{align*}
+		\frac{\partial}{\partial n} \left. \left( - \frac{1}{4 \pi |x - x_{0}|} + \frac{1}{4 \pi |x - x_{0}^{*}|} \frac{a}{|x_{0}|} \right) \right|_{|x| = a} &= \left( \frac{x - x_{0}}{4 \pi |x - x_{0}|^{3}} - \frac{x - x_{0}^{*}}{4 \pi |x - x_{0}^{*}|} \frac{a}{|x_{0}|} \right) \frac{x}{a} \\
+																																																																																&= \left( \frac{x - x_{0}}{4 \pi |x - x_{0}|^{3}} - \frac{x - x_{0}^{*}}{4 \pi |x - x_{0}^{*}|} \frac{a^{3}}{|x_{0}|^{3}} \frac{|x_{0}|^{2}}{a^{2}} \right) \frac{x}{a} \\
+																																																																																&= \frac{x}{a} \cdot \frac{1}{4 \pi |x - x_{0}|^{3}} \left( x - x_{0} - (x - x_{0}^{*}) \frac{|x_{0}|^{2}}{a^{2}} \right) \\
+																																																																																&= \frac{x}{a} \left( \frac{x - x \frac{|x_{0}|^{2}}{a^{2}}}{4 \pi |x - x_{0}|^{3}} \right) \\
+																																																																																&= \frac{a - \frac{|x_{0}|^{2}}{a}}{4 \pi |x - x_{0}|^{3}},
+	\end{align*}
+	which brings us to the formula given in the statement of the problem.
+\end{proof}
+
+\subsection{Wave Equation}
+Let's do the 3d wave equation first, then we'll go to 2d. This may seem weird because we've done the 1d wave and now we're jumping straight to 3d, but this is natural.
+
+To remind you, the 1d wave equation is \( u_{t t} - c^{2} u_{x x} = 0 \). In 3d this is \( u_{t t} - c^{2} \Delta_{x} u = 0 \), where \( u(x, t) \), with \( x \in D \subseteq \mathbb{R}^{3} \), \( t \in \mathbb{R} \). 
+
+There are a couple different nice symmetries of this equation: 
+\begin{enumerate}
+
+	\item Time translation
+	\item Space translation
+	\item Symmetry under Lorentz transformations
+	\item Space rotation symmetry
+	\item Scaling of spacetime
+	\item Time-reversible (\( t \mapsto -t \)). This is quite important!
+
+\end{enumerate}
+We looked at the domain of dependence and of influence and of the finite speed of propagation. Fabio restated this, but check out Day 9 of my notes for finite speed of propagation in \( d + 1 \) dimensions plus the proof. As a word of warning, I think my notes from that day may have a typo. He says it will most likely be in the midterm.
+
+To prove that harmonic functions are smooth we could've done something different, but we proved it by getting a formula. But if they're general properties we should be able to prove them independently. Likewise we should be able to prove finite speed independently of a formula.
+
+\begin{remark}
+	In 1d we proved D'Alembert's formula for the solution of the IVP\@. With that we proved finite speed. Let's get a formula on \( \mathbb{R}^{3+1} \) to do the same.
+\end{remark}
+
+\begin{theorem}[Kirchoff's Formula]
+	The solution to the problem
+	\[ \left\{\begin{NiceMatrix}u_{t t} - c^{2} \Delta u = 0 & \text{\( x \in \mathbb{R}^{3} \), \( t_{0} \in \mathbb{R} \)} \\ 
+	u(x, 0) = \phi(x) & u_{t}(x, 0) = \psi(x)\end{NiceMatrix}\right.  \]
+	is given by
+	\[ u(x_{0}, t_{0}) = \frac{1}{4 \pi c^{2} t_{0}} \iint_{S} \psi(x) dS_{x} + \frac{\partial}{\partial t_{0}} \left( \frac{1}{4 \pi c^{2} t_{0}} \iint_{S} \phi(x) dS_{x} \right), \]
+	where \( S \) is the sphere with centere \( x_{0} \) and radius \( ct_{0} \). Namely
+	\[ S = \left\{ y : |y - x_{0}| = ct_{0} \right\}. \]
+\end{theorem}
+	Really what's happening is that we're finding the solution in the same sort of manner as D'Alembert's---we draw the backwards cone until it hits the data at \( t = 0 \), and then we integrate along this sphere to get what our function should be equal to).
+
+\begin{remark}
+	Really, our domain \( S \) should be written as \( S_{t_{0}} \). Later we will rewrite it differently by taking our domain to be constant then rescaling the initial data instead. This is equivalent.
+\end{remark}
+
+\begin{proof}
+	We want to try to reduce this to the case of a one spatial dimension problem. In that case we could use D'Alembert. One way to think about it is that the equation is invariant under rotations, so we might rotate around the center of the sphere and take the average to get roughly what the function should be doing. This is called the method of spherical average.
+
+	Define \( \hat u(t, r ; x_{0}) \) to be our averaged function, where \( t \) is the time, \( r \) is the radius, and \( x_{0} \) is the center of our function. Then
+	\[ \bar u(x, r ; x_{0}) \frac{1}{4 \pi r^{2}} \int_{|x - x_{0}| = r} u(x, t) dS.  \]
+
+	Think for now \( \bar u = \bar u(t, r) \) and think of the \( x_{0} \) as just a parameter. What happens if \( r \searrow 0 \)? Well naturally
+	\[ \lim_{r \to 0} \bar u = u(x_{0}, t). \]
+	Now, let's derive the PDE in \( (t, r) \) for \( \bar u \). We claim that if \( u \) solves the PDE, then \( \bar u \) solves
+	\[ c^{2} \left( \partial^{2}_{r} \bar u + \frac{2}{r}\partial_{r} \bar u \right) = \bar u_{t t}. \]
+	Let us now prove this claim. For now let's assume that \( x_{0} = 0 \) (by translation invariance this doesn't lose us any information). Then letting \( w \in S^{2} \),
+	\begin{align*}
+	\bar u(t, r) &= \frac{1}{4 \pi r^{2}} \int_{0}^{2 \pi} \int_{0}^{\pi} u(r w, t) r^{2} \sin \theta \, d \varphi \, d \theta
+	&= \frac{1}{4 \pi} \int_{0}^{2 \pi} \int_{0}^{\pi} u(r w, t) \sin \theta \, d \varphi \, d \theta
+	\end{align*}
+	so we have that
+	\begin{align*}
+		\partial_{r} \bar u(t, r) &=  \frac{1}{4 \pi r^{2}} \int_{0}^{2 \pi} \int_{0}^{\pi} w \cdot \nabla_{x} u \left( r w, t \right)  r^{2} \sin \theta \, d \theta \, d \varphi \\
+															&= \frac{1}{4 \pi r^{2}} \int_{B_{r}} \Delta_{x}u \, dV \\
+															&= \frac{1}{4 \pi r^{2}} \int_{B_{r}} c^{-2}u_{t t} dV \\
+	\end{align*}
+	but we have that
+	\[ r^{2} \partial_{r} \bar u = \frac{1}{4 \pi} \int_{B_{r}} c^{-2} u_{t t} dV, \]
+	so therefore
+	\begin{align*}
+		\partial_{r} \left( r^{2} \partial_{r} \bar u \right) &= \partial_{r} \left( \frac{1}{4 \pi} \int_{0}^{r} \int_{S_{r'}} c^{-2} u_{t t} dS dr'  \right) \\
+																													&= \frac{1}{4 \pi} \int_{S_{r}} c^{-2} u_{t t} dS \\
+																													&= r^{2} c^{-2} \bar u_{t t}.
+	\end{align*}
+	Therefore we've got that
+	\[ c^{2} \partial_{r} \left( r^{2} \partial_{r} \bar u \right) = r^{2} \bar u_{t t}, \]
+	which is our desired PDE, which can be seen by expanding.
+
+	Thus, we have that
+	\[ \bar u_{t t} - c^{2} \left( \partial^{2}_{r} \bar u + \frac{2}{r} \partial_{r} \bar u \right) = 0. \]
+	Let \( v(r, t) = r \bar u(r, t) \). Then we have that
+	\[ \partial_{t t} v = r \partial_{t t} \bar u, \quad \partial^{2}_{r} v = \partial_{r} \left( \bar u + r \bar u_{r} \right) = 2 \bar u_{r} r \bar u_{r r}, \]
+	thus multiplying by \( r \) in the PDE above,
+	\[ r \bar u_{t t} - c^{2} \left( r \partial_{r}^{2} \bar u + 2 \partial_{r} \bar u \right) = 0 \]
+	which implies therefore that
+	\[ v_{t t} - c^{2} \partial_{r}^{2} v = 0. \]
+	Since \( r > 0 \), we need to use reflection before we can apply D'Alembert's formula. Let's use odd reflection in \( r \). We need to be careful with regularity at \( r = 0 \) of the reflection. It might not be smooth and then we'll have issues with non-differentiability at the origin. There won't be according to Fabio, but we still have to check. 
+
+	Our data is
+	\[ \left\{\begin{NiceMatrix}v(0, t) = 0 \\ v(r, 0) = r \bar u(r, 0) = r \bar \phi(r) \\ v_{t}(r, 0) = r \bar u_{t}(r, 0) = r \bar \psi(r).\end{NiceMatrix}\right.  \]
+	Then D'Alembert's tells us that
+	\[ v(r, t) = \frac{1}{2c} \left[ \int_{r - ct}^{r + ct} s \bar \psi(s) ds \right] + \frac{\partial}{\partial t} \frac{1}{2c}\int_{ct - r}^{ct + r} s \bar \phi(s) ds.  \]
+	This is the solution of the half line problem for \( r < ct \). We only care about \( r \searrow 0 \) so we won't worry about \( r \ge ct \). 
+
+	Now let's get \( u \). 
+	\begin{align*}
+		u(t, x_{0}) &= \lim_{r \searrow 0} \bar u(r, t)\\
+							 &= \lim_{r \searrow 0}\frac{1}{r} v(r, t) \\
+							 &= \lim_{r \searrow 0} \frac{1}{2 c} \frac{1}{r} \int_{ct - r}^{r + ct} s \bar \psi(s) ds + \frac{1}{r} \frac{1}{2 c} \frac{\partial}{\partial t} \left[ \int_{ct - r}^{ct + r} s \bar \phi(s) ds \right] \\
+							 &= \frac{1}{2 c} \left.\partial_{r} \right|_{r = 0}\left[ \int_{ct - r}^{r + ct} s \bar \psi(s) ds + \frac{1}{r} \frac{1}{2 c} \frac{\partial}{\partial t} \left[ \int_{ct - r}^{ct + r} s \bar \phi(s) ds \right] \right] \\
+							 &= \frac{1}{2 c} \left[ (r + ct) \bar \psi(r + ct) - (ct - r) \bar \psi(ct - r) \right]_{r = 0} \\ 
+							 &\qquad+ \frac{1}{2c} \frac{\partial}{\partial t} \left[ (ct+r) \bar \phi(r + ct) + (ct - r) \bar \phi(ct -r) \right]_{r = 0}  \\
+							 &= \frac{1}{2 c} \left[ ct \bar \psi(ct) +ct \bar \psi(ct) \right] + \frac{1}{2c} \frac{\partial}{\partial t} \left[ ct \bar \phi(ct) + (ct) \bar \phi(ct) \right]  
+	\end{align*}
+	so we are done. Averaging yields the other coefficients.
+\end{proof}
