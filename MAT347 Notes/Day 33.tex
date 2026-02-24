@@ -1,0 +1,70 @@
+\section{Day 33: Interlude before Fields; Sicherman Dice (Feb.\ 4, 2026)}
+Today is our ``comic interlude'' before doing fields.
+\begin{proposition}
+    If $M = R^k \oplus \bigoplus R\,/\!\left<p_i^{s_i}\right>$ over a PID, then
+    \begin{enumerate}[(i)]
+        \item $\dim_{Q(R)} M_{Q(R)} = k$.
+        \item $\dim_{R\,/\left<p\right>} M_{R\,/\left<p\right>} = k + \abs{\{i : p_i \sim p\}}$. Note that we write $M_{R\,/\left<p\right>} = R\,/\!\left<p\right> \otimes M$.
+        \item $\wh{p^s} \colon M \to M$ is multiplication by $p^s$. Then
+        \[ \dim R\,/\!\left<p\right> (\img \wh{p^s})_{R\,/\left<p\right>} = k + \abs{\{i : p_i \sim p, s < s_i\}}. \]
+        This proves uniqueness.
+    \end{enumerate}
+\end{proposition}
+We start by proving (i).
+\begin{proof}
+    We get $Q(R) = \{\frac{a}{b}, \dots, \}$ from $R$ and $M$ as an ``extension of scalars''. Then $M_{Q(R)} = Q(R) \otimes_R M$, where $\frac{c}{d} (\frac{a}{b} \otimes m) = \frac{ca}{bd} \otimes m$, is a $Q(R)$-module. Namely, it is a vector space over $Q(R)$ (as $Q(R)$ is a field). If $M = R$, then
+    \[ M_{Q(R)} = Q(R) \otimes_R R \cong Q(R). \]
+    If $M = R^k$, then
+    \[ M_{Q(R)} = Q(R) \otimes \bigoplus R = Q(R)^k. \]
+    If $M$ is torsion, then $M_{Q(R)} = 0 = Q(R) \otimes_R M$. This is seen by writing $(r, m) = (\frac{r}{k}, km) = 0$.
+\end{proof}
+For (ii),
+\begin{proof}
+    If $M = R^k$, $M_{R\,/\left<p\right>} = R\,/\!\left<p\right> \otimes_R R^k = R\,/\!\left<p\right>$, then $\dim M_{R\,/\left<p\right>} = k$. If $M = R\,/\!\left<q^t\right>$, then
+    \[ M_{R\,/\left<p\right>} = R\,/\!\left<p\right> \otimes_R R\,/\!\left<q^t\right> = R\,/\!\left<p, q^t\right> = \begin{cases} R\,/\!\left<p\right> & \text{if $p \sim q$}, \\ 0 & \text{otherwise.} \end{cases} \]
+    As a reminder, $R/I \otimes R/J = R/(I + J)$. Thus, $\dim_{R\,/\left<p\right>} M_{R\,/\left<p\right>} = 1$ if $p \sim q$ and $0$ if $p \not\sim q$.
+\end{proof}
+For (iii), observe the following chart,
+\begin{center}
+    \begin{tabular}{c|c|c|c}
+        $M$ & $\img \wh{p^s}$ & $(\img \wh{p^s})_{R\,/\left<p\right>}$ & $\dim_{R\,/\left<p\right>}$ \\ \hline
+        $R$ & $p^s R \cong R$ as module & $R \,/\! \left<p\right>$ & 1 \\ \hline
+        $R\,/\!\left<q^t\right>$, $q \not\sim p$ & $R\,/\!\left<q^t\right>$ & $0$ & $0$ \\ \hline
+        $R\,/\!\left<p^t\right>$, $t \leq s$ & $0$ & $0$ & $0$ \\ \hline
+        $R\,/\!\left<p^t\right>$, $t > s$ & $R\,/\!\left<p^{t-s}\right>$ & $R\,/\!\left<p\right>$ & $1$.
+    \end{tabular}
+\end{center}
+This concludes the uniqueness part of the big theorem.\footnote{then he went and assigned this as homework. awawa.}
+We now move onto some fun stuff. Can you reproduce the $2$-dice distribution of sums using $2$ dices marked not by $1$ to $6$? This is equivalent to asking if there are polynomials $f, g \in \ZZ[x]$ such that
+\[ (x + x^2 + x^3 + x^4 + x^5 + x^6)(x + x^2 + x^3 + x^4 + x^5 + x^6) = fg, \]
+$f, g$ have positive coefficients, $f(1) = g(1) = 6$, and $f(0) = g(0) = 0$? As an aside, recall that $(x - \lambda) \mid p$ if and only if $p(\lambda) = 0$. Then $p = (x - \lambda) q + r$ from the Euclidean algorithm. By substituting in $x = \lambda$, we see that $r(\lambda) = 0$ too. Observe that $x-(-1)$ divides into $x^3 + 1$, and we have $x^3 + 1 = (x + 1)(x^2 - x + 1)$. The left hand side (of the generating function for the dice probabilities) is given by
+\begin{align*}
+    \left(x \frac{x^6 - 1}{x - 1}\right)^2 &= x^2 \frac{(x^3 - 1)^2 (x^3 + 1)^2}{(x - 1)^2} \\
+    &= x^2(x^2 + x + 1)^2 (x^3 + 1)^2 = x^2 (x^2 + x + 1)^2 (x + 1)^2 (x^2 - x + 1)^2.
+\end{align*}
+Then $f = x^a (x^2 + x + 1)^b (x + 1)^c (x^2 - x + 1)^d$, where $0 \leq a, b, c, d \leq 2$. FRom here, we may work out that $f(1) = 3^b 2^c = 6$ implies $b = 1$ or $c = 1$. $f(0) = 0$ implies $a \geq 1$, but $g(0) = 0$ so $a = 1$. Thus,
+\begin{align*}
+    f &= x(x^2 + x + 1)(x + 1)(x^2 - x + 1)^2 \\
+    g &= x(x^2 + x + 1)(x + 1)(x^2 - x + 1)^0,
+\end{align*}
+whence $f = x + x^3 + x^4 + x^5 + x^6 + x^8$ and $g = x + 2x^2 + 2x^3 + x^4$. This means that the two dice with sides $1, 3, 4, 5, 6, 8$ and $1, 2, 2, 3, 3, 4$ also generate the same distribution of sums as that with two regular $6$-sided dice. These are called \textit{Sicherman dice}.
+\\[8pt]
+We now move onto field theory. Let us start with a bad definition.
+\begin{definition}
+    $F$ is an \textit{extension field} of $F$ if $E, F$ are fields and $E \supset F$. The short notation is $E/F$.
+\end{definition}
+As an example, $\CC/\RR/\QQ$.
+\begin{definition}
+    Let $E/F$; an element $a \in E$ is ``algebraic over $F$'' if there exists $p \in F[x]$ such that $p(a) = 0$.
+\end{definition}
+As an example, $\sqrt{2}$ is algebraic over $\QQ$ if $p(x) = x^2 - 2$ in $\RR/\QQ$.
+\begin{theorem}
+    Given $E/F$, Let $M = \{a \in E : a \text{ is algebraic over $F$}\}$, then $M$ is a field. So $E/M/F$.
+\end{theorem}
+\begin{proof}
+    We need to show that $\alpha, \beta \in M$ implies $\alpha + \beta \in M$, $\alpha, \beta \in M$ implies $\alpha \beta \in M$, $\alpha \in M$ implies $-\alpha \in M$, and $\alpha \in M$ implies $\alpha\inv \in M$.
+    \\[8pt]
+    For the first part, suppose $p(\alpha) = 0$, where $p \in F[x]$; then without loss of generality, let $p(x) = x^n + \dots$ (i.e., lower order terms). This means $\alpha^n$ can be written as a combination of $\alpha^0, \dots, \alpha^{n-1}$. Suppose $q(\beta) = 0$, and $q = x^m + \dots$; then the same holds for $\beta^m$. Now, observe that
+    \[ (\alpha + \beta)^k = \sum_{j=0}^k \binom{k}{j} \alpha^j \beta^{k-j} = \sum_{i<n, j<m} c_{ij} \alpha^i \beta^j, \]
+    and the proof will be finished next time.
+\end{proof}

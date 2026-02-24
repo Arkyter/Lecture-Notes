@@ -1,0 +1,77 @@
+\section{Day 35: Finite Extensions (Feb.\ 11, 2026)}
+\begin{theorem}
+    In $E/F$, if $a_j \in E$ for $j = 0, \dots, n$ are algebraic over $F$ and $\lambda \in E$ satisfies $\sum_{j=0}^n a_j \lambda^j = 0$, then $\lambda$ is algebraic over $F$.
+\end{theorem}
+Today, we discuss finite extensions $E/F$ where $\dim_F E < \infty$.
+\begin{definition}
+    Given $a \in E/F$, let $F(a)$ be the smallest subfield of $F$ containing $F$ and $a$. Equivalently, this is the set of all rational functions in $a$ with coefficients in $F$, or the intersection of all subfields $K \subset E$ with $K \supset F$ such that $a \in K$. This is also equal to
+    \[ \img (\ev_a \colon Q F[x] \to E) \]
+    Note that we exclude when the denominator is $0$, i.e., $Q F[x]$ are the fractions ``when defined''.
+\end{definition}
+\begin{theorem}
+    The following are equivalent,
+    \begin{enumerate}[(i)]
+        \item $a$ is algebraic over $F$.
+        \item $F[a]$ is finite dimensinoal as a vector space over $F$.
+        \item $F[a]$ is a field, i.e., $F(a) = F[a]$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We start by showing (i) if and only if (ii). We will reduce the degree down to finite dimensions. $F[a]$ is the image of a homomorphism of rings, i.e., $F[a] = \img ev_a \cong F[x] / \ker \ev_a$ as rings; since this is a PID quotiented by an ideal, we see that the possibilities for $\ker \ev_a$ is either trivial or $\left<p\right>$; in the former case, it follows that $F[a] \cong F[x]$, and the latter, we have that it is isomorphic to the polynomials of minimal degree such that $p(a) = 0$. We call $p$ the minimal polynomial of $a/F$.
+\end{proof}
+\begin{enumerate}[(i)]
+    \item If $a$ is not algebraic (i.e., transcendental), then it is the same as saying $F[a] \cong F[x]$, i.e., $F[a]$ is infinite dimensional over $F$.
+    \item If $a$ is algebraic, then $F[a] \cong F[x] \,/\! \left<p\right>$ is a field if $p$ is a prime.
+\end{enumerate}
+\begin{claim}
+    $p$ is irreducible, hence prime.
+\end{claim}
+\begin{proof}
+    Let $p = f g$; $p(a) = 0$ implies $f(a) = 0$ or $g(a) = 0$, so either $f(a) = 0$ and $f \in \ker \ev_a$, or $g(a) = 0$ and $g \in \ker \ev_a$. Either way, this means $\left<p\right>$ is prime, which contradicts the minimality of $p$. 
+\end{proof}
+In the case of finite dimensions, $\coor{F(a):F} = \dim_F F(a)$ is the degree of the extension, i.e., the degree of the minimal polynomial of $a$ over $F$.
+\begin{lemma}
+    Given $L/E/F$, $\coor{L:E} \coor{E:F} = \coor{L:F}$, where $\coor{L:E}$, $\coor{E:F}$ are finite.
+\end{lemma}
+\begin{proof}
+    Let $l_i$ be the basis of $L/E$, $e_j$ the basis of $E/F$; we claim $l_i e_j$ is a basis of $L/F$. Indeed, this basis spans, because for $\lambda \in L$,
+    \[ \lambda = \sum \alpha_i l_i = \sum \left(\sum \beta_j e_j\right) l_i, \]
+    and we have linear independence, since if $\sum_{i, j \neq 1} \beta_{ij} l_i e_j = l_1 e_1$, where $\beta_{ij} \in F$, then
+    \[ \sum \beta_{ij} l_i e_j = \sum_i l_i \sum_j \beta_{ij} e_j = 0, \]
+    so $\sum_j \beta_{ij} e_j = 0$ and $\beta_{ij} = 0$.
+\end{proof}
+\begin{theorem}
+    The algebraic elements of $E$ over $F$ make a field.
+\end{theorem}
+\begin{proof}
+    Let $a, b \in E$ be algebraic over $F$. Then $F(a, b) \coloneq (F(a))(b)$ is a minimal field containing $F, a, b$. Indeed, $\coor{F(a, b) : F} = \coor{F(a, b) : F(a)} \coor{F(a) : F} \leq \coor{F(b) : F} n = mn$, where $f$ is taken to be the minimal polynomial of $a$ over $F$ with degree $n$, $g$ the minimal polynomial of $b$ over $F$ with degree $m$. Thus, $\coor{F(a,b) : F}$ is finite. $F(a, b) \supset F(a + b), F(ab), F(-a)$, so $\coor{F(a+b):F}$, $\coor{F(ab):F}$ are bounded above by $\coor{F(a, b) : F}$, so each of them are finite as desired.
+\end{proof}
+\begin{definition}
+    $E/F$ is algebraic if every element of $E$ is algebraic over $F$. Equivalently, all elements $a \in E$ are such that $F(a) / F$ is finite.
+\end{definition}
+Note that if $E/F$ is finite, then $E/F$ is algebraic, e.g., $\AA/\QQ$ is an algebraic extension but is not finite. $\QQ[\sqrt[n]{2}]$ for all $n \geq 1$ over $\QQ$ is not finite.
+\begin{theorem}
+    Given $L/E/F$, if $L/E$ is algebraic and $E/F$ is algebraic, then $L/F$ is algebraic.
+\end{theorem}
+\begin{proof}
+    Let $\lambda \in L$. Let $l_i$ be the coefficients of the minimal polynomial of $\lambda$ over $E$. Then
+    \[ \coor{F[\lambda] : F} \leq \coor{F(c_0, \dots, c_n, \lambda) : F} = [p_\lambda] \cdot [p_n] \dots [p_0] \leq n \coor{F(c_n):F} \dots \coor{F(c_0):F} < \infty, \]
+    so $\lambda$ is algebraic over $F$.
+\end{proof}
+\begin{theorem}
+    \begin{parlist} \item If $F$ is a finite field, then $\abs{F} = p^n$, where $p$ prime and $n \in \NN$. \item Also, if $F$ is a field with $q = p^n$ elements, then $F$ is the splitting field of the polynomial $x^q - x$ over $\FF_q \cong \ZZ/p$. Hence, $F$ exists and is unique. \end{parlist}
+\end{theorem}
+\begin{definition}
+    Let $F$ be a field. Consider the map $X \colon \ZZ \to \FF$, where $1 \mapsto 1$; if $X$ isn't injcetive, then $\ker x = \left<p\right>$ defines $\opname{char} F \coloneq p$. If $x$ is injective, then $\opname{char} F \coloneq 0$.
+\end{definition}
+As an example, $\RR, \QQ$ have characteristic $0$, and $\opname{char} \ZZ/p = p$.
+\begin{proof}
+    Suppose $F$ is a finite field, so $X$ is not injective. Let $p = \opname{char} F > 0$, $F \supset \img X \cong \ZZ/\ker X \cong \ZZ/p$. So $F/(\ZZ/p)$ or $F/\FF_p$. Note that this tells us $p$ must be prime, since otherwise, $F \supset \ZZ/{ab}$, which has zero divisors. Let $\dim_{\FF_p} F = n$ and let $\varphi_1, \dots, \varphi_n$ be a basis of $F/\FF_p$. Then $F \cong (\FF_p)^n$, and so $\abs{F} = p^n$. As a vector space, we have $F \cong \FF_p^n$, but we don't yet know what multiplication is like.
+\end{proof}
+\begin{theorem}
+    If $F$ is a field and $f \in F[x]$, then we can find a field $E$ such that there exists $a \in E$ with $f(a) = 0$ and $\coor{E:F} \leq \deg f$.
+\end{theorem}
+\begin{proof}
+    Next time.
+\end{proof}
+%We will also introduce splitting fields to prove part (ii) of the theorem earlier. Our subgoal is to show that, for $p \in F[x]$, there exists a smallest field containing all the roots of $p$.
