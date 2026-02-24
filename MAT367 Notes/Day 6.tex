@@ -1,0 +1,54 @@
+\section{Day 6: Smooth maps (Jan.\ 27, 2026)}
+We know that charts and their inverses are smooth by definition, and compositions of smooth functions are smooth. We wish to define a general notion of smooth maps between manifolds. Let us start with a first notion; a function $f \colon M \to \RR$ is \textit{smooth} at $p \in M$ if, for some chart $(U, \varphi)$, $p \in U$, we have that
+\[ f \circ \varphi\inv \colon \varphi(U) \to \RR \]
+is smooth, i.e., $C^\infty$ at $\varphi(p)$. $\varphi$ is smooth, $f \circ \varphi\inv$ is smooth, so $f = (f \circ \varphi\inv) \circ \varphi$ is smooth.
+\begin{remark}
+    Smoothness is independent of the choice of charts, since transition maps are smooth, so we can replace ``some chart'' with ``every chart'' in the definition above.
+\end{remark}
+A function $f \colon M \to \RR$ is \textit{smooth} if it is smooth at every point; equivalently, for every chart $(U, \varphi)$, $f \circ \varphi\inv$ is smooth. Also equivalently, for a set of charts $(U, \varphi)$ covering $M$, we have that $f \circ \varphi\inv$ is smooth. This is the easiest condition to check. We give some examples.
+\begin{enumerate}[(i)]
+    \item $f \colon \RR^{n+1} \to \RR$ is smooth. Then its restriction to $S^n \subset \RR^{n+1}$ is also smooth. We will prove this via stereographic projection $\varphi_N, \varphi_S$. Indeed, $\varphi_N\inv, \varphi_S\inv \colon \RR^n \to \RR^{n+1}$ is smooth, so $f \circ \varphi_N\inv$ and $f \circ \varphi_S\inv$ are both smooth as well, meaning the restriction of $f$ down to $S^n$ is smooth as desired.
+    \item Let $f \colon S^2 \to \RR$ with $f(x, y, z) = \sqrt{1 - z^2} = \sqrt{x^2 + y^2}$. We can use the chart $\varphi \colon \{(x, y, z) \mid z > 0\} \to B_1(0)$ by $\varphi(x, y, z) = (x, y)$, where, $f \circ \varphi\inv(x, y) = \sqrt{x^2 + y^2}$ is smooth at the origin, so $f$ is not smooth.
+\end{enumerate}
+We denote $C^\infty(M) = \{f \colon M \to \RR \mid f \text{ is smooth}\}$ to be the collection of smooth functions on $M$.
+\begin{fact}
+    Linear combinations of $f, g \in C^\infty(M)$ is smooth; the pointwise product is also smooth, and $1 \in C^\infty(M)$ is the multiplicative identity. Thus, $C^\infty(M)$ forms an $\RR$-algebra.
+\end{fact}
+We now discuss continuity. $f \colon M \to \RR$ is continuous if and only if $f \circ \varphi\inv$ is continuous for all charts $(U, \varphi)$. In particular, smooth functions are continuous.
+\begin{proposition}
+    This definition of continuity is equivalent to the topological notion of continuity.
+\end{proposition}
+\begin{proof}
+    By the same fact for $U \subset \RR^n$, we have that $(f \circ \varphi_\alpha\inv)\inv(a, b)$ is open in $\varphi_\alpha(U_\alpha) \subset \RR^n$ for every chart $(U_\alpha, \varphi_\alpha)$ Recall that $V \subset M$ is open if and only if it is a union of $\varphi_\alpha\inv(V_\alpha)$, where $V_\alpha$ is open in $\varphi_\alpha(U_\alpha)$. This means
+    \[ f\inv(a, b) = \bigcup_\alpha \varphi_\alpha\inv\bigl((f \circ \varphi_\alpha\inv)\inv (a, b)\bigr) \]
+    is open.
+\end{proof}
+We now discuss supports. The support of $f \colon M \to \RR$ is the \textit{closure} of $f\inv(\RR \setminus \{0\})$. If $p \notin \supp(f)$, then $f$ is $0$ in a neighborhood of $p$.
+\begin{lemma}
+    If $U \subset M$ is open, $g \colon U \to \RR$ is smooth, and $\supp(g) \subset U$ is closed in $M$, then $g$ extends to a smooth $f \colon M \to \RR$, $\restr{f}{U} = g$, and $\restr{f}{M \setminus U} = 0$.
+\end{lemma}
+\begin{proof}
+    Let $V = M \setminus \supp(g)$. This is open in $M$. $f$ is smooth at $p \in U$ (take any chart containing $p$ with domain in $U$) and $p \in V$ (take any chart containing $p$ with domain in $V$ and coordinate chart equal to the zero map); then $M = U \cup V$, so $f$ is smooth everywhere on $M$.
+\end{proof}
+\begin{proposition}
+    A set $(M, \SA)$ with a \textit{maximal atlas} is \textit{Hausdorff} if and only if, fo rall $p \neq q \in M$, there exists a smooth $f \colon M \to \RR$ such that $f(p) \neq f(q)$.
+\end{proposition}
+\begin{proof}
+    In the reverse direction, given $p \neq q$, we want to show that they lie in disjoint open sets. Choose $f \colon M \to \RR$ such that $f(p) \neq f(q)$; then $f\inv(f(p) - \eps, f(p) + \eps)$ are disjoint open sets containing $p$ and $q$ (we may take $\eps < \frac{1}{2} \abs{f(p) - f(q)}$).
+    \\[8pt]
+    In the forwards direction, for any $p \neq q$, let $U, V$ be disjoint open neighborhoods respectively, and let $(W, \varphi)$ be a chart with $W \ni p$. Choose a smooth function $f \colon f(W) \to \RR$ such that $f(\varphi(p)) = 1$ and $f$ is supported on $B_\eps(p)$. This is called a \textit{bump function}. We have that $f \circ \varphi \colon W \to \RR$ is smooth, so by the lemma, we can extend it to $g \colon M \to \RR$ with $g(q) = 0$ and $g(p) = 1$.
+\end{proof}
+\begin{corollary}
+    Suppose $(M, \SA)$ is a set with a \textit{maximal atlas}. Then, if there is a coordinate-wise smooth injection $f \colon M \to \RR^N$, then $M$ is Hausdorff.
+\end{corollary}
+\begin{proof}
+    For any $p \neq q$, $f(p) \neq f(q)$, so one of their coordinates is different, which gives us our separating function.
+\end{proof}
+Note that we do need Hausdorffness in order to be embedded in $\RR^n$. As an example, consider $F \colon \RP^n \to M_{(n+1)\times(n+1)}(\RR) \cong \RR^{(n+1)^2}$, given by
+\[ \pcoor{x^0:x^1:\dots:x^n} \mapsto \frac{x x^\top}{\norm{x}^2}. \]
+This map is well defined, smooth (coordinate wise), and injective (as the diagonal of the matrix is $x_i^2$), so $\RP^n$ is Hausdorff.
+\\[8pt]
+We now discuss smooth maps between manifolds. $f \colon M \to N$ is smooth, if, for every chart of $M$ and $N$, given $(U, \varphi)$ on $M$ and $(V, \psi)$ on $N$, $\psi \circ f \circ \varphi\inv \colon \varphi(U \cap f\inv(V)) \to \psi(V)$ is smooth. We denote $C^\infty(M, N)$ as the collection of such smooth maps. We give an example.
+\begin{enumerate}[(i)]
+    \item There are diffeomorphisms from $\RP^1 \to S^1$ and $\CP^1 \to S^1$. Indeed, take $\pcoor{x:1} \mapsto x \in \RR$ then precompose with $\varphi_N\inv$ to get a map into $S^1 \setminus \{N\}$. For the last point not of the form $\pcoor{x:1}$, we just take $\pcoor{0:1} \mapsto N$. The same method holds for the complex projective space.
+\end{enumerate}
