@@ -1,0 +1,48 @@
+\section{Day 34: Algebraic Numbers and Finite Extensions (Feb.\ 6, 2026)}
+Recall that $E/F$ denotes a field extension, where $E, F$ are fields and $F \subset E$.
+\begin{definition}
+    Given $a \in E/F$, $a$ is ``algebraic over $F$'' if there exists $f \in F[x]$ such that $f(a) = 0$.
+\end{definition} 
+Moreover, if $E$ is a vector space over $F$, then we define $\coor{E:F} \coloneq \dim_F E$. In particular, $\coor{\CC : \RR} = 2$.
+\begin{theorem}
+    $M \coloneq \{a \in E : a \text{ is algebraic over $F$}\}$ is a field, then $E/M/F$.
+\end{theorem}
+\begin{proof}
+    Additivity is given by supposing $f(a) = 0$, $g(b) = 0$, then $\deg f = n$ and $\deg g = m$. Without loss of generality, the leading coefficients of $f$ and $g$ are $1$. If $f = x^n + \alpha_{n-1} x^{n-1} + \dots + \alpha_0$ and $f(a) = 0$, then
+    \[ a^n = -\alpha_{n-1} a^{n-1} - \dots - \alpha_0, \quad a^{n+1} = -\alpha_{n-1} a^n - \dots - \alpha_0 a, \]
+    and the same goes for $b$ but with degree $m$ instead. Morally, for all $k$, $a^k$ is equal to a polynoimal in $a$ over $F$. Thus,
+    \[ (a + b)^k = \sum_{j=0}^k \binom{k}{j} a^j b^{k-j} = \sum_{i, j} \underbrace{(\dots)}_{\in F} \underbrace{a^i b^j}_{\in E}. \]
+    Thus, for all $k$, $(a + b)^k$ is in the span of $a^i b^j$ for $0 \leq i \leq n$ and $0 \leq j \leq m$, so $\dim_F \leq n m$. However, there are infinitely many such $k$s, so there is linear dependence in $\{(a + b)^k \mid k \in \NN\}$. Thus, there exists $c_k$, not all zero, such that
+    \[ \sum_k c_k (a + b)^k = 0, \]
+    but this gives us a polynomial with $a + b$ as a root.
+    \\[8pt]
+    For multiplication, observe that if $f(a) = 0$, $\deg f = n$, $g(b) = 0$, $\deg g = m$, then $(ab)^k = a^k b^k$, which we may reduce to the $+$ case. As before, $(ab)^k$ is in the span of $a^i b^j$ over $F$.
+    \\[8pt]
+    $-a \in M$ is easy. If $f(a) = 0$, then $g(X) = f(-x)$ has $g(-a) = f(-(-a)) = f(a) = 0$.
+    \\[8pt]
+    $a\inv \in M$ can be resolved by looking at $f(a) = 0$ implies $\sum \alpha_j a^j = 0$, where, by dividing throughout by $a^n$, we have $\sum \alpha_j a^{j-n} = 0$, then
+    \[ \sum_{j=0}^n \alpha_j \left(\frac{1}{a}\right)^{n-j} = 0, \]
+    so we win as this is a polnyomial. Thus, $M$ is a field.
+\end{proof}
+If we denote $A(\bullet)$ as the algebraic extension, then observe that $Q \subset A(\QQ) \subset A(A(\QQ)) \subset \dots$, where $\QQ \subset \CC$ and $A(\QQ) \subset \AA$.
+\begin{theorem}
+    This tower terminates instantly / collapses.
+\end{theorem}
+\begin{theorem}
+    In $E/F$, if $a_j \in E$ for $j = 0, \dots, n$ are algebraic over $F$ and $\alpha \in E$ satisfies $\sum_{j=0}^n a_j \alpha^j = 0$, then $\alpha$ is algebraic over $F$.
+\end{theorem}
+%Today, we discuss finite extensions $E/F$ where $\dim_F E < \infty$.
+% \begin{definition}
+%     Given $a \in E/F$, let $F(a)$ be the smallest subfield of $F$ containing $F$ and $a$. Equivalently, this is the set of all rational functions in $a$ with coefficients in $F$, or the intersection of all subfields $K \subset E$ with $K \supset F$ such that $a \in K$. This is also equal to
+%     \[ \img (\ev_a \colon Q F[x] \to E) \]
+% \end{definition}
+\begin{corollary}
+    $\QQ \subsetneq \AA \subsetneq \CC$; here, $\AA$ is algebraically closed, meaning, every polynomial with coefficients in $\AA$ has roots in $\AA$. Note that $\AA$ is countable but $\CC$ is not.
+\end{corollary}
+\begin{proof}
+    Without loss of generality, $a_n = 1$, so $\lambda^n = -\sum_{j=0}^{n-1} a_j \lambda^j$. Then $\lambda^{n+1} = \sum_{j=0}^{n-1} (\dots) \lambda^j$, where $(\dots)$ are polynomials in $a_j$ with integer coefficients. Then, for all $k$,
+    \[ \lambda^k = \sum_{j=0}^{n=1} (\dots) \lambda^j; \]
+    assume also that $f_j \in F[x]$ such that $f_j(a_j) = 0$, and $\deg f_j = m_j$. Then we may continue writing
+    \[ \dots = \sum_{j<n, l_j < m_j} (\dots) a_0^{l_0} \dots a_{n-1}^{l_{n-1}} \lambda^j, \]
+    where $(\dots)$ are coefficients in $F$ here. Thus, $\lambda^k$ is in the span of $\{a_0^{l_0} \dots a_{n-1}^{l_{n-1}} \lambda^j : j < n, l_j < m_j\}$, which has dimension at most $n \prod_{j=0}^{n-1} m_j$.\footnote{this is ass but i mean like, i'm sure you can write out the proof on paper and it would make sense. or make your own proof. honestly idfk.}
+\end{proof}

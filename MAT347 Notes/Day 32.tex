@@ -1,0 +1,28 @@
+\section{Day 32: Big Theorem for Modules, Uniqueness (Jan.\ 30, 2026)}
+Today we prove the uniqueness part of the big theorem, i.e., if $M$ is a finitely generated module over a PID $R$, then
+\[ M \cong R^k \oplus \bigoplus R\,/\!\left<p_i^{s_i}\right> \]
+uniquely. Recall that, the $R$-modules with $\oplus$ and $\otimes$ forms a commutative semiring; in particular, $\oplus, \otimes$ are ``bifunctors'', i.e., if $f \colon A \to A'$ and $g \colon B \to B'$, then $f \oplus g \colon A \oplus B \to A' \oplus B'$ by $(a, b) \mapsto (fa, gb)$; the same process applies for tensor product. Let $A$ be abelian; recall that $(\ZZ/p) \otimes_\ZZ A$ is isomorphic to the Sylow-$p$ subgroups of $A$.
+\begin{theorem}
+    If $R$ is a commutative domain, then there is a field $Q(R)$ with an inclusion $\iota \colon R \to Q(R)$ (injective), such that, whenever we have a morphism $\alpha \colon R \to F$, where $F$ is a field, there exists a unique morphism $\ol \alpha \colon Q(R) \to F$, such that $\ol \alpha \circ \iota = \alpha$. This statement is given by the following diagram,
+    \[ \begin{tikzcd} R \arrow[r, hookrightarrow, "\iota"] \arrow[rd, "\alpha"'] & Q(R) \arrow[d, dashed, "\ol \alpha"] \\ & F \end{tikzcd} \]
+\end{theorem}
+\begin{fact}
+    If $Q(R)$ exists, it is unique up to isomorphism.
+\end{fact}
+The proof is left as an exercise. We now demonstrate the theorem above.
+\begin{proof}
+    Let $Q(R) = \{\frac{r}{s} : r, s \in R, s \neq 0\} / \sim$, where $\frac{r_1}{s_1} \sim \frac{r_2}{s_2}$ if $r_1s_2 = r_2s_1$. $\sim$ is an equivalence relation (it is quick to check transitivity), and $Q(R)$ is also a field from
+    \[ \frac{r_1}{s_1} + \frac{r_2}{s_2} \coloneq \frac{r_1s_2 + r_2s_1}{s_1s_2}, \quad \frac{r_1}{s_1} \cdot \frac{r_2}{s_2} \coloneq \frac{r_1r_2}{s_1s_2}. \]
+    It remains to do the remaining $9$ checks as done in ``grade $5$''. We also have that $\iota \colon R \to Q(R)$ is given by $r \mapsto \frac{r}{1}$, and, for $\alpha \colon R \to F$, we have
+    \[ \ol \alpha \left(\frac{r}{s}\right) = \frac{\alpha(r)}{\alpha(s)}. \qedhere \]
+\end{proof}
+As an aside, given a ring $R$, a ``multiplicative subset'' of $R$ is $S \subset R \setminus \{0\}$ such that $s_1, s_2 \in S$ implies $s_1 s_2 \in S$. In particular, $S\inv R = \{\frac{r}{s} : r \in R, s \in S\} / \sim$ where $\sim$ is as before; then this is a ring containing $R$ (with the same addition, multiplication, and identities as inherited).
+\begin{enumerate}[(i)]
+    \item $S = R \setminus \{0\}$ implies $S\inv R = Q(R)$.
+    \item If $P$ is a prime ideal in $R$, then $S = R \setminus P$ is multiplicative, and $S\inv R$ is called the localization of $R$ at $P$.
+    \item $R = \ZZ$; then $S = \{2^n \mid n \geq 0\}$ are the dyadic rationals.
+\end{enumerate}
+\begin{proposition}
+    Suppose $M = R^k \oplus \bigoplus R\,/\!\left<p_i^{s_i}\right>$. Then
+    \[ \dim_{Q(R)} Q(R) \otimes_R M = k. \]
+\end{proposition}
