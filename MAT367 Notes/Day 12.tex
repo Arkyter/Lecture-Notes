@@ -1,0 +1,80 @@
+\section{Day 12: Vector Fields, Tangent Bundles, and Vector Bundles (Feb.\ 24, 2026)}
+We start on chapters 6 and 9 now.\footnote{chapter 8 lee, thank me later} A vector field is a ``smooth choice of tangent vector at every point in $M$''; for $M \subset \RR^n$, the tangent space $T_p M$ is in $\RR^n$. 
+\begin{definition}
+    A vector field is a smooth map $V \colon M \to \RR^n$ such that $V(p) \in T_p M \subset \RR^n$.
+\end{definition}
+\begin{enumerate}[(i)]
+    \item Consider $S^2 \subset \RR^3$ (to be thought of here as a globe). We can consider the latitude and longitude lines to give us a vector field on $S^2$. Consider the map
+    \[ (\varphi, \theta) \mapsto (\cos \theta \cos \varphi, \cos \theta \sin \varphi, \sin \theta), \]
+    and $\partial_{\opname{long}}(\varphi, \theta) = \cos \theta (\sin \varphi, \cos \varphi, 0)$, $\partial_{\opname{lat}}(\varphi, \theta) = (\sin \theta \cos \varphi, \sin \theta \sin \varphi, \cos \theta)$. These are smooth maps. We also have that $\partial_{\opname{lat}}(\varphi, \theta)$ is orthogonal to the vector $p$, so it is in $T_p S^2$. There's no way to extend this smoothly to the north pole, so it is not a vector field on $S^2$.\footnote{worst example of all time}
+\end{enumerate}
+What does ``vector field'' mean on an abstract manifold? One way to think about them is to loko at charts.
+\begin{definition}
+    A vector field $X$ on $M$ is a function $p \in M$ to $X_p \in T_p M$ such that, for each chart $\varphi \colon U \to \RR^n$, we have $D \varphi_p \circ X(p) \colon U \to \RR^n$ is smooth (using the identification $T_p M \cong \RR^n$, induced by the chart).
+\end{definition}
+We may check that, if $\psi \circ V \to \RR^n$ is another chart, then on $U \cap V$, $D \varphi \circ X$ is smooth if and only if $D \psi \circ X$ is smooth. In fact, $D(\varphi \circ \psi\inv)$ transforms between the coordinates on $T_p M$ induced by $\varphi$ and $\psi$.
+\begin{definition}
+    The \textit{tangent bundle} $TM$ of $M^m$ is a smooth $2m$-manifold with a point set $\bigsqcup_{p \in M} T_p M$, (non-maximal) atlas $(\bigsqcup_{p \in U} T_p M, (\varphi \circ \pi, D \varphi_p) \colon \bigsqcup_{p \in U} T_p M \to \RR^m \times \RR^m)$ for charts $(U, \varphi)$ in $M$. Note that the image of the charts on the tangent bundle are just $\varphi(U) \times \RR^m$.
+\end{definition}
+\begin{remark}
+    The tangent bundle comes with a projection $\pi \colon TM \to M$ by $T_p M \mapsto p$. Note that $\bigsqcup_{p \in U} T_p M$ from earlier is precisely just $\pi\inv (U)$. (Left as an exercise to check that $\pi$ is smooth.)
+\end{remark}
+Also, for each $p \in M$, the preimage $\pi\inv(p)$ (i.e., fiber) is a vector space. We also have local triviality, i.e., for each $p \in M$, there is a neighborhood $U \ni p$ such that the diagram commutes,
+\[ \begin{tikzcd} \pi\inv(U) \arrow[rr, "(D \varphi{,} \pi)"] \arrow[dr, "\pi"'] & & \RR^m \times U \arrow[dl, "\pi"] \\ & U \end{tikzcd} \]
+where $(D \varphi, \pi)$ is a smooth map and is linear on each $\pi\inv(\bullet)$. As an example, the two charts on $S^2$, $\varphi_N \colon S^2 \setminus \{N\} \to \RR^2$ and $\varphi_S \colon S^2 \setminus \{S\} \to \RR^2$ each identify $T(S^2 \setminus \{N\}) = \RR^2 \times \RR^2$ (and the same for $T(S^2 \setminus \{S\})$). \footnote{personal remark: trivializations is similar to the idea of parallelization (local vs global) pointed out in lee. a trivialization means the tangent bundle locally looks like the projection of $U \times \RR^m$ onto $U$.} I'm not going to include the whole discussion on trivializations of $S^2$, so read \S 10 in Lee for this.
+
+\newpage
+Given $f \colon M \to N$ smooth, define $Df \colon TM \to TN$, where $v \mapsto Df_p(v) \in T_{f(p)}N$ (for $v \in T_p M$).
+\begin{proposition}
+    This is a smooth map.
+\end{proposition}
+\begin{proof}
+    Choose charts $(U, \varphi)$ for $M$ at $p$, $(V, \psi)$ for $N$ at $f(p)$. We get the commutative diagram,
+    \[ \begin{tikzcd}[column sep=120pt]
+        \pi\inv(U) \arrow[r, "Df"] \arrow[d, "(\varphi \circ \pi{,} D\varphi)"] & \pi\inv(V) \arrow[d, "(\psi \circ \pi{,} D\psi)"] \\ \varphi(U) \times \RR^m \arrow[r, "(\psi \circ f \circ \varphi\inv{,} D(\psi \circ f \circ \varphi\inv))"] & \psi(V) \times \RR^n 
+    \end{tikzcd} \]
+    Thus, $Df$ is smooth by definition.
+\end{proof}
+Consider, now, $\iota \colon M \injto \RR^n$ be a submanifold; we get a map $D \iota \colon TM \injto \RR^n \times \RR^n$. This embeds $TM$ as a submanifold into $\RR^n \times \RR^n$. We now discuss general vector bundles.
+\begin{definition}
+    A manifold $E^{m+n}$ equipped with
+    \begin{enumerate}[(i)]
+        \item A smooth map $\pi \colon E \to M^m$,
+        \item An $n$-dimensoinal vector space structure on each $\pi\inv(p)$,
+        \item For each $p \in M$, there's a neighborhood $U \ni p$ and a smooth map such that the diagram commutes and $\tau$ is linear on each $\pi\inv(p)$, i.e.,
+        \[ \begin{tikzcd} \pi\inv(U) \arrow[rr, "\tau"] \arrow[dr, "\pi"] & & \RR^n \times U \arrow[dl, "\pi_2"] \\ & U \end{tikzcd} \]
+    \end{enumerate}
+    The space $E$ is usually called the total space of the vector bundle $\pi \colon E \to M$.
+\end{definition}
+As some examples of vector bundles, we have
+\begin{enumerate}[(i)]
+    \item The tangent bundle $TM$ is a vector bundle.
+    \item The trivial bundle $\RR^n \times M$.
+    \item The M\"obius strip.
+\end{enumerate}
+If we regard the M\"obius strip as $\RR \times S^1$, consider the charts $\RR \times (0, 2\pi) \to S^1 \setminus \{1\}$ by $e^{i\theta} \circ \pi_2$ and $\RR \times (-\pi, \pi) \to S^1 \setminus \{-1\}$ by $e^{i\theta} \circ \pi_2$ again. Then the transition maps between $\RR \times (0, 2\pi) \to \RR \times (-\pi, \pi)$ is given by $(\id, \id)$ and the other direction by $(-\id, t \mapsto t - 2\pi)$. \vspace{-14pt}
+\begin{remark}
+    Instead of $+\id$, we can use $(v, t) \mapsto (r(t) v, t)$, where $r$ is any positive function to get the same structure.
+\end{remark}
+In particular, $M$ (the M\"obius strip) is the tautological line bundle over $\RP^1$ (i.e., every point of $\RP^1$ is a line, so let the fiber be that line).
+\begin{enumerate}[(i)] \setcounter{enumi}{3}
+    \item The tautological line bundle over $\RP^n$; for each point, take the corresponding line; e.g., for $\RP^2$, take the local trivialization
+    \[ (xt, yt, t) \mapsto (t, \pcoor{x:y:1}), \]
+    from $\pi\inv(U)$ to $\RR \times U$.
+    \item The tautological $k$-plane bundle over $\Gr_k(\RR^n)$.
+\end{enumerate}
+\begin{definition}
+    A \textit{smooth section} $s \colon M \to E$ of a vector bundle $\pi \colon E \to M$ is a smooth map such that $\pi \circ s = \id$. (For every $p \in M$, choose a vector above it).
+\end{definition}
+\begin{definition}
+    A vector field on $M$ is a smooth section of a tangent bundle.
+\end{definition}
+We may check that this definition is commensurate to our definition from earlier in the lecture. We give some examples.
+\begin{enumerate}[(i)]
+    \item There is a unique zero section sending $p \in M$ to $0 \in \pi\inv(p)$.
+    \item Sections of the trivial bundle $\RR^n \times M$ (equivalently, maps $f \colon M \to \RR^n$, identified by $f \leftrightarrow (f, \id)$)
+    \item There's no nowhere zero section of the M\"obius strip. This is because of the intermediate value theorem.
+    \item A \textit{frame} is a smooth choice of basis at each point of $M$, i.e., a set of sections $s_1, \dots, s_n \colon M \to E$ such that, for each $p$, $s_1(p), \dots, s_n(p) \in E_p$ forms a basis in $E_p$. A global frame exists if and only if a trivialization of the bundle, i.e., a bundle map $F \colon E \to \RR^n \times M$ by $(s_1, \dots, s_n, \pi)$ commutes in the following daigram,
+    \[ \begin{tikzcd} E \arrow[rr, "F \coloneq (s_1{,} \dots {,} s_n{,} \pi)"] \arrow[dr, "\pi"'] & & \RR^n \times M \arrow[dl, "\pi_2"] \\ & M \end{tikzcd} \]
+    and $F$ is linear on each fiber, giving an isomorphism on every fiber.
+\end{enumerate}
