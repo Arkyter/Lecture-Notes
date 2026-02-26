@@ -1,0 +1,46 @@
+\section{Day 13: (Feb.\ 26, 2026)}
+We continue our discussion of vector bundles and tangent bundles. Note that we're working through \S 9 in the textbook.
+\begin{definition}[Global]
+    A vector field on $M$ is a smooth section of the tangent bundle of $M$.
+\end{definition}
+\begin{definition}[Coordinate-wise]
+    A vector field is a way of assigning $p \in M$ to $X_p \in T_p M$ such that, for each chart $(U, \varphi)$, $p \in U$ smoothly maps to $D \varphi(X_p)$.
+\end{definition}
+For an example, consider $S^3 \subset \RR^4$; for $p \in S^3$, obsevre that $T_p S^3 = \ker DF = \left<p\right>^\perp$ for $F(x) = x \cdot x$. Indeed, this means
+\[ T S^3 = \{(p, v) \mid p \cdot p = 1, p \cdot v = 0\} \subset \RR^4 \times \RR^4, \]
+where the condition $p \cdot p = 1$ can be regarded as $p \in S^3$, and $p \cdot v$ means $v \in T_p S^3$. In particular, if $\iota \colon S^3 \injto \RR^4$ is the inclusion, then we have an inclusion of tangent spaces $d\iota(TS^3) \subset T\RR^4 \cong \RR^4 \times \RR^4$. For $p = (x_0, x_1, x_2, x_3) = (z, w) \in \CC^2$, choose
+\begin{align*}
+    v_1 &= (-x_1, x_0, -x_3, x_2) = (iz, iw), \\
+    v_2 &= (-x_2, -x_3, x_0, x_1) = (-w, z), \\
+    v_3 &= (x_3, -x_2, -x_1, x_0) = (-iw, iz).
+\end{align*}
+Notice that $p \mapsto (p, v_i)$ for $i = 1, 2, 3$ are vector fields (since $v_i(p) \perp p$, so $v_i(p) \in T_p S^3$), $v_i(p)$ for $i = 1, 2, 3$ is a unit vector for each $p \in S^3$, and $v_i \perp v_j$ (for $i \neq j$). This means $v_1(p), v_2(p), v_3(p)$ form a basis for each $T_p S^3$, and $\{v_1, v_2, v_3\}$ forms a \textit{frame} for $TS^3$, meaning $S^3$ is parallelizable, and $TS^3 \cong \RR^3 \times S^3$ (isomorphic as a bundle) under the map
+\[ (p, x) \mapsto (x_1, x_2, x_3), \]
+where $x = x_1 v_1(p) + x_2 v_2(p) + x_3 v_3(p)$. Notice, now, that $v_1$ is the velocity vector of a unit speed curve that traces out the fibers of the Hopf fibration.
+\\[8pt]
+We present a third definition of vector fields; to start, though, recall that vectors in $T_p M$ are directional derivatives $v \colon C^\infty(M) \to \RR$ defined by
+\[ v(f) = \restr{\frac{d}{dt}}{t=0} (f \circ \gamma_v), \]
+where $\gamma_v \colon (a, b) \to M$ is some curve with $\gamma_v(0) = p$.
+\begin{definition}
+    A function $p \in M$ to $X_p \in T_p M$ is a vector field if, for every $f \in C^\infty(M)$, $p \mapsto X_p(f)$ (``the directional derivative of $f$ at $p$'') is a smooth function $M \to \RR$.
+\end{definition}
+\begin{proposition}
+    The coordinate-wise definition is equivalent to the third definition.
+\end{proposition}
+\begin{proof}
+    Let $X$ be a smooth function for all $f \in C^\infty(M)$, which holds if and only if, for all $f \in C^\infty M$, there are charts $(U, \varphi)$ such that
+    \[ \begin{tikzcd} U \arrow[r, "X(f)"] \arrow[d, "\varphi"] & \RR \\ \varphi(U) \arrow[ur, "X(f) \circ \varphi\inv"'] \end{tikzcd} \]
+    the composition above is smooth. This is equivalent to $D_{D \varphi(X_p)} (f \circ \varphi\inv)$ is a smooth function (where $D$ here is the directional derivative), which is equivalent to there being charts $(U, \varphi)$ such that $D \varphi_p (X_p)$ is a smooth function $U \to \RR^m$.\footnote{fedya continued onwards with a really weird direction for this proof.}
+\end{proof}
+\begin{definition}
+    A vector field is a linear map $C^\infty(M) \to C^\infty(M)$ satisfying $X(fy) = X(f) g + f X(g)$.
+\end{definition}
+A linear map of this form in an algebra is called a \textit{derivation}.
+\begin{enumerate}[(i)]
+    \item $X_p$ is defined by $X_p(t) = [X(f)](p)$.
+    \item $X_p$ satisfies the product rule $X_p(fg) = X_p(f) g(p) + f(p) X_p(g)$.
+\end{enumerate}
+This means definition 4 implies definition 3, which is left as an exercise. Also,
+\begin{enumerate}[(i)] \setcounter{enumi}{2}
+    \item You can multiply vector fields by smooth functions, so the vector fields on $M$ form a module over $C^\infty(M)$.
+\end{enumerate}

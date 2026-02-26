@@ -24,7 +24,7 @@ Moreover, if $E$ is a vector space over $F$, then we define $\coor{E:F} \coloneq
     \[ \sum_{j=0}^n \alpha_j \left(\frac{1}{a}\right)^{n-j} = 0, \]
     so we win as this is a polnyomial. Thus, $M$ is a field.
 \end{proof}
-If we denote $A(\bullet)$ as the algebraic extension, then observe that $Q \subset A(\QQ) \subset A(A(\QQ)) \subset \dots$, where $\QQ \subset \CC$ and $A(\QQ) \subset \AA$.
+If we denote $A(\bullet)$ as the algebraic extension, then observe that $Q \subset A(\QQ) \subset A(A(\QQ)) \subset \dots$, where $\QQ \subset \CC$ and $A(\QQ) \subset \mathbb{A}$.
 \begin{theorem}
     This tower terminates instantly / collapses.
 \end{theorem}
@@ -37,7 +37,7 @@ If we denote $A(\bullet)$ as the algebraic extension, then observe that $Q \subs
 %     \[ \img (\ev_a \colon Q F[x] \to E) \]
 % \end{definition}
 \begin{corollary}
-    $\QQ \subsetneq \AA \subsetneq \CC$; here, $\AA$ is algebraically closed, meaning, every polynomial with coefficients in $\AA$ has roots in $\AA$. Note that $\AA$ is countable but $\CC$ is not.
+    $\QQ \subsetneq \mathbb{A} \subsetneq \CC$; here, $\mathbb{A}$ is algebraically closed, meaning, every polynomial with coefficients in $\mathbb{A}$ has roots in $\mathbb{A}$. Note that $\mathbb{A}$ is countable but $\CC$ is not.
 \end{corollary}
 \begin{proof}
     Without loss of generality, $a_n = 1$, so $\lambda^n = -\sum_{j=0}^{n-1} a_j \lambda^j$. Then $\lambda^{n+1} = \sum_{j=0}^{n-1} (\dots) \lambda^j$, where $(\dots)$ are polynomials in $a_j$ with integer coefficients. Then, for all $k$,
