@@ -1,0 +1,91 @@
+\section{Day 34: More on Higher Dimensional Wave Equation (Feb. 23, 2026)}
+Our plan is to review the formulas we proved for the wave equation on \( \mathbb{R}^{3} \) and \( \mathbb{R}^{2} \), discuss consequences and compare (also with 1d), discuss sources and non-homogeneous problem for wave, and finally discuss diffusion, and Schr\"odinger for \( d \ge 1 \). Midterm will cover whatever we manage to do today.
+
+\begin{theorem}
+	Kirchoff's formula (in \( 3d \)) for 
+	\[ \left\{\begin{NiceMatrix} \left( \partial_{t}^{2} - \Delta \right)u = 0, & x \in \mathbb{R}^{3}, t \in \mathbb{R} \\ u(x, 0) = \phi \\ u_{t}(x, 0) = \psi\end{NiceMatrix}\right.  \]
+	will be (for solutions \( u \))
+	\[ u(x, t) = \frac{1}{4 \pi c^{2} t} \int_{|x - y| = ct} \psi(y) dS_{y} + \frac{\partial}{\partial t} \left( \frac{1}{4 \pi c^{2} t} \int_{|x - y| = ct} \phi(y) dS_{y}  \right)  \]
+\end{theorem}
+
+	By using the above for a function which was constant with respect to \( z \), we derived the 2d formula.
+\begin{theorem}
+	When we have 2d data, the solution is given by
+	\[ u(x, t) = \frac{1}{2 \pi c} \int_{|x - y| \le ct} \frac{\psi(y)}{c^{2}t^{2} - |x-y|^{2}}dy + \frac{\partial}{\partial t} \left( \frac{1}{2 \pi c} \int_{|x - y| \le ct}  \frac{\phi(y)}{\sqrt{c^{2}t^{2} - |x - y|^{2}}} dy \right)  \]
+	where there \( \sqrt{\cdot} \) terms are due to us integrating over the sphere.
+\end{theorem}
+
+\begin{remark}
+	We see from both formulas that if \( \phi, \psi \) vanish outside \( B_{R}(0) \), then the solution vanishes outside of the ball \( B_{R + ct}(0) \). By applying linearity of the wave equation we can get that only modifying a solution inside our ball \( B_{R}(0) \) will only affect our solution in the balls \( B_{R+ct}(0) \), which means that the data propagates with finite speed.
+
+	We showed earlier that if \( \phi, \psi \) vanish \textit{inside} \( B_{R}(0) \), then on the cone \( B_{R - ct}(0) \) our function is identically zero, which we can easily show is equivalent. This was by integrating the energy on our cone with three pieces.
+\end{remark}
+
+Let's look more carefully at the formula in 3d. Suppose that \( \varphi = 0 \). Then
+\[ u(x, t) = \frac{1}{4 \pi c^{2} t} \int_{|x - y| = ct} \psi(y) dS_{y}.  \]
+But we can see from the formula that this is only influence by changes to our data inside the cone. Notice also that we're only looking at \( |x - y| = ct \), so any data in the interior of this circle will not affect our solution. In other words, when \( |x| < ct - R \), we have that our solution is zero.
+
+This may seem strange, but imagine it like a sound. You turn on a speaker you make an initial perturbation in the air which will travel outwards with finite speed of propagation. Eventually the sound reaches any point, but then since there was only a compact region of the air displaced by your speaker initially, the waves will eventually flow past you and the sound will stop.
+
+Looking at the formula, if \( |x| > R + ct \) the wave has not yet reached us. On the other hand, if \( |x| < R - ct \), then the wave has already passed us. This property is the sharp Huygen's.
+
+On the other hand, in 2d, we don't have this sharp Huygen's (the notion that eventually the initial data will pass us) because when integrating over the sphere, this sphere will always pass through the whole disc. Formulaically, we see that indeed the 2d system integrates on \( |x - y| \le ct \).
+
+Finally, in the 1d case, while with respect to the initial displacement the sharp Huygens is satisfied, with respect to the initial velocity it is not.
+\[ \frac{1}{2} \left( \phi(x + ct) + \phi(x - ct) \right) + \frac{1}{2c} \int_{x - ct}^{x + ct} \psi(y) dy.  \]
+The former will eventuall vanish with compact support, whereas the latter will not in general.
+
+But isn't this strange physically? Think of the decay of the waves.
+\[ \lim_{t \to \infty} u(x, t) = 0 \]
+everywhere when our data is compactly supported, which we might expect. On the other hand, in \( 2d \), we have an inequality that
+\[ |u(x, t)| \le \frac{C}{t}, \]
+which Fabio asks you to check, and in 1d (the strangest case) we might even just have that \( |u(x, t)| \) does not decay at all. For example, imagine if \( \psi \not \equiv 0 \) and \( \psi \ge 0 \) with compact support. Then every point will just eventually be constant and nonzero.
+
+Well an analogy is an infinitely large sheet in outer space (for 2d) and an infinitely long rope in outer space (for 1d). Push the center of either. This may provide an intuition.
+
+We also would hope that the energy is conserved, and if our solutions are going to zero at a controlled rate, then how is the energy conserved? Well we have that the area where our solution is changing cancels out the decay; although our solution is decaying in magnitude, it's growing in the area where it is changing, and these happen to precisely cancel out to conserve the energy.
+
+\subsection{Sources / Non-Homogeneous Problem}
+First, let us use Duhamel's.
+\[ \left\{\begin{NiceMatrix}u_{tt} - \Delta u = f(x, t) \\ u(x, 0) = 0 = u_{t}(x, 0).\end{NiceMatrix}\right.  \]
+If we don't have that the initial conditions are zero we can use linearity.
+
+Now, how do we find a formula for \( u \)? Well there's a few ways. The first is Duhamel's Principle. Then we have that by fixing an \( x \) (which will be implicit below),
+\[ \left\{\begin{NiceMatrix}v_{t t} - \Delta_{x} v = 0 & t > s \\ v_{t}(t = s) = f(s, x) & t = s \\ v(t = s) = 0 & t = s\end{NiceMatrix}\right.  \]
+gives a solution at \( x \) by
+\[ u(t) = \int_{0}^{t}  v(t, s) ds. \]
+This is because
+\[ u_{t}(t) = v(t, t) = 0 \quad u_{t t}(t) = v_{t}(t, t) = f(s, x). \]
+Now, we can solve this to get an explicit solution. Specifically, since \( v \) satisfies a usual homogeneous wave IVP, we can compute it explicitly.
+\[ u(x, t) = \int_{0}^{t} \frac{1}{4 \pi c^{2} (t - s)} \int_{|x - y| = c(t - s)} f(y, s) \, dy \, ds  \]
+In the homework we do some manipulation to make it nicer and write it as an integral over a cone.
+
+Now there's another way, which Fabio called the operator method, then said ``I don't think this is a good name for it.'' Consider the problem
+\[ \left\{\begin{NiceMatrix}u_{t t} + A^{2} u = f(x, t) \\ u(x, 0) = g \\ u_{t}(x, 0) = h\end{NiceMatrix}\right.  \]
+where we consider \( A \) to be an operator (or a matrix). Then what's a formula for \( u \)? 
+
+Well let's imagine a solution to the homogeneous problem when \( f = 0 \). Then we that \( u(t) \) is a linear combination of \( \cos(At) \) and \( \sin(At) \). Then we get
+\[ u(t) = \cos(At) g + \frac{\sin(At)}{A}h. \]
+
+Now, we get a particular solution without data. This is given by doing as our Ansatz
+\[ u(t) = c_{1}(t) \cos(At) + c_{2}(t) \sin(At). \]
+When we differentiate, we know that differentiating our \( \cos \) and \( \sin \) terms solves the ODE, therefore
+\[ \partial_{t} u = \underbrace{c_{1}' \cos(At) + c_{2}' \sin(At)} + c_{1} \left( - \sin(At) \right)A + c_{2} \cos(At) A. \]
+We choose \( c_{1} \) and \( c_{2} \) such that the underbraced term cancels, therefore
+\[ \partial_{t}^{2} u = c_{1}' \left( - \sin At \right)A + c_{1} \left( - \cos (At) \right)A^{2} + c_{2}' \cos(At) A + c_{2} \left( - \sin(At) \right) A^{2}. \]
+As such, we get the \( 2 \times 2 \) system
+\[ \left\{\begin{NiceMatrix}c_{1}' \cos At + c_{2}' \sin At = 0 \\ c_{1}' \left( - \sin A t \right)A + c_{2}' \left( \cos A t \right)A = f\end{NiceMatrix}\right.  \]
+this can be solved explicitly and
+\[ c_{1}' = \frac{- \sin At}{A} f \quad c_{2}' = \frac{\cos A t}{A} f. \]
+Therefore, by solving these two, we get that
+\begin{align*}
+	u(t) &= \int_{0}^{t} \frac{- \sin As}{A} f(s) ds \cos At + \int_{0}^{t} \frac{\cos As}{A} f(s) ds \sin At \\
+			 &= \int_{0}^{t} \frac{\sin\left(\left( t - s \right)A\right)}{A} f(s) ds
+\end{align*}
+But this is only our particular solution. Summarizing, the general solution is
+\[ u(t) = \cos(At) g + \frac{\sin(At)}{A}h + \int_{0}^{t} \frac{\sin(A(t-s))}{A}f(s) \, ds \]
+If this were an ODE this would be how you'd solve it. But does this match our earlier solution? Well notice that by the above, \( \frac{\sin (At)}{A} h \) is going to be a solution to the homogeneous problem with data \( u_{t} = h \) and \( u = 0 \). As such, the expression \( \frac{\sin (At)}{A} f \) must be a solution to the homogeneous problem with data \( u_{t} = f \), which we have an explicit formula for. Subbing into the integral above yields
+\[ \int_{0}^{t} \frac{\sin(A(t-s))}{A}f(s) \, ds = \int_{0}^{t} \frac{1}{4 \pi c^{2} t^{2}} \int_{|x-y| = c(t-s)} f(y, s) \, dy \, ds,  \]
+which is exactly what we wanted from above. 
+
+We reduced our PDE, which is infinite dimensional, to a second order ODE by treating the operator in the \( x \) variable as just a number or maybe a matrix. We will do this more in a few weeks via the Fourier transform.
