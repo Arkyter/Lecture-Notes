@@ -1,0 +1,76 @@
+\section{Day 37: Splitting Fields, Pt.\ 2 (Feb.\ 25, 2026)}
+\begin{proposition}
+    Let $a, a' \in E/E'$ and $P \in F[x]$ be irreducible with $P(a) = P(a') = 0$. Then $F(a) \cong F(a')$, and $\phi \colon F(a) \to F(a')$ has $\restr{\phi}{F} = \id$.
+\end{proposition}
+\begin{proof}
+    $F(a) \cong F(x) \,/\! \left<p\right> \cong F(a')$, which we see by mapping $[x]$ to $a$ and $a'$.
+\end{proof}
+\begin{proposition}
+    If $P \in F[x]$ is irreducible and $\phi \colon F \to F'$ is an isomorphism, then we may extend $\wt \phi \colon F[x] \to F'[x]$. Let $P' = \wt \phi(P) \in F'(x)$, $a \in E/F$ with $P(a) = 0$, and $a' \in E'/F$ with $P'(a') = 0$; then there is an isomorphism $\wt \phi \colon F(a) \to F(a')$ such that $\wt \, \restr{\phi}{F} = \phi$ and $\phi(a) = a'$.
+\end{proposition}
+\begin{proof}
+    Observe the diagram
+    \[ \begin{tikzcd}
+        E & E' \\
+        F(a) \arrow[u, dash] \arrow[r, "\wt \phi"] \arrow[d, dash] & F'(a') \arrow[u, dash] \arrow[d, dash] \\ F \arrow[r, "\phi"] & F'
+    \end{tikzcd} \]
+    We have
+    \[ F(a) \cong \frac{F[x]}{\left<p\right>}, \quad F'(a') \cong \frac{F'[x]}{\left<p'\right>}, \]
+    for which the two quotients are isomorphic under $\wt \phi$.
+\end{proof}
+\begin{theorem}
+    Let $P \in F[x]$; if $\phi \colon F \to F'$ be isomorphic and $P' = \wt \phi(P)$ as above. If $E/F$ is a splitting field of $P$ and $E'/F'$ is a splitting field of $P'$, then there exists $\wt \phi$ isomorphically extending $\phi$. In particular, the splitting field of $P$ over $F$ is unique up to isomorphism.
+\end{theorem}
+\begin{proof}
+    By induction on $\coor{E:F}$, if $\coor{E:F} = 1$, then $E = F$ implies $p$ splits in $F$; likewise, $p'$ splits in $F'$, so the trivial extension holds. Otherwise, consider the induction hypothesis $\coor{E:F} > 1$; pick a nonlinear irreducible factor $q$ of $P$. Let $q' = \wt \phi(q)$. Let $a$ be a root of $q$ in $E$, and let $a'$ be a root of $q'$ in $E$, and use the following diagram,
+    \[ \begin{tikzcd}
+        E \arrow[r, "\exists \wt \phi"] & E' \\
+        F(a) \arrow[u, dash] \arrow[r, "\wt \phi"] \arrow[d, dash] & F'(a') \arrow[u, dash] \arrow[d, dash] \\ F \arrow[r, "\phi"] & F'
+    \end{tikzcd} \]
+    i.e., the previous proposition applies to $q$ irreducible. By induction, $\coor{E:F(a)} < \coor{E:F}$.
+\end{proof}
+\begin{theorem}
+    $F$ is a field with $\abs{F} = p^n$ if and only if $F$ is a splitting field of $f = x^{pn} - x$ over $\FF_p$.
+\end{theorem}
+This implies that a field of size $p^n$ exists and is unique.
+\begin{proof}
+    In the forwards direction, we want to show $x^{pn} - x$ has $p^n$ roots counted with multiplicity. We claim that if $a \in F$ such that $a \neq 0$, then $a^{p^{n-1}} = 1$. This is beacuse $F^\times$ (i.e., $F \setminus \{0\}$ as a multiplicative group) has order $p^n - 1$, so any element raised to $p^n - 1$ must be the identity.
+    \\[8pt]
+    Now, $a^{p^n} = a$ for all $a \in F$ implies $x^{p^n} - x$ has every element as a root, and so there are $p^n$ roots, so $x^{p^n} - x$ splits over $F$. This means
+    \[ x^{p^n} - x = \prod_{a \in F} (x - a). \]
+    Clearly, it splits on nothing smaller as remoivng any element removes a root, meaning $F$ is a splitting field of $x^{p^n} - x$. The converse case comes later.
+\end{proof}
+\begin{claim}
+    Let $R = \{a \in F : f(a) = 0\}$. $R$ is a field and thus a splitting field, so $F = R$.
+\end{claim}
+\begin{subproof}
+    $0, 1 \in R$ is easy. Suppose $a, b \in R$; then $(ab)^q - ab = a^q b^q - ab = ab - ab$, since $a^q = a$ and $b^q = b$. This means $R$ is closed under multiplciation. We may also check additive closure by
+    \[ (a + b)^q = (a + b)^{pn} = a^{pn} + b^{pn} = a^q + b^q = a+b. \qedhere \]
+\end{subproof}
+As an aside, in characteristic $p$, $(a + b)^p = a^p + b^p$ (by the binomial expansion). If $R$ is a ring and $\opname{char} R = p$, then $\opname{Frob} : R \to R$ by $r \mapsto rp$ is a ring homomorphism. We now claim that $\abs{R} = q$. Namely, $x^q - x$ has no repeated roots. We now do a foray. Even though we don't have a notion of topology to work with limits here, we can define derivatives and differentiability to ``do the right thing'' to use the algebraic side of calculus. \vspace{-12pt}
+\begin{definition}
+    If $f \in F[x]$, $f'$ is determined using $(x^n)' = n x^{n-1}$, i.e., $(\sum a_n x^n)' = \sum a_n n x^{n-1}$.
+\end{definition}
+\begin{claim}
+    $(f + g)' = f' + g'$ and $(fg)' = f'g + fg'$.
+\end{claim}
+\begin{proof}
+    Addition is trivial, and the product rule comes from observing both sides are bilinear in $f$ and $g$, so by how differentiation works on addition, we are done. Indeed, it is enough to check that for $x^n$, $x^m$, we have $(x^n x^m)' = (x^{n+m})'$.
+\end{proof}
+\begin{lemma}
+    If $f$ has a root with multiplicity greater than $1$, then $\gcd(f, f') \neq 1$.
+\end{lemma}
+\begin{proof}
+    Suppose $(x - a)^K \mid f$ with $K \geq 2$; then $f = (x - a)^K g$. Now, $f' = K(x - a)^{K-1} g + (x - a)^K g' = (x - a)^{K-1} (Kg + (x - a)g')$ implies $(x - a)^{K-1} \mid f'$ for $k - 1 \geq 1$. Thus, $(x - a) \mid \gcd(f, f')$, so $\gcd(f, f') \neq 1$.
+\end{proof}
+This ends our foray. We now continue the proof of our claim from earlier.
+\begin{proof}
+    Conversely, suppose $f' = gx^{q-1} - 1 = p^n x^{p^{n-1}} - 1 = -1$. Then $\gcd(f, f') = 1$ and has no repeated roots, so $R = F$ as desired, and $\abs{F} = p^n$.
+\end{proof}
+\begin{lemma}
+    GCDs are absolute: let $f, g \in F[x] \subset E[x]$, where $E/F$; then\\ $\gcd_{F[x]} (f, g) = \gcd_{E[x]} (f, g)$.
+\end{lemma}
+\begin{proposition}
+    The reverse implication follows from the lemma above. For the forwards direction, assume $\gcd(f, f') \neq 1$, so find some $g \in F[x]$ such that $g \mid f$ and $g \mid f'$, and let $E$ be some extension of $F$ in which $g$ has a root $a$. Then $(x - a) \mid f$ and $(x - a) \mid f'$, where $f = (x - a) h$ and $f' = h + (x - a) h' = (x - a) j$. This means $(x - a) \mid h$ implies $f = (x - a)^2 k$, so $f$ has a repeated root in this extension.
+\end{proposition}
+We have some topics left to talk about; namely, Eisenstein's criterion, Gauss' lemma, GCDs being absolute, splitting fields are absolute, and the primitive element theorem.
