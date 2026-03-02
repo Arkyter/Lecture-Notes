@@ -1,0 +1,64 @@
+\section{Day 35: Diffusion/Schr\"odinger in Higher Dimensions (Mar. 2, 2026)}
+We already did \( d = 1 \), so let's do \( d > 1 \). For the heat equation,
+\[ \left\{\begin{NiceMatrix}u_{t} = k \Delta u & x \in \mathbb{R}^{d}, t > 0 \\ u(x, 0) = \phi(x)\end{NiceMatrix}\right.  \]
+\begin{theorem}
+	The solution is given by
+	\[ \tag{H} u(x, t) = \frac{1}{\left( 4 \pi k t \right)^{d/2}} \int_{\mathbb{R}^{d}} e^{- \frac{|x - y|^{2}}{4 k t}} \phi(y) dy. \]
+\end{theorem}
+
+\begin{remark}
+	The formula \( (H) \) in \( 1d \) was already proven a long long time ago. This was including the fact that 
+	\[ \lim_{t \searrow 0} u(x, t) = \phi(x) \]
+	when \( \phi \) is continuous and bounded.
+\end{remark}
+
+\begin{remark}
+	There's two ways to figure out the formula for \( d > 1 \). 
+	\begin{enumerate}
+	
+		\item When \( d = 1 \), we had that
+			\[ \frac{e^{-\frac{(x_{1} - y_{1})^{2}}{4 \pi k t}}}{\left( 4 \pi k t \right)^{\frac{1}{2}}} = K_{t}(x_{1} - y_{1}) \]
+			the heat kernel at time \( t \), and then from here, the problem was solved by
+			\[ \int_{- \infty}^{\infty} K_{t}(x_{1} - y_{1}) \phi(y_{1}) dy_{1}.  \]
+			Notice that \( K_{t} \) itself solved \( \partial_{t} K_{t} = k \partial_{x}^{2} K_{t} \) for \( t > 0 \). If we consider 
+			\[ \vec K_{t}(x_{1}, \ldots, x_{d}) = K_{t}(x_{1}) K_{t}(x_{2}) \cdots K_{t}(x_{d}), \]
+			then \( \vec K_{t} \) solves
+			\[ \left( \partial_{t} - k \Delta_{\mathbb{R}^{d}} \right) \vec K_{t} \equiv 0, \]
+			and this is because \( \Delta_{\mathbb{R}^{d}} \) is by definition just
+			\[ \partial_{x_{1}}^{2} + \cdots + \partial_{x_{d}}^{2}, \]
+			so therefore
+			\[ \partial_{t} \vec K_{t} = \sum_{i=1}^{d} K_{t}(x_{1}) \cdots \partial_{t}\left( K_{t}(x_{i}) \right) \cdots K_{t}(x_{d}), \]	
+			and likewise
+			\[ \Delta_{\mathbb{R}^{d}} \vec K_{t} = \sum_{i=1}^{d} K_{t}(x_{1}) \cdots \partial_{x_{i}}^{2} \left( K_{t}(x_{i}) \right) \cdots K_{t}(x_{d}), \]
+			so factoring yields that it satisfies this. Set for convenience \( x = (x_{1}, \ldots, x_{d}) \).
+			Is this going to be enough to solve our heat equation by convolution? If we consider
+			\[ \int_{\mathbb{R}^{d}} \frac{e^{- \frac{|x - y|^{2}}{4 \pi k t}}}{(4 \pi k t)^{d/2}} \phi(y) dy = U(x, t) \]
+			can we show it solves \( (H) \)? 
+
+			We first need to show that \( \lim_{t \searrow 0}U(x, t) = \phi(x) \). There's a nice way to do this. First, we could just repeat the proof from 1d, then notice that our kernel approximates a delta function. On the other hand, we can just use the fact that when \( \phi \) is bounded, then it can be well approximated by
+			\[ \phi_{1}(x_{1}) \cdots \phi_{d}(x_{d}), \]
+			so the fact that \( K_{t}(x_{i}) \) approximates a delta function as \( t \searrow 0 \) is sufficient.
+
+		\item In the pset we write as an ansats that
+			\[ u(x, t) = \frac{1}{t^{\alpha}} v \left( \frac{x}{t^{\beta}} \right), \]
+			and therefore we plug in, find convenient \( \alpha = \frac{n}{2} \) and \( \beta = \frac{1}{2} \), etc.
+	\end{enumerate}
+\end{remark}
+
+From the fundamental solution (the convolution formula) we see that our solutions have
+\begin{enumerate}
+
+	\item Infinite smoothing
+	\item Infinite speed of propagation
+	\item Decay at a rate of \( t^{- d/2} \) when \( t \) is much larger than \( 1 \), assuming that
+		\[ \int_{\mathbb{R}^{d}} | \phi| < \infty.  \]
+	\item Max principle.
+
+\end{enumerate}
+
+Let's look at the Schr\"odinger equation quickly. This is
+\[ i h u_{t} = \frac{h^{2}}{2m} \Delta u + V(x) u, \]
+for \( u \colon (x, t) \subseteq U \times I \to \mathbb{C}, \) where \( h \) is Planck's constant, \( m \) is the mass, and \( V \) is the potential. If we assume the potential is zero, and we rescale to avoid units, we have that
+\[ - i u_{t} = \Delta u \implies u_{t} = i \Delta u. \]
+If we give the data \( u(x, 0) = \phi(x) \), this is solved by the same thing as the heat equation except the constant \( k \) which was positive becomes an \( i \). We will prove this rigorously.
+
