@@ -1,0 +1,31 @@
+\section{Day 38: Eisenstein's Criterion (Feb. 27, 2026)}
+\begin{theorem}[Eisenstein's, weak version]
+    If $R$ is a UFD, $p \in R$ a prime, and $f = \sum_{k=0}^n a_x x^k \in R[x]$ such that $p \nmid a_n$, $p \mid a_{n-1}, \dots, a_0$, and $p^2 \nmid a_0$. Then $f$ is weakly irreducible in $R[x]$, i.e., factors into a constant times a polynomial.
+\end{theorem}
+As an example, $x^7 - 3$ is irreducible in $\ZZ[x]$ and $x^7 - 3x^5 + 18x - 6$ is also irreducible.
+\begin{proof}
+    Suppose $f = gh$ with $g = \sum b_i x^i$ and $h = \sum c_j x^j$. Then we may investigate which terms in the expansion of $gh$ is divisible by $p$ and not (by checking the coefficients from the supposition); then $a_0 = b_0 c_0$ admits either $b_0$ or $c_0$ divisibly by $p$. Without loss of generality, it is $c_0$ and not $b_0$. Then we claim that for all $k \leq \deg h$, $p \mid c_k$. Indeed, if $p \mid c_0, \dots, c_{k-1}$, then
+    \[ a_k = \sum_{j=0}^{k-1} b_{k-j} c_j + b_0 c_k \]
+    implies $p \mid c_k$, since $p \mid a_k$ and the former term in the summation is divisible by $p$ (but the latter is not). Then $a_n = b_{\deg g} \cdot c_{\deg h}$, but then $p \mid c_{\deg h}$, so $p \mid a_n$, which is a contradiction.\footnote{just read d\&f.}
+\end{proof}
+\begin{definition}
+    A polynomial in $R[x]$ (UFD) is called primitive if the GCD of all its coefficients is $1$.
+\end{definition}
+\begin{lemma}
+    The product of primitive polynomials is again primitive.
+\end{lemma}
+\begin{proof}
+    Suppose not; then there exists $p$ such that $p$ divides into the coefficient of $gh$, so $p \mid gh$ implies that in $(R\,/\!\left<p\right>)[x]$, $gh = 0$. Thus, $g = 0$ or $h = 0$, so all coefficients in $h$ or $g$ are divisible by $p$, so $p \mid g$ or $p \mid h$.
+\end{proof}
+\begin{theorem}
+    Let $R$ be a UFD and $Q = Q(R)$. Let $f \in R[x]$; if $f$ is reducible over $Q[x]$ then it is reducible over $R[x]$.
+\end{theorem}
+\begin{proof}
+    Suppose $f = gh$ in $Q[x]$. Without loss of generality, $f$ is primitive; otherwise, factorizing is easy. Find $a, b \in Q$ such that $ag, bh \in R[x]$ and $ag, bh$ are primitive. Now, $abf = (ag)(bh)$ is primitive in $R[x]$. As $f$, $abf$ are both primitive, it follows that $ab \in R^\times$, so $f = (ag)(bh)$ up to a unit, so $f$ is reducible in $R[x]$.
+\end{proof}
+\begin{theorem}[Eisenstein's Criterion, Strong]
+    Let $R$ be a UFD with $p \in R$ prime; then $f \in R[x]$ such that $p \nmid a_n$ and $p \mid a_{n-1}, \dots, a_1$ and $p^2 \nmid a_0$, then $f$ is irreducible in $Q[x]$.
+\end{theorem}
+\begin{proof}
+    No proof, just accept it for now.
+\end{proof}
