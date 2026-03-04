@@ -2,7 +2,7 @@
 
 \begin{lemma}[Representation Formula]
 		\( u \in \mathcal{C}^{2} \) and \( x_{0} \in D \), \( \Delta u = 0 \) then
-	\[ \mu(x_{0}) = \int_{D} v(x) (- \Delta) u(x) dx + \int_{\partial D}  \mu \frac{\partial}{\partial n} v - v \frac{\partial u}{\partial n} dS_{x} \]
+	\[ u(x_{0}) = \int_{D} v(x) (- \Delta) u(x) dx + \int_{\partial D}  u \frac{\partial}{\partial n} v - v \frac{\partial u}{\partial n} dS_{x} \]
 	where
 	\[ v_{x_{0}}(x) - \frac{1}{4 \pi} \frac{1}{|x - x_{0}|} \]
 \end{lemma}
@@ -27,7 +27,7 @@ for a general domain \( D \).
 	A Green's function for \( - \Delta \) in a domain \( D \) at a point \( x_{0} \in D \) is a function defined such that \( \forall x \in D \) such that
 	\begin{enumerate}
 	
-		\item \( G \in \mathbb{C}^{2} \) with \( \Delta_{x} G = 0 \) in \( D \)
+		\item \( G \in C^{2} \) with \( \Delta_{x} G = 0 \) in \( D \)
 		\item \( G(x) = 0 \) on \( \partial D \)
 		\item \( G(x) + \frac{1}{4 \pi |x - x_{0}|}\) is finite at \( x_{0} \) and \( \mathcal{C}^{2} \) everywhere, and harmonic everywhere.
 	
