@@ -1,0 +1,66 @@
+\section{Day 36: Schr\"odinger in Higher Dimensions (Mar. 9, 2026)}
+We skipped 9.3 in Strauss, but you should read it. We looked at \( u_{t} = k \Delta u \) for \( k > 0 \). We found the fundamental solution \( x \in \mathbb{R}^{d}\), \(t > 0 \) whose Kernel is
+\[ S_{t}(x) = \frac{1}{\left( 4 \pi k t \right)^{d/2}} e^{- \frac{|x|^{2}}{4 k t}}. \]
+Then we moved on to Schr\"odinger very briefly. We will expound upon this. Specifically, the plan is
+\begin{enumerate}
+
+	\item Use analogy to the formula with the heat.
+	\item Do some comparison to the heat equation. There are many differences.
+	\item Solve the harmonic oscillator.
+
+\end{enumerate}
+The Schr\"odinger equation with one electron is
+\[ - i \hbar u_{t} = \frac{\hbar}{2 m} \Delta u + \frac{\ell^{2}}{r} u, \]
+where \( \hbar \) is Planck's constant, and \( \ell \) is a constant, and \( r \) is the radius. We're going to change coordinates here to get the equation
+\[ -i u_{t} = \frac{1}{2} \Delta u + V(x) u. \]
+Here, \( V \) represents the potential somehow.
+
+Let \( u \colon I \times U \to \mathbb{C} \). We say \( u = \operatorname{Re}(u) + i \operatorname{Im}(u) \). Then if we do \( u_{t} = k \Delta u \) for \( k \in \mathbb{C} \) with \( \operatorname{Re} k > 0 \), this it the proof of the heat equation we had before. So instead, let's look at
+\[ u_{t} = \frac{i + \varepsilon}{2} \Delta u \quad \varepsilon > 0. \]
+This is not entirely rigorous, but look at this formula and take the limit as \( \varepsilon \to 0 \) to get our fundamental solution. The solution to
+\[ \left\{\begin{NiceMatrix}u_{t} = \frac{i}{2} \Delta u = 0 \\ u(0, x) = f(x)\end{NiceMatrix}\right.  \]
+is given by
+\[ u(t, x) = \frac{1}{\left( 2 \pi i t \right)^{d/2}} \int_{\mathbb{R}^{d}} e^{- \frac{|x-y|^{2}}{2it}} f(y) \, dy. \]
+The meaning of \( \sqrt{i} \) here is just \( \lim_{\varepsilon \to 0} \sqrt{i + \varepsilon} = \frac{1+i}{\sqrt{2}} \). 
+\begin{remark}
+	This is very different from the heat equation. This is mainly due to the \( i \) in the denominator of our exponent of \( e \). Let's see some ways in which it's very different for fun.
+\end{remark}
+
+\begin{proposition}
+	\begin{itemize}
+	
+		\item The Schr\"odinger equation is time reversible. If \( u(t, x) \) is a solution, then \( \bar u(-t, x) \) is a solution.
+		\item Conservation of total mass. So long as the integral is defined,
+			\[ \int_{\mathbb{R}^{d}} |u(t, x)|^{2} \, dx \equiv c. \]
+			What's the physical meaning of Schr\"odinger? Well \( |u(t, x)|^{2} \) represents the probability density to find our particle at position \( x \) at time \( t \). I don't know this might be wrong, I'm not a physicist. Naturally then this mass should be conserved for this to make sense, otherwise the probability of the particle existing will change which is ridiculous.
+		\item We also see that energy and the momentum are conserved.
+			\[ \int_{\mathbb{R}^{d}}  | \nabla u (t, x)|^{2} \, dx, \quad \operatorname{Im} \left( \int_{\mathbb{R}^{d}} \nabla u(t, x) \cdot \bar u(t, x) \, dx \right). \]
+	\end{itemize}
+\end{proposition}
+in the homework or exam, he might ask ``look at \( u_{t} \) plus more terms, is the energy or momentum conserved, what happens?''
+
+\begin{proof}
+	Let's start with the mass. If \( M \) is our mass, then
+	\begin{align*}
+		\frac{d}{dt} M &= \int_{\mathbb{R}^{d}} \partial_{t}u \, \bar u + u \partial_{t} \, \bar u \, dx = 2 \int_{\mathbb{R}^{d}}  \operatorname{Re}(\partial_{t} u \, \bar u) \, dx \\ 
+									 &= 2 \operatorname{Re} \left(  \int_{\mathbb{R}^{d}} \frac{i}{2} \Delta u \, \bar u \, dx \right) \\
+									 &= 2 \operatorname{Re} \int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}}  i\,  \nabla u \,\overline{\nabla u} \, dx \\
+									 &= 0  
+	\end{align*}
+
+	Now let's check the momentum.
+	\begin{align*}
+		\partial_{t} \int_{\mathbb{R}^{d}}  \partial_{x_{1}} u \, \bar u \, dx &= \int_{\mathbb{R}^{d}} \partial_{x_{1}} \partial_{t} u \, \bar u	+ \partial_{x_{1}} u \, \overline{\partial_{t} u} \, dx \\
+		&= \frac{1}{2} \int_{\mathbb{R}^{d}} \partial_{x_{1}} \, i\Delta \, \bar u - \partial_{x_{1}} u \, i\Delta \bar u \, dx\\
+		&= \frac{1}{2} \int_{\mathbb{R}^{d}} - \partial_{x_{1}} \, i \nabla u \, \nabla \bar u \, dx- \frac{1}{2}  \int_{\mathbb{R}^{d}} \partial_{x_{1}} u \, i\Delta \bar u\, dx \\
+		&= \frac{1}{2} \int_{\mathbb{R}^{d}} i \partial_{x_{1}} u \, \Delta \bar u \, dx - \frac{1}{2}  \int_{\mathbb{R}^{d}} \partial_{x_{1}} u \, i \Delta \bar u \, dx \\
+		&= 0.
+	\end{align*}
+\end{proof}
+As mentioned above, we can look at what happens with \( u_{t} = \frac{i}{2} \Delta u + i V(x) u \).
+
+Let's search for oscillating waves. For the Schr\"odinger equation, we have solutions \( u(x, t) = e^{i x \xi} e^{i t \omega(\xi)} \), which are oscillating waves so long as \( \omega \colon \mathbb{R}^{d} \to \mathbb{C} \) ends up having no imaginary part, this ends up being an oscillator. We want to find \( \xi \in \mathbb{R}^{d} \) and suitable \( \omega \) for this. So let's plug into our equation.
+\[ \partial_{t} u = i \omega(\xi) \cdot u \quad i \Delta u = i \left( - | \xi|^{2} \right) \cdot u. \]
+So if we have \( \omega( \xi) = - | \xi|^{2} \), we have an oscillating solution
+\[ u(x, t) = e^{i x \xi} e^{-i t | \xi|^{2}}. \]
+
