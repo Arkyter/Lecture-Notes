@@ -1,0 +1,53 @@
+\section{Day 14: Lie Brackets and Flow (Mar.\ 3, 2026)}
+Recall that a vector field on $M$ can be regarded as a section of the tangent bundle $X \colon M \to TM$ such that $\pi \circ X = \id_M$, or a linear map $X \colon C^\infty(M) \to C^\infty(M)$ satisfying the proudct rule
+\[ X(fg) = X(f) g + f X(g). \]
+Note that $X_p \in T_p M$ is defined by $X_p (f) = X(f)(p)$, i.e., a directional derivative, and is therefore a vector.
+\begin{definition}
+    We denote $\KX(M)$ to be the collection of vector fields on $M$. 
+\end{definition}
+In general, the composition of two vector fields $X, Y \colon C^\infty(M) \to C^\infty(M)$ is not necessarily a vector field\footnote{since chain rule and product rule are not necessarily commensurate}; indeed, if $M = \RR^n$, $X = Y = \partial_x$, then this clearly does not work, since
+\[ (X \circ Y)(fg) = X(Y(f) g + f Y(g)) \implies \partial_{xx} (fg) = \partial_x (f_x g + f g_x) = f_{xx} g + 2 f_x g_x + f g_{xx}. \]
+However, the \textit{Lie bracket}
+\[ [X, Y] \coloneq X \circ Y - Y \circ X \]
+is always a vector field. In general, commutators of derivations are derivations. The Lie bracket satisfies $[Y, X] = -[X, Y]$, and may in general be written, for
+\[ X = \sum_{i=1}^m a^i \frac{\partial}{\partial x^i}, \quad Y = \sum_{i=1}^m b^i \frac{\partial}{\partial x^i}, \]
+as
+\[ X \circ Y = \sum_{i,j=1}^, a^i \frac{\partial b^i}{\partial x^j} \frac{\partial}{\partial x^i} + \sum_{i,j=1}^m a^i b^j \frac{\partial^2}{\partial x^i \partial x^j} \implies [X, Y] = \sum_{i,j=1}^m \left(a^i \frac{\partial b^i}{\partial x^j} - b^j \frac{\partial a^i}{\partial x^j}\right) \frac{\partial}{\partial x^i}. \]
+Note that this calculation applies to general manifolds by taking local coordinates.\footnote{\href{https://www.math.utoronto.ca/mgualt/courses/18-367/docs/DiffGeomNotes-9.pdf}{see marco gualteri's here, p.88-89}} We now give some examples of computations.
+\begin{enumerate}[(i)]
+    \item Let $X = \partial_i$, $Y = \partial_j$, with coefficients $a^i, b^i$ constant functions. Then $\partial_j a^i = 0$, so the commutator is zero. The definition is coordinate-free, so if you can take a chart where your vector fields are coordinate vector fields, then $[X, Y] = 0$. One such example, is given by considering partial derivatives with respect to latitude and longitude on $S^2$ away from the poles.
+    \item In $\RR^3$, let
+    \[ X = \partial_x, \quad Y = \partial_y + x \partial_z. \]
+    Then $[X, Y] = \partial_x(x) \partial_z = \partial_z$. The geometric interpretation is, how does going in the direction of $X$ then $Y$ differ form going in the direction of $Y$ then $X$?
+    \item We have $[X, fY](g) = X \circ (fY)(g) - (fY) \circ X(h)$; after algebra,
+    \[ [X, fY] = X(f) Y + f[X, Y]. \]
+    \item The \textit{Jacobi identity}:
+    \[ [X, [Y, Z]] + [Y, [X, Z]] + [Z, [X, Y]] = 0. \]
+    This is also true for derivations.
+\end{enumerate}
+We now give more definitions. A vector space over a field of characteristic $\neq 2$ with an operation $[\bullet, \bullet]$ which is bilinear, anticommutative, and satisfies the Jacobi identity is called a \textit{Lie algebra}. An example is $\KX(M)$. Indeed, we say $X \in \KX(M)$ is \textit{tangent} to a submanifold $S$ if, for every $p \in S$,
+\[ X_p \in T_p S \subset T_p M, \]
+so $X$ restricted to $S$ is a vector field on $S$. If $X, Y$ are tangent to $S$, then so is their commutator. We may prove this by considering that $X$ is tangent to $S$ if and only if, for every $p \in S$, $X_p(f)$ depends only on the restriction of $f$ to $S$.
+\\[8pt]
+We now discuss the flow of a vector field. The idea is, ``a vector field can be used to describe ocean currents''. We want a function $\phi(t, x)$ describing where a particle starting at $x$ at time $0$ ends up at time $t$.
+\begin{definition}
+    Let $X \in \KX(M)$. A curve $\gamma \colon (a, b) \to M$ is a \textit{solution curve} for $X$ if $\gamma'(t) = X_{\gamma(t)}$ for all $t \in (a, b)$.
+\end{definition}
+Indeed, we have existence and uniqueness just like we saw in MAT267. Consider $M = U \subset \RR^m$; let $\gamma(t) = x(t) = (x^(t), \dots, x^m(t))$. Then $\gamma$ is a solution curve if it satisfies the first-order ODE $x'(t) = a(x(t))$. As an example, for some $a = (a^i)_{i=1}^m$ constant,
+\[ X = \sum_{i=1}^m a^i \frac{\partial}{\partial x^i} \implies \gamma_p(t) = p + ta. \]
+\begin{theorem}[Existence and Uniqueness]
+    Let $U \subset \RR^m$ be open and $a \in C^\infty(U, \RR^m)$. For every $p \in U$, there exists an open interval $J_p \subset \RR$ containing $0$ and a unique solution $x_p \colon J_p \to U$ such that $x_p'(t) = a(x_p(t))$, $x_p(0) = p$, and $J_p$ is maximal.
+\end{theorem}
+Indeed, define
+\[ \phi(t, p) = x_p(t), \quad \frac{\partial}{\partial t} \phi(t, p) = a(\phi(t, p)). \]
+The maximal domain of definition of $\phi$ is an open subset $J \subset \RR \times U$ containing $\{0\} \times U$, and $\phi$ is smooth on $J$. On a manifold, for $X \in \KX(M)$ and each $p \in M$, there exists a maximal interval $J_p$ and a unique solution $\gamma_p \colon J_p \to M$ such that
+\[ \gamma_p'(t) = X_{\gamma_p(t)}, \quad \gamma_p(0) = p. \]
+The map $\phi(t, p) = \gamma_p(t)$ is smooth and its maximal domain is open.
+\begin{proof}[Proof sketch]
+    If solutions exist and are unique in charts, then we have local existence and uniqueness. Since the maximal interval is open, if an endpoint existed, local existence would extend the solution; uniqueness followed by extending past the largest point where two solutions agree, and smoothness follows from the version of flow in $\RR^m$, along with the \textit{semigroup} or \textit{flow} property
+    \[ \phi_t \circ \phi_s(p) = \phi_{t+s}(p), \]
+    whenever both sides are defined.
+\end{proof}
+\begin{corollary}
+    For fixed $t$, $\phi_t \colon U \to \phi_t(U)$ is a diffeomorphism in $M$.
+\end{corollary}
