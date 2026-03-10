@@ -1,7 +1,7 @@
 \section{Day 15: Flow (Mar.\ 5, 2026)}
 We recap last lecture; let $X$ be a vector field on $M$; then $X$ yields $\phi \colon \mathscr{J} \to M$, where $U$ is an open subset of $\RR \times M$ containing $\{0\} \times M$. We denote $\phi_t(p)$ to be the flow of $p$ follownig $X$ at time $t$. Formally, $\phi_t(p) = X_{\phi_t(p)}$ is smooth and unique where defined. We now discuss the flow property. If $\phi_t(p)$ is defined, then $\phi_s(\phi_t(p)) = \phi_{s+t}(p)$.
 \begin{corollary}
-    $\phi_t$ is a diffeomorphism ontso its image, $\phi_t \colon \mathscr J \cap (\{t\} \times M) \to \phi_t(U)$, where we denote the domain as $\{t\} \times U$ for convenience.
+    $\phi_t$ is a diffeomorphism onto its image, $\phi_t \colon \mathscr J \cap (\{t\} \times M) \to \phi_t(U)$, where we denote the domain as $\{t\} \times U$ for convenience.
 \end{corollary}
 \begin{proof}
     Consider $s = -t$.
@@ -23,7 +23,7 @@ As an example (\S6.29), $x \partial_x$ has flow $\phi_t(x) = e^{tx}$, so it is a
     \[ \phi_{\eps_{\text{min}/2}}(p) \]
     is defined for all $p \in M$, so by the flow property, $\phi_{n \eps_{\text{min}}}(p)$ is defined for all $p \in M$ and $n \in N$, so $\phi_t(p)$ is defined for all $t \geq 0$. We may handle $t < 0$ the exact same way.
 \end{proof}
-Overall, this means that if $X$ is a complete vector field, then its flow defines a $1$-parameter family of diffeomorphisms $\phi_t$ for $t \in \RR$. In particular, flow satisfies the semigroup property (w.r.t.\ composition) and $\phi(t, p)$ is a smooth function on $M\ times \RR$. Conversely, if $\phi_t$ satisfies $\phi_t \circ \phi_s = \phi_{t + s}$ and is smooth on $M \times \RR$, then its the flow of a vector field $X$, i.e.,
+Overall, this means that if $X$ is a complete vector field, then its flow defines a $1$-parameter family of diffeomorphisms $\phi_t$ for $t \in \RR$. In particular, flow satisfies the semigroup property (w.r.t.\ composition) and $\phi(t, p)$ is a smooth function on $M \times \RR$. Conversely, if $\phi_t$ satisfies $\phi_t \circ \phi_s = \phi_{t + s}$ and is smooth on $M \times \RR$, then its the flow of a vector field $X$, i.e.,
 \[ X_p (f) = \restr{\frac{d}{dt}}{t=0} f(\phi_t(p)). \]
 In other words, $X_p$ is the velocity vector in the sense $\gamma(t) = \phi_t(p)$.
 \begin{proof}
@@ -36,8 +36,8 @@ As an example, given $A \in M_{m \times m}(\RR)$, let $\phi_t \colon \RR^m \to \
 \[ \phi_t(x) = e^{tA} x = \left(\sum_{N=0}^\infty \frac{t^N}{N!} A^N x\right). \]
 The corresponding vector field is
 \[ X(f)(x) = \restr{\frac{d}{dt}}{t=0} f(e^{tA} x) = \nabla f \cdot \restr{\frac{d}{dt}}{t=0}(e^{tA}x) = \nabla f \cdot A x, \]
-so $x = \nabla \cdot Ax$.
+so $X = \nabla \cdot Ax$.
 \begin{definition}[Pullback]
     Given $F \colon M \to N$, we define $F^\ast f$, for $f \colon N \to \RR$, as just $f \circ F \colon M \to \RR$. If $F$ is a diffeomorphism, then we may pull back vector fields, i.e., $F^\ast X$ is given by $X_p = DF(F^\ast X_{F\inv(p)})$.
 \end{definition}
-There is another set of definitions for Lie derivative $\SL_X f = \restr{\frac{d}{dt}}{t=0} \phi_t^\ast f \in C^\infty(M)$, where $X$ is a vector field on $M$ We may check that $\SL_X f = X(f)$.
+There is another set of definitions for Lie derivative $\mathcal{L}_X f = \restr{\frac{d}{dt}}{t=0} \phi_t^\ast f \in C^\infty(M)$, where $X$ is a vector field on $M$ We may check that $\mathcal{L}_X f = X(f)$.

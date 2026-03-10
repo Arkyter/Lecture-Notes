@@ -1,8 +1,6 @@
 # lecture-notes
 Lecture notes from my classes at UofT; will be updated daily (hopefully).
 
-**IMPORTANT! i will catch up on 347/367 notes over reading week**
-
 **Disclaimer:** This is updated as often as I want... which is most likely daily, unless I get bored or something. If a day is missing, or if some details are wrong, message me (@arkyter on Discord) so I can fix them :3
 
 Current list of classes:

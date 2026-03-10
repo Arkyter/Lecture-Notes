@@ -12,7 +12,7 @@ However, the \textit{Lie bracket}
 is always a vector field. In general, commutators of derivations are derivations. The Lie bracket satisfies $[Y, X] = -[X, Y]$, and may in general be written, for
 \[ X = \sum_{i=1}^m a^i \frac{\partial}{\partial x^i}, \quad Y = \sum_{i=1}^m b^i \frac{\partial}{\partial x^i}, \]
 as
-\[ X \circ Y = \sum_{i,j=1}^, a^i \frac{\partial b^i}{\partial x^j} \frac{\partial}{\partial x^i} + \sum_{i,j=1}^m a^i b^j \frac{\partial^2}{\partial x^i \partial x^j} \implies [X, Y] = \sum_{i,j=1}^m \left(a^i \frac{\partial b^i}{\partial x^j} - b^j \frac{\partial a^i}{\partial x^j}\right) \frac{\partial}{\partial x^i}. \]
+\[ X \circ Y = \sum_{i,j=1}^, a^i \frac{\partial b^i}{\partial x^j} \frac{\partial}{\partial x^i} + \sum_{i,j=1}^m a^i b^j \frac{\partial^2}{\partial x^i \partial x^j} \implies [X, Y] = \sum_{i,j=1}^m \left(a^j \frac{\partial b^i}{\partial x^j} - b^j \frac{\partial a^i}{\partial x^j}\right) \frac{\partial}{\partial x^i}. \]
 Note that this calculation applies to general manifolds by taking local coordinates.\footnote{\href{https://www.math.utoronto.ca/mgualt/courses/18-367/docs/DiffGeomNotes-9.pdf}{see marco gualteri's here, p.88-89}} We now give some examples of computations.
 \begin{enumerate}[(i)]
     \item Let $X = \partial_i$, $Y = \partial_j$, with coefficients $a^i, b^i$ constant functions. Then $\partial_j a^i = 0$, so the commutator is zero. The definition is coordinate-free, so if you can take a chart where your vector fields are coordinate vector fields, then $[X, Y] = 0$. One such example, is given by considering partial derivatives with respect to latitude and longitude on $S^2$ away from the poles.
@@ -33,7 +33,7 @@ We now discuss the flow of a vector field. The idea is, ``a vector field can be 
 \begin{definition}
     Let $X \in \KX(M)$. A curve $\gamma \colon (a, b) \to M$ is a \textit{solution curve} for $X$ if $\gamma'(t) = X_{\gamma(t)}$ for all $t \in (a, b)$.
 \end{definition}
-Indeed, we have existence and uniqueness just like we saw in MAT267. Consider $M = U \subset \RR^m$; let $\gamma(t) = x(t) = (x^(t), \dots, x^m(t))$. Then $\gamma$ is a solution curve if it satisfies the first-order ODE $x'(t) = a(x(t))$. As an example, for some $a = (a^i)_{i=1}^m$ constant,
+Indeed, we have existence and uniqueness just like we saw in MAT267. Consider $M = U \subset \RR^m$; let $\gamma(t) = x(t) = (x^1(t), \dots, x^m(t))$. Then $\gamma$ is a solution curve if it satisfies the first-order ODE $x'(t) = a(x(t))$. As an example, for some $a = (a^i)_{i=1}^m$ constant,
 \[ X = \sum_{i=1}^m a^i \frac{\partial}{\partial x^i} \implies \gamma_p(t) = p + ta. \]
 \begin{theorem}[Existence and Uniqueness]
     Let $U \subset \RR^m$ be open and $a \in C^\infty(U, \RR^m)$. For every $p \in U$, there exists an open interval $J_p \subset \RR$ containing $0$ and a unique solution $x_p \colon J_p \to U$ such that $x_p'(t) = a(x_p(t))$, $x_p(0) = p$, and $J_p$ is maximal.
