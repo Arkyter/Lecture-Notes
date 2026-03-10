@@ -1,0 +1,64 @@
+\section{Day 16: Lie Derivatives, Frobenius (Mar.\ 10, 2026)}
+Recall last class that we defined the \textit{Lie derivative} of a vector field (\S6.39),
+\[ \mathcal{L}_X Y = \restr{\frac{d}{dt}}{t=0} \Phi_t^\ast Y \in \KX(M), \]
+where $\Phi_t$ denotes the flow of $X$, which we know is a diffeomorhpism. In particular, it also induces the isomorphism $d(\Phi_t)_p \colon T_p M \to T_{\Phi_t(p)} M$, which gives us a way to compare vectors in these spaces.
+\begin{theorem}[\S6.40]
+    If $Y$ is also a vector field, then $\mathcal{L}_X Y = [X, Y]$.
+\end{theorem}
+\begin{proof}
+    Given $f \in C^\infty(M)$, we want to show that $\mathcal{L}_X Y(f) = [X, Y](f)$. Indeed, we have, by definition of pullback,
+    \[ \Phi_t^\ast (Y(f)) = (\Phi_t^\ast Y) (\Phi_t^\ast f). \]
+    By taking the derivative with respect to $t$ at $t = 0$ of both sides, we get\footnote{here, fedya did some expanding that made no sense and was ultimately pointless. just read the book if you're confused here, yeah? oh and he also made an error.}
+    \[ X(Y(f)) = \left(\restr{\frac{d}{dt}}{t=0} \Phi_t^\ast Y\right)(f) + Y \left(\restr{\frac{d}{dt}}{t=0} \Phi_t^\ast f\right) = (\mathcal{L}_X Y)(f) + Y(X(f)), \]
+    where, by rearranging, we get $\mathcal{L}_X Y = [X, Y]$ as desired.
+\end{proof}
+The upshot is that $[X, Y]$ intuitively describes ``how $X$ changes along the flow of $Y$''.
+\begin{theorem}[\S6.41]
+    Let $\Phi$ be the flow of $X$, and let $\Psi$ be the flow of $Y$. We have $[X, Y] = 0$ if and only if $\Phi_t^\ast Y = Y$, or, equivalently, $\Phi_t^\ast X = X$. This is actually also equiaveltnt to $\Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t$.
+\end{theorem}
+As an example, consider $X = \partial_x$ on $\RR^2$; then $[X, Y] = 0$ if and only if $Y$ is invariatn under shifts in the $x$ direction, such as $Y = \partial_x + y \partial_y$. We may visualize this by drawing flow lines.
+\begin{proof}
+    We want to show that $[X, Y] = 0 \iff \Phi_t^\ast Y = Y \iff \Psi_t^\ast X = X$ is equivalent to $\Phi_t \circ \Psi_s = \Psi_s \circ \Phi_t$. In the forwards direction, if $\Phi_t^\ast Y = Y$, %we may define
+    % \[ \gamma(t) = \Psi_s \Phi_t(p), \quad \delta(t) = \Psi_s(p) \]
+    % with associated $\dot \gamma(t) = Y_{\gamma(t)}$ and $\dot \delta(t) = Y_{\delta(t)}$. Then $\Phi_t \circ \Psi_s(p) $
+    then $\Phi_t$ takes integral curves of $Y$ to integral curves of $Y$. In particular, this means $\Phi_t^\ast \Psi_s = \Psi_s$, in the sense that $\Phi_t \circ \Psi_s \circ \Phi_t\inv = \Psi_s$.\footnote{this is not a complete proof, so... read the textbook!}
+\end{proof}
+More generally,\footnote{oh no}
+\[ [X, Y] = \lim_{t \to 0} \frac{1}{t^2} \left(\Phi_t^\ast \Psi_t^\ast - \Psi_t^\ast \Phi_t^\ast\right). \]
+As an example, in $\RR^3$, consider $X = \partial_x$, $Y = \partial_y + x \partial_z$. We see $[X, Y] = \partial_z$, but we can also see it by seeing
+\[ \frac{1}{st} \left(\Psi_s^\ast \Phi_t^\ast - \Phi_t^\ast \Psi_s^\ast\right) \to \frac{\partial}{\partial z}. \]
+Last lecture, someone asked about what the Jacobi's identity was useful for. So we digress here! Recall Jacobi's identity,
+\[ [X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0. \]
+It can be viewed as a product rule where $[\bullet, \bullet]$ is both the derivation an product by rewriting (by using anticommutativity) as
+\[ [X, [Y, Z]] = [[X, Y], Z] + [Y, [X, Z]] \iff \mathcal L_X[Y, Z] = [\mathcal L_X Y, Z] + [Y, \mathcal L_X Z]. \]
+We now introduce the Frobeinus theorem. When can you take linearly independent vector fields $X_1, \dots, X_k$ and ``integrate them'' to get a $k$-dimensional submanifold, i.e., for every $p \in M$, there is locally a $k$-dimensional submanifold through $p$ such that $X_1, \dots, X_k$ are tangent to $S$ near $p$?
+\begin{theorem}[Frobenius]
+    The above happens if and only if $[X_i, X_j] = \sum_{j=1}^r c_{ij}^k(p) X_k$ for all $i, j$. This is called the \textit{Frobenius condition}.
+\end{theorem}
+As an example, consider $M = T^2$ ($2$-torus), and $X_1 = 2 \partial_x + 3 \partial_y$. The flow lines, when drawn on the gluing diagram for the $2$-torus, form ``foliations by submanifolds'' (cf.\ p.151-153). As another example, consider $X = \partial_x + \sqrt{2} \partial_y$; then the flow lines $\RR \to T^2$ define a \textit{foliation} (i.e., locally nice-looking partitions into submaifolds), but they are not globally manifolds.
+\begin{lemma}[Flow Straightening Lemma, \S6.47]
+    Let $X \in \KX(M)$ be a vector field, and $p \in M$ such that $X_p \neq 0$. There there exists a coordinate chart $(U, \varphi)$ about $p$, with corresponding local coordinates $x^1, \dots, x^m$ such that
+    \[ \restr{X}{U} = \frac{\partial}{\partial x^1}. \]
+\end{lemma}
+\begin{proof}
+    Choose a submanifold $N$ of codimension $1$ such that $X_p \notin T_p N$. The idea is that we will use $N$ as the ``$x_1 = 0$'' points along $X$ to get the extra coordinate. Consider $\Phi \colon (-\eps, \eps) \times N \to M$; then $D_{(0, p)} \Phi(s, v) = v + s X_p$, so $\Phi$ has full rank at $(0, p)$, and so, by the inverse function theorem, it is a chart for $M$ near $p$. By definition, $X_p$ is $\partial_1$ with respect to these coordinates.\footnote{read the book p.149 fedya legit said this is a froof}
+\end{proof}
+We are now going to upgrade this lemma\footnote{fedya's words not mine}.
+\begin{lemma}
+    Let $p \in M$, and let $X_1, \dots, X_r \in \KX(M)$ be vector fields, whose values at $p \in M$ are linearly independent with
+    \[ [X_i, X_j] = 0 \]
+    for all $1 \leq i, j \leq r$. Then there exists a coordinate chart $(U, \varphi)$ near $p$, with corresponding local coordinates $x^1, \dots, x^m$ such that
+    \[ \restr{X_1}{U} = \frac{\partial}{\partial x^1}, \dots, \restr{X_r}{U} = \frac{\partial}{\partial x^r}. \]
+\end{lemma}
+\begin{proof}
+    We run through the previous proof with $N$ a codimension $r$ submanifold. By taking
+    \[ F \colon (-\eps, \eps)^r \times N \to M; \]
+    then $F(t_1, \dots, t_r, p) = \Phi_{t_1}^{X_1} \circ \dots \circ \Phi_{t_r}^{X_r}(p)$, where we may rearrange the flows however we like because the vector fields commute. Thus,
+    \[ DF_{(0, \dots, 0, p)} \Phi(s_1, \dots, s_r, v) = v + s_1 \restr{X_1}{p} + \dots + s_r \restr{X_r}{p}. \qedhere \]
+\end{proof}
+We now prove the Frobenius theorem.\footnote{read the book don't read these notes. ive said it like 10 times today now}
+\begin{proof}
+    The Frobenius condition is necessary; it is true because, if $X_i, X_j$ are tangent to a submanifold $S$, then so is $[X_i, X_j]$. The Frobenius condition is also sufficient beacuse we may reduce to the $[\cdot, \cdot] = 0$ case, i.e., solve it in $U \subset \RR^m$, in coordinates
+    \[ X_i = \sum_{j=1}^r a_{ij} (\vec x) \frac{\partial}{\partial x^j} + \sum_{j=r+1}^m b_{ij}(\vec x) \frac{\partial}{\partial x^j}, \]
+    where $a_{ij}(\vec 0) = I_r$ and $b_{ij}(\vec 0) = 0$, which is done by a linear change of coordinates. Define $X_i = \sum_{j=1}^r a_{ij} X_j'$. They span the same thing and commute, so by the flow straightening lemma, they give a submanifold.
+\end{proof}
