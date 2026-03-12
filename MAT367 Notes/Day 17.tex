@@ -1,0 +1,52 @@
+\section{Day 17: Differential Forms (Mar.\ 12, 2026)}
+Let us summarize what we've done with vector fields. To understand vector fields, we need to understand them:
+\begin{enumerate}[(i)]
+    \item Coordinate-wise: $X = \sum_i X^i \partial_{x_i}$, in any chart $(U, \varphi)$ on $M$.
+    \item Abstractly: as a smooth section of the tangent bundle, i.e., a smoort choice of tangent vector at each point.
+    \item Functional: a derivation $C^\infty(M) \to C^\infty(M)$.
+    \item Integral: something that ``generates'' a flow, i.e., a $1$-parameter family of diffeomorphisms.
+\end{enumerate}
+We move from vector fields onto differential forms now (i.e., \S7 in Meinrenken).\footnote{``i'm now going to say a bunch of words, and i'm not sure how much it will mean to you'' aka welcome back to DEFINITIONS!!} 
+We can discuss the previous $4$ ways to define a vector field for differential forms as well.
+\begin{enumerate}[(i)]
+    \item Coordinate-wise: a $k$-form $\omega$ is a sum
+    \[ \sum_{\abs{I} = k} f_I \, d\omega_{i_1} \wedge \dots \wedge d\omega_{i_k}, \]
+    where $I$ is a collection of $k$ indices $i_1, \dots, i_k$.
+    \item Abstract: $\omega$ is a smooth section of a $k$-covector at each point, i.e., a section of some vector bundle.
+    \item Functional: a form is a kind of function
+    \[ \KX(M) \times \dots \times \KX(M) \to C^\infty(M), \]
+    where we consider the product to be a $k$-tuple.
+    \item Integral: a $k$-form is something you can integrate over a $k$-dimensional submanifold.
+\end{enumerate}
+We give an example. Given $f \in C^\infty(M)$, define the (exterior) differential $df \colon \KX(M) \to C^\infty(M)$, where $df(X) = X(f)$. Note that $df$ is $C^\infty(M)$-linear (i.e., a linear map in functions). Specifically,
+\[ df(gX + hY) = g \, df(x) + h \, df(y). \]
+This is left as an exercise. We now expand on the functional definition.
+\begin{definition}[\S7.7]
+    A \textit{$1$-form} on $M$ is a $C^\infty(M)$-linear map from $\KX(M)$ to $C^\infty(M)$.
+\end{definition}
+The set of $1$-forms is denoted $\Omega^1(M)$. In particular, $\Omega^1(M)$ can be regarded as a module over the algebra $C^\infty(M)$.\footnote{see \S7.9 ish, p.164-165}
+\begin{definition}[p.159; \S7.2]
+    Given a vector space $V$, we define its \textit{dual} $V^\ast = \Hom(V, \RR)$. 
+\end{definition}
+Given $\alpha \in V^\ast$, we can write $\alpha(v)$ as $\left<\alpha, v\right>$ to emphasize that $V$ is finite-dimensional. Specifically, $(V^\ast)^\ast = V$ canonically. We can think of $v$ as a homomorphism from $V^\ast \to \RR$. Indeed, in this case, we also have $V^\ast \cong V$, but not canonically unless we first fix an inner product.
+\begin{definition}
+    Given $e_1, \dots, e_n$ a basis for $V$, we get $e^1, \dots, e^n$ the \textit{dual basis} for $V^\ast$, defined by $e^i(e_j) = \delta_{ij}$ (i.e., Kronecker delta).
+\end{definition}
+Given $p \in M$, we have the tangent space $T_p M$. Its dual is the tangent space $T_p^\ast M$, where elements $v \in T_p^\ast M$ are called \textit{covectors}. In $T_p \RR^n$, we have a distinguished basis $\partial_1, \dots, \partial_n$; its dual basis is written $dx_1, \dots, dx_n$, where
+\[ dx_i(a_1 \partial_1 + \dots + a_n \partial_n) = a_i. \]
+\vspace{-24pt}
+\begin{definition}
+    Given a linear map $T \colon V \to W$, the dual map goes the other way, i.e., $T^\ast \colon W^\ast \to V^\ast$, defined by $T^\ast \omega(v) = \omega(Tv)$.
+\end{definition}
+As an example, given a smooth map $f \colon M \to N$, we have $Df_p \colon T_p M \to T_{f(p)} N$ with $v \mapsto f_\ast v = Df_p(v)$. The dual map takes $Df_p^\ast \colon T_{f(p)}^\ast N \to T_p^\ast M$ by $v \mapsto f^\ast v = (Df_p)^\ast(v)$. See \S7.4.
+\\[8pt]
+As another example, given $f \in C^\infty(M)$, we can define a covector $df_p \in T_p^\ast M$ by $df_p(v) = v(f) = D_v f$. In $\RR^n$, we can write
+\[ df_p = \frac{\partial f}{\partial x_1} dx_1 + \dots + \frac{\partial f}{\partial x_n} dx_n. \]
+This is also left as an exercise. Recall that, given $f \colon M \to N$ and $g \colon N \to \RR$< we define $f^\ast g = g \circ f \colon M \to \RR$.
+\begin{proposition}[\S7.6]
+    Given $f \colon M \to N$ smooth and $g \colon N \to \RR$ smooth, we have $d(f^\ast g)_p = f^\ast dg_{f(p)}$.
+\end{proposition}
+\begin{proof}
+    This is an exercise in chasing definitions. For every $v \in T_p M$, we have
+    \[ \left<d (f^\ast g)_p, v\right> = v(f^\ast g) = v(g \circ f) = Df_p(v)(g) = \left<(dg)_{f(p)}, T_p f(v)\right> = \left<f^\ast dg_{f(p)}, v\right>. \qedhere \]
+\end{proof}
