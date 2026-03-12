@@ -1,0 +1,111 @@
+\section{Day 37:  (Mar. 11, 2026)}
+Pop Quiz! For the following property, does the Heat/Schr\"odinger equation satisfy these
+\begin{enumerate}
+
+	\item Time Reversible
+	\item Conserves \( \int |u|^{2} \)
+	\item Finite speed
+	\item Smooths initial data
+	\item There's waves which are oscillating in time when \( u(x, 0) = e^{ix \xi} \) (where for the heat this is thought of as cosines and sines in our coordinates or such).
+	\item The function decays when \( \int |u(x, 0)| \, dx < \infty \). Namely, \( \lim_{t \to \infty} |u(x, t)| = 0 \).
+
+\end{enumerate}
+
+Recall that for the Schr\"odinger and Heat respectively our solutions are
+\[ u(x, t) = \frac{1}{\left( 4 \pi i t \right)^{d/2}} \int_{\mathbb{R}^{d}} e^{- \frac{|x - y|^{2}}{4 i t}} u(y, 0)\, dy, \quad u(x, t) = \frac{1}{\left( 4 \pi k t \right)^{d/2}} \int_{\mathbb{R}^{d}} e^{- \frac{|x - y|^{2}}{4 k t}} u(y, 0)\, dy. \]
+Then I implore you to try this yourself without checking the below, but the answers are on the next page.
+\pagebreak
+\begin{enumerate}
+
+	\item Heat is not time-reversible, Schr\"odinger is, so long as you take the conjugate of your solutions.
+	\item Heat does not conserve mass (it can decay), but Schr\"odinger does.
+	\item Neither has finite speed---just look at the formulas.
+	\item For heat it smooths. For Schr\"odinger it's more complicated. Part of the proof that heat smooths was that the heat kernel decays inside the integral. The Schr\"odinger equation doesn't, so something that looks like a saw wave might not be smooth for the Schr\"odinger. In other words, when we try differentiating, we have that the integral inside the integral of the heat solution will always exist, but for Schr\"odinger it might explode if our function does not decay. So we have to be careful.
+	\item For Schr\"odinger we found them last time. For heat, the initial data yields solutions which decay exponentially, so they are not periodic in time.
+	\item This is true for both of them. Just look at the equation.
+
+\end{enumerate}
+
+\section{Schr\"odinger with Potential}
+The 1d model is
+\[ -i u_{t} = u_{x x} - x^{2} u. \]
+In this case, our potential is \( V = x^{2} \). Then trying to solve yields, for separable solutions \( u(x, t) = T(t)X(x) \),
+\[ -i \frac{T'}{T} = \frac{X''}{X} - x^{2} = \lambda, \]
+for some constant \( \lambda \). We also want that \( \lim_{x \to \pm \infty} |u(x, t)| = 0 \). If we want it to be a probability distribution (in the case of Schr\"odinger) this would be necessary.
+
+Notice that if we had no \( V(x) \) potential, then we would have 
+\[ \frac{X''}{X} = \lambda \]
+yields no solutions. None of our possible choices of \( \lambda \) work for this, they're either linear, constant, sine waves, hyperbolic, etc. In all these cases they do not decay in both directions. Thus the point is that a potential can allow us to produce separable solutions which are bounded. These are called bound states.
+
+Let's solve the above equation.
+\[ - i \frac{T'}{T} = \frac{X''}{X} - x^{2} = -\lambda. \]
+Then we have that \( X'' - x^{2} X - \lambda X = 0 \). So then let's integrate against \( X(x) \). \( -\lambda \) is thought to be the energy of the state \( X \).
+
+Let's find solutions to \( X'' + (\lambda - x^{2}) X = 0 \). Not so easy to find, but if \( \lambda = 1 \) it's not so bad. In this case, we can find
+\[ X(x) = e^{- \frac{x^{2}}{2}} \]
+by some ad hoc methods. For an arbitrary \( \lambda \), we might try to find solutions \( X \) of the form
+\[ X(x) = w(x) e^{\frac{-x^{2}}{2}} \]
+then we have that the equation for \( w \) is
+\[ w'' - 2x w' + (\lambda - 1) w = 0, \]
+which we can get by just subbing in \( w \) to our above equation for \( X \).
+
+Let's try to solve this ODE via power series.
+\[ w(x) = \sum_{k \ge 0} a_{k} x^{k}, \]
+then we have that
+\[ \sum_{k \ge 2} k (k-1)a_{k}x^{k-2} - \sum_{k\ge 1}2k a_{k}x^{k} - \sum_{k \ge 0} (\lambda - 1) a_{k}x^{k} = 0.   \]
+Then
+\begin{enumerate}
+
+	\item For our \( x^{0} \) term, we have that \( 2 a_{2} = \left( 1 - \lambda \right) a_{0} \)
+	\item For our \( x^{1} \) term, we have that \( 6a_{3} = \left( 3 - \lambda \right) \)
+	\item For our \( x^{2} \) term, we have that \( 12 a_{4} = (5 - \lambda) a_{2} \).
+\end{enumerate}
+So in general we get a recursion formula.
+\[ (k+2)(k+1) a_{k+2} = (2k + 1- \lambda) a_{k}. \]
+Since our \( a_{0} \) and \( a_{1} \) are free coefficients, \( a_{0} \) determines our \( a_{2k} \) terms and \( a_{1} \) determines the \( a_{2k+1} \) terms. We have that the expansion stops in one of these sequences if \( 2k - \lambda + 1 = 0 \) which is the same as \( \lambda = 2k+1 \).
+
+\begin{remark}
+If \( a_{0} = 0 \) and \( a_{1} \ne 0 \) this is an odd solution. Likewise, if \( a_{0} \ne 0 \) and \( a_{1} = 0 \), then this is an even solution. 
+
+Therefore, if \( \lambda = 2k+1 \) and we have that \( a_{1} = 0 \), then we get an even polynomial of degree \( k \). On the other hand, if \( k \) is odd and \( a_{0} = 0 \), then this is an odd polynomial with degree \( k \).
+\end{remark}
+As such, we have found some of the solutions. These are the only solutions, which is a problem on the homework. These are Hermite polynomials. Namely,
+\[ H_{0} = 1, \ H_{1} = 2x, \ H_{2} = 4x^{2} - 2, \ H_{3} = 8x^{3} - 12x, \ \ldots \]
+Then our solutions are
+\[ X_{k}(x) = e^{- \frac{x^{2}}{2}}H_{k}(x). \]
+If we evaluate these, then
+\[ u_{k}(x, t) = e^{- \frac{x^{2}}{2}}H_{k}(x) e^{-i(2k+1)t}. \]
+
+\section{Hydrogen Atom}
+Consider
+\[ i u_{t} = - \frac{1}{2} \Delta u - \frac{1}{r} u, \quad r = |x|. \]
+where \( x \in \mathbb{R}^{3} \). Let's look for separated solutions which are decaying. Namely,
+\[ \int_{\mathbb{R}^{3}} |u|^{2} \, dx < \infty \]
+Notice that we are taking minus the Laplacian, so the sign of the potential is going to be negative. This is because our Schr\"odinger equation with potential is
+\[ -i u_{t} = \frac{1}{2} \Delta u + V(x) u, \]
+so we've multipled everything by negative \( 1 \), and minus a positive function (\( \frac{1}{r} \)) is negative. Our potential also decays.
+
+Separation of variables yields that when \( u = T(t) v(x) \),
+\[ 2 i \frac{T'}{T} = - \frac{\Delta X}{X} - \frac{2}{r} = \lambda, \]
+which is a constant. Let's look for \( 0 > \lambda = - \beta^{2} \). Then our solution is of the form
+\[ u_{\lambda}(x, t) = e^{2 i \lambda t} v_{\lambda}(x), \]
+where we need \( v_{\lambda} \) to solve the equation
+\[ - \Delta v - \frac{2}{r} v = - \beta^{2} v. \]
+Looking for radial \( v_{\lambda} = v_{\lambda}(r) \) yields that
+\[ - v'' - \frac{2}{r} v' - \frac{2}{r} v = - \beta^{2} v. \]
+
+As an aside for now, why did we take \( \lambda \) to be negative? Well in this case then we have that
+\[ \int_{\mathbb{R}^{3}} |u|^{2} \, dx < \infty \iff \int_{0}^{\infty} |v(r)|^{2} r^{2}\, dr < \infty.  \]
+So for \( r \) large, we have that \( - v'' \sim - \beta^{2} v \), so it would be decaying nicely at the rate of \( v \sim e^{-\beta r} \).
+
+Set \( v(r) = w(r) e^{- \beta r}  \) as an Ansatz. Then the equation for \( w \) is going to be
+\[ - w'' + \left( 2 \beta - \frac{2}{r} \right)w' + \frac{2}{r} \left( \beta - 1 \right)w = 0. \]
+This once again comes down to factoring.
+\[ w(r) = \sum_{k \ge 0} a_{k} r^{k}. \]
+Before we plug in, let's rewrite it to make things a bit simpler when we plug in. Then this is
+\[ \frac{1}{2} r w'' - \beta r w' + w' - (\beta - 1)w = 0. \]
+Since our exponents of \( r \) are sufficiently low on the higher terms, we can expect the power series method to work. If our \( r^{k} \) was too high on the higher order terms, we wouldn't get a recursion, so it wouldn't work. But the recursion in this case is
+\[ \sum_{k \ge 0}\left( \frac{1}{2} k (k-1) + k \right)a_{k} r^{k-1} + \sum_{k \ge 1} \left[ - \beta(k-1) + (1 - \beta) \right] a_{k-1}r^{k-1} = 0. \]
+As before, this series eventually stops. But Fabio made an error, so I am not going to copy his conclusions at risk of spreading misinformation.
+
+
