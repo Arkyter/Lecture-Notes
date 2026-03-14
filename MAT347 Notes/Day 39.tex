@@ -1,0 +1,62 @@
+\section{Day 39: Gauss' Lemma, Eisenstein's Criterion, Primitive Element Theorem (Mar.\ 3, 2026)}
+We follow the odds and ends handout \href{https://drorbn.net/AcademicPensieve/Classes/25-347-GroupsRingsFields/OddsAndEnds.pdf}{here}.
+\begin{definition}
+    Let $R$ be a UFD; we say that $f \in R[x]$ is \textit{primitive} if the GCD of its coefficients is $1$.
+\end{definition}
+\begin{lemma}
+    If $R$ is a UFD, the product of two primitive polynomials $f, g \in R[x]$ is also primitive.
+\end{lemma}
+\begin{proof}
+    Suppose not; then some prime $p$ divides into all of the coefficients of $f g$. Then, in $(R\,/\!\left<p\right>)[x]$, we have that $\ol f \ol g = 0$, where $\ol f$ and $\ol g$ are the images of $f$ and $g$ in $(R\,/\!\left<p\right>)[x]$; but $(R\,/\!\left<p\right>)[x]$ is a domain, so either $\ol f = 0$ or $\ol g = 0$, so either $p$ divides all the coefficients of $f$ or all the coefficients of $g$, and so either $f$ is not primitive, or $g$ is not primitive.
+\end{proof}
+\begin{corollary}
+    Let $R$ be a UFD, and let $Q$ be its field of fractions. If a polynomial $f \in R[x]$ factorizes as $f = gh$ in $Q[x]$, then it also factors as $f = g_1 h_1$ in $R[x]$, with factors that are $Q$-multiples of the original factors $g_1 = ag$ and $h_1 = a\inv h$, with $a \in Q$.
+\end{corollary}
+\begin{proof}
+    Without loss of generality, $f$ is primitive, or else, divide $f$ and $g$ by the GCD of the coefficients of $f$. Find $a, b \in Q$ such that $g_1 = ag$ and $h_1 = bh$ are in $R[x]$ and are primitive, and note that $abf = (ag)(bh)$ is primitive by Gauss' lemma. Also, $abf$ is a multiple of $f$ and $f$ is primitive. It follows that $f = abf$ (up to a unit, which can be swallowed by either $a$ or $b$ to make the equality strict). So $ab = 1$, so $b = a\inv$, so $g_1 = ag$, and $h_1 = a\inv h$.
+\end{proof}
+\begin{theorem}[Eisenstein]
+    If $R$ is a UFD and $Q$ is its field of fractions, $f = \sum_{k=0}^n a_k x^k \in R[x]$ is a polynomial with coefficients in $R$, $p \in R$ is a prime, and $p \nmid a_n$, $p \mid a_{n-1}, \dots, a_0$, and $p^2 \nmid a_0$, then $f$ is irreducible in $Q[x]$.
+\end{theorem}
+\begin{proof}
+    Suppose not. By the previous corollary, we can assume that $f = gh$ where $g = \sum_i b_i x^i$ and $h = \sum_j c_j x^j$ are both in $R[x]$ and are of positive degrees (or else they'd be units in $Q[x]$). Comparing the constant terms in $f = gh$ and noting that $p$ divides $a_0$ exactly once, we find that $p$ divides exactly one of $b_0$ and $c_0$. Without loss of generality, $p \mid b_0$ yet $p \nmid c_0$. By induction, $p \mid b_k$ for all $k < n$. Indeed, suppose $p \mid b_0,\dots, b_{k-1}$; then $p \mid a_k - \sum_{j=0}^{k-1} b_j c_{k-j} = b_k c_0$, and as $p \nmid c_0$, we have that $p \mid b_k$. So $p$ divides the coefficient of the leading term of $g$ (whose degree is less than $n$), and so it divides the coefficient of the leading term of $f = gh$; but the contradicts the assumption that $p \nmid a_n$.
+\end{proof}
+\begin{proposition}
+    Given a field extension $E/F$, if $a, b \in F[x]$, then $\gcd_E(a, b) = \gcd_F(a, b)$.
+\end{proposition}
+\begin{proof}
+    Let $g_F \coloneq \gcd_F(a, b)$. Clearly, $g_F \mid a$ and $g_F \mid b$ in $F[x]$, whence in $E[x]$. There exists $s, t \in F[x]$ such that $g_F = sa + tb$, so anything dividing $a, b$ in $E[x]$ also divides $g_F$, so $g_F$ satisfies the definition of a GCD in $E[x]$, and so $g_F = \gcd_E(a, b)$.
+\end{proof}
+\begin{lemma}
+    If $E$ is a splitting field of some polynomial $f$ over $F$ and some irreducible polynomial $p \in F[x]$ has a root $v$ in $E$, then $p \in F[x]$ has a root $v$ in $E$, then $p$ splits in $E$.
+\end{lemma}
+\begin{proof}
+    Let $L$ be a splitting field of $p$ over $E$. We need to show that if $w$ is a root of $p$ in $L$, then $w \in E$ (so all the roots of $p$ are in $E$ and hence $p$ splits in $E$). Consider the two extensions
+    \[ E = E(v)/F(v), \quad E(w)/F(w). \]
+    The ``smaller fields'' $F(v)$ and $F(w)$ in these two extensions are isomorphic as they both arise by adding a root of the same irreducible polynomial $p$ to the base field $F$. The ``larger fields'' $E = E(v)$ and $E(w)$ in these two extensions are both the splitting fields of the same polynomial $f$ over the respective ``small fields'', as $E$ is obtained from $F$ by adding all the roots of $f$, and so $E(v)$ and $E(w)$ are obtained from $F(v)$ and $F(w)$ by adding those same roots. Thus, by the uniqueness of splitting extensions, the isomorphism between $F(v)$ and $F(w)$ extends to an isomorphism between $E = E(v)$ and $E(w)$, and in particular, these two fields are isomorphic, and so $\coor{E:F} = \coor{E(v):F} = \coor{E(w):F}$. Since all degrees involved are finite, it follows from the last equality that $E(w) = E$, therefore, $W \in E$.
+\end{proof}
+\begin{theorem}
+    A finite extension $E/F$ is a splitting extension if and only if whenever an irreducible $p \in F[x]$ has a root in $E$, it fully splits in $E$.
+\end{theorem}
+\begin{proof}
+    The forwards direction is the previous lemma. For the reverse direction, if $E = F(\{\alpha_i : 1 \leq i \leq n\})$, then $f = \prod_i \opname{minpoly}_F(\alpha_i)$ fully splits in $E$ and all the $\alpha_i$'s are roots of $f$. So $E$ is a splitting fields of $f$.
+\end{proof}
+For the rest of today, suppose all fields are of characteristic $0$.
+\begin{lemma}
+    If $\lambda$ is the only common root of two polynomials $f, g$ in the splitting field of $fg$, then $\lambda$ is a member of the smallest field $E$ generated by the coefficients of $f$ and $g$.
+\end{lemma}
+\begin{proof}
+    $\gcd(f, g) = (x - \lambda)^k$ is in $E[x]$, so $x^k + k \lambda x^{k-1} + \dots$ is in $E[x]$, so $k\lambda \in E$, and so $\lambda \in E$, so $\opname{char} E = 0$.
+\end{proof}
+\begin{theorem}
+    If $E/F$ is a finite extension, then there is some $\gamma \in E$ such that $F(\gamma)$ ($\gamma$ is called a primitive element for the extension $E/F$).
+\end{theorem}
+\begin{proof}
+    It's enough to show that, whenever $\alpha, \beta \in E$, there is $\gamma \in E$ such that $F(\alpha, \beta) = F(\gamma)$. Let $f, g \in F[x]$ be polynomials such that $f(\alpha) = g(\beta) = 0$, and let $\alpha = \alpha_1, \dots, \alpha_n$, and $\beta = \beta_1, \dots, \beta_m$ be all the roots of $f$ and $g$ respectively in some splitting field of $fg$.
+\end{proof}
+\begin{proof}[The lucky case]
+    If the gaps $\alpha_i - \alpha_j$ between the roots of $f$ are all different from the gaps $\beta_i - \beta_j$ between the roots of $g$, shift $g$ by $\gamma = \beta - \alpha$; namely, set $h(x) = g(x + \beta - \alpha) = g(x + \gamma) \in F(\gamma)[x]$. Now, $f$ and $h$ have exactly one root in common, $\alpha$. So, by the lemma, $\alpha$ belongs to the field generated by the coefficients of $f$ and of $h$, so $\alpha \in F(\gamma)$ and also $\beta = \alpha + \gamma \in F(\gamma)$. We also have that $\gamma = \beta - \alpha \in F(\alpha, \beta)$, so $F(\alpha, \beta) = F(\gamma)$.
+\end{proof}
+\begin{proof}[The general case]
+    $F$ is infinite, so we can find $0 \neq c \in F$ such that after rescaling, we are in the lucky case. Namely, find $0 \neq c \in F$ such that $\{\alpha_i - \alpha_j\} \cap \{c(\beta_i - \beta_j)\} = \emptyset$, set $g_c(x) \coloneq g(c\inv x)$, and use the lucky case to find $\gamma$ such that $F(\gamma) = F(a, c \beta) = F(\alpha, \beta)$.
+\end{proof}
