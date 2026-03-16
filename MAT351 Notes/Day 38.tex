@@ -1,0 +1,40 @@
+\section{Day 38: Fourier Transform (Mar.\ 16, 2026)}
+50\% of the final will be stuff we've seen (from homework, class, etc.), though, some parts of the problems may be harder. The midterm will be graded by tomorrow.
+\\[8pt]
+We will mainly deal with the Fourier transform and its applications (to PDEs) in the last $2$ weeks of class, with relevant textbook references in Strauss \S12.3 (we will have different notation than Strauss, though, so be careful when interpreting) and \S5 in \href{https://kryakin.site/am2/Stein-Shakarchi-1-Fourier_Analysis.pdf}{Stein \& Shakarchi's Fourier Analysis} (the relevant parts are also uploaded onto Quercus). Our notation will follow that of the latter book.
+\\[8pt]
+The Fourier transform is an analogue of the Fourier series. For functions on all space (for now, we say $\RR$, $\RR^d$, etc.). To start, for sufficiently nice $f$, we can write the complex Fourier series
+\[ f(x) = \sum_{M = -\infty}^\infty c_M e^{i M \pi \frac{x}{\ell}}, \quad x \in (-\ell, \ell). \]
+Here, we regard $f$ as a $2\ell$-periodic function, where $c_M$ is the Fourier coefficient given by
+\[ c_M = \frac{1}{2\ell} \int_{-\ell}^\ell f(y) e^{-i M \pi \frac{y}{\ell}} \, dy. \]
+If we want, we may write the Fourier series with the coefficients substituted in as follows,
+\[ f(x) = \sum_{M=-\infty}^\infty \frac{1}{2\ell} \left(\int_{\ell}^\ell f(y) e^{i \frac{M}{\ell} \pi y} \, dy\right) e^{i \frac{M}{\ell} \pi x}, \]
+where we wish to send $\ell \to \infty$ so that the interval $(-\ell, \ell)$ expands to the whole line, making each $\frac{M}{2\ell}$ ``closer'' to each other, so we may consider it a ``continuous variable''.\footnote{Fabio's side remark: technically, we haven't done the theory for Fourier transform in higher dimensions yet, but the processes and constructions are exactly the same.} Indeed, denote $k = \frac{M}{2\ell}$; we get may turn the summation into an integral,
+\[ f(x) = \sum_{M=\infty}^\infty \frac{1}{2\ell} \left(\int_{-\ell}^\ell f(y) e^{-2\pi i k y} \, dy\right) e^{2\pi i k x} \taking{\ell \to \infty} \int_{\RR} \left(\int_{\RR} f(y) e^{-2\pi i k y} \, dy\right) e^{2\pi i k x} \, dk, \]
+where $k = \frac{\pi}{2\ell}$ yields $\frac{dM}{2\ell} = dk$. Note that this is an intuitive explanation, and a rigorous treatment of the above is presented in \S8.3 of Folland's \textit{Real Analysis}. The above computation leads us to define
+\[ \hat f(k) \coloneq \int_\RR f(x) e^{-2\pi i k x} \, dx \]
+to be the Fourier transform of $f$. Note that the formal calculation ``says''
+\[ f(x) = \int_\RR \hat f(k) e^{2\pi i k x} \, dk. \]
+We now make some definitions\footnote{oh no, he's becoming fedyapilled}. An \textit{integrable} function $f \colon \RR^d \to \CC$ is a function that satisfies $\norm{f}_1 < \infty$, i.e.,
+\[ \int_{\RR^d} \abs{f(x)} dx < \infty. \]
+In this manner, the Fourier coefficient is defined as $\hat f \colon \RR^d \to \CC$, where
+\[ \hat f(\xi) \coloneq \int_{\RR^d} f(x) e^{-2\pi i x \cdot \xi} \, d\xi. \]
+``Practice writing $\xi$... if you want to write it on the final or homework properly. I've seen some things.'' Note that the dot product written above is important! After all, we're exponentiating $x \cdot \xi = x_1 \xi_1 + \dots + x_d \xi_d$. We call $\xi$ the \textit{Fourier, frequency, or wave number variable}. In particular, if $\norm{f}_1 < \infty$, then so is $\lVert \hat f \rVert_1 < \infty$, which we may see by writing
+\[ \abs{\hat f(\xi)} \leq \int_{\RR^d} \abs{f(x)} \bigl \lvert e^{-2\pi i x \cdot \xi} \bigr \rvert dx = \norm{f}_1. \]
+In other words, if we denote $\hat \SF$ as the map $f \mapsto \hat f$, then $\hat F$ being integrable implies that it is bounded. We'd like to integrate
+\[ \int_{\RR^d} \hat f(\xi) e^{2\pi i x \cdot \xi} \, d\xi \]
+to get $f(x)$. In principle, the above may not be defined yet under just the assumption that $\hat f$ is bounded.
+\begin{lemma}[Riemann--Lebesgue]
+    If $f$ is integrable, then $\hat f$ is bounded with $\hat f(\xi) \to 0$ as $\abs{\xi} \to \infty$.
+\end{lemma}
+\noindent Again, this is not enough for the above to be integrable, but it is a first step. We will skip the proof for now, since it is immediate from dominated convergence; see \S3.1.4 on p.80 of Stein's \textit{Fourier Analysis} for this exact proof.
+\begin{definition}[Schwartz Space: Stein, p.134]
+    A \textit{Schwartz space} $\mathcal S(\RR^d)$ is the set of all $C^\infty$ smooth functions $\RR^d \to \CC$ such that all its derivatives \textit{rapidly decrease} or \textit{rapidly decay}, i.e.,
+    \[ \sup_{x \in \RR^d} \abs{\abs{x}^k f^{(\ell)}(x)} = c_{k,\ell} < \infty, \quad f^{(\ell)} \coloneq D_x^{(\ell)} f. \]
+\end{definition}
+\noindent Note that we define $D_x^{(\ell)}$ to be the collcetions of derivatives of order $\ell$. Next class, we will see that $\hat \SF \colon \mathcal S \to \mathcal S$ (which you can read about in Stein \S5.1.3!). To wrap up today's lecture, we give a few examples of Schwarz functions on $\RR^d$.
+\begin{enumerate}[(i)]
+    \item The Gaussian $\exp(-\abs{x}^2)$,
+    \item Any bump function with compact support (since bump functions are always taken to be smooth).
+\end{enumerate}
+These are our two main examples.
