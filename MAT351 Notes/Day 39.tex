@@ -1,0 +1,126 @@
+\section{Day 39: Definition of Fourier Transform (Mar.\ 16, 2026)}
+Midterm average 64. There will be a wave question on the final. 
+
+Suppose \( f \colon \mathbb{R}^{d} \to \mathbb{C} \). Then we say that
+\[ \hat f(\xi) = \int_{\mathbb{R}^{d}} e^{-2 \pi i x \xi}f(x) \, dx. \]
+We are thinking of
+\[ f(x) = \int_{\mathbb{R}^{d}} e^{2 \pi i x \xi} \hat f( \xi) d \xi. \]
+Here \( x \) is physical space and \( \xi \) is frequency space. This integration is all just over \( \mathbb{R}^{d} \) so
+\[ \int_{\mathbb{R}^{d}} f = \int_{\mathbb{R}^{d}} \operatorname{Re} f + i \int_{\mathbb{R}^{d}} \operatorname{Im} f.  \]
+There's no complex integration happening.
+
+\begin{remark}
+	Some books don't include the factor of \( 2 \pi i \) in the exponent of the Fourier transform, which can cause constants/factors to change.
+\end{remark}
+
+\begin{definition}[Schwarz Space]
+	\( S(\mathbb{R}^{d}) \) is the Schwarz space, which consists of all \( f \colon \mathbb{R}^{d} \to \mathbb{C} \) such that
+	\[ \sup_{x \in \mathbb{R}^{d}} \left| |x^{\alpha}| D^{\beta} f(x)| \right| < c_{\alpha, \beta}. \]
+	So the Schwarz space is smooth functions which are decaying faster than any polynomial.
+	
+\end{definition}
+
+\begin{lemma}
+	If \( \int_{\mathbb{R}^{d}} |f(x)| \, dx < \infty  \) then \( \hat f \) is bounded and continuous and
+	\[
+		\lim_{|\xi| \to \infty} | \hat f( \xi)| = 0.
+	\]
+\end{lemma}
+
+\begin{proposition}
+	Let \( f \in S(\mathbb{R}^{d}) \). Then if we set
+	\[ \hat F(f)( \xi) = \hat f( \xi) = \int_{\mathbb{R}^{d}} e^{-2 \pi i x \xi} f(x) \, dx, \]
+	then we have the properties
+	\begin{enumerate}
+	
+		\item \[ \widehat{f( \cdot + h)}( \xi) = e^{2 \pi i h \cdot \xi} \hat f( \xi), \quad h \in \mathbb{R}^{d} \]
+		\item 
+			\[ \hat F(f( \cdot) e^{- 2 \pi i h \cdot x})( \xi) = \hat f( \xi + h), \quad h \in \mathbb{R}^{d} \]
+		\item 
+			\[ \widehat{f(\delta \cdot)}( \xi) = \delta^{- d} \hat f( \delta^{-1} \xi). \]
+		\item (\( d = 1 \)) 
+			\[ \widehat{f'}( \xi) = 2 \pi i \xi \hat f( \xi). \]
+		\item (\( d = 1 \))
+			\[ \hat F( - 2 \pi i x f)( \xi) = \frac{d}{d \xi}\hat f(\xi) \]
+
+	
+	\end{enumerate}
+\end{proposition}
+\begin{remark}\relax
+	[What's actually going on here in these propositions? Well it's establishing some sort of correspondence between physical space and frequency space. When you imagine physical/frequency space, a good intuition is to think about your intuition about sound waves or light waves. Physical space returns amplitude and phase at a given point, and frequency space returns the signal's frequency over all space. Immediately we can intuit property three if we recall from Grade 10 science class that wavelength and frequency of light are inversely related.]
+	\begin{tabular}{|c|c|c|}
+		& Physical space & Fourier/Frequency Space \\ \hline
+		1. & Translation & Modulation \\
+		2. & Modulate & Translation \\
+		3. & Rescaling of \( x \) & ``Inverse'' rescaling \\
+		4. & Derivative & Multiply by frequency \\
+		5. & Multiply by position \( x \) & Derivative in frequency.
+
+		
+	\end{tabular}
+	\begin{enumerate}
+	
+		\item Think of the physical meaning. When we translate in physical space this is the same as modulating in Fourier space. Moving over just changes the initial point of our cycling function \( e^{2 \pi i h \cdot \xi} \).
+		\item On the other hand, when we modulate in physical space, this is translation in Fourier space. There's some sort of duality between the Fourier transform and its inverse.
+		\item When you rescale \( x \), this is the inverse scaling of frequencies in Fourier space. This can be derived from the formula, or you can think about it as frequency being inversely correllated with wavelength.
+		\item So long as our function is Schwarz, the algebra works out. In analogy, imagine the Fourier series, where differentiating multiplies by the frequency.
+		\item This is once again by duality.
+	
+	\end{enumerate}
+	I'm gonna leave the proof as an exercise for the reader, because Fabio mostly just skimmed through the algebra and it will be in Stein and Shakarchi.
+\end{remark}
+
+Fabio then drew pictures, but this is a pain to embed, so I'm gonna link a desmos graph.
+
+\begin{example}[Some Pics]\leavevmode
+\begin{enumerate}
+
+	\item \url{https://www.desmos.com/calculator/qcisryezot}
+	\item \url{https://www.desmos.com/calculator/b6cuk5f9sd}
+
+\end{enumerate}
+	
+\end{example}
+
+\begin{proposition}
+	Property 4 gives ``\( f \text{ regular} \implies \hat f \) decays''.
+	Assume that
+	\[ \left( \frac{d}{dx} \right)^{d} f(x) \in L^{1}, \]
+	which in this case means \( L^{1} \) integrable. Then we have that
+	\( \widehat{\left( \frac{d}{dx} \right)^{d}f}(\xi) \)
+	is bounded with the bound
+	\[ \left| \hat f( \xi) \right| \le \frac{C}{| \xi|^{d}}. \]
+\end{proposition}
+\begin{proof}
+	Quite immediate.
+	\[ \widehat{\left( \frac{d}{dx} \right)^{d}f}(\xi) = \left( 2 \pi i \xi \right)^{d} \hat f ( \xi) = c | \xi|^{d} \hat f( \xi) \]
+	so when the former is bounded, so is the latter.
+\end{proof}
+
+Towards an inversion formula. The aim is to show that
+\[ f(x) = \int_{\mathbb{R}^{d}} e^{2 \pi i x \cdot \xi} \hat f( \xi) d \xi. \]
+\begin{lemma}
+	If \( f(x) = e^{- \pi |x|^{2}} \) then we have that it is its own fourier transform. \( \hat f( \xi) = e^{- \pi | \xi|^{2}} \).
+\end{lemma}
+\begin{proof}
+	This is in the problem set using ODEs. We also did this in complex analysis.
+\end{proof}
+
+\begin{theorem}
+	\( f \in S( \mathbb{R}^{d}) \) implies that \( \hat f \in S( \mathbb{R}^{d}) \).
+\end{theorem}
+\begin{proof}[Proof (d = 1).]
+	\( f \in S \) then we have that \( \left| x^{\alpha} \left( \frac{d}{dx} \right)^{\beta} f \right| < c_{\alpha \beta}, \) where \( \alpha, \beta \in \mathbb{N} \). Likewise for \( \hat f \), potentially varying our constants.
+
+	To show that \( \hat f \in S \) it suffices that
+	\[ \left( \frac{d}{dx} \right)^{d} x^{\beta}f \in L^{1},  \]
+	because this implies
+	\[ \widehat{\left( \frac{d}{dx} \right)^{\alpha} x^{\beta} f}( \xi) \]
+	is bounded. So how do we show it's \( L^{1} \)? Well this follows because
+	\begin{align*} 
+		\int_{\mathbb{R}} g(x) \, dx &= \int_{\mathbb{R}} \frac{1 + x^{2}}{1+ x^{2}}g(x) \, dx  \\
+																 &\le c \sup \left| (1 + x^{2}) \left( \frac{d}{dx} \right)^{\alpha} x^{\beta} f(x) \right| < \infty.
+	\end{align*}
+
+
+\end{proof}
