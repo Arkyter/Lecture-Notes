@@ -1,1 +1,39 @@
-\section{Day 40: (Mar.\ 5, 2026)}
+\section{Day 40: Galois Theory (Mar.\ 5, 2026)}
+Given $E/F$, we define the Galois group $\Gal(E/F)$ to be
+\[ \{f \in \Aut(E) \mid f(F) = F\}, \]
+where $\Aut$ denotes the field automorphisms.
+\begin{claim}
+    $\Gal(E/F)$ is a group under composition.
+\end{claim}
+\begin{proof}
+    Trivial, \S14.1.1.
+\end{proof}
+An example of a Galois group is
+\[ \Gal(\CC/\RR) = \begin{cases} \phi \colon \CC \to \CC & \text{is additive, multiplicative, bijective}, \\ \restr{\phi}{\RR} = \id. \end{cases} \]
+In particular, this means $\phi(a + bi) = \phi(a) + \phi(b) \phi(i) = a + b\phi(i)$, meaning $\phi$ is determined by $\phi(i)$, but $\phi(i)^2 = \phi(i^2) = -1$, so $\phi(i) = \sqrt{-1}$, i.e., $\phi(i) = \pm i$. Thus, $\Gal(\CC/\RR) \subset H \cong \ZZ/2$. Are the two elements different? $\phi_1(z) = z$, $\phi_2(z) = \ol z$, and the conjugate has the properties to be an isomorphism, whence we actually have $\Gal(\CC/\RR) \cong \ZZ/2$.
+\\[8pt]
+As an aside, we will usually take $F$ to be characteristic zero (and thus infinite), and $E$ to only be a finite extension; however, there are analogues in characteristic $p$. Today, we will state the fundamental theorem of Galois theory, and go over examples. For the future, characteristic zero will be our standing assumption. We denote
+\[ \Gal(f) = \Gal(F(f) / F), \]
+for $f \in F[x]$, where $F(f)$ is the splitting field of $f$. In this lens, $\Gal(\CC/\RR) = \Gal(x^2 + 1)$, where $x^2 + 1$ is regarded to be in $\RR[x]$. If $G < \Aut(E)$, then $E_G = \{x \in E \mid \forall g \in G, g(x) = x\}$. $E_G$ is a subfield of $E$: it has the identities $0$ and $1$, is closed under the operations, and has inverses. We now give examples.
+\begin{enumerate}[(i)]
+    \item $\CC_{\left<\ol z\right>} = \{z \in \CC \mid z = \ol z\} = \RR$. In this case, we have $\CC_{\Gal(\CC/\RR)} = \RR$.
+    \item Let $E \coloneq Q(\cbrt{2}) \subset \RR$. $\Gal(E/\QQ) = \{\phi \colon E \to E \mid \restr{\phi}{\QQ} = \id\} = \Aut(E)$, and any such $\phi$ must map any root of $x^3 - 2$ into another. Why? If $u^3 = 2$, and $w$ is another root, then $\phi(w^3) = \phi(2) = 2 = \phi(u)^3$, so $\phi(u)$ is a root of $x^3 - 2$; but there is only one root of $x^3 - 2$ in $\RR$ and two in $E$, so $\phi(\cbrt{2}) = \cbrt{2}$. Note that $E = \{a + b 2^{1/3} + c 2^{2/3}\}$, and using the properties of $\phi$, we have that
+    \[ \phi(a + b 2^{1/3} + c 2^{2/3}) = a + b 2^{1/3} + c 2^{2/3} \implies \phi = \id. \]
+    Thus, $\Gal(E/\QQ) = \{e\}$. In this case, $E_{\Gal(E/\QQ)} = E \neq \QQ$; what's different? Well, $E$ isn't a splitting field, but $\CC$ is. Let's try again.
+    \item Let $E \coloneq \QQ(x^3 - 2)$ in $\CC$; our roots are $2^{1/3}$ or $2^{1/3} e^{\frac{2\pi}{3} i}$ or $2^{1/3} e^{\frac{4\pi}{3} i}$, so $E = \QQ(2^{1/3}, e^{\frac{2\pi}{3} i})$.
+    \\[8pt]
+    For ease of computation, denote $\rho$ to be the root of unity above. Then $E = Q(2^{1/3}, 2^{1/3} \rho, 2^{1/3} \rho^2)$, which we will denote to be $u_1, u_2, u_3$ respectively. As before, $\phi$ must permute the roots of $x^3 - 2$, and this defines an automorphism, so $G = \Gal(E, \QQ) \leq \mathrm{Sym}(u_1, u_2, u_3) \cong S_3$, where $\abs{S_3} = 6$. Let us claim that
+    \[ G = \{e, \ol z, \text{an element $\tau$ such that $\tau(u_1) = u_2$}\}, \]
+    because of the diagram below,\footnote{what?}
+    \[
+        \begin{tikzcd} \QQ(u_1, u_2, u_3) \arrow[rr, "\exists \tau"] & & \QQ(u_1, u_2, u_3) \\
+            \QQ(u_1) \arrow[u, dash] \arrow[rr, "\exists \omega"] & & \QQ(u_2) \arrow[u, dash] \\
+            & \QQ \arrow[ul, dash] \arrow[ur, dash] &
+        \end{tikzcd}
+    \]
+    By the diagram, $\tau(u_1) = u_2$, so $G < S_3$ contains $(1 \, 2), (2 \, 3)$, implying $G \cong S_3$. We may check that, since $\ol z \in S_3$, we have $E_{S_3} \subset \RR$. Also, $\tau$ does not fix $2^{1/3}$, so $E = \QQ$, like the firstr example. Now, our intuition should kick in.
+\end{enumerate}
+\begin{theorem}
+    Given $E/F$ a splitting extension of a field $F$ with characteristic zero, there exists a bijection $\{K : E/K/F\}$ with subgroups of $G = \Gal(E/F)$, given by mapping $K \mapsto \Gal(E/K)$ and $H \mapsto E_H$ in the other direction.
+\end{theorem}
+This is the first part of the fundamental theorem of Galois theory.
