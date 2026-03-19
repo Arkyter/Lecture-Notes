@@ -1,0 +1,85 @@
+\section{Day 18: One-forms (Mar.\ 17, 2026)}
+A $1$-form is a smooth choice of covectors at each point on a manifold $M$.
+\begin{definition}[Coordinate-wise]
+    A map sending $p \mapsto \alpha_p$ is a one-form if and only if, for every chart $(U, \varphi)$ on $M$,
+    \[ \alpha_{\varphi(p)} = \sum_{i=1}^m g_i(\varphi(p)) \, dx_i, \]
+    where the $g_i \colon \varphi(U) \to \RR$ are smooth functions.
+\end{definition}
+Consider the following examples,
+\begin{enumerate}[(i)]
+    \item Consider $f \colon M \to \RR$; then on a chart, we have
+    \[ df = \sum_{i=1}^m \frac{\partial f}{\partial x_i} dx_i. \]
+    We leave it as an exercise to show that this is independent of choice of chart.
+    \item $y \, dx$ is a form on $\RR^2$, and is not $df$ for any $f \in \RR^2 \to \RR^2$. This is because, if such an $f$ did exist, we would have
+    \[ 0 = \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x} = 1. \]
+\end{enumerate}
+\begin{definition}[Functional]
+    A $1$-form is a $C^\infty(M)$ linear map $\KX(M) \to C^\infty(M)$ such that, at each point $v \in M$, we apply a covector $\alpha(v)$.
+\end{definition}
+\begin{proposition}
+    Let $\alpha$ be a one-form on $M$; then there is a unique covector $\alpha_p$, $p \in M$, such that
+    \[ [\alpha(X)](p) = \alpha_p(X_p), \forall X \in \KX(M). \]
+\end{proposition}
+\begin{proof}
+    We want to show that if $X_p = Y_p$, then $\alpha(X)(p) = \alpha(Y)(p)$, then this gives a well-defined map $X_p \mapsto \alpha_p(X_p)$. Then, we need to show that it is linear, which will make it a covector. By linearity, it is enough to show that if $X_p = 0$, then $\alpha(X)(p) = 0$; if $X_p = 0$, we can write
+    \[ X = \sum_{i=1}^m f_i y_i, \]
+    where $f_i(p) = 0$; since on some chart, we can have $y_i = \partial_i$ and then extend somehow, we have
+    \[ \alpha(X)(p) = \sum_i \underbrace{f_i(p)}_{=0} \alpha(y_i)(p) = 0. \qedhere \]
+\end{proof}
+\begin{proposition}[\S7.10]
+    Similarly to vector fields, one-forms on $M$ can be restricted to  open subsets $U \subset M$. The two definitions given above are equivalent.
+\end{proposition}
+Recall that the pullback of a function $g \colon N \to \RR$ along $f \colon M \to N$ is defined as $f^\ast g = g \circ f$, so we have that
+\[ Df \colon T_p M \to T_{f(p)} N, \quad v \mapsto f_\ast v. \]
+This induces $T_{f(p)}^\ast N \to T_p^\ast M$ by $\nu \mapsto f^\ast \nu$. Now, given a one-form $\omega \in \Omega^1(N)$, we define its pullback by $(f^\ast \omega)_p = f^\ast(\omega_{f(p)})$.
+\begin{proposition}[\S7.12]
+    This is again a one-form.
+\end{proposition}
+\begin{proof}
+    We use the coordinate-wise definition. We have a smooth function
+    \[ f \colon (U \subset \RR^m) \to (V \subset \RR^n), \quad \omega = \sum_{i=1}^n g_i \, dx_i \in \Omega^1(V). \]
+    We have that $Df_p$ has smooth coordinates for $\partial_{x_j} f_i$, so, notice that the restriction of $f^\ast$ onto $f(p)$ is actually $(Df_p)^\top$. This means
+    \[ (f^\ast \omega)_p = \restr{f^\ast}{f(p)} (\omega_{f(p)}) = \restr{f^\ast}{f(p)} \sum_i g_i(f(p)) \, dx_i, \]
+    which is a composition of smooth maps, whence it is a one-form.
+\end{proof}
+The pullback enjoys a few properties.
+\begin{enumerate}[(i)]
+    \item $(f \circ g)^\ast = g \ast f^\ast$,
+    \item If $g \colon M \to \RR$ is a smooth function, then $f^\ast(g \omega) = f^\ast g \cdot f^\ast \omega$,
+    \item $f^\ast(dg) = d(f^\ast g)$,
+    \item For some coordinates, we have that $(f^\ast \omega)_p$ is given by
+    \[ \restr{f^\ast}{f(p)} \sum_{i=1}^n g_i(f(p)) \, dx_i = \sum_{i=1}^n g_i(f(p)) \restr{f^\ast}{f(p)} \, dx_i = \sum_{i=1}^n \sum_{j=1}^m g_i(f(p)) \frac{\partial f_i}{\partial x_j} \, dx_j. \]
+\end{enumerate}
+\begin{definition}[Abstract]
+    A one-form is a section of the cotangent bundle, i.e., for a smooth manifold $M$, the disjoint union
+    \[ T^\ast M = \bigsqcup_{p \in M} T_p^\ast M \]
+    is called the cotangent bundle of $M$. It has a natural projection map $\pi \colon T^\ast M \to M$ such that $\omega \in T_p^\ast M$ is sent to $p$.
+\end{definition}
+Note that, with tangent bundles, $f \colon M \to N$ defined $DF \colon TM \to TN$; we can only do this sort of thing when $f$ is a diffeomorphism. On the other hand, the pullback of forms is given by: if $\omega \in \Omega(N)$ is defined as $s_\omega \colon N \to T^\ast N$, then $f^\ast \omega$ is given by
+\[ s_{f^\ast\omega} (p) = \restr{f^\ast}{f(p)} (s_\omega \circ f(p)). \]
+We now discuss integration of $1$-forms along a curve (\S7.6 in book). Given a smooth curve $\gamma \colon I \to M$ and $\alpha \in \Omega^1(M)$, we can take $\gamma^\ast \alpha \in \Omega^1(I)$, with
+\[ \gamma^\ast \alpha = f(t) \, dt \]
+for some function $f(t)$. We define
+\[ \int_\gamma \alpha = \int_a^b f(t) \, dt, \]
+where $I = [a, b]$. By the fundamental theorem of calculus, we get the $1$-dimensional version of Stokes' theorem.
+\begin{theorem}[Stokes, 1D; \S7.15]
+    Let $\alpha = df$ for some $f \colon M \to \RR$. Then
+    \[ \int_\gamma \alpha = f(\gamma(b)) - f(\gamma(a)). \]
+\end{theorem}
+\begin{proof}
+    The proof is immediate.
+    \[ \gamma^\ast df = d(\gamma^ast f) = d(f \circ \gamma) = \frac{\partial(f \circ \gamma)}{\partial dt} \, dt, \]
+    then we may conclude by FTC.
+\end{proof}
+We also have that the integral is invariant with respect to reparameterizations. Indeed, we want to show that $\int_\gamma \alpha$ only depends on the curve as a submanifold of $M$, and the form $\alpha$. Formally,
+\[ \int_\gamma \alpha = \pm \int_{\gamma \circ \kappa} \alpha, \]
+where $\kappa \colon I \to I$ is a diffeomorphism and $\pm$ depends on the sign of $\frac{d\kappa}{dt}$.
+\begin{proof}
+    We may write,
+    \[ \int_{\gamma \circ \kappa} \alpha = \int_c^d (\gamma \circ \kappa)^\ast \alpha = \int_c^d \kappa^\ast \gamma^\ast \alpha = \int_{\kappa(c)}^{\kappa(d)} \gamma^\ast \alpha = \pm \int_a^b \gamma^\ast \alpha. \qedhere \]
+\end{proof}
+Recall that $\alpha$ is an \textit{exact} form if it is the exterior derivative of some function $f \colon M \to \RR$. In this case, $\int_\gamma \alpha$ depends only on the endpoints. In fact, this is an if and only if statement; if $\int_\gamma \alpha$ depends only on the endpoints, then define
+\[ f(p) = \int_\gamma \alpha, \]
+where $\gamma$ is any curve from $p_0$ to $p$. As it turns out, $f$ is smooth and $df = \alpha$. As an example, let $M = S^1$ and $\alpha = d\theta$. Then
+\[ \int_{S^1} d\theta = \int_\gamma d\theta = 2\pi, \]
+where $\gamma \colon [a, b] \to S^1$. Since we are integrating over a loop, and we get something nonzero, $d\theta$ cannot be an exact form.

@@ -1,0 +1,44 @@
+\section{Day 19: \texorpdfstring{$k$}{k}-forms (Mar.\ 19, 2026)}
+Last time, we showed that if $\alpha$ is a one-form, then
+\[ \int_\gamma \alpha = \int_a^b \gamma^\ast \alpha = \int_a^b \alpha_{\gamma(t)} \gamma_\ast(\partial_t)) \, dt, \]
+where $\gamma_\ast(\partial_t) \in T_{\gamma(t)} M$. Notice that this doesn't depend on the parametrization of $\gamma$; this is because $\alpha_{\gamma(t)} (kv) = k \alpha_{\gamma(t)} (v)$, i.e., $\int$ remains the same by substitution. Moreover, we have that $\alpha(X + Y) = \alpha(X) + \alpha(Y)$, which doesn't matter for this computation. Now, we want a $k$-form to be a thing that can be integrated over a $k$-dimensinoal submanifold. Formally, this is a map $\omega \colon T_p M \times \dots \times T_p M \to \RR$, where we can define, for $F \colon U \to M$,
+\[ \int_{F(U)} \omega = \int_U \omega_{F(x)} (F_\ast \partial_1, \dots, F_\ast \partial_k) \, dx_1 \dots dx_k. \]
+Once again, we have invariance under reparametrization by diffeomorphisms $G \colon U \to V$. Indeed, we want
+\begin{align*} 
+    &\int_{G(U)} \omega_{F(G\inv(y))} \left((F \circ G\inv)_x \partial_1, \dots, (F \circ G\inv)_x \partial_k\right) \, dy \\
+    & \qquad = \pm \int_U \omega_{F(x)} \left((F \circ G\inv)_x \partial_1, \dots, (F \circ G\inv)_x \partial_k\right) \abs{\det DG\inv} dx,
+\end{align*}
+where $\pm$ is there in case $G$ changes orientation. Therefore, we need:
+\begin{fact}
+    Let $\omega \colon V \times \dots \times V \to \RR$ be a map which is multilinear, i.e., for all $i = 1, \dots, k$, if $v_k = a u + bw$, then
+    \[ \omega(v_1, \dots, v_k) = a \omega(v_1, \dots, u_i, \dots, v_k) + b \omega(v_1, \dots, w_i, \dots, v_k), \]
+    and skew-symmetric, i.e., alternating, where
+    \[ \omega(v_1, \dots, v_k) = -\omega(v_1, \dots, v_i, v_{i-1}, \dots, v_k); \]
+    then $\omega(v_1, \dots, v_k) = C \cdot \det[v_1 \mid \dots \mid v_k]$.
+\end{fact}
+Therefore, if $\omega \colon V \times \dots \times V \to \RR$ is multilinear and alternating, it is called a \textit{alternating $k$-tensor}, where its restriction to any $k$-dimensional subspace behaves like a determinant.
+\begin{definition}[Vague]
+    A $k$-form $\omega \in Omega^k(M)$ is a smooth choice of alternating $k$-tensors $\omega_p \colon T_p M \times \dots \times T_p M \to \RR$ at each $p \in M$.
+\end{definition}
+\begin{definition}[Formal, \S7.20]
+    A $k$-form is a map $\omega \colon \KX(M) \times \dots \times \KX(M) \to C^\infty(M)$ which is \begin{parlist} $C^\infty(M)$-linear in each coordinate, and \item skew-symmetric. \end{parlist}
+\end{definition}
+A $n$-form $\omega \in \Omega^n(\RR^n)$ always takes the form $\omega(X_1, \dots, X_n)(p) = f(p) \det [(X_1)_p \mid \dots \mid (X_n)_p]$, where $f \colon \RR^n \to \RR$ is some smooth function. What do alternating $k$-tensors on $\RR^n$ look like in general?
+\begin{definition}
+    Let $I = \{i_1 < \dots < i_k\} \subset \{1, \dots, n\}$\footnote{for fucks sake bestie just say $k$ indices.} Define $dx_I = dx_{i_1} \wedge \dots \wedge dx_{i_k}$ to be the alternating $k$-tensors, which is, $dx_I(\partial_{i_1}, \dots, \partial_{i_k}) = 1$, $dx_I(\partial_{j}, \dots) = 0$ if $j \notin I$. This uniquely defines an alternating $k$-tensor.
+\end{definition}
+We may interpret the above as, taking $v_1, \dots, v_k$ and computing $\det(\pi_I v_1, \dots, \pi_I v_k)$, where $\pi_I \colon \RR^n \to \left<\partial_{i_1}, \dots, \partial_{i_k}\right>$.
+\begin{lemma}
+    Every alternating $k$-tensor $\omega \colon \RR^n \times \dots \times \RR^n \to \RR$ can be epxressed uniquely as
+    \[ \omega = \sum_{\abs{I} = k} \omega_I \, dx_I, \quad \omega_I \in \RR. \]
+\end{lemma}
+\begin{proof}
+    Let $\omega_I = \omega(\partial_{i_1}, \dots, \partial_{i_k})$. Check that $\omega(v_1, \dots, v_k)$ is determined by these.
+\end{proof}
+\begin{proposition}
+    
+\end{proposition}
+Any $k$-form on $U \subset \RR^n$ is given by $c_p = \sum_{\abs{I} = k} f_I(p) \, dx_I$, where $f_I \colon U \to \RR$ is smooth. Any $k$-form on $M$ can be written this way on  charts. In particular, $\omega(X_1, \dots, X_k)(p) = \omega_p((X_1)_p, \dots, (X_k)_p)$ for some well defined alternating $k$-tensor $\omega_p$.
+\begin{proof}
+    The same proof as for vector fields and $1$-forms.
+\end{proof}
