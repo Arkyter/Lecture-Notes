@@ -1,0 +1,76 @@
+\section{Day 40: More on Fourier Transform (Mar.\ 23, 2026)}
+Recap: The Fourier Transform for \( f \in L^{1} \) is
+\[ \hat f( \xi) = \int_{\mathbb{R}^{d}} e^{-2 \pi i x \xi} f(x) \, dx = \hat {\mathcal{F}}(f) \]
+We are thinking of
+\[ \hat {\mathcal{F}}^{-1}(g)(x) = \int_{\mathbb{R}^{d}} e^{2 \pi i x \cdot y} g(y) \, dy.  \]
+The most important property of the Fourier Transform is that in physical space frequency space the notions of localization and regularity are dual. That is to say that in physical space if your function is decaying at some rate, then the fourier transform will be correspondingly smooth, and likewise if in your physical space you have some smoothness, then there's corresponding decay in frequency space. Likewise going backwards from frequency space to Fourier space.
+
+This was proven last time, but you should know the proof yourself and be able to recreate it. Do it right after lecture if necessary. Now because of this we have that \( \hat {\mathcal{F}} \) maps Schwarz space into itself, and we also have that
+\[ \hat {\mathcal{F}} \left( e^{- \pi |x|^{2}} \right) = e^{- \pi | \xi|^{2}}. \]
+We now want to prove the Fourier inversion formula for the Schwarz space. Namely,
+\[ \hat {\mathcal{F}}^{-1} \circ \hat {\mathcal{F}} = \operatorname{id}, \quad \hat {\mathcal{F}} \circ \hat {\mathcal{F}}^{-1} = \operatorname{id}.  \]
+Let us give one last reason to motivate this being true. There were 5 properties. One was like dilation and translation and such, but then we also had
+\[ \widehat{\partial_{x_{1}} f}( \xi) = 2 \pi i \xi_{1} \hat f. \]
+Then we have also that
+\[ \widehat{\Delta f}(\xi) = - 4 \pi^{2} | \xi|^{2} \hat f(\xi). \]
+So \( \hat {\mathcal{F}} \) ``diagonalizes'' the laplacian. It can transform a PDE into an ODE\@. Let's suppose for the time being that we can actually invert. Namely,
+\[ \Delta f = \hat {\mathcal{F}}^{-1} \left( -4 \pi^{2} | \xi|^{2} \hat f(\xi) \right), \]
+then we can make sense of \(a \left( \sqrt{- \Delta}\right) f\). Namely, when \( a \colon \mathbb{R} \to \mathbb{C} \) is a bounded function, then
+\[ a \left( \sqrt{- \Delta} \right) f = \hat {\mathcal{F}}^{-1} \left( a(2 \pi | \xi|) \hat f( \xi) \right) \]
+Think of \( \sqrt{- \Delta} \to | \xi| \) on the Fourier side. Then our equation corresponds to
+\[ \hat {\mathcal{F}} \left( a( \sqrt{- \Delta}) f \right) = a(2 \pi | \xi|) \hat f ( \xi). \]
+Examples: \( e^{t \Delta}f \) with \( t \ge 0 \). This is going to be a solution of
+\[ \left\{\begin{NiceMatrix}\partial_{t} u = \Delta u & t > 0 \\ u|_{t = 0} = f\end{NiceMatrix}\right.  \]
+We did this a while back in a non-rigorous sense. So let's do it now formally. The meaning of \( e^{t \Delta}f \) is just
+\[ \hat {\mathcal{F}} \left( e^{t \Delta} f \right) = e^{- t 4 \pi^{2} | \xi|^{2}} \hat f( \xi), \]
+where we think of \( a(y) = e^{-t y^{2}} \).
+
+We computed \( \hat u(t, \xi) = e^{-4 \pi^{2} t | \xi|^{2}}\hat f( \xi) \). Then we check that
+\[ \partial_{t} \hat u(t, \xi) = - 4 \pi^{2} | \xi|^{2} \hat u( \xi). \]
+Take \( \hat {\mathcal{F}}^{-1} \). Then we get
+\[ \partial_{t} u(t, x) = \Delta u(t, x). \]
+
+\begin{lemma}
+	\[ \hat {\mathcal{F}} \left( e^{- \pi |x|^{2}} \right)( \xi) = e^{- \pi | \xi|^{2}} \]
+	and therefore we have that
+	\[ \hat {\mathcal{F}} \left( e^{- \delta \pi |x|^{2}} \right) ( \xi) = e^{- \pi \frac{|x|^{2}}{\delta}} \cdot \frac{1}{\sqrt{\delta}}. \]
+\end{lemma}
+
+\begin{proposition}
+	Let \( f, g \in S \) then
+	\[ \int_{} \hat f g = \int_{} f \hat g. \]
+\end{proposition}
+\begin{proof}
+	\begin{align*}
+		\int_{} \hat f(x) g(x) \, dx &= \int_{x} \left( \int_{y} e^{-2 \pi i x y}f(y) \, dy \right)g(x) \, dx \\
+		\tag{Fubini}																 &= \int_{y} \left( \int_{x} e^{-2 \pi i x y}g(x) \, dx \right)f(y) \, dy \\
+																								 &= \int_{} \hat g(y) f(y) \, dy
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	Even though we prove everything for Schwarz functions, typically we can extend all of these identities to make sense beyond just the restricted spots where we prove them to basically whenever they make sense. In this case, the claim is that the previous proposition holds even when \( f, g \in L^{1} \).
+\end{remark}
+
+\begin{proposition}
+	\[ f(0) = \int_{} \hat f( \xi) d \xi. \]
+	More generally, when we plug in \( x \), we have that
+	\[ f(x) = \int_{} \hat f(\xi) e^{2 \pi i x \xi} d \xi\]
+\end{proposition}
+\begin{proof}
+	Let \( f \in S \) be a Schwarz function and \( g = e^{- \pi \delta |x|^{2}} \). Then
+	\begin{align*} 
+		\int_{} \hat f g &= \int \hat f(\xi) e^{- \pi \delta |x|^{2}} \, d \xi \\
+										 &= \int_{} f \hat g\\
+										 &= \int_{} f(x) e^{- \pi \frac{|x|}{\delta}} \frac{1}{\sqrt{\delta}} \, dx
+	\end{align*}
+	So now let us take the limit as \( \delta \to 0 \). Then
+	\[ \int \hat f(\xi) e^{- \pi \delta |x|^{2}} \, d \xi \xrightarrow{\delta \to 0} \int_{} \hat f(\xi) \, d \xi \]
+	whereas for our other integral it's slightly harder. But we know that actually if we set
+	\[ g_{\delta}(x) = e^{- \pi \frac{|x|^{2}}{\delta}} \frac{1}{\sqrt{\delta}}, \]
+	then \( g_{\delta} \) is going to form approximate identities. Therefore,
+	\[
+		\int_{} f(x) e^{- \pi \frac{|x|}{\delta}} \frac{1}{\sqrt{\delta}} \, dx \xrightarrow{\delta \to 0} f(0).
+	\]
+	
+\end{proof}
