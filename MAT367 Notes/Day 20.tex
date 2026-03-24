@@ -1,0 +1,98 @@
+\section{Day 20: Operations on Differential Forms (Mar.\ 24, 2026)}
+Last time, we defined a $k$-form on $M$ to be a smotoh choice of alternating $k$-tensor
+\[ \omega_p \colon T_p M \times \dots \times T_p M \to \RR. \]
+Formally, $\omega \colon \KX(M) \times \dots \times \KX(M) \to C^\infty(M)$ is an alternating $C^\infty(M)$-multilinear function. We may regard this a coordinate-wise construction,
+\[ \omega = \sum_{\substack{\abs{I} = k \\ I \subset \{1, \dots, n\}}} f_I \, dx_I, \]
+where $dx_I$ is $1$ on $\partial_{i_1}, \dots, \partial_{i_k}$ and zero on other sets of basis vectors. We have the following operations on differential forms,
+\begin{itemize}
+    \item Wedge product,
+    \item Exterior derivative,
+    \item Pullback along functions,
+    \item Integration over submanifolds.
+\end{itemize}
+For the wedge product (\S7.22), we have that $\wedge \colon \Omega^k(M) \times \Omega^\ell(M) \to \Omega^{k+\ell}(M)$. We start with the simplest case $k = \ell = 1$. Let $\alpha, \beta \in \Omega^1(M)$, where $\alpha_p \colon T_p M \to \RR$ and $\beta \colon T_p M \to \RR$. Is the wedge product defined like this, $\alpha \wedge \beta(v_1, v_2) = \alpha(v_1) \beta(v_2)$? No, as it is not alternating. Perhaps we could define it as
+\[ \alpha \wedge \beta(v_1, v_2) \coloneq \alpha(v_1) \beta(v_2) - \alpha(v_2) \beta(v_1). \]
+As an example, on $\RR^2$, consider $\alpha = dx$ and $\beta = dy$. We have $\alpha \wedge \beta(v_1, v_2) = x_1y_2 - x_2y_1$ (where $v_1 = (x_1, y_1)$ and $v_2 = (x_2, y_2)$), which is the determinant of the $2 \times 2$ matrix with rows $v_1, v_2$. On $\RR^n$, let $\alpha = dx$ and $\beta = dy$ again; we have that
+\[ \alpha \wedge \beta(\partial_i, \partial_j) = 0 \]
+unless $\{i, j\} = \{1, 2\}$, so this specializes down to our case again, i.e., $\alpha \wedge \beta(\partial_1, \partial_2) = 1$ and $\alpha \wedge \beta(\partial_2, \partial_1) = -1$. In general, given a $k$-linear map $\varphi \colon V \times \dots \times V \to \RR$, we can product an alternating map
+\[ \opname{Sk}(\varphi)(v_1, \dots, v_k) = \sum_{\sigma \in S_k} \mathrm{sign}(\sigma) \varphi(v_{\sigma(1)}, \dots, v_{\sigma(k)}). \]
+In this manner, define: for $\alpha \in \Omega^k(M)$ and $\beta \in \Omega^\ell(M)$, we have
+\[ \alpha \wedge \beta(v_1, \dots, v_{k+\ell}) = \frac{1}{k! \ell!} \sum_{\sigma \in S_{k+\ell}} \mathrm{\sign}(\sigma) \alpha(v_{\sigma(1)}, \dots, v_{\sigma(k)}) \beta(v_{\sigma(k+1)}, \dots, v_{\sigma(k+\ell)}), \]
+i.e., we may ``sum over all shuffles''. In particular, $dx_I = dx_{i_1} \wedge \dots \wedge dx_{i_k}$ for $i_1 < \dots < i_k$; why is this well-defined? We have the properties of the wedge product,
+\begin{enumerate}[(i)]
+    \item Bilinearity: $(f \alpha_1 + \alpha_2) \wedge \beta = f \alpha_1 \wedge \beta + \alpha_@ \wedge \beta$,
+    \item Graded commutativity (\S7.24): $\beta \wedge \alpha = (-1)^{k\ell} \alpha \wedge \beta$, where $\beta \in \Omega^\ell$ and $\alpha \in \Omega^k$. We may note that $kl$ is the sign of the permutation sending $1, \dots, k+\ell$ to $k+1, \dots, k+\ell, 1, \dots, k$.
+    \item Associativity (also \S7.24): $(\alpha_1 \wedge \alpha_2) \wedge \alpha_3 = \alpha_1 \wedge (\alpha_2 \wedge \alpha_3)$. 
+\end{enumerate}
+\begin{corollary}[\S7.21]
+    Every form is locally a sum of forms of the form $f_0 df_1 \wedge \dots \wedge df_k$, where $f_0, \dots, f_k$ are smooth functions.
+\end{corollary}
+\begin{proof}[Proof sketch]
+    $f_0 \, dx_1 \wedge \dots \wedge dx_k$ in local cordinates and $dx_i = d(\vec{x} \mapsto x_i)$.
+\end{proof}
+However, coordinate functions don't extend to the entire of $M$, so we may pick a compact $K \subset U$ (where $U$ is the domain of a coordinate chart) with $k \in V$ open and $V \subset K$. Pick $\varphi \colon M \to \RR$ to be supported on $K$ and equal to $1$ on $V$; then we may use functions $f_i = \varphi x_i$, which extend over $M$, and $\omega = \sum_{\abs{I} = k, I \subset [n]} \omega_I df_{i_1} \wedge \dots \wedge df_{i_k}$.\footnote{i've ran out of footnotes to write and fucks to give, $[n]$ is combinatorialists notation for $1$ to $n$.}
+\\[8pt]
+We now discuss exterior derivatives. Let $\Omega^k \to \Omega^{k+1}$ be a generalization of ``$f \mapsto df$''.
+\begin{definition}[\S7.25]
+    There's a unique collection of linear maps $\Omega^k(M) \to \Omega^{k+1}(M)$ for each $k$, such that
+    \begin{enumerate}[(i)]
+        \item For $f \in \Omega^0(M) = C^\infty(M)$, we have $df \in \Omega^1$ is the differential,
+        \item $d(df) = 0$ for all $f \in C^\infty(M)$,
+        \item The graded product rule holds $d(\alpha \wedge \beta) = d \alpha \wedge \beta + (-1)^{\deg \alpha} \alpha \wedge d\beta$.
+        \item $d(d\alpha) = 0$ for all $\alpha \in \Omega^k(M)$.
+    \end{enumerate}
+\end{definition}
+\begin{proof}[Proof outline]
+    Assume existence, and use this to prove uniqueness, which we will derive a formula for.
+\end{proof}
+\begin{lemma}
+    $d$ is local, i.e., $\restr{(d\alpha)}{U}$ only depends on $\restr{\alpha}{U}$, i.e., this is equivalent to, if $\restr{\alpha}{U} = 0$, then so is $\restr{d\alpha}{U}$.
+\end{lemma}
+\begin{proof}
+    Define $f$ to be a function that is supported on $U$ and equal to $1$ near $p$, so $f \alpha = 0$. By (i, ii, iii), $0 = d(f\alpha) = df \wedge \alpha + f \, d\alpha$. Since $df$ is $0$ at $p$ and $f$ is $1$ at $p$, we have $\restr{(d\alpha)}{p} = 0$. We can do this for every $p \in U$. 
+\end{proof}
+It's enough to see what happens on charts, $\alpha = \sum f_0 \, df_1 \wedge \dots \wedge df_k$. By (i, ii, iii), we have
+\[ d(f_0 \, df_1 \wedge \dots \wedge df_k) = df_0 \wedge \dots \wedge df_k. \]
+This gives us the formula in coordinates,
+\[ d(f \, dx_I) = df \wedge dx_I. \]
+This guarantees uniqueness and the forms property. After this, we may check existence (the formula above is consistent over different charts). This was left as an exercise.
+\begin{definition}
+    A $k$-form $\omega \in \Omega^k(M)$ is closed if $d\omega = 0$; it is exact if $\omega = d\alpha$ (for some $\alpha$).
+\end{definition}
+For some examples,
+\begin{enumerate}[(i)]
+    \item $\omega \in \Omega^m(M)$ implies $d\omega = 0$. There are $m$ nonzero $(m+1)$-forms on $M$.
+    \item $d\theta \in \Omega^1(S^1)$ is closed but not exact (on the other hand, every exact form is closed by (iv)).
+\end{enumerate}
+\begin{definition}
+    The \textit{de Rham cohomology} of $M$ is $H^k(M)$, defined as the quotient of closed forms by exact forms. This is a vector space.
+\end{definition}
+\begin{fact}
+    $H^k(M)$ is finite dimensional if $M$ is compact. $H^k(M)$ only depends on the topology of $M$ (not diffeomorphism type).
+\end{fact}
+We now define pullbacks of forms.
+\begin{definition}
+    Given $F \colon M \to N$, $\alpha \in \Omega^k(M)$, we define the pullback by $F$ to be $F^\ast \alpha(v_1, \dots, v_k) = \alpha(F_\ast v_1, \dots, F_\ast v_k)$.
+\end{definition}
+The pullback admits the following properties (\S7.29),
+\begin{enumerate}[(i)]
+    \item The pullback is actually a differential form (it varies smoothly).
+    \item It preserves $\wedge$: $F^\ast(\alpha \wedge \beta) = F^\ast \alpha \wedge F^\beta$,
+    \item It preserves $d$: $F^\ast (d\alpha) = d F^\ast \alpha$.
+\end{enumerate}
+\begin{proof}
+    First, we check that this holds pointwise. Indeed,
+    \[ F^\ast(\alpha \wedge \beta)(v_1, \dots, v_k) = (\alpha \wedge \beta)(F_\ast v_1, \dots, F_\ast v_k) = \sum \alpha (F_\ast v_{\sigma(1)}, \dots, F_\ast v{\sigma(k)}) \beta(\dots), \]
+    which is precisely $F^\ast \wedge F^\ast \beta$. For the second step, observe that $d, \wedge, F^\ast$ are all $\RR$-linear maps, and that they satisfy local properties, so we only have to show this for $f_0 \, df_1 \wedge \dots \wedge df_k$. From the beginning, we get that
+    \[ F^\ast(df_0 \, df_1 \wedge \dots \wedge df_k) = F^\ast f_0 F^\ast df_1 \wedge \dots \wedge F^\ast df_k, \]
+    which we've already seen that pullbacks of $1$-forms are forms, so we have (i). We also know $F^\ast(df) = dF^\ast f$, so we get (iii).
+\end{proof}
+In particular, we know that, for $F \colon \RR^k \to \RR^k$, every $k$-form is $\omega = f \, dx_1 \wedge \dots \wedge dx_k$ for some $f$. We also have $F^\ast \omega(\partial_1, \dots, \partial_k) = \omega(F_\ast \partial_1, \dots, F_\ast \partial_k) = \omega(\partial_1 F, \dots, \partial_k F)$, which is precisely $\det (DF) \omega(\partial_1, \dots, \partial_k)$, whence $F^\ast \omega \rvert_p = \det (DF_p) \restr{\omega}{F(p)}$.
+\\[8pt]
+We now work through chapter 8 of the book. For a $k$-form on $\RR^k$, every $k$-form is $\omega = f \, dx_1 \wedge \dots \wedge dx_k$ for some $f \in C^\infty(\RR^k)$. If $f$ has compact support in $U$, then we can define $\int_U \omega = \int_{\RR^k} f(x_1, \dots, x_k) \, dx_1 \dots dx_k$. From last time, we see that
+\[ \int_{F(u)} \omega = \pm \int_U F^\ast \omega \]
+by change of variables, where $F \colon U \to F(U)$ is a diffeomorphism. For $k$-forms on a $k$-manifold, suppose $\omega \in \Omega^k(M)$ (where $\dim M = k$) has compact support; then we can find charts $U_1, \dots, U_r$ such that $\omega$ is supported on $U_1 \cup \dots \cup U_r$, and we can write
+\[ \omega = \rho_1 \omega + \dots + \rho_r \omega, \]
+where $\rho_i \colon M \to \RR$, where the $\rho_i$ sum to $1$ on $\supp(\omega)$, and each $\rho_i$ vanish outside of $U_i$. This is a partition of unity. By definition, we get
+\[ \int_M \omega = \sum_{i=1}^r \int_{\varphi_i(U_i)} (\varphi_i\inv)^\ast (\rho_i \omega), \]
+where we choose the $\varphi_i$'s to have compatible orientations, i.e., $\det D(\varphi_i \circ \varphi_j\inv) > 0$ for all $i, j$.
