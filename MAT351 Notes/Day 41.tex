@@ -1,0 +1,153 @@
+\section{Day 41: Theory and Applications (of the Fourier Transform) (Mar.\ 25, 2026)}
+For some reason ``Theory and Applications'' as a title gives me the same vibes as ``Crime and Punishment.'' Our plan is to finish the Fourier Theory part then look at applications to PDE and the Heisenberg uncertainty principle.
+\begin{theorem}
+	If \( f \in S \) is a Schwarz function, then 
+	\[ f(x) = \int_{\mathbb{R}} e^{2 \pi i x \xi} \hat f( \xi) \, d \xi, \]
+	where
+	\[ \hat f( \xi) = \int_{\mathbb{R}} e^{- 2 \pi i x \xi}f(x) \, dx. \]
+\end{theorem}
+\begin{proof}
+	Last time we arrived at
+	\[ f(0) = \int_{\mathbb{R}} \hat f(\xi) \, d \xi \]
+	using the identity
+	\[ \int_{} f \hat g = \int_{} \hat f g \]
+	with the function \( g = e^{-\pi \delta |\xi|^{2}} \). Behind this is also the fact that as \( \delta \to 0 \) this gives approximate identities. To conclude the theorem, let
+	\[ f(x+y) = F(y) \implies F(0) = f(x). \]
+	Then from the above we have that
+	\[ F(0) = \int_{\mathbb{R}} \hat F(\xi) d \xi \implies f(x) = \int_{\mathbb{R}} e^{2 \pi i x \xi} f(\xi) \, d \xi. \]
+\end{proof}
+Let's now extend the Fourier Transform to \( L^{2}(\mathbb{R}^{d}) \). Here,
+\[ L^{2}(\mathbb{R}^{d}) = \left\{ f \text{ measurable} : \left\lVert f \right\rVert_{L^{2}} < \infty \right\}. \]
+where
+\[
+	\left\lVert f \right\rVert_{L^{2}} = \left( \int_{\mathbb{R}^{d}} |f(x)|^{2} \, dx \right)^{\frac{1}{2}}.
+\]
+Notice that \( f \colon \mathbb{R}^{d} \to \mathbb{C} \) potentially. We will prove \( L^{2}(\mathbb{R}^{d}) = \bar S \) the topological closure with the topology given by the \( L^{2} \) norm. We need a few steps to show this.
+\begin{lemma}
+	Let \( f, g \in S \). Then define
+	\[ (f * g)(x) = \int_{\mathbb{R}^{d}} f(x - y) g(y) \, dy. \]
+	\begin{enumerate}
+	
+		\item \(  f * g = g * f \)
+		\item \( f * g \in S \).
+		\item \( \hat {\mathcal{F}}(f * g)(\xi) = \hat f(\xi) \cdot \hat g(\xi) \).
+	
+	\end{enumerate}
+	We call \( f * g \) the convolution of \( f \) and \( g \).
+\end{lemma}
+\begin{proof}
+	\begin{enumerate}
+	
+		\item Change of variables \( y \to x - y \).
+		\item Homework 15.
+		\item We're gonna do this formally for the time being and make it rigorous later. I'll add a star to any of the lines that are dubious.
+			\begin{align*}
+				\hat {\mathcal{F}}(f * g)(\xi) &= \int_{x} e^{-2 \pi i \xi x} \int_{y} f(x-y)g(y) \, dy \, dx \\
+				\tag{\( * \)}&= \int_{y} g(y) \left( \int_{x} e^{-2 \pi i \xi x}f(x-y) \, dx \right) \, dy \\
+										 &= \int_{y} g(y) e^{-2 \pi i \xi y} \left( \int_{x} e^{-2 \pi i \xi (x-y)} f(x-y) \right) \, dx \, dy \\
+										 &= \left( \int_{y} g(y) e^{-2 \pi i \xi y}  \, dy \right) \left( \int_{x} e^{-2 \pi i \xi (x)} f(x) \right) \, dx \\
+										 &= \hat g(\xi) \hat f(\xi).
+			\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	The order of integration for multiple integrals doesn't matter when using the Lebesgue measure. Namely, given \( F \colon \mathbb{R}^{2} \to \mathbb{R} \) with \( F \in L^{1}(\mathbb{R} \times \mathbb{R}) \), then
+	\[ \int \left( \int F(x, y) \, dx \right) dy = \int \left( \int F(x, y) \, dy \right)  dx = \iint F(x, y) \, dx \, dy  \]
+	This is Fubini's theorem. We also have a theorem of Tonelli. If \( G(x, y) \ge 0 \), then
+	\[ \iint_{} G(x, y) \, dx \, dy = \int_{} \left( \int_{} G(x, y) \, dx \right) dy = \int_{} \left( \int_{} G(x, y)\, dy \right) dx. \]
+	The remarkable part for Tonelli is that it need not be integrable. In this sense \( G \) being positive basically accounts for the condition on \( \int_{} |F| \). Namely it's basically saying ``Fubini \textit{plus} if one of these integrals are unbounded then all three are.'' This is by remarking that if we decompose \( F \) into the functions \( F^{+}, F^{-} \) which are both non-negative functions and \( F = F^{+}-F^{-} \), then we can integrate them individually then apply Tonelli. This kind of thing.
+
+	For our purposes, we apply the above with
+	\[ F(x, y) = f(x-y)g(y), \implies G(x, y) = |F(x, y)| = |f(x-y)| \cdot |g(y)|. \]
+\end{remark}
+It follows then that
+\[ \hat {\mathcal{F}}(f * g)(\xi) = \hat f(\xi) \hat g(\xi), \quad f, g \in L^{1}. \]
+
+\begin{remark}
+	We are about to prove Plancharel's for Fourier transforms. The analogue for Fourier series was
+	\[ \left\lVert f \right\rVert^{2}_{L^{2}([0, 2 \pi])} = 2 \pi \sum_{} |\hat f_{n}|^{2}. \]
+	The \( 2 \pi \) factor can be remembered by setting \( f \equiv 1 \) and analyzing like this. Well Fabio says maybe. Doesn't remember if there was such a factor. Me neither to be fair.
+\end{remark}
+
+\begin{theorem}[Plancherel]
+	If \( f \in S \) then \( \left\lVert f \right\rVert_{L^{2}} = \lVert \hat f \rVert_{L^{2}} \).
+\end{theorem}
+\begin{proof}
+	First note that
+	\[ \hat {\mathcal{F}}(\bar f(- \cdot)) = \overline{\hat {\mathcal{F}}(f)}. \]
+	Namely, conjugates can be exchanged with the fourier transform, up to a minus sign in the argument of \( f \). Now, let
+	\[ h = f * \overline{f}(- \cdot).. \]
+	We will use that \( h(0) = \int_{} \hat h(\xi) d \xi \) (proposition from last time) to prove the theorem.
+	\[
+		h(0) = \int_{} f(-y) \bar f(-y) \, dy
+		= \left\lVert f \right\rVert_{L^{2}}^{2}
+	\]
+	\[ \hat h(\xi) = \hat {\mathcal{F}} \left( f * \hat f(- \cdot \right) = \hat f(\xi) \overline{\hat {\mathcal{F}}(f)(\xi)} = | \hat f |^{2}(\xi) \]
+	so we have that
+	\[ \int_{} \hat h(\xi) \, d \xi = \int_{} |\hat f(\xi)|^{2} d \xi = \| \hat f \|^{2}_{L^{2}}. \]
+\end{proof}
+
+Our final step is to define \( \hat f \) for \( f \in L^{2} \).
+\begin{lemma}
+	\( S \) is dense in \( L^{2} \). Namely, for all \( f \in L^{2} \) there exists a sequence \( \psi_{n} \in S \) such that
+	\[ \psi_{n} \xrightarrow{L^{2}} f. \]
+\end{lemma}
+Let us finally prove the original claim.
+\begin{proof}
+	Given \( f \in L^{2} \) let \( \psi_{n} \in S \) as above with \( \psi_{n} \to f \) in \( L^{2} \). Look at \( \hat \psi_{n} \). We claim that \( \hat \psi_{n} \) is Cauchy in \( L^{2} \). To do this, notice that by Plancherel,
+	\[ \|\hat \psi_{n} - \hat \psi_{m}\| = \|\widehat{\psi_{n} - \psi_{m}}\| = \left\lVert \psi_{n} - \psi_{m} \right\rVert_{L^{2}}. \]
+	So since our \( \psi_{n} \) are Cauchy, our \( \hat \psi_{n} \) are as well. Thus, we have that since \( L^{2} \) is complete, \( \hat \psi_{n} \to g \) for some \( g \). We define \( \hat f = g \).
+\end{proof}
+
+\begin{proposition}
+	The Fourier transform is a bijection on the Schwarz space and it's an isometry on \( L^{2} \).
+\end{proposition}
+\begin{proof}
+	For the first fact, the Fourier inversion formula shows that the Fourier transform is invertible. For the second fact, use the parallelogram law.
+	\[ \left\langle f, g \right\rangle_{L^{2}} = \frac{1}{4} \left( \left( \|f + g\|^{2} + \|f - g \|^{2} \right) + i \left( \|f + ig\|^{2} + \|f - ig \|^{2} \right) \right). \]
+	Since the Fourier transform preserves the \( L^{2} \) norm, it preserves the \( L^{2} \) inner product, so it's an isometry.
+\end{proof}
+
+\subsection{Applications}
+We're gonna solve the heat, Schr\"odinger, wave, and poisson equations with the Fourier transform. For Poisson we'll do it on the half plane and also on a strip. Then we'll cover the Heisenberg uncertainty principle.
+
+\begin{example}
+	\[ \left\{\begin{NiceMatrix}u_{t} = \Delta u & t > 0 \ x \in \mathbb{R}^{d} \\ u(0, x) = f\end{NiceMatrix}\right.  \]
+	Take the PDE \( u_{t} = \Delta u \) and transform it in the \( x \) variable. Then
+	\[ \hat u(t, \xi) = \int_{} e^{-2 \pi i x \xi} u(t, x) \, dx. \]
+	Then
+	\[
+		\left\{\begin{NiceMatrix}
+				\hat u_{t}(t, \xi) = -(2 \pi)^{2} |\xi|^{2} \hat u(t, \xi) \\
+				\hat u(0, \xi) = \hat f(\xi)
+		\end{NiceMatrix}\right. 
+	\]
+	which gives us an ODE for \( Z(t) = \hat u(t, \xi) \) for each \( \xi \in \mathbb{R}^{d} \). But we know how to solve an ODE of this form.
+	\[ \hat u(t, \xi) = e^{-(2 \pi)^{2} |\xi|^{2} t} \hat f(\xi). \]
+	Above we cited the quite useful properties that
+	\[ \hat {\mathcal{F}}(\nabla \odot f) = 2 \pi i \xi \odot \hat f(\xi) \]
+	where \( \odot \) is one of our bilinear operations. So like gradient, divergence, curl, go to multiplication, dot product, and cross product.
+
+	From here, 
+	\[ u(t, x) = \hat {\mathcal{F}}^{-1}\left( e^{-(2 \pi)^{2} |\xi|^{2} t}\hat f(\xi) \right) = \left( e^{-\left( 2 \pi \right)^{2} |\xi|^{2} t} \hat f(\xi) \right)^{\vee}. \]
+	Fabio notated the inverse as a power of \( \vee \).
+
+	But we know that
+	\begin{align*}
+		u(t, x) &= \left( \hat K_{t}(\xi) \cdot \hat f(\xi) \right)^{\vee}(x) \\
+						&= K_{t} * f(x).
+	\end{align*}
+	So we just need to find the inverse transform \( \left( e^{-(2 \pi)^{2}|\xi|^{2} t} \right)^{\vee} \).
+
+	\begin{align*}
+		\hat K_{t})(\xi) &= e^{- \pi |2 \sqrt{\pi t} \xi|^{2}} \\
+		\tag{\( G = e^{- \pi |x|^{2}} \)}&= G \left( 2 \sqrt{\pi t} \xi \right) \\
+		\hat {\mathcal{F}}^{-1} \left( \hat K_{t} \right)(\xi)  &= \hat {\mathcal{F}}^{-1} \left( G(\sqrt{4 \pi t} \xi) \right) \\
+																				&= G\left(\frac{x}{\sqrt{4 \pi t}}\right) \frac{1}{\left(4 \pi t\right)^{d/2}} \\
+																				&= \frac{e^{- \frac{|x|^{2}}{4 t}}}{(4 \pi t)^{d/2}}
+	\end{align*}
+\end{example}
+
+
+
