@@ -1,0 +1,40 @@
+\section{Day 21: Stokes' Theorem (Mar.\ 26, 2026)}
+Last time, we integrated a compatly supported $k$-form $\omega$ over an oriented $k$-manifold $M$, where
+\[ \omega = \sum_{i=1}^r \rho_i \omega, \]
+where each $\rho_i$ was a function supported on the oriented coordinate chart $(U_i, \varphi_i)$, with $\sum \rho_i = 1$ at every point (i.e., a partition of unity). We had
+\[ \int_M \omega = \sum \int_{U_i} (\varphi_i\inv)^\ast \rho_i \omega, \]
+where $\omega = f \, dx_1 \wedge \dots \wedge dx_k$. It is important that we have independent of coordinates; similarly, given $\omega \in \Omega^k(M)$, where $M$ is a $m$-dimensional manifold, we can integrate over $k$-dimensional oriented submanifolds $i \colon S \injto M$, i.e.,
+\[ \int_S \omega = \int_S i^\ast \omega, \]
+where $i^\ast \omega$ is viewed as a $k$-form on $S$.
+\begin{theorem}[Generalized Stokes]
+    Let $A \subset M^m$ be a bounded region with boundary $\partial A$. Then, for any $\alpha \in \Omega^{m-1}(M)$ such that $A \cap \supp(\alpha)$ is compact, we have
+    \[ \int_{\partial A} \alpha = \int_A d\alpha. \]
+\end{theorem}
+Maybe, $M$ is a manifold of something higher dimensional. We give some examples.
+\begin{enumerate}[(i)]
+    \item $\alpha \in\Omega^2(\RR^3)$ (i.e., divergence theorem).
+    \item $A$ is a surface with boundary in $\RR^3$. Let $\alpha \in \Omega^1(\RR^3)$. Then this is the multivariable calculus case of the Stokes' theorem.
+    \item Let $\alpha$ be a function in $\Omega^0(M) = C^\infty(M)$. Then this is the fundamental theorem of calculus.
+\end{enumerate}
+\begin{corollary}
+    If $\alpha$ is a closed form, then $\int_{\partial A} \alpha = 0$.
+\end{corollary}
+\begin{enumerate}[(i)]
+    \setcounter{enumi}{3}
+    \item Some example on a torus.
+    \item Some example on a $2$-torus. Read Lee.
+\end{enumerate}
+\begin{definition}
+    Let $M$ be oriented. We say $D \subset M$ is a region with smooth boundary if there exists $f \colon M \to \RR$ is smooth with zero a regular value (i.e., $f\inv(0)$ is a manifold) and $D = f\inv(t \leq 0)$. We write $\partial D = f\inv(0)$ and $\mathrm{int}(D) = f\inv(t < 0)$.
+\end{definition}
+Fix a special atlas covering $D$. We may cover $\partial D$ by submanifold charts $(U, \varphi)$,  where $\varphi(U \cap \partial D) = \varphi(U) \cap \{x_1 = 0\}$; indeed,
+\[ \varphi(U) \cap \mathrm{int}(D) = \varphi(U) \cap \{x_1 < 0\}. \]
+We can get this by (potentially) flipping the coordinate $x_1 \mapsto -x_1$ so that the charts are compatible with the orientation on $M$. We may also cover the interior by some oriented charts, whence an oriented atlas on $D$.
+\begin{proposition}[\S8.6]
+    If we restrict these charts to $\{x_1 = 0\}$, we get an oriented atlas on $\partial D$ (in particular, $\partial D$ is orientable).
+\end{proposition}
+\begin{proof}
+    Consider $\tau \colon \varphi_i(U_i \cap U_j) \to \varphi_j(U_i \cap U_j)$ is a transition map. Consider
+    \[ \vec x = (0, x_2, \dots, x_m); \]
+    we have that $D \tau_{\vec x}$ is a matrix with entry $(1,1)$ positive, and the entire rest of the first row zeroes; the latter block is positive determinant as transition maps work there (or something).
+\end{proof}
