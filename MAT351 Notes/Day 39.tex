@@ -1,3 +1,4 @@
+ % ! TeX root = ../mat351.tex
 \section{Day 39: Properties of Fourier Transform (Mar.\ 18, 2026)}
 Midterm average 64. There will be a wave question on the final. 
 
@@ -13,10 +14,10 @@ There's no complex integration happening.
 	Some books don't include the factor of \( 2 \pi i \) in the exponent of the Fourier transform, which can cause constants/factors to change.
 \end{remark}
 
-\begin{definition}[Schwarz Space]
-	\( S(\mathbb{R}^{d}) \) is the Schwarz space, which consists of all \( f \colon \mathbb{R}^{d} \to \mathbb{C} \) such that
+\begin{definition}[Schwartz Space]
+	\( S(\mathbb{R}^{d}) \) is the Schwartz space, which consists of all \( f \colon \mathbb{R}^{d} \to \mathbb{C} \) such that
 	\[ \sup_{x \in \mathbb{R}^{d}} \left| |x^{\alpha}| D^{\beta} f(x)| \right| < c_{\alpha, \beta}. \]
-	So the Schwarz space is smooth functions which are decaying faster than any polynomial.
+	So the Schwartz space is smooth functions which are decaying faster than any polynomial.
 	
 \end{definition}
 
@@ -48,6 +49,7 @@ There's no complex integration happening.
 \end{proposition}
 \begin{remark}\relax
 	[What's actually going on here in these propositions? Well it's establishing some sort of correspondence between physical space and frequency space. When you imagine physical/frequency space, a good intuition is to think about your intuition about sound waves or light waves. Physical space returns amplitude and phase at a given point, and frequency space returns the signal's frequency over all space. Immediately we can intuit property three if we recall from Grade 10 science class that wavelength and frequency of light are inversely related.]
+
 	\begin{tabular}{|c|c|c|}
 		& Physical space & Fourier/Frequency Space \\ \hline
 		1. & Translation & Modulation \\
@@ -63,7 +65,7 @@ There's no complex integration happening.
 		\item Think of the physical meaning. When we translate in physical space this is the same as modulating in Fourier space. Moving over just changes the initial point of our cycling function \( e^{2 \pi i h \cdot \xi} \).
 		\item On the other hand, when we modulate in physical space, this is translation in Fourier space. There's some sort of duality between the Fourier transform and its inverse.
 		\item When you rescale \( x \), this is the inverse scaling of frequencies in Fourier space. This can be derived from the formula, or you can think about it as frequency being inversely correllated with wavelength.
-		\item So long as our function is Schwarz, the algebra works out. In analogy, imagine the Fourier series, where differentiating multiplies by the frequency.
+		\item So long as our function is Schwartz, the algebra works out. In analogy, imagine the Fourier series, where differentiating multiplies by the frequency.
 		\item This is once again by duality.
 	
 	\end{enumerate}

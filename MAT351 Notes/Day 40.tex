@@ -1,3 +1,4 @@
+ % ! TeX root = ../mat351.tex
 \section{Day 40: More on Fourier Transform (Mar.\ 23, 2026)}
 Recap: The Fourier Transform for \( f \in L^{1} \) is
 \[ \hat f( \xi) = \int_{\mathbb{R}^{d}} e^{-2 \pi i x \xi} f(x) \, dx = \hat {\mathcal{F}}(f) \]
@@ -5,9 +6,9 @@ We are thinking of
 \[ \hat {\mathcal{F}}^{-1}(g)(x) = \int_{\mathbb{R}^{d}} e^{2 \pi i x \cdot y} g(y) \, dy.  \]
 The most important property of the Fourier Transform is that in physical space frequency space the notions of localization and regularity are dual. That is to say that in physical space if your function is decaying at some rate, then the fourier transform will be correspondingly smooth, and likewise if in your physical space you have some smoothness, then there's corresponding decay in frequency space. Likewise going backwards from frequency space to Fourier space.
 
-This was proven last time, but you should know the proof yourself and be able to recreate it. Do it right after lecture if necessary. Now because of this we have that \( \hat {\mathcal{F}} \) maps Schwarz space into itself, and we also have that
+This was proven last time, but you should know the proof yourself and be able to recreate it. Do it right after lecture if necessary. Now because of this we have that \( \hat {\mathcal{F}} \) maps Schwartz space into itself, and we also have that
 \[ \hat {\mathcal{F}} \left( e^{- \pi |x|^{2}} \right) = e^{- \pi | \xi|^{2}}. \]
-We now want to prove the Fourier inversion formula for the Schwarz space. Namely,
+We now want to prove the Fourier inversion formula for the Schwartz space. Namely,
 \[ \hat {\mathcal{F}}^{-1} \circ \hat {\mathcal{F}} = \operatorname{id}, \quad \hat {\mathcal{F}} \circ \hat {\mathcal{F}}^{-1} = \operatorname{id}.  \]
 Let us give one last reason to motivate this being true. There were 5 properties. One was like dilation and translation and such, but then we also had
 \[ \widehat{\partial_{x_{1}} f}( \xi) = 2 \pi i \xi_{1} \hat f. \]
@@ -49,7 +50,7 @@ Take \( \hat {\mathcal{F}}^{-1} \). Then we get
 \end{proof}
 
 \begin{remark}
-	Even though we prove everything for Schwarz functions, typically we can extend all of these identities to make sense beyond just the restricted spots where we prove them to basically whenever they make sense. In this case, the claim is that the previous proposition holds even when \( f, g \in L^{1} \).
+	Even though we prove everything for Schwartz functions, typically we can extend all of these identities to make sense beyond just the restricted spots where we prove them to basically whenever they make sense. In this case, the claim is that the previous proposition holds even when \( f, g \in L^{1} \).
 \end{remark}
 
 \begin{proposition}
@@ -58,7 +59,7 @@ Take \( \hat {\mathcal{F}}^{-1} \). Then we get
 	\[ f(x) = \int_{} \hat f(\xi) e^{2 \pi i x \xi} d \xi\]
 \end{proposition}
 \begin{proof}
-	Let \( f \in S \) be a Schwarz function and \( g = e^{- \pi \delta |x|^{2}} \). Then
+	Let \( f \in S \) be a Schwartz function and \( g = e^{- \pi \delta |x|^{2}} \). Then
 	\begin{align*} 
 		\int_{} \hat f g &= \int \hat f(\xi) e^{- \pi \delta |x|^{2}} \, d \xi \\
 										 &= \int_{} f \hat g\\

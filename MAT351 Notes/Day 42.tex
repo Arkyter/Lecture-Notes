@@ -1,0 +1,79 @@
+ % ! TeX root = ../mat351.tex
+\section{Day 42: More Applications of the Fourier Transform (Mar.\ 30, 2026)}
+We solved the heat before. The same procedure works for the Schr\"odinger equation.
+\begin{example}
+	\[ \left\{\begin{NiceMatrix}u_{t} = \Delta u & t > 0 \ x \in \mathbb{R}^{d} \\ u(0, x) = f\end{NiceMatrix}\right.  \]
+	Take the PDE \( u_{t} = \Delta u \) and transform it in the \( x \) variable. Then
+	\[ \hat u(t, \xi) = \int_{} e^{-2 \pi i x \xi} u(t, x) \, dx. \]
+	Then
+	\[
+		\left\{\begin{NiceMatrix}
+				\hat u_{t}(t, \xi) = -i (2 \pi)^{2} |\xi|^{2} \hat u(t, \xi) \\
+				\hat u(0, \xi) = \hat f(\xi)
+		\end{NiceMatrix}\right. 
+	\]
+	which gives us an ODE for \( Z(t) = \hat u(t, \xi) \) for each \( \xi \in \mathbb{R}^{d} \). This is like before.
+	\[ \hat u(t, \xi) = e^{-i (2 \pi)^{2} |\xi|^{2} t} \hat f(\xi). \]
+	From here, 
+	\[ u(t, x) = \hat {\mathcal{F}}^{-1}\left( e^{-i (2 \pi)^{2} |\xi|^{2} t}\hat f(\xi) \right) = \left( e^{-i \left( 2 \pi \right)^{2} |\xi|^{2} t} \hat f(\xi) \right)^{\vee}. \]
+	As before though,
+	\begin{align*}
+		u(t, x) &= \left( \hat K_{t}(\xi) \cdot \hat f(\xi) \right)^{\vee}(x) \\
+						&= K_{t} * f(x).
+	\end{align*}
+	So we just need to find the inverse transform \( \left( e^{-i (2 \pi)^{2}|\xi|^{2} t} \right)^{\vee} \). Notice though that this time it was a formal calculation, because we had to take the inverse transform of the function
+	\[ \hat K_{t}(x) = e^{-4 \pi i t |\xi|^{2}}, \]
+	which is smooth and bounded but not necessarily \( L^{2} \).
+\end{example}
+
+\begin{example}
+	The same kind of thing could solve
+	\[ - \Delta u = f \quad - \Delta v + v = f  \]
+	because in \( \mathbb{R}^{d} \),
+	\[ 4 \pi |\xi|^{2} \hat u = \hat f, (1 + 4 \pi |\xi|^{2})\hat v = \hat f \]
+	so therefore
+	\[ \hat u(\xi) = \frac{\hat f}{4 \pi |\xi|^{2}}, \quad \hat v (\xi) = \frac{\hat f}{1 + 4 \pi |\xi|^{2}}. \]
+	Then we have that
+	\[ u = \left( \frac{1}{4 \pi^{2} |\xi|^{2}} \right)^{\vee} * f, \quad v = \left( \frac{1}{1 + 4 \pi^{2} |\xi|^{2}} \right)^{\vee} * f \]
+	and the former is
+	\[ u = \left( \frac{1}{4 \pi |x|} \right) * f. \]
+	The latter he didn't write. Notice however the former function---namely,
+	\[ \frac{1}{4 \pi^{2} |\xi|^{2}}, \]
+	is not \( L^{2} \). So we once again have a problem.
+\end{example}
+
+\begin{proposition}[Exercises]\leavevmode
+	\begin{enumerate}
+	
+		\item Is the Fourier transform of a radial function radial?
+		\item A function \( f \) is homogeneous of degree \( \alpha \) if
+			\[ f(\lambda x) = \lambda^{\alpha} f(x), \lambda > 0, x \in \mathbb{R}^{d}. \]
+			If \( f \) is homogeneous of degree \( \alpha \), then \( \hat f \) is homogeneous of degree \( -d - \alpha \).
+	
+	\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+	If we know 1.\ then we can prove the first one easily. For the second one we would do the same kind of thing, finding radial solutions of our PDE, and so on.
+\end{remark}
+
+\begin{theorem}[Heisenberg's Uncertainty Principle]
+	Assume that \( \| f\|_{L^{2}} = 1 \). Define \( \bar x = \| x f \|_{L^{2}} \) and \( \sqrt{2 \pi} \, \bar k = \| \xi \hat f \|_{L^{2}} \). Then
+	\[ \bar x \cdot \bar k \ge \frac{1}{2} \]
+\end{theorem}
+
+\begin{proof}
+	Notice that Cauchy-Schwarz gives that
+	\begin{align*}
+		\left| \int_{- \infty}^{\infty} x f(x) f'(x) \, dx \right| &\le \left[ \int_{- \infty}^{\infty} |x f(x)|^{2} dx \right]^{1/2} \left[ \int_{- \infty}^{\infty} |f'(x)|^{2} dx  \right]^{1/2} \\
+																															 &= \bar x \left[ \int_{- \infty}^{\infty} |i k \hat f(k)|^{2} \frac{dx}{2 \pi} \right]^{1/2} \\
+																															 &= \bar x \bar k
+	\end{align*}
+	On the other hand, taking the original integral and integrating it by parts yields that
+	\[ \int_{- \infty}^{\infty} x f(x) f'(x) \, dx = \left[ \frac{1}{2}x \, f(x)^{2} \right]_{- \infty}^{\infty} - \int_{- \infty}^{\infty}  \frac{1}{2} f(x)^{2} \, dx = 0 - \frac{1}{2} \]
+	by \( f \) having \( L^{2} \) norm \( 1 \). This implies that
+	\[ \bar x \bar k \ge \frac{1}{2}. \]
+\end{proof}
+
+
+

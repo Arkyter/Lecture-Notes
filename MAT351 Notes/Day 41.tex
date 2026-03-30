@@ -1,7 +1,8 @@
+ % ! TeX root = ../mat351.tex
 \section{Day 41: Theory and Applications (of the Fourier Transform) (Mar.\ 25, 2026)}
-For some reason ``Theory and Applications'' as a title gives me the same vibes as ``Crime and Punishment.'' Our plan is to finish the Fourier Theory part then look at applications to PDE and the Heisenberg uncertainty principle.
+For some reason ``Theory and Applications'' as a title gives me the same vibes as ``Crime and Punishment''. Our plan is to finish the Fourier Theory part then look at applications to PDE and the Heisenberg uncertainty principle.
 \begin{theorem}
-	If \( f \in S \) is a Schwarz function, then 
+	If \( f \in S \) is a Schwartz function, then 
 	\[ f(x) = \int_{\mathbb{R}} e^{2 \pi i x \xi} \hat f( \xi) \, d \xi, \]
 	where
 	\[ \hat f( \xi) = \int_{\mathbb{R}} e^{- 2 \pi i x \xi}f(x) \, dx. \]
@@ -101,7 +102,7 @@ Let us finally prove the original claim.
 \end{proof}
 
 \begin{proposition}
-	The Fourier transform is a bijection on the Schwarz space and it's an isometry on \( L^{2} \).
+	The Fourier transform is a bijection on the Schwartz space and it's an isometry on \( L^{2} \).
 \end{proposition}
 \begin{proof}
 	For the first fact, the Fourier inversion formula shows that the Fourier transform is invertible. For the second fact, use the parallelogram law.
