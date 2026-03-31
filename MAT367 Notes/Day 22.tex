@@ -1,0 +1,77 @@
+\section{Day 22: (Mar.\ 31, 2026)}
+Last time, we stated Stokes' theorem in a region $D$ of a manifold $M$. If $\alpha \in \Omega^{m-1}(M)$ such that $\supp \alpha \cap D$ is compact, we have
+\[ \int_{\partial D} \alpha = \int_D d\alpha. \]
+{\color{crimson} I'm not even footnoting this. See the proof in the 257 notes. It's literally that, but spelled out worse.}
+\begin{proof}
+    Last time, we showed that we can pick an oriented atlas on $D$, where charts are submanifold charts for $\partial D$. This induces an orienation on $\partial D$. $\alpha$ has compact support on $D$, so its support on finitely many of these charts $(U_i, \varphi_i)$. Pick a partition of unity $\{\rho_i\} \cup \hat \rho$ subordinate to $\{U_i\}_i \cup \{M \setminus (D \cap \supp(\alpha))\}$; we can write
+    \[ \alpha = \sum_i \rho_i \alpha. \]
+    It is enough to show Stokes' theorem for $\alpha$ compactly supported on $\RR^m$, $D = \{x \mid x_i \leq 0\}$. We have that
+    \[ \alpha = \sum_{i=1}^m f_i \, dx_1 \wedge \dots \wedge \wh{dx_i} \wedge \dots \wedge dx_m. \]
+    We have
+    \[ \int_{x_1 = 0} \alpha = \int_{\RR^{m-1}} \iota^\ast \alpha = \int_{\RR^{m-1}} f_1 \, dx_2 dx_m, \]
+    where $\iota^\ast \alpha$ is a form on $\RR^{m-1}$ given by $(x_2, \dots, x_m)$, so
+    \[ \iota^\ast \alpha (\partial_2, \dots, \partial_m) = \alpha(\iota_\ast \partial_2, \dots, \iota_\ast \partial_m) = f. \]
+    We may then apply Fubini's theorem. When $i \neq 1$, the form is zero because we may first integrate over $dx$ then apply Fubini's. By the fundamental theorem of calculus,
+    \[ \int_{-\infty}^\infty \partial_i f_i = \lim_{x_i \to \infty} f_i - \lim_{x_i \to -\infty} f_i = 0, \]
+    from compactness of support.
+\end{proof}
+\begin{corollary}
+    Let $M$ be an orientable $m$-manifold, and let $\alpha \in \Omega^m(M)$ with compact support. Recall that $\alpha$ is always closed and, if $\alpha$ is exact, then $\alpha = d\omega$. By Stokes',
+    \[ \int_M \alpha = \int_{\emptyset} \omega = 0. \]
+\end{corollary}
+\begin{fact}
+    If $M$ is connected, then the converse is also true, i.e., $\int_M \alpha = 0$ implies $\alpha = d\omega$.
+\end{fact}
+\begin{corollary}[p.179]
+    If $M$ is orientable, compact, and connected, then $H^m(M)$ is the quotient of closed $m$-forms and exact $m$-forms, and is isomorphic to $\RR$. If $M$ is not compact, then $H^m(M)$ is defined to be over the same quotient but with compactly supported forms.
+\end{corollary}
+
+\newpage
+\begin{proposition}[Section 8.4]
+    Every oriented maniolfd $M$ admits a volume form, i.e., an $m$-form which is nowhere zero. Note that if $M$ is compact, then this is nowhere zero.\footnote{real quote!}
+\end{proposition}
+\begin{proof}
+    Take a locally finite atlas $(U_i, \varphi_i)$, a partition of unity $\rho_i$, and take
+    \[ \omega = \sum_i \varphi_i^\ast (\rho_i \varphi_i)  \, dx_1 \wedge \dots \wedge dx_m. \]
+    Each summand extends over $M$, since its $0$ outside a compact subset of $U_i$. Orientability implies that when we add the signs, they're all the same, so $\omega \neq 0$.
+\end{proof}
+Conversely, if $M$ admits a volume form, then it is orientable. At each point, given a basis $X_1, \dots, X_m$ in $T_p M$< we have that $\omega_p(X_1, \dots, X_m) > 0$ or $< 0$ determines an orientation at $p$ by ``the basis for which $\omega > 0$''. We may check that this defines a global orientation on $M$.
+\begin{theorem}
+    Let $\omega \in \Omega^k(M)$ be a closed form, and let $F \colon \RR \times S \to M$ be smooth (think of a smooth family of maps $F_t \colon S \to M$); then $\int_S F_t^\ast \omega$ is independent of $t$.
+\end{theorem}
+\begin{proof}
+    Consider $D = [a, b] \times S$; then, using $d\omega = 0$, we have
+    \[ \int_D F^\ast \, d\omega = \int_D dF^\ast \omega = \int_{\partial D} F^\ast \omega = \int_S F_b^\ast \omega - \int_S F_a^\ast \omega. \qedhere \]
+\end{proof}
+We now discuss winding numbers. Let $\gamma \colon S^1 \to \RR^2 \setminus \{0\}$ be a loop. The winding number, informally, is the number of times that $\gamma$ goes about the origin. The winding number has the following properties, (i)
+\[ \gamma(t) = (\cos(2\pi n t), \sin(2\pi n t)) \]
+has winding number $n$ (for $n \in \ZZ$). (ii) The winding number is invariant under deformation in $\RR^2 \setminus \{0\}$, so we can define it as the integral of some closed form over $\gamma$, i.e.,
+\begin{definition}[p.200]
+    The winding number of $\gamma$ is given by
+    \[ w(\gamma) = \int_{S^1} \gamma^\ast\left(\frac{1}{2\pi} d\theta\right). \]
+\end{definition}
+$\theta$ is as in polar coordinate, but $\theta$ is not a smooth function $\RR^2 \setminus \{0\} \to \RR$, so it is not exact. We may compute; let $x = r \cos \theta$ and $y = r \sin \theta$; we have $r^2 = x^2 + y^2$, so $dx = -r \sin \theta + dr \cos \theta$, and $2 \, dr = 2x \, dx + 2y \, dy$. We may compute $dy$ similarly to see
+\[ d\theta = \frac{x \, dy - y \, dx}{x^2 + y^2}. \]
+Indeed, this satisfies the two properties aforementioned by (i) computation and (ii) properties of closed forms. Moreover, (i) $w(\gamma)$ is always an integer, and (ii) two loops can be deformed into each other if and only if they share the same winding number. These two properties follow from observing that every $\gamma$ can be deformed to some $\gamma_n$ (exercise).
+\\[8pt]
+(iii) If we have two loops $\gamma_1, \gamma_2$, then $w(\gamma_1 \ast \gamma_2) = w(\gamma_1) + w(\gamma_2)$, i.e., concatenation of loops.
+\\[8PT]
+We will not talk about the Poincar\'e--Hopf theorem. But we will talk about the surfaces.
+\begin{theorem}[\S8.37]
+    Let $\Sigma$ be a compcat oriented surface with boundary, $X$ a vector field on $\Sigma$ with isolated zeroes (i.e., whenever $X_p = 0$, there is a neighborhood around $p$ in which $p$ is the only zero). Then
+    \[ \sum_{X_p = 0} \index_p(X) - \sum_{C} \opname{rot}_C(X) = \chi(\Sigma), \]
+    where the second summation is over all boundary components $C$, and $\chi(\Sigma)$ is the Euler characteristic.
+\end{theorem}
+It suffices to assume that there are finitely many zeroes. As a Heuristic, something about how $X$ behaves near zeroes with something about how $X$ behaves near $\partial \Sigma$ is a topological invariant. The Euler characteristic is given by lots of different definitions, but one is as follows (the cohomology one),
+\[ \chi(M) = \sum_{i=1}^m (-1)^i \dim(H^i(M)). \]
+We will define it axiomatically though.
+\begin{itemize}
+    \item If $\Sigma = \Sigma' \sqcup \Sigma''$, then $\chi(\Sigma) = \chi(\Sigma') + \chi(\Sigma'')$,
+    \item If $\Sigma$ is obtained from $\Sigma'$ by gluing two boundary circles, then $\chi(\Sigma) = \chi(\Sigma')$.
+    \item $\chi(D^2) = 1$, i.e., the disc.
+\end{itemize}
+As an example, consider $S^2$. It can be separated into two hemispheres, so $\chi(S^2) = 0$.
+\begin{corollary}[Hairy Ball Theorem]
+    Every vector field on $S^2$ has a zero.
+\end{corollary}
+He then went over a bunch of examples of Euler characteristics. Just read the book.
