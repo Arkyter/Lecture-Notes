@@ -1,0 +1,83 @@
+ % ! TeX root = ../mat351.tex
+\section{Day 43: More Applications of the Fourier Transform (Apr.\ 1, 2026)}
+What does \( e^{- i t \Delta} \) mean?
+
+The answer is 
+\[ e^{- i t \Delta} \colon f \to u = e^{-i t \Delta} f \]
+such that
+\[ \left\{\begin{NiceMatrix}\partial_{t} u = - i \Delta u \\ u(0, x) = f & x \in \mathbb{R}^{d}\end{NiceMatrix}\right.  \]
+set \( u = U(t) f \). Then we want that
+\[ \partial_{t} u = - i \Delta u, \quad \left. e^{-i t \Delta} f \right|_{t = 0} = f \]
+So one answer is through the Fourier transform.
+\[ \left( e^{-i t \Delta} f \right)(t, x) = \hat {\mathcal{F}}^{-1}_{\xi \to x} \left( e^{i t 4 \pi^{2} | \xi|^{2}} \hat f( \xi) \right), \]
+where we map the \( \xi \) variable to \( x \) (which is what this somewhat enigmatic subscript means). From the definition we can check that
+\begin{align*}
+	\partial_{t} \hat {\mathcal{F}}^{-1} \left( e^{i t 4 \pi^{2} |\xi|^{2}} \hat f(\xi) \right) &= \hat {\mathcal{F}}^{-1} \left( \partial_{t}e^{i t 4 \pi^{2} |\xi|^{2}} \hat f(\xi) \right) \\
+																																															&= \hat {\mathcal{F}}^{-1}\left( e^{i t 4 \pi^{2} |\xi|^{2}} i 2 \pi \xi \cdot 2 \pi \xi \hat f(\xi) \right) \\
+																																															&= i \hat {\mathcal{F}}^{-1} \left( 2 \pi \xi \cdot 2 \pi \xi e^{i t 4 \pi^{2} |\xi|^{2}}  \hat f(\xi)\right) \\
+	&= -i \Delta \hat {\mathcal{F}}^{-1} \left( e^{i t 4 \pi^{2} |\xi|^{2}}\hat f(\xi) \right)
+\end{align*}
+where this last line is because \( \hat {\mathcal{F}}(\nabla g) = 2 \pi i \xi \hat g(\xi) \) and likewise \( \hat {\mathcal{F}}(\nabla \cdot G) = 2 \pi i \xi \hat G(\xi) \).
+
+For a general function \( a \), we can define
+\( a(\Delta) \colon f \to a(\Delta) f \)
+by doing
+\[ a(\Delta) f = \hat {\mathcal{F}}\left( a(2 \pi i \xi) \hat f(\xi) \right) \]
+
+Last class we proved Heisenberg's uncertainty principle. Namely, if \( f \colon \mathbb{R} \to \mathbb{C} \) has \( \| f \|_{L^{2}} = 1 \), and
+\[ \bar x = \int_{\mathbb{R}} x^{2} |f|^{2} \, dx \quad \bar k = \int_{\mathbb{R}} \xi^{2} |\hat f|^{2} d \xi, \]
+then
+\[ \hat x \cdot \hat k \ge \frac{1}{16 \pi^{2}}. \]
+We also get the same with
+\[ \bar x = \int_{} (x - x_{0})^{2} |f|^{2} \, dx \quad \bar k = \int (\xi - \xi_{0})^{2} |\hat f|^{2} \, d \xi. \]
+How? Well apply the original to \( f(x + x_{0}) \) and we can shift \( \bar x \). This won't change the value of \( \bar k \). For shifting \( \bar k \), we should modulate \( f \). Namely, we should take \( e^{- 2 \pi i \xi_{0} x} f(x + x_{0}) \), which should shift \( \bar k \). Fabio says to check this yourself.
+
+But now one can ask when is \( \bar x \bar k = \frac{1}{16 \pi^{2}} \)? Well we proved the inequality originally via Cauchy-Schwarz, so
+\[ \left| \int x f\,  f' \right| = \| x f\|_{L^{2}} \| f' \|_{L^{2}} \]
+implies that for some \( c \)
+\[ x f(x) = c f'(x), \]
+and therefore we have that for some \( A, B \)
+\[ f(x) = Ae^{B\frac{x^{2}}{2}}. \]
+But which choices of \( A, B \) yield \( \| f \|_{L^{2}} = 1 \)? We want \( \operatorname{Re} B < 0 \) so that it decays, therefore by using our knowledge of the Gaussian integral, that
+\[ \int_{\mathbb{R}} e^{- \pi x^{2}} \, dx = 1,  \]
+we arrive at
+\[ \int_{\mathbb{R}} e^{- B x^{2}} \, dx = \frac{\sqrt{\pi}}{\sqrt{2 \operatorname{Re} B}}  \]
+which then yields
+\[ |A|^{2} = \frac{\sqrt{2 \operatorname{Re}(B)}}{\sqrt{\pi}} \]
+to get that
+\[ 1 = \int_{} |A|^{2} e^{- 2 \operatorname{Re}(B) x^{2}}\, dx.  \]
+Fabio says to check this as well because he's not sure of it.
+
+We are going to solve
+\[ \left\{\begin{NiceMatrix}- \Delta u = 0 \\ u(x, 0) = g(x) \\ u(x, b) = h(x)\end{NiceMatrix}\right.  \]
+on the domain of
+\[ 0 < z < b \quad x \in \mathbb{R}^{d} \]
+and rediscover D'Alembert's formula for
+\[ \left\{\begin{NiceMatrix}u_{t t} - c^{2} u_{x x} = 0 \\ u(0, x) = g(x) \\ u_{t}(0, x) = h(x).\end{NiceMatrix}\right.  \]
+For this second question, take the Fourier transform in \( x \) of
+\[ \left\{\begin{NiceMatrix}\hat u_{t t} + (2 \pi c \xi)^{2} \hat u(\xi) = 0 \\ \hat u(0, \xi) = \hat g(\xi) \\ \hat u_{t}(0, \xi) = \hat h(\xi)\end{NiceMatrix}\right.  \]
+This PDE has turned into a second order ODE\@. Back when we did this a while ago we spoke about the ``operator method'' and said ``treat the Laplacian as a matrix''. This is just that.
+
+To solve our ODE, the general solution is
+\[ \hat u(t, \xi) = A(\xi) \cos(2 \pi c \xi t) + B(\xi) \sin(2 \pi c \xi t). \]
+Imposing our initial conditions gives us that
+\[ \hat u(0, \xi) = A(\xi) \implies A = \hat g. \]
+Likewise we also have that
+\[ \partial_{t} \hat u(0, \xi) = B(\xi) 2 \pi c \xi = \hat h(\xi) \implies B(\xi) = \frac{\hat h(\xi)}{2 \pi c \xi}. \]
+This implies that
+\[ \hat u(t, \xi) = \cos(2 \pi c \xi t) \hat g(\xi) + \frac{\sin(2 \pi c \xi t)}{2 \pi c \xi}\hat h(\xi). \]
+This is what we saw before. Rewriting this gives us
+\[ u(t, x) = \cos\left(c \frac{\partial_{x}}{i} t\right)g + \frac{\sin \left( c \frac{\partial x}{i} t \right)}{-i \partial_x} h. \]
+This is by our earlier proposition on \( a(\nabla) \) and such. This rewriting is just a curiosity though, it's not necessary for the solution. We'll now show it's equivalent to D'Alembert. How would we show this? Well first we need to show
+\begin{align*}
+	\hat {\mathcal{F}}^{-1} \left( \cos(2 \pi c \xi t) \hat g(\xi) \right) &= \frac{1}{2} \left( g(x + ct) + g(x - ct) \right) \\
+	\cos(2 \pi c \xi t) \hat g(\xi) &= \frac{1}{2} \hat {\mathcal{F}} \left( g(x + ct) + g(x - ct) \right) \\ 
+																	&= \frac{1}{2} \hat g(\xi) e^{2 \pi i c t \xi} + \frac{1}{2} \hat g (\xi) e^{- 2 \pi i c t \xi} \\
+																	&= \cos(2 \pi c t \xi) \hat g(\xi)
+\end{align*}
+the second part for \( \sin \) you really should do, but he's not going to himself. Also we should do the first problem ourselves if we have time.
+
+How do we define the Fourier Transform of a not nice function? If it's not \( L^{2} \) or not Schwartz. If \( \psi \) is in the dual of the Schwartz functions---a bounded linear function on \( S \)---then we say that
+\[ (\hat \psi, \phi) = (\psi, \hat \phi), \quad \forall \phi \in S. \]
+
+Thanks Fabio for the classes.
