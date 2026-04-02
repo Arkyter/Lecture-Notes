@@ -1,0 +1,22 @@
+\section{Day 23: (Apr.\ 2, 2026)}
+Recall Poincar\'e's theorem from last lecture; the euler characteristic $\chi(\Sigma)$ is given by
+\[ \sum_{X_p = 0} \ind_p(X) - \sum_{C} \opname{rot}_C(X) = \chi(X), \]
+where $\Sigma$ is a complex surface with boundary, $X$ a vector field on $\Sigma$ with isolated zeroes, and $C$ the boundary components of $\partial \Sigma$. Notice that $\chi$ is a topological invariant for surfaces of genus $g$ and $r$ boundary circles. Indeed, we have $\chi(\Sigma) = 2 - 2g - r$. We leave it as an exercise to check this with axioms.
+\\[8pt]
+We now give some examples of the rotation number of a vector field. Let $X$ be a vector field on the disk $D^2$. We have
+\[ X_p = f(p) \partial_x + g(p) \partial_y, \]
+whence $F_X(f, g) \colon D^2 \to \RR^2$. If $\gamma \colon S^1 \to D^2$ such that $X_p \neq 0$ for all $p \in \gamma(S^1)$, then we can define $\opname{rot}_\gamma(X) = w(F_X \circ \gamma)$. Indeed, if we deform $\gamma$ so that it doesn't go through a zero, the rotation number stays the same. This is equivallent to asking that $\gamma_t$ is a smooth family, then so is $X \circ \gamma_T$. We see that
+\[ \opname{rot}_{\gamma_a}(X) = w(F_X \circ \gamma_a) = w(F_X \circ \gamma_b) = \opname{rot}_{\gamma(B)}(X), \]
+as the winding number is a closed form. By Stokes' theorem, we see that it is independent of deformations. We may define the index at $p$ of a vector field $X$ if $p$ is an isolated zero of $X$, i.e., there exists a little ball about $p$ where $X_q \neq 0$ for $q \neq p$ in $B$. For any curve $\gamma$ in $B$ with winding number $1$ about $p$, we see that $\opname{rot}_\gamma(X)$ is the same.
+\begin{definition}
+    $\ind_p(X) = \opname{rot}_{\gamma}(X)$ for any such $\gamma$.
+\end{definition}
+He then proceeded to give examples of index (cf.\ p.213). He also gave an exericse to show that the indices are independent of chart. We now discuss rotation number about a boundary circle. Recall that a \textit{framing} of a tangent bundle is a choice of vector fields that form a basis of every point. As an example, $\partial_x$ and $\partial_y$ on a disk, or, on a circle $C \subset \Sigma$ (an oriented surface), $X_1$ tangent to $C$, and $X_2$ facing in a chosen direction (e.g., normal, if it's a boundary circle).
+\\[8pt]
+We now give a ``proof sketch'' of Poincar\'e. Our strategy will be to prove that the left side satisfies the axioms for $\chi$, so it has to be $\chi$. Recall that the axioms are
+\begin{itemize}
+    \item If $\Sigma$ is the disjoint union of $\Sigma'$ and $\Sigma''$, then $\chi(\Sigma)$ is equal to the sum of the euler characteristics of both $\Sigma'$ and $\Sigma''$. (this one is obvious)
+    \item If $\Sigma$ is obtained from $\Sigma'$ by gluing two boundary circles, then $\chi(\Sigma) = \chi(\Sigma')$.
+    \item $\chi(D^2) = 1$.
+\end{itemize}
+Then Fedya proceeded to give some more ``intuition'', which I'm sure you can read section 8.5.2 for (i.e., additivity of winding number, etc.)
