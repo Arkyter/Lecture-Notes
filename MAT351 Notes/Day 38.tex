@@ -16,13 +16,13 @@ Here, we regard $f$ as a $2\ell$-periodic function, where $c_M$ is the Fourier c
 \[ c_M = \frac{1}{2\ell} \int_{-\ell}^\ell f(y) e^{-i M \pi \frac{y}{\ell}} \, dy. \]
 If we want, we may write the Fourier series with the coefficients substituted in as follows,
 \[ f(x) = \sum_{M=-\infty}^\infty \frac{1}{2\ell} \left(\int_{\ell}^\ell f(y) e^{i \frac{M}{\ell} \pi y} \, dy\right) e^{i \frac{M}{\ell} \pi x}, \]
-where we wish to send $\ell \to \infty$ so that the interval $(-\ell, \ell)$ expands to the whole line, making each $\frac{M}{2\ell}$ ``closer'' to each other, so we may consider it a ``continuous variable''.\footnote{Fabio's side remark: technically, we haven't done the theory for Fourier transform in higher dimensions yet, but the processes and constructions are exactly the same.} Indeed, denote $k = \frac{M}{2\ell}$; we get may turn the summation into an integral,
+where we wish to send $\ell \to \infty$ so that the interval $(-\ell, \ell)$ expands to the whole line, making each $\frac{M}{2\ell}$ closer to each other, so we may consider it a continuous variable.\footnote{Fabio's side remark: technically, we haven't done the theory for Fourier transform in higher dimensions yet, but the processes and constructions are exactly the same.} Indeed, denote $k = \frac{M}{2\ell}$; we get may turn the summation into an integral,
 \[ f(x) = \sum_{M=\infty}^\infty \frac{1}{2\ell} \left(\int_{-\ell}^\ell f(y) e^{-2\pi i k y} \, dy\right) e^{2\pi i k x} \taking{\ell \to \infty} \int_{\RR} \left(\int_{\RR} f(y) e^{-2\pi i k y} \, dy\right) e^{2\pi i k x} \, dk, \]
-where $k = \frac{\pi}{2\ell}$ yields $\frac{dM}{2\ell} = dk$. Note that this is an intuitive explanation, and a rigorous treatment of the above is presented in \S8.3 of Folland's \textit{Real Analysis}. The above computation leads us to define
+where $k = \frac{\pi}{2\ell}$ yields $\frac{dM}{2\ell} = dk$.\footnote{This is somewhat informal} The above computation leads us to define
 \[ \hat f(k) \coloneq \int_\RR f(x) e^{-2\pi i k x} \, dx \]
-to be the Fourier transform of $f$. Note that the formal calculation ``says''
+to be the Fourier transform of $f$. Note that the formal calculation says
 \[ f(x) = \int_\RR \hat f(k) e^{2\pi i k x} \, dk. \]
-We now make some definitions\footnote{oh no, he's becoming fedyapilled}. An \textit{integrable} function $f \colon \RR^d \to \CC$ is a function that satisfies $\norm{f}_1 < \infty$, i.e.,
+We now make some definitions. An \textit{integrable} function $f \colon \RR^d \to \CC$ is a function that satisfies $\norm{f}_1 < \infty$, i.e.,
 \[ \int_{\RR^d} \abs{f(x)} dx < \infty. \]
 In this manner, the Fourier coefficient is defined as $\hat f \colon \RR^d \to \CC$, where
 \[ \hat f(\xi) \coloneq \int_{\RR^d} f(x) e^{-2\pi i x \cdot \xi} \, d\xi. \]
