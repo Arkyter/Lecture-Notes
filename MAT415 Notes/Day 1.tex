@@ -1,0 +1,61 @@
+\section{Day 1: Gaussian Integers}
+The Quercus site for this class will be up tonight or early tomorrow. This class will have (approximately) weekly homework. There will be regular oral quizzes with the TA, about 5--10 minutes, where you will discuss one of the problems on the homework.
+
+Consider the following example,
+\[ 1+1 = 2, \quad 1+4 = 5, \quad 4+9 = 13, \quad 1+16=17. \]
+\vspace{-22pt}
+\begin{theorem}[Fermat] \label{thm:fermat_on_two_squares}
+    Let $p > 2$; $p$ can be expressed as a sum of two squares if and only if $p \equiv 1 \pmod{4}$.
+\end{theorem}
+\begin{proof}
+    We start with the easy direction. Observe that the squares of the numbers $0, 1, 2, 3, \dots$ are all equal to $0$ or $1$ modulo $4$, i.e., $0^2 = 0$, $1^2 = 1$, $2^2 = 4 \equiv 0 \! \pmod{4}$, and $3^2 = 9 \equiv 1 \! \pmod{4}$, and so on (you can always express a number as either $2n$ or $2n + 1$, then squaring, to check that this pattern continues). It follows that if $p = n^2 + m^2$, then $p \equiv 1 \! \pmod{4}$; if it were the sum of the squares of two odd numbers, then $p$ would be even, which contradicts it being prime.
+
+    For the other direction, consider the ring of Gaussian integers,
+    \[ \ZZ[i] = \{a + bi \mid a, b \in \ZZ\} \subset \CC. \]
+    Consider $p = n^2 + m^2$. Notice that the right hand side cannot be factored as \textit{integers}, but it could be factored in $\ZZ[i]$ as $(n + im)(n - im)$; in this manner, we may instead ask the question of how to factor $p \in \ZZ[i]$. The continuation of this proof will use the fact that $\ZZ[i]$ is a UFD, but we will not prove that today. In particular, $\ZZ[i]$ is a Euclidean domain with $\alpha \mapsto \abs{\alpha}^2$ is a Euclidean norm.
+\end{proof}
+
+Given $z = x + iy \in \ZZ[i]$, define the norm of $z$ as $N(z) = z \cdot \ol{z} = x^2 + y^2 \in \ZZ_{\geq 0}$.\footnote{at this point, Rozenblyum made a comment about complex number norms versus algebra norms. idk. sure.} Observe that we have $N(z \cdot w) = N(z) \cdot N(w)$.
+\begin{claim}
+    $z \in \ZZ[i]$ is a unit if and only if $N(z) = 1$, i.e., the units are $\{\pm 1, \pm i\}$.
+\end{claim}
+\begin{proof}
+    Suppose $N(z) = 1$; by definition, we see $z \cdot \ol z = 1$, and so $\ol{z}$ constitutes the inverse of $z$. Conversely, suppose $z \in \ZZ[i]$ is a unit; if there exists another number $w$ such that $z \cdot w = 1$, then, since norm is multiplicative, we may take the norm of both sides to get that $N(z) \cdot N(w) = 1$. Since $N(z) \in \ZZ_{\geq 0}$, it must be that $N(z) = 1$.
+\end{proof}
+
+\begin{claim} \label{clm:primes_in_gaussian_integers}
+    If $p$ is a prime such that $p \equiv 1 \pmod{4}$, then $p$ is not prime in $\ZZ[i]$.
+\end{claim}
+We will prove the claim later; for now, observe that \ref{thm:fermat_on_two_squares} and \ref{clm:primes_in_gaussian_integers} imply each other; one is obvious, and for the direction that the claim implies the theorem, suppose $p$ is not prime, so we may write it as the product of two non-units, $p = \alpha \cdot \beta$, where $\alpha, \beta \in \ZZ[i]$. We have that $p^2 = N(p) = N(\alpha) \cdot N(\beta)$; but $N(\alpha), N(\beta) \neq 1$, so it must be that $N(\alpha) = N(\beta) = p$. By writing $\alpha = a + bi$, we get that $N(\alpha) = a^2 + b^2 = p$, which is the desired expression as seen in \ref{thm:fermat_on_two_squares}.
+
+We now prove \ref{clm:primes_in_gaussian_integers} in two ways. For the first way, consider Wilson's theorem:
+\begin{theorem}[Wilson] \label{thm:wilson}
+    Let $p$ be prime; then $(p-1)! \equiv -1 \pmod{p}$.
+\end{theorem}
+\begin{proof}
+    The proof of this is simple; since $\ZZ/p$ is a field, every nonzero residue modulo $p$ has an inverse, where $\alpha \equiv \alpha\inv$ if and only if $\alpha \equiv 1$ or $-1$, i.e., $\alpha^2 = 1$. It follows that the product of $1, \dots, p-1$ without $1$ and $p-1$ is $1$, so we are done.
+\end{proof}
+\begin{corollary} \label{cor:wilson}
+    If $p = 4n + 1$, then $(\!(2n)!)^2 \equiv -1 \pmod{p}$.
+\end{corollary}
+\begin{proof}
+    By Wilson's theorem, we have that $-1 \equiv (p-1)!$. Let us write the factorial out;
+    \[ -1 \equiv (p-1)! = (1 \cdot 2 \cdot \ldots \cdot 2n) \bigl((p - 2n) (p - 2n + 1) \dots (p-1)\bigr). \]
+    Since we're working modulo $p$, we may realize the right hand side expression as
+    \[ \dots \equiv (1 \cdot 2 \cdot \ldots \cdot 2n)\bigl((-2n) (-2n + 1) \dots (-1)\bigr) = (2n)! (-1)^{2n} (2n)! = \bigl((2n)!\bigr)^2. \qedhere \]
+\end{proof} \vspace{-8pt}
+The above corollary allows us to write\footnote{Rozenblyum proceeded to stand stunned in front of the blackboard for 3 minutes. When pointed out on how to continue the discussion, he said that this was proof your ``IQ drops precipitously when in front of a classroom''.}
+\[ p \mid \bigl((2n)!\bigr)^2 + 1, \]
+which we may factor as $(\!(2n)! + i)(\!(2n)! - i)$; if $p$ was prime, then it divides one of them, but we know that $p (a + bi) = (2n)! \pm i$ can't happen.
+
+We now proceed to the second proof. Consider the cyclic group
+\[ (\ZZ/p)^\times = \ZZ/(p-1); \]
+if $p = 4n + 1$, then $\ZZ/(p-1) \cong \ZZ/(4n)$, whence the existence of some element of order $4$ in $(\ZZ/p)^\times$. Let such an element be called $m$; it follows that $m^4 \equiv 1 \pmod{p}$ and $m^2 \equiv -1 \pmod{p}$, but then we would have $p \mid m^2 + 1$, which is a contradiction. While this proof was fast, it didn't really tell us much about the arithmetic that went on in the first proof.
+
+The morals as to the two above proofs are that
+\begin{enumerate}[(i)]
+    \item It is important to understand arithmetic in more general number rings (such as prime factorization). As an example,
+    \[ \ZZ[\sqrt{-5}] = \{a + b \sqrt{-5} \mid a, b \in \ZZ\} \]
+    is not a UFD (see the MAT347 notes for a reference on this).
+    \item Questions about number rings are closely related to questions in modular arithmetic.
+\end{enumerate}

@@ -61,26 +61,76 @@
 	\setlength{\textwidth}{6.5in}
 	\setlength{\headwidth}{6.5in}
 	\setlength{\textheight}{8.75in}
-	%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
-	\setlength{\parskip}{0.4ex plus 0.2ex minus 0.2ex} % changing it up for the preschool / elementary writeups
+	% \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+	% \setlength{\parskip}{0.4ex plus 0.2ex minus 0.2ex} % changing it up for the preschool / elementary writeups
 	\setlength{\footskip}{0.3in}
 
 	\usepackage{anyfontsize} % https://tex.stackexchange.com/a/328322
 	\usepackage[T1]{fontenc}
 	\usepackage{newtx} % times new roman
 	\usepackage[cal=cm]{mathalfa} % turns mathcal back into \varcal, see https://tex.stackexchange.com/a/639198
-	% \renewcommand{\@listI}{ % changes enumerate environments for the article class. maybe necessary
-	% 	\leftmargin=27pt
-	% 	\rightmargin=0pt
-	% 	\labelsep=5pt
-	% 	\labelwidth=20pt
-	% 	\itemindent=0pt
-	% 	\listparindent=0pt
-	% 	\topsep=3pt plus 2pt minus 4pt
-	% 	\partopsep=2pt plus 1pt minus 1pt % what does this one do?
-	% 	\parsep=3pt plus 1pt
-	% 	\itemsep=\parsep
-	% }
+	
+	\renewcommand{\abstractname}{\vspace{-\baselineskip}} % removes abstract name
+
+	\usepackage[skip=\medskipamount, tocskip=0em]{parskip}
+
+	% theorem environment (spacing changes)
+	\makeatletter
+	\def\thm@space@setup{
+	\thm@preskip=1.3\parskip \thm@postskip=0pt % originally meant to be \thm@preskip=\parskip...
+	}
+	\makeatother
+
+	% proof environment (spacing changes)
+	\makeatletter 
+	\renewenvironment{proof}[1][\proofname]{\par
+	\vspace{-\topsep}% remove the space after the theorem
+	\pushQED{\qed}%
+	\normalfont
+	\topsep=0.2\parskip \partopsep=0pt % no space before
+	\trivlist
+	\item[\hskip\labelsep
+			\itshape
+		#1\@addpunct{.}]\ignorespaces
+	}{%
+		\popQED\endtrivlist\@endpefalse
+		\addvspace{2pt plus 2pt} % some space after
+	}
+	\makeatother
+
+	% list environments (enumerate, itemize, etc.)... spacing...
+	\makeatletter
+	\def\@listI{\leftmargin\leftmargini
+				\parsep 4\p@ \@plus2\p@ \@minus2\p@ % probably means "5 ex plus 2 ex minus 2 ex"
+				\topsep \z@
+				\itemsep 4\p@ \@plus2\p@ \@minus2\p@}
+	\makeatother
+
+	% title spacing!
+	\makeatletter
+	\def\@maketitle{
+		\newpage\null\vskip 2em
+		\begin{center}
+		\let \footnote \thanks % supposedly, i don't use this, so whatever, but leaving it in here
+			{\LARGE \@title \par}%
+			\vskip 1em % originally 1.5em
+			% {\large
+			% \lineskip .5em%
+			% \begin{tabular}[t]{c}%
+			% 	\@author
+			% \end{tabular}\par}%
+			{\large \@author}
+			\vskip 0.5em % originally 1em
+			{\large \@date}
+		\end{center}%
+		\par
+		\vskip 1.5em
+	}
+	\makeatother
+
+	% cuz commutative diagrams look SHIT otherwise.
+	\usetikzlibrary{arrows}
+	\tikzcdset{arrow style=tikz, diagrams={>=stealth'}}
 }
 { % if koma is used, ...
 	\usepackage[headsepline]{scrlayer-scrpage}
