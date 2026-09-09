@@ -1,0 +1,125 @@
+\section{Day 1: Measure Theory (Sep.\ 9, 2026)}
+The syllabus is on the Quercus page, with contact information for professor and TA available. Office hours will be held on 2--3pm on Wednesdays. They're going to be in the Huron lounge. The grading scheme is as follows,
+\begin{enumerate}[(i)]
+    \item (15\%) 6 assignments, roughly due every two weeks, graded for completeness. Must be handwritten.\footnote{"i can complete the assignments in a \textit{non-handwritten way} in a short amount of time... i'll let you think about what i mean...}
+    \item (20\% $\times 2$) Two midterms, both in-class on Mondays (Oct.\ 19, Nov.\ 16)
+    \item (45\%) Final.
+\end{enumerate}
+On the graduate side of things, most of the grades will be an ``A$-$'' (As and A$+$s are mostly for department recognition). A $B$-range is an indication that the instructor would like you to spend more time with the material (i.e., a qualifying exam). The midterms would be... ideally be able to distinguish stronger students from weaker students. ``On the higher end, everything looks identical for graduate students and undergraduate students... on the lower end, the undergraduate curve runs... lower.''
+
+The first three classes will be mostly measure theoretic. Things like Carath\'eodory's extension theorem, construction of Lebesgue measure, etc... (things covered in MAT457) will be stated, but not proved.
+
+We now begin with ``formalizing probability''.
+\begin{example}[Coinflips]
+    Let's say we flip $2$ coins; there are $4$ possibilities: you can get (with $H$ for heads and $T$ for tails) $HH$, $HT$, $TH$, $TT$. Assuming we're flipping fair coins, we have that the probabilities for each outcome is equal,
+    \[ \PP(HH) = \PP(HT) = \PP(TH) = \PP(TT) = \frac{1}{4}. \]
+    We may, for example, study the probability to flip at least one head. Clearly,
+    \[ \PP(\text{at least one } H) = \PP(\{HH, HT, TH\}) = \PP(HH) + \PP(HT) + \PP(TH) = \frac{3}{4}. \]
+    We may describe $\{HH, HT, TH\}$ as an \textit{event}, i.e., a set of outcomes. We can describe the set of all outcomes, as described earlier as the four possible coinflip results, as $\Omega$, our probability space. In this manner, events can be conceptualized as subsets of $\Omega$.
+\end{example}
+
+\begin{example}[Infinitely many coinflips]
+    Now, let's flip infinitely many (fair) coins. The outcomes are now sequences of $H$ and $T$. We have the following observations,
+    \[ \PP(\text{at least one } H) = 1, \quad \PP(TTTT\dots) = 0. \]
+    We also have that
+    \[ \PP(\text{all tails}) \leq \PP(\text{first $k$ coins are tails}) = \frac{1}{2^k}. \]
+    Since the above is true for all $k$, we can take $k \to \infty$ to get that the probability of flipping all tails is indeed $0$.
+\end{example}
+
+Per the two examples above, it follows that probability spaces need not be very nice, which is why we're going to use measure theory. As in the example for infinitely many coinflips, we have a few problems. While outcomes have probability $0$, specific events do not. We cannot (nor do we want to) study \textit{all events}; we will only study a ``nice'' subset of them.
+\begin{definition}[$\sigma$-algebra] \label{def:sigma_algebra}
+    Let $\Omega$ be a set. A $\sigma$-algebra $\SA$ on $\Omega$ is a nonempty collection of subsets of $\Omega$ such that
+    \begin{enumerate}[(i)]
+        \item $A \in \SA$ implies that $A^c \in \SA$,
+        \item For countable collections $(A_n : n \in \NN)$ in $\SA$, we have that
+        \[ \bigcup_{n=1}^\infty A_n \in \SA. \]
+    \end{enumerate}
+\end{definition}
+Note that it is redundant to state that $\emptyset \in \SA$; since $\SA$ was already supposed to be nonempty, we could simply pick $A \in \SA$ and see that $\emptyset = (A \cup A^c)^c \in \SA$. A pair $(\Omega, \SA)$ is called a \textit{measurable space}.
+
+\begin{definition}[Probability measure] \label{def:probability_measure}
+    A probability measure on a measurable space $(\Omega, \SA)$ is a function $\PP \colon \SA \to [0, 1]$ such that\footnote{``something has to happen'' -- Duncan; ``nothing ever happens'' -- Daniel}
+    \begin{enumerate}[(i)]
+        \item $\PP(\Omega) = 1$,
+        \item $\PP$ is countably additive, i.e., if $(A_n : n \in \NN) \subset \SA$ is a disjoint collection of sets, then
+        \[ \PP \left(\bigcup_{n=1}^\infty A_n\right) = \sum_{n=1}^\infty \PP(A_n). \]
+    \end{enumerate}
+\end{definition}
+
+A triple $(\Omega, \SA, \PP)$ is a \textit{probability space}.
+
+\begin{exercise}
+    If $(\SA_i \colon i \in I)$ is any collection of $\sigma$-algebras on $\Omega$, then $\bigcap_{i \in I} \SA_i$ is a $\sigma$-algebra.
+\end{exercise}
+\begin{exercise}
+    For any collection of sets $\SB \subset 2^\Omega$, there is a \textit{smallest} $\sigma$-algebra $\sigma(\SB)$ containing $\SB$. 
+\end{exercise}
+
+We will denote $\sigma(\SB)$ to be the intersection of all $\sigma$-algebras containing $\SB$.
+\begin{fact} \label{fct:probability_space_properties}
+    Let $(\Omega, \SA, \PP)$ be a probability space.
+    \begin{enumerate}[(i)]
+        \item (Monotonicity). If $A \subset B$, then $\PP(A) \leq \PP(B)$.
+        \item (Subadditivity / Union bound). For $(A_n : n \in \NN) \subset \SA$, we have that
+        \[ \PP\left(\bigcup_{n=1}^\infty A_n\right) \leq \sum_{n=1}^\infty \PP(A_n). \]
+        \item (Continuity). Let $(A_n : n \in \NN) \subset \SA$. If
+        \[ A_1 \subset A_2 \subset \dots \]
+        and $A = \bigcup_{n=1}^\infty A_n$, then $\PP(A_n) \uparrow \PP(A)$. Similarly, if
+        \[ A_1 \supset A_2 \supset \dots \]
+        and $A = \bigcap_{n=1}^\infty A_n$, then $\PP(A_n) \downarrow \PP(A)$.
+    \end{enumerate}
+\end{fact}
+As a quick proof of monotonicity, we simply have $\PP(B) = \PP(A) + \PP(B \cap A^c) \geq \PP(A)$.
+
+\newpage
+We then took a $1$ hour break, and Duncan came back to talk about a ``preview'' of this course; we will be looking at things like (weighted) random walks (i.e., the four cardinal directions). We will also look at the law of large numbers, the central limit theorem, and so on. % A fun conjecture:
+% \begin{conjecture}[Self-avoiding walk]
+%     Let $X_n$ denote the position on the $n$th step of a random walk (then $\norm{X_n}_2 \approx \sqrt{n}$); if $X_n$ never repeats, i.e., it never visits the same point twice, then it is conjectured that $\norm{X_n}_2 \approx n^{3/4}$.
+% \end{conjecture}
+% \begin{conjecture}
+%     Take the same $X^n$ mean a walk of length $n$.
+%     \[ \left(\frac{X_{nt}^n}{n^{3/4}} : t \in [0, 1]\right) \]
+%     converges to... something....
+% \end{conjecture}
+
+We now continue talking about \ref{fct:probability_space_properties}.
+\begin{proof}
+    To see continuity from below, observe that
+    \[ \PP\left(\bigcup_{n=1}^\infty A_n\right) = \lim_{n \to \infty} \PP(A_n), \]
+    per the chain of inclusion. We can also write it as
+    \[ \PP\left(\bigcup_{n=1}^\infty A_n\right) = \PP\left(\bigcup_{n=1}^\infty (A_n \setminus A_{n-1})\right) = \sum_{n=1}^\infty \PP(A_n \setminus A_{n-1}) = \lim_{N \to \infty} \sum_{n=1}^N \PP(A_n \setminus A_{n-1}) = \lim_{N \to \infty} \PP(A_N). \qedhere \]
+\end{proof}
+The other two parts of \ref{fct:probability_space_properties} are left as an exercise.
+
+We now look at examples of probability measures.
+\begin{enumerate}[(i)]
+    \item Let $\Omega$ be finite or countable, and take $\SA = 2^\Omega$, with a function $p \colon \Omega \to [0 ,1]$, where $\sum_{\omega \in \Omega} p(\omega) = 1$. Then
+    \[ \PP(A) = \sum_{\omega \in A} p(\omega) \]
+    defines a probability measure.
+    \item (Measures on $\RR$). Let $\SB(\RR)$ be the Borel $\sigma$-algebra on $\RR$ (i.e., the smallest $\sigma$-algebra containing all open sets).
+    \begin{theorem}
+        There is a probability measure $\PP$ on $(\RR, \SB(\RR))$ satisfying
+        \[ \PP((-\infty, x]) = F(x) \]
+        for some function $F \colon \RR \to [0, 1]$ if and only if \begin{parlist}
+            \item $F$ is non-decreasing and right-continuous,
+            \item $F(x) \to 0$ as $x \to -\infty$ and $F(x) \to 1$ as $x \to +\infty$.
+        \end{parlist}
+        We call $F$ the \textit{CDF}, or \textit{cumulative distribution function} of $\PP$.
+    \end{theorem}
+    \begin{proof}
+        For the easy (only if) direction, monotonicity of $\PP$ yields a non-decreasing $F$. Continuity from above yields right-continuity; specifically, if $x_n \downarrow x$, then
+        \[ \bigcap_{n=1}^\infty (-\infty, x_n] = (-\infty, x], \]
+        so $\PP(-\infty, x] = \lim_{n \to \infty} \PP(-\infty, x_n]$. For the last parts, $F(x) \to 0$ (as $x \to -\infty$) uses continuity from above, and $F(x) \to 1$ (as $x \to \infty$) uses continuity from below.
+
+        The hard (if) direction comes from the Carath\'eoodory extension theorem (existence of $\PP$), and the uniqueness was not mentioned.
+    \end{proof}
+    \item Let $\QQ$ be a $\sigma$-finite measure on $(\Omega, \SA)$. Let $f \in \Omega \to [0, \infty)$ be measurable such that
+    \[ \int f(\omega) \, d \QQ(\omega) = 1. \]
+    Then $\PP(A) = \int f(\omega) \mathbf{1}(\omega \in A) \, d \QQ(\omega)$ is a probability measure on $\Omega$. $f$ is called the \textit{density}, or the \textit{Radon--Nikodym derivative}. As an example,
+    \[ \PP(A) = \int \frac{e^{- \frac{x^2}{2}}}{\sqrt{2\pi}} \mathbf{1}(x \in A) \, dx \]
+    is the standard Gaussian measure on $\RR$ (with its associated distribution). For another example,
+    \[ f(x) = \frac{e^{-\lambda x}}{\lambda} \mathbf 1(x \geq 0) \]
+    is the exponential distribution with parameter $\lambda \geq 0$. For a third example,
+    \[ f(x) = \frac{\mathbf 1(x \in [a, b])}{b-a} \]
+    is the uniform distribution on $[a, b]$.
+\end{enumerate}
