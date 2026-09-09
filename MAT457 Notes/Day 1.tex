@@ -1,0 +1,52 @@
+\section{Day 1: Introduction (Sep.\ 9, 2026)}
+Nabutovsky's office is in BA6104. Exams will be ``difficult'', and you will be responsible for statements and proofs of theorems. You should know the meaning of the material. Unlike most Nabutovsky courses, tests will not be based on homework questions.
+
+Undergraduate students are expected to know the basics of metric spaces, topological spaces, and set cardinality. You're also expected to have some exposure to the Lebesgue measure on $\RR$ and $\RR^n$, along with some of its properties. 
+
+Nabutovsky proceeds to survey the class about what they know. Here are the things he's asked (as to who is familiar on these).
+\begin{enumerate}[(i)]
+    \item Lebesgue density theorem in $\RR^n$.
+    \item Fubini's theorem.
+    \item $L^p$ spaces, and how to prove that they are complete.
+    \item Why care about the Lebesgue integral when the Riemann integral exists? (Per Nabutovsky, most functions you deal with in PDEs and other subjects are smooth, for which the Riemann integral will suffice. So why care?)
+\end{enumerate}
+``Now I know where the class stands, and I will explain all these to you in due course.'' In this course, we will extend the theory of Lebesgue integration to abstract spaces. Nabutovsky believes in starting slowly (with the later part of the course being much faster). We will start with the Lebesgue measure on $\RR$.
+
+Consider the space $X = \RR$. Let us define a function $f \colon \SP(\RR) \to [0, +\infty]$ (observe that $+\infty$ is allowed). We want to make $f$ a \textit{measure}; in order to do that, it must satisfy
+\begin{enumerate}[(i)]
+    \item $f(\emptyset) = 0$,
+    \item (countable additivity) If $E_1, E_2, \dots$ is a countable collection of disjoint sets, then
+    \[ f\left(\bigcup_i E_i\right) = \sum_i f(E_i). \]
+    In particular, it follows from the above that if some $E_i$ is of infinite measure, then $\bigcup_i E_i$ is also of infinite measure.
+\end{enumerate}
+The following two properties apply only to the case when $X = \RR$.
+\begin{enumerate}[(i)]
+    \setcounter{enumi}{2}
+    \item $f([0, 1]) = 1$,
+    \item $f$ is translation-invariant, i.e., $f(E + t) = f(E)$, for all $E \in \SP(\RR)$ and all $t \in \RR$. Note that the set $E + t$ is given by $E + t = \{x \mid x - t \in E\}$.
+\end{enumerate}
+At this point, Nabutovsky states that properties (iii) and (iv) are ``kind of arbitrary''. Nabutovsky also said that there is in fact no function $f$ that satisfies all $4$ of these properties.
+\begin{proof}
+    Consider the set $\RR / \QQ$. For convenience, let us restrict $X$ down to $(0, 1)$; we say that $x \sim y$ if $y = \smash{x \stackrel{\circ}{+} q}$, where $q \in \QQ$, where the special addition symbol is defined by
+    \[ a \stackrel{\circ}{+} b = \begin{cases} a + b & \text{if } a + b \in (0, 1), \\ a + b - 1 & \text{if } a + b \geq 1. \end{cases} \]
+    Let $E$ consist of exactly one element from each of the equivalence classes of $X / \QQ$ (from the axiom of choice)\footnote{note: this is a Vitali set}, for which the cardinality of $E$ is $\RR$. Now, define $E_q \coloneq \smash{E \stackrel{\circ}{+} q}$ for $q \in \QQ \cap [0, 1)$; then, for $q_1 \neq q_2$, we see that $E_{q_1} \cap E_{q_2} = \emptyset$, since, for all $t_1, t_2 \in E$ satisfying $t_1 + q_1 = t_2 + q_2$, it must be that
+    \[ t_1 = t_2 + (q_2 - q_1) \implies t_1 \sim t_2, \]
+    so $t_1 = t_2$. Now,
+    \[ 0 < \mu\bigl((0, 1)\bigr) = \sum_{q \in \QQ \cap [0, 1)} \mu(E_q). \]
+    By translation-invariance, it must be that $\mu(E_{q_1}) = \mu(E_{q_2})$, so we have two cases to consider: either $\mu(E_q) = 0$ (for any $q \in \QQ \cap [0, 1)$), or it is greater than $0$. In either case, we would get that the sum is $0$ or $+\infty$, which contradicts property (iii).
+\end{proof}
+For another perspective on this proof, see \S2.6.23 in Royden {\color{crimson}(note: I will reference edition 5 only)}. At this point, Nabutovsky gave an example of another measure.
+\begin{definition}[Counting measure] \label{def:counting_measure}
+    The counting measure counts the number of elements in a set; if there are infinitely many elements, the measure is infinite; if the set is finite, then the measure is exactly the number of elements in the set, per its definition.
+\end{definition}
+\begin{definition}[Algebra] \label{def:algebra}
+    Let $X$ be a metric (or a topological space). Let $M \subset \SP(X)$ (with $M \neq \emptyset$). We say $M$ is an \textit{algebra} if:
+    \begin{enumerate}[(i)]
+        \item If $E \in M$, then its complement $E^c$ is in $M$.
+        \item If $E_1, \dots, E_n \in M$, then their union $\bigcup_{i=1}^n$ is in $M$.
+    \end{enumerate}
+\end{definition}
+\begin{definition}[$\sigma$-algebra] \label{def:sigma_algebra}
+    In addition to the above properties, we ask that the union of any \textit{countable} collection of elements of $M$ is also in $M$.
+\end{definition}
+Using the fact that $A \cap B = (A^c \cup B^c)^c$, we also get that the countable intersection of elements of $M$ is also in $M$.

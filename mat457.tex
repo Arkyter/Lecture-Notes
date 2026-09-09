@@ -1,0 +1,32 @@
+\documentclass[11pt]{article}
+
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package}
+\WarningFilter{xcolor}{Package option}
+\WarningFilter{microtype}{Unable to apply patch}
+
+\usepackage{{style_files/arky}}
+\usepackage{standalone}
+\usepackage{import}
+
+% extra stuff
+\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,patterns,decorations.pathreplacing,calligraphy}
+
+% document specific
+%\usepackage{parskip}
+\setlength{\parindent}{0pt} % no indents
+\DeclareMathOperator{\Der}{Der}
+
+\begin{document}
+\title{MAT457 Lecture Notes}
+\date{'26 Fall Semester} % add date
+\maketitle
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+
+\include{MAT457 Notes/Day 1}
+
+
+\end{document}
