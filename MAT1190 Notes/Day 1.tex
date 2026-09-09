@@ -1,0 +1,38 @@
+\section{Day 1: Introduction}
+This is the first part of a two-semester course. Throughout this class, we will cover Hartshorne Chapter II. To quote Hunter Spink, ``if I just went through Hartshorne straight, it would not make any sense; this textbook does not make any sense. As a first exposure, the book is not reasonable. '' We will get through scheme theory, though. The goal of this class is to develop scheme theory as a main topic, then show how it applies to a bunch of easier theories. ``A lot of people think schemes are so confusing, that you basically have to do $6$ to $9$ on a completely obsolete theory to show you how it actually matters'' (but he won't do that).
+
+Three references that are very useful, outside of Hartshorne.
+\begin{enumerate}[(i)]
+    \item Ravi Vakil's \href{https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf}{\textit{The Rising Sea}}. This is meant to be a yearlong textbook.
+    \item Jo Harris' \textit{The Geometry of Schemes}. Harris just says ``this is schemes, suck it up'' then develops a bunch of properties about it.
+    \item Qin Li's \textit{Arithmetic} (something something).
+\end{enumerate}
+
+The class will have an \textit{oral} midterm and final (roughly October and December). There will be ungraded exercises (biweekly, as we go?) to turn in throughout the semester; the orals will be based on the easier questions.
+
+This class will start with the theory of manifolds over $\RR$, i.e., the classical theory of nice spaces. Consider the following insight on the Gelfand--Kolmogorov theorem: consider $C^0(M, \RR)$, the ring of continuous functions $M \to \RR$ on a manifold $M$. How do we recover $M$ from $C^0(M, \RR)$? Colloquially, different points of $M$ see different aspects of any function in $C^0(M, \RR)$. If we start with a point $p \in M$, we get an $\RR$-algebra map $C^0(M, \RR) \to \RR$ given by evaluating the functions at the given point $p$; we call this the ``evaluation map'', denoted
+\[ \ev_p \colon C^0(M, \RR) \to \RR, \quad f \mapsto f(p). \]
+Specifically, $\ev_p \in \Hom_{\RR\mathrm{-alg}}(C^0(M, \RR), \RR)$. What does it mean for $\ev_p$ to be an $\RR$-algebra map? As an example, while $\Hom(\CC, \CC) = \Aut(\CC)$ contains ``uncountably many horrible things'', we see that $\Hom_{\RR\mathrm{-alg}}(\CC, \CC)$ consists of homomorphisms that fix $\RR$, i.e., it only admits the identity and complex conjugation.
+
+\begin{claim} \label{clm:evaluation_map}
+    $\{\ev_p\}_{p \in M}$ are the only elements of $\Hom_{\RR-\mathrm{alg}}(C^0(M, \RR), \RR)$.
+\end{claim}
+We will do the proof for $M = \RR$, then see that the proof follows analogously for several other examples of $M$ as well.
+\begin{proof}
+    Assume we have an $\RR$-algebra map $\Phi \colon C^0(M, \RR) \to \RR$ that sends the identity function $x$ to $a$, i.e., $x \mapsto a$. We claim that this map is $\ev_a$; if not, then there is some function $g \in C^0(M, \RR)$ such that $g \not\mapsto g(a)$ under $\Phi$. Indeed, consider $\ker(\Phi)$; we see that $x - a \in \Ker(\Phi)$; now, consider the function
+    \[ (x - a)^2 + (g(x) - b)^2, \]
+    where $b \coloneq \Phi(g(x))$. This function was constructed to never vanish; the only way for it to be zero would be for $x = a$ and $g(x) = \Phi(g(x))$, but this never happens, so it is nonzero everywhere. However, $x - a \in \ker \Phi$ and $g(x) - b \in \ker \Phi$, so
+    \[ (x - a)^2 + (g(x) - b)^2 \in \ker \phi, \]
+    whence it is a unit; this would mean
+    \[ 1 = \frac{1}{(x - a)^2 + (g(x) - b)^2} \cdot \left((x - a)^2 + (g(x) - b)^2\right) \in \ker \Phi, \]
+    which is contradictory.
+\end{proof}
+
+\newpage
+Following Grothendieck, let $R$ be any ring, and consider $\Spec R$, which is a set of points with a topology, and is a locally ringed space (i.e., local functions ``glue'' to form global functions). We will rigorously define $\Spec R$ later. The key insight about manifolds is that, since they consist of charts that are compatible to each other locally, it allows us to ``glue'' data from functions together. Another important thing to know about locally ringed spaces is that if a function is non-vanishing everywhere, then it is invertible. Together, this lets you recover a topology on your ring $R$. {\color{crimson} Note that this stuff is still intentionally hand-wavey for now.}\footnote{``you... uncover something so unbelievably terrible that i can't even begin to describe it. something that's going to ruin your life for the next... twelve weeks!''}
+
+Consider the polynomials over the real numbers, $\RR[x]$. It is a ring. What would happen if we tried to reconstruct the space according to the procedure described earlier? Let's look at the $\RR$-algebra homomorphisms from $\RR[x] \to \RR$; then we get that it is $\RR$, since $x \mapsto a \in \RR$, and there is probably some way to proceed from here.
+
+There is, however, a reason we don't do algebraic geometry over the real numbers; that reason being, the process would suggest that $\RR[x]$ is that ring of functions on the real line. If we looked at $x^2 + 1 \in \RR[x]$, we would see that it's a polynomial that doesn't vanish anywhere and not invertible. This makes these ``space-recovery'' arguments impossible, specifically the part where a ``non-vanishing function is invertible''. There are two solutions to this behavior... either you invert functions which don't vanish everywhere, so you map $\RR \to \RR \setminus \{0\}$, or you can add points for every possible evaluation to every field. For example, consider
+\[ \ev_i \colon \RR[x] \to \CC, \quad x \mapsto i; \],
+we would see that $x^2 + 1 \mapsto 0$. Next time, we will define that $\Spec(R)$ is built out of all homomorphisms from $\RR$ to fields, modded out by ``some stuff''.

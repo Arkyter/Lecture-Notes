@@ -1,0 +1,46 @@
+\section{Day 1: Recap of Differential Geometry}
+Tests will involve slightly more advanced problems than quizzes; there will be no homework, but you are suggested to do the exercises in the textbook.
+
+We start with smooth manifolds. Let $X$ be a topological space. For all points $p \in X$, there exists an (open) neighborhood $U_\alpha \ni p$, with a chart $\varphi_\alpha \colon U_\alpha \to V_\alpha \subset \RR^n$ between open sets. Denote $\chi_\alpha$ to be the inverse of $\varphi_\alpha$, and consider another chart $\varphi_\beta \colon U_\beta \to V_\beta$ with $p \in U_\beta$ and $\chi_\beta \coloneq \varphi_\beta\inv$. Then we have two diffeomorphisms,
+\begin{align*}
+    \varphi_{\alpha \beta} &\coloneq \chi_\beta \circ \chi_\alpha\inv \colon U_\alpha \to U_\beta, \\
+    \varphi_{\beta \alpha} &\coloneq \chi_\alpha \circ \chi_\beta\inv \colon U_\beta \to U_\alpha.
+\end{align*}
+Here, we will also assume that $X$ is Hausdorff and second-countable. As an example, consider $f \colon \RR^{n+1} \to \RR$, where $c$ is a regular value in $\RR$. Then $\{f = c\}$ is a $n$-manifold in $\RR^{n+1}$. For all $x \in \{f = c\} = M$, we see that
+\[ \nabla f = \left(\frac{\partial f}{\partial x_1} (x), \dots, \frac{\partial f}{\partial x_{n+1}} (x)\right) \]
+has maximal rank $1$ if and only if $\nabla f(x) \neq 0$, which is equivalent to there being some index $i$ such that
+\[ \frac{\partial f}{\partial x_i}(x) \neq 0. \]
+He then said something incomprehensible, but this is mostly covering basics of differential geometry, which is why (I think) he is going so fast. We move onto his next example. Consider $f \colon \RR^{n+1} \to \RR$, where $f(x) = x_1^2 + \dots + x_{n+1}^2$. We then claim that $c = 1$ is a regular value. Indeed,
+\[ \nabla f(x) = (2x_1, \dots, 2x_{n+1}), \]
+where we see that, if the sum of the $x_i^2$ terms are equal to $1$, then some of the $x_i$'s are nonzero. If there is some nonzero $x_i$, then we may solve for $x_i$ by writing
+\[ x_i = \sqrt{1 - x_1^2 - \dots - \wh{x_i}^2 - x_n^2}. \]
+We now move onto real projective space, denoted $\RP^n$. $\RP^n$ consists of the lines through $0$ in $\RR^{n+1}$, for which the homogeneous coordinates are given by $\coor{x_0 : x_1 : \dots : x_n}$. The manifold structure on $\RP^n$ is given by the following charts
+\[ X^i \colon U_i \to \RR^n, \quad \coor{x_0 : x_1 : \dots : x_n} \mapsto \left(\frac{x_0}{x_i}, \dots, \frac{x_{i-1}}{x_i}, \frac{x_{i+1}}{x_i}, \dots, \frac{x_n}{x_i}\right), \]
+where $U_i = \{\coor{x_0 : \dots : x_n} \mid x_0 \neq 0\}$. We see that these charts are well defined because $\RP^n$ identifies points in $\RR^{n+1}$ together if they are a scalar multiple apart, but said scalar is cancelled out under the maps $X^i$. It is left as an exercise to check that the transition maps are smooth between each $U_i$ and $U_j$.
+
+Similarly, the complex projecitve space $\CP^n$ consists of complex lines through $0$; it is a $2n$-manifold in $\CC^{n+1} \cong \RR^{2n+2}$.
+
+Let $M^n$ and $N^m$ be smooth manifolds. A map $f \colon M^n \to N^m$ is smooth if it is smooth in charts.
+
+A tangent vector $v$ at $p \in M$ is an equivalence class of smooth curves through $p$. Specifically, consider $\gamma \colon (-1, 1) \to M$, with $\gamma(0) = p$. We say two curves $\gamma_1$ and $\gamma_2$ are equivalent if their tangent vectors at $0$ are equal in charts to $\RR^n$, i.e., consider $\hat \gamma_1$ and $\hat \gamma_2$ as $X_\alpha \circ \gamma_1$ and $X_\alpha \circ \gamma_2$ respectively; then equivalence is asking for $\hat \gamma_1(0) = \hat \gamma_2(0)$.\footnote{it is at this point that i realized the $\chi$'s are actually just $X$'s. how do i read his handwriting come on}
+
+\newpage
+We may write
+\[ X_\beta \circ \gamma_1 = (X_\beta \circ X_\alpha\inv) \circ (X_\alpha \circ \gamma_1) = \gamma_{\beta \alpha} \circ (X_\alpha \circ \gamma_1), \]
+where, by the chain rule, we get
+\[ (X_\alpha \circ \gamma_1)' (0) = d \varphi_{\beta \alpha} \bigl((X_\alpha \circ \gamma_1)'(0)\bigr). \]
+Similarly, we may write a statement for $\gamma_2$.
+
+We now talk about derivations. A derivation at $p$ is a linear map $D \colon C^\infty(M^n) \to \RR$ (remember that $C^\infty(M^n)$ is the space of smooth functions on $M$), such that
+\[ D(f g) = D(f) g(p) + f(p) D(g). \]
+Some other properties of derivations are as follows:
+\[ D(\mathbf{1} \cdot \mathbf{1}) = D(\mathbf 1) \cdot 1 + 1 \cdot D(\mathbf 1) = 2 D(\mathbf 1) \implies D(\mathbf 1) = 0. \]
+Similarly, $D(c \mathbf 1) = c D(\mathbf 1) = 0$. If $f(p) = g(p) = 0$, then $D(f \cdot g) = 0$. He then wrote down some more things that were basically indecipherable because of shitty handwriting.
+
+\begin{exercise}
+    This canonical map arising from $D_v \colon C^\infty(M) \to \RR$, given by $D_v(f) \coloneq (f \circ \gamma)'(0)$, gives an equivalence class of curves at $p$, and is well-defined.
+\end{exercise}
+
+Consider $\hat f = f \circ \gamma \colon (-1, 1) \to \RR$ and $\hat g = g \circ \gamma \colon (-1, 1) \to \RR$. Then the Leibniz rule applies,
+\[ (\hat f \cdot \hat g)'(0) = \hat f'(0) \cdot \hat g(0) + \hat f(0) \cdot \hat g'(0). \]
+He then wrote a theorem here about some bijection between derivations and tangent vectors. Since he's really just recapping MAT367, I'll stop recording notes for today. One bit of notation different from what you see in MAT367, though, is that he uses $\Der_p(M)$ to denote the derivations at $p \in M$. Also, $\Der_p(M) = T_p M$.
