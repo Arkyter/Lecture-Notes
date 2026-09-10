@@ -1,0 +1,65 @@
+\section{Day 2: Spectrum of a Ring (Sep.\ 10, 2026)}
+Last class, we talked about evaluation maps. Let $M$ be a manifold, and let $p \in M$. We have that all of the $\RR$-algebra maps $C^0(M, \RR) \to \RR$ were given by $\ev_p \colon C^0(M, \RR) \to \RR$. A key fact about locally ringed spaces is that any function on them which is nonvanishing everywhere is invertible; when working with polynomials $\RR[x]$, though, we see that $x^2 + 1$ constitutes a counterexample to the aforementioned statement.
+
+The function $x^2 + 1$ maps $\RR$ to $\RR \setminus \{0\}$. Observe that we may identify $xy - 1 = 0$ with $\RR \setminus \{0\}$ by the isomorphism $(x, y) \mapsto x$; the curve $xy - 1 = 0$ (visualized, perhaps, in the $xy$-plane) admits an automorphism $(x, y) \mapsto (y, x)$; if we pre-compose $(x, y) \mapsto x$ with this, we see that we get an automorphism on $\RR \setminus \{0\}$ in the form of $x \mapsto x\inv$. This is called the \href{https://en.wikipedia.org/wiki/Rabinowitsch_trick}{\textit{Rabinowitsch trick}}.
+
+Our solution to the above problem is to ``add more points''. Consider $\Hom_{\RR-\opname{alg}}(\RR[x], \CC)$ (note that we extended the codomain $\RR$ to $\CC$). %Here, $x^2 + 1$ admits a zero $i$, so it is no longer a non-vanishing function.
+Fix a field $K$, and consider $f_1, \dots, f_r \in K[x_1, \dots, x_n]$, and consider the set
+\[ \{f_1(x_1, \dots, x_n) = f_r(x_1, \dots, x_n) = 0\} \subset K^n. \]
+This is the zero set $z_K(f_1, \dots, f_r)$.
+\begin{theorem} \label{thm:canonical_bijection_zero_set}
+    We have the canonical bijection,
+    \[ \Hom_{K-\opname{alg}}\left(\frac{K[x_1, \dots, x_n]}{(f_1, \dots, f_r)}, K\right) \cong Z_K(f_1, \dots, f_r). \]
+\end{theorem} \vspace{-8pt}
+\begin{proof}
+    The key fact about polynomial rings is that, in general, for any ring $R$, $\Hom_{R-\opname{alg}}(R[x_1, \dots, x_n], S)$ is in a very natural bijection with $n$-tuples of elements of $S$. Concretely, you can send $(x_1, \dots, x_n) \mapsto (s_1, \dots, s_n)$ because $x_1, \dots, x_n$ don't have to satisfy any relation over $R$. In this manner, any map from the quotient ring to $K$ (in the original theorem statement) must send $f_1, \dots, f_r$ to $0$. Per our key fact, it follows that $f \mapsto \ev_{(s_1, \dots, s_n)} = f(s_1, \dots, s_n)$.
+
+    The canonical bijection thus arises for $(a_1, \dots, a_n) \in Z_K(f_1, \dots, f_r)$ and its associated evaluation maps $\ev_{(a_1, \dots, a_n)}$.
+\end{proof}
+
+Thus, we want to consider $K[x_1, \dots, x_n]/(f_1, \dots, f_r)$ to be the ``ring of functions''. We want to ask, what is the function $f_1$ on the space $Z_k(f_1, \dots, f_r)$? Clearly, $\restr{f_1}{Z_k(f_1, \dots, f_r)} = 0$ (and the same holds for each of $f_1, \dots, f_r$).
+
+As an example, consider a field $K$, $f_1 = x$, and $f_2 = y$. Then $Z_K(f_1, f_2) = (0, 0)$, and $K[x, y]/(f_1, f_2) \cong K$. If $f_1 = x$ an d$f_2 = y^2$, then
+\[ \frac{K[x, y]}{(x, y^2)} \cong \frac{K[y]}{y^2}. \]
+Here, $\ev_{(0, 0)}(y) = 0$, but we aren't setting $y$ to $0$ (as we are quotienting out by $y^2$). Thus, we have a hurdle to deal with; (not all) functions will not be determined by their points.
+
+Let $L/K$ be a field over $K$, and consider $Z_L(f_1, \dots, f_r)$, where $f_1, \dots, f_r$ are polynomials over $K$. Since $K$ is embedded in $L$, we can consider $f_1, \dots, f_r$ as polynomials over $L$ as well, and write
+\[ Z_L(f_1, \dots, f_r) = \{(a_1, \dots, a_n) \mid f_1(a_1, \dots, a_n) = \dots = f_r(a_1, \dots, a_n) = 0\} \subset L^n. \]
+{\color{airforceblue} He then drew a diagram.}
+
+\newpage
+\begin{theorem}
+    \begin{enumerate}[(i)]
+        \item $\Hom_{K-\opname{alg}}(K[x_1, \dots, x_n]/(f_1, \dots, f_r), L)$ is in bijection with $Z_L(f_1, \dots, f_r)$.
+        \item Let $R = K[x_1, \dots, x_n]/(f_1, \dots, f_r)$. We have that
+        \[ \Hom_{K-\opname{alg}}(R, L) \cong \{(\text{prime ideals } p \subset R), \kappa(p) \xhookrightarrow[]{K-\opname{alg}} L)\}, \]
+        where $\kappa(p) = \opname{Frac}(R/p)$.
+    \end{enumerate}
+\end{theorem}
+Basically, this theorem says that ``instead of being really good at solving system of equations, you could be really good at finding prime ideals instead.''
+\begin{proof}
+    For (i), the proof is the same as earlier. For (ii), we have a $K$-algebra map $\Phi \colon R \to L$; because the image is a field, we can factor the map through intermediate rings canonically. Because $\Img \Phi$ is an integral domain, $\Phi$ factors through
+    \[ R \to R/p \xhookrightarrow[]{K-\opname{alg}} L, \]
+    where $\Img \Phi = R/p$. In particular, since $L$ is a field, we can further write
+    \[ R \to R/p \hookrightarrow \opname{Frac}(R/p) \xhookrightarrow[]{K-\opname{alg}} L. \]
+    The first two maps are canonical to the prime ideal $p$.
+\end{proof}
+``To solve a system of equations over a larger field, we specify a prime ideal, then specify an embedding.''
+
+\begin{definition}
+    We define $\abs{\Spec(R)} \coloneq \{p \subset R \mid p \text{ prime}\}$.
+\end{definition}
+\begin{corollary}
+    If $R$ is a field, then $\abs{\Spec(R)}$ is a single point.
+\end{corollary}
+Of all the points that constitute $\Spec(R)$, of which they are prime ideals, some of them are $\ker \ev_p$ for $p \in Z_K(f_1, \dots, f_r)$.
+
+As an example, consider $\abs{\Spec \RR[x]}$. $\RR[x]$ is a UFD, so its prime ideals are of the form $(f)$ with $f$ irreducible. Specifically, $\abs{\Spec \RR[x]} = \{(x - a) \mid a \in \RR\} \cup \{(x - a)^2 + b^2 \mid a \in \RR, b \sim -b \in \RR^\ast\}$ (i.e., we identify $b$ with $-b$ because it doesn't matter here). Following our process from earlier, we have
+\[ \RR[x] \to \opname{Frac}\left(\frac{\RR[x]}{(x - a)}\right) \xhookrightarrow[]{\RR-\opname{alg}} L, \]
+where $L/\RR$. Here, $\opname{Frac}(\RR[x]/(x-a)) \cong \RR$. For the irreducible quadratics, we have
+\[ \RR[x] \to \opname{Frac}\left(\frac{\RR[x]}{((x-a)^2 + b^2)}\right) \xhookrightarrow[]{\RR-\opname{alg}} L, \]
+where $\opname{Frac}(\RR[x]/((x-a)^2 + b^2)) \cong \CC$. Thus, $\abs{\Spec \RR[x]}$ is given by $\CC$ modded out by complex conjugation, with $\{0\}$ added in.
+
+Now, consider
+\[ \RR[x] \to \opname{Frac}(\RR[x]/(0)) \hookrightarrow L, \]
+where $X$ satisfies no algebraic equation over $\RR$.
