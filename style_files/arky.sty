@@ -76,7 +76,13 @@
 	
 	% this removes the "section 1: day 1:..." redundancy. ONLY USE FOR LECTURE NOTES .STY!!
 	\makeatletter % https://tex.stackexchange.com/a/444226 % yippee i guess.
-	\renewcommand{\@seccntformat}[1]{}
+		\renewcommand{\@seccntformat}[1]{}
+	\makeatother
+
+	% this removes the "section 1: day 1:..." redeundancy from the TABLE OF CONTENTS ONLY!
+	\makeatletter
+		\let\latexl@section\l@section
+		\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
 	\makeatother
 
 	% theorem environment (spacing changes)
