@@ -73,6 +73,11 @@
 	\renewcommand{\abstractname}{\vspace{-\baselineskip}} % removes abstract name
 
 	\usepackage[skip=\medskipamount, tocskip=0em]{parskip}
+	
+	% this removes the "section 1: day 1:..." redundancy. ONLY USE FOR LECTURE NOTES .STY!!
+	\makeatletter % https://tex.stackexchange.com/a/444226 % yippee i guess.
+	\renewcommand{\@seccntformat}[1]{}
+	\makeatother
 
 	% theorem environment (spacing changes)
 	\makeatletter
