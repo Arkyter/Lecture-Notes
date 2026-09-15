@@ -1,0 +1,26 @@
+\section{Day 2: (Sep.\ 10, 2026)}
+Quiz $1$ will be on Tuesday of next week. Let $M^n$ be a smooth manifold, and let $p \in M$. We have that $T_p M$ is the space of tangent vectors at $p$. There are two ways of looking at tangent vectors. First, we can think of them as equivalence classes of smooth curves through $p$, i.e., $\gamma_1, \gamma_2 \colon (-1, 1) \to M$ with $\gamma_1(0) = \gamma_2(0) = p$. We say that $\gamma_1 \sim \gamma_2$ if $(X \circ \gamma_1)'(0) = (X \circ \gamma_2)'(0)$, where $X$ is the chart from a neighborhood of $p$ to $\RR^n$. Second, we may think of it as $T_p M \cong \Der_p(M)$, where $\Der_p(M)$ are the derivations at $p$, i.e., the linear maps $D \colon C^\infty(M) \to \RR$ that satisfy
+\[ D(f \cdot g) = D(f) g(p) + f(p) D(g). \]
+The equivalence class of $\gamma$, $[\gamma]$, defines a derivation $D$ by the formula
+\[ D(f) = \frac{d}{dt} (\gamma'(t)) \biggr\rvert_{t=0}. \]
+$[\gamma] \mapsto D$ is a bijection. $T_p M$ is a vector space, and we can find bases of $T_p M$ from coordinate charts. For $X$ a coordinate chart near $p$, we have a basis of $T_p M$ given by
+\[ \frac{d}{d X_1} \biggr\rvert_p, \dots, \frac{d}{d X_n} \biggr\rvert_p. \]
+This holds for any chart $X$. Indeed, to make any genreal derivation $D \in \Der_p(M)$ in this basis, we may simply just write
+\[ D = \sum_i v_i \frac{d}{dX_i} \biggr\rvert_p, \qquad V_i \subset D(X_i). \]
+In the special case, let $M = V$ be an open subset of $\RR^n$. Then $T_p M \cong \RR^n$ canonically if we think about it as equivalence classes of curves. Specifically, $[\gamma_1] = [\gamma_2]$ if $\gamma_1'(0) = \gamma_2'(0)$ (are the usual vectors in $\RR^n)$. Similarly, let $F \colon V \to \RR^m$, where $V \subset \RR^n$ is open, and $n \geq m$. Then $\left<F = c\right>$ is a manifold of dimension $n-m$, and for all $x \in \left<F = c\right>$, we would have that
+\[ \left(\frac{df_i}{dX_j}(x)\right) \]
+is of rank $m$. Tangent vectors to $\left<F = c\right>$ can be thought of as vectors in $\RR^n$. As another example, let $F \colon \RR^{n+1} \to \RR$, where $F(x_0, \dots, x_n) = \sum_i x_i^2$, and let $c = 1$; then $x_0^2 + \dots + x_n^2 = 1$ is precisely $\left<F = 1\right>$, and we have $T_p S^n = p^\perp$, for $p \in \left<F = 1\right> = S^n$.
+
+We will now discuss the differential of a smooth map. Let $f \colon M^m \to N^n$ be smooth. $f$ induces a linear map
+\[ df_p \colon T_p M \to T_{f(p)} N, \]
+where, for $v = [\gamma] \in T_p M$, we have $df_p([\gamma]) = [f \circ \gamma]$. Alternatively, by regarding $v = \gamma'(0)$, we have that $df_p(v) = (f \circ \gamma)'(0)$. If we think about tangent vectors of derivations, where $h \in C^\infty(N)$, then $d f_p (D)(h) \coloneq D(h \circ f)$. For $D \in \Der_p(M)$, we have that $df_p(D) \in \Der_{f(p)}(N)$.
+
+Let $Y$ be a chart near $f(p)$. Let
+\[ \ol w = df_p(\ol v) = \sum_{j=1}^m w_j \frac{d}{dY_j}\biggr\rvert_{f(p)}. \]
+How do we find the coefficients? $w_j = w(y_j) = )d f_p (v))(y_j) = v(y_j \circ f)$. He then did a bunch of stuff about transport of structure withuot really any... direction.
+
+We now talk about tangent bundles. The tangent bundle of $M^n$, a smooth manifold, is $TM$, where
+\[ TM = \left<(p, v) \mid p \in M, v \in T_p M\right>. \]
+Let $\pi \colon TM \to M$ be the canonical projection. If $X \colon U \to V \subset \RR^n$ is a coordinate chart near $p$, then $X$ maps
+\[ \left(p, \sum_{i=1}^n v_i \frac{d}{dX_i}(p)\right) \to (X(p), (v_1, \dots, v_n)) \subset V \times \RR^n \subset \RR^{2n}. \]
+He then talked about charts about $\pi$. I'm not following anything he's writing honestly.
