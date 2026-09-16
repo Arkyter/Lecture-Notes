@@ -1,4 +1,4 @@
-\section{Day 3: Random Variables (Sep.\ 16, 2026)}
+\section{Day 3: Random variables (Sep.\ 16, 2026)}
 Let $(\Omega, \SA, \PP)$ be a probability space, and let $(S, \mathcal S)$ be a measurable space. A random variable is a \textit{measurable function} $X \colon \Omega \to S$ (i.e., for all $U \in \mathcal S$, $X\inv(U) \in \SA$). For example, consider $(\Omega, \SA, \PP) = ([0, 1], \SB([0, 1]), dx)$ (i.e., the Borel $\sigma$-algebra with the Lebesgue measure). Let $S = \{H, T\}$ be the outcomes of a coinflip; we may define a random variable $X$ as follows,
 \[ X(\omega) = \begin{cases} H, &\omega \geq \frac{1}{2}, \\ T, &\omega < \frac{1}{2}. \end{cases} \]
 Note that this is not the only way to define a fair coin; we could consider a random variable $\tilde X$ that sends $\omega$ to $H$ if $\min\{\abs{\omega}, \abs{1 - \omega}\} < \frac{1}{4}$, or any other fancy examples that one could come up with.
