@@ -7,7 +7,6 @@ Current list of classes:
 
 - MAT415 (Algebraic Number Theory)
 - MAT457 (Advanced Real Analysis I) -- maintained by [@theflickerman404](https://github.com/theflickerman404)
-- MAT464 (Riemannian Geometry)
 - MAT1190 (Algebraic Geometry I)
 - MAT1600 (Probability I)
 
