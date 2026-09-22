@@ -56,7 +56,7 @@ As an example, $\ZZ_0 = 0$. This is because $\ZZ[x]/(x(0) - 1) = \ZZ[x]/(1) = 0$
     $\abs{\Spec R_g} \cong D(g) \subset \abs{\Spec R}$.
 \end{theorem}
 \begin{proof}
-    Consider the map $\phi \colon R \to R_g$, so $\phi^\ast \colon \abs{\Spec R_g} \to \abs{\Spec R}$. First, we can show that $\Img \phi^\ast \subset D(g)$. Indeed, $(\phi^ast)\inv (D(g)) = Z(\phi(g))$ (since zero sets pullback the way you expect), which is equal to $\phi$.
+    Consider the map $\phi \colon R \to R_g$, so $\phi^\ast \colon \abs{\Spec R_g} \to \abs{\Spec R}$. First, we can show that $\Img \phi^\ast \subset D(g)$. Indeed, $(\phi^\ast)\inv (D(g)) = Z(\phi(g))$ (since zero sets pullback the way you expect), which is equal to $\phi$.
     
     Now, we want to show that $\phi^\ast$ is injective, i.e., we can recover $\kp$ from $\phi^\ast \kp = \phi\inv(\kp)$. We claim that $(\phi(\phi\inv(\kp))) = \kp$. The non-trivial containment is that $\kp \subset \phi(\phi\inv(\kp))$. Given $r/g$ in $\kp$, we have $r \in \kp$, so $r \in \phi\inv(\kp)$, so $r \in \phi(\phi\inv(\kp))$, whence $r/g \in (\phi(\phi\inv(\kp)))$.
 
