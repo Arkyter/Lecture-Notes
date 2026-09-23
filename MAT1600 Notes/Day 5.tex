@@ -1,0 +1,95 @@
+\section{Day 5: Inequalities and the weak Law of Large Numbers (Sep.\ 23, 2026)}
+We start by looking at a handful of inequalities related to real random variables.
+\begin{enumerate}[(i)]
+    \item \textit{(Markov/Chebyshev).} Let $X$ be a real, non-negative random variable. Let $t \geq 0$. Then
+    \[ \PP(X \geq t) \leq \frac{\EE (X \, \mathbf 1(X \geq t))}{t} \leq \frac{\EE X}{t}. \]
+    \begin{proof}
+        We may check this by writing
+        \[ \PP(X \geq t) = \EE \mathbf 1(X \geq t) \leq \EE \left(\frac{X}{t}\right) \mathbf 1(X \geq t). \qedhere \]
+    \end{proof}
+
+    \item \textit{(Generalized Chebyshev).} Let $X$ be a real random variable. Let $\varphi \colon \RR \to [0, \infty)$; then
+    \[ \PP(\varphi(X) \geq t) \leq \frac{\EE \varphi(X)}{t}. \]
+    As an example, if $\varphi(x) = x^k$ for $k \in 2\NN$, then
+    \[ \PP(\abs{X} \geq t) = \PP(X^k \geq t^k) \leq \frac{\EE X^k}{t^k}. \]
+    We call $\EE X^k$ the $k$th moment. As another example, let $\varphi(x) = e^{\lambda x}$ for $\lambda > 0$. Then
+    \[ \PP(X \geq t) = \PP(e^{\lambda X} > e^{\lambda t}) \leq \frac{\EE e^{\lambda X}}{e^{\lambda t}}. \]
+
+    \item \textit{(Jensen).} If $\varphi \colon \RR \to \RR$ is a convex function and $X$ is a real random variable, then $\EE \varphi(X) \geq \varphi(\EE X)$. As an example, we know that $\EE X^2 \geq (\EE X)^2$, since $\EE X^2 - (\EE X)^2 = \Var(X) \geq 0$. For some intuition from analysis, we know that
+    \[ L^p(\mu) \subset L^q(\mu) \]
+    if $p > q$ and $\mu$ is a probability measure. This is left as an exercise if you don't already know how to demonstrate it.
+    \begin{proof}
+        Since $\varphi$ is convex, for every $x \in \RR$, we can find $c, d \in \RR$ such that $\varphi(x) = cx + d$ and $\varphi(y) \geq cy + d$ for all $y \in \RR$. Choose $c, d$ with $x = \EE X$; then $\EE \varphi(X) \geq \EE[cX + d] = c \EE X + d = \varphi(\EE X)$.
+    \end{proof}
+\end{enumerate}
+
+We now talk about the law of large numbers. We start with the idea of it: let $X_1, X_2, \dots$ be a sequence of i.i.d.\ random variables (i.e., $\smash{X_1 \stackrel{d}{=} X_n}$ for all $n$). Let $S_n = X_1 + \dots + X_n$. Then the law of large numbers says that
+\[ \frac{S_n}{n} \to \EE X_1, \quad n \to \infty. \]
+There are two types of convergence. The first being convergence in probability, denoted $\smash{\taking{\PP}}$ (this is the \textit{weak law}), and the second being convergence almost surely, denoted $\smash{\taking{\text{a.e.}}}$ (this is the \textit{strong law}).
+
+\begin{theorem}[Panchenko \S2.5: $L^2$ weak law] \label{thm:weak_LLN_L2}
+    If $(X_n : n \in \NN)$ is a sequence of \textit{uncorrelated} real random variables with
+    \[ \EE X_i = 0 \]
+    for all $i$. If there exists $K \geq 0$ such that $\EE X_i^2 \leq K$ for all $i$, then $\smash{\frac{S_n}{n} \taking{\PP} 0}$.
+\end{theorem}
+
+\newpage
+\begin{proof}
+    Fix $\eps > 0$; we want to show that $\PP(\abs{S_n/n} > \eps) \to 0$. Since
+    \[ \EE S_n^2 = \EE\left(\sum_{i=1}^n X_i\right)^2 = \sum_{i=1}^n \EE X_i^2 + \sum_{i \neq j} \EE X_i X_j, \]
+    for which the latter term vanishes as $\EE X_i X_j = \EE X_i \EE X_j = 0$, we may directly write as follows,
+    \[ \PP\left(\abs{\frac{S_n}{n}} > \eps\right) = \PP(S_n^2 > n^2 \eps) \leq \frac{\EE S_n^2}{n^2 \eps^2} = \frac{1}{n^2 \eps^2} \sum_{i=1}^n \EE X_i^2 \leq \frac{n K}{n^2 \eps^2} = \frac{K}{n \eps^2} \to 0, \]
+    as $n \to \infty$. Note that the Chebyshev's inequality used in the middle here.
+\end{proof}
+
+As an observation, if we let $\eps = t/\sqrt{n}$, then we get
+\[ \PP\left(\abs{\frac{S_n}{n}} > \frac{t}{\sqrt{n}}\right) \leq \frac{K}{t^2}, \]
+so $S_n$ typically lives in a $O(\sqrt{n})$ window around $0$.
+
+As an example of the weak law, let $f \colon [0, 1] \to \RR$ be conitnuous. Define
+\[ f_n(x) = \sum_{m=0}^n \binom{n}{m} x^m (1 - x)^{n-m} f\left(\frac{m}{n}\right), \]
+called the \textit{Bernstein polynomials}. Then $f_n \to f$ uniformly.
+\begin{proof}
+    Let $p \in [0, 1]$. Then $f_n(p) = \EE f(S_n/n)$ when $S_n = X_1 + \dots + X_n$, where $X_i$ are i.i.d.\ Bernoulli random variables with probability $p$. Now,
+    \[ \PP \left(\abs{\frac{S_n}{n} - p} > \delta\right) \leq \frac{\EE\left(\frac{S_n}{n} - p\right)^2}{\delta^2} \leq \frac{1}{4n\delta^2}. \]
+    Specifically, the last inequality is obtained by writing
+    \[ \EE \left(\frac{S_n}{n} - p\right)^2 = \frac{1}{n^2} \EE \left(\sum_{i=1}^n X_i - np\right)^2 = \frac{1}{n^2} \sum_{i=1}^n \EE(X_i - p)^2 \leq \frac{p(1 - p)}{n} \leq \frac{1}{4n}. \]
+    Define the \textit{modulus of continuity} for $f$,
+    \[ \omega(\delta) = \sup_{\substack{x,y \in [0, 1] \\ \abs{x - y} \leq \delta}} \abs{f(x) - f(y)}; \]
+    we may describe the difference between $f_n(p)$ and $f(p)$ as
+    \[ \abs{f_n(p) - f(p)} = \abs{\EE f\left(\frac{S_n}{n}\right) - f(p)} \leq \omega(\delta) + 2 \norm{f}_\infty \PP\left(\abs{\frac{S_n}{n} - p} > \delta\right). \]
+
+    \newpage
+    Note that this was obtained by writing
+    \[ f\left(\frac{S_n}{n}\right) - f(p) = \left(f\left(\frac{S_n}{n}\right) - f(p)\right) \mathbf 1 \left(\abs{\frac{S_n}{n} - p} \leq \delta\right) + \left(f\left(\frac{S_n}{n}\right) - f(p)\right) \mathbf 1 \left(\abs{\frac{S_n}{n} - p} > \delta\right), \]
+    for which we will denote the terms as $A = B + C$ for convenience. Clearly, $\abs{A} \leq \abs{B} + \abs{C}$, so $\EE \abs{A} \leq \EE \abs{B} + \EE \abs{C}$, for which $\EE \abs{B}$ is precisely the modulus of continuity $\omega(\delta)$ and $\EE \abs{C} \leq 2 \norm{f}_\infty \EE \mathbf 1 (\dots)$.
+
+    From here, by sending $n \to \infty$, we see that
+    \[ \limsup_{n \to \infty} \abs{\EE f\left(\frac{S_n}{n}\right) - f(p)} \leq \omega(\delta). \]
+    Since $\delta > 0$ is arbitrary and $\omega(\delta) \downarrow 0$ as $\delta \downarrow 0$, we see that
+    \[ \lim_{n \to \infty} \sup_{p \in [0, 1]} \abs{\EE f\left(\frac{S_n}{n}\right) - f(p)} = 0. \qedhere \]
+\end{proof}
+
+As an aside, consider the $K$-Lipschitz functions, i.e., $\omega(\delta) \leq K\delta$ for some $K > 0$. Then
+\[ \norm{f_n - f}_\infty \leq \in_{\delta > 0} K \delta + \frac{2 \norm{f}_\infty}{4n \delta^2} = Kn^{-\frac{1}{3}} + \frac{\norm{f}_\infty}{2} n^{-\frac{1}{3}}, \]
+by taking $\delta = n^{-1/3}$.
+
+We now discuss the weak LLN for triangular arrays (cf.\ Durrett \S2.2.11). Consider the following triangular array,\footnote{``if you're good at geometry, you'll be able to see that this is a triangle...''}
+\[ \begin{array}{cccc} X_{1,1} \\ X_{2,1}, & X_{2,2} \\ X_{3,1}, & X_{3,2}, & X_{3,3} \\ \vdots & & & \ddots \end{array} \]
+Specifically, let $(X_{n,i} : 1 \leq i \leq n \in \NN)$ be an array of random variables. Denote $S_n = X_{n,1} + \dots + X_{n,n}$. Let $\mu_n = \EE S_n$, $\sigma_n^2 = \Var(S_n)$. If $\sigma_n^2/b_n^2 \to 0$ as $n \to \infty$ for some sequence $(b_n)$, then
+\[ \frac{S_n - \mu_n}{b_n} \taking{\PP} 0. \]
+The proof is left as an exercise. {\color{airforceblue} ``It's nice to recognize the weak law in places that don't fit into the previous framework.''}
+
+As an example in computation, consider the coupon collector problem (cf.\ Durrett 2.2.7): consider $(X_i^n : i \in \NN)$ i.i.d., of which are uniform on $\{1, \dots, n\}$. Denote
+\[ \tau_i^n = \min\{j \in \NN \mid \abs{X_1^n, \dots, X_j^n} \geq 1\}, \]
+i.e., ``how long does it take to collect $i$ distinct cards?'' Specifically, $\tau_n$ denotes how long it would take to collect \textit{all} cards. More precisely, we want $\alpha_n$ such that
+\[ \frac{\tau_n^n}{\alpha_n} \taking{\PP} 1. \]
+Write $\tau_n^n = \sum_{i=1}^n X_i^n$ and $Y_i^n = \tau_i^n - \tau_{i-1}^n$ (and $\tau_0^n = 0$); $Y_i^n$ is independent of each other, since the amount of time it takes to collect the next card does not depend on the cards that have been collected already.
+\[ \PP(Y_i^n = k) = \left(\frac{n - i +1}{n}\right) \left(\frac{i - 1}{n}\right)^{k-1}. \]
+We call $Y_i^n$ a \textit{geometric random variable} with success parameter $\frac{n-i+1}{n}$. Continuing our computation, we have that
+\[ \EE \tau_n^n = \sum_{i=1}^n \EE Y-i^n = \sum_{i=1}^n \frac{n}{n-i+1} = n \sum_{i=1}^n \frac{1}{i} \sim n \log n + O(1). \]
+To compute the variance of $\tau_n^n$, we have that
+\[ \Var(\tau_n^n) = \sum_{i=1}^n \Var(X_i^n) = \sum_{i=1}^n \left(\frac{n}{n-i+1}\right)^2 \left(\frac{i-1}{n}\right) \leq n^2 \sum_{i=1}^n \frac{1}{(n - i + 1)^2} \leq 10n^2. \]
+Thus,
+\[ \frac{\tau_n^n - n \log n}{n \log n} \taking{\PP} 0, \]
+since $n^2 <\!\!< (n \log n)^2$.
