@@ -1,0 +1,80 @@
+\section{Day 5: Norm and Trace (Sep.\ 22, 2026)}
+Recall, from last time, that we defined norm and trace for field extensions. Specifically, let $K/F$ be a finite field extension; then, for $\alpha \in L$, the left-multiplication map $\phi_\alpha \colon L \to L$ given by $\beta \mapsto \alpha\beta$ si a $K$-linear map of $K$-vector spaces, for which
+\[ N_{L/F}(\alpha) = \det(\phi_\alpha), \quad \Tr_{L/F}(\alpha) = \tr(\phi_\alpha). \]
+Note that this definition than that of the book (cf.\ p.15), so we will relate our definition to theirs now.
+\begin{proposition} \label{prop:trace_and_norm_formulation}
+    Let $\ol F$ be an algebraic closure of $F$. Then, for $\alpha \in L$, we have that
+    \[ \Tr_{L/F}(\alpha) = \sum_{\substack{\sigma \colon L \to \ol F \\ \text{$F$-embeddings}}} \sigma(\alpha), \quad N_{L/F}(\alpha) = \prod_{\substack{\sigma \colon L \to \ol F \\ \text{$F$-embeddings}}} \sigma(\alpha). \]
+\end{proposition} \vspace{-8pt}
+\begin{proof}
+    Observe that $F \subset F(\alpha) \subset L$. Then $\Tr_{L/F}(\alpha) = \abs{L : F(\alpha)} \Tr_{F(\alpha)/F}(\alpha)$, where $F(\alpha) = F[x]/p(x)$, with $p(x)$ being the minimal polynomial of $\alpha$. $p(x)$ has $n = \deg p = \abs{F(x) : F}$ distinct roots, which we will call $\alpha_1, \dots, \alpha_n \in F$, so there are exactly $n$ embeddings of $F(\alpha) \hookrightarrow \ol F$.
+\end{proof}
+
+In particular,
+\[ \Tr_{F(\alpha)/F}(\alpha) = \sum_{i=1}^n \alpha_i, \quad N_{F(\alpha)/F}(\alpha) = \prod_{i=1}^n \alpha_i. \]
+In the basis of $F(\alpha)$, i.e., $\{1, \alpha, \dots, \alpha^{n-1}\}$, the matrix of $\phi_\alpha$ is given by
+\[ \begin{pmatrix}
+    0 & & & -a_0 \\ 1 & & & -a_1 \\ & \ddots & & \vdots \\ 0 & & 1 & -a_{n-1}
+\end{pmatrix}, \]
+i.e., the companion matrix for the minimal polynomial $p(x) = x^n + a_{n-1} x^{n-1} + \dots + a_0$ of $\alpha$.
+
+In $L/F$, there are $\abs{L : F}$ $F$-algebra embeddings $L \to \ol F$, where each one takes $\alpha$ to one of $\alpha_1, \dots, \alpha_n$.
+
+\begin{claim} \label{clm:number_of_ways_to_extend}
+    Each $\alpha_i$ appears exactly $\frac{1}{n} \abs{L : F}$ times.
+\end{claim}
+\begin{proof}
+    For every embedding $F(\alpha)\to \ol F$, there exists $\frac{1}{n} \abs{L:F}$ $F(\alpha)$-algebra embeddings $L \to \ol F$. Specifically,
+    \[ \abs{L : F(x)} = \frac{\lvert{L : \ol F}\rvert}{\abs{F(\alpha) : F}} = \frac{L : F}{n}. \qedhere \]
+\end{proof}
+
+In this way, we may write
+\[ \sum_{\substack{\sigma \colon L \to \ol F \\ \text{$F$-alg}}} \sigma(\alpha) = n \sum_{\substack{\sigma \colon L \to \ol F \\ \text{$F$-alg}}} \sigma(\alpha) = n \Tr_{F(\alpha)/F}(\alpha) = \Tr_{L/F}(\alpha). \]
+The same applies to norm. As a corollary, if $L/F$ is a finite Galois extension with Galois group $G$, then, for $\alpha \in L$,
+\[ \Tr_{L/F}(\alpha) = \sum_{\sigma \in G} \sigma(\alpha), \quad N_{L/F}(\alpha) = \prod_{\sigma \in G} \sigma(\alpha). \]
+
+\newpage
+\begin{proposition} \label{prop:norm_trace_integer}
+    Let $F$ be a number field. If $\alpha \in \SO_F$, then $\Tr_{F/\QQ}(\alpha), N_{F/\QQ}(\alpha) \in \ZZ$.
+\end{proposition}
+\begin{proof}
+    We saw, by Vi\`ete's formulas, that
+    \[ \Tr_{\QQ(\alpha)/\QQ}(\alpha) = -a_{n-1}, \quad N_{\QQ(\alpha)/\QQ}(\alpha) = (-1)^n a_0, \]
+    for which $a_0, a_{n-1}$ are coefficients of the minimal polynomial of $\alpha$, whence they are integers. It follows that
+    \[ \Tr_{F/\QQ}(\alpha) = \abs{F : \QQ(\alpha)} \Tr_{\QQ(\alpha)/\QQ}(\alpha), \quad N_{F/\QQ}(\alpha) = \abs{F : \QQ(\alpha)} N_{\QQ(\alpha)/\QQ}(\alpha) \]
+    yields the desired result, as $\abs{F : \QQ(\alpha)}$ is an integer as well.
+\end{proof}
+
+We now talk about another important invariant: the discriminant (cf.\ p.18).
+\begin{definition} \label{defn:discriminant}
+    Let $L/F$ be a finite extension, and pick $\alpha_1, \dots, \alpha_n \in L$; then the associated discriminant is
+    \[ \Delta(\alpha_1, \dots, \alpha_n) \coloneq \det(\Tr_{L/F}(\alpha_i\alpha_j))_{ij} \in F. \]
+\end{definition}
+
+As an example, let $d \in \ZZ \setminus \{0, 1\}$ not be a cube, and consider $F = \QQ(d^{1/3})$; then the minimal polynomial is $x^3 - d = 0$, so the basis for $F/\QQ$ is $\{1, d^{1/3}, d^{2/3}\}$. We have that $\Delta(1, d^{1/3}, d^{2/3})$ may be computed as the determinant
+\[ \det \begin{pmatrix}
+    \Tr_{F/\QQ} 1 & \Tr_{F/\QQ} d^{1/3} & \Tr_{F/\QQ} d^{2/3} \\
+    \Tr_{F/\QQ} d^{1/3} & \Tr_{F/\QQ} d^{2/3} & \Tr_{F/\QQ} d \\
+    \Tr_{F/\QQ} d^{2/3} & \Tr_{F/\QQ} d & \Tr_{F/\QQ} d^{4/3}
+\end{pmatrix} = \det \begin{pmatrix} 3 & 0 & 0 \\ 0 & 0 & 3d \\ 0 & 3d & 0 \end{pmatrix} = -27d^2. \]
+Note that, if $F$ is a number field, and $\alpha_1, \dots, \alpha_n \in \SO_f$, then $\Delta(\alpha_1, \dots, \alpha_n) \in \ZZ$ (the determinant of an integer-valued matrix is an integer).
+
+\begin{proposition} \label{prop:discriminant_detects_bases}
+    The discriminant detects bases. Let $L/F$ be a finite extension, and let $\alpha_1, \dots, \alpha_n \in L$.
+    \begin{enumerate}[(i)]
+        \item If $\Delta(\alpha_1, \dots, \alpha_n) \neq 0$, then $\alpha_1, \dots, \alpha_n$ are linearly independent over $F$.
+        \item If $\alpha_1, \dots, \alpha_n$ form a basis for $L/F$ and $\opname{char} F = 0$, then $\Delta(\alpha_1, \dots, \alpha_n) \neq 0$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    For (i), suppose $\alpha_1, \dots, \alpha_n$ are linearly dependent. Then there exists $a_1, \dots, a_n \in F$ such that $a_1 \alpha_1 + \dots + a_n \alpha_n = 0$, so for any $j$,
+    \[ 0 = \Tr_{L/F} \left(\alpha_j \left(\sum_i a_i \alpha_i\right)\right) = \sum_{i=1}^n a_i \Tr_{L/F} (\alpha_i \alpha_j) \implies \bigl(\Tr_{L/F}(\alpha_i \alpha_j)\bigr)_{ij} \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} = 0. \]
+    Thus, $\det (\Tr_{L/F}(\alpha_i \alpha_j)) = 0$.
+
+    
+    For (ii), suppose $\{\alpha_1, \dots, \alpha_n\}$ is a basis of $L/F$ and $\Delta(\alpha_1, \dots, \alpha_n) = c$. Then the $F$-linear map $\phi \colon L \to L$ given by $(\Tr_{L/F}(\alpha_i \alpha_j))$ has nonzero kernel (by reading the matrix as a linear transformation), and we can run the same argument backwards to see that there is some choice of $a_1, \dots, a_n \in F$, not all zero, such that
+    \[ \sum_{i=1}^n a_i \Tr_{L/F}(\alpha_i \alpha_j) = 0 \]
+    for all $j$. Now, set $\alpha = a_1 \alpha_1 + \dots + a_n \alpha_n \in L$, and consider $\beta \in L$ given by $\beta = b_1\alpha_1 + \dots + b_n\alpha_n$; we have that
+    \[ \Tr_{L/F}(\beta \alpha) = \Tr_{L/F} \left(\sum_{j=1}^n b_j \alpha_j \alpha\right) = \sum_{j=1}^n b_j \Tr_{L/F}(\alpha_j \alpha) = \sum_{j=1}^n b_j \left(\sum_{i=1}^n a_i \Tr_{L/F}(\alpha_i \alpha_j)\right) = 0. \]
+    If $\alpha \neq 0$, we may take $\beta = \alpha\inv$ to get $\Tr_{L/F}(1) = 0$, which is a contradiction, and we are done. \footnote{this is why you don't rush proofs man.}
+\end{proof}

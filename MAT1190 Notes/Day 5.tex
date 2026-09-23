@@ -1,0 +1,70 @@
+\section{Day 5: Localization (Sep.\ 22, 2026)}
+Given a function $\phi \colon R \to S$ (though tos as function pullback), we have that $\phi^\ast \colon \abs{\Spec S} \to \abs{\Spec R}$ and $(\phi^\ast)\inv Z(I) = Z(\phi(I))$.
+
+\begin{definition} \label{defn:basic_open_set}
+    Given $f \in R$, define the basic open subset
+    \[ D(f) \coloneq Z(f)^c = \{\kp \in \Spec R \mid f(\kp) \neq 0\}. \]
+\end{definition}
+The $D(f)$'s form a subset of the topology; i.e., every open set is a union of these $D(f)$, and we have
+\[ D(f_1) \cap D(f_2) \cap \dots \cap D(f_k) = D(f_1 \dots f_k). \]
+\vspace{-20pt}
+\begin{theorem}[Rabinowitsch] \label{thm:rabinowitsch}
+    Let $f_1, \dots, f_n, g \in k[x_1, \dots, x_n]$; then
+    \[ Z_k(f_1, \dots, f_n) \cap D_k(g) = Z_k(f_1, \dots, f_n, x_{n+1} g - 1). \]
+\end{theorem}
+Specifically, the left hand side is a subset of $k^n$, and the right hand side is a subset of $k^{n+1}$.
+\begin{proof}
+    The proof is simple; consider the correspondence given by the two maps
+    \[ (a_1, \dots, a_n) \mapsto \left(a_1, \dots, a_n, \frac{1}{g(a_1, \dots, a_n)}\right), \quad (b_1, \dots, b_n) \mapsfrom (b_1, \dots, b_{n+1}). \qedhere \]
+\end{proof}
+
+\begin{definition} \label{defn:localization}
+    We define the localization of $R$ at $g$ as $R_g \coloneq R[x]/(xg - 1)$. We will denote $x$ as $g\inv$ freely.
+\end{definition}
+
+\begin{theorem} \label{thm:properties_of_localization}
+    We have the following properties for localization,
+    \begin{enumerate}[(i)]
+        \item Every element of $R_g$ can be written as $rg\inv$ with $r \in R$. 
+        \item $rg\inv \in Sg\inv$ if and only if $g^N (r - s) = 0$ for some $N$.
+        \item A ring map $R_g \to S$ is the same as a map $R \to S$ such that $g$ maps to a unit. Specifically, this is a universal property
+        \[ \begin{tikzcd}
+            R \arrow[r] \arrow[dr, "\text{sends $g$ to unit}"'] & R_g \arrow[d, dashed, "\exists!"]\\ & S
+        \end{tikzcd} \]
+        \item This map from $R \to R_g$ is an isomorphism if and only if $g$ is a unit. In words, ``if you tried to localize at a unit, you didn't actually do anything''.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    For (i), take some element of the localization $R_g$, and write it as $f(x) = r_0 + r_1x + \dots + r_nx^n$. We can factor out $x^n$ by writing
+    \[ f(x) = (r_0 g^n + \dots + r_1 g^{n-1} + \dots + r_n)x^n, \]
+    for which the bracketed portion is in $R$, and $x^n = g^{-n}$, so we are done.
+
+    For (ii), by taking the difference of two sides, it suffices to show that $r = 0$ in $R_g$ if and only if $g^N r = 0$ in $R$, or $r = 0$ in $R_g$. We really just want to look at the kernel of the map from $R \to R_g$, consisting of the elements which are annihilated by some power of $g$. If $r \mapsto 0$ in $R[x]/(xg - 1)$, then in $R[x]$, $r = (1 - xy)(a_0 + a_1x + \dots + a_nx^n)$; by comparing coefficients, we get
+    \[ r = a_0 + (a_1 - g a_0) x + (a_2 - g a_1) x^2 + \dots + (a_n - g a_n{-1}) x^n - a_n g x^{n+1}. \]
+
+    \newpage
+    This tells us that $a_0 = r$, $a_1 = gr$, $a_2 = g^2 r$, etc., so $a_n = g^n r$, which we know is $0$. The converse is obvious: if $g^N r = 0$ in $R$, then $g^N r = 0$ in $R_g$, i.e., $r = 0$ in $R_g$.
+
+    For (iii), a map from $R[x]/(xg - 1) \to S$ is the same as $x \mapsto s$ where $sg = 1$.
+
+    For (iv), if $g$ is a unit in $R$, then $R[x]/(xg - 1)$ can be written as $R[x]/(x - g\inv) \cong R$.
+\end{proof}
+
+As an example, $\ZZ_0 = 0$. This is because $\ZZ[x]/(x(0) - 1) = \ZZ[x]/(1) = 0$. More generally, if $g$ is nilpotent, i.e., $g^N = 0$, then $R_g = 0$, since $g^N r = 0$. {\color{crimson} I kinda got lost at these examples cuz the board was too dusty.}
+
+\begin{theorem} \label{thm:spectrum_of_localization}
+    $\abs{\Spec R_g} \cong D(g) \subset \abs{\Spec R}$.
+\end{theorem}
+\begin{proof}
+    Consider the map $\phi \colon R \to R_g$, so $\phi^\ast \colon \abs{\Spec R_g} \to \abs{\Spec R}$. First, we can show that $\Img \phi^\ast \subset D(g)$. Indeed, $(\phi^\ast)\inv (D(g)) = Z(\phi(g))$ (since zero sets pullback the way you expect), which is equal to $\phi$.
+    
+    Now, we want to show that $\phi^\ast$ is injective, i.e., we can recover $\kp$ from $\phi^\ast \kp = \phi\inv(\kp)$. We claim that $(\phi(\phi\inv(\kp))) = \kp$. The non-trivial containment is that $\kp \subset \phi(\phi\inv(\kp))$. Given $r/g$ in $\kp$, we have $r \in \kp$, so $r \in \phi\inv(\kp)$, so $r \in \phi(\phi\inv(\kp))$, whence $r/g \in (\phi(\phi\inv(\kp)))$.
+
+    It remains to check that $\phi^\ast$ is surjective. Take $\kq \in D(g) \subset \Spec R$, and note that $R \to \kappa(\kq)$ sends $g$ to a unit. Thus, we can factor the map as $R \to R_g \to \kappa(\kq)$. Taking the spectrum of this factorization, we get $\Spec R \leftarrow \Spec R_g \leftarrow \Spec \kappa(\kq)$, so $\Spec R_g$ contains $\kq$.
+
+    Finally, given $D(h) \in \Spec R_g$, we want to show that $D(h)$ is open in $\Spec R_g$. We have that $h = f/g^i$ for some $i$ and $f \in R$; for $\phi \colon R \to R_g$, without loss of generality, $i = 0$, so $h = \phi(f)$ in $R_g$. Thus,
+    \[ (\phi^\ast)\inv D(f) = D(\phi(f)) = D(h); \]
+    but $(\phi^\ast)\inv$ is just restriction, so $D(h) = D(f)$ is open in $\Spec R$.
+\end{proof}
+
+He will correct this proof next class, apparently. {\color{airforceblue} ``iunno. fix this proof. it's an exercise''}
