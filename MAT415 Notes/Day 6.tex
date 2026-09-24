@@ -1,0 +1,131 @@
+\section{Day 6: Integral Basis (Sep.\ 24, 2026)}
+Rozenblyum isn't particularly happy with how he introduced the discriminant, so we will be doing some linear algebra exposition for the start of this lecture. Consider a vector space $V$ over $F$. A \textit{symmetric bilinear form} is a map
+\[ \left<-, -\right> \colon V \times V \to F \]
+such that $\left<v, w\right> = \left<w, v\right>$ and, for all $v \in V$, the map $V \to F$ given by $w \mapsto \left<v, w\right>$ is a linear map. $\left<-,-\right>$ is \textit{nondegenerate} if, for all $v \in V$, there exists some $w \in V$ such that $\left<v, w\right> \neq 0$. Our main example is the following: consider $L/F$ a finite field extension; then
+\[ L \times L \to F, \quad (\alpha, \beta) \mapsto \Tr(\alpha \beta) \]
+is a symmetric bilinear form. Moreover, if $\opname{char} F = 0$, it's nondegenerate, since $\Tr(\alpha \alpha\inv) = \Tr(1) = \abs{L : F}$. Suppose $V/F$ is a vector space with symmetric bilinear form $\left<-,-\right>$. If $\{v_1, \dots, v_n\}$ is a basis of $V$, we can form a matrix
+\[ Q = \bigl(\left<v_i,v_j\right>\bigr)_{i,j}. \]
+Observe that if $v = \sum_i a_i v_i$ and $w = \sum_j b_j v_j$, then
+\[ \left<v, w\right> = \left<\sum_i a_i v_i, \sum_j a_j v_j\right> = \sum_{i,j} a_i b_j \left<v_i, v_j\right> = (a_1, \dots, a_n) \, Q \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix}. \]
+We may also observe that $\det Q \neq 0$ if and only if $\left<-,-\right>$ is nondegenerate. Now, suppose $\{w_1, \dots, w_n\}$ is another basis of $V$. We have a change of basis matrix $P = (P_{ij})$, where
+\[ w_j = \sum_{i=1}^n P_{ij} v_i, \]
+and we have $Q' = (\left<w_i, w_j\right>)$ (i.e., representing the same symmetric bilinear form, but in a different basis). How are $Q$ and $Q'$ related?
+\[ \left<w_i, w_j\right> = \left<\sum_{k=1}^n P_{ki} v_k, \sum_{\ell=1}^n P_{\ell j} v_\ell\right> = \sum_{k,\ell} P_{ki} P_{\ell j} \left<v_k, v_\ell\right> = \sum_{k,\ell} P_{ki} P_{\ell j} Q_{k\ell} = (P^\top Q P)_{ij}, \]
+i.e., $Q' = P^\top Q P$.
+
+\begin{corollary} \label{cor:discriminant_change_of_basis}
+    Let $L/F$ be a finite field extension, and let $\{\alpha_1, \dots, \alpha_n\}$ be a basis of $L/F$. Let $\{\beta_1, \dots, \beta_n\}$ be a different basis of $L/F$. Let $P$ be the transition matrix from $\alpha$ to $\beta$; then
+    \[ \beta_j = \sum_{i=1}^n P_{ij} \alpha_i, \]
+    and $\Delta (\beta_1, \dots, \beta_n) = (\det P)^2 \Delta(\alpha_1, \dots, \alpha_n)$.
+\end{corollary}
+\begin{proof}
+    Let $Q$ be the matrix corresponding to the form $\Tr(\alpha \beta)$ in the basis $\{\alpha_1, \dots, \alpha_n\}$, i.e., $Q_{ij} = \Tr(\alpha_i \alpha_j)$. Then $\Delta(\alpha_1, \dots, \alpha_n) = \det Q$. Now, let $Q'$ be the corresponding matrix to $\{\beta_1, \dots, \beta_n\}$; since $Q' = P^\top Q P$, we have that
+    \[ \Delta(\beta_1, \dots, \beta_n) = \det Q' = \det P^\top \det Q \det P = (\det P)^2 \det Q = (\det P)^2 \Delta(\alpha_1, \dots, \alpha_n). \qedhere \]
+\end{proof}
+
+\newpage
+Recall that, if $p(x)$ is a polynomial of degree $n$ with roots $\alpha_1, \dots, \alpha_n$, then
+\[ \Delta(p) = \left(\prod_{i < j} (\alpha_j - \alpha_i)\right)^2 \]
+is a symmetric polynomial in the $\alpha_i$. In particular, $\Delta(p)$ is a polynomial in $a_0, \dots, a_{n-1}$ (i.e., the coefficients of $p$), and is called the \textit{discrimnant of $p$}.
+
+{\color{airforceblue} We will detour a little here to talk about elementary symmetric polynomials.} Suppose $f(x_1, \dots, x_n) \in F[x_1, \dots, x_n]$. We say that $f$ is symmetric if $f(x_{\sigma(1)}, \dots, x_{\sigma(n)}) = f(x_1, \dots, x_n)$ for all $\sigma \in S_n$. Specifically, let us define $\sigma_i(x_1, \dots, x_n)$ to be the sums of proudcts of $x_i$'s; i.e.,
+\[ \sigma_1 = x_1 + \dots + x_n, \quad \sigma_2 = \sum_{i<j} x_i x_j, \quad \dots \quad \sigma_n = x_1 \dots x_n. \]
+These are called the ``elementary symmetric polynomials'', for which the fundamental theorem of symmetric polynomials states that any symmetric $f(x_1, \dots, x_n)$ can be expressed as $g(\sigma_1, \dots, \sigma_n)$ for a unique $g$. This is why we're able to write $\Delta(p)$ as a polynomial in $a_0, \dots, a_{n-1}$.
+
+\begin{theorem} \label{thm:discriminant_of_minpoly}
+    Consider a field extension $L = F(\alpha)/F$, where $\alpha$ has minimal polynomial $p(x)$ of degree $n$. Then
+    \[ \Delta(1, \alpha, \dots, \alpha^{n-1}) = \Delta(p(x)). \]
+\end{theorem}
+\begin{proof}
+    Write $p(x) = (x - \alpha_1) \dots (x - \alpha_n)$. We see $\Tr(\alpha) = \sum_{i=1}^n \alpha_i$ and $\Tr(\alpha^k) = \sum_{i=1}^n \alpha_i^k$, so we may use this fact to try and write the discriminant in terms of these traces. Recall that the disriminant of $\{1, \alpha, \dots, \alpha^{n-1}\}$ is given by
+    \[ \Delta(1, \alpha, \dots, \alpha^{n-1}) = \det \left(\Tr_{L/F}\bigl(\alpha^{(i+1) + (j-1)}\bigr)\right)_{1\leq i, j \leq n} = \det \left( \sum_{k=1}^n \alpha_k^{i+j-2} \right). \]
+    Denote the entries as $M_{i,j}$ for convenience. We wish to decompose $M$ as $M = V^\top V$, where
+    \[ V = \begin{pmatrix} 1 & \alpha_1 & \alpha_1^2 & \dots & \alpha_1^{n-1} \\ \vdots & \vdots & \vdots & & \vdots \\ 1 & \alpha_n & \alpha_n^2 & \dots & \alpha_n^{n-1} \end{pmatrix}; \]
+    note that $V$ is called the \textit{Vandermonde matrix}. Indeed, since $V_{ij} = \alpha_i^{j-1}$, we see that
+    \[ (V^\top V)_{ij} = \sum_{k=1}^n V_{ik}^\top V_{kj} = \sum_{k=1}^n V_{ki} V_{kj} = \sum_{k=1}^n \alpha_{k}^{i-1} \alpha_{k}^{j-1} = M_{ij} \]
+    as desired. In this manner, it follows that \ref{cor:discriminant_change_of_basis} yields
+    \[ \Delta(1, \alpha, \dots, \alpha^{n-1}) = (\det M) (\det V)^2, \]
+    where $\det V = \prod_{i < j} (\alpha_j - \alpha_i)$, so the right hand side is precisely the discriminant of the polynomial $p(x)$ as seen earlier.
+\end{proof}
+
+\newpage
+As an observation,
+\[ \Delta(1, \alpha, \dots, \alpha^{n-1}) = N_{L/F}(p'(\alpha)). \]
+\begin{proof}
+    Let $p(x) = (x - \alpha_1) \dots (x - \alpha_n)$, and denote the latter $n-1$ terms as $g(x)$. We have that $p'(x)$ can be written $(x - \alpha_1) g'(x) + g(x)$, where
+    \[ p'(\alpha_1) = g(\alpha_1) = \prod_{i > 1} (\alpha_1 - \alpha_i). \]
+    We may let $g$ take on $\smash{(x - \alpha_1) \dots \wh{(x - \alpha_i)} \dots (x - \alpha_n)}$ to also see that
+    \[ p'(\alpha_i) = \prod_{j \neq i} (\alpha_i - \alpha_j), \]
+    so
+    \[ N_{L/F}(p'(\alpha)) = \prod_{i=1}^n p'(\alpha_i) = \prod_{i \neq j} (\alpha_i - \alpha_j) = (-1)^{\frac{n(n-1)}{2}} \prod_{i < j} (\alpha_i - \alpha_j)^2, \]
+    where we picked up a term of $(-1)^{\#\{i < j\}}$ by counting.
+\end{proof}
+
+\begin{definition} \label{defn:integral_basis}
+    Let $F$ be a number field. Let $I \subset \SO_F$ be a nonzero ideal. An \textit{integral basis of $I$} is a basis of $F/\QQ$, $\{\omega_1, \dots, \omega_n\} \in F$, such that
+    \begin{enumerate}[(i)]
+        \item each $\omega_i \in I$,
+        \item $I = \ZZ\omega_1 + \dots + \ZZ \omega_n$.
+    \end{enumerate}
+    An integral basis of $F$ is an integral basis of $I = \SO_F$.
+\end{definition}
+
+\begin{lemma} \label{lem:ideal_contains_basis}
+    Let $F$ be a number field. If $I \subset \SO_f$ is a nonzero ideal, then $I$ contains a basis of $F$.
+\end{lemma}
+\begin{proof}
+    Let $\alpha_1, \dots, \alpha_n \in F$ be a basis; then there exists $m \in \ZZ$ such that $m \alpha_i \in \SO_F$. Let $p \in I$ be a nonzero element; then the left-multiplication by $\beta$ map, $\alpha \mapsto \beta\alpha$ from $F \to F$ is invertible. In particular, this means $\{\beta (m \alpha_i)\}_i$ is a basis of $F$.
+\end{proof}
+
+\begin{proposition} \label{prop:existence_of_integral_basis}
+    Let $F$ be a number field and $I \subset \SO_F$ a nonzero ideal. Then $I$ has an integral basis.
+\end{proposition}
+\begin{proof}
+    Recall that, if $\omega_1, \dots, \omega_n \in \SO_F$, then $\Delta(\omega_1, \dots, \omega_n) \in \ZZ$. Choose a basis of $F$, $\{\omega_1, \dots, \omega_n\} \in I$, such that $\abs{\Delta(\omega_1, \dots, \omega_n)}$ is minimal (it can't be zero by linear independence). We claim that $\{\omega_1, \dots, \omega_n\}$ constitutes an integral basis.
+
+    Suppose not. Then there exists some element $\alpha \in I$ such that $\alpha$ is a rational linear combination of the basis elements, i.e., $\sum_i a_i \omega_i$ for $a_i \in \QQ$ (but not all $a_i \in \ZZ$). Without loss of generality, suppose $a_1$ is not an integer. This means $a_1 = \floor{a_1} + \theta$ for some rational $\theta \in (0, 1)$. Consider
+    \[ \omega_1' \coloneq \alpha - \floor{a_1} \omega_1 = \theta \omega_1 + a_2 \omega_2 + \dots + a_n \omega_n, \]
+    which is clearly in $I$, as it is still a $\QQ$-linear combination. Clearly, $\{\omega_1', \omega_2, \dots, \omega_n\}$ is a basis for $F$. We now check that this contradicts our supposition: indeed,
+    \[ \Delta(\omega_1', \omega_2, \dots, \omega_n) = \det(P)^2 \Delta(\omega_1, \dots, \omega_n), \quad P = \left(\!\!\begin{array}{c|ccc} \theta & & & 0 \\ a_2 & 1 \\ \vdots & & \ddots \\ a_n & & & 1 \end{array}\right), \]
+    for which $\det P = \theta < 1$, whence $\abs{\Delta(\omega_1', \omega_2, \dots, \omega_n)} < \abs{\Delta(\omega_1, \dots, \omega_n)}$, so we are done.
+\end{proof}
+
+\newpage
+\begin{proposition} \label{prop:integral_bases_equal_discriminant}
+    Suppose $\{\omega_1, \dots, \omega_n\}$ and $\{\omega_1', \dots, \omega_n'\}$ are integral bases of $I$. Then the absolute values of the discriminants of both bases are equal, i.e.,
+    \[ \abs{\Delta(\omega_1, \dots, \omega_n)} = \abs{\Delta(\omega_1', \dots, \omega_n')}. \]
+    In particular, $\omega_1, \dots, \omega_n \in I$ is an integral basis if and only if it is a basis and the absolute value of the discriminant is minimal.
+\end{proposition}
+\begin{proof}
+    Without loss of generality, $\abs{\Delta(\omega_1, \dots, \omega_n)}$ is minimal. We have that $\ZZ^n \to I$ is an isomorphism under the maps
+    \[ (a_1, \dots, a_n) \mapsto \sum_i a_i \omega_i, \quad (b_1, \dots, b_n) \mapsto \sum_i b_i \omega_i', \]
+    for which the change of basis matrix $P$ gives an isomorphism $\ZZ^n \to \ZZ^n$. Any such change of basis must have $\det P = \pm 1$, so it follows that
+    \[ \Delta(\omega_1', \dots, \omega_n') = (\det P)^2 \Delta(\omega_1, \dots, \omega_n) = \Delta(\omega_1, \dots, \omega_n). \qedhere \]
+\end{proof} \vspace{-8pt}
+{\color{airforceblue} ``An easy way to do exercise 5 on the homework is to use the above property.''}
+
+\begin{definition} \label{defn:absolute_discriminant}
+    Let $F$ be a number field, and let $\{\omega_1, \dots, \omega_n\} \in \SO_f$ be an integral basis. The \textit{absolute discriminant} of $F$ is
+    \[ \Delta_F = \Delta(\omega_1, \dots, \omega_n). \]
+\end{definition} \vspace{-8pt}
+By the \ref{prop:integral_bases_equal_discriminant}, this is well-defined. As an example, take $d$ to be a squarefree integer, and consider $F = \QQ(\sqrt{d})$. We have that
+\[ \Delta_F = \begin{cases} 4d & d \equiv 2,3 \pmod{4}, \\ d & d \equiv 1 \pmod{4}, \end{cases} \]
+since $\Delta(1, \sqrt{d}) = 4d$ for the first case, and $d$ for the second case because $\{1, \sqrt{d}\}$ is not an integral basis for $F$ (we may consider $\frac{1}{2}(1 + \sqrt{d})$), and so $\Delta_F$ for $d \equiv 1 \pmod{4}$ must be a square apart from $4d$, whence the only candidate is $d$ (cf.\ p.143?).
+
+{\color{airforceblue} This number has meaning... something called ``ramification''.}
+
+\begin{definition} \label{defn:norm_of_ideal}
+    Let $F$ be a number field, and let $I \subset \SO_F$ be a nonzero ideal. The \textit{norm of $I$}, $N(I)$, is defined as the number of elements in the quotient $\SO_F/I$.
+\end{definition}
+
+In order for the definition to make sense, we need to know that $\#\{\SO_F/I\}$ is finite.
+\begin{proposition} \label{prop:quotient_of_ring_of_integers_by_ideal_is_finite} % long-ass name. what else do i do?
+    Let $F$ be a number field and $I \subset \SO_F$ a nonzero ideal. Then $\SO_F/I$ is finite, i.e., a ring with finitely many elements.
+\end{proposition}
+\begin{proof}
+    Let $A, B$ be finitely generated abelian groups such that $A \subset B$. Then $\rank B/A = \rank B - \rank A$.
+
+    Alternatively, let $m \in I \cap \ZZ$ be nonzero (e.g., $\alpha \in I$ nonzero with minimal polynomial $x^n + a_{n-1} x^{n-1} + \dots + a_0$; then $a_0 \in I$). Let $\alpha \in \SO_F/I$. We can write $\alpha = \sum_i c_i \ol{w_i}$, where $c_i \in \ZZ$, with $c_i = m q_i + r_i$. Then
+    \[ \alpha = \sum_i r_i w_i \quad \mod I. \]
+    Since $m \in I$, we see that any element of $\SO_F/I$ can be represented as $\sum_i r_i w_i$, for $r_i \in \ZZ$ and $\abs{r_i} < m$. There are finitely such elements, so we are done.
+\end{proof}
