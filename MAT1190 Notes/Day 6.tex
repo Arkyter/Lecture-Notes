@@ -1,0 +1,94 @@
+\section{Day 6: (Sep.\ 24, 2026)}
+Last class, we saw that, for $\phi \colon R \to R_g$, we have that $\phi^\ast \colon \Spec R_g \hookrightarrow \Spec R$ has image $D(g) \subset \Spec R$. We want to show that it is homeomorphism onto its image. Given an open set $D(f/g^i) \subset \Spec R_g$, we want an open set $U$ in $\Spec R$ such that $(\phi^\ast)\inv U = D(f/g^i)$. Indeed, $D(f/g^i)_{\Spec R_g} = D(f)$, so we may take $U = D(f) \subset \Spec R$.
+
+{\color{airforceblue} ``By now, we're getting \textit{really} close to the definition of a scheme... next week, we'll be `full scheme ahead'.''}
+
+\begin{definition} \label{defn:radical_ideal}
+    An ideal $I \subset R$ is said to be \textit{radical} if $I = \sqrt I \coloneq \{r \in R \mid r^n \in I \text{ for some $n$}\}$. $\sqrt I$ is called the \textit{radical} of $I$.
+\end{definition}
+
+Note that the radical of zero, $\sqrt{(0)}$, is equal to the set of all nilpotent elements of $R$, which we see by unraveling the definitions. Recall that $f(\kp) = 0$ for all $\kp \in \Spec R$ if $f$ is nilpotent. Moreover, $I$ being radical is equivalent to $R/I$ being reduced, i.e., it does not have any nilpotent elements. In general, $(R/I)_{\opname{red}} \coloneq (R/I)/\sqrt{(0)} = R/\sqrt{I}$.
+
+\begin{theorem} \label{thm:expression_for_radical}
+    Let $I \subset R$ be an ideal; then
+    \[ \sqrt I = \bigcap_{\kp \supset I} \kp. \]
+    In particular, $\sqrt{(0)}$ is the intersection of all prime ideals $\kp \in \Spec R$, i.e., $f(\kp) = 0$ for all $\kp$ if and only if $f$ is nilpotent. 
+\end{theorem}
+\begin{proof}
+    By quotienting by $I$, we can reduce the question to the case $I = (0)$. We know
+    \[ \sqrt{(0)} \subset \bigcap_{\kp \in \Spec R} \kp \]
+    because if $r$ is nilpoetnt, then $r^n = 0 \in \kp$ implies $r \in \kp$. Conversely, we want to show that if $f \in \bigcap_{\kp \in \Spec R} \kp$, then $f$ is nilpotent. Indeed, $D(f) = \emptyset$, i.e., there is no ideal in which $f$ does not vanish in. Since $D(f) = \Spec R_f$, we see that this means $R_f$ is the zero ring, i.e., in $R_f$, we have $1 = 0$. Thus, in $R$, $f^n \cdot 1 = 0 f^n$ for some $n$, and so $f^n = 0$.
+\end{proof}
+
+{\color{airforceblue} Note that we implicitly use Zorn's lemma above, i.e., if $\Spec R_f = \emptyset$, then $R_f$ is the zero ring.}
+
+\begin{theorem} \label{thm:Z_is_contravariant_equivalence}
+    $Z(I) = Z(\sqrt I)$, and $Z$ gives a contravariant equivalence.
+    \[ \{\text{radical ideals in $R$}\} \to \{\text{closed subsets of $\Spec R$}\}. \]
+\end{theorem} \vspace{-6pt}
+\begin{proof}
+    For the first part, $Z(I) = Z(\bigcap_{\kp \in I} \kp) = Z(\sqrt I)$. For the second part, we ask, how do we recover the radical $I$ from the zero locus? Since $Z(I) = \{\kp \mid \kp \supset I\}$, we see that
+    \[ \bigcap_{\kp \in Z(I)} \kp = \sqrt{I} = I. \qedhere \]
+\end{proof} \vspace{-14pt}
+Given a closed set $V$, we may define $I(V) = \bigcap_{\kp \in V} \kp$, and we have $Z(I(V)) = V$ and $I(Z(J)) = \sqrt{J}$.
+
+\newpage
+\begin{corollary} \label{cor:nilpotent_vanishing_locus}
+    We have the following,
+    \begin{enumerate}[(i)]
+        \item $D(f) = \emptyset$ if and only if $Z(f) = \Spec R$ if and only if $f$ is nilpotent.
+        \item $D(f) = \Spec R$ if and only if $Z(f) = \emptyset$ if and only if $f$ is a unit.
+        \item $\Spec R = \bigcup_{\alpha \in \SA} D(f_\alpha)$ if and only if $Z(\{f_\alpha \mid \alpha \in \SA\}) = \emptyset$ if and only if $\{f_\alpha \mid \alpha \in \SA\} = (1)$, 
+    \end{enumerate}
+\end{corollary}
+As a throwback to day $1$ of class, observe that $x^2 + 1$ does not vanish on any real number, but it is also not invertible. We may look at the prime ideal $\kp = (x^2 + 1)$ in $\RR[x]$ to see $x^2 + 1 = 0$ in $\kappa(\kp)$, so (ii) does not apply. Also note that, in classical algebraic geometry, the Nullstellensatz states that if $k = \ol k$, and $f_1, \dots, f_r$ have no common solution, then there exists $g_!, \dots, g_r$ such that $\sum_i g_i f_i = 1$.
+\begin{proof}
+    We just proved (i) earlier. For (ii), we have that $I(Z(f)) = \sqrt{(f)}$, so $I(\emptyset) = (1)$, then $1^n \in (f)$ for some $n$, which tells us $1 \in (f)$, whence $f$ is a unit. For (iii),
+    \[ I(Z(\{f_\alpha \mid \alpha \in \SA)) = \sqrt{(f_\alpha \mid \alpha \in \SA)}, \]
+    and the left hand side is equal to $I(\emptyset) = (1)$, so $1^n \in (f_\alpha \mid \alpha \in \SA)$, whence $(f_\alpha \mid \alpha \in \SA) = (1)$.
+\end{proof}
+
+\begin{corollary} \label{cor:spectrum_is_quasicompact}
+    $\Spec R$ is quasi-compact.
+\end{corollary}
+\begin{proof}
+    By (iii) from \ref{cor:nilpotent_vanishing_locus}, we have that $(f_\alpha \mid \alpha \in \SA) = (1)$, so there exists $\sum_{i=1}^n f_i g_i = 1$, which implies that
+    \[ \Spec R = \bigcup_{i=1}^n D(f_i). \qedhere \]
+\end{proof} \vspace{-8pt}
+
+In this manner, we may think $\Spec R_p \, ``\!\!=\!\!" \, D(f) \subset \Spec R$. The problem with writing equality is that, if we had another function $g$ such that $D(f) = D(g)$, then we might want to have a different canonical ring to describe $D(g)$. For example, $D(x) = D(x^2)$, and $\Spec \CC[x]_x = Z(xy - 1)$, and $\Spec \CC[x]_{x^2} = Z(x^2y - 1)$.
+
+\begin{theorem} \label{thm:isomorphism_between_localizations_for_equal_nonvanishing_loci}
+    If $D(f) = D(g)$, then there exists a unique $R$-algebra map between $R_f$ and $R_g$. In particular, this map is an isomorphism.
+\end{theorem}
+\begin{proof}
+    Look at $Z(f)_{\Spec R_g} = \emptyset$. Then $f$ is a unit in $R_g$, so there is a canonical map $R_f \to R_g$, and vice versa.
+\end{proof}
+
+\begin{corollary} \label{cor:localization_and_vanishing_functions}
+    For a basic open set $U$, the ``ring of functions'' is $R$ localized at \textit{all} $f \in R$ such that $f$ does not vanish on $U$.
+\end{corollary}
+
+\begin{theorem} \label{thm:localization_of_localization}
+    The localization of a localization is the localization of the product, i.e., $(R_f)_g = R_{fg}$. Another way to think about this is to say that restricting from $D(f)$ to $D(g)_{D(f)}$ is the same as directly restricting to $D(fg)$.
+\end{theorem}
+\begin{proof}
+    The proof is left as a homework exercise.
+\end{proof}
+
+We now talk about germs of functions. A germ is a function defined on a neighborhood of a point; specifically, we define a \textit{germ} at $\kp \in \Spec R$ to be a pair $(f, U)$ (where $U \ni \kp$ is a basic open set) such that $f \in R_g$ up to an equivalence relation that $(f_1, U_1) \sim (f_2, U_2)$ provided there exists a basic open set $U_3 \subset U_1 \cap U_2$ such that $\kp \in U_3$ and $(\restr{f_1}{U_3}, U_3) = (\restr{f_2}{U_3}, U_3)$. We may regard $\restr{f_1}{U_3}$ as the inverse of $f$ in $\SO(U_3)$.
+
+{\color{airforceblue} He then gave an example with parabolas on the board.}
+
+\newpage
+\begin{definition} \label{defn:localization_at_prime_ideal}
+    The localization of $R$ at $\kp$ is given by $R_\kp \coloneq R[\{x_f \mid f \notin \kp\}] / \{1 - x_f f \mid f \notin \kp\}$.
+\end{definition}
+
+\begin{theorem} \label{thm:localization_isomorphic_to_germ}
+    $R_p$ is isomorphic to the ring of germs of $R$ at $p$.
+\end{theorem}
+\begin{proof}
+    We can map $R_p$ to the ring of germs by $r \mapsto (r, \Spec R)$ and $x_f \mapsto (f\inv, D(f))$. Clearly, this is well-defined based on how we wrote the definitions earlier. Surjectivity is also obvious. What about injectivity, though? Suppose we have some element of $R_p$. This only involves finitely many of the formal inverses, so we can collect denominators, so we may write $r/g$. Suppose $r/g \mapsto 0$, i.e., $(r/g, D(g)) = 0$. This means, there exists $h$ such that $D(h) \subset D(g)$, so that $\restr{d/g}{D_h)} = 0$. Equivalently, $\restr{r}{D(h)} = 0$, so $h^N r = 0$ in $R$, so $r = 0$ in $R_p$, as this is a unit in $R$, so $r/g = 0$ in $R$.
+\end{proof}
+
