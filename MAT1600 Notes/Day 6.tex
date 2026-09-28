@@ -1,0 +1,60 @@
+\section{Day 6: Weak Law of Large Numbers (Sep.\ 28, 2026)}
+\begin{theorem}[Durrett \S2.2.11] \label{thm:weak_lln_for_triangular_array}
+    Let $(X_{n,k})$, where $1 \leq k \leq n$, be a triangular array of real random variables. Then the $X_{n,1}, \dots, X_{n,n}$ are independent for each fixed $n$. Let $b_n > 0$, with $b_n \to \infty$ as $n \to \infty$. Set $\ol X_{n,k} = X_{n,k} \mathbf 1(\abs{X_{n,k}} \leq b_n)$ denote the \textit{truncation} of $X_{n,k}$. Supposing
+    \[ \sum_{i=1}^n \PP\bigl(\abs{X_{n,k}} > b_n\bigr) \to 0, \quad n \to \infty, \tag{1} \]
+    and
+    \[ \frac{1}{b_n^2} \sum_{k=1}^n \EE \ol X_{n,k}^2 \to 0, \quad n \to \infty, \tag{2} \]
+    we may set $S_n = X_{n,1} + \dots + X_{n,n}$ with $\ol S_n = \ol X_{n,1} + \dots + \ol X_{n,n}$; then
+    \[ \frac{S_n - \EE S_n}{b_n} \taking{\PP} 0, \quad n \to \infty. \]
+\end{theorem} \vspace{-8pt}
+\begin{proof}
+    Start by writing
+    \[ \PP \bigl(\bigl\lvert S_n - \EE \ol S_n \bigr\rvert \geq b_n \eps\bigr) \leq \PP(\bigl\lvert \ol S_n - \EE \ol S_n \bigr\rvert > b_n \eps) + \PP(S_n \neq \ol S_n), \]
+    for which the right hand side is denoted (A) and (B) for convenience. (A) can be bounded as follows,
+    \[ \PP(\bigl\lvert \ol S_n - \EE \ol S_n \bigr\rvert > b_n \eps) \leq \frac{\Var(\ol S_n)}{b_n^2 \eps^2} = \frac{\sum_{k=1}^n \Var(\ol X_{n,k})}{b_n^2 \eps^2} \taking{(2)} 0, \]
+    since the variance of $\ol X_{n,k}$ is bounded by the second moment $\EE \ol X_{n,k}^2$. For (B), we may write
+    \[ \PP(S_n \neq \ol S_n) \leq \sum_{k=1}^n \PP(X_{n,k} \neq \ol X_{n,k}) = \sum_{k=1}^n \PP\bigl(\bigl\lvert X_{n,k} \bigr\rvert > b_n\bigr) \taking{(1)} 0. \qedhere \]
+\end{proof}
+
+We now look at the general weak law.
+\begin{theorem} \label{thm:weak_lln}
+    Let $(X_i : i \in \NN)$ be an i.i.d.\ sequence of real random variables with $\EE \abs{X_1} < \infty$, $\EE X_1 = 0$. Then
+    \[ \frac{S_n}{n} \taking{\PP} 0, \quad S_n = X_1 + \dots + X_n. \]
+\end{theorem} \vspace{-8pt}
+
+\begin{lemma} \label{lem:pth_moment}
+    For a nonnegative real random variable $Y$, $p > 0$, we have that
+    \[ \EE Y^p = \int_0^\infty p y^{p-1} \PP(Y > y) \, dy. \]
+\end{lemma} \vspace{-8pt}
+As an example, it follows from above that $\EE Y = \int_0^\infty \PP(Y > y) \, dy$.
+\begin{proof}
+    Directly compute as follows,
+    \[ \int_0^\infty p y^{p-1} \PP(Y > y) \, dy = \int_0^\infty p y^{p-1} \left(\int_\Omega \mathbf 1(Y(\omega) > y) \, d\PP(\omega)\right) dy. \]
+
+    \newpage
+    Using that $Y \colon (\Omega, \SA, \PP) \to (\RR, \SB(\RR))$, we may write
+    \[ \dots = \int_\Omega \int_0^{Y(\omega)} p y^{p-1} \, dy \, d\PP(\omega) = \int_\Omega \bigl(Y(\omega)\bigr)^p \, d\PP(\omega) \eqcolon \EE Y^p. \qedhere \]
+\end{proof}
+
+Using this corollary, we may now prove the weak law.
+\begin{proof}
+    Taking $b_n = n$ in the previous \ref{thm:weak_lln_for_triangular_array}, we need to check
+    \begin{align*}
+        \sum_{k=1}^n \PP(\abs{X_n} > n) &\taking{n \to \infty} 0 \tag{1} \\
+        \frac{1}{n^2} \sum_{k=1}^n \EE \ol X_k ^2 &\taking{n \to \infty} 0. \tag{2}
+    \end{align*}
+    First, we may write (1) as
+    \[ \sum_{k=1}^n \PP(\abs{X_n} > n) = n \PP(\abs{X_1} > n) = \EE\bigl[ n \mathbf 1 (\abs{X_n} > n) \bigr], \]
+    for which $n \mathbf 1(\abs{X_1} > n) \leq \abs{X_1}$, and converges to $0$ pointwise, i.e., almost surely. Thus, by Lebesgue's dominated convergence theorem, we have that the above converges to $0$. For (2),
+    \[ \frac{1}{n^2} \sum_{k=1}^n \EE \ol X_k^2 = \frac{1}{n} \EE \ol X_1^2 = \frac{1}{n} \EE\bigl[X_1 \mathbf 1(\abs{X_1} \leq n)\bigr]^2. \]
+    By \ref{lem:pth_moment},
+    \[ \EE\bigl[X_1 \mathbf 1(\abs{X_1} \leq n)\bigr]^2 = \int_0^n 2y \PP(\abs{X_1} \in (y, n]) \, dy \leq \int_0^n 2y \PP(\abs{X_1} \geq y) \, dy. \]
+    It is enough to show that
+    \[ \frac{1}{n} \int_0^n 2y \PP(\abs{X_1} > y) \, dy \to 0 \]
+    as $n \to \infty$. The integrand is bounded above by $\abs{2 \PP(\abs{X_1} > y)}$, which is integrable by our lemma as $\EE \abs{X_1} < \infty$. Thus, we indeed see that the above converges to $0$. Having established that (1) and (2) both converge to $0$, it follows from \ref{thm:weak_lln_for_triangular_array} that
+    \[ \frac{S_n - \EE S_n}{n} \taking{\PP} 0. \]
+    To complete the proof, we only need that $\frac{1}{n} \EE \ol S_n \to 0$, which we see from writing
+    \[ \frac{\EE \ol S_n}{n} = \frac{1}{n} \sum_{k=1}^n \EE \ol X_k = \EE \ol X_1 = \EE X_1 \mathbf 1(\abs{X_1} \leq n); \]
+    $X_1 \mathbf 1(\abs{X_1} \leq n)$ converges to $X_1$ a.s.\ in $\Omega$ and $\abs{X_1 \mathbf 1(\abs{X_1} \leq n)} \leq \abs{X_1}$, which makes it a dominating function, so Lebesgue's dominated convergence theorem yields
+    \[ \frac{\EE \ol S_n}{n} \taking{n \to \infty} \EE X_1 = 0. \qedhere \]
+\end{proof}
