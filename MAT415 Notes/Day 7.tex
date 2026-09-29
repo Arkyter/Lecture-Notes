@@ -1,0 +1,70 @@
+\section{Day 7: (Sep.\ 29, 2026)}
+Recall that $\ZZ[\sqrt{-5}] = \SO_{\QQ(\sqrt{-5})}$ is not a PID, since $3, 7, 1 + 2\sqrt{-5}, 1 - 2\sqrt{-5}$ are all irreducible elements, and
+\[ 21 = 3 \cdot 7 = (1 + 2 \sqrt{-5})(1 - 2 \sqrt{-5}), \]
+with $\pm 1$ being units. In number rings, ideals generalize elements, and considering ideals in number rings restores unique factorization. {\color{airforceblue}We may think of these as ``ideal numbers''.}
+
+Recall, that for a ring $R$, with $I, J \subset R$ ideals, we can consider $I + J = \{a + b \in R \mid a \in I, b \in J\}$ and $IJ = \left<ab \mid a \in I, b \in J\right>$. If $I = \left<a_1, \dots, a_n\right>$ and $J = \left<b_1, \dots, b_m\right>$, then $IJ = \bigl<a_ib_j\bigr>$ for $i = 1, \dots, n$ and $j = 1, \dots, m$. In $\ZZ[\sqrt{-5}]$,
+\begin{align*}
+    \bigl<3, 1 + 2 \sqrt{-5}\bigr> \bigl<3, 1 - 2 \sqrt{-5}\bigr> &= \left<3\right>, \\
+    \bigl<7, 1 + 2 \sqrt{-5}\bigr> \bigl<7, 1 - 2 \sqrt{-5}\bigr> &= \left<7\right>, \\
+    \bigl<3, 1 + 2 \sqrt{-5}\bigr> \bigl<7, 1 + 2 \sqrt{-5}\bigr> &= \bigl<1+2\sqrt{-5}\bigr>, \\
+    \bigl<7, 1 - 2 \sqrt{-5}\bigr> \bigl<3, 1 - 2 \sqrt{-5}\bigr> &= \bigl<1-2\sqrt{-5}\bigr>.
+\end{align*}
+In the above, the ideals on the left hand side are prime ideals in $R$. From this, we may multiply the top two examples to get
+\[ \left<21\right> = \bigl<3, 1 + 2 \sqrt{-5}\bigr> \bigl<3, 1 - 2 \sqrt{-5}\bigr> \bigl<7, 1 + 2 \sqrt{-5}\bigr> \bigl<7, 1 - 2 \sqrt{-5}\bigr>. \]
+We want some general context in which the above is true.
+
+\begin{definition} \label{defn:dedekind_domain}
+    A \textit{Dedekind domain} is an integral domain $R$ such that
+    \begin{enumerate}[(i)]
+        \item every nonzero prime ideal of $R$ is maximal, 
+        \item $R$ is Noetherian, and
+        \item $R$ is \textit{integrally closed}, i.e., $R \subset \Frac(R)$. This means that, supposing $\alpha \in K$ such that $a_0, \dots, a_{n-1} \in R$ satisfy
+        \[ \alpha^n + a_{n-1} \alpha^{n-1} + \dots + a_0 = 0, \]
+        i,e, $\alpha$ is a root of a monic polynomial $p(x) \in R[x]$, then $\alpha \in R$.
+    \end{enumerate}
+\end{definition}
+
+We now discuss some key facts of Dedekind domains.
+\begin{theorem} \label{thm:number_ring_is_dedekind}
+    Every number ring $\SO_F$ is a Dedekind domain.
+\end{theorem}
+
+\begin{theorem} \label{thm:dedekind_unique_decomposition}
+    If $R$ is a Dedekind domain and $I \subset R$ is a nonzero (proper) ideal, then there is a unique set of prime ideals, up to reordering, $p_1, \dots, p_n \subset R$ such that
+    \[ I = p_1 p_2 \dots p_n. \]
+\end{theorem}
+
+As an example, if $R$ is a PID, then $R$ is a Dedekind domain.
+
+\begin{proof}[Proof of \ref{thm:number_ring_is_dedekind}]
+    We proved that, if $I \subset \SO_F$ is a nonzero ideal, then $\SO_F/I$ is finite. This followed from the existence of integral bases. We now claim that if $R$ is a finite integral domain, then it is a field.
+    \begin{subproof}
+        Take a nonzero element $x \in R$. Since $R$ is an integral domain, the right-multiplication map $a \mapsto ax$ from $R \to R$ is injective automatically, and surjective since $R$ is finite. Thus, there exists $y \in R$ such that $ay = 1$.
+    \end{subproof}
+    From here, if $I \subset \SO_F$ is a nonzero prime ideal, then $\SO_F/I$ is a finite integral domain, which is a field, which means $I$ is maximal. {\color{airforceblue} $I$ prime implies that $\SO_F/I$ is a finite PID.}
+
+    \newpage
+    Suppose $I_1 \subset I_2 \subset \dots$ is an ascending chain of ideals. If $I_i = 0$ for all $i$, then the chain is stationary. Otherwise, without loss of generality, suppose $I_1$ is nonzero. Then
+    \[ R/I_1 \twoheadrightarrow R/I_2 \twoheadrightarrow R/I_3 \twoheadrightarrow \dots, \]
+    which must eventually be stationary, since we start with some finite underlying set in $R/I_1$, and the surjections $\twoheadrightarrow$ either decrease or keep the number of elements the same; in either case, there can only be so many maps decreasing the number of elements, meaning that the ascending chain must become stationary at some point.
+
+    {\color{airforceblue} To conclude that $\SO_F$ is a Dedekind domain, we need to check that it is integrally closed. We will leave it as a homework exercise. To do this, you need to show that, for $\alpha \in \SO_F$ such that $p(\alpha) = 0$, then $p \in \SO_F[x]$ is monic, and so $\alpha$ is an algebraic integer.}
+\end{proof}
+
+To prove \ref{thm:dedekind_unique_decomposition}, we want to do the following first:
+
+\begin{theorem} \label{thm:dedekind_principal_ideal}
+    Let $I \subset R$ be a nonzero ideal in a Dedekind domain. Then there exists a nonzero ideal $J$ such that $IJ$ is principal.
+\end{theorem}
+
+\begin{lemma} \label{lem:dedekind_nonzero_ideal_contains_product_of_prime_ideals}
+    Let $R$ be a Dedekind domain and $I \subset R$ a nonzero ideal. Then $I$ contains a product of nonzero prime ideals.
+\end{lemma}
+\begin{proof}
+    Suppose not. Let $S$ be the set of ideals of $R$ which don't contain a product of prime ideals. Since $R$ is Noetherian, $S$ contains a maximal element $M \in S$. Observe that $M$ is not prime, since $M$ does not contain a product of prime ideals (i.e., we would have $M \subset M$ otherwise). In this way, there exists $a, b \in M$ such that $a, b \notin M$, but $ab \in M$. Consider $I = M + (a)$ and $J = M + (b)$, for which $I, J \not\subset M$. We have that $IJ \subset M$, since every element of $IJ$ is either in $M$ or $(ab)$; in particular, this means $I, J \neq R$. Since $M$ is maximal with $I, J \not\subset S$, we see that $I, J$ must contain products of prime ideals, i.e.,
+    \[ I \supset p_1 \dots p_n, \quad J \supset q_1 \dots q_m, \]
+    and so $M \supset IJ \supset (p_1 \dots p_n)(q_1 \dots q_m)$.
+\end{proof}
+
+We will prove \ref{thm:dedekind_unique_decomposition} and \ref{thm:dedekind_principal_ideal} next lecture.
