@@ -1,0 +1,108 @@
+\section{Day 7: Borel--Cantelli, Strong Law of Large Numbers (Sep.\ 30, 2026)}
+Often, when you want to prove something related to almost sure convergence, you will most likely be using the Borel--Cantelli lemma.
+
+For a sequence of sets $(A_n : n \in \NN)$, we denote
+\[ \{A_n \text{ infinitely often}\} = \{A_n \text{ i.o.}\} = \{\omega \in \Omega \colon \omega \in A_n \text{ for infinitely many $n$}\} = \bigcap_{n \geq 1} \left(\bigcup_{m \geq n} A_m\right). \]
+
+\begin{lemma}[Panchenko \S2.4: Borel--Cantelli] \label{lem:borel_cantelli}
+    Let $(A_n : n \in \NN)$ be a sequence of sets.
+    \begin{enumerate}[(i)]
+        \item If $\sum_{n=1}^\infty \PP(A_n) < \infty$, then $\PP(A_n \text{ i.o.}) = 0$.
+        \item If $\sum_{n=1}^\infty \PP(A_n) = \infty$ and the $(A_n : n \in \NN)$ are independent, then $\PP(A_n \text{ i.o.}) = 1$.
+    \end{enumerate} 
+\end{lemma}
+\begin{proof}
+    For (i), {\color{airforceblue} since $\bigcup_{m \geq n} A_m \supset \bigcup_{m \geq n'} A_m$ for $n' \geq n$}, continuity of measure assures that
+    \[ \{A_n \text{ i.o.}\} {\color{airforceblue}= \PP \left(\bigcap_{n \geq 1} \bigcup_{m \geq n} A_m\right)} = \lim_{n \to \infty} \PP \left(\bigcup_{m \geq n} A_n\right) = \limsup_{n \to \infty} \sum_{m = n}^\infty \PP(A_m) = 0. \]
+    For (ii), it is enough to show that $\PP(\bigcup_{m \geq n} A_m) = 1$ for all $n$. This is equivalent to asking that $\PP(\bigcap_{m \geq n} A_m^c) = 0$, for which
+    \[ \lim_{\ell \to \infty} \PP\left(\bigcap_{m = n}^\ell A_m^c\right) = \lim_{\ell \to \infty} \prod_{m=n}^\ell \PP(A_m^c) = \lim_{\ell \to \infty} \prod_{m=n}^\ell (1 - \PP(A_m)). \]
+    Using the fact that $e^x \geq 1 - x$ for all $x \geq 0$, we have that
+    \[ \dots \leq \limsup_{\ell \to \infty} \prod_{m = n}^\ell e^{-\PP(A_m)} = \lim_{\ell \to \infty} \exp \left(-\sum_{m=n}^\ell \PP(A_m)\right) = 0. \qedhere \]
+\end{proof}
+
+We now introduce the strong laws.
+\begin{theorem}[Durrett \S2.3.5: Strong Law of Large Numbers I] \label{thm:strong_lln_1}
+    Let $(X_i : i \in \NN)$ be an i.i.d.\ sequence of \\ real random variables with $\EE X_1 = 0$, $\EE X_1^4 < \infty$, and denote $S_n = X_1 + \dots + X_n$. Then
+    \[ \frac{S_n}{n} \to 0 \quad (a.s.) \quad \leadsto \quad \PP\left(\lim_{n \to \infty} \frac{S_n}{n} = 0\right) = 1. \]
+\end{theorem} \vspace{-8pt}
+\begin{proof}
+    It is enough to show that, for all $\eps > 0$,
+    \[ \PP\left(\abs{\frac{S_n}{n}} > \eps \text{ i.o.}\right) = 0 \quad \leadsto \quad \PP\left(\forall \eps > 0, \, \abs{\frac{S_n}{n}} \leq \eps\right) = 1. \]
+    % since this would imply, for all $\eps > 0$, that there exists a large enough $n$ such that $\abs{S_n / n} < \eps$ with probability $1$.
+    By Borel--Cantelli (i), it suffices to show that
+    \[ \sum_{n=1}^\infty \PP\left(\abs{\frac{S_n}{n}} > \eps\right) < \infty. \]
+    By Chebyshev's inequality (or Markov's inequality),
+    \[ \PP\left(\abs{\frac{S_n}{n}} > \eps\right) \leq \frac{\EE S_n^4}{\eps^4 n^4}. \]
+    We want to check that $\EE S_n^4 \leq c n^2$ for some constant $c > 0$, since the right hand side would then be bounded above by $\frac{c}{\eps^4 n^2}$, which is summable over $n$.
+
+    \newpage
+    Let us compute $\EE S_n^4$.
+    \begin{align*}
+        \EE S_n^4 &= \sum_{i,j,k,\ell = 1}^n \EE[X_i X_q X_k X_\ell] \\
+        &= \left(\sum_{i \neq j \neq k \neq \ell} \EE X_i \EE X_j \EE X_k \EE X_\ell + \sum_{i \neq k \neq \ell} \EE X_i^2 \EE X_k \EE X_\ell + \sum_{i \neq \ell} \EE X_i^3 \EE X_\ell\right) \\
+        &\quad + \sum_{i=1}^n \EE X_i^4 + \sum_{1 \leq i < j \leq n} \binom{4}{2} \, \EE X_i^2 \EE X_j^2.
+    \end{align*}
+    The bracketed term vanishes since we may always pull out $\EE X_\ell = \EE X_1 = 0$, so it suffices to evaluate the latter two summations.
+    \[ \sum_{i=1}^n \EE X_i^4 = n \EE X_1^4 = O(n), \quad 6 \sum_{1 \leq i < j \leq n} \EE X_i^2 \EE X_j^2 = 3 n (n - 1) \bigl(\EE X_1^2\bigr)^2 \leq 3 n(n - 1) \EE X_1^4 = O(n^2). \]
+    Note that the inequality applies from Cauchy--Schwarz, or that $\Var(X_1^2)$ is nonnegative, so $\EE X_1^4 \geq (\EE X_1^2)^2$. Thus, $\EE S_n^4 \leq cn^2$, and we are done.
+\end{proof}
+
+\begin{theorem}[Strong Law of Law Numbers] \label{thm:strong_lln}
+    Let $(X_i : i \in \NN)$ be i.i.d., and let $S_n = X_1 + \dots + X_n$.
+    \begin{enumerate}[(i)]
+        \item If $\EE \abs{X_1} < \infty$, then $S_n/n \to \EE X_1$ a.s.,
+        \item If $\EE \abs{X_1} = \infty$, then $\PP(\lim_{n \to \infty} S_n/n \text{ exists}) = 0$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}[Proof of (ii)]
+    Start by observing that
+    \[ \sum_{n=1}^\infty \PP(\abs{X_n} \geq n) \geq \int_0^\infty \PP(\abs{X_1} \geq x) \, dx = \EE \abs{X_1} = \infty. \]
+    Note that the equality uses (i) the discretization of level sets, and (ii) that $X_i$ are i.i.d.. By Borel--Cantelli (ii), we see that $\PP(\abs{X_n} \geq n \text{ i.o.}) = 1$; (\textdagger); in particular,
+    \[ \frac{S_n}{n} - \frac{S_{n-1}}{n-1} = \frac{X_n}{n} + S_{n-1} \left(\frac{1}{n} - \frac{1}{n-1}\right) = \frac{X_n}{n} + \frac{S_{n-1}}{n(n-1)}. \]
+    Since $S_n/n$ converges, it follows that the latter term above also converges to $0$, so $X_n/n \to 0$ as $n \to \infty$ as well (otherwise, our previous computation would show that $S_n/n$ is not Cauchy). Thus, per (\textdagger),
+    \[ \PP\left(\frac{S_n}{n} \text{ converges}\right) \leq \PP\left(\frac{X_n}{n} \to 0\right) = 0. \qedhere \]
+\end{proof}
+As a side note, $S_n/n$ converges in probability if
+\[ x \PP(\abs{X_1} \geq x) \taking{x \to \infty} 0. \]
+
+\newpage
+For (i) of \ref{thm:strong_lln}, we will follow the proof of the weak law. By truncating, we get
+\[ \PP\left(\abs{\frac{\ol S_n}{n} - \EE X_1} > \eps\right) \leq a_n, \]
+where $\sum_{n=1}^\infty a_n = \infty$. To fix this, look at subsequences where $\sum_{k=1}^\infty a_{n_k} < \infty$, then check that $S_n/n$ can't vary too much for $n \in (n_k, n_{k+1})$.
+
+For the following proof, we will be following Panchenko \S2.7. {\color{airforceblue}(nevermind)}
+\begin{proof}[Proof of (i)]
+    Step (i): without loss of generality, suppose $X_1 \geq 0$ a.s.\ (for general random variable s$X_i$, write $X_i = X_i^+ - X_i^-$, where $X_i^\pm \geq 0$, and apply the strong LLN to $X_i^+$ and $X_i^-$ separately).
+
+    Step (ii): let $Y_k = X_k \, \mathbf 1(X_k \leq k)$ be the \textit{truncation} of $X_k$, and denote $T_k = Y_1 + \dots + Y_k$. Then $S_n/n \to \EE X_1$ a.s.\ if and only if $T_n/n \to \EE X_1$ a.s.. This is because it is enough to show that $\PP(X_k \neq Y_k \text{ i.o.}) = 0$, and
+    \[ \sum_{k=1}^\infty \PP(X_k \neq Y_k) = \sum_{k=1}^\infty \PP(X_1 \geq k) \leq \EE X_1 < \infty, \]
+    since $\EE X_1 < \infty$ (once again, we implicitly use that the $X_i$'s are i.i.d.).
+
+    Step (iii): here, we do some computation to eventually apply Borel--Cantelli.
+    \[ \sum_{k=1}^\infty \frac{\EE Y_k^2}{k^2} = \sum_{k=1}^\infty \frac{1}{k^2} \int_0^\infty 2y \, \PP(Y_k \geq y) \, dy \leq \sum_{k=1}^\infty \frac{1}{k^2} \int_0^k 2y \, \PP(X_1 \geq y) \, dy. \]
+    By applying Fubini's, we get
+    \[ \dots = \int_0^\infty \left(\sum_{k=\lceil{y}\rceil}^\infty \frac{1}{k^2}\right) 2y \, \PP(X_1 \geq y) \, dy \leq \int_0^\infty \frac{C}{y} \cdot 2y \, \PP(X_1 > y) \, dy = 2c \, \EE X_1 < \infty, \]
+    where $C > 0$ is a constant.
+
+    Step (iv): consider a subsequence $k(1) < k(2) < k(3) < \dots$; we will show that
+    \[ \frac{T_{k(n)} - \EE T_{k(n)}}{k(n)} \to 0 \quad \text{(a.s.)}. \]
+    By Borel--Cantelli (i), it is enough to show that, for all $\eps > 0$,
+    \[ \sum_{n=1}^\infty \PP\left(\frac{\abs{T_{k(n)} - \EE T_{k(n)}}}{k(n)} > \eps\right) < \infty. \tag{$\ast$} \]
+    Indeed,
+    \[ \PP\left(\frac{\abs{T_{k(n)} - \EE T_{k(n)}}}{k(n)} > \eps\right) \leq \frac{\Var(T_k)}{k^2 \eps^2} = \frac{\sum_{i=1}^k \Var(Y_i)}{k^2 \eps^2} \leq \frac{1}{\eps^2} \frac{\sum_{i=1}^k \EE Y_i^2}{k^2}. \]
+    It follows that ($\ast$) is upper bounded by
+    \[ (\ast) \leq \sum_{n=1}^\infty \frac{1}{\eps^2 k(n)^2} \left(\sum_{i=1}^{k(n)} \EE Y_i^2\right) = \frac{1}{\eps^2} \sum_{i=1}^\infty \EE Y_i^2 \left(\sum_{n : k(n) \geq i} \frac{1}{k(n)^2}\right). \]
+
+    \newpage
+    We want this to be dominated by the first term, so choose $k(n)$ increasing geometrically, i.e., set $k(n) = \floor{\alpha^n}$, for $\alpha > 1$; then
+    \[ \sum_{n : k(n) \geq 1} \frac{1}{k(n)^2} = \sum_{n \colon \floor{\alpha^n} \geq i} \frac{1}{\floor{\alpha^n}^2} \leq \frac{C}{i^2}, \]
+    since geometric series are dominated by the first term. It follows that ($\ast$) is finite by step (iii). Thus, for any fixed $\alpha > 1$, we see that
+    \[ T_{\floor{\alpha^n} - \EE T_{\floor{\alpha^n}}}{\floor{\alpha^n}} \to 0 \quad (a.s.). \]
+
+    Step (v): how much can $T_m/m$ change for $m \in (\floor{\alpha^n}, \lfloor{\alpha^{n+1}}\rfloor)$? Since $X_i \geq 0$, we see that
+    \[ \frac{\lfloor \alpha^{n} \rfloor}{\lfloor \alpha^{n+1} \rfloor} \frac{T_{\floor{\alpha^n}}}{\lfloor \alpha^{n} \rfloor} \leq \frac{T_m}{m} \leq \frac{T_{\lfloor \alpha^{n+1} \rfloor}}{\lfloor \alpha^{n+1} \rfloor} \frac{\lfloor \alpha^{n+1} \rfloor}{\lfloor \alpha^{n} \rfloor}. \]
+    By taking $n, m \to \infty$, we get
+    \[ \frac{1}{\alpha} \EE X_1 \leq \liminf \frac{T_m}{m} \leq \limsup \frac{T_m}{m} \leq \alpha \EE X_1. \]
+    The above holds for all fixed $\alpha > 1$ a.s., so it holds a.s.\ simultaneously for all $\alpha = 1 + \frac{1}{n}$ for $n \in \NN$; thus,
+    \[ \frac{T_m}{m} \to \EE X_1 \quad (a.s.). \qedhere \]
+\end{proof}
