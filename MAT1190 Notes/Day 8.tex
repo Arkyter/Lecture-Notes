@@ -1,0 +1,85 @@
+\section{Day 8: (Oct.\ 1, 2026)}
+Today, we will talk more about the sheaf properties of rings. In $\ZZ$, with $a, b$ suitably chosen such that $a9^i + b5^j = 1$, we have that
+\[ \frac{x}{9^i} = \frac{y}{5^j} = \frac{ax + by}{a9^i + b5^j} = ax + by \in \ZZ. \]
+Here, $ax + by$ is given by $\frac{x}{9^i}$ in $\ZZ_9$ and $\frac{y}{5^j}$ in $\ZZ_5$. Now consider $Z((y - x^2)(y^2 - x^4 + 1)) \subset \Spec \CC[x, y]$. Can we interpret a polynomial, of whose restrictions to two different varieties, take on different values? Specifically, we want to find $h(x, y)$ restricting to $f(x, y)$ and $g(x, y)$ on $Z(y - x^2)$ and $Z(y^2 - x^4 + 1)$ respectively. Consider
+\[ 1 = (y^2 - x^4 + 1) - (y + x^2)(y - x^2). \tag{\textdagger} \]
+If we look at $Z(y^2 - x^4 + 1) = D(y - x^2)$, we have that
+\[ \left(\frac{\CC[x, y]}{(y - x^2)(y^2 - x^4 + 1)}\right)_{y - x^2} \cong \left(\frac{\CC[x, y]}{(y^2 - x^4 + 1)}\right)_{y - x^2}, \]
+since, under the localization, $y - x^2$ becomes a unit. Similarly, $Z(y - x^2) = D(y^2 - x^4 + 1)$. Vacuously,
+\[ \frac{f}{1} = \frac{g}{1} \]
+on $D(y - x^2) \cap D(y^2 - x^4 + 1) = D((y - x^2)(y^2 - x^4 + 1)) = \emptyset$. In order to do the cross-multiplication trick (as seen in $\ZZ$), we can look at
+\[ \frac{f(y^2 - x^4 +1)}{y^2 - x^4 + 1} \,\,``\!=\!"\,\, \frac{g(y - x^2)}{y - x^2} \quad \text{ in } \quad \frac{\CC[x, y]}{(y - x^2)(y^2 - x^4 + 1)}, \]
+where the quoted equal sign means the grade school equality $\frac{a}{b} = \frac{c}{d}$ holding if $ad = bc$. Looking at the linear combination we created in (\textdagger), observe that the above is equal to
+\[ \dots = \frac{f(y^2 - x^4 + 1) - (y +x ^2) g (y - x^2)}{y^2 - x^4 + 1 - (y + x^2)(y - x^2)} = (y^2 - x^4 + 1) f - (y + x^2)(y - x^2) g. \]
+We now ask, does the latter expression restrict correctly to $\CC[x, y]/(y - x^2)$ and $\CC[x, y]/(y^2 - x^4 + 1)$? In $\CC[x, y]/(y - x^2)$, it is clear that the $g$ term vanishes; since $(y^2 - x^4 + 1)$ factors as seen in (\textdagger), it follows that we get $g$. In $\CC[x, y]/(y^2 - x^4 + 1)$, we may once again follow the same process (and check the equation in (\textdagger)) to get a restriction down to $g$ as desired.
+
+{\color{airforceblue} ``While this isn't super rigorous math, it gives an idea of what we're trying to do anyways.'' -- Hunter}
+
+\begin{theorem} \label{thm:gluing_on_spectrum}
+    Given an open cover $D(f_1) \cup \dots \cup D(f_k)$ of $\Spec R$ and $g_i \in R_{f_i}$ such that
+    \[ \restr{g_i}{D(f_if_j)} = \restr{g_j}{D(f_if_j)} \]
+    for all $i, j$, there exists a \textit{unique} $g \in R$ such that $\restr{g}{D(f_i)} = g_i$.
+\end{theorem}
+
+In the above, we have that $R \to \prod R_{f_i} \to \prod R_{f_if_j}$ is dual to the notion $U \times_{\Spec R} U \to U \to \Spec R$, for $U = U_1 \sqcup U_2 \sqcup \dots \sqcup U_k$.
+
+\newpage
+\begin{proof}
+    Write $\smash{g_i = \frac{r_i}{f_i^N}}$ for some common $N$. We know that $g_i = g_j$ on $D(f_if_j)$ for all $i, j$, so there exists some $M_{ij}$ such that
+    \[ (f_if_j)^M \left(\frac{r_i}{f_i^N} - \frac{r_j}{f_j^N}\right) = 0. \]
+    Specifically, $\smash{f_i^{M-N} f_j^M r_i = f_i^M f_j^{M-N} r_j}$ in $R$. Replace $r_i$ with $f_i^{M-N} r_i$ and $f_i^N$ with $f_i^M$ everywhere. In this manner, we can assume that $r_i f_j^N = r_j f_i^N$ for all $i, j$, so we may actually cross multiply.
+
+    $D(f_i) = D(f_i^N)$, so $D(f_i^N) \cup \dots \cup D(f_k)^N) = \Spec R$, meaning
+    \[ (1) = (f_1^N, \dots, f_k^N) \implies 1 = a_1 f_1^N + \dots + a_k f_k^N. \]
+    We are now going to ``ansatz a way that they can glue together''. Indeed, choose $r = a_1r_1 + \dots + a_kr_k$. When restricting $r$ to the open set $D(f_i)$, we need to check that
+    \[ \restr{g}{D(f_i)} = g_i = \frac{r_i}{f_i^N} \iff \frac{a_1r_1 + \dots + a_kr_k}{1} = \frac{r_i}{f_i^N} \text{ in } D(f_i). \]
+    From here, we may immediately check that
+    \[ a_1 f_i^N r_1 + a_2 f_i^N r_2 + \dots + a_k f_i^N r_k = a_1 f_1^N r_i + a_2 f_2^N r_i + \dots + a_k f_k^N r_i = r_i. \]
+
+    We now check uniqueness. We want to show that, if $r \in R$ and $\restr{r}{D(f_i)} = 0$, then $r = 0$. Indeed, there exists $M$ such that $f_i^M r = 0$ in $R$ for all $i$. Then
+    \[ D(f_1) \cup \dots \cup D(f_k) = D(f_1^M) \cup \dots \cup D(f_k^M) = \Spec R, \]
+    for which $1 = a_1 f_1^M + \dots + a_k f_k^M$ imply that $r = a_1 f_1^M r + \dots + a_k f_k^M r = 0$.
+\end{proof}
+
+\begin{corollary} \label{cor:gluing_on_basic_open_set}
+    Given a basic open covering $\bigcup_{i=1}^n D(f_i)$ of a basic open set $D(f)$ and $g_i \in R_{f_i}$ such that $g_i = g_j$ on $D(f_i f_j)$ for all $i, j$, then there exists a unique $g \in R_f$ such that $\restr{g}{D(f_i)} = g_i$.
+\end{corollary}
+\begin{proof}
+    Apply \ref{thm:gluing_on_spectrum} to $R_f$.
+\end{proof}
+
+\begin{definition} \label{defn:ring_of_regular_functions}
+    We denote $\SO_{\Spec R}(U)$ to be the ring of regular functions on an open set $U \subset \Spec R$. It is defined as the set of tuples
+    \[ f(\kp)_{\kp \in U} \in \prod R_\kp \]
+    such that, for all $\kp \in U$, there exists a basic open set $\kp \in D(g_\kp) \subset U$ and $\alpha_\kp \in R_{g_\kp}$ such that $(\alpha_p, D(g)) = f_\kq$ for all $\kq \in D(g)$.
+    % \[ \left\{f(\kp)_{\kp \in U} \in \prod R_\kp \mid \forall \kp \in U, \, \exists \text{ open set } U \text{ s.t. } \kp \in D(g_{\kp}) \subset U \right\} \]
+\end{definition}
+
+We define $\SO_{\Spec R}$ to be the \textit{structure sheaf} of $\Spec R$. $\SO_{\Spec R}$ is a \textit{contravariant functor} from
+\[ \{\text{open sets in $\Spec R$ with arrows being inclusion}\} \to \mathbf{Ring}. \]
+That is, the restriction map $\res_{U,V} \colon \SO_{\Spec R}(U) \to \SO_{\Spec R}(V)$, given by $f \mapsto \restr{f}{V}$, whenever $V \subset U$. Clearly, restricting from $U$ to $V$ to $W$ where $W \subset V \subset U$ would yield the composition $\res_{V,W} \res_{U,V} = \res_{U,W}$. 
+
+An \textit{affine scheme} is the data $(\abs{\Spec R}, \SO_{\Spec R})$.
+
+\newpage
+\begin{theorem} \label{thm:structure_sheaf_gluing_property}
+    We have the following properties of the structure sheaf,
+    \begin{enumerate}[(i)]
+        \item $\SO_{\Spec R}(R(f)) \cong R_f$,
+        \item Given an open cover $\{U_\alpha\}_{\alpha \in \SA}$ of $U$ and $g_\alpha \in \SO_{\Spec R}(U_\alpha)$ such that
+        \[ \restr{g_\alpha}{U_\alpha \cap U_\beta} = \restr{g_\beta}{U_\alpha \cap U_\beta}, \]
+        there is a \textit{unique} $g \in \SO_{\Spec R}(U)$ such that $\restr{g}{U_\alpha} = g_\alpha$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    For (i), any element of $\SO_{\Spec R}(D(f))$ induces an open coverign of $D(f)$ with basic open sets and elements that agree on overlaps, so we are done. Specifically, you need
+    \[ R \to \prod_{\kp \in \Spec R} R_\kp \]
+    to be an injection.
+
+    For (ii), the definition of $\SO_{\Spec R}$ necessitates this to be true.
+\end{proof}
+
+As an example, $\SO_{\mathbb A^2}(\mathbb A^2 - \{(0, 0)\})$. Then $\mathbb A_\CC^2 = \Spec \CC[x, y]$. Here, $D(x) \cup D(y) = \mathbb A^2 \setminus \{(0, 0)\}$, for which $R$ is given by $f \in C[x, y]_x$ and $g \in C[x, y]_y$ such that $f, g$ agree on $D(xy)$, i.e., in $\CC[x, y]_{xy}$. We need $f, g$ as our functions.
+
+{\color{amethyst} If you know the answers to all the optional exercises, you know how to get a 100 on the midterm.}
+
