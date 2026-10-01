@@ -1,4 +1,4 @@
-\section{Day 7: (Sep.\ 29, 2026)}
+\section{Day 7: Dedekind Domains (Sep.\ 29, 2026)}
 Recall that $\ZZ[\sqrt{-5}] = \SO_{\QQ(\sqrt{-5})}$ is not a PID, since $3, 7, 1 + 2\sqrt{-5}, 1 - 2\sqrt{-5}$ are all irreducible elements, and
 \[ 21 = 3 \cdot 7 = (1 + 2 \sqrt{-5})(1 - 2 \sqrt{-5}), \]
 with $\pm 1$ being units. In number rings, ideals generalize elements, and considering ideals in number rings restores unique factorization. {\color{airforceblue}We may think of these as ``ideal numbers''.}
@@ -30,10 +30,10 @@ We now discuss some key facts of Dedekind domains.
     Every number ring $\SO_F$ is a Dedekind domain.
 \end{theorem}
 
-\begin{theorem} \label{thm:dedekind_unique_decomposition}
+\begin{theorem*}
     If $R$ is a Dedekind domain and $I \subset R$ is a nonzero (proper) ideal, then there is a unique set of prime ideals, up to reordering, $p_1, \dots, p_n \subset R$ such that
     \[ I = p_1 p_2 \dots p_n. \]
-\end{theorem}
+\end{theorem*}
 
 As an example, if $R$ is a PID, then $R$ is a Dedekind domain.
 
@@ -54,9 +54,9 @@ As an example, if $R$ is a PID, then $R$ is a Dedekind domain.
 
 To prove \ref{thm:dedekind_unique_decomposition}, we want to do the following first:
 
-\begin{theorem} \label{thm:dedekind_principal_ideal}
+\begin{theorem*}
     Let $I \subset R$ be a nonzero ideal in a Dedekind domain. Then there exists a nonzero ideal $J$ such that $IJ$ is principal.
-\end{theorem}
+\end{theorem*}
 
 \begin{lemma} \label{lem:dedekind_nonzero_ideal_contains_product_of_prime_ideals}
     Let $R$ be a Dedekind domain and $I \subset R$ a nonzero ideal. Then $I$ contains a product of nonzero prime ideals.
@@ -67,4 +67,4 @@ To prove \ref{thm:dedekind_unique_decomposition}, we want to do the following fi
     and so $M \supset IJ \supset (p_1 \dots p_n)(q_1 \dots q_m)$.
 \end{proof}
 
-We will prove \ref{thm:dedekind_unique_decomposition} and \ref{thm:dedekind_principal_ideal} next lecture.
+We will prove \ref{thm:dedekind_unique_decomposition} and \ref{thm:dedekind_principal_ideal} {\color{amethyst}(these were relabeled because they were proved later)} next lecture.

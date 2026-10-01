@@ -1,0 +1,95 @@
+\section{Day 8: Properties of Dedekind Domains, Ideal Class Group (Oct.\ 1, 2026)}
+Last time, we defined Dedekind domains. For now, an ideal will denote a \textit{nonzero} ideal (just so Rozenblyum doesn't have to write nonzero every single time). Last lecture, we proved that every ideal in a Dedekind domain contains a product of prime ideals.
+
+\begin{lemma} \label{lem:field_of_fractions_and_ideal_of_dedekind_domain} % "ceren, what do i call this lemma?" ceren: "iunno... 'useful lemma'"
+    $R$ is a Dedekind domain with field of fractions $K$ and $A \subsetneq R$ a proper ideal, then there exists some element $\gamma \in K \setminus R$ such that $\gamma A \subset R$.
+\end{lemma}
+\begin{proof}
+    Let $a \in A$ be a nonzero element; then $(a) \subset A$. By the earlier lemma,
+    \[ A \supset (a) \supset p_1 \dots p_k, \]
+    with $p_1, \dots, p_k$ prime ideals (and $k$ being chosen to be minimal). Every ideal is contained in a maximal ideal, so $A \subset P$, where $P$ is a prime ideal (since maximal ideals are prime); so $p_1 \dots p_k \subset P$ (when you multiply ideals, you get a smaller ideal, which is why there is no contradiction).
+
+    We claim that $P = p_i$ for some $i$. Otherwise, for all $i$, there exists $a_i \in P_i \setminus P$; but $a_1 \dots a_k \in P$, so one of the $a_i$ must be in $P$ itself; from here, we would get that $P_i \subset P$, but then $P_i = P$, since prime ideals are maximal in Dedekind domains.
+
+    Without loss of generality, let $P = p_1$ per the above. This means we have
+    \[ p_1 \dots p_i \subset (a) \subset A \subset P = p_1, \]
+    where, by minimality of $k$, $p_2 \dots p_k \not\subset (a)$; in other words, there exists some element $b \in (p_2 \dots p_k) \setminus (a)$. Take $\gamma = b/a \in K \setminus R$; we want to show that, for all $x \in A$, that $\gamma x \in R$. Equivalently, $b x \in (a)$. This is true for all $x \in p_1$, since $b \in p_2 \dots p_k$, so $b x \in p_1 \dots p_k \subset (a)$, so we are done.
+\end{proof}
+
+\begin{theorem} \label{thm:dedekind_principal_ideal}
+    If $R$ is a Dedekind domain and $I \subset R$ an ideal, then there exists an ideal $J$ such that $IJ$ is principal.
+\end{theorem}
+\begin{proof}
+    Let $\alpha \in I$ be nonzero; then $(\alpha) \subset I$. Define $J = \{x \in R \mid x I \subset (\alpha)\}$; then $J \neq \emptyset$ is an ideal with $\alpha \in J$. We want to show that $IJ = (\alpha)$. It suffices to check the opposite direction, since $IJ \subset (\alpha)$ by construction; in this manner, let
+    \[ A = \frac{1}{\alpha} IJ \subset R. \]
+    We want to check that $A = R$. Supposing not, then $A$ would be a proper ideal, and by \ref{lem:field_of_fractions_and_ideal_of_dedekind_domain}, there would exist $\gamma \in A \setminus R$ such that $\gamma A \subset R$. We'll show that $\gamma \in R$ to get a contradiction. It is enough to check that $\gamma$ satisfies a monic polynomial with coefficients in $R$, since Dedekind domains are integrally closed.
+
+    Since $\alpha \in I$, we have that $J \subset A = \frac{1}{\alpha} I J$, for which $\gamma J \subset \gamma A \subset R$. We claim that $\gamma J \subset J$, which we would see by demonstrating $\gamma x y \subset (\alpha)$ for $x \in J$ and $y \in I$. Indeed,
+    \[ \frac{1}{\alpha} \gamma x y = \gamma \left(\frac{1}{\alpha} x y\right) \in R, \]
+    for which the bracketed portion is an element of $A$. We know that $\gamma A \subset R$ from earlier, so $\alpha\inv \gamma x y \in R$, which is precisely what we wanted to check.
+
+    \newpage
+    In this way, $\gamma \colon J \to J$ is a map of abelian groups. Let $\alpha_1, \dots, \alpha_m$ be a generating set for the ideal $J$. We get
+    \[ \gamma \begin{pmatrix} \alpha_1 \\ \vdots \\ \alpha_m \end{pmatrix} = M \begin{pmatrix} \alpha_1 \\ \vdots \\ \alpha_m \end{pmatrix} \]
+    for $M$ an $m \times m$ matrix over $R$, i.e., $\gamma \alpha_i = \sum_{i=1}^m M_{ij} \alpha_j$. $\gamma$ is an eigenvalue of $M$, so $\gamma$ is a root of the characteristic polynomial of $M$, i.e., a monic polynomial with coefficients in $R$.
+\end{proof}
+
+Define an equivalence relation on ideals $I \sim J$ if there exist $\alpha, \beta \in R$ such that $\alpha I = \beta J$. If $I \sim J \sim K$, then $\alpha I = \beta J$ and $\gamma J = \delta K$, so $\gamma \alpha I = \beta \gamma J = \beta \delta K$. Observe that $\sim$ is compatible with products, i.e., $I \sim I'$ and $J \sim J'$ yields $IJ \sim I' J'$. The upshot being, we may write $C\ell_R$ to be the ``ideal classes'' to denote the quotient set. This has a binary operation $[I] \cdot [J] = [IJ]$.
+
+\begin{claim} \label{clm:ideal_classes_are_a_group}
+    $C\ell_R$ is a group.
+\end{claim}
+\begin{proof}
+    For any nonzero $\alpha \in R$, we have that $[\alpha I] = [(\alpha) \cdot I)] = [I]$, so $(\alpha)$ is clearly an identity element in $C\ell_R$. Note that, for any nonzero $\alpha, \beta \in R$, $[(\alpha)] = [(\beta)]$, since $\beta(alpha) = \alpha(\beta)$. This means that the identity element of $C\ell_R$ is given by equivalence class of principal ideals. Specifically, this means we may use \ref{thm:dedekind_principal_ideal} to find inverses.
+\end{proof}
+
+We call $C\ell_R$ the \textit{ideal class group} of $R$. Note that, if $R$ is a PID, then $C\ell_R = \{e\}$. Conversely, if the class group is trivial, then $R$ is a PID as well; specifically, it is enough to show that, if $I \sim (a)$, then $I$ is principal. $I \sim (a)$ is equivalent to there existing nonzero $\alpha, \beta \in R$ sucht hat $\alpha I = \beta(\alpha)$; but then
+\[ R \supset I = \frac{1}{\alpha} \beta(\alpha) \implies \frac{\beta \alpha}{\alpha} = \beta \in R. \]
+We can regard $C\ell_R$ as a measure of how non-principal ideals in $R$ can be.
+
+\begin{theorem} \label{thm:class_group_of_ring_of_integers}
+    If $R = \SO_F$, where $F$ is a number field, then $C\ell_R$ is finite.
+\end{theorem}
+{\color{amethyst} This will be proved next week. I will change the label and indexing when it is done.}
+
+We start by checking two properties of Dedekind domains.
+\begin{proposition} \label{prop:dedekind_ideals_left_cancellation}
+    If $A, B, C$ are ideals of a Dedekind ring $R$ and $AB = AC$, then $B = C$.
+\end{proposition}
+\begin{proof}
+    There exists some ideal $J$ such that $J A = (\alpha)$, for $\alpha \in R$. This means $JAB = JAC$, which means $\alpha B = \alpha C$, which we may divide throughout by $\alpha$ to get $B = C$.
+\end{proof}
+\begin{proposition} \label{prop:dedekind_ideal_divisibility}
+    If $A, B \subset R$ are ideals of a Dedekind domain $R$, then $A \mid B$ (i.e., there exists $C$ such that $B = AC$) if and only if $B \subset A$.
+\end{proposition}
+\begin{proof}
+    If $A \mid B$, then $B = CA \subset A$. Suppose $B \subset A$; then there exists an ideal $J \subset R$ such that $J A = (\alpha)$ is principal. Take $C = \alpha\inv J B$; then clearly, $CA = B$. Since $B \subset A$, we have $JB \subset JA = (\alpha)$, so $\alpha\inv JB \subset R$. $\alpha\inv JB$ is an ideal, so we are done.
+\end{proof}
+
+\newpage
+\begin{theorem} \label{thm:dedekind_unique_decomposition}
+    Every ideal in a Dedekind domain $R$ is uniquely representable as a product of prime ideals.
+\end{theorem}
+\begin{proof}
+    We first check existence, i.e., that every ideal can be expressed as a product of prime ideals. Suppose not; then, since $R$ is Noetherian, there exists a largest proper ideal $I$ that cannot be expressed as a product of prime ideals. Every proper ideal is contained in a maximal ideal, so, in particular, $I \subset M$, for which $M$ being maximal means it is prime. This means that there must exist some $J$ such that $I = J M$. Note that $I \subsetneq J$, since, if $I = J$, then $J = RJ = MJ = 1$, meaning $R = M$, which is a contradiction.
+
+    By definition of $I$, we would have that $J = p_1 \dots p_k$ for prime ideals $p_1, \dots, p_k$. This would mean $I = p_1 \dots p_k M$ as a product of prime ideals, so we have our desired contradiction of our earlier supposition. This means every ideal \textit{can} be expressed as a product of prime ideals.
+
+    We now check for uniqueness. Suppose $p_1 \dots p_k = q_1 \dots q_\ell$. Since, for all the prime ideals $p_1, \dots, p_k$, we have $p_1 \dots p_k \subset p_1$, we have $q_1 \dots q_\ell \subset p_1$, so there exists $i$ such that $q_i = p_1$. Without loss of generality, let $i = 1$ by rearranging. By cancellation, $p_2 \dots p_k = q_2 \dots q_\ell$, and we may just induct on the maximum of $\{k, \ell\}$ to finish off the proof.
+\end{proof}
+
+With this, we can ``do arithmetic with ideals''. Given $I, J \subset R$, we can define things like the greatest common divisor and least common multiple,
+\[ \gcd (I, J) \coloneq I + J, \quad \lcm (I, J) \coloneq I \cap J. \]
+
+\begin{theorem}
+    Let $I \subset R$ be an ideal in a Dedekind domain. Let $\alpha \in I$ be nonzero; then there exists $\beta \in I$ such that $I = (\alpha, \beta)$.
+\end{theorem}
+\begin{proof}
+    It is enough to find $\beta$ such that $I = \gcd((\alpha), (\beta))$. Let $I = p_1^{n_1} \dots p_k^{n_k}$, where $p_1, \dots, p_k$ are distinct primes. Then, let $Q_1, \dots, Q_r$ be other distinct prime ideals that divide $(\alpha)$. We want $\smash{\beta \in \bigcap_i (p_i^{n_i} - p_i^{n_i+1})}$, since this would imply that $\beta \in \bigcap_j (R - Q_j)$. Per the chinese remainder theorem, fix $\beta_i \in p_i^{n_i} - p_i^{n_i + 1}$, and let $\beta$ satisfy
+    \[ \beta = \beta_i \pmod{p_i^{n_i+1}}; \]
+    then $\beta = 1 \pmod{Q_j}$. (Recall that, in order to apply the chinese remainder theorem, we would need to show that any pair of ideals is comaximal; but $\smash{p_1^{n_i+1} + p_j^{n_j+1} = R}$, for which $\smash{\gcd(p_i^{n_i+1}, p_j^{n_j+1}) = R}$).
+\end{proof}
+
+% \begin{proof}[Proof of \ref{thm:class_group_of_ring_of_integers}]
+    
+% \end{proof}
