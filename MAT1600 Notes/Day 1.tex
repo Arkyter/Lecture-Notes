@@ -27,7 +27,7 @@ We now begin with ``formalizing probability''.
 \end{example}
 
 Per the two examples above, it follows that probability spaces need not be very nice, which is why we're going to use measure theory. As in the example for infinitely many coinflips, we have a few problems. While outcomes have probability $0$, specific events do not. We cannot (nor do we want to) study \textit{all events}; we will only study a ``nice'' subset of them.
-\begin{definition}[$\sigma$-algebra] \label{def:sigma_algebra}
+\begin{definition}[$\sigma$-algebra] \label{defn:sigma_algebra}
     Let $\Omega$ be a set. A $\sigma$-algebra $\SA$ on $\Omega$ is a nonempty collection of subsets of $\Omega$ such that
     \begin{enumerate}[(i)]
         \item $A \in \SA$ implies that $A^c \in \SA$,
@@ -37,7 +37,7 @@ Per the two examples above, it follows that probability spaces need not be very 
 \end{definition}
 Note that it is redundant to state that $\emptyset \in \SA$; since $\SA$ was already supposed to be nonempty, we could simply pick $A \in \SA$ and see that $\emptyset = (A \cup A^c)^c \in \SA$. A pair $(\Omega, \SA)$ is called a \textit{measurable space}.
 
-\begin{definition}[Probability measure] \label{def:probability_measure}
+\begin{definition}[Probability measure] \label{defn:probability_measure}
     A probability measure on a measurable space $(\Omega, \SA)$ is a function $\PP \colon \SA \to [0, 1]$ such that\footnote{``something has to happen'' -- Duncan; ``nothing ever happens'' -- Daniel}
     \begin{enumerate}[(i)]
         \item $\PP(\Omega) = 1$,
