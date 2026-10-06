@@ -1,0 +1,57 @@
+\section{Day 9: (Oct.\ 6, 2026)}
+\begin{theorem} \label{thm:dedekind_ufd_equiv_pid}
+    A Dedekind domain $R$ is a UFD if and only if it is a PID. 
+\end{theorem}
+\begin{proof}
+    If $R$ is a PID, then it is a UFD. We will check the forwards direction. Suppose $R$ is a UFD and $I \subset R$ is a nonzero ideal. We know that there exists $J \subset R$ such that $IJ = (a)$. Indeed, take the prime factorization $a = p_1 \dots p_r$ (and so $(a) = (p_1) \dots (p_r)$); since $p_i$ being prime implies that the $(p_i)$ are prime ideals, we see that
+    \[ IJ = (p_1) \dots (p_r). \]
+    By uniqueness of prime factors of ideals, we see that $I = (p_{i_1}) \dots (p_{i_k}) = (p_{i_1} \dots p_{i_k})$, where $\{i_1, \dots, i_k\} \subset \{1, \dots, r\}$, so $I$ is principal.
+\end{proof}
+
+We now discuss the splitting of primes. First, we already saw that primes in $\ZZ$ might factor in other number rings, i.e., in $R = \ZZ[i]$, $5 = (2 - i)(2 + i)$, but $3 \in \ZZ[i]$ is prime. There are three kinds of primes in the Gaussian integers. For example, $3$ is prime in $\ZZ[i]$, $5$ factors into distinct primes, and $2$ factors as the \textit{square} of a prime $(1 + i)^2$.
+
+$R = \ZZ[\sqrt{-5}]$ is not a PID. $2, 3$ are irreducible in $R$, but they're not prime. Indeed,
+\[ (2) = (2, 1 + \sqrt{-5}) (2, 1 + \sqrt{-5}), \quad (3) = (3, 1 + \sqrt{-5})(3, 1 - \sqrt{-5}). \]
+We now discuss the more general setup. Let $K \subset L$ be number fields, and let $R \coloneq \SO_K$ and $S \coloneq \SO_L$ (so $R \subset S$).
+\begin{theorem} \label{thm:prime_ideals_of_number_fields_properties}
+    Let $P \subset R$, $Q \subset S$ be prime ideals; then the following are equivalent.
+    \begin{enumerate}[(i)]
+        \item $Q$ divides into $P S = \{\alpha_1 \beta_1 + \dots + \alpha_r \beta_k \mid \alpha_i \in P, \beta_j \in S\}$;
+        \item $PS \subset Q$;
+        \item $P \subset Q$;
+        \item $Q \cap R = P$;
+        \item $Q \cap K = P$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    (i) is equivalent to (ii) because divisibility implies containment. (ii) is equiavlent to (iii) since $PS$ is the smallest ideal of $S$ containing $P$. (iv) is equivalent to (v) because $Q \cap K \subset R$. Clearly, (iv) implies (iii), so the only thing that remains to show is (iii) implies (iv). $P \subset Q$ implies $P \subset Q \cap R$; we may observe that $Q \cap R \subset R$ is a proper ideal, i.e., $1 \notin Q \cap R$, since $1$ is not in $Q$. Since $P$ is a nonzero prime, it is maximal, so $P = Q \cap R$.
+\end{proof}
+
+\begin{definition} \label{defn:ideal_lies_above_ideal}
+    When conditions of the above theorem are satisfied, we say ``$Q$ lies over $P$'', or ``$P$ lies under $Q$''.
+\end{definition}
+
+\begin{theorem} \label{thm:lies_over_prime_ideal}
+    In the context above,
+    \begin{enumerate}[(i)]
+        \item Every prime $Q \subset S$ lies over a unique prime $P \subset R$.
+        \item Every prime $P \subset R$ lies under at least one prime $Q$ of $S$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    For (i), we need to show that $Q \cap R$ is a prime ideal. $ab \in Q \cap P$ implies that $a$ or $b$ is in $Q \cap R$. Since $1 \notin Q \cap R$, it follows that $Q \cap R$ is a proper ideal.
+
+    For (ii), take $Q$ to be any prime ideal in the factorization os $PS$. We need to show that $PS \neq S$, i.e., $1 \notin PS$. Recall that there exists $\gamma \in K \setminus R$ such that $\gamma P \subset R$. This means $\gamma P S \subset S$; if $1 \in PS$, then $\gamma \in S$, meaning $\gamma$ is an algebraic integer (by definition of $S$ being a number field). $\gamma$ is an algebraic integer contained in $K$, meaning it must be contained in $R = \SO_K$, which is a contradiction.
+\end{proof}
+
+We now have that, if $p \subset R$ is prime, then $p S = q_1^{e_1} \dots q_r^{e_r}$, where the $q_i$'s are distinct prime ideals over $p$, and the $e_i$ are called \textit{ramification indices}. $p$ is said to be \textit{ramified} if there are exponents greater than $1$, i.e., some prime appears with multiplicity higher than $1$.
+
+If $q$ lies over $p$, then the map $R \to S$ descends to a map
+\[ R/p \to S/q \]
+in the quotient. Both $R/p$ and $S/q$ are fields, since $p, q$ are maximal, meaning we $S/q$ is a field extension of $R/p$. We denote the \textit{inertial degree} of $q$ over $p$ as $\abs{S/q : R/p}$, usually written $f(q/p)$.
+
+As an example, consider $R = \ZZ$ and $S = \ZZ[i]$. $2$ lies under $(1 - i)$, and $S/2S$ has order $4$, so $\abs{S/(1-i)}$ is a proper divisor of $4$, i.e., $\abs{S/(1-i)} = 2$. On the other hand, $3$ is a prime in $\ZZ[i]$. $3S \subset S$ is a prime ideal, and $\abs{S/3S} = 9 = 3^2$, so $f(3S/3) = 2$.
+
+With these examples, we see that
+\[ \sum_{i=1}^r e_i f_i = \abs{L : K}, \]
+where $f_i = f(q_i/p)$. As an example, for $\ZZ \subset \ZZ[i]$, $(2) = (1 - i)^2$, so $e = 2$ and $f = 1$. Here, $\abs{\QQ(i) : \QQ} = 2$. We also have $(3) = (3)$, so $e = 1$ and $f = 2$.

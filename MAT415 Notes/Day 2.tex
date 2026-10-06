@@ -1,6 +1,6 @@
 \section{Day 2: Algebra Preliminaries; Algebraic Numbers and Integers (Sep.\ 10, 2026)}
 We set some conventions for this class. Unless specified otherwise, a ring will always refer to a commutative ring with unity.
-\begin{definition}[Preliminaries] \label{def:class_conventions}
+\begin{definition}[Preliminaries] \label{defn:class_conventions}
     Let $R$ be a ring.
     \begin{enumerate}[(i)]
         \item $R$ is an \textit{integral domain} if it admits no zero divisors, i.e., whenever $ab = 0$ for $a, b \in R$, then $a = 0$ or $b = 0$.
@@ -24,7 +24,7 @@ Note that primes are always irreducible. You can reference my MAT347 notes for a
 \end{proof}
 
 We now continue writing out the definitions.
-\begin{definition}[Preliminaries, cont.] \label{def:class_conventions_2}
+\begin{definition}[Preliminaries, cont.] \label{defn:class_conventions_2}
     Let $R$ be a ring.
     \begin{enumerate}[(i)] \setcounter{enumi}{5}
         \item An integral domain $R$ is a \textit{Euclidean domain} (ED) if there exists a map $v \colon R \setminus \{0\} \to \ZZ_{\geq 0}$ such that, for all $a, b \in R$ with $b \neq 0$, there exists $q, r \in R$ such that $a = bq + r$ with $r = 0$ or $v(r) < v(b)$. In addition, for all nonzero $a, b \in R$, $v$ must satisfy $v(a) \leq v(ab)$.% {\color{airforceblue} The two properties may be thought of as ``division with remainder''}
@@ -57,7 +57,7 @@ Once again, the proof is in my MAT347 notes. Let us give some examples of this.
     \end{parlist}
 \end{corollary}
 
-\begin{definition} \label{def:algebraic_number_and_integer}
+\begin{definition} \label{defn:algebraic_number_and_integer}
     An \textit{algebraic number} $\alpha$ is a complex number $\alpha \in \CC$ for which there exists $a_0, \dots, a_{n-1} \in \QQ$ (with $n \geq 1$) such that
     \[ \alpha^n + a_{n-1} \alpha^{n-1} + \dots + a_1 \alpha + a_0 = 0, \]
     i.e., $p(\alpha) = 0$ for some monic $p(x) \in \QQ[x]$. An \textit{algebraic integer} is a complex number $\alpha \in \CC$ such that there exists $a_0, \dots, a_{n-1} \in \ZZ$ (with $n \geq 1$) such that
