@@ -1,0 +1,64 @@
+\section{Day 9: Sheaves, (Locally) Ringed Spaces (Oct.\ 6, 2026)}
+This week is the last week of material before the midterm. The midterm will consist of exercises polished into a document (some are too trivial, some are unclear, etc.). So!!\footnote{and he did a fruity-ass jump (i mean a hop)}
+
+We are now going to discuss the structure sheaf $\SO_X$ on the spectrum $X = \Spec A$.
+\begin{definition} \label{defn:presheaf}
+    Given a topological space $X$, a \textit{presheaf} is a contravariant functor $\SCF \colon \mathbf{Open}(X) \to \mathbf{Ab}$, where $\mathbf{Open}(X)$ denotes the open sets of $X$ and $\mathbf{Ab}$ denotes abelian groups, with morphisms being inclusions. Given $V \subset U$, we write $f \mapsto \restr{f}{V}$ for the map $\SCF(U) \to \SCF(V)$.
+\end{definition}
+
+Let us give some examples of presheaves.
+\begin{enumerate}[(i)]
+    \item Given an abelisn group $A$, we have that
+    \[ A \colon \mathbf{Open}(X) \to \mathbf{Ab}, \quad U \mapsto A, \]
+    where restriction is identity.
+    \item The bounded continuous functions on a manifold forms a presheaf as well. Restrictions of bounded continuous functions are bounded continuous functions, after all.
+    \item Any assignment of open sets to abelian groups, $\mathbf{Open}(X) \to \mathbf{Ab}$, where the restrictions are $0$.
+\end{enumerate}
+
+``Presheaves have nothing to do with functions. They're just some random way to assign abelian groups to functions such that restriction behaves.''
+
+A morphism of presheaves $\SCF \to \SCG$ is a \textit{natural functor} where, for each $U$, we assign $\SCF(U) \to \SCG(U)$ such that there is compatibility as follows,
+\[
+    \begin{tikzcd}
+        \SCF(U) \arrow[r] \arrow[d] & \SCG(U) \arrow[d] \\
+        \SCF(V) \arrow[r] & \SCG(V)
+    \end{tikzcd}
+\]
+He then said something about $\ZZ_M$ and bounded continuous functions on $M$, but I hope that's not relevant.
+
+
+\begin{definition} \label{defn:sheaf}
+    A \textit{sheaf} is a presheaf satisfying the unique gluing condition: let $(U_\alpha)_{\alpha \in \SA}$ be a cover of $U$, and consider $f_\alpha \in \SCF(U_\alpha)$ satisfying
+    \[ \restr{f_\alpha}{U_\alpha \cap U_\beta} = \restr{f_\beta}{U_\alpha \cap U_\beta}. \]
+    Then there exists some unique $f \in \SCF(U)$ such that $\restr{f}{U_\alpha} = f_\alpha$ for all $\alpha$.
+\end{definition}
+
+We now want to check if the following presheaves are sheaves.
+\begin{enumerate}[(i)]
+    \item Consider $X = \RR$ and $A = \ZZ$. Consider the empty covering of the empty set; then the gluing condition is vacuous, meaning that any $f \in \SCF(U)$ would satisfy $\restr{f}{U_\alpha} = f_\alpha$ for all $\alpha$, for which there are no $U_\alpha$ at all, since the cover is empty. Thus, it is not a sheaf. {\color{crimson} He said this was a bad example.}
+    \item Let's check the bounded continuous functions on a manifold. Let $X =\ RR$, and let $U_i = (i, i + 2)$ be a bunch of (arbitrarily chosen) intervals that cover $\RR$. We can just consider $f_i = x$ on each of the intervals; clearly, the $f_i$ agree on the overlaps and are bounded on their respective intervals, but this obviously does not glue to a bounded continuous function (if it did glue to a function, it would have to glue to $x$, which is \textit{not} a bounded continuous function).
+
+    \newpage
+    \item Producing compatible gluing data in the last case is super easy (i.e., in the case of assigning open sets to abelian groups); but, we will have a ``massive failure of uniqueness'', i.e., any candidate $f \in \SCF(U)$ has $\restr{f}{U_\alpha} = 0 \neq f_\alpha$. Thus, we see that this is generally not a sheaf (for example, if $X$ has the indiscrete topology, then it has to be a sheaf; to quote Hunter, ``there are always ways to make terrible sheaves'').
+\end{enumerate}
+
+We now want to talk about the abelian group of germs. The germs at $x \in X$ are pairs $(f, U)$ where $x \in U$ and $f \in \SCF(U)$. $(f, U) \sim (g, V)$ if there exists $W \subset U \cap V$ such that $\restr{f}{W} = \restr{g}{W}$. $\SCF_p$ is then the abelian group of germs (it is a ring if $\SCF$ is valued in rings). We now talk about sheafification.
+
+Given a presheaf $\SCF$, we define a sheaf $\SCF^\#$ given by the compatible collections of germs. Specifically, for $(f_x)_{x \in U}$, $f_x \in \SCF_U$, such that, for all $x$, there exists $V \subset U$, $g \in \SCF(V)$ such that $(g, V) = f_x$ for all $x \in V$.
+
+A \textit{ringed space} is a pair $(X, \SO_X)$, where $\SO_X$ is the sheaf of rings. As an example, consider $(M, C^2(M, \RR))$ or $(\Spec R, \SO_{\Spec R})$. The problem is that the vanishing locus of closed sets need not be closed, since we've defined two pieces of incompatible data. We need to impose an extra condition.
+\begin{definition} \label{defn:locally_ringed_space}
+    A \textit{locally ringed space} is a ringed space where the germs at $x$, $\SO_x$, are a local ring for all $x \in X$. Recall that a local ring is a ring with a unique maximal ideal $\km$.
+\end{definition}
+We're going to use the localness of this ring to define what it means to vanish or not vanish at a point. We may define $\kappa(x)$, in the case that $X$ is a local ring, to be $\SO_x/\km$.
+
+Note that $I \subset R$ is the unique maximal ideal of $R$ if and only if all elements of $R \setminus I$ are units. For example, $\SO_{M,p}$, where $M$ is a manifold and $p \in M$ is a local ring with maximal ideal given by $\{(f, U) \mid f(p) = 0\}$, i.e., germs $(f, U)$. It is a local ring because if we have $(f, U)$ with $f(p) \neq 0$, then continuity implies that $f \neq 0$ on a neighborhood $V \subset U$ of $p$; with this, we may then write that the inverse of $(f, V)$ is $(f\inv, V)$.
+
+Hence, $\ZZ^\#$ need not be a locally ringed space, as inverses don't exist locally.
+
+\begin{theorem} \label{thm:open_set_in_locally_ringed_space}
+    If $f \in \SO_X(X)$ and $X$ is locally ringed, then $D(f) \subset X$ is open. 
+\end{theorem}
+\begin{proof}
+    If $f(p) \neq 0$ in $\kappa(x)$, i.e., $p \in D(f)$, then $f$ is a unit in $\SO_{X,p}$. $(f, U)$ is a unit implies that there is a potentially smaller $V \subset U$, such that the germ $(f\inv, V)$ on $V$ has $f \neq 0$, since $f f\inv = 1$.
+\end{proof}
