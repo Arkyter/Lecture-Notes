@@ -95,5 +95,5 @@ As an exercise, demonstrate that $X_n \to Y$ almost surely if and only if $M_n \
     \[ \PP\left(\abs{Y_n - Y_m} \geq \frac{1}{\ell^2}\right) \leq \frac{1}{\ell^2} \tag{\textdagger} \]
     for all $n, m \geq m(\ell)$, for all $\ell \in \NN$. Then
     \[ \sum_{\ell = 1}^\infty \PP\left(\frac{Y_{m(\ell + 1)} - Y_{m(\ell)}} \geq \frac{1}{\ell^2}\right) \leq \sum_{\ell = 1}^\infty \frac{1}{\ell^2} < \infty, \]
-    so, by Borel--Cantelli (i), $\abs{Y_{m(\ell + 1)} - Y_{m(\ell)}} < \ell^{-2}$ for all but finitely many $\ell$ almost surely. Thus, $(Y_{m(\ell)})_{\ell \geq 1}$ is Cauchy a.s., and so $Y_{m(\ell)} \to Y$ for a limit $Y$ (by equivalence of convergence and Cauchy for real numbers). Then, by (\textdagger), we get $\smash{Y_n \taking{\PP} Y}$ along $n \in \NN$.
+    so, by Borel--Cantelli (i), $\abs{Y_{m(\ell + 1)} - Y_{m(\ell)}} < \ell^{-2}$ for all but finitely many $\ell$ almost surely. Thus, $(Y_{m(\ell)})_{\ell \geq 1}$ is Cauchy a.s., and so $Y_{m(\ell)} \to Y$ for a limit $Y$ (by equivalence of convergence and Cauchy for real numbers). Then, by (\textdagger), we get $Y_n \to Y$ in probability along $n \in \NN$.
 \end{proof}
