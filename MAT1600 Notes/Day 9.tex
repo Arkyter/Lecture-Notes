@@ -1,0 +1,99 @@
+\section{Day 9: Hewitt--Savage 0--1 law, Random series (Oct.\ 7, 2026)}
+There is a fields symposium in probability coming up, on Oct.\ 13--16. The lectures are given by Hugo Duminil--Copin (one of the lectures you'll have to miss, though, because of MAT1600).
+
+We continue proving the Hewitt--Savage $0$--$1$ law today. Recall the statement of the theorem (in \ref{thm:hewitt-savage_0-1_law} as well): let $(X_n)_{n \geq 1}$ be i.i.d.; then, for $A \in \xi$, where $\xi$ is the exchangeable $\sigma$-algebra, we have that $\PP(A) \in \{0, 1\}$.
+\begin{proof}[Proof of \ref{thm:hewitt-savage_0-1_law}]
+    Let $A \in \xi$. Then, for any $\eps > 0$, there exists $n \in \NN$ and an event $A_n \in \sigma(X_1, \dots, X_n)$ such that $\PP(A \,\Delta\, A_n) < \eps$. We can write
+    \[ A_n = \{(X_1, \dots, X_n) \in B_n\} \]
+    for some borel set $B_n \in \RR^n$. Now, define $A_n' = \{(X_{n+1}, \dots, X_{2n}) \in B_n\}$. Consider the following two facts, 
+    \begin{enumerate}[(i)]
+        \item First, the $A_n$ and $A_n'$ are independent, so $\PP(A_n \cap A_n') = \PP(A_n) \PP(A_n') = \PP(A_n)^2$. The last equality is true because the random variables are i.i.d.. Notice that we've already made a ``step'' beyond Kolmogorov, since you can't say this with \ref{thm:kolmogorov_0-1_law}.
+        \item $\PP(A \, \Delta \, A_n) = \PP(A \, \Delta \, A_n')$. To see this, let
+        \[ \Gamma(x) = (x_{n+1}, \dots, x_{2n}, x_1, \dots, x_n, x_{2n+1}, \dots), \]
+        i.e., exchanging the first $2n$ entries. Call $A = X\inv(B)$, where $X = (X_1, X_2, \dots)$; specifically, $A$ is the event that $X$ is in $B$. We may compute as follows,
+        \begin{align*}
+            \PP(A_n' \, \Delta \, A) &= \PP(A_n' \, \Delta \, \{x \in B\}) \tag{by definition} \\
+            &= \PP(A_n' \, \Delta \, \{\Gamma X \in \Gamma B\}) \tag{bijection} \\
+            &= \PP(A_n' \, \Delta \, \{\Gamma X \in B\}) \tag{exchangeability} \\
+            &= \PP(\{\Gamma X \in B_n\} \, \Delta \, \{\Gamma X \in B\}) \tag{by definition} \\
+            &= \PP(\{X \in B_n\} \, \Delta \, \{X \in B\}) \tag{$\Gamma X = X$ as $X$ i.i.d.} \\
+            &= \PP(A_n \, \Delta \, A). \tag{by definition}
+        \end{align*}
+    \end{enumerate}
+    Now, we have that $\PP\bigl((A_n \cap A_n') \, \Delta \, A\bigr) \leq \PP(A_n \, \Delta \, A) + \PP(A_n' \, \Delta \, A) < 2\eps$ by the union bound. It follows that
+    \[ \PP(A_n \cap A_n') = \PP(A_n)^2 \to \PP(A) \]
+    as $\eps \to 0$ (take $n = n(\eps)$); also, since the symmetric difference is small, we get $\PP(A_n) \to \PP(A)$. Since $\PP(A_n)$ and $\PP(A_n)^2$ both converge to $\PP(A)$, we get that $\PP(A) = \PP(A)^2$.
+\end{proof}
+
+As an example, for any two real-valued sequences $(a_n)_{n \geq 1}, (b_n)_{n \geq 1}$, let $(X_n)_{n \geq 1}$ be i.i.d., and take $S_n = X_1 + \dots + X_n$. Then
+\[ R \coloneq \limsup_{n \to \infty} \frac{S_n - a_n}{b_n} \]
+is constant a.s.\ by \ref{thm:hewitt-savage_0-1_law}.
+
+\newpage
+We will now start on random series. Let $(X_n)_{n \geq 1}$ be an independent sequence. When does
+\[ \sum_{n=1}^\infty X_n \]
+diverge or converge? Notice, that the probability the above converges or diverges is going to happen with probability $0$ or $1$, since the event is contained in the tail $\sigma$-algebra.
+
+As an example, let $X_i = \pm 1$, with equal probability. For which $\alpha > 0$ does
+\[ \sum_{n=1}^\infty \frac{X_n}{n^\alpha} \]
+converges a.s.? The answer is $\alpha > \frac{1}{2}$ (by looking at the variance).
+
+Our goal is to characterize when convergence happens for the general sum of random variables $X_n$. Can
+\[ \sum_{n=1}^\infty X_n \]
+converge in probability, but not almost surely?
+\begin{theorem}[Panchenko \S2.10: Kolmogorov's maximal inequality] \label{thm:kolmogorov_maximal_inequality}
+    Let $(X_n)_{n \geq 1}$ be independent, $S_n = X_1 + \dots + X_n$. For $x \geq a > 0$,
+    \[ \PP\left(\max_{1 \leq j \leq n} \abs{S_j} \geq x\right) \leq \frac{1}{1-p} \PP(\abs{S_n} > x - a), \]
+    where $\max_{1 \leq j \leq n} \PP(\abs{S_n - S_j} \geq \alpha)$.
+\end{theorem}
+{\color{amethyst} To quote: ``the vanilla way to bound this... would be to do a union bound; but that's way too weak. This is basically the precursor to the concept of stopping time.''}
+\begin{proof}
+    Define the ``stopping time'' $\tau = \min\{j \leq n \mid \abs{S_j} \geq x\}$. Observe that $\{\tau = j\} \in \sigma(X_1, \dots, X_j)$ (note that $\tau = \infty$ if $\abs{S_j} < x$ for all $j$); we have
+    \begin{align*}
+        \PP(\abs{S_n} > x - a, \tau = j) &\geq \PP(\abs{S_n - S_j} < a, \tau = j) \\
+        &= \PP(\abs{S_n - S_j} < a) \PP(\tau = j),
+    \end{align*}
+    by independence. In this way, we get
+    \begin{align*}
+        \PP(\tau \leq n) = \sum_{j=1}^n \PP(\tau = j) &\leq \frac{1}{1-p} \sum_{j=1}^n \PP(\abs{S_n} > x - a, \tau = j) \\
+        &= \frac{1}{1 - p} \PP(\abs{S_n} > x - a, \tau \leq n) \\
+        &\leq \frac{1}{1 - p} \PP(\abs{S_n} > x - a). \qedhere
+    \end{align*}
+\end{proof}
+
+\newpage
+\begin{theorem}[Panchenko \S2.11] \label{thm:convergence_probability_implies_as}
+    If $(X_n)_{n \geq 1}$ are independent and $S_n = X_1 + \dots + X_n$, then
+    \[ S_n \taking{\PP} S \iff S_n \to S \text{ a.s. } \]
+\end{theorem} \vspace{-8pt}
+As an exercise, demonstrate that $X_n \to Y$ almost surely if and only if $M_n \coloneq \sup_{i \geq n} \abs{Y_i - Y} \taking{\PP} 0$. In the following context, taking the maximum suffices (instead of the supremum).
+\begin{proof}[Proof of \ref{thm:convergence_probability_implies_as}]
+    Suppose $\smash{S_n \taking{\PP} S}$. Define $q_n(\eps) = \sup_{j \geq n} \PP(\abs{S_j - S} > \eps)$. We want to show that $q_n(\eps) \to 0$ as $n \to \infty$ for all fixed $\eps > 0$. Let's look at $\PP(\max_{n \leq j \leq k} \abs{S_m - S_n} \geq \eps)$. By \ref{thm:kolmogorov_maximal_inequality}, 
+    \[ \PP\left(\max_{n \leq j \leq k} \abs{\sum_{i = m+1}^j X_i} \geq \eps\right) \leq \frac{1}{1-p} \PP\left(\abs{S_k - S_n} \geq \frac{\eps}{2}\right), \tag{\textdagger} \]
+    where $p = \max_{n \leq j \leq k} \PP(\abs{S_k - S_j} \geq \eps/2)$. We may bound $p$ by writing
+    \[ p \leq \max_{n \leq j} 2 \PP \left(\abs{S_j - S} \geq \frac{\eps}{4}\right) = 2 q_n(\eps/4), \]
+    so
+    \[ (\dagger) \leq \frac{1}{1 - 2 q_n(\eps/4)} \PP\left(\abs{S_k - S_n} > \frac{\eps}{2}\right) \leq \frac{2 q_n(\eps/4)}{1 - q_n(\eps/4)}. \tag{$\ddagger$} \]
+    Continuity of measure then assures that
+    \[ \PP\left(\max_{n \leq j} \abs{S_j - S_n} > \eps\right) \leq (\ddagger). \]
+    Thus,
+    \[ \PP\left(\max_{n \leq j} \abs{S_j - S} > 2\eps\right) \leq 2 \max_{n \leq j} \abs{S_j - S_n} \leq 2 (\dagger) = \frac{4 q_n(\eps/4)}{1 - 2 q_n(\eps/4)} \taking{n \to \infty} 0, \]
+    for which the theorem would then follow from the earlier exercise.
+\end{proof}
+
+\begin{theorem}[Panchenko \S2.12] \label{thm:finite_sum_of_second_moments_convergence_as}
+    If $(X_i)_{i \geq 1}$ is a sequence of independent random variables with $\EE X_i = 0$ for all $i$ and $\sum_{i=1}^\infty \EE X_i^2 < \infty$, then $\sum_{i=1}^\infty X_i$ converges almost surely.
+\end{theorem}
+
+\begin{lemma}
+    A sequence $(Y_n)_{n \geq 1}$ of random variables converges in probability if and only if
+    \[ \lim_{n_0 \to \infty} \max_{n, m \geq n_0} \PP(\abs{Y_n - Y_m} > \eps) \to 0 \]
+    for all $\eps > 0$. This condition is denoted as being \textit{Cauchy in probability}.
+\end{lemma}
+\begin{proof}
+    The forwards direction is easy, since we just mimic our previous proof. Conversely, suppose $(Y_n)_{n \geq 1}$ is Cauchy in $\PP$. Then we can define a subsequence $m(1) < m(2) < \dots$ such that
+    \[ \PP\left(\abs{Y_n - Y_m} \geq \frac{1}{\ell^2}\right) \leq \frac{1}{\ell^2} \tag{\textdagger} \]
+    for all $n, m \geq m(\ell)$, for all $\ell \in \NN$. Then
+    \[ \sum_{\ell = 1}^\infty \PP\left(\frac{Y_{m(\ell + 1)} - Y_{m(\ell)}} \geq \frac{1}{\ell^2}\right) \leq \sum_{\ell = 1}^\infty \frac{1}{\ell^2} < \infty, \]
+    so, by Borel--Cantelli (i), $\abs{Y_{m(\ell + 1)} - Y_{m(\ell)}} < \ell^{-2}$ for all but finitely many $\ell$ almost surely. Thus, $(Y_{m(\ell)})_{\ell \geq 1}$ is Cauchy a.s., and so $Y_{m(\ell)} \to Y$ for a limit $Y$ (by equivalence of convergence and Cauchy for real numbers). Then, by (\textdagger), we get $\smash{Y_n \taking{\PP} Y}$ along $n \in \NN$.
+\end{proof}
