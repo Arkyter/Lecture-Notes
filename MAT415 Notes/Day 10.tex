@@ -1,0 +1,93 @@
+\section{Day 10: Norms of Ideals, Decomposition of Extension of Number fields (Oct.\ 8, 2026)}
+Let $L/K$ be number fields, and let $p \subset \SO_K$ be a prime ideal. Then $p \SO_L$ has a decomposition as $q_1^{e_1} \dots q_r^{e_r}$, where the $q_i$ are the primes lying over $p$, and $e_i$ the ramification indices. Denote
+\[ f_i = \abs{\SO_L/q_i : \SO_k/p} \]
+to be the indices of inertia.
+
+\begin{theorem} \label{thm:ramification_and_inertia}
+    In the context above, $\sum_{i=1}^r e_i f_i = n = \abs{L : K}$.
+\end{theorem}
+To prove this, we will use the norm. Recall that, for $I \subset \SO_K$ a nonzero ideal, we defined $N(I) = \# \SO_K/I$ as the \textit{norm of $I$}.
+\begin{theorem} \label{thm:norm_of_ideal_multiplicative}
+    For ideals $I, J \subset \SO_K \eqcolon R$, $N(I \cdot J) = N(I) N(J)$.
+\end{theorem}
+\begin{proof}
+    Suppose $I$ and $J$ are relatively prime. Then 
+    \[ I + J = \gcd(I, J) = R, \]
+    so $I \cap J = \lcm(I, J) = IJ$. By the Chinese remainder theorem,
+    \[ \frac{R}{I \cdot J} \cong \frac{R}{I} \times \frac{R}{J}. \]
+    Thus, $N(I \cdot J) = N(I) N(J)$ in this case.
+
+    It remains to check that if $p \subset \SO_K$ is a prime ideal, then $N(p^k) = N(p)^k$. We will proceed by induction on $k$. The claim is clearly vacuously true for $k = 0$ or $1$, so we will directly go to the inductive step. Let $S = R/p^k$; we have that $I = p^{k-1} / p^k$ is an ideal in $S$, so $S/I \cong R/p^{k-1}$. By counting elements, we get
+    \[ \frac{\abs{R/p^k}}{\abs{p^{k-1} / p^k}} = \abs{R/p^{k-1}} \implies \frac{N(p^k)}{\abs{p^{k-1} / p^k}} = N(p^{k-1}), \]
+    i.e., $N(p^k) = N(p^{k-1}) \abs{p^{k-1} / p^k}$. By induction, we need to show that
+    \[ \abs{\frac{p^{k-1}}{p^k}} = N(p) = \abs{\frac{R}{p}}. \]
+    We claim that there exists an isomorphism $p^{k-1}/p^k \cong R/p$ as abelian groups. To see this, pick $\beta \in p^{k-1} \setminus p^k$, and define $\varphi \colon R \to p^{k-1}/p^k$ by $\alpha \mapsto [\beta \alpha]$. We want to check that $\varphi$ is surjective, and the kernel is exactly $p$. Notice that $\img \varphi \ni (\beta) + p^\alpha = \{\beta x + \alpha\}$ for $\alpha \in p^k$, where $(\beta) + p^k = p^{k-1}$, so $p^k \subsetneq (\beta) + p^k \subset p^{k-1}$. It follows that $(\beta) + p^k = p^{k-1}$ by uniqueness of prime factorization, so $\varphi$ is surjective.
+
+    We now compute the kernel of $\varphi$. First, observe that $I = \{\alpha \mid \beta \alpha \in p^k\}$ is an ideal, where $p \subset I \subsetneq R$; but $p$ is a maximal ideal, so $p = I$. This means $\ker \varphi = p$.
+\end{proof}
+
+\begin{theorem} \label{thm:ramification_and_inertia_over_Z}
+    Let $\QQ \subset L$ and $n \coloneq \abs{L:Q}$. Let $p \in \ZZ$ be prime. Given the decomposition $p \SO_L = q_1^{e_1} \dots q_r^{e_r}$, we have
+    \[ \sum_{i=1}^r e_i f_i = n, \quad f_i = \abs{\SO_L/q_i : \ZZ/p}. \]
+\end{theorem}
+
+\newpage
+\begin{proof}
+    Here, $N(p \SO_L) = N(q_1)^{e_1} \dots N(q_r)^{e_r}$. Since $N(p \SO_L) = p^n$ and $N(q_i) = p^{f_i}$, we may pick an integral basis $\alpha_1, \dots, \alpha_n$ such that
+    \[ \frac{\SO_L}{p \SO_L} \cong \frac{\ZZ^n}{p \ZZ^n} = \left(\frac{\ZZ}{p}\right)^n. \]
+    Thus, $p^n = (p^{f_1})^{e_1} \dots (p^{f_r})^{e_r}$ yields the desired result by comparing powers.
+\end{proof}
+
+\begin{theorem} \label{thm:norms_in_number_field_extension}
+    Let $L/K$ be a degree $n$ extension of number fields. Let $p \subset \SO_K$ be a prime ideal; then $N(p \SO_L) = N(p)^n$.
+\end{theorem}
+\begin{proof} \renewcommand{\qedsymbol}{\ensuremath{\triangle}}
+    Take $I = p_1^{e_1} \dots p_k^{e_k}$. By our previous theorem, it's enough to show this for $I = p$, i.e., a prime ideal $p$. Observe that $\SO_L / p \SO_K$ is a vector space over $\SO_K / p$. We'll show that
+    \[ \dim_{\SO_K / p} \SO_L / p \SO_L = n. \]
+    Let's start by checking that the dimension is at most $n$, i.e., any collection of $n + 1$ elements is linearly dependent. Let $\alpha_1, \dots, \alpha_{n+1} \in \SO_L$; we want to show that $\ol \alpha_1, \dots, \ol \alpha_{n+1} \in \SO_L/p \SO_L$ are linearly dependent. First, $\dim_K L = n$, so the $\alpha_i$'s are linearly dependent over $K$. Thus, there exists $a_i \in K$ such that
+    \[ \sum_{i=1}^{n+1} a_i \alpha_i = 0. \]
+    We can make $a_i \in \SO_K$ by multiplying by large enough $N \in Z$. Recall, that, for all $x \in K$, there exists $n \in \ZZ$ such that $nx \in \SO_K$. From here, we see that there exists $b_k \in \SO_K$, not all in $p$, such that 
+    \[ \sum_{i=1}^{n+1} b_i \alpha_i = 0. \qedhere \]
+\end{proof}
+
+Before we finish the rest of the proof, we will prove a lemma first.
+\begin{lemma} \label{lem:shift_ideal_out_of_inclusion}
+    Let $A, B \subset R$ be nonzero ideals in a Dedekind domain with $B \subset A \neq R$. Then there exists $\gamma \in \opname{Frac}(R)$ such that $\gamma B \subset R$, but $\gamma B \not\subset A$.
+\end{lemma}
+\begin{proof}
+    There exists $C \subset R$ such that $B \cdot C = (\alpha)$, i.e., principal. Then $B \cdot C \not\subset \alpha \cdot A$, so there exists $\beta \in C$ such that $\beta B \not\subset \alpha A$. Set $\gamma = \beta/\alpha$. We get that $\gamma B = \alpha\inv (\beta \cdot B) \subset \alpha\inv (C \cdot B) = \alpha\inv (\alpha) = R$. Notice that
+    \[ (\gamma \cdot B) \subset A \iff \alpha \gamma \cdot B \subset \alpha A, \]
+    so $\alpha \gamma B = \beta B \not\subset \alpha A$.
+\end{proof}
+We now apply this lemma to finish off our earlier proof.
+
+\begin{proof}[Proof of \ref{thm:norms_in_number_field_extension}, cont]
+    Suppose $a_i \in P$ for all $i$. Applying our lemma to $A = P$ and $B = (a_1, \dots, a_{n+1}) \subset \SO_K$, we get $\gamma \in K$ such that $\gamma B \subset \SO_K$, i.e., $\gamma a_i \in \SO_K$, but $\gamma B = (\gamma a_i) \not\subset A$. By taking $b_i = \gamma a_i \in \SO_K$ (from earlier), we get
+    \[ \sum_{i=1}^{n+1} b_i \alpha_i = \gamma \sum_{i=1}^{n+1} a_i \alpha_i = 0, \]
+    and we may reduce modulo $P$ to get a linear dependence.
+    
+    \newpage
+    We want to check that the dimension (in the theorem statement) is $n$ by checking the other direction of the inequality. Consider $P \subset \SO_K$ a prime ideal, and let $P \cap \ZZ = \ell \ZZ$ for some prime $\ell \in \ZZ$. Consider all primes $P_i$ in $\SO_K$ lying over $\ell$, i.e., $\ell \SO_K \cong p_1^{e_1} \dots p_m^{e_m}$. We know
+    \[ \dim_{\SO_K / p_i} \SO_L/p_i \SO_L = n_i \leq n. \]
+    We'll show that $n_i = n$ for all $i$. We have that
+    \[ \sum_i e_i f_i = d = \abs{K : \QQ} \]
+    for $f_i = f(P_i / \ell) = \abs{\SO_K / p_i / \ZZ/\ell}$; notice that $\ell \SO_K$ has prime decomposition $p_1^{e_1} \dots p_k^{e_k}$; then \\ $\ell \SO_L \cong \prod (p_i \SO_L)^{e_i}$, and
+    \[ N(\ell \SO_L) = N(p_1 \SO_L)^{e_1} \dots N(p_m \SO_L)^{e_m} \leq (N(p_1)^{n_1})^{e_1} \dots (N(p_m)^{n_m})^{e_m} \]
+    by the previous theorem. Since $N(\ell \SO_L) = \ell^{\deg \abs{L : \QQ}} = \ell^{dn}$ and $f_i = \abs{\SO_K/p_i : \ZZ/\ell}$, we see $N(p_i) = \ell^{f_i}$. Moreover, per the earlier theorem, we know $n_i \leq n$, so the inequality $N(p_m \SO_L)^{e_m} \leq (N(p_m)^{n_m})^{e_m}$ becomes
+    \[ \ell^{dn} = \ell^{\sum_{e_i f_i n_i}} \implies \sum_i e_i f_i n_i = dn; \]
+    but $\sum e_i f_i = d$ and $n_i \leq n$. These three things can only be true if $n_i = n$, so we are done.
+\end{proof}
+
+We can finally return to prove the original statement presented at the start of class.
+\begin{proof}[Proof of \ref{thm:ramification_and_inertia}]
+    Apply the norm $N$ to $p \SO_L = q_1^{e_1} \dots q_r^{e_r}$. Then
+    \[ N(p \SO_L) = N(q_1)^{e_1} \dots N(q_r)^{e_r}. \]
+    Since $f_i = \abs{\SO_L/q_i : \SO_K/p}$, we get $N(p \SO_L) = N(p)^n$ by the previous theorem. Also, $N(q_i) = N(p)^{f_i}$, so
+    \[ N(p)^n = N(p)^{\sum_{i=1}^r e_i f_i} \implies n = \sum_{i=1}^r e_i f_i. \qedhere \]
+\end{proof}
+
+
+% We now prove the more general theorem introduced as the start of class.
+% \begin{proof}[Proof of \ref{thm:ramification_and_inertia}]
+
+% \end{proof}
