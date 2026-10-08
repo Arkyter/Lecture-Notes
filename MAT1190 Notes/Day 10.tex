@@ -52,3 +52,15 @@ We now have a notion of pulling back germs via the above procedure. Now, conside
 \end{proof}
 
 {\color{amethyst} ``I'll say this was a confusing proof. I'll write this up nicely in the notes... my blood sugar dropped to half of what a normal human should have, but... as penance, I'll write this up nicely.''}
+
+\begin{theorem} \label{thm:spectrum_ring_to_locally_ringed_spaces_functor}
+    $\Spec$ is a fully faithful functor from $\mathbf{Ring}$ to locally ringed spaces.
+\end{theorem}
+
+\begin{definition} \label{defn:scheme}
+    A \textit{scheme} is a locally ringed space, which has an open covering by $\Spec R$ for various $R$.
+\end{definition}
+
+\begin{corollary} \label{cor:spectrum_of_integers_is_terminal_object}
+    $\Spec \ZZ$ is the terminal object in the category of locally ringed spaces. This means there is always a unique map from $X \to \Spec \ZZ$.
+\end{corollary}
