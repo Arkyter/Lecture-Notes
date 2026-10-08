@@ -1,0 +1,54 @@
+\section{Day 10: (Oct.\ 8, 2026)}
+Today, we're going to describe how to ``do morphisms'' between affine schemes. Then we're going to get to schemes!
+
+Let $(X, \SO_X)$ be a locally ringed space, where $X$ is a topological space and $\SO_X$ is the associated sheaf of rings. The germs at $x$, $\SO_{X,x}$, is a local ring. $D(f) = \{x \in X \mid f(x) \neq 0\}$ is open, and $f(x)$ has its image in $\kappa(x) = \SO_{X,x}/\km$.
+
+\begin{definition} \label{defn:pushforward_sheaf}
+    Given a presheaf $\SCF$ on $X$ and a continuous map $f \colon X \to Y$, $f_\ast \SCF$ is the presheaf given by $(f_\ast \SCF)(V) \coloneq \SCF(f\inv(V))$.
+\end{definition}
+
+\begin{theorem} \label{thm:pushforward_sheaf_is_sheaf}
+    If $\SCF$ is a presheaf, then $f_\ast \SCF$ is a presheaf. If $\SCF$ is a sheaf, then $f_\ast \SCF$ is a sheaf.
+\end{theorem}
+\begin{proof}
+    Given $W \subset V \subset U$, we want to show that, for $\alpha \in f_\ast \SCF(U)$,
+    \[ \restr{\bigl(\restr{\alpha_U}{V}\bigr)}{W} = \restr{\alpha}{W}, \quad \alpha_U \in \SCF(f\inv(U)). \]
+    $\SCF(f\inv(U)) = f_\ast \SCF(U)$ restricts down to $\restr{\alpha_U}{V} \in \SCF(f\inv(V)) = f_\ast \SCF(V)$, which restricts down to \\ $\restr{\bigl(\restr{\alpha_U}{V}\bigr)}{W} \in \SCF(f\inv(W)) = f_\ast \SCF(W)$. By the presheaf property for $\SCF$, we get what we want.
+
+    To check the implication for sheaves, let $\{U_\alpha\}_{\alpha \in \SA}$ be a covering with $U \subset Y$. We want to show that \\ $g_\alpha \in (f_\ast \SCF)(U_\alpha)$ such that $\smash{\restr{g_\alpha}{U_\alpha \cap U_\beta} = \restr{g_\beta}{U_\alpha \cap U_\beta}}$, so there exists a unique $g$ such that $\restr{g}{U_\alpha} = g_\alpha$. Thus, $\smash{g_\alpha \in \SCF(f\inv(U_\alpha))}$ satisfies
+    \[ \restr{g_\alpha}{f\inv(U_\alpha \cap U_\beta)} = \restr{g_\beta}{f\inv(U_\alpha \cap U_\beta)}, \]
+    for which $f\inv(U_\alpha \cap U_\beta) = f\inv(U_\alpha) \cap f\inv(U_\beta)$. It follows that $f\inv(U) = \bigcup f\inv(U_\alpha)$, on which we have compatible guing data, so there exists a unique $g \in \SCF(f\inv(U)) = f_\ast \SCF(U)$ restricting correctly.
+\end{proof}
+
+\begin{definition} \label{defn:morphism_of_ringed_spaces}
+    A map of ringed spaces $(X, \SO_X) \to (Y, \SO_Y)$ is the data of continuous $f \colon X \to Y$ and a morphism of sheaves $\SO_Y \to f_\ast \SO_X$. Specifically, they are compatible ring homomorphisms $\SO_Y(U) \to \SO_X(f\inv(U))$.
+\end{definition}
+
+A map of locally ringed spaces $(X, \SO_x) \to (Y, \SO_Y)$ is a map of ringed spaces such that the induced map from $f^\#_\ast \colon \SO_{Y, f(x)} \to \SO_{X, x}$ is a local map of local rings, meaning the preimage of a maximal ideal under $f^\#_\ast$ is a maximal ideal as well.
+
+The map $\SO_{Y, f(x)} \to \SO_{X, x}$ takes a germ $(g, U)$ (where $f(x) \in U$), and under the map $\SO_Y(U) \to \SO_X(f\inv(U))$, $g$ maps to $g' \in \SO_X(f\inv(U))$. Treating this as a germ, we obtain a germ $(g', f\inv(U))$ at $x \in X$, which gives the element of $\SO_{X,x}$.
+
+We now have a notion of pulling back germs via the above procedure. Now, consider the pullback map on germs of functions $f^\#_x \colon \SO_{Y, f(x)} \to \SO_{X, x}$; $\km_x$ denotes the germs vanishing at $x$ and $\km_{f(x)}$ denotes the germs vanishing at $f(x)$, in $X$ and $Y$ respectively. If $\smash{(f^\#_{f(x)})\inv (\km_x) \subsetneq \km_{f(x)}}$, then there exists $\alpha \in \km_{f(x)}$ such that $\smash{f^\#_{f(x)}(\alpha) \notin \km_x}$. Thus, $f^\#_x$ being local means germs vanishing at $f(x)$ pullback to germs vanishing at $x$. If a germ doesn't vanish at $f(x)$, though, then its a unit, and so up to a unit, it does not vanish. Essentially, the vanishing and non-vanishing of germs is preserved under the pullback.
+
+\begin{theorem} \label{thm:locally_ringed_map_to_affine_scheme}
+    Let $(X, \SO_X)$ be a locally ringed space. A map $(X, \SO_X) \to (\Spec R, \SO_{\Spec R})$ is entirely specified by $R \to \SO_X(X)$ and vice versa.
+\end{theorem}
+
+\newpage
+\begin{proof}
+    We claim that, if $(S, \km)$ is a local ring, and $f \colon R \to S$ is a ring map, then $f(\km) \in \Spec R$ is the unique prime such that there is an induced local ring map $R_{f(\km)} \to S$.
+
+    To prove this, we're going to take the spectrum and ``see that this is really really obvious''. Consider the map $\Spec S \to \Spec R$ (from the ring map $f$).
+    \[ \begin{tikzcd} R \arrow[r] \arrow[d] & S \\ R_\kp \arrow[ur] \end{tikzcd} \leadsto \begin{tikzcd} \Spec R & \Spec S \arrow[l] \arrow[dl] \\ \Spec R_\kp \arrow[u] \end{tikzcd}  \]
+    i.e., the diagram on the left induces that on the right by taking the spectrum (and that we take $\Spec R_\kp$ to be the primes contained in $\kp$). The map $\Spec S \to \Spec R_\kp$ sends $\km \in \Spec S$ to $\kp$, since $\Spec S \to \Spec R$ must map $\km$ to something contained in $\kp$. It follows that we have
+    \[ \begin{tikzcd} f(\km) & \km \arrow[l, maps to] \arrow[dl, maps to] \\ f \arrow[u, maps to] \end{tikzcd} \]
+    Given $f \colon R \to \SO_X(X)$, we want to (i) construct a map on topological spaces $\Spec R \to X$, (ii) show that it is continuous, and (iii) show that it is a map of locally ringed spaces. For (i), we can draw the following diagram,
+    \[ \begin{tikzcd} R \arrow[r] \arrow[d] & \SO_X(X) \arrow[d] \\ R_{\Phi(x)} \arrow[r] & \SO_{X,x} \end{tikzcd} \]
+    If we look at $\Phi(x) = f\inv(\text{maximal ideal of $\SO_{X,x}$})$, then $R_{\Phi(x)} \to \SO_{X,x}$ is a local map of local rings. For (ii), we want to check that this ``random assignment of $\Phi$ is continuous''. Specifically, we want to show that $\Phi\inv(D(f))$ is open. Indeed, we showed that $\Phi\inv(D(g)) = D(f(g))$, and that $x \in \Phi\inv(D(g))$ is equivalent to $\Phi(x) \in D(g)$, which itself is equivalent to $g(\Phi(x)) \neq 0$. By the diagram (and the localness of the bottom map), {\color{amethyst}we see that if $g$ does not vanish in $R_{\Phi(x)}$, then it doesn't vanish at $\SO_{X, x}$}. Specifically, $f(g)(x)$ not vanishing at $x$ is equivalent to $D(f(g))$.
+
+    Finally, for (iii), we construct $\SO_{\Spec R} \to f_\ast \SO_X$. Given $U \subset X$, we have $\SO_{\Spec R}(U) \to \SO_X(\Phi(U))$. This means the compatible germs on $U$ are mapped from $(g_p)_{p \in U} \mapsto \Phi\inv(u)$. Given $x \in \Phi\inv(u)$, i.e., $\Phi(x) \in u$, take the image of $g_{\Phi(x)}$ in $\SO_{X,x}$. If $(r/h^i, U)$ is a representative for a germ around $p$ such that $(r/h^i, U) = g_q$ for all $q \in U$, then
+    \[ \left(\frac{f(r)}{f(h^i)}, D(f(h))\right) \]
+    is the germ verifying compatibility on the image.
+\end{proof}
+
+{\color{amethyst} ``I'll say this was a confusing proof. I'll write this up nicely in the notes... my blood sugar dropped to half of what a normal human should have, but... as penance, I'll write this up nicely.''}
