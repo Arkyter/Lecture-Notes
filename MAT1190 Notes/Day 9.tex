@@ -8,7 +8,7 @@ We are now going to discuss the structure sheaf $\SO_X$ on the spectrum $X = \Sp
 
 Let us give some examples of presheaves.
 \begin{enumerate}[(i)]
-    \item Given an abelisn group $A$, we have that
+    \item Given an abelian group $A$, we have that
     \[ A \colon \mathbf{Open}(X) \to \mathbf{Ab}, \quad U \mapsto A, \]
     where restriction is identity.
     \item The bounded continuous functions on a manifold forms a presheaf as well. Restrictions of bounded continuous functions are bounded continuous functions, after all.
@@ -36,7 +36,7 @@ He then said something about $\ZZ_M$ and bounded continuous functions on $M$, bu
 We now want to check if the following presheaves are sheaves.
 \begin{enumerate}[(i)]
     \item Consider $X = \RR$ and $A = \ZZ$. Consider the empty covering of the empty set; then the gluing condition is vacuous, meaning that any $f \in \SCF(U)$ would satisfy $\restr{f}{U_\alpha} = f_\alpha$ for all $\alpha$, for which there are no $U_\alpha$ at all, since the cover is empty. Thus, it is not a sheaf. {\color{crimson} He said this was a bad example.}
-    \item Let's check the bounded continuous functions on a manifold. Let $X =\ RR$, and let $U_i = (i, i + 2)$ be a bunch of (arbitrarily chosen) intervals that cover $\RR$. We can just consider $f_i = x$ on each of the intervals; clearly, the $f_i$ agree on the overlaps and are bounded on their respective intervals, but this obviously does not glue to a bounded continuous function (if it did glue to a function, it would have to glue to $x$, which is \textit{not} a bounded continuous function).
+    \item Let's check the bounded continuous functions on a manifold. Let $X = \RR$, and let $U_i = (i, i + 2)$ be a bunch of (arbitrarily chosen) intervals that cover $\RR$. We can just consider $f_i = x$ on each of the intervals; clearly, the $f_i$ agree on the overlaps and are bounded on their respective intervals, but this obviously does not glue to a bounded continuous function (if it did glue to a function, it would have to glue to $x$, which is \textit{not} a bounded continuous function).
 
     \newpage
     \item Producing compatible gluing data in the last case is super easy (i.e., in the case of assigning open sets to abelian groups); but, we will have a ``massive failure of uniqueness'', i.e., any candidate $f \in \SCF(U)$ has $\restr{f}{U_\alpha} = 0 \neq f_\alpha$. Thus, we see that this is generally not a sheaf (for example, if $X$ has the indiscrete topology, then it has to be a sheaf; to quote Hunter, ``there are always ways to make terrible sheaves'').
