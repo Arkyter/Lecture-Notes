@@ -1,0 +1,56 @@
+\section{Day 11: Galois Extensions for Number Fields (Oct.\ 13, 2026)}
+Last time, we addressed how primes split in number rings, and we talked about norms of ideals.
+\begin{theorem} \label{thm:norm_of_ideal_in_number_field}
+    Let $K$ be a number field. If $\alpha \in \SO_K$ is nonzero, then $N(\left<\alpha\right>) = N_K(\alpha)$.
+\end{theorem}
+
+As an abelian group, $\SO_K/\left<\alpha\right> = \SO_K/\img(\varphi_\alpha)$, where $\varphi_\alpha \colon \SO_K \to \SO_\alpha$ is the group homomorphism given by left multiplication, $\varphi_\alpha(\beta) = \alpha \beta$.
+
+\begin{lemma} \label{lem:free_abelian_first_iso_counting_elements}
+    Let $\varphi \colon \ZZ^n \to \ZZ^n$ be a map of free abelian groups with $\det(\varphi) \neq 0$. Then
+    \[ \abs{\frac{\ZZ^k}{\img \varphi}} = \abs{\det \varphi}. \]
+\end{lemma} \vspace{-8pt}
+
+\begin{proof}[Proof of \ref{lem:free_abelian_first_iso_counting_elements}]
+    Let $P \in M_n(\ZZ)$ be the matrix representing $\varphi$. By assumption, $\det P \neq 0$. We can now do row and column operations, i.e., Gaussian elimination, to transform $P$ into a diagonal matrix. In this way, there exists elementary matrices $E_1, E_2 \in \GL_n(\ZZ)$ and diagonal matrix $D = \opname{diag}(d_1, \dots, d_n)$ such that
+    \[ P = E_1 D E_2. \]
+    Then $\ZZ^n / P \ZZ^n = \ZZ^n / (E_1 D E_2 \ZZ^n) = E_1 \ZZ^n / (D E_1 \ZZ^n) = \ZZ^n / D \ZZ^n$. The number of elements in $\ZZ^n / D \ZZ^n$ is given by multiplying the number of elements in each $\ZZ / d_i \ZZ$, which is the product of all $d_i$, i.e., $
+    \abs{\det(\varphi)}$.
+\end{proof}
+
+\begin{proof}[Proof of \ref{thm:norm_of_ideal_in_number_field}]
+    Let $\alpha_1, \dots, \alpha_n$ be an integral basis of $\SO_K$. In this basis, $\varphi_\alpha$ is given by an integer $n \times n$ matrix. The theorem then follows from the lemma.
+\end{proof}
+
+Now, consider $L/K$ to be an extension of number fields, and take $p \subset \SO_K$ a prime ideal. We saw that $p \SO_L = q_1^{e_1} \dots q_m^{e_m}$.
+
+\begin{theorem} \label{thm:galois_permutation_of_prime_ideals}
+    Suppose $L/K$ is a Galois (i.e., normal) extension. Then if $q_1, q_2$ are primes over $p \subset \SO_K$, then there exists $\sigma \in \Gal(L/K)$ such that $\sigma(q_1) = q_2$.
+\end{theorem}
+\begin{proof}
+    Suppose not, i.e., $\sigma(q_1) \neq q_2$ for all $\sigma$. Then there exists $x \in \SO_L$ such that
+    \[ x \equiv 0 \pmod{q_2}, \quad x \equiv 1 \pmod{\sigma(q_1)} \]
+    for all $\sigma \in \Gal(L/K)$. Note that the ``modulo $q_2$'' statement is equivalent to writing $\alpha \in p_2$. By the Chinese remainder theorem, consider $N_K^L(\alpha) \in \SO_K \cap q_2 = p$; but
+    \[ N_K^L(\alpha) = \prod_{\sigma \in \Gal(L/K)} \sigma(\alpha). \tag{\textdagger} \]
+    On the other hand, by assumption, $\sigma(\alpha) \notin q_1$ for all $\sigma \in \Gal(L/K)$. Thus, $N_K^L(\alpha) \notin q_1$; but we already have $N_K^L(\alpha) \in p = q_1 \cap \SO_K$, which is a contradiction.
+\end{proof}
+
+Note that the crucial application that $L/K$ is Galois is given in (\textdagger). The above theorem could fail ``really badly'' if $L/K$ is not Galois.
+
+\begin{corollary} \label{cor:primes_lying_over_galois}
+    If $L/K$ is Galois and $q, q'$ are two primes lying over $p \subset \SO_K$, then $e(q \mid p) = e(q' \mid p)$ and $f(q \mid p) = f(q' \mid p)$.
+\end{corollary}
+\begin{proof}
+    $e(q \mid p) = e(q' \mid p)$ follows from unique factorization. For $f$, since there exists $\sigma \in \Gal(L/K)$ such that $\sigma(q) = q'$, it induces an isomorphism $\SO_L/q \cong \SO_L/q'$.
+\end{proof}
+
+\newpage
+This means that all primes in a Galois extension have the same powers and indices of inertia.
+
+Recall that, given $L/K$ an extension of number fields, we say a prime ideal $p \subset \SO_K$ is \textit{ramified} if $e(q \mid e) > 1$, for some prime $q \subset \SO_L$ lying over $p$. As an example, $\left<2\right>$ is ramified in $\ZZ[i]/\ZZ$, since $(2) = (1 + i)^2$.
+
+\begin{theorem*}
+    Let $p \in \ZZ$ be prime. Let $K$ be a number field. $p$ is ramified in $\SO_K$ if and only if $p \mid \opname{disc}(\SO_K)$.
+\end{theorem*}
+
+We will prove this later.
