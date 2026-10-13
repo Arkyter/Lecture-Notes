@@ -1,0 +1,68 @@
+\section{Day 11: Schemes and Projective Space (Oct.\ 13, 2026)}
+Let us consider a map of locally ringed spaces, $(X, \SO_X) \to (\Spec R, \SO_{\Spec R})$. This is equivalent to a map $R \to \SO_X(X)$. We will talk extensively about the global sections of $\SO_X$, denoted $\Gamma(\SO_X)$. In particular, $\Gamma(\SCF) \colon \SCF(X)$.
+
+$\Spec$ is a fully faithful functor from $\mbf{Rings} \to \mbf{LRS}$, where $\mbf{LRS}$ is the category of locally ringed spaces.
+
+\begin{definition} \label{defn:scheme}
+    A \textit{scheme} $(X, \SO_X)$ is a locally ringed space such that there exists an open cover by $\{U_\alpha\}_{\alpha \in \SA}$, and there are isomorphisms $(U_\alpha, \SO_{U_\alpha}) \cong (\Spec R_\alpha, \SO_{\Spec R_\alpha})$, for some rings $R_\alpha$.
+\end{definition}
+
+Note that $\SO_{U_\alpha} = \restr{\SO_X}{U_\alpha}$. In particular, the image of $\Gamma(\SCF)$ is an \textit{affine scheme}, and we can think of a scheme as ``gluing together a bunch of affine schemes''. Let us look at some examples.
+
+\begin{enumerate}[(i)]
+    \item Consider the affine space $\mbf A_R^n \coloneq \Spec R[x_1, \dots, x_n]$.
+    
+    \item Consider $D(x) = \mbf A_\ZZ^1 \setminus \{(x)\}$, where $\mbf A_\ZZ^1 = \Spec \ZZ[x]$. We may glue $\mbf A_\ZZ^1$ to $\mbf A_\ZZ^1$ along $D(x)$ to get the line with two origins (since $D(x)$ is simply excising the origin, and we identify the second copy of $\mbf A_\ZZ^1$ with itself everywhere else). We can check that this is \textit{not} an affine scheme: consider an open cover by the two copies of $\mbf A_\ZZ^1$. Then the global sections are given by
+    \[ \Gamma \SO_{\text{doubled line}} = \left\{(f, g) \in \ZZ[x]^2 \mid \restr{f}{D(x)} = \restr{g}{D(x)}\right\}. \]
+    Since $\ZZ[x]$ is an integral domain and $D(x)$ is a dense open set, we see that $f = g$. \\ Thus, $\Gamma \SO_{\text{doubled line}} = \ZZ[x]$. Moreover, we get a map
+    \[ 
+        \begin{tikzcd}
+            \text{Doubled line} \arrow[d, phantom, sloped, "\supset"] \arrow[r] & (\Spec \ZZ[x], \SO_{\Spec \ZZ[x]}) \\
+            \mbf A_\ZZ^1 \arrow[ur, "\sim"]
+        \end{tikzcd}
+    \]
+    Note that the map from the doubled line to $(\Spec \ZZ[x], \SO_{\Spec \ZZ[x]})$ cannot be an isomorphism since the doubled line has an extra point.
+
+    \item Glue $\mbf A_R^1$ along $\mbf A_R^1$,respectively thought of as $\Spec R[t]$ and $\Spec R[s]$, along $\mbf A_R^1$ minus its origin. By observing that $\Spec R[t, t\inv] \subset \Spec R[t]$ and $\Spec R[s, s\inv] \subset \Spec R[s]$, we see we may glue by sending $t \mapsto s\inv$ at the level of $\Spec R[t, t\inv] \to \Spec R[s, s\inv]$. As a result, we obtain the projective line $\PP_R^1$.
+    
+    We now compute the global sections. By definition,
+    \[ \Gamma \SO_{\PP_R^1} = \left\{ (f(s), g(t)) \mid f(s) = g(s\inv)\right\}. \]
+    Concretely, we can visualize this as taking $\restr{g}{D(t)}$, and mapping it to $\restr{f(s)}{D(s)}$. Checking this coefficient by coefficient, we see that $f$ only consists of nonnegative powers of $s$, and $g$ only consists of nonpositive powers of $s$, where we must have that $f = g \in R$. Thus, $\Gamma \SO_{\PP_R^1} = R$.
+\end{enumerate}
+
+Note that it is extremely important to understand the last example about the projective line (and spaces henceforth).
+
+\newpage
+\begin{theorem} \label{thm:compatible_locally_ringed_spaces}
+    Given locally ringed spaces $\{X_\alpha\}_{\alpha \in \SA}$, open subsets $X_{\alpha \beta} \subset X_\alpha$, where $X_{\alpha \alpha} \coloneq X_\alpha$ and $X_{\alpha \beta}$ ``acts like'' $X_\alpha \cap X_\beta \subset X_\alpha$, and isomorphisms $\varphi_{\alpha \beta} \colon X_{\alpha beta} \to X_{\beta \alpha}$ satisfying
+    \[ 
+        \begin{tikzcd}
+            X_{\alpha \beta} \cap X_{\alpha \gamma} \arrow[rr, "\varphi_{\alpha \gamma}"] \arrow[dr, "\varphi_{\alpha \beta}"'] & & X_{\gamma \alpha} \cap X_{\gamma \beta} \arrow[dl, "\varphi_{\beta \gamma}"] \\
+            & X_{\beta \alpha} \cap X_{\beta \gamma}
+        \end{tikzcd}
+    \]
+    then there exists a unique locally ringed space $X$ with open cover $\{U_\alpha\}_{\alpha \in \SA}$ and isomorphisms $\psi_\alpha \colon U_\alpha \to X_\alpha$ such that $\psi_\alpha(U_\alpha \cap U_\beta) = X_{\alpha \beta}$ and $\varphi_{\alpha \beta} = \restr{\psi_\beta}{U_\alpha \cap U_\beta} \restr{\psi_\alpha\inv}{X_{\alpha, \beta}}$.
+\end{theorem}
+
+{\color{amethyst} This thing is \textit{somewhere} on the stacks project.}
+
+\begin{definition}[Projective $n$-space] \label{defn:projective_n-space}
+    Consider $S \coloneq R[x_1^{\pm 1}, \dots, x_n^{\pm 1}]_{(0)} \subset R[x_1^{\pm 1}, \dots, x_n^{\pm 1}]$. Note that this is a degree $0$ subring if $\deg R = 0$. Note that $\deg x_i = 1$ and $\deg x_i\inv = -1$. To get the projective $n$-space, we're going to try to construct a map $(\mbf A^1 \setminus \{0\})^n \to \mbf A^{n-1}$.
+
+    Denote $R_i$ to be the subring of $S$ where $x_i$ is allowed to be a denominator, $R_{ij}$ to be the subring where $x_i x_j$ is allowed to be a denominator, and so on for any collection of indices in the subscript. Then
+    \[ R_i = R \left[\frac{x_0}{x_i}, \dots, \wh{\frac{x_i}{x_i}}, \dots, \frac{x_n}{x_1}\right]. \]
+    Observe that $R_i[(x_j / x_i)\inv] = R_{ij} = R_j[(x_i/x_j)\inv]$. This means we may ``trade off'' arbitrary powers of $x_i$ and $x_j$ to get Laurent polynomials in $x_i$ and $x_j$ to construct $R_{ij}$. Also observe that
+    \[ D\left(\frac{x_j}{x_i}\right)_{\Spec R_i} = \Spec R_{ij} = D\left(\frac{x_i}{x_j}\right)_{\Spec R_j}. \]
+    We define $\varphi_{ij}$ to be this map on spectra, corresponding to the string of equalities above. The gluing condition would then be
+    \[ R_i \left[\left(\frac{x_j}{x_i}\right)\inv\right] \left[\left(\frac{x_k}{x_i}\right)\inv\right] = R_j \left[\left(\frac{x_i}{x_j}\right)\inv\right] \left[\left(\frac{x_k}{x_j}\right)\inv\right] = R_k \left[\left(\frac{x_i}{x_k}\right)\inv\right] \left[\left(\frac{x_j}{x_k}\right)\inv\right], \]
+    where all three of these are equal to $R_{ijk}$.
+\end{definition}
+
+\begin{theorem} \label{thm:global_sections_of_projective_n-space}
+    $\Gamma \SO_{\PP_R^n} = R$.
+\end{theorem}
+\begin{proof}
+    On an open covering of $\Spec R$, we see that the $f_i \in R_i$, which are compatible in $\Spec R_{ij} = \Spec R_i \cap Spec R_j \subset \PP_R^n$ have
+    \[ \restr{f_i}{\Spec R_{ij}} = \restr{f_j}{\Spec R_{ij}}, \]
+    as $R_i, R_j \hookrightarrow R_{ij}$. Thus, $f_i = f_j$, and so $\Gamma \SO_{\PP_R^n} = \bigcap_i R_i =  R$.
+\end{proof}
