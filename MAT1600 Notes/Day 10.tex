@@ -1,0 +1,128 @@
+\section{Day 10: Kolmogorov's Strong LLN, Central Limit Theorem (Oct.\ 14, 2026)}
+Recall, from last lecture, that if $(X_i : i \geq 1)$ is a sequence of independent random variables with $\EE X_i = 0$ and $\sum_{i=1}^\infty \EE X_i^2 < \infty$, then
+\[ \sum_{i=1}^\infty X_i \]
+converges a.s.. Last time, we demonstrated that convergence in probabiliity is equivalent to being Cauchy in probability. Since this is an independent random series, we have that convergence in $\PP$ is equivalent to convergence in measure. Let us finish off our proof of \ref{thm:finite_sum_of_second_moments_convergence_as} from last time.
+\begin{proof}
+    Let $n_0 \in \NN$, and let $m, n \geq n_0$. We have that
+    \[ \PP\left(\abs{\sum_{i=1}^m X_i - \sum_{i=1}^n X_i} > \eps\right) = \PP\left(\abs{\sum_{i=n+1}^m X_i} > \eps\right) \leq \frac{1}{\eps^2} \sum_{i=n+1}^m \EE X_i^2 \leq \frac{1}{\eps^2} \sum_{i=n_0}^\infty \EE X_i^2 \taking{n_0 \to \infty} 0. \]
+    Therefore, the sequence is Cauchy in $\PP$, so it converges almost surely by last Wednesday's results.
+\end{proof}
+
+\begin{theorem}[Panchenko \S2.13: Kolmogorov's SLLN] \label{thm:kolmogorov_slln}
+    Let $(X_i)_{i \geq 1}$ be an independent sequence of real random variables with $\EE X_i = 0$ and $\EE X_i^2 < \infty$ for all $i$. Suppose that $b_n \uparrow \infty$ (i.e., is an increasing sequence of real numbers) and
+    \[ \sum_{i=1}^\infty \frac{\EE X_i^2}{b_i^2} < \infty. \]
+    Then $S_n/b_n \to 0$ almost surely.
+\end{theorem}
+
+\begin{lemma}[Panchenko \S2.7: Kronecker's lemma] \label{lem:kronecker_lemma}
+    If $x_m, b_m$ are real sequences with $b_m \uparrow \infty$ and
+    \[ \sum_{m=1}^\infty \frac{X_m}{b_m} \]
+    converges, then $b_n\inv \sum_{m=1}^n x_m \to 0$ as $n \to \infty$.
+\end{lemma}
+\begin{proof}
+    Let $r_n = \sum_{i=n+1}^\infty \frac{x_i}{b_i}$ so that $r_n \to \infty$ as $n \to \infty$. Write
+    \[ \sum_{i=1}^n x_i = \sum_{i=1}^n b_i(r_{i-1} - r_i) = \sum_{i=1}^{n-1} (b_{i+1} - b_i) r_i + b_1 r_0 - b_n r_n. \]
+    We want to check that each of the three terms in the summand go to $0$ when we divide throughout by $b_n$. Clearly, the latter two go to $0$ because $b_1 r_0$ is a constant and $b_n \to \infty$, and $r_n \to 0$. For the $(b_{i+1} - b_i) r_i$ term, let us fix some $n_0$. Then
+    \[ \frac{1}{b_n} \sum_{i=1}^{n-1} (b_{i+1} - b_i) r_i \leq \abs{\frac{1}{b_n} \sum_{i=1}^{n_0} (b_{i+1} - b_i) r_i} + \abs{\sum_{i=n_0}^{n-1} \frac{(b_{i+1} - b_i)}{b_n} r_i}. \]
+    Since the summation in the first term is finite, we see it must go to $0$ as $n \to \infty$. For the latter term, we see that
+    \[ \abs{\sum_{i=n_0}^{n-1} \frac{(b_{i+1} - b_i)}{b_n} r_i} \leq \sum_{i=n_0}^{n-1} \frac{(b_{i+1} - b_i)}{b_n} \max_{i \geq n_0} \abs{r_i} = \frac{b_n - b_{n_0}}{b_n} \cdot \max_{i \geq n_0} \abs{r_i}, \]
+    where the fraction goes to $1$ as $n \to \infty$ and the maximum goes to $0$ as $n_0 \to \infty$, as $r_n \to 0$.
+\end{proof}
+
+\newpage
+\begin{proof}[Proof of \ref{thm:kolmogorov_slln}]
+    By \ref{thm:finite_sum_of_second_moments_convergence_as}, we see that
+    \[ \sum_{n=1}^\infty \frac{X_n}{b_n} \]
+    converges almost surely. Kronecker's lemma \ref{lem:kronecker_lemma} tells us that
+    \[ \frac{1}{b_n} \sum_{i=1}^n X_i = \frac{S_n}{b_n} \taking{n \to \infty} 0 \quad \text{(a.s.)}. \qedhere \]
+\end{proof}
+
+\begin{corollary} \label{cor:asymptotic_bound_of_S_n}
+    Let $(X_i : i \in \NN)$ be i.i.d., $\EE X_1^2 < \infty$, and $\EE X_1 = \mu$. Then
+    \[ \frac{S_n - n \mu}{n^{1/2} (\log n)^{1/2 + \eps}} \to 0 \quad \text{(a.s.)}. \]
+\end{corollary} \vspace{-8pt}
+\begin{proof}
+    This follows by observing that
+    \[ \sum_{n=1}^\infty \frac{1}{n (\log n)^{1 + 2\eps}} < \infty. \qedhere \]
+\end{proof} \vspace{-3pt}
+As an aside, consider $\EE X_i = 0$. Then
+\[ \frac{S_n}{n^{1/2} \sqrt{\log \log n}} \taking{a.s.} \sqrt{2 \EE X_1^2}. \]
+See \href{https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm}{this} for a reference on the law of the iterated algorithm. Moreover, the regular strong law of large numbers can be realized as a corollary of the Kolmogorov SLLN is as follows,
+\begin{corollary} \label{cor:kolmogorov_lln_shortcut}
+    If $X_i$ are i.i.d.\, $\EE X_1 = 0$, then
+    \[ \frac{S_n}{n} \to 0 \quad \text{(a.s.)}. \]
+\end{corollary} \vspace{-8pt}
+\begin{proof}
+    As before, it is enough to show that
+    \[ \frac{1}{n} \sum_{i=1}^n Y_i \to 0, \]
+    where $Y_i = X_i \mbf 1(\abs{X_i} < i)$. We checked in a previous proof (cf.\ Etemadi's proof) that
+    \[ \sum_{i=1}^n \frac{\Var Y_I}{i^2} < \infty. \]
+    Therefore, by \ref{thm:kolmogorov_slln}, we have that
+    \[ \frac{1}{n} \sum_{i=1}^n (Y_i - \EE Y_i) \to 0 \quad \text{(a.s.)}. \]
+    Also, $n\inv \sum_{i=1}^n \EE Y_i \to 0$ as $n \to \infty$ (as checked in Etemadi's proof).
+\end{proof}
+
+\newpage
+We will now talk about the central limit theorem. Let $X_i$ be i.i.d., $\EE X_1 = 0$, and $\EE X_1^2 = 1$. Then $\Var S_n = n$. Thus suggests that $S_n$ typically lives in ``windows of size $\sqrt{n}$''. For example,
+\[ \PP(\abs{S_n} \geq \eps \sqrt{n}) \leq \frac{1}{\eps^2} \]
+by Chebyshev's. Our goal is understand $S_n / \sqrt{n}$; specifically, we want to show that it converges in some sense. As another example, consider the de Moivre--Laplace cnetral limit theorem: for $X_i = \pm 1$ with equal probability, we have that
+\[ \PP \left(\frac{S_n}{\sqrt{n}} \subset [a, b]\right) \leadsto \PP(N \subset [a, b]), \]
+where $N \sim N(0, 1)$, as $n \to \infty$. As a sketch,\footnote{erm... ick???}
+\[ \PP(S_n = k) = \binom{n}{n/2 + k/2} \left(\frac{1}{2}\right)^n. \]
+Then you can just ``whack this with Sterling's formula''.\footnote{ick???? x2} Check out Durrett if you're into this sort of thing.
+
+To talk about the central limit theorem, we should first formalize convergence of measures.
+
+\begin{definition} \label{defn:weak_measure_convergence}
+    Let $(S, d)$ be a metric spac, $(\PP_n, n \in \NN), \PP$ be probability measures on $(S, d)$ (with the Borel $\sigma$-algebra). We say $\PP_n \to \PP$ \textit{weakly} if
+    \[ \int f \, d \PP_n \to \int P \, d\PP \]
+    for all continuous bounded $f \colon (S, d) \to \RR$, i.e., $f \in C_b(S)$.
+\end{definition}
+
+We have a few remarks about weak convergence to make.
+\begin{enumerate}[(i)]
+    \item If $\PP_n \to \PP$ and $\PP_n \to \QQ$ (weakly), then $\PP = \QQ$. To see this, observe that
+    \[ \int f \, d\PP = \int f \, d\QQ \]
+    for all $f \in C_b(S)$. Now, let $U$ be open, $f = U^c$, and $f_m(x) = \min\{1, d(x, F)\}$. Then $f_m \uparrow \mbf(U)$ pointwise, for which
+    \[ \int f_m \, d\PP = \int f_m \, d\QQ \leadsto \PP(U) = \QQ(u) \]
+    by the dominated convergence theorem.
+
+    \item If $\PP_n$ converges to any measure $\PP$ weakly, we have that $\PP$ is a \textit{probability} measure. 
+    
+    \item $\PP_n \to \PP$ weakly does not imply $\PP_n(A) \to \PP(A)$ for all sets $A$. As an example, let $\PP_n(\{1/n\}) = 1$ and $\PP(\{0\}) = 1$. Then $\PP_n(\{0\}) = 0$ does not converge to $\PP(\{0\}) = 1$. On the other hand,
+    \[ \int f \, d \PP_n = f\left(\frac{1}{n}\right) \to f(0) = \int f \, d\PP. \]
+\end{enumerate}
+
+\newpage
+\begin{theorem}[Panchenko \S4.4: Portmanteau theorem] \label{thm:portmanteau}
+    Let $(S, d)$ be a separable metric space with the Borel $\sigma$-algebra. Let $(\PP_n : n \in \NN)$, $\PP$ be probability measures on $(S, d)$. Then the following are equivalent.
+    \begin{enumerate}[(i)]
+        \item $\PP_n \to \PP$ weakly.
+        \item For all open sets $U \subset S$, $\lim_{n \to \infty} \PP_n(U) \geq \PP(U)$.
+        \item For all closed sets $F \subset S$, $\limsup_{n \to \infty} \PP_n(F) \leq \PP(F)$.
+        \item For all continuity sets $A$ for $\PP$, $\PP_n(A) \to \PP(A)$. We call $A$ a \textit{continuity set} for $\PP$ if $\PP(\ol A \setminus A^{\text{int}}) = 0$, i.e., the probability of $\partial A$.
+    \end{enumerate}
+\end{theorem}
+Colloquially, (ii) and (iii) mean that ``mass can escape open sets and can enter closed sets''.
+
+\begin{proof}
+    We will prove this by showing (i) implies (ii), (ii) if and only if (iii), (ii) and (iii) together imply (iv), and (iv) implies (i).
+
+    (ii) $\iff$ (iii) is given by taking complements.
+
+    (ii, iii) $\implies$ (iv): Observe that
+    \[ P_n(A^{\text{int}}) \stackrel{(ii)}{\leq} \liminf \PP_n(A^{\text{int}}) \leq \lim \PP_n(A) \leq \limsup \PP_n(\ol A) \stackrel{(iii)}{\leq} \PP(\ol A). \]
+    $\PP_n(A^\text{int}) = \PP(\ol A)$ are equal since $A$ is a continuity set.
+
+    (i) $\implies$ (ii): Let $f_m(x) = \min\{1, m d(x, U^c)\}$, so that $f_m \uparrow \mbf 1(U)$ pointwise. Then
+    \[ \liminf_{n \to \infty} \PP_n(U) \geq \lim_{n \to \infty} \int f_m \, d\PP_n = \int f_m \, d\PP. \]
+    Now, take $m \to \infty$; we get that $\int f_m \, d\PP \to \PP(U)$ by DCT, so $\liminf_{n \to \infty} \PP_n(U) \geq \PP(U)$.
+
+    (iv) $\implies$ (i): Let's just prove this when $S = \RR$ (since this will be clear for general metric spaces). Let $f \colon \RR \to \RR$ be bounded, and let $(a, b)$ contain the range of $f$. There are at most countably many $y$ such that $\PP(f\inv(\{y\})) > 0$. Call this ``bad'' set $B$; then, for any $\eps > 0$, we can find $a = a_1 < \dots < a_N = b$ in $[a, b] \setminus B$ such that $a_{i+1} - a_i < \eps$ for all $B$. Now, let
+    \[ f_p(x) = \sum_{i=1}^N a_i \mbf 1(x \in f\inv[a_{i-1}, a_i]). \]
+    Then
+    \[ \int f_\eps \, d\PP_n \to \int f_\eps d\PP \]
+    by (iv), since the indicators are continuity sets, and
+    \[ \abs{\int P_\eps \, d\PP_n - \int f d \PP_n} < \eps \]
+    for all $n$. 
+\end{proof}
