@@ -1,0 +1,94 @@
+\section{Day 12: More on Ramification (Oct.\ 15, 2026)}
+We start by discussing Smith normal form (i..e, diagonalizing integer matrices). Let $A$ be a $n \times n$ matrix over $\ZZ$; then $A$ can be diagonalized by row and column operations.
+\begin{proof}
+    Let $A = (a_{ij})$ and without loss of generality, $a_{ii} \neq 0$. For the first step, by row and column operations, we can arrange $A$ so that $a_{11} \mid a_{1i}$ and $a_{11} \mid a_{i1}$ for all $i$. It is enough to show that $a_{11}$ can be made to divide all other elements in the first row.
+
+    Suppose $a_{11} \nmid a_{12}$. Then $a_{12} = q a_{11} + r$, where $\abs{r} < \abs{a_{11}}$ (and nonzero $r$). In particular, $r = a_{12} - q a_{11}$. By column operations, we can make $\abs{a_{12}} < \abs{a_{11}}$ by permuting the first two columns. Now, by row and column operations, we can zero out all $a_{i1}$ and $a_{1i}$ for $i > 1$. This arranges $A$ into a block diagonal matrix with $a_{11}$ on the top left with a $(n-1) \times (n-1)$ block $B$ in the bottom right, from which we may diagonalize $B$, and so on, inductively.
+\end{proof}
+
+By taking $d_i = \gcd(a_{ij})_{i,j=1}^{n-i+1}$, i.e., the greatest common divisor of all elements in the bottom right \\ $(n-i) \times (n-i)$ block, we see that $A$ can be diagonalized as
+\[ \begin{pmatrix} d_1 & & 0 \\ & \ddots \\ 0 & & d_n \end{pmatrix}, \]
+for which $d_1 \mid d_2 \mid \dots \mid d_n$. We will leave it as an exercise to check that a version of this works for matrices over PIDs. Here, you will have to replace row and column operations by more general invertible matrices.
+
+We return to ramification now.
+\begin{theorem} \label{thm:ramification_implies_divisible_into_discriminant}
+    Let $p \in \ZZ$ be prime, and let $R = \SO_K$ be a number ring. If $p$ is ramified in $R$, then $p \mid \opname{disc}(R)$.
+\end{theorem}
+\begin{proof}
+    Let $q \subset R$ be a prime over $p$ with $e(q \mid p) > 1$. This means $p = q^{e(q \mid p)} I = q (q^{e(q \mid p) - 1} I)$, for which we will denote the bracketed portion $J$. $J$ is divisible by all primes of $R$ over $p$. Let $\sigma_1, \dots, \sigma_n$ denote the embeddings of $K$ in $\CC$. Recall that there exists an extension $K \subset L$ such that $L/\QQ$ is Galois; then $\sigma_1, \dots, \sigma_n$ are automorphisms of $L$. Let $\alpha_1, \dots, \alpha_n$ be an integral basis of $R$. We'll show that $p \mid \opname{disc}(\alpha_1, \dots, \alpha_n)$.
+
+    Let $\alpha \in J \setminus p R$; then $J \subset r$ for every prime $r$ over $p$. Pick $\alpha \in r$ for all primes $r$ over $p$, so we have
+    \[ \alpha = m_1\alpha_1 + \dots + m_n\alpha_n. \]
+    Since $\alpha \notin pR$, it must be that $p \nmid m_i$ for some $i$. Without loss of generality, $p \nmid m_1$; we have
+    \[ \opname{disc}(\alpha, \alpha_2, \dots, \alpha_n) = m_1^2 \opname{disc}(\alpha_1, \dots, \alpha_n) \]
+    by the change of basis theorem \ref{cor:discriminant_change_of_basis}. Since $p \nmid m_1$, we see that
+    \[ p \mid \opname{disc}(\alpha, \alpha_2, \dots, \alpha_n) \iff p \mid \opname{disc}(\alpha_1, \dots, \alpha_n). \]
+    $\alpha$ is contained in every prime of $R$ over $p$, so $\alpha$ is contained in every prime if $S = \SO_L$ over $p$. Fix a prime $r \subset S$ over $p$. We may observe that, for every field automorphism $\sigma$ of $L$, we get that $\sigma(\alpha) \in r$. Equivalently, $\alpha \in \sigma\inv(r)$, which is a prime ideal over $p$; thus, $\sigma_i(\alpha) \in r$ for all $i$ implies $r$ contains $\opname{disc}(\alpha, \alpha_2, \dots, \alpha_n)$. By the determinant formula, we see that
+    \[ \opname{disc}(\alpha, \alpha_2, \dots, \alpha_n) = \sum_{\tau \in S_n} \opname{sgn}(\tau) \prod_i \Tr (\beta_i \beta_{\tau(i)}), \]
+    where $\beta_1 = \alpha$ and $\beta_i = \alpha_i$ for $i > 1$. Note that the product above is divisible by $\Tr(\alpha \beta_{\tau(i)}) \in r$. Thus, $\opname{disc}(\alpha_1, \dots, \alpha_n) \in r$, and is also an integer. Thus,
+    \[ \opname{disc}(\alpha, \alpha_2, \dots, \alpha_n) \in r \cap \ZZ = p \ZZ, \]
+    so $p \mid \opname{disc}(\alpha, \dots, \alpha_n)$.
+\end{proof}
+
+\begin{corollary} \label{cor:finitely_many_primes_of_Z_ramified}
+    Only finitely many primes of $\ZZ$ are ramified in a number ring $R$.
+\end{corollary}
+\begin{proof}
+    Every prime that ramifies has to be a divisor of a finite number. Clearly, finite numbers have finitely many primes in their prime factorization.
+\end{proof}
+
+\begin{corollary} \label{cor:ramification_test}
+    Let $\alpha \in \ol \ZZ$, and let $K = \QQ(\alpha)$. Let $f$ be any monic polynomial over $\ZZ$ such that $f(\alpha) = 0$. If $p$ is a prime such that $p \nmid N^k f'(\alpha)$, then $p$ is unramified in $\SO_K$.
+\end{corollary}
+\begin{proof}
+    By the homework problem, for $d = \deg (\alpha)$,
+    \[ \opname{disc}(1, \alpha, \alpha^2, \dots, \alpha^{d-1}) \mid N^k f'(\alpha), \]
+    up to sign if $f$ is minimal. The discriminant $\opname{disc}(\SO_K) \mid \opname{disc}(1, \alpha, \dots, \alpha^{d-1})$.
+\end{proof}
+
+\begin{corollary} \label{cor:finitely_many_primes_of_extension_ramified}
+    Let $K \subset L$ be an extension of number fields. Then only finitely many primes $q \subset \SO_K$ are ramified.
+\end{corollary}
+\begin{proof}
+    Recall that if $q \subset \SO_K$ is ramified in $\SO_L$, then $q \cap \ZZ = p \ZZ$ is ramified. Finitely many primes $p \in \ZZ$ ramify in $\SO_L$, and every prime $q \in \SO_K$ lies over some prime $p \in \ZZ$. Moreover, for every prime $p \in \ZZ$, there are finitely many primes $q \subset \SO_K$ over $p$. Thus, there can only be finitely many possibilities for ramified primes.
+\end{proof}
+
+What happens in quadratic number fields? Let $K = \QQ(\sqrt m)$, with $m$ squarefree. How do primes split? Recall that, for $m = 2, 3 \pmod{4}$, $\SO_K = \ZZ[\sqrt{m}]$. If $m = 1 \pmod{4}$, then
+\[ \SO_1 = \ZZ \left[\frac{1 + \sqrt m}{2}\right], \]
+where $\opname{disc}(K) = m$. Let $p \in \ZZ$ be prime. What are the possibilities for prime factorization of $p \SO_K$?
+\begin{enumerate}[(i)]
+    \item If $p \SO_K = q_1 q_2$, with $q_1, q_2$ distinct, and $f(q_1, p) = f(q_2, p) = 1$.
+    \item If $p \SO_K = q^2$, and $f(q, p) = 1$.
+    \item If $p \SO_K = q$, and $f(q, p) = 2$.
+\end{enumerate}
+
+\begin{theorem} \label{thm:quadratic_number_field_factorization}
+    Following the setup from above, where $R$ is a number ring,
+    \begin{enumerate}[(i)]
+        \item If $p \mid m$, then $p R = (p, \sqrt{m})^2$.
+        \item If $m$ is odd, then
+        \[ 2R = \begin{cases} (2, 1 + \sqrt m)^2, & \text{if $m \equiv 3 \pmod{4}$}, \\ \left(2, \frac{1 + \sqrt{m}}{2}\right)\left(2, \frac{1 - \sqrt{m}}{2}\right), & \text{if $m \equiv 1 \pmod 8$}, \\ \text{prime}, & \text{if $m \equiv 5 \pmod{8}$.} \end{cases} \]
+        \item If $p$ is odd and $p \nmid m$, then
+        \[ pR = \begin{cases} (p, n + \sqrt m)(p, n - \sqrt m), & \text{if $m = n^2 \pmod{p}$}, \\ \text{prime}, & \text{if $m$ is not a square mod $p$.} \end{cases} \]
+    \end{enumerate}
+\end{theorem}
+
+\newpage
+\begin{proof}
+    (i) is an easy calculation. $(p, \sqrt{m})^2 = (p^2, p \sqrt{m}, m)$; $p \mid m$, so this lies in $p R$. $m$ is squarefree and $p \mid m$ implies that $\gcd(p^2, m) = p$, where $p \in (p^2, m) \subset (p^2, p \sqrt m, m)$. Thus, $pR = (p, \sqrt m)^2$.
+
+    The other cases where $p \SO_K$ has $2$ or $p$ factors are proved the same way. It remains to show that (a) $2R$ is prime if $m \equiv 5 \pmod{8}$ and (b) $pR$ is prime if $p \nmid m$ and $m $ is not a square modulo $p$. We prove the latter first. Let $q$ be a prime over $p$. We need to show that $f(q \mid p) > 1$ (equivalently, it is equal to $2$), i.e., we need to show that $R/q \notin \FF_p$.
+
+    Observe that $x^2 - m$ has a root in $R$. implies that $x^2 - m$ has a root in $R/q$. By assumption, $x^2 = m$ doesn't have a root in $\FF_p = \ZZ/p$; but it does have a root in $R/q$, so it means that $R/q$ is not isomorphic to $\FF_p$. The same idea follows through with (a).
+    \[ f(x) = x^2 - x + \frac{1 - m}{4} \]
+    has a root in $R$, but none in $\FF_2$. Since $m \equiv 5 \pmod{8}$, we see that $\frac{1-m}{4}$ is odd. $f$ has a root in $K$ because $\opname{disc}(f) = m$ is a square in $K$, so it has a root in $\SO_K = R$, since $f$ is monic with integer coefficients.
+\end{proof}
+
+We now give a preview of the next topic. Consider an extension of number fields $K \subset L$. Fix $\alpha \in L$ such that $L = K(\alpha)$, and fix a prime $q \subset \SO_K$. Let us define some notation: for $h(x) \in R[x]$, denote $\ol h(x) \in (R/q)[x]$ be the reduction. Now, let $g(x) \in K[x]$ be a monic irreducible polynomial with $g(\alpha) = 0$. Now, let $g(x) \in \SO_K[x]$, and consider $\ol g(x) \in (R/q)[x]$. $R/q$ is a field (since prime ideals are maximal in Dedekind domains), so $(R/q)[x]$ is a PID. Thus, $\ol g$ factors as
+\[ \ol g = \ol g_1^{e_1} \dots \ol g_r^{e_r}. \]
+The $\ol g_i$ are distinct irreducible monic polynomials. Next week, we will prove the following theorem.
+\begin{theorem*}
+    Suppose $p \nmid \abs{\SO_L / (R[\alpha])}$, where $p = q \cap \ZZ$. Note that $\SO_L / (R[\alpha])$ is a quotient of abelian groups. Then $q \SO_L$ factors as $r_1^{e_1} \dots r_m^{e_m}$, where $r_i$ is the ideal
+    \[ r_i = q \SO_L + (g_i(\alpha)), \]
+    and $f(r_i \mid q) = \deg g_i$.
+\end{theorem*}
