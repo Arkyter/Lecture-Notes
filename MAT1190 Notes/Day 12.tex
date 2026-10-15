@@ -1,0 +1,88 @@
+\section{Day 12: Fiber Products (Oct.\ 15, 2026)}
+Today, we will talk about products of schemes. Let $C$ be a category with objects $X$ and $Y$. We define a product $Z$, if it exists, to be an object for $X$ and $Y$, equipped with maps $Z \to X$ and $Z \to Y$ such that if $W \to X$ and $W \to Y$ are $2$ maps in $C$, then there exists a unique map $W \to Z$ such that
+\[ \begin{tikzcd} & & X \\ W \arrow[r] \arrow[rru, bend left = 15] \arrow[rrd, bend right = 15] & Z \arrow[ru] \arrow[rd] \\ & & Y \end{tikzcd} \]
+commutes. As an example, given sets $S, T$, there is a product $S \times T = \{(s, t) \mid s \in S, t \in T\}$, along with projections $\pi_S, \pi_T$ onto $S, T$ respectively, such that the above diagram makes sense, i.e., $W \to S \times T$ (where $S \times T$ was originally $Z$) is given by $w \mapsto (f(w), g(w))$.
+
+Let us look at the category of affine schemes, $\mbf{AffSch} = \mbf{Rings}^\text{op}$.
+\begin{theorem} \label{thm:product_category_unique}
+    Products are unique up to unique isomorphisms if they exist.
+\end{theorem}
+{\color{crimson} The proof is given by symbol pushing through diagrams. I'm not going to draw diagrams for this.}
+
+From the above, we see that if a product exists, we may call it $X \times Y$. Now, consider
+\[ \begin{tikzcd}
+    & & \Spec R \\
+    \Spec Q \arrow[r, "\exists!"] \arrow[rru, dashed, bend left = 15] \arrow[rrd, dashed, bend right = 15] & \Spec R \times \Spec S \arrow[ru] \arrow[rd] \\
+    & & \Spec S
+\end{tikzcd} \]
+where the unique map $\Spec Q \to \Spec R \times \Spec S$ induces the commutativity in the diagram above. Denoting $\Spec R \times \Spec S$ as $\Spec T$, we see that
+\[ \begin{tikzcd}
+    & & R \arrow[dl] \arrow[lld, dashed, bend right = 15] \\
+    Q & T \arrow[l, "\exists!"'] \\
+    & & S \arrow[ul] \arrow[llu, dashed, bend left = 15]
+\end{tikzcd} \]
+where $T = R \otimes S$. Specifically, the tensor product behaves as usual, i.e., $R \to R \otimes S$ sends $r \mapsto r \otimes 1$, and $S \to R \otimes S$ sends $s \mapsto 1 \otimes s$.
+
+\newpage
+\begin{theorem} \label{thm:tensor_product_of_schemes}
+    $\Spec (R \otimes S) = \Spec R \times \Spec S$ in the category of schemes.
+\end{theorem}
+\begin{proof}
+    We prove this by drawing diagrams.
+    \[ \begin{tikzcd}
+    & & \Spec S \\
+    (X, \SO_X) \arrow[r, "\exists!"] \arrow[rru, dashed, bend left = 15] \arrow[rrd, dashed, bend right = 15] & \Spec R \otimes S \arrow[ru] \arrow[rd] \\
+    & & \Spec R
+    \end{tikzcd} \quad \begin{tikzcd}
+        & & S \arrow[dl] \arrow[lld, dashed, bend right = 15] \\
+        \Gamma \SO_X & S \otimes R \arrow[l, "\exists!"'] \\
+        & & R \arrow[ul] \arrow[llu, dashed, bend left = 15]
+    \end{tikzcd} \qedhere \]
+\end{proof}
+
+In this manner, $\mbf A_\ZZ^1 \times \mbf A_\ZZ^1 \cong \mbf A_\ZZ^2$, i.e., $\Spec \ZZ[x] \times \Spec \ZZ[y] = \Spec \ZZ[x, y]$. In terms of topology, though this is not a product topological space (i.e., with a basis of closed sets $Z_1 \times Z_2$). Instead, we have a map of topological spaces from $\mbf A_\ZZ^2$ to each of $\mbf A_\ZZ^1$, so we have a topological product of $\mbf A_\ZZ^1$ and $\mbf A_\ZZ^1$.
+
+{\color{amethyst} The important part is like, the product of these topological spaces in terms of point $\times$ point, line $\times$ line, point $\times$ line, and so on; they don't reach some of the primes in $\ZZ[x, y]$. However confusingly this is worded.}
+
+As an exaxmple, let us consider the product of spectra $\Spec \FF_2 \times \Spec \FF_3$. Since $\ZZ/2\ZZ \otimes \ZZ/3\ZZ = \ZZ/((2) + (3)) = {0}$, we get that $\Spec \FF_2 \times \Spec \FF_3 = \emptyset$, i.e., the spectrum of the zero ring. 
+
+Now, consider $\Spec R \times \Spec \ZZ = \Spec R \otimes \ZZ = \Spec R$. This comes from the fact that $\Spec \ZZ$ is the terminal object in the category.
+
+For a last example, let us look at $\mbf A_\CC^1 \times \mbf A_\CC^1$. This is $\Spec \CC[x] \otimes_\ZZ \CC[y]$... which is... ``impossibly bad to describe''. Instead, we want $\Spec \CC[x] \otimes_\CC \CC[y]$, which is $\mbf A_\CC^2$.
+
+We now introduce the fiber product. $X \times_T Y$, if it exists, is the unique product with maps $X \times_T Y$ to $X$ and $Y$ such that
+\[ \begin{tikzcd}
+& & X \arrow[dr] \\
+W \arrow[r, "\exists!"] \arrow[rru, dashed, bend left = 15] \arrow[rrd, dashed, bend right = 15] & X \times Y \arrow[ru] \arrow[rd] & & T \\
+& & Y \arrow[ur]
+\end{tikzcd} \]
+For sets $X \times_T Y = \{(x, y) \mid h_X(x) = h_Y(y)\}$, where $h_X, h_Y$ are the maps from $X \to T$ and $Y \to T$ respectively, we have that the above diagram with arrows flipped around for spectra. {\color{crimson}(which I don't want to draw, see p.87 Hartshorne)}
+
+As a quick note, if $E \in \SCC$ is terminal, then $C \times_E D \cong C \times D$.
+
+\begin{theorem} \label{thm:fiber_products_exist_in_schemes}
+    Fiber products $X \times_T Y$ exist in schemes. 
+\end{theorem}
+\begin{proof}
+    If $X, Y, T$ are affine, we are done. If $X$ is not affine but $Y, T$ are, then take an open cover $\{X_\alpha\}_{\alpha \in \SA}$ of $X$. Then $X_\alpha \times_T Y$ exists for each $\alpha$. We claim that $(X_\alpha \cap X_\beta) \times_T Y$ also exists.
+    
+    \newpage
+    Indeed,
+    \[ \begin{tikzcd}
+    & X_\alpha \cap X_\beta \arrow[dr] \\
+    \opname{Pr}_{X_\alpha}\inv(X_\alpha \cap X_\beta) \arrow[ur] \arrow[dr] & & T \\ & Y \arrow[ur]
+    \end{tikzcd} \leadsto \begin{tikzcd}
+        & X_\alpha \arrow[dr] \\
+        W \arrow[ur] \arrow[dr] \arrow[r] & X_\alpha \times_T Y \arrow[d] & T \\
+        & Y \arrow[ur]
+    \end{tikzcd} \]
+    The image lands in the open set $\opname{Pr}_{X_\alpha}\inv(X_\alpha \cap X_\beta)$, since $W \to X_\alpha \times_T Y \to X_\alpha$ has image in $X_\alpha \cap X_\beta$ by the above diagrams. From here, we may do ``some horrible check'' to see that we are done.
+
+    In that next case, if $X$ is not affine, $T$ is affine, and $Y$ is not, then $Y$ has an open cover, and we may run the same argument as before. Finally, if $T$ is \textit{also} not affine, then cover $T$ with $\{T_\alpha\}_{\alpha \in \SA}$. Then $X_\alpha$ is the preimage of $T_\alpha$ in $X$, and $Y_\alpha$ is the preimage of $T_\alpha$ in $Y$. Then $X_\alpha \times_{T_\alpha} Y_\alpha = X_\alpha \times_T Y$.
+\end{proof}
+
+Morally, if you want to cover $X \times_T Y$ with open affines, then you first cover $T$ with open affines. Given an open $\Spec R \subset T$, cover preimages of $X$ and $Y$ with open affines $\Spec A_i$ and $\Spec B_j$, then you get an open cover $\Spec A_i \otimes_R B_j$.
+
+As a corollary of the construction, $\PP_R^n = \Spec R \times_{\Spec R} \PP_\ZZ^n$. $\PP_R^n$ can be covered with
+\[ \Spec R \otimes_\ZZ \ZZ\left[\frac{x_0}{x_i}, \dots, \wh{\frac{x_i}{x_i}}, \dots, \frac{x_n}{x_i}\right] = R\left[\frac{x_0}{x_i}, \dots, \wh{\frac{x_i}{x_i}}, \dots, \frac{x_n}{x_i}\right]. \]
+In this way, we may define $\PP_X^N \coloneq X \times \PP_\ZZ^n$.
