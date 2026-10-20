@@ -41,7 +41,7 @@ To prove this, we will use the norm. Recall that, for $I \subset \SO_K$ a nonzer
 \begin{theorem} \label{thm:norms_in_number_field_extension}
     Let $L/K$ be a degree $n$ extension of number fields. Let $p \subset \SO_K$ be a prime ideal; then $N(p \SO_L) = N(p)^n$.
 \end{theorem}
-\begin{proof} % \renewcommand{\qedsymbol}{\ensuremath{\triangle}}
+\begin{proof} \renewcommand{\qedsymbol}{\ensuremath{\triangle}}
     Take $I = p_1^{e_1} \dots p_k^{e_k}$. By our previous theorem, it's enough to show this for $I = p$, i.e., a prime ideal $p$. Observe that $\SO_L / p \SO_L$ is a vector space over $\SO_K / p \SO_K$. We'll show that
     \[ \dim_{\SO_K / p \SO_K} \SO_L / p \SO_L = n. \]
     Let's start by checking that the dimension is at most $n$, i.e., any collection of $n + 1$ elements is linearly dependent. Let $\alpha_1, \dots, \alpha_{n+1} \in \SO_L$; we want to show that $\ol \alpha_1, \dots, \ol \alpha_{n+1} \in \SO_L/p \SO_L$ are linearly dependent. First, $\dim_K L = n$, so the $\alpha_i$'s are linearly dependent over $K$. Thus, there exists $a_i \in K$ such that
@@ -61,7 +61,7 @@ Before we do \ref{thm:ramification_and_inertia}, we will prove a lemma first.
 \end{proof}
 We now apply this lemma to finish off our earlier proof.
 
-\begin{proof}[Proof of \ref{thm:ramification_and_inertia}]
+\begin{proof}[Proof of \ref{thm:norms_in_number_field_extension}]
     Suppose $a_i \in P$ for all $i$. Applying our lemma to $A = P$ and $B = (a_1, \dots, a_{n+1}) \subset \SO_K$, we get $\gamma \in K$ such that $\gamma B \subset \SO_K$, i.e., $\gamma a_i \in \SO_K$, but $\gamma B = (\gamma a_i) \not\subset A$. By taking $b_i = \gamma a_i \in \SO_K$ (from earlier), we get
     \[ \sum_{i=1}^{n+1} b_i \alpha_i = \gamma \sum_{i=1}^{n+1} a_i \alpha_i = 0, \]
     and we may reduce modulo $P$ to get a linear dependence.

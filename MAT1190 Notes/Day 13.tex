@@ -1,0 +1,53 @@
+\section{Day 13: Graded Rings and Graded Schemes (Oct.\ 20, 2026)}
+Today, we're going to be talking about the $\opname{Proj}$ construction. This generalizes the construction of projective space by gluing together the open sets we saw last week.
+
+What does it mean to be a graded ($\NN$, if no qualifications are given), or $\ZZ$-graded ring? What is the geometric interpretation? The action of ``multiplication by $\psi_m$ on your space''...; classically,
+\[ \PP^n_\CC \cong (\CC^{n+1} \setminus \{0\}) / \CC^\ast, \]
+which can be read off as homogeneous coordinates of the form $\coor{x_0 : x_1 : \dots : x_n}$, with $(x_0, \dots, x_n)$ not all zero. We may cover $\PP^n_\CC$ by $\{x_i \neq 0\}$, defined as
+\[ D_+(x_i) = \coor{\frac{x_0}{x_i} : \dots : 1 : \dots : \frac{x_n}{x_i}} \cong \mbf A_\CC^n. \]
+On $\PP^n_\CC$, the zero locus of the homogeneous polynomials makes sense. For example,
+\[ Z_{+,\CC}\left(x^3 + x_1 x = x_3\right), \]
+where the subscripts mean ``considered in projective space'', makes sense. Now, the action of $\CC^\ast$ on $\mbf A_\CC^{n+1}$ is equivalent to giving a grading to $\CC[x_0, \dots, x_n]$ so that the traded piece consists of homogeneous polynomials of degree $i$, whose zero locus makes sense on all of $\PP^n_\CC$. Specifically,
+\[ f(\lambda \cdot x) = \sum \lambda^i f_i(x), \]
+where $\lambda \in \CC^\ast$, $\cdot$ is the action on $\mbf A_\CC^{n+1}$, and the assignment ``$=$'' is unique. Note that $f_i(x)$ are also the homogeneous polynomials of degree $1$.
+
+Now, consider the schemes over $S$, denoted $\mbf{Sch} / S$, where $S$ is a chosen scheme. The objects of this category are denoted $X/S$, which are the maps $X \to S$, where $X$ are schemes. The morphisms are given by $X/S \to Y/S$, are given by connecting the diagram
+\[ \begin{tikzcd} X \arrow[r] \arrow[rd] & Y \arrow[d] \\ & S \end{tikzcd} \]
+\vspace{-8pt} \begin{theorem} \label{thm:fiber_product_in_schemes_over_scheme}
+    The fiber product $X \times_S Y$ is just the product $X/S \times Y/S$ in $\mbf{Sch}/S$.
+\end{theorem}
+In this way, we may consider $S$ to be the terminal object of $\mbf{Sch}/S$.
+
+\begin{definition} \label{defn:group_scheme}
+    A \textit{group scheme} $X/S \in \mbf{Sch}/S$ is an element of $\mbf{Sch}/S$ equipped, equipped with morphisms $\opname{mult} \colon X \times_S X \to X$, $\opname{inv} \colon X \to X$, and $e \colon S/S \to X/S$ (as $S \to X \to S$ is the identity), and satisfies all the group axioms, i.e., the diagram commutes,
+    \[ \begin{tikzcd}
+        & X \times_S X \times_S X \arrow[dl, "\text{mult} \times \text{id}"'] \arrow[dr, "\text{id} \times \text{mult}"] \\
+        X \times_S X \arrow[dr, "\text{mult}"'] & & X \times_S X \arrow[dl, "\text{mult}"] \\
+        & X &
+    \end{tikzcd} \]
+\end{definition}
+
+\newpage
+$e$, being the identity, would then have to satisfy
+\[ \begin{tikzcd}
+    X \arrow[r, "\sim"] \arrow[dr, "\sim"] & S \times_S X \arrow[r, "e \times_S \id"] & X \times_S X \arrow[r, "\opname{mult}"] & X \\
+    & X \times_S S \arrow[r, "\id \times_S e"] & X \times_S X \arrow[r, "\opname{mult}"] & X
+\end{tikzcd} \]
+From here, we would have $G \to \{\phi\} \times G \mapsto G \times G \to G$, where $G \times G \to \{\phi\} \times G$ by $\varphi$. This means we would have the diagram
+\[ \begin{tikzcd}
+    X \arrow[r, "\id \times \id"] & X \times_S X \arrow[r, "\opname{inv} \times \id"] \arrow[dr, "\id \times_S \opname{inv}"'] & X \times_S X \arrow[r] & X \\
+    & & X \times_S X \arrow[r] & X
+\end{tikzcd} \]
+
+We are now done defining this group scheme.\footnote{jfc} In $\mbf{Sch}/\Spec R$, we have a group scheme $\mathbb G_{m,R} \coloneq D(x) \subset \mbf A_{m,R}^1$, where $\smash{\mathbb G_{m,R} = \Spec R[x^2]}$ and $\smash{\mbf A_{m,R}^1 = \Spec R[x]}$. 
+
+We want that $\mathbb G_{m, R} \times_{\Spec R} \mathbb G_{m, R} \to \mathbb G_{m, R}$ as $R[x^\pm, y^\pm] \leftarrow R[t^\pm]$, where $xy \mapsfrom t$. We want this to satisfy the associativity diagram,
+\[ \begin{tikzcd} & R[x^\pm, y^\pm, z^\pm] \\ R[t^\pm, z^\pm] \arrow[ur] & & R[x^\pm, u^\pm] \arrow[ul] \\ & R[s^\pm] \arrow[ul] \arrow[ur] \end{tikzcd} \leadsto \begin{tikzcd} & xyz \\ tz \arrow[ur, maps to] & & xu \arrow[ul, maps to] \\ & s \arrow[ul, maps to] \arrow[ur, maps to] \end{tikzcd} \]
+In this way, we have the following theorem,
+\begin{theorem} \label{thm:graded_ring_same_as_group_action_data}
+    A graded ring $S = \bigoplus_{i \in \ZZ} S_i$ is the same as data $\mathbb G_{m, \Spec \ZZ} \curvearrowright \Spec S$. A $\NN$-graded ring is equivalent to $\mathbb G_{k, \Spec \ZZ} \curvearrowright \Spec S$. This is equivalent to asking that the following diagram commutes,
+    \[ \begin{tikzcd}
+        & \mbf A_{\Spec Z}^1 \times \Spec S \arrow[d] \\ \mathbb G_{m, \Spec \ZZ} \times \Spec S \arrow[ur, "\exists !"] \arrow[r] & \Spec S
+    \end{tikzcd} \]
+\end{theorem}
+This also works with $R$-algebras and $\mathbb G_{m, \Spec R}$/
