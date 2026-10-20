@@ -28,11 +28,11 @@ Now, consider $L/K$ to be an extension of number fields, and take $p \subset \SO
     Suppose $L/K$ is a Galois (i.e., normal) extension. Then if $q_1, q_2$ are primes over $p \subset \SO_K$, then there exists $\sigma \in \Gal(L/K)$ such that $\sigma(q_1) = q_2$.
 \end{theorem}
 \begin{proof}
-    Suppose not, i.e., $\sigma(q_1) \neq q_2$ for all $\sigma$. Then there exists $x \in \SO_L$ such that
-    \[ x \equiv 0 \pmod{q_2}, \quad x \equiv 1 \pmod{\sigma(q_1)} \]
-    for all $\sigma \in \Gal(L/K)$. Note that the ``modulo $q_2$'' statement is equivalent to writing $\alpha \in p_2$. By the Chinese remainder theorem, consider $N_K^L(\alpha) \in \SO_K \cap q_2 = p$; but
-    \[ N_K^L(\alpha) = \prod_{\sigma \in \Gal(L/K)} \sigma(\alpha). \tag{\textdagger} \]
-    On the other hand, by assumption, $\sigma(\alpha) \notin q_1$ for all $\sigma \in \Gal(L/K)$. Thus, $N_K^L(\alpha) \notin q_1$; but we already have $N_K^L(\alpha) \in p = q_1 \cap \SO_K$, which is a contradiction.
+    Suppose not, i.e., $\sigma(q_1) \neq q_2$ for all $\sigma$. Then there exists $\alpha \in \SO_L$ such that
+    \[ \alpha \equiv 0 \pmod{q_2}, \quad \alpha \equiv 1 \pmod{\sigma(q_1)} \]
+    for all $\sigma \in \Gal(L/K)$. Note that the ``modulo $q_2$'' statement is equivalent to writing $\alpha \in p_2$. By the Chinese remainder theorem, consider $N_{L/K}(\alpha) \in \SO_K \cap q_2 = p$; but
+    \[ N_{L/K}(\alpha) = \prod_{\sigma \in \Gal(L/K)} \sigma(\alpha). \tag{\textdagger} \]
+    On the other hand, by assumption, $\sigma(\alpha) \notin q_1$ for all $\sigma \in \Gal(L/K)$. Thus, $N_{L/K}(\alpha) \notin q_1$; but we already have $N_{L/K}(\alpha) \in p = q_1 \cap \SO_K$, which is a contradiction.
 \end{proof}
 
 Note that the crucial application that $L/K$ is Galois is given in (\textdagger). The above theorem could fail ``really badly'' if $L/K$ is not Galois.
