@@ -44,7 +44,7 @@ converge in probability, but not almost surely?
 \begin{theorem}[Panchenko \S2.10: Kolmogorov's maximal inequality] \label{thm:kolmogorov_maximal_inequality}
     Let $(X_n)_{n \geq 1}$ be independent, $S_n = X_1 + \dots + X_n$. For $x \geq a > 0$,
     \[ \PP\left(\max_{1 \leq j \leq n} \abs{S_j} \geq x\right) \leq \frac{1}{1-p} \PP(\abs{S_n} > x - a), \]
-    where $\max_{1 \leq j \leq n} \PP(\abs{S_n - S_j} \geq \alpha)$.
+    where $\max_{1 \leq j \leq n} \PP(\abs{S_n - S_j} \geq \alpha) \leq p < 1$.
 \end{theorem}
 {\color{amethyst} To quote: ``the vanilla way to bound this... would be to do a union bound; but that's way too weak. This is basically the precursor to the concept of stopping time.''}
 \begin{proof}
