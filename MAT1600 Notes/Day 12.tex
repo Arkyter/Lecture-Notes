@@ -1,0 +1,56 @@
+\section{Day 12: (Nov.\ 2, 2026)}
+Let $(X_n)_{n \geq 1}$ be a sequence of i.i.d.\ random variables. Let $\EE X_1 = 0$ and $\Var(X_1) = 1$. Then
+\[ Z_n \coloneq \frac{X_1 + \dots + X_n}{\sqrt{n}} \taking{d} N(0, 1). \] \vspace{-16pt}
+\begin{lemma} \label{lem:weak_convergence_third_derivative}
+    $\PP_n \to \PP$ weakly if, for all $f \in C_b(\RR)$ with $f'''$ continuous and $\norm{f'''}_\infty < \infty$, we have
+    \[ \int f \, d\PP_n \to \int f \, d\PP. \]
+\end{lemma} \vspace{-8pt}
+\begin{proof}
+    Left as an exercise. 
+\end{proof}
+
+As some intuition about the central limit theorem, we can think of the normal distribution $N(0, 1)$ as a ``unique fixed point'' for these limits as $n \to \infty$.
+\begin{lemma} \label{lem:sum_of_normal_rv}
+    If $X \sim N(0, a)$, $Y \sim N(0, b)$, and $X, Y$ are independent, then $X + Y \sim N(0, a + b)$.
+\end{lemma}
+The proofs in Panchenko and Durrett use characteristic functions and Fourier transform, but we will prove this from first principles because it's easier.
+\begin{proof}
+    $X + Y$ has a density. If $f_X$ is the density of $X$ and $f_Y$ is the density of $Y$, then
+    \[ f_{X+Y}(z) = (f_X \ast f_Y)(z) = \int f_X(x) f_Y(z - x) \, dx = \frac{1}{2\pi \sqrt{ab}} \int_\RR \exp\left(- \frac{x^2}{2a} - \frac{(z - x)^2}{2b}\right) dx. \]
+    Since
+    \[ \frac{x^2}{a} + \frac{(z - x)^2}{b} = \frac{z^2}{a + b} + \frac{a+b}{ab}\left(x - \mu_z\right), \]
+    where $\mu_z$ depends on $z, a, b$, we can write the convolution earlier as
+    \[ \frac{1}{Z} \exp \left(\frac{-z^2}{2(a + b)}\right) \int_\RR \exp\left(\frac{-(a + b)}{2ab} (x - \mu_z)^2\right) \, dx, \]
+    where $Z$ is a ``proportionality factor''.\footnote{we handily drop this because we can figure it out later.} The integral does not depend on the value of $z$, since we can change variables to the integrand is, up to a constant, a normal random variable with prescribed variance and mean $\mu_z$. This means
+    \[ f_{X+Y}(z) = \frac{1}{Z'} \exp\left(\frac{-z^2}{2(a + b)}\right), \]
+    where we collect more terms in $Z'$. Since $f_{X+Y}$ must integrate to $1$, it follows that $Z' = \sqrt{2\pi(a + b)}$.
+\end{proof}
+{\color{crimson} Note to self: this can be done with moment generating functions in a nicer way.}
+
+Let's prove the central limit theorem under an additional assumption, i.e., that $\EE \abs{X_1}^3 < \infty$ (cf.\ Panchenko \S3.6). We will do this by interpolating between $Z_n$ and $N(0, 1)$. First, let $(g_i)_{i \geq 1}$ be a sequence of i.i.d.\ $N(0, 1)$ random variables. Let
+\[ Z \coloneq \frac{g_1 + \dots + g_n}{\sqrt n}. \]
+Then $Z \sim N(0, 1)$ per our previous lemma \ref{lem:sum_of_normal_rv}.
+
+\newpage
+For $m = 1, \dots, n+1$, let
+\[ T_m \coloneq \frac{g_1 + \dots + g_{m-1} + X_m + \dots + X_n}{\sqrt{n}}, \]
+so $T_1 = Z_n$ and $T_{n+1} = Z$. We want to show that $T_1$ is close to $T_{n+1}$ in distribution, which we will do by comparing $T_k$ with $T_{k+1}$ for $k = 1, \dots, n$. This strategy is called the \textit{Lindeberg exchange method}.
+
+Let $f \in C_b(\RR)$ with $\norm{f'''}_\infty < \infty$. We want to show that
+\[ \abs{\EE f(T_k) - \EE f(T_{k+1})} = o \left(\frac{1}{n}\right). \]
+First, define $S_m$ as
+\[ S_m = \frac{g_1 + \dots + g_{m-1} + X_{m+1} + \dots + X_n}{\sqrt{n}}, \]
+so $T_m = S_m + \frac{X_m}{\sqrt n}$, and $T_{m+1} = S_m + \frac{g_m}{\sqrt{n}}$, the idea being that we want $\EE f(T_m) = \EE f(S_m) + \EE[\text{Taylor terms}]$. Precisely,
+\[ \abs{f(T_m) - f(S_m) - f'(S_m) \frac{X_m}{\sqrt{n}} - f''(S_m) \frac{X_m^2}{2n}} \leq \norm{f'''}_\infty \frac{\abs{X_m}^3}{6n^{3/2}}. \tag{A} \]
+Similarly,
+\[ \abs{f(T_{m+1}) - f(S_m) - f'(S_m) \frac{g_m}{\sqrt{n}} - f''(S_m) \frac{g_m^2}{2n}} \leq \norm{f'''}_\infty \frac{\abs{g_m}^3}{6n^{3/2}}. \tag{B} \]
+Now, observe that $\EE f(T_m) - \EE f(T_{m+1})$ is bounded from above by 
+\[ \abs{\frac{\EE [f'(S_m) X_m]}{\sqrt n} + \frac{\EE [f''(S_m) X_m^2]}{2n} - \frac{\EE [f'(S_m) g_m]}{\sqrt n} - \frac{\EE [f''(S_m) g_m^2]}{2n}} + \EE(A) + \EE(B). \tag{\textdagger} \]
+Since
+\[ \EE \left[f'(S_m) \frac{X_m}{\sqrt{n}}\right] = \frac{\EE f'(S_m) \cdot \EE X_m}{\sqrt n} = 0 \]
+and
+\[ \frac{\EE [f''(S_m) X_m^2]}{2n} = \frac{\EE f''(S_m \EE X_m^2)}{2n} = \EE \frac{f''(S_m)}{2n} = \dots = \frac{\EE [f''(S_m) g_m^2]}{2n}, \]
+we have that the first term in (\textdagger) vanishes. From here, it follows that
+\[ \EE(A) + \EE(B) \leq \frac{\norm{f'''}_\infty}{6n^{3/2}} \left(\EE \abs{X_1}^3 + \EE \abs{g_1}^3\right), \]
+so
+\[ \abs{\EE f(T_1) - \EE f(T_{n+1})} \leq \sum_{m=1}^n \abs{\EE f(T_m) - \EE f(T_{m+1})} \leq \frac{\norm{f'''}_\infty}{6n^{3/2}} (\EE \abs{X_1}^3 + \EE \abs{g_1}^3) \taking{n \to \infty} 0. \]
