@@ -470,6 +470,9 @@
 \newenvironment{subproof}[1][Subproof]{ % i mean. do i want it to say proof or subproof? hell, it's not even indented
 \begin{proof}[#1] \renewcommand{\qedsymbol}{$\blacksquare$}} 
 {\end{proof}}
+\newenvironment{semiproof}[1][Proof]{
+\begin{proof}[#1] \renewcommand{\qedsymbol}{\ensuremath{\triangle}}}
+{\end{proof}}
 
 \theoremstyle{definition}
 
