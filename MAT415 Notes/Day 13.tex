@@ -1,1 +1,85 @@
-\section{Day 13: (Oct.\ 22, 2026)}
+\section{Day 13: Cyclotomic Fields (Oct.\ 22, 2026)}
+Let $K, L$ be number fields. Let $n = \abs{L : K}$, $R = \SO_K$, and $S = \SO_L$. Fix a nonzero prime $q \subset R$. Given $h \in \SO_K[x]$, let $\ol h$ denote the corresponding element in $(\SO_K/q)[x]$. 
+
+Fix $\alpha \in S$ (we want $\SO_L \cong \SO_K[\alpha]$), where $\alpha$ is a primitive element. Let $g \in K[x]$ be the monic irreducible polynomial for $\alpha$ over $K$; $\alpha \in \SO_K$, so its conjugates also lie in $\SO_K$, so $g \in \SO_K[x]$.
+
+We can consider that $\ol g \in (\SO_K/q)[x]$ factors as $\ol g = \ol g_1^{e_1} \dots \ol g_r^{e_r}$, where $\ol g_i$ are distinct real monic polynomials.
+
+\begin{theorem} \label{thm:factoring_polynomials}
+    Suppose $p \nmid \abs{\SO_L : \SO_K[\alpha]}$, where $p = q \cap \ZZ$. Then the prime decomposition of $q \SO_L = \ell_1^{e_1} \dots \ell_r^{e_r}$, where $\ell_i = q \SO_L + (g_i(\alpha))$. Also, $f(\ell_i / q) = \deg g_i$.
+\end{theorem}
+
+\begin{proof}
+    Let $f_i = \deg g_i = \deg \ol g_i$. We will show:
+    \begin{enumerate}[(i)]
+        \item For all $i$, $\ell_i = \SO_L$, or $\SO_L/\ell_i$ is finite dimensional of order $\abs{\SO_K / q}^{f_i}$.
+        \item $\ell_i + \ell_j = S$ for $i + j$.
+        \item $q \SO_L \mid \ell_1^{e_1} \dots \ell_r^{e_r}$.
+    \end{enumerate}
+    Assuming the above are all true, we can rearrange the $\ell_i$ such that $\ell_1, \dots, \ell_t \neq \SO_L$, and $\ell_{t+1}, \dots, \ell_r = \SO_L$. We then have that $\ell_1, \dots, \ell_t$ are prime ideals (per (i)), and contain $q$. (ii) implies that the $\ell_i$ are distinct, and (iii) implies that $q \SO_L = \ell_1^{d_1} \dots \ell_r^{d_r}$, where the $d_i \leq e_i$ by unique factorization. We would then get $f(\ell_i / q) = f_i$ from (i).
+
+    In this manner,
+    \[ n = f_1d_1 + \dots + f_td_t \leq f_1e_1 + \dots + f_re_r = (\deg \ol g_1) e_1 + \dots + (\deg \ol g_r) e_r = \deg g = n, \]
+    as $\alpha$ is a primitive element. We would then get that $t = r$, and $d_i = e_i$.
+
+    We now prove (i). We want to show that $\SO_L/\ell_i$ is finite dimensional of order $\abs{\SO_K/q}^{f_i}$; we claim that
+    \[ \frac{\SO_L}{\ell_i} \cong \frac{(\SO_K/q)[x]}{\ol g_i} = F_i. \]
+    Note that we have a surjective homomorphism $\varphi \colon \SO_K[x] \to (\SO_K / q) [x] / \ol g_i$; $\varphi$ is surjective with kernel $\ker \varphi = q[x] + (g_i)$, so
+    \[ \frac{\SO_K[x]}{q[x] + g(i)} = \frac{\SO_K[x]}{(q, g_i)} \cong F_i. \]
+    We also have that $\SO_K[x] \to \SO_L$, with $x \mapsto \alpha + \ell_i$, given by $\psi \colon \SO_K[x] \to \SO_L/\ell_i$. Now, $q \subset \ker \psi$ because $\ell_i$ lies over $q$, so $\ell_i \cap \SO_K = q$, so $q \subset \ell_i$. Also, $g_i \in \ker \psi$ because $g_i(\alpha) = 0$. This means $(q, g_i) \subset \ker \psi$.
+
+    It follows that
+    \[ \frac{\SO_L}{\ell_i} \cong \frac{\SO_K[x]}{(q, g_i)}, \]
+    since $(q, g_i)$ is a maximal ideal and $\ker \psi \neq \SO_K[x]$ ($\psi(1) = 1)$ when $ell_i \neq S$. Since $\psi$ is surjective, we claim that $\SO_L = \SO_K[\alpha] + \ell_i$; then $p \in q \subset \ell_i$, and
+    \[ p \nmid \abs{\SO_L / \SO_K[\alpha]} \implies \SO_L = \SO_K[\alpha] + p \SO_L. \]
+    This concludes (i).
+
+    We now prove (ii). Let $\ol g_i$ and $\ol g_j$ be distinct irreducible polynomials in $(\SO_K/q)[x]$. By Bezout's, there exists $\smash{\ol h, \ol k \in (\SO_K / q)[x]}$ such that $\smash{\ol g_i \ol h + \ol g_j \ol k = 1}$, i.e., $g_i h + g_j k = 1$ modulo $q[x]$. Evaluating at $\alpha$, we have that $g_i(\alpha) h(\alpha) + g_j(\alpha) k(\alpha) = 1$ modulo $q \SO_L$, so $1 \in (q, g_i(\alpha), g_j(\alpha)) = \ell_i + \ell_j$.
+
+    \newpage
+    For (iii), let $\gamma_i = q_i(\alpha)$ and $\ell_i = (q, \gamma_i)$. We claim that $\ell_1^{e_1} \dots \ell_r^{e_r} \subset (q, \gamma_1^{e_1}, \dots, \gamma_r^{e_r})$; clearly, $q \SO_L = (q) \subset (q, \gamma_1^{e_1}, \dots, \gamma_r^{e_r})$. Thus, it suffices to show that $\gamma_1^{e_1}, \dots, \gamma_r^{e_r} \in q \SO_L$. Recalling that $\ol q = \ol g_1^{e_1} \dots \ol g_r^{e_r}$, we immediately get that $g = g_1^{e_1} \dots g_r^{e_r}$ modulo $q[x]$, which we may evaluate at $\alpha$ to get
+    \[ \gamma_1^{e_1} \dots \gamma_r^{e_r} = 0 \pmod{q \SO_L} \iff \gamma_1^{e_1}, \dots, \gamma_r^{e_r} \in q \SO_L. \qedhere \]
+\end{proof}
+
+We now talk about cyclotomic fields. For $n \geq 1$, set $\zeta_n = e^{2\pi i / n} \in \ZZalg$. Then $\zeta_n^n - 1 = 0$. Let $K_n = \QQ(\zeta_n)$. We denote the \textit{primitive $n$th roots of $1$} to be $\zeta_n^b$ for $\gcd(b, n) = 1$. There are $\varphi(n)$ of these, where $\varphi$ is Euler's totient function.
+
+Note that every root of $x^n - 1$ is a power of $\zeta_n$, so $K_n$ is the splitting field for $x^n - 1$, and it is a finite extension, where $K_n/\QQ$ is Galois. As an example, $K_1 = K_2 = \QQ$, $K_3 = \QQ(\sqrt{-3})$, and $K_4 = \QQ(i)$.
+
+Now, suppose $n = p^a$ is a prime power. Consider
+\[ \Phi_{p^a}(x) = \frac{x^{p^a} - 1}{x^{p^{a-1}} - 1} = 1 + x^{p^{a-1}} + \dots + x^{(p - 1) p^{a-1}}, \]
+so $\zeta_{p^a}$ is a root of $\Phi_{p^a}$, and $\deg \Phi_{p^a} = (p - 1) p^{a - 1} = \varphi(p^a)$.
+
+As another eaxmple, $\Phi_5(x) = x^4 + x^3 + x^2 + x + 1$, $\Phi_8(x) = x^4 + 1$, and $\Phi_9(x) = x^6 + x^3 + 1$.
+
+\begin{proposition} \label{prop:cyclotomic_field_irreducible}
+    $\Phi_{p^a}$ is irreducible over $\QQ$. $\abs{K_{p^a} : \QQ} = \varphi(p^a)$, and $\Gal(K_{p^a} / \QQ) = (\ZZ / p^a \ZZ)^\times$.
+\end{proposition}
+\begin{proof}
+    We will prove this modulo $p$. First,
+    \[ \Phi_{p^a}(x) = \frac{x^{p^a} - 1}{x^{p^{a-1}} - 1}. \]
+    In $(\ZZ/p\ZZ)[x]$, it is equivalent to
+    \[ \dots \equiv \frac{(x - 1)^{p^a}}{(x - 1)^{p^{a - 1}}} \equiv (x - 1)^{p^a - p^{a-1}} \equiv x^{p^a - p^{a-1}} - 1, \]
+    so $\Phi_{p^a}(x + 1) = x^d$, where $d$ is the degree of the above. By Eisenstein's criterion, we get that $\Phi_{p^a}(x + 1)$ is irreducible ($\Phi_{p^a}(1) = p$).
+\end{proof}
+
+Now, let $K = K_{p^a}$ and $\zeta = \zeta_{p^a}$. Let $R = \ZZ[\zeta]$, and write $\lambda = 1 - \zeta$, $d = \varphi(p^a) = \abs{K : \QQ}$.
+
+\begin{lemma} \label{lem:cyclotomic_unit}
+    If $\gcd(b, p) = 1$, then $\frac{1 - \zeta^b}{1 - \zeta}$ is a unit in $R$.
+\end{lemma}
+\begin{proof} \renewcommand{\qedsymbol}{\ensuremath{\triangle}}
+    Note that $1, \zeta, \zeta^2, \dots, \zeta^{d-1}$ forms a basis of $K/\QQ$. We have
+    \[ \abs{\Delta(1, \zeta, \zeta^2, \dots, \zeta^{d-1})} = N(\Phi_{p^a}'(\zeta)) = N\left(p^a \frac{\zeta\inv}{\zeta^{p^{a - 1}} - 1}\right). \]
+    Note that $N(p^a \zeta\inv) = p^{a d}$. Now,
+    \[ N_{K/\QQ} \left(\zeta^{p^{a - 1}} - 1\right) = N_{K_p / \QQ} \left(\zeta^{p^{a-1}} - 1\right) = p^{p^{a-1}}, \]
+    as $\frac{\abs{K:\QQ}}{\abs{K_p : \QQ}} = p^{a - 1}$. Thus,
+    \[ \abs{\Delta(1, \zeta, \zeta^2, \dots, \zeta^{d-1})} = p^{ad - p^{a - 1}}. \qedhere \]
+\end{proof}
+
+{\color{crimson} Then there was some corollary about $p$ being ramified and unramified in $K$.}
+
+\begin{proof}[Proof of \ref{lem:cyclotomic_unit}, cont.]
+    $\SO_K/\lambda \cong \FF_p$. Indeed, $x \in \SO_K$ yields $x = c_0 + \lambda x_1$, where $0 \leq c_0 < p$ and $x \in \SO_K$ (by the claim). Repeating this $d$ times yields
+    \[ x = c_0 + c_1 \lambda + \dots + c_{d-1} \lambda^{d-1} + \lambda^d x_d, \]
+    where $0 \leq c_i < p$ for each $c_i$ and $x_d \in \SO_K$. We claim that $p \SO_K = (\lambda)^d$, but this follows from the above. {\color{amethyst} And then he gave up!}
+\end{proof}
