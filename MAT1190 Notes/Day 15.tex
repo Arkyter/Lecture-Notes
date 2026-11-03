@@ -1,0 +1,57 @@
+\section{Day 15: More on Proj (Nov.\ 3, 2026)}
+Last time, we saw $D_+(f)$, where $f$ is homogeneous of degree at least $1$, where $f \in S$ (with $S$ being a graded ring). We saw a bijection
+\[ D_+(f) \cong \Spec S_{(f)}, \]
+which is the degree $0$ part of $S_f$. To show the homoemorphism between these two, we want to compare basic open sets of homogeneous elements $g$, i.e., we want to show that $D_+(fg) \subset D_+(f)$. To do this, we want to check that
+\[ D\left(\frac{g^{\deg f}}{f^{\deg g}}\right) \subset \Spec S_{(f)}, \]
+which induces bijections between
+\[ \Spec(S_{(f)})_{\frac{g^{\deg f}}{f^{\deg g}}} = \Spec S_{(fg)}. \]
+Thus, we can define a scheme structure on $\opname{Proj} S$ by gluing the scheme structure on each $D_+(f) \subset \opname{Proj} S$.\footnote{i'm sick of proj, i don't know anything about proj, it was such a mistake to start proj, i just want to finish proj. we're blasting to the finish line.} We glue this together in a ``reasonable way'', i.e.,
+\[ \opname{Proj}(S)(U) = \{(S_p)_{p \in U} \mid S_p \text{ are ``compatible''}\}. \]
+Compatibility here means that, for all $p \in U$, there exists homogenous $r, g$ with $g \in S_+$ such that $D_+(g) \subset U$ and $S_\kq = \frac{r}{g^i}$ for all $\kq \in U$. We also ask that this be consisten in $S_{(\kq)}$, which is the degree $0$ part of $S_\kq$.
+
+\begin{theorem} \label{thm:proj_maps}
+    There exist maps from $\Spec S \setminus Z_+(S)$ to $\opname{Proj}(S)$, then to $\Spec S_0$.
+\end{theorem}
+\begin{proof}
+    The first map glues maps $\Spec S_f \to \Spec S_{(f)}$ for all homogenous $f$ of degree at least $1$. The second map is given by covering $\opname{Proj}(S)$ by the basic open affine sets $S_0 \to \opname{Proj}(S)(D_+(f)) = S_{(f)}$. This then gives maps $D_+(f) \to \Spec S_0$, which glue to $\opname{Proj}(S) \to \Spec S_0$.
+\end{proof}
+
+\begin{definition} \label{defn:fiber_of_scheme}
+    The fiber over $y \in Y$ is given by $X \times_Y \Spec k(\kq)$.
+\end{definition}
+Specifically, the diagram is given by
+\[
+    \begin{tikzcd}
+        Z \arrow[rrd] \arrow[rdd] \arrow[rd] \\
+        & \text{fiber} \arrow[r] \arrow[d] & X \arrow[d, "f"] \\
+        & \Spec k(\kq) \arrow[r] & Y
+    \end{tikzcd}
+\]
+
+We can also consider the squaring map, $t^2 \colon \mbf A_\CC^1 \to \mbf A_\CC^1$, given by $t \in \Spec \CC[t]$ mapping to $z^2 \in \Spec \CC[z]$. Then we see
+\[ \Spec \CC[z] \otimes_{\CC[t]} \frac{\CC[t]}{t - \lambda} \cong \frac{\Spec \CC[z]}{z - \lambda} \cong \frac{\Spec \CC[z]}{z - \sqrt{\lambda}} \coprod \frac{\Spec \CC[z]}{z + \sqrt{\lambda}}. \]
+Then, for $\lambda = 0$, we have that the fiber is $\Spec \CC[z]/z^2$. At the generic point, we get $\CC[z] \otimes_{\CC[t]} \CC[t] \cong \Spec \CC[t]$.
+
+\newpage
+As an example, consider $\opname{Proj} \CC[t, x, y, z] / (zy^2 - x(x - z)(x - tz))$, where $t, x, y, z$ are all of degree $1$. We have the diagram
+\[ \begin{tikzcd}
+    \Spec \CC[t, x, y, z] / (zy^2 - x(x - z)(x - tz)) \arrow[r, "\text{scale}"] \arrow[rd, "{Z(x, y, z)}"'] & \opname{Proj}(S) \arrow[d] \\ & \Spec S_0 = \mbf A_t^1
+\end{tikzcd} \]
+Note that when we say scale, we mean an equivalence relation under scaling $x, y, z$ by $\CC^\ast$. We can pick out some $\lambda \in \mbf A_t^1$, for which the fiber over $\lambda$ is $\opname{Proj} \CC[t, x, y, z]/(zy^2 - x(x-z)(x-\lambda z))$. This is the fiber by local computation.
+
+We now talk about properties of schemes.
+
+\begin{definition} \label{defn:local_property}
+    A \textit{local property} $P$ of open affine subschemes of $U \subset X$ (for the purpose of discussion, suppose $U \subset \Spec R$).
+    \begin{enumerate}[(i)]
+        \item If $\Spec R$ satisfies $P$, then $\Spec R_f$ satisfies $P$ (i.e., all basic open subsets of $\Spec R$ satisfy the local property).
+        \item If $f_1, \dots, f_k$ generate $(1) = R$, and $\Spec R_{f_i}$ satisfies $P$ for all $f_i$, then $\Spec R$ satisfies $P$.
+    \end{enumerate} 
+\end{definition}
+
+\begin{theorem}[Affine Communication Lemma] \label{thm:affine_communication_lemma}
+    If $P$ is a local property and $X$ is covered by open affine sets satisfying $P$, then \textit{all} open affine sets satisfy $P$.
+\end{theorem}
+\begin{proof}
+    Take an open affine set $U \subset X$. By the first property of local properties, we can find a cover of $U$ by open affine sets satisfying $P$. We can moreover, find a basic open affine covering of $U$ refining this cover of $U$. Now, let $D(g) \subset U$ be one of the basic open affine sets. If $D(g) \subset V \subset U$, where $V$ satisfies $P$, then $D(g) = D(\restr{g}{V})$ implies that $D(g)$ satisfies $P$, where $g \in \SO_X(U)$. It follows that $\SO_{\opname{Proj}(S)}(D_+(f)) = S_{(f)}$. We can then glue to finish this theorem.
+\end{proof}
