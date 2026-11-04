@@ -1,0 +1,124 @@
+\section{Day 13: Characteristic Functions (Nov.\ 4, 2026)}
+The second midterm will cover everything from random series (i.e., after Hewitt--Savage) up to the proof of the central limit theorem with characteristic functions. We will do something more with characteristic functions after proving CLT with it, but it won't show up on the exam. Everything before random series is fair game, i.e., it could be used in a proof, but it won't be explicitly tested. That is, ``know basics''.
+
+The exam will be a little bit harder (midterm $1$ had an average of $80\%$), but it won't be that much harder; it'll be curved back to $80\%$, but Duncan wants the exam to be around $60$--$65\%$ raw score for the purposes of being able to scale. ``Hopefully, you run out of ideas before you run out of time.''
+
+The final exam will be held Dec.\ 15, from 10--1pm.
+
+We now talk about characteristic functions. If $X$ is a real random variable, we define its moment generating function to be
+\[ \varphi_X(t) = \EE e^{tX}. \]
+We will not worry about if the moments are defined for now; this is just for some background. By expanding the series for $e^{tX}$, we get
+\[ \EE e^{tX} = \EE \left(\sum_{n=0}^\infty \frac{t^n x^n}{n!}\right) = \sum_{n=0}^\infty \frac{\EE X^n}{n!} t^n. \]
+You may also know $e^{tX}$ as the Laplace transform. A key property of the moment generating functions is that, for independent real random variables $X$ and $Y$, we have
+\[ \varphi_{X + Y} = \varphi_X + \varphi_Y, \]
+since $\EE e^{t(X + Y)} = \EE e^{tX} \EE e^{tY}$. In this manner, summing independent random variables is equivalent to \\ multiplying moment generating functions. The problem with dealing with these, however, is that if a moment of $X$ is not defined (say, if $\EE X^3 = +\infty$), then the moment generating function doesn't exist.
+
+To remedy this, let us look at the following: for a real random variable $X$, define its characteristic function (Fourier transform) as
+\[ f_X(t) = \EE e^{itX} = \EE \cos(tX) + i \EE \sin(tX). \]
+Similar to moment generating functions, we have $f_{X+Y} = f_X f_Y$ for independent $X$ and $Y$. Moreover, $f_X$ and $f_Y$ exist for all $t \in \RR$. As an example, let $X \sim N(0, 1)$. Then
+\[ \EE e^{it X} = \frac{1}{\sqrt{2\pi}} \int_\RR e^{itx - \frac{x^2}{2}} \, dx = e^{-\frac{t^2}{2}} \frac{1}{\sqrt{2\pi}} \int_\RR \exp\left(\frac{-(x - it)^2}{2}\right) dx = e^{-\frac{t^2}{2}} \frac{1}{\sqrt{2\pi}} \int_{\RR - it} e^{-\frac{u^2}{2}} \, du = e^{-\frac{t^2}{2}}, \]
+where
+\[ \int_{\RR - it} e^{-\frac{u^2}{2}} \, du = \int_\RR e^{-\frac{u^2}{2}} \, du = 1 \]
+comes from shifting the contour per the fact that the Gaussian is holomorphic. See p.75 of Panchenko for the desired contour (to which you apply Cauchy's integral formula).
+
+For a second example, if $X = a + bY$, with $a, b \in \RR$, we have that
+\[ f_X(t) = e^{it a} f_Y(bt). \]
+
+\newpage
+This amounts to checking that the Fourier transform is linear. In particular, if $X \sim N(\mu, \sigma^2)$, then
+\[ f_X(t) =\EE e^{it(\mu + \sigma X)} = e^{it \mu - \frac{t^2 \sigma^2}{2}}. \]
+To prove the central limit theorem by looking at characteristic functions, our idea is that, if $(X_i)_{i \geq 1}$ are i.i.d.\ with $\EE X_1 = 0$, $\EE X_1^2 = 1$, and
+\[ Z_n = \frac{X_1 + \dots + X_n}{\sqrt n}, \]
+then we should show that $f_{Z_n} \to f_{N(0, 1)}$ as $n \to \infty$. By what we saw previously, we have that
+\[ f_{Z_n}(t) = \left(f_{X_1 / \sqrt{n}}(t)\right)^n = \left(f_{X_1}\left(\frac{t}{\sqrt n}\right)\right)^n. \]
+Now, we need to understand how $f_{X_1}$ behaves near $0$, and we need to check that pointwise convergence in characteristic functions imply that the random variables converge in distribution.
+
+\begin{lemma}[Panchenko \S3.5] \label{lem:characteristic_function_C^r}
+    \begin{enumerate}[(i)]
+        \item If $X$ is a real random variable, then $f_X$ is continuous.
+        \item If $\EE \abs{X}^r < \infty$ for some $r$, then $f_X$ is in $C^r(\RR)$. We also have $f^{(j)}(t) = \EE (iX)^j e^{it X}$ for $1 \leq j \leq r$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    First, $\lim_{t \to s} \EE e^{it X} = \EE e^{is X}$ by DCT (on the real and imaginary parts separately), so we are done with (i). For (ii), let $j = 1$; then
+    \[ \lim_{t \to s} \frac{\EE e^{itX} - \EE e^{isX}}{t - s} = \EE \left(\frac{e^{it X} - e^{is X}}{t - s}\right), \]
+    for which 
+    \[ \abs{\frac{e^{it X} - e^{is X}}{t - s}} < \abs{X} \]
+    by the mean value theorem. Since $\EE \abs{X} < \infty$, we can apply DCT to conclude that
+    \[ f^{(1)}(s) = \EE (iX) e^{is X}. \]
+    We may extend this by induction for all $j \leq r$ to get the desired expression for $f^{(j)}(t)$.
+\end{proof}
+
+In principle, tail bounds on $\PP_X$ imply regularity statements of $f_X$. Let's use this to compute
+\[ \lim_{n \to \infty} f_{Z_n}(t) = \lim_{n \to \infty} \left(f_{X_1}\left(\frac{t}{\sqrt{n}}\right)\right)^n. \tag{\textdagger} \]
+Since $\EE X_1^2 = 1 < \infty$, we have that $f_{X_1}$ is twice differentiable, and as $t \to 0$, we have
+\[ f_{X_1}(t) = 1 + \EE (iX_1) + \frac{t^2}{2} \EE(iX_1)^2 + o(t^2) = 1 - \frac{t^2}{2} + o(t^2), \]
+per the fact that $\EE X_1 = 0$ and $\EE X_1^2 = 1$. Using this, we may compute (\textdagger) as follows,
+\[ \dots = \lim_{n \to \infty} \left(1 - \frac{t^2}{2n} + o\left(\frac{t^2}{n}\right)\right)^n = e^{-\frac{t^2}{2}}. \] 
+
+\newpage
+\begin{theorem}[Panchenko \S3.4] \label{thm:same_characteristic_implies_same_distribution}
+    If $X, Y$ are real random variables with $f_X = f_Y$, then $X = Y$ in distribution.
+\end{theorem}
+
+\begin{lemma}[Panchenko \S3.6] \label{lem:probability_measure_smoothing}
+    Let $\PP$ be a probability measure on $\RR$. For $\sigma > 0$, let $\PP^\sigma$ be the law of $X + \sigma Y$, where $X \sim \PP$ and $Y \sim N(0, 1)$, with $X$ and $Y$ independent. Then $\PP^\sigma$ has Lebesgue density
+    \[ p_\sigma(x) = \frac{1}{2\pi} \int f_\PP(t) e^{-itx - \frac{\sigma^2 t^2}{2}} \, dt, \tag{$\ast$} \]
+    where $f_\PP$ is the characteristic function of $\PP$.
+\end{lemma}
+We may note that $\PP^\sigma = \PP \ast N(0, \sigma^2)$.
+\begin{proof}
+    First,
+    \[ p_\sigma(x) = \frac{1}{\sigma \sqrt{2\pi}} \int_\RR \exp\left(\frac{-(x - y)^2}{2\sigma^2}\right) d\PP(y) = \int_\RR q_\sigma(x - y) \, d\PP(y), \]
+    where $q_\sigma$ is the density of $N(0, \sigma^2)$. Now,
+    \[ \exp\left(\frac{-(x - y)^2}{2\sigma^2}\right) = f_{N(0, 1)} \left(\frac{x - y}{\sigma}\right) = \frac{1}{\sqrt{2\pi}} \int_\RR e^{-iz \left(\frac{x - y}{\sigma}\right)} e^{- \frac{z^2}{2}} \, dz, \]
+    so
+    \begin{align*}
+        \frac{1}{\sigma \sqrt{2\pi}} \int_\RR \exp\left(\frac{-(x - y)^2}{2\sigma^2}\right) d\PP(y) &= \frac{1}{2\pi \sigma} \iint_{\RR^2} e^{-iz \left(\frac{x - y}{\sigma}\right)} e^{-\frac{z^2}{2}} \, dz \, d\PP(y) \tag{Fubini} \\
+        &= \frac{1}{2\pi \sigma} \int_\RR f_\PP\left(\frac{z}{\sigma}\right) e^{-\frac{ixz}{\sigma} - \frac{z^2}{2}} \, dz,
+    \end{align*}
+    where we may substitute $t = \frac{z}{\sigma}$ to conclude that the above is equal to the right hand side of ($\ast$).
+\end{proof}
+
+\begin{proof}[Proof of \ref{thm:same_characteristic_implies_same_distribution}]
+    If $f_X = f_Y$, then by \ref{lem:probability_measure_smoothing}, for all $\sigma > 0$, we have $X + \sigma N(0, 1) = Y + \sigma N(0, 1)$, where $N(0, 1)$ is independent of $X$ and $Y$. Now, $X + \sigma N(0, 1) \to X$ almost surely as $\sigma \to 0$, and $Y + \sigma N(0, 1) \to Y$ almost surely as $\sigma \to 0$ as well. Almost sure convergence implies convergence in distribution, meaning $X = Y$ in distribution.
+\end{proof}
+
+\begin{theorem}[Fourier Inversion Formula, Panchenko \S3.8] \label{thm:fourier_inversion}
+    If $\PP$ is a probability measure with
+    \[ \int \abs{f_\PP(t)} dt < \infty, \]
+    then $\PP$ has bounded Lebesgue density
+    \[ p(x) \coloneq \frac{1}{2\pi} \int_\RR f_\PP(t) e^{-itx} \, dt. \]
+\end{theorem}
+\begin{proof}
+    Let $p_\sigma$ be the density of $\PP \ast N(0, \sigma^2)$. It is enough to show that, for any continuous, compactly supported function $g \colon \RR \to \RR$, that
+    \[ \int_\RR p_\sigma(x) g(x) \, dx \to \int_\RR p(x) g(x) \, dx \]
+    Note that we already know that $\int_\RR p_\sigma(x) g(x) \, dx \to \int_\RR g(x) \, d\PP(x)$ by weak convergence. First, $p_\sigma \to p$ pointwise, since
+    \[ \frac{1}{2\pi} \int_\RR f_\PP(t) e^{-itx - \frac{\sigma^2 t^2}{2}} \, dt \to \frac{1}{2\pi} \int_\RR p_n(t) e^{-itx} \, dt \]
+    by DCT, since $\lvert{f_\PP(t) e^{-itx - \frac{\sigma^2 t^2}{2}}}\rvert \leq \abs{f_\PP(t)}$, and $\int \abs{f_\PP} < \infty$.
+
+    \newpage
+    Second, $\int_\RR p_\sigma g \to \int_\RR pg$ by pointwise convergence, and DCT applies because
+    \[ \abs{p_\sigma(x) g(x)} \leq \left(\frac{1}{2\pi} \int \abs{f_\PP}\right) g(x) \, dx. \qedhere \]
+\end{proof}
+
+\begin{theorem}[L\'evy's Continuity Theorem, Panchenko \S3.5] \label{thm:levy_continuity_theorem}
+    Let $(\PP_n)_{n \geq 1}$ be a sequence of probability measures on $\RR$. Suppose that $f_{\PP_n}$ converges pointwise to a limit $f$ which is continuous at $0$; then $f$ is the characteristic function of a probability measure $\PP$ and $\PP_n \to \PP$ weakly.
+\end{theorem}
+In fact, the central limit theorem is a corollary of L\'evy's continuity theorem (with convergence of characteristic functions checked earlier).
+
+\begin{lemma}[Panchenko \S3.10] \label{lem:ad_hoc_bound_for_levy_cont_thm}
+    If $X$ is a real random variable, then for $u > 0$, we have that
+    \[ \PP \left(\abs{X} > \frac{1}{u}\right) < \frac{7}{u} \int_0^u \bigl(1 - \Re (f_X(t))\bigr) \, dt \]
+\end{lemma}
+Noe that this lemma basically tells us that the behavior of $f$ at $0$ tells us about the control of tails of $f$.
+
+\begin{proof}
+    Directly compute as follows,
+    \[ \frac{1}{u} \int_0^u (1 - \Re f_X(t)) \, dt = \frac{1}{u} \int_0^u \int_\RR 1 - \cos(tx) \, d\PP(x) \, dt. \]
+    By Fubini's theorem and integrating with respect to $t$, we get
+    \[ \dots = \int_\RR 1 - \frac{\sin xu}{xu} \, d\PP(x) \geq \int_{\abs{xu} \geq 1} 1 - \frac{\sin xu}{xu} \, d\PP(x) \geq (1 - \sin 1) \int_{\abs{xu} \geq 1} 1 \, d\PP(x) \geq \frac{1}{7} \PP\left(\abs{X} \geq \frac{1}{u}\right). \qedhere \]
+\end{proof}
+
+We will prove L\'evy's continuity theorem next class.
+
