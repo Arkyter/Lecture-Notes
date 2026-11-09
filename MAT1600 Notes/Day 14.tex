@@ -3,7 +3,7 @@ Recall L\'evy's continuity theorem, where if $(\PP_n)_{n \geq 1}$ is a sequence 
 \begin{proof}[Proof of \ref{thm:levy_continuity_theorem}]
     We will do this in two steps: we will first show that the $\PP_n$ are tight, then we will show that any two limit points $\PP, \QQ$ of $(\PP_n)_{n \geq 1}$ are equal.
 
-    We start by proving the latter. We know that $f_{\PP_n} \to f_\PP$ and $f_{\PP_n} \to f_\QQ$ pointwise along the subsequence where $\PP_n \to \PP$ and $\PP_n \to \QQ$, respectively. Since characteristic functions evaluated a point are continuous bounded test functinons, we have that $f_\PP = f = f_\QQ$ implies $\PP = \QQ$ by Fourier inversion.
+    We start by proving the latter. We know that $f_{\PP_n} \to f_\PP$ and $f_{\PP_n} \to f_\QQ$ pointwise along the subsequence where $\PP_n \to \PP$ and $\PP_n \to \QQ$, respectively. Since characteristic functions evaluated a point are continuous bounded test functions, we have that $f_\PP = f = f_\QQ$ implies $\PP = \QQ$ by Fourier inversion.
 
     Now, to demonstrate the former, observe that for all $\eps > 0$, there exists $u > 0$ (cf.\ \ref{lem:ad_hoc_bound_for_levy_cont_thm}) such that
     \[ \eps > \frac{7}{u} \int_0^u \bigl(1 - \Re f(x)\bigr) \, dx = \lim_{n \to \infty} \frac{7}{u} \int_0^u \bigl(1 - \Re f_n(x)\bigr) \, dx \geq \PP_n \left(\abs{x} \geq \frac{1}{u}\right), \]
