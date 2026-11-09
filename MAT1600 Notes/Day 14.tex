@@ -1,0 +1,49 @@
+\section{Day 14: L\'evy's Continuity Theorem, Lindeberg CLT (Nov.\ 9, 2026)}
+Recall L\'evy's continuity theorem, where if $(\PP_n)_{n \geq 1}$ is a sequence of probability measures on $\RR$ with $f_{\PP_n} \to f$ pointwise (and continuous at $0$), then $\PP_n \to \PP$ weakly, with $f$ being the characteristic function of $\PP$.
+\begin{proof}[Proof of \ref{thm:levy_continuity_theorem}]
+    We will do this in two steps: we will first show that the $\PP_n$ are tight, then we will show that any two limit points $\PP, \QQ$ of $(\PP_n)_{n \geq 1}$ are equal.
+
+    We start by proving the latter. We know that $f_{\PP_n} \to f_\PP$ and $f_{\PP_n} \to f_\QQ$ pointwise along the subsequence where $\PP_n \to \PP$ and $\PP_n \to \QQ$, respectively. Since characteristic functions evaluated a point are continuous bounded test functinons, we have that $f_\PP = f = f_\QQ$ implies $\PP = \QQ$ by Fourier inversion.
+
+    Now, to demonstrate the former, observe that for all $\eps > 0$, there exists $u > 0$ (cf.\ \ref{lem:ad_hoc_bound_for_levy_cont_thm}) such that
+    \[ \eps > \frac{7}{u} \int_0^u \bigl(1 - \Re f(x)\bigr) \, dx = \lim_{n \to \infty} \frac{7}{u} \int_0^u \bigl(1 - \Re f_n(x)\bigr) \, dx \geq \PP_n \left(\abs{x} \geq \frac{1}{u}\right), \]
+    where the equality in the middle is justified by DCT, as the continuity of $f$ at $0$ implies that
+    \[ f(0) = \lim_{n \to \infty} f_n(0) = 1. \]
+    In this manner, $\limsup_{n \to \infty} \PP_n(\abs{x} \geq u\inv) < \eps$; since $\eps > 0$ is arbitrary, it follows that $\PP_n$ is tight. \qedhere
+\end{proof}
+
+{\color{amethyst} This concludes the end of the coverage for the second midterm.} 
+
+\begin{theorem}[Lindeberg's CLT, Panchenko \S3.10] \label{thm:lindeberg_clt}
+    For each $n \geq 1$, let $(X_{n,j})_{1 \leq j \leq n}$ be a collection of independent real random variables such that $\EE X_{n,j} = 0$ and $\sum_{j=1}^n \EE (X_{n,j})^2 = 1$.
+    Suppose that for all $\eps > 0$ we have
+    \[ \sum_{j=1}^n \EE (X_{n,j})^2 \mbf 1\bigl(\abs{X_{n,j}} > \eps\bigr) \taking{n \to \infty} 0; \tag{$\ast$} \]
+    then $\smash{S_n \taking{d} N(0, 1)}$.
+\end{theorem}
+
+Note that the condition ($\ast$) is called the \textit{Lindeberg condition}.
+
+\begin{proof}
+    By L\'evy's continuity theorem (\ref{thm:levy_continuity_theorem}), it is enough to show that
+    \[ \log \EE e^{i \lambda S_n} \to -\frac{\lambda^2}{2} \]
+    for all $\lambda \in \RR$. Note that the left hand side is equivalent to $\sum_{j=1}^n \log \EE e^{i \lambda X_j}$. {\color{amethyst} Here, $X_j = X_{n,j}$ to ``simplify notation'', i.e., Duncan messed up the indices and doesn't want to rewrite them.} In particular,
+    \[ \sum_{j=1}^n \log \EE e^{i \lambda X_j} = \sum_{j=1}^n \log\!\left(1 + \bigl(\EE e^{i \lambda X_j} - 1\bigr)\right), \tag{A} \]
+    and we want to show that this is equal to $\sum_{j=1}^n \bigl(\EE e^{i\lambda X_j} - 1\bigr) + o(1)$ (which we will denote (B)). Using the fact that $\smash{\abs{e^{ia} - 1 - ia} < \frac{a^2}{2}}$, we have
+    \[ \abs{\EE e^{i\lambda X_j} - 1} = \abs{\EE^{i \lambda X_j} - 1 - \EE i \lambda X_j} \leq \EE \abs{e^{i \lambda X_j} - 1 - i \lambda X_j} \leq \frac{\smash{\EE \lambda^2 X_j^2}}{2}. \]
+
+    \newpage
+    Since $\EE \lambda^2 X_j^2 \leq \lambda^2 \eps^2 + \EE \lambda^2 X_j^2 \mbf 1(\abs{X_j} > \eps) \to \lambda^2 \eps^2$ over $1 \leq j \leq n$ by the Lindeberg condition. Moreover, since $\eps > 0$ was arbitrary, we have
+    \[ \max_{1 \leq j \leq n} \EE \lambda^2 X_j^2 \taking{n \to \infty} 0. \]
+    Therefore, by the Taylor expansion of log, we have that $\abs{\log(1 + x) - x} \leq x^2$ for $\abs{x} < \frac{1}{2}$, so
+    \[ \abs{\log(1 + \EE e^{i\lambda X_j} - 1) - \bigl(\EE e^{i\lambda X_j} - 1\bigr)} \leq (\EE e^{i \lambda X_j} - 1)^2 \]
+    for all $1 \leq j \leq n$, as long as $n$ is sufficiently large. Therefore,
+    \[ \abs{\mathrm{(A)} - \mathrm{(B)}} \leq \sum_{j=1}^n \bigl(\EE e^{i\lambda X_j} - 1\bigr)^2 \leq \sum_{j=1}^n \left(\frac{\smash{\EE \lambda^2 X_j^2}}{2}\right)^2 = \frac{\lambda^4}{4} \sum_{j=1}^n (\EE X_j^2)^2 \leq \frac{\lambda^4}{4} \left( \max_{1 \leq j \leq n} \EE X_j^2 \right) \sum_{j=1}^n \EE X_j^2, \]
+    for which the max term goes to $0$ and the summation is equal to $1$, so the above is $o(1)$. Thus, (A) is equal to (B), and so it is enough to show that
+    \[ \sum_{j=1}^n \left(\EE e^{i\lambda X_j} - 1\right) \to -\frac{\lambda^2}{2} \]
+    to finish the proof. We will prove this properly next time, but for now we will give a heuristic:
+    \[ \sum_{j=1}^n \left(\EE e^{i\lambda X_j} - 1\right) = \sum_{j=1}^n \EE i \lambda X_j + \frac{\EE (i \lambda X_j)^2}{2} + \text{err.} = \sum_{j=1}^n \frac{-\lambda^2 \EE X_j^2}{2} + \text{err.} = -\frac{\lambda^2}{2} + \text{err.}, \]
+    for which the error is small because of the Lindeberg condition.
+    
+\end{proof}
+
+
