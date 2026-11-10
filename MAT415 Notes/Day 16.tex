@@ -1,0 +1,55 @@
+\section{Day 16: Decomposition Groups (Nov.\ 10, 2026)}
+Let $L/K$ be a Galois extension of number fields with Galois group $G = \Gal(L/K)$. Let $p \subset \SO_K$ be prime, and let $q \subset \SO_L$ be a prime lying over $p$. Previously, we defined the decomposition group
+\[ D(q \mid p) = D \{\sigma \in G \mid \sigma(q) = q\}, \]
+and
+\[ E(q \mid p) = E = \{\sigma \in G \mid \sigma(\alpha) \equiv \alpha \mod{q} \text{, for all $\alpha \in \SO_L$}\}. \]
+Then $E \subset D$ (note that the condition for $E$ is stronger than that of $D$; it asks us to preserve the equivalence class). We saw that there exists an isomorphism $D/E \to \Gal(\SO_L/q : \SO_K/p) = \ol G$. In particular, $D/E$ is a cyclic group of order $f(q/p)$.
+
+Last lecture, we proved that $L$ is an extension of $L_E$, which is an extension of $L_D$, which is an extension of $K$. Respectively, we have $e = \abs{L : L_E}$, $f = \abs{L_E : L_F}$, and $r = \abs{L_F : K}$ (where $e, f$ are the ramification and inertial indices of $q$ over $p$, and $r$ denotes the number of primes in $\SO_L$ over $p$).
+
+Specifically, $L_D$ is the smallest field extension in which $p$ splits into the ``correct'' number of primes, whence the ramification and inertial degree of $q_D$ over $p$ are $1$. Similarly, $q_E$ over $q_D$ has ramification degree $1$ and inertial degree $f$, and $q$ over $q_E$ has ramification degree $e$ and inertial degree $1$. The point is that we can always decompose Galois extensions $L/K$ into these two intermediate field extensions for which we have such nice properties.
+
+\begin{corollary} \label{cor:splitting_inert_primes}
+    Suppose $D \subset G$ is normal. Then $p$ splits into $r$ distinct primes in $L_D$. If $E \subset G$ is also normal in $G$, then each of them remains prime (i.e., ``is inert'') in $L_E$. Finally, each one becomes an $e$th power in $L$.
+\end{corollary}
+\begin{proof}
+    First, $D \subset G$ being normal implies that $L_D / K$ is Galois. All primes over $p$ behave the same way, i.e., $e = f = 1$, so there are $\abs{L_D : K} = r$ primes over $p$ in $L_D$. Moreover, there are $r$ primes over $p$ in $L_E$, as there are also $r$ primes over $p$ in $L$. Each prime $p'$ in $L_D$ over $p$ lies under a unique prime $p''$ in $L_E$ {\color{amethyst}(for now, regard $q_E$ as $p''$ and $q_D$ as $p'$)}, i.e.,
+    \[ p' \SO_{L_E} = (p'')^e \]
+    for $p'' \in \SO_{L_E}$ prime. Since $E \subset G$ is normal and $L_E/K$ is Galois, we have that $e(p'' / p) = e(q_E / p) = 1$, so $e(p'' / p') = 1$.
+
+    The point is, $p' \SO_{L_E}$ is prime, i.e., $p'$ is inert in $L_E$. Finally, $p'' \SO_L$ is the $e$th power of $p'$, because Galois implies that there's only one prime in $L$ over $p'$.
+\end{proof}
+
+Now, suppose $K \subset K' \subset L$, i.e., replace $K$ by a larger subfield $K'$. Then $L/K'$ is still Galois. If $K' = L_H$ for some subgroup $H \subset G$, then $\Gal(L/K') = H$. Consider $p' \coloneq \SO_{K'} \cap q$ for some prime over $p$ in $\SO_K$. Note that $D(q \mid p') = D \cap H$ and $E(q \mid p') = E \cap H$.
+
+\begin{theorem} \label{thm:largest_smallest_subfield}
+    \begin{enumerate}[(i)]
+        \item $L_D$ is the largest intermediate subfield of $L/K$ such that $e(p' / p) = f(p' / p) = 1$.
+        \item $L_D$ is the smallest $K'$ such that $q$ is the only prime in $\SO_L$ over $p'$.
+        \item $L_E$ is the largest $K'$ such that $e(p' / p) = 1$.
+        \item $L_E$ is the smallest $K'$ such that $q$ is totally ramified over $p'$.
+    \end{enumerate}
+\end{theorem}
+
+\newpage
+\begin{proof}
+    We already proved that $L_D, L_E$ have the relevant properties. It remains to show the ``largest'' and ``smallest'' assertions. Suppose $K' = L_H$ such that $q$ is the only prime over $p' \coloneq q \cap \SO_K'$. We have every $\sigma \in H = \Gal(L/K')$ sends $q$ to a smaller prime over $p'$. Thus, $\sigma(q) = q$ for all $\sigma \in H$ implies $H \subset D$, so $L_D \subset L_H$. This proves (ii).
+
+    For (i), suppose $e(p' / p) = f(p' / p) = 1$. Then we get $e(q / p') = e' = e$ and $f' = f$ by multiplying out. Specifically, we already established that
+    \[ \abs{L : L_E} = e, \quad \abs{L_E : L_D} = f, \quad \abs{L_D : K} = r. \]
+    If we also have
+    \[ \abs{L : L_{E'}} = e', \quad \abs{L_{E'} : L_{D'}} = f', \quad \abs{L_{D'} : K'} = r' \]
+    with $K' / K$, for which $L_{E'} / L_E$ and $L_{D'} / L_D$, then, since $\abs{L : L_{D'}} = \abs{L : L_D}$ so $e = e'$, then $L_D = L_{D'}$, then $K' \subset L_D$. It follows that we have $L_D$ as the largest intermediate subfield of $L/K$ with the desired property.
+
+    The proofs of (iii) and (iv) follow analogously.
+\end{proof}
+
+\begin{corollary} \label{cor:prime_splits_completely_normal_subgroup_of_galois}
+    If $D \subset G$ is a normal subgroup, then $P$ splits completely in $K'$ if and only if $K' \subset L_D$.
+\end{corollary}
+{\color{amethyst} Here, Rozenblyum clarifies that splitting completely means $e = f = 1$ for all primes lying over $P$.}
+\begin{proof}
+    If $P$ splits completely in $K'$, then $e(p' / p) = f(p' / p) = 1$, so $K' \subset L_D$ (by (i) from \ref{thm:largest_smallest_subfield}). Moreover, $P$ splitting completely in $L_D$ implies that it splits completely in any smaller extension.
+\end{proof}
+
+We will continue this proof next lecture.
