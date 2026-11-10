@@ -1,0 +1,67 @@
+\section{Day 17: Quasicoherent Modules (Nov.\ 10, 2026)}
+To start... rings are to affine schemes, as modules are to quasicoherent schemes. We can think of these as ``upgrades''.
+
+\begin{definition} \label{defn:O_X-module}
+    For a scheme $X$, an $\SO_X$-module is a sheaf $\SF$ such that each $\SF(U)$ has an $\SO_X(U)$ structure compatible with restrictions.
+\end{definition}
+In particular, in addition to the module property of $(rs)m = r(sm)$, we also ask that the following diagram commute,
+\[
+    \begin{tikzcd}
+        \SO_X(U)  \times \SF(U) \arrow[r] \arrow[d] & \SF(U) \arrow[d] \\ \SO_X(U) \times \SF(U) \arrow[r] & \SF(U)
+    \end{tikzcd}
+\]
+We give a few examples.
+\begin{enumerate}[(i)]
+    \item Let $X$ be an integral scheme. It has a unique ``generic point'' $\xi$ (this exists in an affine open $\xi_i \in \Spec R_i$, where $\Spec R_i$ and $\ol \xi_i^c$ are disjoint open sets). Using that $\SO_{X, \xi} = \Frac(R_i)$, we get that
+    \[ K_X(U) = \begin{cases} K_X & \text{if $U \neq \emptyset$}, \\ 0 & \text{if $U = \emptyset$}, \end{cases} \]
+    where $K_X$ is seen as the ``fraction field'' of $\SO_{X,\xi}$. $\SO_X(U)$ acts on $K_X$ by multiplication, and restricting $\SO_X(U) \to \SO_{X,\xi}$ has an obvious diagram
+    \[ \begin{tikzcd} 
+        \SO_X(U) \otimes K_X \arrow[r] \arrow[d] \arrow[dd, bend right = 65] & K_X \arrow[d] \arrow[dd, bend left = 35] \\
+        \SO_X(U) \otimes K_X \arrow[r] \arrow[d] & K_X \arrow[d] \\
+        \SO_X(U) \otimes K_X \arrow[r] & K_X \\
+    \end{tikzcd} \]
+    \vspace{-36pt}
+    \item Let $\phi \colon Y \to X$ be a morphism. Then $\phi_X \SO_y$ has an $\SO_X$-module structure,
+    \[ \SO_X(U) \times \SO_Y(\phi\inv(U)) \to \SO_Y(\phi\inv(U)). \]
+    This comes from the data $\SO_X \to \phi_X(\SO_Y)$, with the diagram
+    \[ \begin{tikzcd}
+        \SO_X(\phi\inv(U)) \times \SO_Y(\phi\inv(U)) \arrow[d] \arrow[r] & \SO_Y(\phi\inv(U)) \arrow[d] \\
+        \SO_Y(\phi\inv(Y)) \times \SO_X(\phi\inv(U)) \arrow[r] & \SO_Y(\phi\inv(U))
+    \end{tikzcd} \]
+    \item $\SO_{\PP_\RR^1}(a_1 P_1 + \dots + a_k P_k) (U)$ is equal to all the element of $K_{\PP_\RR^1}$, where $P_1, \dots, P_k$ are closed sets of $\PP_\RR^1$. This has poles of order $\sum a_i$ at $P_i$ for all $i$. Multiplying by $\SO_X(U)$ can't make poles worse.
+\end{enumerate}
+
+\newpage
+\begin{definition} \label{defn:sheaf_of_modules} % idk what to call this xd
+    Given an $R$-module $M$, we define $\tilde M$ to be the sheaf of $\SO_{\Spec R}$-modules with
+    \[ \tilde M(U) = \left\{(m_\kp) \in \prod_{\kp \in U} M_{\kp} \mid (m_\kp) \text{ is compatible} \right\}. \]
+    Note that $M_f \coloneq M \otimes_R R_f$, so $M_\kp = M \otimes_R R_\kp$.
+\end{definition}
+
+For all $p$, there exists $f \notin p$ and $f^{-n} m \in M_f$ such that the image of $f^{-n} m$ in $M_\kq$ is $m_\kq$ for all $\kq \in U$.
+
+\begin{theorem} \label{thm:sections_of_sheaf_of_modules}
+    We have $\Gamma \tilde M = M$, and $\tilde M(D(f)) = M_f$. We also have that the germ $\tilde M_\kp = M_\kp$, and $\tilde M \rvert_{D(f)} = \tilde{M_f}$.
+\end{theorem}
+\begin{proof}
+    First, $\smash{\restr{\tilde M}{D(f)}}$ is, by definition, $\tilde{M_f}$. We also have that $(M_f)_\kp = M_\kp$ if $f \notin \kp$. We now need to check that $\Gamma \tilde M = M$. Note that there exists a map $M \to \Gamma \tilde M$, where $m \mapsto (m)_\kp$. We want to show that the map is injective, i.e., if $m_\kp = 0$ for all $\kp$, then $m = 0$. Indeed,
+    \[ m = 0 \text{ in $M_\kp$} \Leftrightarrow \exists f \notin \kp \text{ s.t. } fm = 0 \text{ in $M$}. \]
+    If we look at the annihilator $\opname{Ann}_R(m) \subset R$, we see that $\opname{Ann}_R(m) = R$ implies that $1 \in \opname{Ann}_R(m)$, which implies $m = 0$.
+
+    We also want to show that the map is surjective. Given a couple of germs, we want to glue. $\Spec R$ is quasicompact, so there exists $f_1, \dots, f_n$ such that $(f_1, \dots, f_n) = (1)$, for which the germs come from $f_i^n m_i \in M_{f_i}$. From here, we can redo the proof of the sheaf property of rings, and this glues an $m \in M$ satisfying our properties.
+
+    From here, $\tilde M(D(f)) = \Gamma \restr{\tilde M}{D(f)} = \Gamma \tilde{M_f} = M_f$.
+\end{proof}
+
+\begin{theorem} \label{thm:specifying_maps_for_map_of_O_X-modules}
+    A map of $\SO_X$-modules $\tilde M \to \SF$ is equivalent to specifying $M \to \Gamma \SF$.
+\end{theorem}
+\begin{proof}
+    The forwards direction is obvious by taking global sections (taking $\Gamma$).
+
+    The converse direction is more difficult. Consider that $\tilde M(D_f)) = M_f$, which has a map to $(\Gamma \SF)_f$, which also has a map to $\SF(D(f))$. By taking limits, we get $\tilde M_\kp \to \tilde \SF_\kp$. In this way, we can define $\tilde M \to \SF$ by mapping compatible germs to compatible germs (as $\SF$ is a sheaf), i.e., $\prod \tilde M_\kp \to \prod \SF_\kp$. We can check that composition is preserved.
+\end{proof}
+
+\begin{definition} \label{defn:quasicoherent}
+    $\SF$, an $\SO_X$-module, is \textit{quasicoherent} if there exists an open affine covering by $\Spec R_i$ such that $\restr{\SF}{\Spec R_i} \cong \tilde M_i$ for $R_i$-modules $M_i$.
+\end{definition}
