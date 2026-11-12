@@ -1,1 +1,77 @@
-\section{Day 15: (Nov.\ 5, 2026)}
+\section{Day 15: Ramification and Inertial Indices for Cyclotomic Fields (Nov.\ 5, 2026)}
+Today, we talk about cyclotomic fields. Consider $\QQ(\zeta_n)$ with $\zeta_n = e^{2\pi i / n}$. We saw that the ring of integers is given by $\ZZ[\zeta_n]$, with degree $\varphi(u)$, and the discriminant was also previously discussed. We would like to ask, how do primes split in $\ZZ[\zeta_n]$? There are two cases. If $p \nmid n$, then $p$ is unramified because it does not divide into the discriminant, and there is the case when $p \mid n$.
+
+\begin{theorem} \label{thm:ramification_inertia_number_of_primes_for_cyclotomic}
+    Suppose $p \nmid n$. Then every prime above $p$ in $K_n = \QQ(\zeta_n)$ has $e = 1$, $f = \ord_n(p)$, and $r = \varphi(n) / f$.
+\end{theorem}
+Specifically, there are $r$ primes above $p$, of which each such prime is unramified, with $\ord_n(p)$ inertial degree.
+
+\begin{proof}
+    We already know that $e = 1$. We'll compute $f$ and $r$ as follows. Recall that
+    \[ f = \coor{\ZZ[\zeta_n] / q : \FF_p}, \]
+    where $q \subset \ZZ[\zeta_n]$ is a prime over $p$. Let $K = \ZZ[\zeta_n] / q$, which is a finite field. We claim that $\zeta_n$ has order of exactly $n$ in $K$. Let us reduce $f(x) = x^n - 1 = \prod_{i=0}^{n-1} (x - \zeta_n^i)$ modulo $q$; since $p \nmid n$, $n$ is invertible in $K$, so $f(x)$ and $f'(x) = n x^{n-1}$ are relatively prime in $K[x]$. From here, $f(x)$ has $n$ distinct roots in $K$, since otherwise, a smaller power of $\ol \zeta_n$ would be $1$ in $K$.
+\end{proof}
+
+We now talk about some general facts about finite fields. $K/\FF_p$ is a finite extension, and $\varphi \colon x \mapsto x^p$ is a field automorphism of $K$. Observe that $\coor{K : \FF_p} = n$ if and only if $n$ is the smallest number such that $\varphi^n \colon K \to K$ is the identity.
+
+To prove this, suppose $\coor{K : \FF_p} = n$; then $\abs{K} = p^n$ and $\abs{K^\times} = p^n - 1$. For all $\alpha \neq 0$, $\alpha^{p^n - 1} = 1$ in $K$ implies that $\alpha^{p^n} = \alpha$ for all $\alpha \in K$, i.e., $\varphi^n \colon K \to K$, given by $\varphi^n(\alpha) = \alpha^{p^n}$ is the identity.
+
+Now, suppose $\varphi^n \colon K \to K$ is the identity; then $\alpha^{p^n} = \alpha$ for all $\alpha \in K$, meaning every element of $K$ is a root of $x^{p^n} - x = 0$. This polynomial can have at most $p^n$ roots, so $\abs{K} \leq p^n$.
+
+We want to know $\abs{K : \FF_p}$. By construction, $K = \FF_p[\ol \zeta_n]$; the upshot is that $f = \abs{K : \FF_p}$, which is precisely the smallest $s$ such that
+\[ \ol \zeta_n^{p^s} = \ol \zeta_n \implies \ol \zeta_n^{p^s - 1} = 1. \]
+By the above, we get $n \mid p^s - 1$, so $f = \ord_n(p)$.
+
+As an example, for $p \nmid n$, $p$ splits completely if and only if $p \equiv 1$ modulo $n$.
+\begin{theorem} \label{thm:ramification_inertia_number_of_primes_for_cyclotomic_pt2}
+    For $p$ prime, write $n = p^a m$, with $p, m$ coprime and $a \geq 0$. Then
+    \[ p \SO_K = (q_1 \dots q_r)^e \]
+    with distinct primes $q_i$, and $e = \varphi(p^a)$, $f = \ord_m(p)$, and $r = \frac{\varphi(m)}{f} = \frac{\varphi(n)}{\varphi(p^a) f}$.
+\end{theorem}
+\begin{proof}
+    Let $E = K_{p^a}$ and $F = K_m$; then $K_n = EF$. In $E$, there is one prime above $p$ with ramification index $e_0 = \varphi(p^a)$. In $F$, there are
+    \[ r_0 = \frac{\varphi(m)}{\ord_m(p)} \]
+    primes above $p$, each with index of inertia $f_0 = \ord_m(p)$. Let $q \subset K_n$ be a prime above $p$. We have $e(q / p) \geq e_0$ and $f(q / p) \geq f_0$, with the number of primes in $K_n$ above $p$ at least $r_0$ (i.e., the number of primes in $K_m$ above $p$).
+    
+    \newpage
+    Thus,
+    \[ \abs{K_n : \QQ} = e_0 \varphi(m) = \sum_{q \mid p} e(q / p) f(q / p) \geq r_0 e_0 f_0 = \frac{\varphi(m)}{\ord_m(p)} \varphi(p^a) \ord_m(p) = \varphi(m) \varphi(p^a) = \varphi(n). \]
+    It follows that $r = r_0 = \frac{\varphi(m)}{\ord_m(p)}$, $e = e_0 = \varphi(p^a)$, and $f = f_0 = \ord_m(p)$.
+\end{proof}
+
+We ask, which primes ramify in $K_n$? Odd ramified primes are exactly the odd prime divisors of $n$, and $2$ is ramified if and only if $4 \mid n$, for which the index of ramification is
+\[ e = \varphi(p^a) = p^{a-1} (p - 1), \]
+which is greater than $1$ if and only if $p^a > 2$.
+
+We now discuss prime decomposition in Galois extensions. Let $L/K$ be a Galois extension of number fields with $G = \Gal(L/K)$. First, $\abs{G} = \abs{L : K}$. Let $p \subset \SO_K$ be prime. Recall that $G$ permutes primes in $\SO_L$ over $p$ (i.e., primes $q \subset \SO_L$ over $p$).
+
+\begin{definition} \label{defn:decomposition_inertia_group}
+    We define $D = D(q/p) = \{\sigma \in G \mid \sigma q = q\} \subset G$ to be the \textit{decomposition group}. We define $E = E(q/p) = \{\sigma \in G \mid \forall \alpha \in \SO_L, \, \sigma(\alpha) \equiv \alpha \mod q\} \subset G$ to be the \textit{inertia group}.
+\end{definition}
+Notice that $E \subset D$. Denote $q = \{\alpha \in \SO_L \mid \alpha \equiv 0 \mod q\}$. We see that $G$ acts on $L$; in fact, $G$ acts on $\SO_L$, and by definition of $D$, $D$ acts on $\SO_L / q$, i.e., if $\alpha \equiv \beta$ mod $q$, there exists some $\sigma \in D$ such that $\sigma(\alpha) \equiv \sigma(\beta)$ modulo $q$. We also have that $\sigma(\alpha) - \sigma(\beta) = \sigma(\alpha - \beta) \in q$ if $\alpha - \beta \in q$. We have a group homomorphism
+\[ D \to \Gal(\SO_L/q : \SO_K/p) = \ol G, \]
+which is a cyclic group of order $f$. The kernel of this map is exactly $E$. $D/E \hookrightarrow \ol G$ (and we wlil soon see that $D/E \cong \ol G$).
+
+Since $E \subset D \subset G$, they define intermediate fields
+\[ L_E = \{x \in L \mid \sigma x = x, \, \forall \sigma \in E\}, \]
+with $L_D$ defined similarly. We call these the inertia and decomposition fields respectively. Define, for $X \subset L$ and $H \subset G$, $X_H \coloneq L_H \cap X$. Suppose $q \subset \SO_L$ is a prime over $p \subset \SO_K$ with $e(q/p) = e$, $f(q/p) = f$, and $r(q/p) = r$.
+
+\begin{theorem} \label{thm:degrees_of_decomposition_inertial_field}
+    $L_D/K$ has degree $r$ and $q_D \subset \SO_{L_D}$ is prime over $p$ has ramification index $1$ and inertal degree $1$.
+\end{theorem}
+\begin{proof}
+    $\abs{L_D : K}$ is the index of $D$ in $G$, where $G$ acts on the primes in $\SO_L$ over $p$, so we may think of $D$ as the stabilizer of $q$. The primes in $\SO_L$ over $p$ are then realized as $G/D$, for which there are $r$ primes in $\SO_L$ over $p$. Since $\#\{G/D\} = r$, we get that $\abs{L_D : K} = r$. Now, let's show that $e(q_D / p) = f(q_D / p) = 1$. The extension $L / L_D$ is Galois with Galois group $D$, upshot being that the only prime in $L$ over $q_D$ is $q$, as $\Gal(L/L_D) = D$ permutes primes over $q$, but $D$ fixes $q$.
+
+    Thus, $\abs{L:L_D} = e(q/q_D) f(q/q_D)$. We also have that $\abs{L:L_D} = ef$ because $\abs{L:K} = n = ref$, and $\abs{L_D:K} = r$, and
+    \[ e(q / q_0) \leq e, f(q / q_0) \leq f \implies e(q / q_D) = e, f(q / q_D) = f, \]
+    so $e = e(q_D/p) e(q/q_D)$ and $f = f(q_D/p) f(q/q_D)$, whence $e(q_D/p) = f(q_D/p) = 1$.
+\end{proof}
+
+\newpage
+Now, consider $L/K$ with intermediate field $L_E, L_D$ (just like earlier), and associated $q, q_E, q_D, p$. We claim that $f(q/q_E) = 1$. Equivalently, $\SO_L/q \cong \SO_{L_E}/q_E$. To show this isomorphism, it is enough to check that the Galois group of $\SO_L/q$ over $\SO_{L_E}/q_E$ is trivial. Since, for $\theta \in \SO_L/q$, the polynomial $(x - \theta)^m$ has coefficients in $\SO_{L_E} / q_E$ for some $m \geq 1$, this implies that $\sigma(\theta) = \theta$ for every element of the Galois group. For any $\alpha \in \SO_L$ corresponding to $\theta$, the polynomial
+\[ g(x) = \prod_{\sigma \in E} (x - \sigma \alpha) \]
+has coefficients in $\SO_{L_E}$. By reducing modulo $q$, we get that $\ol g(x) \in (\SO_L / q)[x]$ has coefficients in $\SO_{L_E} / q_E$, and $\ol g(x) = (x - \theta)^m$, and $m = \abs{E}$.
+
+Thus, $f(q / q_E) = 1$. Recalling that $f(q_D/p) = 1$, we get that $f(q_E/q_D) = f$, since
+\[ f = f(q/p) = f(q/q_E) f(q_E/q_D) f(q_D/p), \]
+for which the first and third terms are $1$. Now, $\abs{L_E : L_D} \geq f(q_E/q_D) = f$. $E$ is a normal subgroup of $D$, so $L_E/L_D$ is Galois with Galois group $D/E$. We already saw that $\abs{D/E} \leq f$, since $D/E \hookrightarrow \ol G$, so $\abs{D/E} = f$ and $D/E \cong \ol G$.
