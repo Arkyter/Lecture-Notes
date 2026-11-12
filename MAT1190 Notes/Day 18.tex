@@ -1,0 +1,80 @@
+\section{Day 18: Image, Quotient, Cokernel Sheaves, Surjectivity of Sheaves, CLosed Immersions (Nov.\ 12, 2026)}
+Today, we will talk about image sheaves, quotient sheaves, cokernels of sheaves, and surjectivity of sheaves. First, $\SCF \to \SCG$ is injective if $\SCF(U) \to \SCG(U)$ is injective for all $U$. Injective means that the kernel of the map is $0$. If we define
+\[ \ker(\SCF \to \SCG)(U) \coloneq \ker(\SCF(U) \to \SCG(U)), \]
+then this is a sheaf!
+
+\begin{theorem} \label{thm:localization_sheaf_injectivity}
+    We say that $\SCF \to \SCG$ is \textit{injective} if and only if the maps on germs, $\SCF_x \to \SCG_x$, is injective for all $x \in X$.
+\end{theorem}
+In particular, $\ker(\SCF \to \SCG)_x = \ker(\SCF_x \to \SCG_x)$.
+\begin{proof}
+    Left as a {\color{amethyst}(fun)} exercise.
+\end{proof}
+
+We define $\Img(\SCF \to \SCG)$ to be the \textit{sheafification} of $U \mapsto \Img \SCF(U)$. If $\SCF \hookrightarrow \SCG$, then $\SCG / \SCF$ is a sheaf of $U \mapsto \SCG(U)/\SCF(U)$. We also define $\coker(\SCF \to \SCG)$ to be the sheaf of $\coker(\SCF(U) \to \SCG(U))$.
+
+In general, if we have to sheafify something to make it work, then we will.
+
+\begin{theorem} \label{thm:localization_sheaf_image_quotient_cokernel}
+    $\Img(\SCF \to \SCG)_x = \Img(\SCF_x \to \SCG_x)$, $(\SCG/\SCF)_x = (\SCG_x/\SCF_x)$, $\coker(\SCF \to \SCG)_x = \coker(\SCF_x \to \SCG_x)$.
+\end{theorem}
+The idea of each to proving each of the above is that sheafification does not change germs. As an example, consider $Z = \{0, \infty\}$, and $X = \PP_\CC^1$, and consider the map $\iota \colon \{0, \infty\} \to \PP_\CC^1$.
+
+We claim that this is surjective, but it is not surjective on global sections. First, $\Gamma \SO_X = \CC$, for which we may write $(\iota_X \SO_Z)(X) = \SO_Z(Z) = \Gamma \SO_Z = \CC \times \CC$, so the map $\SO_X \to \iota_X \SO_Z$ is given by $c \mapsto (c, c)$. Now, to check for surjectivity, observe that the maps $\SO_{X, x} \to (\iota_X \SO_Z)_x$ are rational functions in $\CC[x]$ with no poles at $x$.
+
+Surjectivity is moreso about the ability to model local things with thing in the domain, instead of the ability to glue them together (as we saw the problem above).
+
+\begin{theorem} \label{thm:categorical_equivalence_quasicoherent_sheaves}
+    The correspondence $M \to \tilde M$ (an assignment of $R$-modules to $\tilde M$ on $\Spec R$) is an equivalence of categories from $R$-modules to sheaves of the form $\tilde M$. This functor is exact, meaning that
+    \[ 0 \to M \to N \to P \to 0 \quad \leadsto \quad 0 \to \tilde M \to \tilde N \to \tilde P \to 0. \]
+\end{theorem} \vspace{-8pt}
+\begin{proof}
+    We already showed that $\tilde M \to \SCF$ is equivalent to $M \to \Gamma \SCF$. For exactness, check that
+    \[ 0 \to \tilde M_p \to \tilde N_p \to \tilde R_p \to 0 \]
+    is exact for all $p \in \Spec R$, given that $0 \to M_p \to N_p \to R_p \to 0$ is exact. It is left as an exercise to check that localization of modules is exact, for which we would see that the two short sequences above are always exact.
+\end{proof}
+
+\begin{theorem} \label{thm:pushforward_of_tilde_modules}
+    Let $\phi \colon R \to S$ be a ring map, and let $M$ be an $S$-module. $\phi^\ast \colon \Spec S \to \Spec R$ yields $\phi_\ast \tilde M = {}_R \tilde M$, where ${}_R M$ means $M$ considered as an $R$-module.
+\end{theorem}
+\begin{proof}
+    $\phi_\ast(M)(\Spec R) = {}_R M$, and this induces $\wt{{}_R M} \to \phi_\ast(\tilde M)$. We want to show that this is an isomorphism. For any $f \in R$, $\wt{{}_R M}(D(f)) = {}_{R_\kp} M_{\psi(f)}$, and $(\phi_\ast \tilde M)(D(f)) = \wt{{}_R M} (D(\psi(f))) = {}_{R_f} M_{\psi(f)}$. Taking limits over basic open sets containing $x$, we get
+    \[ (\wt{{}_R M})_X \to (\phi_\ast (\tilde M)_x), \]
+    so the sheaves are isomorphic.
+\end{proof}
+
+\begin{theorem} \label{thm:quasicoherent_sheaf_isomorphism_to_tilde_module}
+    If $\SCF$ is quasicoherent on $X$, then, for all open affine $\Spec k \subset X$, we have that $\restr{\SCF}{\Spec R} \cong \tilde M$ for some $R$-module $M$.
+\end{theorem}
+\begin{proof}
+    We will use the affine communication lemma \ref{thm:affine_communication_lemma}. First, if $\restr{\SCF}{\Spec R} = \tilde M$, then $\restr{\SCF}{\Spec R_f} = \wt{M_f}$. If $(f_1, \dots, f_k) = (1)$ in $R$, then $\restr{\SCF}{\Spec R_f} \cong \smash{\wt{M_i}}$. We want to show that there exists an $R$-module $M$ such that $\SCF \cong \tilde M$. The key observation that only uses that $\SCF$ is a sheaf, is that
+    \[ \SCF \cong \opname{Equalizer}\left(\prod_{i} (\iota_i)_\ast \restr{\SCF}{U_i} \rightrightarrows \prod_{i < j} (\iota_{i,j})_\ast \restr{\SCF}{U_i \cap U_j}\right), \]
+    given by $(a_i) \mapsto (b_{ij})$ by $\smash{b_{ij} = \restr{a_i}{U_i \cap U_j} = \restr{a_j}{U_i \cap U_j}}$, and $\iota_i \colon U_i \to X$ and $\iota_{i,j} \colon U_i \cap U_j \to X$ for $X$ covered by $U_i$. This fact is extremely useful when you understand the pushforward maps in a sheaf. 
+
+    In this manner, $(\Spec R_{f_i}) \cap (\Spec R_{f_j}) = \Spec R_{f_i f_j}$, and
+    \[ \restr{\SCF}{\Spec R_{f_i f_j}} = \left(\restr{\SCF}{\Spec R_{f_i}}\right)\biggr\rvert_{\Spec R_{f_i f_j}} = \restr{\wt{M_i}}{\Spec R_{f_j}} = \wt{(M_i)_{f_j}}, \]
+    which is also equal to $\wt{(M_j)_{f_i}}$ by swapping orders in the construction. Thus,
+    \[ \SCF = \ker \left(\prod {}_R \wt{M_i} \to \prod {}_R \wt{M_{ij}}\right) = \wt{\ker \left(\prod {}_R {M_i} \to \prod {}_R {M_{ij}}\right)}. \qedhere \]
+\end{proof}
+
+\begin{definition} \label{defn:closed_immersion}
+    A \textit{closed immersion} $\phi \colon Z \to X$ is a morphism of schemes such that there is an open cover of $X$ by open affine $\Spec R$ such that $\phi\inv(\Spec R_i) \cong \Spec R_i / I_i$.
+\end{definition}
+
+As a note, from the definition, $\phi$ is an injection from $Z$ homeomorphically onto a closed subset of $X$.
+
+\begin{theorem} \label{thm:closed_immersion_induces_qc_sheaf_of_ideals}
+    For a closed immersion, let $\SCI = \ker(\SO_X \to \phi_X Z)$. Then $0 \to \SCI \to \SO_X \to \phi_\ast \SO_Z \to 0$ is a short exact sequence, and $\SCI \subset \SO_X$ is a quasicoherent module. In particular, it is a quasicoherent sheaf of ideals (ideals are submodules of a ring)! 
+\end{theorem}
+\begin{proof}
+    For $\SO_X \to \iota_X \SO_Z$, restrict to one of the open affine $\Spec R \subset X$ such that $\iota\inv(\Spec R) \cong \Spec R /I$. Restricted to $\Spec R$, this is $\tilde R \to \wt{R/I}$, which is surjective. The definition of $\SCI$ restricted to $\Spec R$ shows $\restr{\SCI}{\Spec R} = \ker(\tilde R \to \wt{R/I}) = \tilde I$.
+\end{proof}
+
+\begin{theorem} \label{thm:qc_sheaf_of_ideals_induces_closed_immersion}
+    A quasicoherent sheaf of ideals $\SCI \subset \SO_X$ induces a closed immersion.
+\end{theorem}
+\begin{proof}
+    $Z = \{x \in X \mid I_x \neq \SO_{X,x}\}$. $Z \cap \Spec R = \{\kp \in \Spec R \mid I_\kp \neq R_\kp\} = Z(I)$, for which the condition $I_\kp \neq R_\kp$ is the same as $I \subset \kp$ implying $R_\kp/I_\kp = (R/I)_{\kp} \neq 0$. We want $Z \cap \Spec R \cong \Spec R/I$. $\SO_Z(U)$ is defined as the compatible germs in $\prod_{x \in U} \SO_{X,x} / I_{X,x} \cong \SO_{\Spec R/I}(U)$.
+\end{proof}
+
+{\color{amethyst} Alright... we'll keep plowing through Chapter 2... no more learning, only Hartshorne.}
