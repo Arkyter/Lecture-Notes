@@ -16,7 +16,7 @@ converges a.s.. Last time, we demonstrated that convergence in probabiliity is e
 
 \begin{lemma}[Panchenko \S2.7: Kronecker's lemma] \label{lem:kronecker_lemma}
     If $x_m, b_m$ are real sequences with $b_m \uparrow \infty$ and
-    \[ \sum_{m=1}^\infty \frac{X_m}{b_m} \]
+    \[ \sum_{m=1}^\infty \frac{x_m}{b_m} \]
     converges, then $b_n\inv \sum_{m=1}^n x_m \to 0$ as $n \to \infty$.
 \end{lemma}
 \begin{proof}
@@ -38,7 +38,7 @@ converges a.s.. Last time, we demonstrated that convergence in probabiliity is e
 \end{proof}
 
 \begin{corollary} \label{cor:asymptotic_bound_of_S_n}
-    Let $(X_i : i \in \NN)$ be i.i.d., $\EE X_1^2 < \infty$, and $\EE X_1 = \mu$. Then
+    Let $(X_n)_{n \geq 1}$ be i.i.d., $\EE X_1^2 < \infty$, and $\EE X_1 = \mu$. Then
     \[ \frac{S_n - n \mu}{n^{1/2} (\log n)^{1/2 + \eps}} \to 0 \quad \text{(a.s.)}. \]
 \end{corollary} \vspace{-8pt}
 \begin{proof}
@@ -49,7 +49,7 @@ As an aside, consider $\EE X_i = 0$. Then
 \[ \frac{S_n}{n^{1/2} \sqrt{\log \log n}} \taking{a.s.} \sqrt{2 \EE X_1^2}. \]
 See \href{https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm}{this} for a reference on the law of the iterated algorithm. Moreover, the regular strong law of large numbers can be realized as a corollary of the Kolmogorov SLLN is as follows,
 \begin{corollary} \label{cor:kolmogorov_lln_shortcut}
-    If $X_i$ are i.i.d.\, $\EE X_1 = 0$, then
+    If $X_i$ are i.i.d., $\EE X_1 = 0$, then
     \[ \frac{S_n}{n} \to 0 \quad \text{(a.s.)}. \]
 \end{corollary} \vspace{-8pt}
 \begin{proof}
@@ -65,7 +65,7 @@ See \href{https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm}{this} for
 \newpage
 We will now talk about the central limit theorem. Let $X_i$ be i.i.d., $\EE X_1 = 0$, and $\EE X_1^2 = 1$. Then $\Var S_n = n$. Thus suggests that $S_n$ typically lives in ``windows of size $\sqrt{n}$''. For example,
 \[ \PP(\abs{S_n} \geq \eps \sqrt{n}) \leq \frac{1}{\eps^2} \]
-by Chebyshev's. Our goal is understand $S_n / \sqrt{n}$; specifically, we want to show that it converges in some sense. As another example, consider the de Moivre--Laplace cnetral limit theorem: for $X_i = \pm 1$ with equal probability, we have that
+by Chebyshev's. Our goal is understand $S_n / \sqrt{n}$; specifically, we want to show that it converges in some sense. As another example, consider the de Moivre--Laplace central limit theorem: for $X_i = \pm 1$ with equal probability, we have that
 \[ \PP \left(\frac{S_n}{\sqrt{n}} \subset [a, b]\right) \leadsto \PP(N \subset [a, b]), \]
 where $N \sim N(0, 1)$, as $n \to \infty$. As a sketch,\footnote{erm... ick???}
 \[ \PP(S_n = k) = \binom{n}{n/2 + k/2} \left(\frac{1}{2}\right)^n. \]
@@ -74,7 +74,7 @@ Then you can just ``whack this with Sterling's formula''.\footnote{ick???? x2} C
 To talk about the central limit theorem, we should first formalize convergence of measures.
 
 \begin{definition} \label{defn:weak_measure_convergence}
-    Let $(S, d)$ be a metric spac, $(\PP_n, n \in \NN), \PP$ be probability measures on $(S, d)$ (with the Borel $\sigma$-algebra). We say $\PP_n \to \PP$ \textit{weakly} if
+    Let $(S, d)$ be a metric space, $(\PP_n, n \in \NN), \PP$ be probability measures on $(S, d)$ (with the Borel $\sigma$-algebra). We say $\PP_n \to \PP$ \textit{weakly} if
     \[ \int f \, d \PP_n \to \int f \, d\PP \]
     for all continuous bounded $f \colon (S, d) \to \RR$, i.e., $f \in C_b(S)$.
 \end{definition}
@@ -83,7 +83,7 @@ We have a few remarks about weak convergence to make.
 \begin{enumerate}[(i)]
     \item If $\PP_n \to \PP$ and $\PP_n \to \QQ$ (weakly), then $\PP = \QQ$. To see this, observe that
     \[ \int f \, d\PP = \int f \, d\QQ \]
-    for all $f \in C_b(S)$. Now, let $U$ be open, $f = U^c$, and $f_m(x) = \min\{1, d(x, F)\}$. Then $f_m \uparrow \mbf(U)$ pointwise, for which
+    for all $f \in C_b(S)$. Now, let $U$ be open, $F = U^c$, and $f_m(x) = \min\{1, m d(x, F)\}$. Then $f_m \uparrow \mbf 1(U)$ pointwise, for which
     \[ \int f_m \, d\PP = \int f_m \, d\QQ \leadsto \PP(U) = \QQ(u) \]
     by the dominated convergence theorem.
 
@@ -98,7 +98,7 @@ We have a few remarks about weak convergence to make.
     Let $(S, d)$ be a separable metric space with the Borel $\sigma$-algebra. Let $(\PP_n : n \in \NN)$, $\PP$ be probability measures on $(S, d)$. Then the following are equivalent.
     \begin{enumerate}[(i)]
         \item $\PP_n \to \PP$ weakly.
-        \item For all open sets $U \subset S$, $\lim_{n \to \infty} \PP_n(U) \geq \PP(U)$.
+        \item For all open sets $U \subset S$, $\liminf_{n \to \infty} \PP_n(U) \geq \PP(U)$.
         \item For all closed sets $F \subset S$, $\limsup_{n \to \infty} \PP_n(F) \leq \PP(F)$.
         \item For all continuity sets $A$ for $\PP$, $\PP_n(A) \to \PP(A)$. We call $A$ a \textit{continuity set} for $\PP$ if $\PP(\ol A \setminus A^{\text{int}}) = 0$, i.e., the probability of $\partial A$.
     \end{enumerate}

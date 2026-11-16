@@ -44,7 +44,7 @@ converge in probability, but not almost surely?
 \begin{theorem}[Panchenko \S2.10: Kolmogorov's maximal inequality] \label{thm:kolmogorov_maximal_inequality}
     Let $(X_n)_{n \geq 1}$ be independent, $S_n = X_1 + \dots + X_n$. For $x \geq a > 0$,
     \[ \PP\left(\max_{1 \leq j \leq n} \abs{S_j} \geq x\right) \leq \frac{1}{1-p} \PP(\abs{S_n} > x - a), \]
-    where $\max_{1 \leq j \leq n} \PP(\abs{S_n - S_j} \geq \alpha) \leq p < 1$.
+    where $\max_{1 \leq j \leq n} \PP(\abs{S_n - S_j} \geq a) \leq p < 1$.
 \end{theorem}
 {\color{amethyst} To quote: ``the vanilla way to bound this... would be to do a union bound; but that's way too weak. This is basically the precursor to the concept of stopping time.''}
 \begin{proof}
@@ -85,7 +85,7 @@ As an exercise, demonstrate that $X_n \to Y$ almost surely if and only if $M_n \
     If $(X_i)_{i \geq 1}$ is a sequence of independent random variables with $\EE X_i = 0$ for all $i$ and $\sum_{i=1}^\infty \EE X_i^2 < \infty$, then $\sum_{i=1}^\infty X_i$ converges almost surely.
 \end{theorem}
 
-\begin{lemma} \label{lem:cauchy_in_probability}
+\begin{lemma}[Panchenko \S2.6] \label{lem:cauchy_in_probability}
     A sequence $(Y_n)_{n \geq 1}$ of random variables converges in probability if and only if
     \[ \lim_{n_0 \to \infty} \max_{n, m \geq n_0} \PP(\abs{Y_n - Y_m} > \eps) \to 0 \]
     for all $\eps > 0$. This condition is denoted as being \textit{Cauchy in probability}.

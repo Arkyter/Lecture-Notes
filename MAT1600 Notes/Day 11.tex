@@ -4,7 +4,7 @@ Let $(\PP_n)_{n \geq 1}$ be probability measures on $(\RR, \SB(\RR))$ (this work
 for all continuous and bounded functions $f \colon \RR \to \RR$. Note that this is the same as convergence in distribution!
 
 \begin{theorem}[Panchenko \S3.1] \label{thm:weak_convergence_in_law}
-    Let $(\PP_n)_{n \geq 1}, \PP$ be probability measures on $(\RR, \SB(\RR))$. Then $\PP_n \to \PP$ weakly if and only if $F_n(x) \to F(x)$ at all continuity points, where $(F_n)_{n \geq 1}, F$ are the CDFs of $(\PP_n)_{n \geq 1}, \PP$ respectively.
+    Let $(\PP_n)_{n \geq 1}, \PP$ be probability measures on $(\RR, \SB(\RR))$. Then $\PP_n \to \PP$ weakly if and only if $F_n(x) \to F(x)$ at all continuity points $x$ of $F$, where $(F_n)_{n \geq 1}, F$ are the CDFs of $(\PP_n)_{n \geq 1}, \PP$ respectively.
 \end{theorem}
 \begin{proof}
     The forwards direction follows immediately from the Portmanteau lemma \ref{thm:portmanteau}. If $x$ is a continuity point of $F$, then $P(\{x\}) = 0$, meaning $(-\infty, x]$ is a continuity set. The Portmanteau lemma then yields that
@@ -74,7 +74,7 @@ We now have three notions of random variables converging. We have almost sure co
 {\color{crimson} The proof is given in Panchenko, see page 73.}
 
 \begin{theorem}[Durrett \S8.1.1: Skorokhod's Representation Theorem] \label{thm:skorokhod_representation_theorem}
-    Suppose $X_n \to X$ in distribution. Then there exists a probability space $(\Omega, \SB, \PP)$ supporting random variables $(Y_n)_{n \geq 1}$ and $Y$ such that $Y_n \to X$ in distribution, $Y \to X$ in distribution, and $Y_n \to Y$ almost surely.
+    Suppose $X_n \to X$ in distribution. Then there exists a probability space $(\Omega, \SB, \PP)$ supporting random variables $(Y_n)_{n \geq 1}$ and $Y$ such that $Y_n = X_n$ in distribution, $Y = X$ in distribution, and $Y_n \to Y$ almost surely.
 \end{theorem}
 Note that $X_n \to X$ in probability or almost surely tells us about random variables. Convergence in distribution only tells us about laws.
 
