@@ -1,0 +1,40 @@
+\section{Day 19: More on Closed Immersions (Nov.\ 17, 2026)}
+Recall that a closed immersion $Z \hookrightarrow X$ (i.e., there exists an open affine cover of $X$ by $\Spec R$ such that its inverse image is $\Spec R/Z$) is equivalent to a quasicoherent sheaf of ideals $I \subset \SO_X$.
+
+\begin{theorem} \label{thm:affine_map}
+    Given $\phi \colon Y \to X$, if $X$ is covered by open affines whose preimages are open affine, then every preimage of open affines is open affine (i.e., $\phi$ is affine).
+\end{theorem}
+\begin{proof}
+    We will use the affine communication lemma on $X$.
+    \begin{enumerate}[(i)]
+        \item If $\Spec R \subset X$, we have $\phi\inv(\Spec R) = \Spec S$; then $\Spec R_f \subset \Spec R$ has the property that
+        \[ \phi\inv(\Spec R_f) = \phi\inv(D(f) \text{ in $\Spec R$}) = D(\text{img of $f$ in $S$}) = \Spec S_{\text{img of $f$}}. \]
+        \item Suppose $\phi\inv(\Spec R_{f_i}) \cong \Spec S_i$, where $(f_1, \dots, f_k) = (1) = R$. We want to show that \\ $\phi\inv(\Spec R) \cong \Spec S$ for some $S$. Let's start by guessing that $S$ is the equalizer of $\prod S_i \rightrightarrows \prod S_{ij}$, where
+        \[ \phi\inv(\Spec R_{f_i f_j}) = \phi\inv \bigr\rvert_{\Spec R_{f_i}} (D(f_j)) = \Spec (S_i)_{\text{img of $f_j$}} = \Spec (S_j)_{\text{img of $f_i$}}. \]
+        We want to show that $Y = \Spec S$; what we know currently, is that there exists a map \\ $S \to \Gamma(\phi\inv(\Spec R))$, so this furnishes a map $\phi\inv(\Spec R) \to \Spec S$. We have maps $R \to R_f \to S_i$, giving a map $\psi \colon R \to S$. Looking at $D(\psi(f_i)) \subset \Spec S$, we claim that the preimage in $\phi\inv(\Spec R)$ is $\Spec S$, and $S_{\psi(f_i)} = S_i$.
+
+        The preimage of $D(\psi(f_i))$ in $\Spec S$ in $\phi\inv(\Spec R)$ is $D(\text{image of $\psi(f_i)$ in $\Gamma \phi\inv(\Spec R)$})$, which is equal to $\phi\inv(\Spec R_i) = \Spec S_i$, and
+        \[ S_{\psi(f_i)} = \text{Equalizer of } \prod (S_j)_{f_i} \to \prod (S_{jk})_{f_i} = S_i. \]
+        This describes sections of $\Spec S_i$ and $\smash{\Spec (S_i)_{f_i}}$ using the double cover
+        \[ \Spec S_i = \bigcup_{j=1}^i \bigl(\Spec S_j \cap \Spec S_i\bigr). \qedhere \]
+    \end{enumerate}
+\end{proof}
+\begin{theorem} \label{thm:closed_immersion_local_on_target}
+    Closed immersions are local on target, i.e., $\phi\inv(\Spec R) = \Spec R/Z$ for all open $\Spec R \subset X$.
+\end{theorem}
+\begin{proof}
+    Given $\Spec R \subset X$, we know that, because $\phi$ is affine, that $\phi\inv(\Spec R) \cong \Spec S$. For $\Spec S \to \Spec R$, we want to show that $S = R/I$; what we actually know about this map is that, we may pick an open cover of $\Spec R$ by basic open affine $\Spec R_{f_i}$ such that $S_f = R_{f_i} / I_i$, i.e., $R \to S$ is locally surjective. We want to show that $R \to S$ is globally surjective. Let us look at $\SO_{\Spec R} \to \phi_\ast \SO_{\Spec S}$.
+
+    Since $\tilde R \to \wt{{}_R S}$ is surjective on open affine covers as sheaves, locally, $\wt{R_{f_i}} \to \wt{R_{f_i} / I_i}$ is surjective as sheaves because they are surjective as maps of $R_{f_i}$-modules. This means $\smash{\tilde R \to \wt{{}_R S}}$ is surjective, so $R \to {}_R S$ is surjective.
+\end{proof}
+
+\begin{definition} \label{defn:quasicoherent_sheaf_on_proj}
+    Let $S$ be an $\NN$-graded ring. Let $M$ be a $\ZZ$-graded $S$-module. Define a quasicoherent sheaf $\tilde M$ on $\opname{Proj} S$ as follows: $\tilde M(U)$ is given by the compatible elements of $\prod_{\kp \in U} M_{(\kp)}$. Locally, there exists $m/f^i$ of degree zero on $D_+(f)$ restricting to all germs $M_{(\kp)}$ for $\kp \in D_+(f)$.
+\end{definition}
+
+Observe that we have $\tilde M(D_+(f)) = M_{(f)}$, and $\tilde M$ is a quasicoherent sheaf. We now have that
+\[ (M_{(f)})_\kp = M_{(\kp)} \]
+satisfies the sheaf property for $\kp \in D_+(f)$ a prime in $S_{(f)}$. Moreover,
+\[ \restr{\tilde M}{D_+(f)} = \wt{M_{(f)}} \]
+leads to a map $\wt{M_{(f)}} \to \restr{\tilde M}{D_+(f)}$ (induced from $M_{(f)} \to \Gamma \restr{M}{D_+(f)}$) is an isomorphism on basic open affines, so it is injective and surjective on germs, so it is an isomorphism.
+
