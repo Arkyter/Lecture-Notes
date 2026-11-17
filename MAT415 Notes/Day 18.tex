@@ -1,0 +1,56 @@
+\section{Day 18: Prime Splitting in General Extensions (Nov.\ 17, 2026)}
+Today's goal is to understand prime splitting in general extensions. Let $K \subset L \subset M$ be number fields such that $M/K$ is Galois. Set $G = \Gal(M/K)$ and $H = \Gal(M/L) \subset G$, and let $p \subset \SO_K$ be a prime, and $q \subset \SO_M$ be prime over $p$. Recall that
+\[ D \coloneq D(q \mid p) = \{\sigma \in G \mid \sigma q = q\}. \]
+While this may have been observed previously, we now demonstrate that $D$ is a finite group with $\abs{D} = ef$. To see this, recall that $G$ acts on the primes over $p$ transitively: the stabilizer of $q$ is given by $D$, i.e.,
+\[ \frac{G}{D} \cong \{\text{primes over } p\}. \]
+By orbit--stabilizer, this means $\abs{G/D} = r$, whence $\abs{D} = ef$ (since $\abs{G} = ref$).
+
+Now, the $K$-embeddings $L \hookrightarrow M$ are in bijection with $G/H$. $D$ acts on $G/H$ by multiplication, and given $\sigma H \in G/H$, define
+\[ r_\sigma \coloneq \sigma\inv(q) \cap \SO_L, \]
+which is prime in $L$ over $p$. Note that the above definition only depends on $\sigma H$, since, for any $\sigma' = \sigma h$,
+\[ r_{\sigma'} = (\sigma h)\inv(q) \cap \SO_L = h\inv \sigma\inv q \cap \SO_L = \sigma\inv q \cap h(\SO_L) = \sigma\inv q \cap \SO_L = r_\sigma. \] \vspace{-20pt}
+\begin{proposition} \label{prop:equal_D_orbits}
+    For $\sigma_1, \sigma_2 \in G$, $r_{\sigma_1} = r_{\sigma_2}$ if and only if $\sigma_1 H$ and $\sigma_2 H$ lie in the same $D$-orbit, i.e., the primes in $L$ over $p$ are isomorphic to $D \backslash G / H$ (a double coset).
+\end{proposition}
+\begin{proof}
+    Suppose $r_{\sigma_1} = r_{\sigma_2} = r$. Then $\sigma_1\inv q$ and $\sigma_2\inv q$ are both primes in $M$ over $r \subset \SO_L$. Thus, there exists some $h \subset H = \Gal(M/L)$ such that $\sigma_2\inv(q) = h \sigma_1\inv(q)$, i.e.,
+    \[ \sigma_2 h \sigma_1\inv = d \in D. \]
+    We have $d \sigma_1 = \sigma_2 h$ in $G$, so $d(\sigma_1 H) = \sigma_2 h H = \sigma_2 H$, i.e., $d [\sigma_1] = [\sigma_2]$ in $G/H$. This concludes one direction.
+
+    Conversely, we want to show that $r_{\sigma_1} = r_{d \sigma_1}$; but this is clear from,
+    \[ r_{d \sigma_1} = \sigma_1\inv d\inv (q) \cap \SO_L = \sigma_1\inv(q) \cap \SO_L = r_{\sigma_1}. \qedhere \]
+\end{proof}
+
+\begin{proposition} \label{prop:D_orbit_length}
+    For $r = r_\sigma$, we have $e(r \mid p) f(r \mid p) = \abs{D : \sigma H} \subset G/H$. In particular, if $p$ is unramified in $L$, then the orbit length is simply $f(r \mid p)$.
+\end{proposition}
+\begin{proof}
+    Consider the stabilizer of $\sigma H \in G/H$.
+    \[ \opname{Stab}_D(\sigma H) = \{d \in D \mid \sigma\inv d \sigma \in H\} = D \cap \sigma H \sigma\inv. \]
+    Note that $D \cap \sigma H \sigma\inv$ is the decomposition group of $q \subset \SO_M$ for the Galois extension $M / \sigma(L)$ (by realizing $\sigma H \sigma\inv$ as $\Gal(M/\sigma(L))$). Thus, we have $\sigma r = q \cap \SO_{\sigma(L)}$, so
+    \[ \abs{D : \sigma H} = \frac{\abs{D(q \mid p)}}{\abs{D(q \mid \sigma r)}} = \frac{e(q \mid p) f(q \mid p)}{e(q \mid \sigma r) f(q \mid \sigma r)} = e(\sigma r \mid p) f(\sigma r \mid p) = e(r \mid p) f(r \mid p). \qedhere \]
+\end{proof}
+
+\newpage
+Now, suppose $p$ is unramified in $M$. $D$ maps isomorphically to $\Gal(k_q \mid k)$, where
+\[ k \coloneq \frac{\SO_M}{q}, \quad k = \frac{\SO_K}{p}. \]
+This means $D = (\varphi)$, where $\varphi$, the Frobenius element, is characterized by $\ol{\varphi(y)} = \ol y^{\abs{p}}$ for $y \in \SO_M$.
+\begin{theorem} \label{thm:ramification_if_and_only_if_divides_discriminant}
+    Let $L$ be a number field. If $p \mid \opname{disc}(L)$, then $p$ is ramified in $L$. In particular, $p$ is ramified if and only if $p \mid \opname{disc}(L)$.
+\end{theorem}
+\begin{lemma} \label{lem:trace_of_unramified_prime_mod_p}
+    If $L/K$ is an extension of number fields. If $p \subset \SO_K$ is unramified in $L$, then
+    \[ \ol{\Tr_{L/K}(x)} = \sum_{i=1}^r \Tr_{K_i/K_p}(\ol x_i). \]
+\end{lemma} \vspace{-8pt}
+In words, if we want to reduce the trace modulo $p$, we can reduce the element we're taking the trace of modulo $p$, then take the trace in every prime it ``sits below''; specifically, we have (?) that the left hand side is in $\SO_L/p = k_p$, and $\ol x_i \in \SO_L/q_i$ for $q_i$ primes over $p$.
+\begin{proof}[Proof of \ref{lem:trace_of_unramified_prime_mod_p}]
+    Let $M$ be the Galois closure of $L$, so $K \subset L \subset M$. Then
+    \[ \Tr_{L/K}(x) = \sum_{\sigma H \in G/H} \sigma(x). \]
+    Partition the cosets into $D$-orbits; each orbit corresponds to some prime $r$ over $p$ in $L$, and
+    \[ \Tr_{L/K}(x) = \sum_{r \in D \backslash G / H} \sum_{\sigma \in \text{orbit of $r$}} \sigma(x). \]
+    We have, for fixed $r$ over $p$, that $i_\sigma \colon k_r \to k_q$, $i_\sigma(x \mod r) = \sigma(x) \mod q$ is a well-defined embedding. Let $f = [k_r : k]$; the orbit has exactly $f$ elements since $p$ is unramified. Moreover,
+    \[ \{\sigma H, \varphi \sigma H, \dots, \varphi^{f-1} \sigma H\} \subset G/H \]
+    is the corresponding orbit of $D = (\varphi)$. Thus,
+    \[ \sum_{\tau \in \text{orbit $G/H$}} \ol{\tau(x)} = \sum_{j=0}^{f-1} \ol{\varphi^j \sigma(x)} = a + a^q + \dots + a^{q^{f-1}} = \Tr(a), \]
+    where $a = x \mod r$, so we are done. 
+\end{proof}
