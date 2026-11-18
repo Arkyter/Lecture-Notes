@@ -1,0 +1,83 @@
+\section{Day 16: Conditional Expectation (Nov.\ 18, 2026)}
+Let $(\xi_n)_{n \geq 1}$ be i.i.d.\ $\exp(\lambda)$ random variables. Let $T_n = \xi_1 + \dots + \xi_n$. Let $N_t = \sup\{n : T_n \leq t\}$, and let us define $N(s, t) = N_t - N_s$. We claim that $N = (N(s, t) : s < t \in [0, \infty))$ is a rate-$\lambda$ Poisson process on $[0, \infty)$. To check this, it is enough to show that
+\begin{enumerate}[(i)]
+    \item $N(s_i, t_i)$ for $i = 1, \dots, k$ is independent for $(s_i, t_i)$ disjoint.
+    \item $N(s, t)$ is equal in distribution to $N(0, t-s)$ for all $s < t$.
+\end{enumerate}
+\begin{definition} \label{defn:conditional_probability}
+    Let $\PP$ be a probability measure. Let $A, B$ be events, and suppose $\PP(B) > 0$. We define the conditional probability of $A$ given $B$ to be
+    \[ \PP(A \mid B) = \frac{\PP(A \cap B)}{\PP(B)}. \]
+\end{definition} \vspace{-4pt}
+As an example, if $X = \opname{Unif}\{1, \dots, 6\}$, then $\smash{\PP(X = 2 \mid X \text{ is even}) = \frac{1}{3}}$. Observe that $\PP(\bullet \mid B)$ is a probability measure!
+\begin{fact} \label{fact:independence_conditional_probability}
+    If $\PP(B) > 0$, then the events $A$ and $B$ are independent if and only if $\PP(A \mid B) = \PP(A)$.
+\end{fact}
+\begin{fact} \label{fact:memoryless_property}
+    If $X \sim \exp(\lambda)$, then $\PP(X \geq t + s \mid X \geq s) = \PP(X \geq t)$.
+\end{fact}
+In other words, $\PP(X - s \in A \mid X \geq s) = \PP(X \in A)$. Conditional on $\{X \geq s\}$, $X - s$ is an $\exp(\lambda)$ random variable. {\color{amethyst}It is left as an exercise to determine all memoryless random variables supported on $[0, \infty)$.} If a memoryless random variable is supported on $\{0, 1, 2, \dots\}$, then $\PP(X = k \mid X \geq k - 1) = \PP(X = 1)$. {\color{amethyst} As a note, continuous time Markov processes are associated to exponential random variables, and discrete time Markov processes are associated to geometric random variables.}
+
+With this, to show properties (i) and (ii) for $N$, it is enough to show that $N$ is conditional on all information of $N$ in the interval $[0, t]$, that $N(t, t+s)$ has the same law in the (unconditioned) version of $N(0, s)$. Let's condition on
+\[ B = \{N_t = n, \xi_1 = a_1, \dots, \xi_n = a_n\} = \{\xi_1 = a_1, \dots, \xi_n = a_n, \xi_{n+1} > t - (a_1 + \dots + a_n)\}, \]
+for which $a_1 + \dots + a_n \leq t$ (in order for $N_t$ to not exceed $n$). Conditional on $B$, the law on $(T_{n+1} - t, T_{n+2} - t, \dots)$ is the same as the unconditional law $(T_1, T_2, \dots)$, since, on $B$,
+\[ (T_{n+1} - t, T_{n+2} - t, \dots) = (\xi_{n+1} + (a_1 + \dots + a_n), \xi_{n+1} + \xi_{n+2} + (a_1 + \dots + a_n), \dots). \tag{\textdagger} \]
+On $\xi_{n+1} > t - (a_1 + \dots + a_n)$, we see that $X = \xi_{n+1} - (t - (a_1 + \dots + a_n))$ is an $\exp(\lambda)$ random variable.\footnote{beware strict and non-strict inequalities being... messily handled here. the idea is still that we're conditioning over measure zero sets, so it doesn't matter, but yeah.} This means we may continue writing (\textdagger) as
+\[ \dots = (X, X + \xi_{n+2}, X + \xi_{n+2} + \xi_{n+3}, \dots). \]
+We now talk about conditional expectation.
+\begin{definition} \label{defn:conditional_expectation} 
+    For a $\sigma$-algebra $\SF$, $X$ a real random variable with $\EE \abs{X} < \infty$, we define $\EE(X \mid \SF)$ to be the conditional expectation of $X$ given $\SF$. This is a $\SF$-measurable random variable such that, for all $A \in \SF$, we have that
+    \[ \EE [X \mbf 1_A] = \EE \bigl[\EE(X \mid \SF) \mbf 1_A\bigr]. \]
+\end{definition}
+
+\newpage
+As a special case, we write $\PP(A \mid \SF) = \EE(\mbf 1_A \mid \SF)$. Generally, the notation is that $\EE(X \mid Y) = \EE(X \mid \sigma(Y))$ for $X, Y$ random variables.
+
+As an example, let $X \sim \opname{Unif}\{1, \dots, 6\}$, and let $\SF_{\text{even}} = \sigma\{X \text{ even}\} = \{\emptyset, \Omega, \{x \in \{2, 4, 6\}\}\}$, with \\
+$\SF_{\text{odd}} = \{\emptyset, \Omega, \{x \in \{1, 3, 5\}\}\}$.
+Then,
+\[ \EE(X \mid \SF) = \begin{cases} 4 & \text{$X$ even}, \\ 3 & \text{$X$ odd}, \end{cases} \]
+and
+\[ \PP(X = 2 \mid \SF) = \begin{cases} \frac{1}{3} & \text{$X$ even}, \\ 0 & \text{$X$ odd}. \end{cases} \]
+We can think of $\EE(X \mid \SF)$ as our ``best guess'' at $X$ given the information from $\SF$. For $A \in \SF$, let's give an example of checking that $\EE X \mbf 1_A = \EE\bigl(\EE (X \mid \SF) \mbf 1_A\bigr)$. Suppose $A = \{X \in \{1, 3, 5\}\}$; then
+\[ \EE X \mbf 1_A = \frac{1}{6} \cdot 1 + \frac{1}{6} \cdot 3 + \frac{1}{6} \cdot 5 = \frac{3}{2} = 3 \PP(A) = \EE\bigl(\EE (X \mid \SF) \mbf 1_A\bigr). \]
+More generally, if $\Omega = \bigsqcup_{i=1}^\infty A_i$ and $\SF = \sigma(\{A_i\}_{i \geq 1})$, then
+\[ \EE(X \mid \SF) = \frac{\EE X \mbf 1_{A_i}}{\PP(A_i)} \]
+on $A_i$, i.e.,
+\[ \EE(X \mid \SF) = \sum_{i=1}^\infty \left(\frac{\EE X \mbf 1_{A_i}}{\PP(A_i)} \mbf 1_{A_i}\right). \]
+We now discuss existence and uniqueness of conditional expectation; we'll start with uniqueness. Suppose $Y, Y'$ are two copies of the conditional expectation $\EE(X \mid \SF)$. Then the set $\{Y = Y' > 0\} = A$ is $\SF$-measurable; thus,
+\[ \EE Y \mbf 1_A = \EE X \mbf 1_A = \EE Y' \mbf 1_A \]
+by definition of conditional expectation, whence $\EE(Y - Y') \mbf 1(Y - Y' > 0) = 0$, so $Y \leq Y'$ a.s.; similarly, $Y' \leq Y$ a.s., so $Y = Y'$ a.s.. For existence, define a \textit{signed measure} $\mu$ on $(\Omega, \SF)$ by
+\[ \mu(A) =\EE X \mbf 1_A, \]
+for $A \in \SF$. If $\PP(A) = 0$, then $\mu(A) = 0$, so $\mu <\!\!< \PP$ (absolute continuity of measures). By the Radon--Nikodym theorem, there exists an $\SF$-measurable function $d\mu/d\PP$ such that
+\[ \mu(A) = \int \frac{d\mu}{d\PP} \, \mbf 1_A \, d\PP, \quad \forall A \in \SF. \]
+We see that $d\mu/d\PP$ is a version of $\EE(X \mid \SF)$. Note that uniqueness is also given by the Radon--Nikodym theorem.
+
+\newpage
+We wish to check the following properties of conditional expectation.
+\begin{enumerate}[(i)]
+    \item \textit{(Linearity)}. $\EE(cX + Y \mid \SF) = c \EE(X \mid \SF) + \EE(Y \mid \SF)$.
+    \item \textit{(Monotonicity)}. If $X \leq Y$, then $\EE(X \mid \SF) \leq \EE(Y \mid \SF)$.
+    \item \textit{(DCT)}. If $X_n \to X$ almost surely, $\abs{X_n} \leq Y$, and $\EE Y < \infty$, then $\EE(X_n \mid \SF) \to \EE(X \mid \SF)$ almost surely.
+    \item \textit{(Jensen's Inequality)}. If $f \colon \RR \to \RR$ is convex, then $f(\EE(X \mid \SF)) \leq \EE(f(X) \mid \SF)$. We may assume that both sides exist by assuming integrability of $f$.
+\end{enumerate}
+\begin{proof}
+    Let $\mathcal S = \{(a, b) \in \QQ^2 \mid ax + b \leq f(x), \forall x \in \RR\}$. It is a fact that $f(x) = \sup_{(a, b) \in \mathcal S} ax + b$, \\ whence $\EE(f(X) \mid f) \geq a \EE(X \mid \SF) + b$ almost surely for any fixed $a, b$, whence 
+    \[ \EE (f(X) \mid \SF) \geq \sup_{(a, b) \in \mathcal S} a \EE(X \mid \SF) + b = f(\EE(X \mid \SF)) \]
+    almost surely. Note that it's important that $\mathcal S$ is countable (which it is by construction).
+\end{proof}
+\begin{enumerate}[(i)] \setcounter{enumi}{4}
+    \item \textit{(Tower Property)}. If $\SC \subset \SB$, then $\EE(X \mid \SC) = \EE(\EE(X \mid \SB) \mid \SC)) = \EE(\EE(X \mid \SC) \mid \SB)$.
+    \item For $p \in [1, \infty]$, $\norm{\EE(X \mid \SF)}_p \leq \norm{X}_p$. Equivalently, $\EE(\EE(X \mid \SF))^p \leq \EE X^p$.
+    \item If $X$ is $\SF$-measurable, then $\EE(X \mid \SF) = X$.
+\end{enumerate}
+We can prove (vi) as follows: by taking $f(x) = \abs{x}^p$, Jensen's inequality yields $\EE(\abs{X}^p \mid \SF) \geq \abs{\EE(X \mid \SF)}^p$, so
+\[ \EE \abs{X}^p = \EE(\EE(\abs{X}^p \mid \SF)) \geq \EE \abs{\EE(X \mid \SF)}^p. \]
+\begin{enumerate}[(i)] \setcounter{enumi}{7}
+    \item \textit{(Measurable Factor)}. If $X$ is $\SF$-measurable, $\EE(XY \mid \SF) = X \EE(Y \mid \SF)$.
+\end{enumerate}
+\begin{proof}
+    It suffices to check when $X = \mbf 1_B$, where $B \in \SF$. We can extend this to general $X$ by linearity and DCT.
+\end{proof}
+\begin{enumerate}[(i)] \setcounter{enumi}{8}
+    \item If $\EE X^2 < \infty$, we have that $\EE(X \mid \SF)$ is the orthogonal projection of $X$ onto the subspace of $\SF$-measurable functions in $L^2(\Omega, \PP)$. We may write $X - \EE(X \mid \SF) \perp \EE(X \mid \SF)$ as a property of orthogonal projections, along with $\EE(X \mid \SF)$ minimizing $\EE(X - Y)^2$ over all $\SF$-measurable $Y$.
+\end{enumerate}
