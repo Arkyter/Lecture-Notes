@@ -1,0 +1,71 @@
+\section{Day 20: (Nov.\ 19, 2026)}
+Let $S$ be an $\NN$-graded ring, $M$ a $\ZZ$-graded $S$-module, and $\tilde M$ a quasicoherent sheaf on $\opname{Proj}(S)$,
+\[ \tilde M(U) = \left\{\text{compatible degree zero germs in } \prod_{\kp \in U} M_{(\kp)}\right\}. \]
+Note that $\tilde M(D_+(f)) = M_{(f)}$, and $\restr{\tilde M}{D_+(f)} = \wt{M_{(f)}}$, which is a quasicoherent sheaf on $\Spec S_{(f)}$. Note that both tildes are different! Let's say $M$ is concentrated in degrees at most $0$ (note that $M$ is a $\ZZ$-graded module, so the degree can be positive or negative), e.g.,
+\[ S = \CC[x_0, \dots, x_n], \quad M = \frac{\CC[x_0, \dots, x_n]}{(x_0, \dots, x_n)} \cong \CC. \]
+We get that $\tilde M(D_+(f_i)) = M_{(f)} = 0$ for $f$ homogeneous of degree at least $1$, so $\tilde M = 0$. If $M_{\geq k} = N_{\geq k}$, i.e., $M$ and $N$ agree above some degree $k$, then $\tilde M = \tilde N$. It follows that the tilde construction doesn't necessarily faithfully represent the module.
+
+Our goal is to show that all quasicoherent sheaves on $\opname{Proj} S$ are $\tilde M$, and there exists a canonical $\Gamma_X \tilde M = N$ such that $\tilde M = \tilde N$. Unfortunately, this goal requires us to impose ``boring hypothesis'' to accomplish this in the greatest level of generality.
+
+For a scheme $X$ and two $\SO_X$-modules $\SCF, \SCG$, we define $\SCF \otimes \SCG$ to be the sheafification of
+\[ U \mapsto \SCF(U) \otimes_{\SO_X(U)} \SCG(U). \] \vspace{-24pt}
+\begin{fact}
+    If $\tilde M$ and $\tilde N$ are quasicoherent on $X = \Spec R$, then $\tilde M \otimes \tilde N = \wt{M \otimes_R N}$.
+\end{fact}
+\begin{proof}
+    Construct a sheaf map $\wt{M \otimes_R N} \to \tilde M \otimes \tilde N$ by constructing
+    \[ \begin{tikzcd}
+        M \otimes_R N \arrow[r] \arrow[dr] & \Gamma \tilde M \otimes \tilde N \\
+        & \tilde M(X) \otimes_R \tilde N(X) \arrow[u]
+    \end{tikzcd}
+    \]
+    then we can show an isomorphism on germs
+    \[ (M \otimes N)_\kp = M_\kp \otimes_R N_\kp = (\tilde M \otimes \tilde N)_\kp. \]
+    We can check the second equality at the level of presheaves.
+\end{proof}
+
+Let $X = \Proj S$. Let $S = S_0[x_1, \dots, x_n]/I$; $M_{(f)}$ isn't ``stupid'' for $f = x_1, \dots, x_n$; meaning,
+\[ D_+(x_1), \dots, D_+(x_n) \]
+covers $\Proj S$.
+
+Let us define a \href{https://stacks.math.columbia.edu/tag/01MM}{twisted sheaf}. $\SO_X(n) = \wt{S(n)}$ (in which multiplication is not allowed?), where $(S(n))_i = S_{n+i}$. Note that $\SO_X(n)$ is a quasicoherent sheaf on $\Proj S$, and we imply the tilde construction for graded $S$-modules.
+
+\newpage
+\begin{theorem} \label{thm:twisted_sheaf_invertible}
+    We have a few properties of $\SO_X(n)$.
+    \begin{enumerate}[(i)]
+        \item $\SO_X(n)$ is an invertible sheaf, i.e., it is ``equivalent in notion'' to a line bundle, meaning $X$ is covered by $U_i$ such that $\restr{\SCF}{U_i} \cong \SO_{U_i}$.
+        \item $\SO_X(m) \otimes \SO_X(n) = \SO_X(m+n)$.
+        \item Define $\SCF(N)_i = \SCF \otimes \SO_X(n)$.
+        \item Tilding and twisting commute, i.e., $(\tilde M)(n) = \wt{M(n)}$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Look at $\restr{\SO_X(n)}{D_+(x_i)} = \wt{S(n)_{(x_i)}}$. Let us compare with $\restr{\SO_X}{D_+(x_i)} \cong \wt{S_{(x_i)}}$. We get an isomorphism from the $S_{(x_i)}$-module map
+    \[ S(n)_{(x_i)} \cong S_{(x_i)}, \]
+    given by $f \mapsto f x_i^{-n}$, since $x_i$ is of degree $1$.
+
+    For the second part, let us construct a map $\SO_X(n+m) \to \SO_X(n) \otimes \SO_X(m)$. First,
+    \[ \restr{\SO_X(n+m)}{D_+(x_i)} \cong \wt{S(n+m)_{(x_i)}}, \]
+    and
+    \[  \restr{\SO_X(n) \otimes \SO_X(m)}{D_+(x_i)} \cong \restr{\SO_X(n)}{D_+(x_i)} \otimes \restr{\SO_X(m)}{D_+(x_i)} \cong \wt{S(n)_{(x_i)}} \otimes \wt{S(m)_{(x_i)}}, \]
+    which is isomorphic to $\wt{S(n+m)_{(x_i)}}$. To check that they're compatible on overlaps $D_+(x_i x_j)$, let us check $\tilde M(n)$ versus $\tilde M(n)$; by writing
+    \[ \restr{\tilde M(n)}{D_+(x_i)} = \wt{M(x_i)} \otimes \wt{S(n)_{(x_i)}} = \wt{M(n)_{(x_i)}} = \restr{\wt{M(n)}}{D_+(x_i)}, \]
+    we get exactly what we want.
+
+    For the third part, let $\SCF$ be a sheaf of $\SO_X$-modules on $\Proj S$. We have $\Gamma_\ast \SCF = \bigoplus_{n \in \ZZ} \Gamma \SCF(n)$, and our goal is to show
+    \[ \tilde M \cong \wt{\Gamma_\ast \tilde M}. \]
+    Let us prove a helper lemma first.
+    \begin{lemma}[Hartshorne \S2.5.14] \label{lem:qcoh_sheaf_line_bundle}
+        Let $\SCF$ be a quasicoherent sheaf on a scheme $X$, and let $\SCL$ be a line bundle.
+        \begin{enumerate}[(i)]
+            \item If $f \in \Gamma(\SCL)$, then $X_f = D(f) = \{x \mid f_x \notin \km_x \mathscr L_x\}$. If $X$ is quasicompact, suppose $s \in \Gamma \SCL$ such that $\restr{s}{X_f} = 0$. Then there exists $n$ such that $f^n s = 0$ in $\SCF \otimes \SCL^{\otimes n}$.
+            \item Suppose $X$ is covered by $U_1, \dots, U_n$ such that each $U_i \cap U_j$ and each $U_i$ is quasicompact. Suppose $t \in \SCF(D(f))$; then, for some $n$, $f^n t \in (\SCF \otimes \SCL^n)(D(f))$ is the restriction of an element of $\Gamma(\SCF \otimes \SCL^n)$. 
+        \end{enumerate}
+    \end{lemma}
+    \begin{subproof}
+        For (i), cover $X$ with $U_1, \dots, U_n$ with $U_i = \Spec R_i$. Since $\SCF$ is quasicoherent, $\restr{\SCF}{U_i} \cong \wt{M_i}$ for some $R_i$-module $M_i$. Because $\restr{\SCF}{U_i} \cong \SO_{U_i}$, we can make this identification, allowing us to treat $\restr{f}{U_i}$ as an element of $f \in R_i$. Then, $X_f \cap U_i = D(f_i)$. $\restr{s}{U_i} \in M_i$, thus, the property that $\restr{(\restr{s}{U_i})}{D(f_i)} = 0$ in $M_i$, so there exists $N$ such that $\smash{f_i^N \restr{s}{U_i} = 0}$ i.e., $\smash{\restr{f^N s}{U_i} = 0}$. Because there are only finitely many $U_i$, we can find $N$ which has $\restr{(f^N s)}{U_i} = 0$ for all $i$, whence $f^N s = 0$.
+    \end{subproof}
+\end{proof}
+
+We will leave the proof of the second part of \ref{lem:qcoh_sheaf_line_bundle} and the last bit of \ref{thm:twisted_sheaf_invertible}.
