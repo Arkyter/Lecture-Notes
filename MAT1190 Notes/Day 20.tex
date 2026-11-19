@@ -40,7 +40,7 @@ Let us define a \href{https://stacks.math.columbia.edu/tag/01MM}{twisted sheaf}.
         \item Tilding and twisting commute, i.e., $(\tilde M)(n) = \wt{M(n)}$.
     \end{enumerate}
 \end{theorem}
-\begin{proof}
+\begin{semiproof}
     Look at $\restr{\SO_X(n)}{D_+(x_i)} = \wt{S(n)_{(x_i)}}$. Let us compare with $\restr{\SO_X}{D_+(x_i)} \cong \wt{S_{(x_i)}}$. We get an isomorphism from the $S_{(x_i)}$-module map
     \[ S(n)_{(x_i)} \cong S_{(x_i)}, \]
     given by $f \mapsto f x_i^{-n}$, since $x_i$ is of degree $1$.
@@ -54,18 +54,17 @@ Let us define a \href{https://stacks.math.columbia.edu/tag/01MM}{twisted sheaf}.
     we get exactly what we want.
 
     For the third part, let $\SCF$ be a sheaf of $\SO_X$-modules on $\Proj S$. We have $\Gamma_\ast \SCF = \bigoplus_{n \in \ZZ} \Gamma \SCF(n)$, and our goal is to show
-    \[ \tilde M \cong \wt{\Gamma_\ast \tilde M}. \]
-    Let us prove a helper lemma first.
-    \begin{lemma}[Hartshorne \S2.5.14] \label{lem:qcoh_sheaf_line_bundle}
-        Let $\SCF$ be a quasicoherent sheaf on a scheme $X$, and let $\SCL$ be a line bundle.
-        \begin{enumerate}[(i)]
-            \item If $f \in \Gamma(\SCL)$, then $X_f = D(f) = \{x \mid f_x \notin \km_x \mathscr L_x\}$. If $X$ is quasicompact, suppose $s \in \Gamma \SCL$ such that $\restr{s}{X_f} = 0$. Then there exists $n$ such that $f^n s = 0$ in $\SCF \otimes \SCL^{\otimes n}$.
-            \item Suppose $X$ is covered by $U_1, \dots, U_n$ such that each $U_i \cap U_j$ and each $U_i$ is quasicompact. Suppose $t \in \SCF(D(f))$; then, for some $n$, $f^n t \in (\SCF \otimes \SCL^n)(D(f))$ is the restriction of an element of $\Gamma(\SCF \otimes \SCL^n)$. 
-        \end{enumerate}
-    \end{lemma}
-    \begin{subproof}
-        For (i), cover $X$ with $U_1, \dots, U_n$ with $U_i = \Spec R_i$. Since $\SCF$ is quasicoherent, $\restr{\SCF}{U_i} \cong \wt{M_i}$ for some $R_i$-module $M_i$. Because $\restr{\SCF}{U_i} \cong \SO_{U_i}$, we can make this identification, allowing us to treat $\restr{f}{U_i}$ as an element of $f \in R_i$. Then, $X_f \cap U_i = D(f_i)$. $\restr{s}{U_i} \in M_i$, thus, the property that $\restr{(\restr{s}{U_i})}{D(f_i)} = 0$ in $M_i$, so there exists $N$ such that $\smash{f_i^N \restr{s}{U_i} = 0}$ i.e., $\smash{\restr{f^N s}{U_i} = 0}$. Because there are only finitely many $U_i$, we can find $N$ which has $\restr{(f^N s)}{U_i} = 0$ for all $i$, whence $f^N s = 0$.
-    \end{subproof}
-\end{proof}
-
+    \[ \tilde M \cong \wt{\Gamma_\ast \tilde M}. \qedhere \]
+\end{semiproof}
+Let us prove a helper lemma first.
+\begin{lemma}[Hartshorne \S2.5.14] \label{lem:qcoh_sheaf_line_bundle}
+    Let $\SCF$ be a quasicoherent sheaf on a scheme $X$, and let $\SCL$ be a line bundle.
+    \begin{enumerate}[(i)]
+        \item If $f \in \Gamma(\SCL)$, then $X_f = D(f) = \{x \mid f_x \notin \km_x \mathscr L_x\}$. If $X$ is quasicompact, suppose $s \in \Gamma \SCL$ such that $\restr{s}{X_f} = 0$. Then there exists $n$ such that $f^n s = 0$ in $\SCF \otimes \SCL^{\otimes n}$.
+        \item Suppose $X$ is covered by $U_1, \dots, U_n$ such that each $U_i \cap U_j$ and each $U_i$ is quasicompact. Suppose $t \in \SCF(D(f))$; then, for some $n$, $f^n t \in (\SCF \otimes \SCL^n)(D(f))$ is the restriction of an element of $\Gamma(\SCF \otimes \SCL^n)$. 
+    \end{enumerate}
+\end{lemma}
+\begin{subproof}
+    For (i), cover $X$ with $U_1, \dots, U_n$ with $U_i = \Spec R_i$. Since $\SCF$ is quasicoherent, $\restr{\SCF}{U_i} \cong \wt{M_i}$ for some $R_i$-module $M_i$. Because $\restr{\SCF}{U_i} \cong \SO_{U_i}$, we can make this identification, allowing us to treat $\restr{f}{U_i}$ as an element of $f \in R_i$. Then, $X_f \cap U_i = D(f_i)$. $\restr{s}{U_i} \in M_i$, thus, the property that $\restr{(\restr{s}{U_i})}{D(f_i)} = 0$ in $M_i$, so there exists $N$ such that $\smash{f_i^N \restr{s}{U_i} = 0}$ i.e., $\smash{\restr{f^N s}{U_i} = 0}$. Because there are only finitely many $U_i$, we can find $N$ which has $\restr{(f^N s)}{U_i} = 0$ for all $i$, whence $f^N s = 0$.
+\end{subproof}
 We will leave the proof of the second part of \ref{lem:qcoh_sheaf_line_bundle} and the last bit of \ref{thm:twisted_sheaf_invertible}.
