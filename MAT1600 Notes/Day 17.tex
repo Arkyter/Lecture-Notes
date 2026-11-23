@@ -1,0 +1,65 @@
+\section{Day 17: Martingales (Nov.\ 23, 2026)}
+\begin{theorem} \label{thm:cond_expectation_orthogonal_projection}
+    If $X \in L^2(\Omega, \mathcal S, \PP)$ and $\SF \subset \mathcal S$ is a $\sigma$-algebra, then $\EE(X \mid \SF)$ is the \textit{orthogonal projection} of $X$ onto the subspace $\{X \in L^2(\Omega, \mathcal S, \PP) \mid Y \text{ is $\SF$-measurable}\} = L^2(\SF)$.
+\end{theorem}
+We have a few consequnces of thie theorem.
+\begin{enumerate}[(i)]
+    \item By definition of orthogonality, $X - \EE(X \setminus \SF) \perp L^2(\SF)$, so, for all $Y \in L^2(\SF)$, we have $\EE Y(X - \EE(X \mid \SF)) = 0$. This is clear by observing that $\EE(X \mid \SF) \in L^2(\SF)$, since $\EE(X \mid \SF)$ is $\SF$-measurable. Then $\EE \abs{\EE(X \mid \SF)}^2 \leq \EE \abs{X}^2 < \infty$, with the first inequality being the $L^2$ contraction.
+    \item $\EE(X \mid Y)$ is given by the argument that minimizes the set $\{EE (X - Y)^2 \mid Y \in L^2(\SF)\}$. This is clear as, for $Y \in L^2(\SF)$, by measurable factor,
+    \[ \EE(Y \EE(X \mid \SF)) = \EE((\EE(XY \mid \SF)) = \EE XY). \]
+    \item If $Y \in L^2(\SF)$, let $Z = \EE(X \mid \SF) - Y \in L^2(\SF)$. Then
+    \[ \EE(X - Y)^2 = \EE([X - \EE(X \mid \SF)] - Z)^2 = \EE(X - \EE(X \mid \SF))^2 + \EE Z^2, \]
+    so this is minimized if and only if $\EE Z^2 = 0$ (i.e., $Z = 0$ a.s.).
+\end{enumerate}
+
+{\color{amethyst} The remainder of the course will cover martingales. We will do discrete-time martingales. MAT1601 will deal with continuous-time martingales and Markov processes.}
+
+\begin{definition}[Filtration] \label{defn:filtration}
+    An increasing sequence of $\sigma$-algebras $\SF = (\SF_1 \subset \SF_2 \subset \dots)$ is called a \textit{filtration}. A sequence $(X_n)_{n \geq 1}$ is said to be \textit{adapted to $\SF$} if $X_n$ is $\SF_n$-measurable for all $n$.
+\end{definition}
+If $\SF_n = \sigma(X_1, \dots, X_n)$, then $\SF = (\SF_n)_{n \geq 1}$ is a filtration, and $(X_n)_{n \geq 1}$ is adapted to $\SF$, i.e., it is adapted to its own filtration.
+
+\begin{definition}[Martingale] \label{defn:martingale}
+    A sequence $(X_n)_{n \geq 1}$ is a \textit{martingale} with respect to a filtration $\SF$ if
+    \begin{enumerate}[(i)]
+        \item $X_n$ is adapted to $\SF$,
+        \item $\EE \abs{X_n} < \infty$ for all $n$,
+        \item $\EE(X_n \mid \SF_{n-1}) = X_{n-1}$.
+    \end{enumerate}
+\end{definition}
+
+Let us motivate this definition with some examples.
+\begin{enumerate}[(i)]
+    \item Let $(\xi_i)_{i \geq 1}$ be i.i.d.\ with $\EE \xi_i = 0$. Let $\SF_n \in \sigma(\xi_1, \dots, \xi_n)$; then $(S_n)_{n \geq 1}$ where $S_n = \xi_1 + \dots + \xi_n$ constitutes a martingale with respect to $(\SF_n)_{n \geq 1}$. This follows because 
+    \[ \EE(S_n \mid \SF_{n-1}) = \EE(\xi_n + S_{n-1} \mid \SF_{n-1}) = \EE \xi_n + S_{n-1}, \]
+    since the $S_{n-1}$ is $\SF_{n-1}$-measurable, and $\xi_n$ is independent of $\SF_n$.
+
+    \item If we replace the third property in the definition of a martingale with $\EE(X_n \mid \SF_{n-1}) \geq X_{n-1}$ a.s., then we get a \textit{submartingale}. If the sign is $\leq$, then we get a \textit{supermartingale}.
+    
+    \item In the setting of example (i), assume $\EE \xi^2 = \sigma^2 < \infty$. Then $S_n^2 - n \sigma^2$ is \textit{also} a martingale w.r.t.\ $(\SF_n)_{n \geq 1}$. To check this,
+    \begin{align*}
+        \EE(S_n^2 - n \sigma^2 \mid \SF_{n-1}) &= \EE(S_{n-1}^2 + 2 \xi_n \S_{n-1} + \xi_n^2 - n \sigma^2 \mid \SF_{n-1}) \\
+        &= S_{n-1}^2 + 2 S_{n-1} \EE(\xi_n \mid \SF_{n-1}) + \EE(\xi_{n-1}^2) \mid \SF_{n-1}) - n \sigma^2 \\
+        &= S_{n-1}^2 + 0 + \sigma^2 - n\sigma^2 = S_{n-1}^2 - (n - 1) \sigma^2.
+    \end{align*}
+
+    \newpage
+    \item Let $X$ be any integrable random variable. Let $(\SF_n)_{n \geq 1}$ be a prescribed filtration; then $(X_n)_{n \geq 1}$ for \\ $X_n = \EE(X \mid \SF_n)$ is a martingale. {\color{amethyst}``Revealing information (i.e., taking $n \to \infty$)'' yields that $X_n$ \\ converges... whatever this means.}
+\end{enumerate}
+
+\begin{fact} \label{fact:martingale_property_for_forwards_time}
+    If $n \geq m$ and $(X_n)_{n \geq 1}$ is a submartingale with respect to $(\SF_n)_{n \geq 1}$, then $\EE(X_n \mid \SF_m) \geq X_m$. In particular, $\EE X_n \geq \EE X_0$ for all $n$. For a supermartingale and martingale, we would have $\leq$ and $=$ for the signs.
+\end{fact}
+\begin{proof}
+    We may proceed by induction. By the tower law,
+    \[ \EE(X_n \mid \SF_m) = \EE(\EE(X_n \mid \SF_{n-1}) \mid \SF_m) \geq \EE(X_{n-1} \mid \SF_m) \dots \geq X_m. \]
+    The exact same process applies for supermartingales and martingales.
+\end{proof}
+
+\begin{theorem} \label{thm:convex_submartingale}
+    If $(X_n)_{n \geq 1}$ is a martingale, $\varphi$ convex, and $\abs{\EE \varphi(X_n)} < \infty$ for all $n$, then $(\varphi(X_n))_{n \geq 1}$ is a \\ submartingale. This also holds if $(X_n)_{n \geq 1}$ is a submartingale and $\varphi$ is convex and non-decreasing.
+\end{theorem}
+\begin{proof}
+    Left as an exercise. This proof is done by Jensen's inequality.
+\end{proof}
+
