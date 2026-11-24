@@ -1,0 +1,42 @@
+\section{Day 21: Tilde Constructions on Quasicoherent Sheaves (Nov.\ 24, 2026)}
+Assume ``stuff'' is quasicompact. We were in the middle of proving the following theorem,
+\begin{theorem} \label{thm:qcoh_sheaf_line_bundle_2}
+    Let $\SCF$ be a quasicoherent sheaf on a scheme $X$, and let $\SCL$ be a locally free line bundle.
+    \begin{enumerate}[(i)]
+        \item If $f \in \Gamma(\SCL)$, $D(f) \subset X$, and $t \in \Gamma(\SCF)$ such that $\restr{t}{D(f)} = 0$, then $f^N t = 0$. {\color{amethyst}($X$ is $\eps$-compact.)}
+        \item Suppose $s \in \SCF(D(f))$. Then, for some $N$, we have that $f^N s \in \SCF \otimes \SCL^{\otimes n}$ is the restriction of an element of \\ $\Gamma (\SCF \otimes \SCL^{\otimes n})$. 
+    \end{enumerate}
+\end{theorem}
+In quotes, ``$s = f^{N}s / f^N$''.
+\begin{proof}
+    We proved (i) last time, so we will prove (ii) now. Let $U_1, \dots, U_n$ be an open cover of $X$, $U_i \cong \Spec R_i$, and $\restr{\SCL}{U_i} \cong \SO_{U_i}$. We have that $s \mapsto s_i \in \Gamma \SO_{U_i} = R_i$. Denote
+    \[ \restr{s}{D(f) \cap U_i} = \restr{s}{\Spec(R_i)_{f_i}} \in (R_i)_{f_i}. \]
+    There exists some $N$ large enough to work for \textit{all} $i = 1, \dots, n$ such that
+    \[ s = \frac{g_i}{f_i^N} \]
+    for $g_i \in R_i$, so if the $s_i$ did glue together as sections of $(\SCF \otimes \SCL^{\otimes n})(U_i)$, then the glued $g \in \SCF(\SCF \otimes \SCL^{\otimes n})$ would work {\color{amethyst}(where $\restr{g}{U_i} = g_i = f_i^N s$)}. We also have, for all $i, j$,
+    \[ \restr{g_i}{D(f) \cap U_i \cap U_j} = \restr{g_j}{D(f) \cap U_i \cap U_j}, \]
+    where we may note that both are restrictions of $sf^N$. Since
+    \[ \restr{(g_i - g_j)}{D(f) \cap U_i \cap U_j} = 0, \]
+    we may use the fact that $U_i \cap U_j$ is $\eps$-compact to apply (i) and obtain
+    \[ \restr{f^M(g_i - g_j)}{U_i \cap U_j} = 0. \]
+    Thus, $f^M g_i$ and $f^M g_j$ agree on $U_i \cap U_j$ for all $i$ and $j$, and we see that, by sending $g_i$ to $g_i f^M$, we may write
+    \[ s = \frac{s_i f_i^M}{f_i^{N + M}} \]
+    to see that these glue correctly to something restricting to $f^{N+M} s \in \SCF \otimes \SCL^{\otimes(N + M)}$.
+\end{proof}
+
+\begin{theorem}[Hartshorne \S2.5.15] \label{thm:graded_ring_qcoh_sheaf_isomorphism}
+    Let $S = S_0[x_1, \dots, x_m] / I$ be a graded ring, where each $x_i$ is degree $1$, and $I$ is a graded ideal. Let $X = \Proj S$, and let $\SCF$ be a quasicoherent sheaf on $X$. Then
+    \[ \SCF = \wt{\Gamma_\ast \SCF} = \wt{\bigoplus_{i \in R} \Gamma \SCF(i)}. \]
+\end{theorem} \vspace{-8pt}
+\begin{proof}
+    First, write down the map $\smash{\wt{\Gamma_\ast \SCF} \to \SCF}$. Specify this on $D_+(x_i)$. We have,
+    \[ \wt{\Proj \Gamma_\ast \SCF} \bigr\rvert_{D_+(x_i)} = \wt{(\Gamma_\ast \SCF)_{(x_i)}} \]
+    mapping to $\restr{\SCF}{D_+(x_i)}$, which is quasicoherent on $\Spec S_{(x_i)}$. Now, we need $(\Gamma_x \SCF)_{(x_i)} \to \Gamma \SCF$. Given \\ $f \in \Gamma(\SCF(d))$, for which the elements in $(\Gamma_x \SCF)_{(x_i)}$ are sums of terms of the form $f / x_i^d$, where $f \in \Gamma(\SCF(d))$ and $x_i^{-d} \in \Gamma \SO(-d) \bigr\rvert_{D_+(x_i)}$,
+
+    \newpage
+    whence
+    \[ \frac{f}{x_i^d} \in \restr{\Gamma \SCF(d)}{D_+(x_i)} \otimes \restr{\Gamma \SO(-d)}{D_+(x_i)} \to \restr{\Gamma(\SCF(d) \otimes \SO(-d))}{D_+(X_i)} = \restr{\Gamma \SCF}{D_+(x_i)}. \]
+    We want this map to be an isomorphism. Using the previous theorem with $\SCL = \SO(1)$ and $f = x_i$. For $U_1, \dots, U_n$ with $U_j = D_+(x_j) \cong \Spec S_{(x_j)}$ $\eps$-compact, we have that
+    \[ D_+(x_j) \cap D_+(x_k) \cong \Spec S_{(x_j x_k)} \]
+    $\eps$-compact as well, so $\restr{\SCL}{D_+(x_i)} \cong \SO_{\Spec S_{(x_i)}}$. We may now apply the theorem to $\SCF$; indeed, (i) if we have an element of $\Gamma \SCF$ that restricts to $0$ in $\restr{\Gamma \SCF}{D_+(x_i)}$, then there exists some $N$ such that $\smash{x_i^N f = 0 \in \Gamma \SCF(N)}$. (ii), if $t \in \restr{\Gamma \SCF}{D_+(x_i)}$, then there exists $N$ such that $x_i^N t$ is the restriction of an element of $\Gamma \SCF(N)$. Together, (i) and (ii) demonstrate injectivity and surjecitvity of the map we were considering, and so we have the desired isomorphism.
+\end{proof}
