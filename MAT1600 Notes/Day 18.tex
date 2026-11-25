@@ -1,0 +1,97 @@
+\section{Day 18: Stopping Times and Martingale Convergence (Nov.\ 25, 2026)}
+{\color{amethyst} As stated previously, the rest of this course will be on discrete time martingales.}
+
+\begin{theorem}[Martingale Convergence Theorem] \label{thm:martingale_convergence_theorem}
+    If $(X_n)_{n \geq 1}$ is a submartingale and $\sup_{n \geq 1} \EE X_n^+ < \infty$, then $X_n$ converges a.s.\ to some $X$ with $\EE \abs{X} < \infty$.
+\end{theorem}
+{\color{amethyst} This ``controls'' how much $X_n$ can ``drift up''.} We would also like to consider the case where there exists $c \in \RR$ such that $X_n \leq c$ a.s..
+\begin{definition} \label{def:predictability}
+    Let $(\SF_n)_{n \geq 1}$ be a filtration. A process $(H_n)_{n \geq 1}$ is \textit{predictable} (with respect to $(\SF_n)_{n \geq 1}$) if $H_n \in \SF_{n-1}$.
+\end{definition}
+For a martingale $(X_n)_{n \geq 1}$ with respect to a filtration $(\SF_n)_{n \geq 1}$ and a predictable process $(H_n)_{n \geq 1}$, define the martingale transform
+\[ (H \cdot X)_n = \sum_{m=1}^n H_m(X_m - X_{m-1}), \]
+where we conventionally take $X_0 = 0$. For example, consider the \textit{Martingale betting system}: let $X_n = \sum_{i=1}^n \xi_i$, where $\xi_i = \pm 1$, equal to $\PP$. Denote $\SF_n = \sigma(\xi_1, \dots, \xi_n)$. We have
+\[ H_m = \begin{cases} 1 & \xi_{m-1} = 1, \\ 2 H_{m-1} & \xi_{m-1} = -1. \end{cases} \]
+Clearly, by starting with $H_1 = 1$, we have that such a process is predictable. The idea is that $(H \cdot X)_n$ is given by our ``net earnings by time $n$'', i.e.,
+\[ (H \cdot X)_n = \sum_{m=1}^n H_m X_m. \]
+Notice that $(H \cdot X)_n = 1$ if it is the first time that $\xi_n = 1$, and $(H \cdot X)_k = k$ if it is the $k$th time we have $\xi_\bullet = 1$.
+
+\begin{theorem} \label{thm:martingale_transform_is_martingale}
+    Martingale transforms are martingales, assuming that $\EE \abs{(H \cdot X)_n} < \infty$ for all $n$.
+\end{theorem}
+Note that, if $(X_n)_{n \geq 0}$ is a supermartingale and $(H_n)_{n \geq 0}$ is a nonnegative predictable process, then $(H \cdot X)_n$ is a supermartingale. If $(X_n)_{n \geq 0}$ is a submartingale with the same hypothesis, then $(H \cdot X)_n$ is a submartingale. {\color{crimson}(check...)}
+\begin{proof}
+    Directly compute as follows,
+    \begin{align*}
+        \EE((H \cdot X)_n \mid \SF_{n-1}) &= \EE(H_n(X_n - X_{n-1}) + (H \cdot X)_{n-1} \mid \SF_{n-1}) \\
+        &= H_n \EE(X_n - X_{n-1} \mid \SF_{n-1}) + (H \cdot X)_{n-1} \\
+        &\leq (H \cdot X)_n.
+    \end{align*}
+    It follows that the statement holds for $(X_n)_{n \geq 1}$ martingale, submartingale, or supermartingale by observing that $H_n \geq 0$ and $\EE(X_n - X_{n-1} \mid \SF_{n-1}) \leq 0$.
+\end{proof}
+
+\begin{definition} \label{defn:stopping_time}
+    A random variable $N \in \NN$ is a \textit{stopping time} with respect to a filtration $(\SF_n)_{n \geq 1}$ if \\ $\{N = n\} \in \SF_n$ for all $n$.
+\end{definition}
+As an exercise, show that if $N$ is a stopping time if and only if $\{N \leq n\} \in \SF_n$ for all $n$; equivalently, \\ $\{N > n\} \in \SF_n$ for all $n$.
+
+\newpage
+As an example of stopping times, let $X_n \in \SF_N$. $N = \min\{n \in \NN \mid X_n \in U\}$ for some set $U$ is a stopping time, and so is $N$ being the $k$th time $X_n$ hits $U$. On the other hand, $N = \max\{n \in \NN \mid X_n \in U\}$ is \textit{not} a stopping time.
+
+\begin{corollary} \label{cor:martingale_given_stopping_time}
+    If $(X_n)_{n \geq 1}$ is a (sub/super) martingale then $(X_{N \wedge n})_{n \geq 1}$ is a (sub/super) martingale for any stopping time $N$. Note that $N \wedge n = \min\{N, n\}$.
+\end{corollary}
+\begin{proof}
+    Let's write $X_{N \wedge n} = (H \cdot X)_n$ for a predictable process $H$. Set $H = \mbf 1\{N \geq n\}$, and apply \ref{thm:martingale_transform_is_martingale} and the definition of stopping time. {\color{amethyst} Note that $\mbf 1 \{N \geq n\} = \mbf 1 \{N > n - 1\} \in \SF_{n-1}$.}
+\end{proof}
+
+As an example, suppose $(X_n)_{n \geq 1}$ is a submartingale. Let $a < b$ be reals, and let $B_0 = -1$. For $k \geq 1$, define
+\[ A_k = \min\{n \in \NN \mid n > B_{k-1}, X_n \leq a\}, \quad B_k = \min\{n \in \NN \mid n > A_k, X_n \geq b\}. \tag{$\ast$} \]
+Clearly, the $A_k$ and $B_k$ are both stopping times, with both alternating between each other to denote the ``next time'' $X_n$ hits a low of $a$ or a high of $b$. 
+\begin{example}[Buy low, sell high]
+    We may think of $(X_n)_{n \geq 1}$ as a ``stock market'' system. Define
+    \[ H_m = \begin{cases} 1 & A_k < m \leq B_k \text{ for some $k$}, \\ 0 & \text{otherwise.} \end{cases} \]
+    {\color{amethyst} Realistically, you can measure, at time $m$, whether $A_k$ has happened or not (but you don't know a priori), which is why we write $A_k < m$; you won't know if $B_k$ has happened yet though, whence $m \leq B_k$.} Since $(X_n)_{n \geq 1}$ is a submartingale, we have that $(H \cdot X)_n$ is a submartingale, so
+    \[ H_m = \sum_{k=1}^\infty \mbf 1 \{A_k < m\} \cdot \mbf 1 \{B_k \geq m\} = \sum_{k=1}^\infty \mbf 1 \{A_k \leq m - 1\} \mbf 1 \{B_k > m - 1\}. \]
+    Note that both events lie in $\SF_{m-1}$.
+\end{example}
+
+\begin{theorem}[Doob's Upcrossing Inequality, Panchenko \S5.4] \label{thm:doob_upcrossing_inequality}
+    Let $(X_n)_{n \geq 1}$ be a submartingale with $A_k, B_k$ as before ($\ast$). Let $U_n = \max\{k \in \NN \mid B_k \leq n\}$, denoting the number of upcrossings of $[a,b]$ by time $n$. Then
+    \[ (b - a) \EE U_n \leq \EE (X_n - a)^+ = \EE(X_0 - a)^+. \]
+\end{theorem} \vspace{-8pt}
+\begin{proof}
+    Let $Y_n = a + (X_n - a)^+ = \max\{X_n, a\}$. $Y_n$ is also a submartingale, since the maximum of $X$ and $a$ is convex and nondecreasing. Look at $(H \cdot Y)_n$, with $H$ as before; $(H \cdot Y)_n$ constitutes another submartingale, where $(H \cdot Y)_n \geq (b - a) U_n$. Next, let $K_m = 1 - H_m$ so that
+    \[ Y_n - Y_0 = (H \cdot Y)_n + (K \cdot Y)_n. \]
+    Then $\EE(b - a) U_n \leq \EE (H \cdot Y)_n = \EE Y_N - \EE Y_0 - \EE(K \cdot Y)_n$. Now, $\EE(K \cdot Y)_n \geq \EE(K \cdot Y)_1$ as $(K \cdot Y)$ is a submartingale, so $\EE(K \cdot Y)_1 = \EE(Y_1 - Y_0) \geq 0$.
+\end{proof}
+
+We now prove the martingale convergence theorem.
+\begin{proof}[Proof of \ref{thm:martingale_convergence_theorem}]
+    For $a < b \in \QQ$, let $U_n^{a, b}$ be the number of upcrossings of $[a, b]$ by time $n$. Then
+    \[ (b - a) \EE U_n^{a,b} \leq \EE (X_n - a)^+ - \EE(X_0 - a)^+ \leq \abs{a} + \EE X_n^+. \]
+    Thus, by assumption, $\lim_{n \to \infty} \EE U_n^{a,b} < \infty$ for all $a < b \in \QQ$, whence $U_n^{a,b} \to U^{a,b}$ a.s.\ for a finite limit $U^{a,b} \in \NN$, per monotonicity of the sequence $U_n^{a,b}$. On the a.s.\ event $\{U^{a,b} < \infty \, \forall a < b \in \QQ\}$, we get
+    \[ \liminf_{n \to \infty} X_n = \limsup_{n \to \infty} X_n, \]
+    so we can call the limit $X \in \RR \cup \{-\infty, \infty\}$. Now,
+
+    \newpage
+    \begin{enumerate}[(i)]
+        \item $\EE X^+ \leq \liminf_{n \to \infty} \EE X_n^+ < \infty$ by Fatou's lemma (and the original assumption), and
+        \item $\EE X^- \leq \liminf_{n \to \infty} \EE X_n^-$ by Fatou's, and $\EE X_n^- = \EE X_n^+ - \EE X_n \leq \EE X_n^+ - \EE X_0$, with the inequality given by the fact that $(X_n)_{n \geq 1}$ is a submartingale. In particular,
+        \[ \liminf_{n \to \infty} \EE X_n^- \leq \left(\sup_n \EE X_n^+\right) - \EE X_n < \infty. \qedhere \]
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary} \label{cor:supermartingale_convergence}
+    If $(X_n)_{n \geq 1}$ is a nonnegative supermartingale, then $X_n \to X$ a.s.\ for a limit $X$ with $\EE \abs{X} < \infty$, and $\EE X \leq \inf_{n \geq 1} \EE X_n$.
+\end{corollary}
+
+As a second example, a.s.\ convergence in martnigales does not imply convergence in $L^1$. Let $X_n = 1 + \sum_{i=1}^n \xi_i$, where we have i.i.d.\ $\xi_i = \pm 1$ with equal probability, and we denote $\SF_n = \sigma(\xi_1, \dots, \xi_n)$. Let
+\[ N = \min\{n \geq 1 \mid X_n = 0\}. \]
+Then $(X_{N \wedge n})_{n \geq 1}$ converges a.s.\ to $X_N = 0$. However, $\EE X_{N \wedge n} = \EE X_{N \wedge 0} = 1$ for all $n$ (related to the fact that $\EE N = \infty$).
+
+We will talk more about this example next time. We will also prove the following theorem next time,
+\begin{theorem*}
+    Let $(X_n)_{n \geq 1}$ be a martingale with $\abs{X_n - X_{n-1}} \leq 1$ a.s.\ for all $n$. then $\PP(C \cup D) = 1$, where $C$ is the event where $X_n$ converges to a real number, and $D$ is the event where $\limsup_{n \to \infty} X_n = \infty$ and $\liminf_{n \to \infty} X_n = -\infty$.
+\end{theorem*}
+Specifically, martingales can only diverge in the above special way, i.e., they can't drift to $+\infty$ and not $-\infty$ (and vice versa) or oscillate immediately between two values.
