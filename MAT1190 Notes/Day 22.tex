@@ -1,0 +1,52 @@
+\section{Day 22: (Nov.\ 26, 2026)}
+Let us talk about the quasicoherent sheaves on $\Proj S$. What are the closed subschemes of $\PP_R^n \coloneq \Proj S$, where $S = R[x_0, \dots, x_n]$, $x_0, \dots, x_n$ are of degree $1$ and $R$ is degree $0$?
+\begin{theorem} \label{thm:sections_of_projective_space}
+    Let $X = \PP_R^n$; then $\Gamma_\ast \SO_X = R[x_0, \dots, x_n]$.
+\end{theorem}
+\begin{proof}
+    We want to show that $\Gamma \SO_X(m) = R[x_0, \dots, x_n]_m$. The sections of $\SO_X(m)$ are just the compatible tuples of sections of $\SO_X(m)$ on $D_+(x_i)$. First,
+    \[ \SO_X(m)(D_+(x_i)) = \wt{S(m)}(D_+(x_i)) = S(m)_{(x_i)} = (R[x_0, \dots, x_n]_{x_i})_m. \]
+    On the overlaps, we may follow the same process to get $\SO_X(m)(D_+(x_i x_j)) = (R[x_0, \dots, x_n]_{x_i x_j})_m$.
+    \[ \Gamma \SO_X(m) = \opname{Equal}\left(\prod \left(R[x_0, \dots, x_n][x_i^\pm]\right)_m \rightrightarrows \prod R[x_1, \dots, x_n][(x_i x_j)^\pm]_n\right). \]
+    Now, we're looking for $(f_0, \dots, f_n)$, with the property that $f_i$ is allowed to have $x_i$ in its denominator, \\ $\deg f_i = m$, and $f_0 = f_1 \dots = f_m$ in $R[x_0, \dots, x_n][x_1^\pm , \dots, x_m^\pm]$. Then $\Gamma \SO_X(m) = R[x_0, \dots, x_n]_m$.
+\end{proof}
+
+\begin{theorem} \label{thm:global_proj}
+    If $Z \to X = \PP_R^n$ is a closed immersion, then the quasicoherent sheaf of ideals $I \subset \SO_X$ has $I = \tilde I$ for some homogeneous ideal $I \subset R[x_0, \dots, x_n]$. In particular, $Z \cong \Proj R[x_0, \dots, x_n] / I$.
+\end{theorem}
+\begin{proof}
+    $\tilde I \subset \SO_X$ implies that $\tilde I(m) \subset \SO_X(m)$ for all $m$. $\Gamma \tilde I(m) \subset \Gamma \SO_X(n)$, and
+    \[ \bigoplus_{m \in \ZZ} \Gamma \tilde I(m) \subset \bigoplus_{m \in \ZZ} \Gamma \SO_X(m). \]
+    We also have $\Gamma_\ast \tilde I \subset \Gamma_\ast \SO_X = R[x_0, \dots, x_n]$, so it follows that $I = \Gamma_\ast \tilde I = \tilde I$.
+\end{proof}
+
+Let's look at the closed subsections of $\PP^1_R$. Let $I \subset K[x, y]$ be a homogeneous ideal. Let us look at $\Gamma_\ast \tilde I$. The compatible sections in $I(m)_{(x)} \subset K[x, y](m)_{(x)} = x^m K[y/x]$ and $I(m)_{(y)} \subset y^m K[x/y]$. Thinking of $I(m)_{(x)} = x^m(f(y/x))$ and $I(m)_{(y)} = y^m(g(x/y))$, where $f$ and $g$ are polynomials generating ideals, we ask that these two agree on the intersection. We wish to compute $\Gamma I(m)$, i.e., the compatible sections of $I(m)_{(x)}$ and $I(m)_{(y)}$. Notice, that $f$ and $g$ must only contain degree $m$ terms in order to cancel out $x^m$ and $y^m$. It follows that compatible sections must look like $h(x, y) \in R[x, y]_m$.
+\[ \Gamma_\ast \tilde I \bigr\rvert_{D_+(x_i)} = (\Gamma_\ast \tilde I)_{(x)} \subset K[x, y]_{(x)} = K\left[\frac{y}{x}\right]. \]
+{\color{amethyst} At this point, Hunter got confused. More will be done in the official course notes.}
+
+We now talk about line bundles giving maps to $\PP_R^n$. Given sections $f_0, \dots, f_n$ in $\Gamma \SCL$ that don't all vanish simultaneously at any $x \in X$, we get a map, for any scheme $X$ over $\Spec R$, $[f_0, \dots, f_n] \colon X \to \PP_R^n$.
+\begin{theorem} \label{thm:line_bundle_sheaf}
+    If $f \in \Gamma \SCL$, then $\restr{\SCL}{D(f)} \cong \SO_{D(f)}$.
+\end{theorem}
+\begin{proof}
+    Consider $\SO_{D(f)} \to \restr{\SCL}{D(f)}$. $g \in \SO_{D(f)}(U)$ maps to $gf \in \SCL(U)$. Why is this an isomorhpism? On $\Spec R \subset D(f)$, we can pick a very small open affine such that $\restr{\SCL}{\Spec R}$ is trivial. Thus, $\restr{\SCL}{\Spec R} \cong \SO_{\Spec R}$, and we have $\restr{f}{\Spec R} \in \restr{\Gamma \SCL}{\Spec R} \cong \restr{\Gamma \SO}{\Spec R} = R$. Let $f'$ be $\restr{f}{\Spec R}$ in $R$. $f'$ doesn't vanish anywhere, so $f' \in R^\times$; then $\SO_{\Spec R} \to \restr{\SCL}{\Spec R} \cong \SO_{\Spec R}$ given by $g \mapsto g f'$, and $f'$ being a unit yields that this is an isomorphism, so we are done.
+\end{proof}
+
+\newpage
+\begin{corollary} \label{cor:agreement_of_sections}
+    Let $f, g \in \Gamma \SCL$. There exists $\frac{g}{f} \in \SO_X(D(f))$ satisfying $\frac{g}{f} \cdot \restr{f}{D(f)} = \restr{g}{D(f)} \in \SCL(D(f))$.
+\end{corollary}
+\begin{proof}
+    $\restr{\SCL}{D(f)}$ is trivial, and $f$ corresponds to a unit, so $f'$ makes sense.
+\end{proof}
+To construct $[f_0, \dots, f_n] \colon X \to \PP_R^n$, observe that, on $D(f_i)$,
+\[ \left(\frac{f_0}{f_i}, \dots, \frac{f_n}{f_i}\right) \colon D(f_i) \to \Spec R\left[\frac{x_0}{x_i}, \dots, \frac{x_n}{x_i}\right], \]
+induced by
+\[ \Spec R\left[\frac{x_0}{x_i}, \dots, \frac{x_n}{x_i}\right] \to \Gamma(D(f_i)), \quad \frac{x_j}{x_i} \mapsto \frac{f_j}{f_i}. \]
+On $D(f_i) \cap D(f_j) = D(f_i f_j)$, we have 
+\[ D(f_i f_j) = D_{D(f_i)}(f_j) = D_{D(f_i)}\left(\frac{f_j}{f_i}\right) = D_{D(f_i)}\left(\varphi_i^\#\left(\frac{x_j}{x_i}\right)\right) = \varphi_i\inv(D_+(x_i x_j)). \]
+In this manner,
+\[ \restr{\varphi_i}{D(f_i f_j)} \colon \left(\frac{f_0}{f_i}, \dots, \frac{f_n}{f_i}\right) \colon D(f_i f_j) \to \Spec R\left[\frac{x_0}{x_i}, \dots, \frac{x_n}{x_i}\right]_{x_j/x_i}, \]
+and
+\[ \restr{\varphi_j}{D(f_i f_j)} \colon \left(\frac{f_0}{f_i}, \dots, \frac{f_n}{f_i}\right) \colon D(f_i f_j) \to \Spec R\left[\frac{x_0}{x_i}, \dots, \frac{x_n}{x_i}\right]_{x_i/x_j}. \]
+Both maps indeed correspond to $R[x_0, \dots, x_n]_{(x_i x_j)} \to \Gamma D(f_i f_j)$ by formally replacing all $x_k$ with $f_k$ wherever they appear.
